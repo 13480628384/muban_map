@@ -199,12 +199,13 @@ end
 
 --设置物品使用层数
 function mt:set_item_count(count)
+	self._count = count
 	if count > 0 then 
 		jass.SetItemCharges(self.handle,count)
+		
 	else 
 		self:item_remove()	
 	end	
-	self._count = count
 end
 
 --获取物品使用层数
@@ -214,14 +215,17 @@ end
 
 --显示物品 是否显示地上的模型
 function mt:show(is)
+	if not self.handle then 
+		return
+	end	
 	local handle = self.handle
 	jass.SetItemVisible(handle,true)
 	if is then
 		if self._eff then
 			self._eff:remove()
 		end
-		-- print(self:get_item_point())
-		self._eff = ac.effect(self:get_item_point(),self._model,0,1,'origin')
+		-- print(self:get_point())
+		self._eff = ac.effect(self:get_point(),self._model,270,1,'origin')
 	end
 end
 
@@ -240,7 +244,7 @@ function mt:is_show()
 end
 
 --获取物品在地上的坐标
-function mt:get_item_point()
+function mt:get_point()
 	local x,y = jass.GetItemX(self.handle),jass.GetItemY(self.handle)
 	return ac.point(x,y)
 end
@@ -279,8 +283,8 @@ end
 function mt:get_tip()
 	local owner = self.owner
 	local gold
-	local skill_tip = self:get_simple_tip() 
-	local item_tip = self:get_item_lni_tip()
+	local skill_tip = self:get_simple_tip() or ''
+	local item_tip = self:get_item_lni_tip() or ''
     local tip = ''
 
 	--如果物品tip和技能tip一致，不添加技能tip
@@ -331,6 +335,67 @@ end
 function mt:on_add_state()
 	local hero = self.owner
 
+	if not hero or not hero:is_type('英雄') then 
+		return
+	end	
+
+	--保存物品
+	local name = self.name
+
+	--单位的属性表
+	local data = ac.unit.attribute
+
+	local state = {}
+	for key in pairs(data) do 
+		local value 
+		if self.random then 
+			value = self.randm_data[key]
+			if value then 
+				value = math.random(value[1],value[2])
+			end 
+		else 
+			value = self[key]
+		end 
+		if value then 
+			table.insert(state,{name = key,value = value})
+		end 
+		key = key..'%'
+		value = self[key]
+		if value then 
+			table.insert(state,{name = key,value = value})
+		end 
+	end
+	table.sort(state,function (a,b)
+		return a.name < b.name
+	end) 
+
+	local is_show_text = self:get_type() == '神符'
+	for index,value in ipairs(state) do 
+		if is_show_text then 
+			ac.texttag
+			{
+				string = value.name .. ' +' .. value.value,
+				size = 10,
+				position = hero:get_point(),
+				speed = 86,
+				red = (self.color[1] / 255 * 100),
+				green = (self.color[2] / 255 * 100),
+				blue = (self.color[3] / 255 * 100),
+				player = hero:get_owner()
+			}
+		end
+		-- print('物品添加属性：',value.name,value.value)
+		if self.item_type ~= '消耗品' then
+			hero:add_tran(value.name,value.value)
+		end	
+	end 
+
+	self.state = state
+end
+--单位使用物品 添加属性
+function mt:on_use_state()
+	local hero = self.owner
+
 	if not hero then 
 		return
 	end	
@@ -355,6 +420,11 @@ function mt:on_add_state()
 		if value then 
 			table.insert(state,{name = key,value = value})
 		end 
+		key = key..'%'
+		value = self[key]
+		if value then 
+			table.insert(state,{name = key,value = value})
+		end 
 	end
 	table.sort(state,function (a,b)
 		return a.name < b.name
@@ -374,18 +444,13 @@ function mt:on_add_state()
 				blue = (self.color[3] / 255 * 100),
 				player = hero:get_owner()
 			}
-		end 
-		if value.name == '生命%' then 
-			value.name = '生命'
-			value.value = hero:get('生命上限') * value.value / 100
-		elseif value.name == '魔法%' then 
-			value.name = '魔法'
-			value.value = hero:get('魔法上限') * value.value / 100
-		end 
-		hero:add(value.name,value.value)
+		end
+		-- print('物品添加属性：',value.name,value.value)
+		if self.item_type == '消耗品' then
+			hero:add_tran(value.name,value.value)
+		end	
 	end 
 
-	self.state = state
 end
 
 
@@ -401,7 +466,11 @@ function mt:on_remove_state()
 
 	if self.state then 
 		for index,value in ipairs(self.state) do 
-			hero:add(value.name,-value.value)
+
+			if self.item_type ~= '消耗品' then
+				hero:add_tran(value.name,-value.value)
+			end	
+
 		end 
 		self.state = nil 
 	end
@@ -410,12 +479,19 @@ end
 --删除物品
 function mt:item_remove(is)
 	-- print('即将移除物品：',self.slot_id,self.name,self.handle)
+	
+    -- if self._eff then 
+    --     print('即将移除物品：:',self.handle,self.name,self._eff.unit:get_point())
+	-- end
+	
 	ac.item.item_map[self.handle] = nil
 
 	jass.RemoveItem(self.handle)
 	dbg.handle_unref(self.handle)
 	if self.owner then 
-		self.owner.item_list[self.slot_id] =nil
+		if self.slot_id then 
+			self.owner.item_list[self.slot_id] =nil
+		end	
 		self:on_remove_state()
 	end	
 	self.handle = nil
@@ -428,6 +504,7 @@ function mt:item_remove(is)
 end
 
 --单位是否有物品,查到立即返回
+--可根据物品名称，或是物品品质返回物品。
 function unit.__index:has_item(it)
 	if type(it) == 'string' then 
 		it_name = it
@@ -442,7 +519,7 @@ function unit.__index:has_item(it)
 	local item 
 	for i=1,6 do
 		local items = self:get_slot_item(i)
-		if items and items.name == it_name then
+		if items and (items.name == it_name or items.color == it_name)then
 			item = items
 			break
 		end
@@ -489,10 +566,12 @@ function unit.__index:add_item(it,is_fall)
 		return 
 	end
 	
+	
 	--为了合成装备
-	if self:event_dispatch('单位-即将获得物品前', self, it) then
+	-- print('装备2',it)
+	if self:event_dispatch('单位-合成装备', self, it) then
 		self.buy_suc = true 
-		return
+		return 
 	end
 	
 	if self:event_dispatch('单位-即将获得物品', self, it) then
@@ -501,15 +580,18 @@ function unit.__index:add_item(it,is_fall)
 			it:setPoint(self:get_point())
 		end 
 		if it.recycle then
+			-- print(it.name,it.handle)
 			it:item_remove()
 		end		
 		 
 		--给与 时的处理逻辑
+		-- 唯一装备可能要处理下。
 		if it.geiyu then
 			it.geiyu = false 
-			if it.item_type == '消耗品' then 
-				it:item_remove()
-			end	
+			-- print(it.name)
+			-- if it.item_type == '消耗品' then 
+			-- 	it:item_remove()
+			-- end	
 		end 
 		return
 	end
@@ -552,8 +634,9 @@ function unit.__index:add_item(it,is_fall)
 		it:hide()
 	end)
 
+	self:event_notify('单位-获得物品后',self, it)
 
-	self:print_item(true)
+	-- self:print_item(true)
 	--刷新tip
 	-- it:fresh_tip()
 	return it
@@ -618,7 +701,7 @@ end
 
 --获取指定槽位的物品
 function unit.__index:get_slot_item(slot)
-	local page = self.currentpage
+	local page = self.currentpage or 1
 	slot = (page - 1) * 6 + slot
 
 	local item = self.item_list[slot]
@@ -630,7 +713,7 @@ end
 
 --获取当前页面索引，如第一页是1-6
 function unit.__index:get_bar_page()
-	local page = self.currentpage
+	local page = self.currentpage or 1
 	local a = (page - 1) * 6 + 1
 	local b = a + 5
 	return a,b
@@ -685,7 +768,7 @@ function ac.item.create_item(name,poi,is)
 	end	
 
 	--如果存在lni则继承lni的属性
-	local data = Table.ItemData[name]
+	local data = ac.table.ItemData[name]
 	if data then
 		for k, v in pairs(data) do
 			items[k] = v
@@ -712,7 +795,7 @@ function ac.item.create_item(name,poi,is)
 
 	-- print(name,items._model,x,)
 	if not is then 
-		items._eff = ac.effect(ac.point(x,y),items._model,0,1,'origin')
+		items._eff = ac.effect(ac.point(x,y),items._model,270,1,'origin')
     end
 
 	--设置使用次数
@@ -763,7 +846,7 @@ function item.create(name)
 	end	
 
 	--如果存在lni则继承lni的属性
-	local data = Table.ItemData[name]
+	local data = ac.table.ItemData[name]
 	if data then
 		for k, v in pairs(data) do
 			items[k] = v

@@ -1,26 +1,17 @@
 
-local equipments = {}
-local has_equipment = false 
 
-for name,data in pairs(ac.table.item) do 
+--按照装备品阶 筛选出 lni 装备。
+--quality_item={'白' = {'新手剑','新手戒指'},'蓝' = {..}}
+local quality_item ={}
+for name,data in pairs(ac.table.ItemData) do 
     local color = data.color 
-    if data.item_type == '装备' and color then 
-        if color then 
-            local list = equipments[color] or {}
-            equipments[color] = list 
-
-            table.insert(list,name)
-        end 
+    if color then 
+        local list = quality_item[color] or {}
+        table.insert(list,name)
+        quality_item[color] = list 
     end 
 end 
 
-for color,list in pairs(equipments) do 
-    table.sort(list,function (a,b) return a < b end)
-end 
-
-local function is_mul_kill(unit)
-    return false 
-end 
 
 local function item_self_skill(item)
     local timer = ac.wait(100 * 1000,function (timer)
@@ -38,7 +29,6 @@ local reward = {
     
         local list = {'力量符文','敏捷符文','智力符文','血质符文','魔力符文','生命符文','魔法符文'}
         
-    
         if level == nil then 
             if g_game_min < 10 then 
                 level = 1 
@@ -56,68 +46,49 @@ local reward = {
         local item = hero:add_item(name)
     end,
 
-    ['命运宝箱'] = function (player,hero,unit)
-        local name = '命运宝箱'
-        local x,y = unit:get_point():get() 
-        local item = hero:add_item(name)
-        item_self_skill(item)
-    end,
-
-    ['随机蓝装'] = function (player,hero,unit)
-        local list = equipments['蓝']
+    ['随机白装'] = function (player,hero,unit)
+        local list = quality_item['白']
         if list == nil then 
             print('没有蓝色装备 添加失败')
             return 
         end 
         local name = list[math.random(#list)]
-        local x,y = unit:get_point():get() 
-        local item = hero:add_item(name)
+        print('掉落物品：',name)
+        local item = ac.item.create_item(name,unit:get_point())
+        item_self_skill(item)
+    end,
+    ['随机蓝装'] = function (player,hero,unit)
+        local list = quality_item['蓝']
+        if list == nil then 
+            print('没有蓝色装备 添加失败')
+            return 
+        end 
+        local name = list[math.random(#list)]
+        print('掉落物品：',name)
+        local item = ac.item.create_item(name,unit:get_point())
         item_self_skill(item)
     end,
 
-    ['随机紫装'] = function (player,hero,unit)
-        local list = equipments['紫']
+
+    ['随机金装'] = function (player,hero,unit)
+        local list = quality_item['金']
+        if list == nil then 
+            print('没有橙色装备 添加失败')
+            return 
+        end 
+        local name = list[math.random(#list)]
+        local item = ac.item.create_item(name,unit:get_point())
+        item_self_skill(item)
+    end,
+
+    ['随机红装'] = function (player,hero,unit)
+        local list = quality_item['红']
         if list == nil then 
             print('没有紫色装备 添加失败')
             return 
         end 
         local name = list[math.random(#list)]
-        local x,y = unit:get_point():get() 
-        local item = ac.item.create(name,x,y)
-        item_self_skill(item)
-    end,
-
-    ['随机橙装'] = function (player,hero,unit)
-        local list = equipments['橙']
-        if list == nil then 
-            print('没有橙色装备 添加失败')
-            return 
-        end 
-        if has_equipment then 
-            print('只能掉落一件橙装')
-            return 
-        end 
-        local name = list[math.random(#list)]
-        local x,y = unit:get_point():get() 
-        local item = ac.item.create(name,x,y)
-        item_self_skill(item)
-        has_equipment = true 
-    end,
-
-    ['普通技能卡'] = function (player,hero,unit)
-        if g_game_min > 10 then 
-            return 
-        end 
-        local name = '普通技能卡'
-        local x,y = unit:get_point():get() 
-        local item = hero:add_item(name)
-        item_self_skill(item)
-    end,
-
-    ['高级技能卡'] = function (player,hero,unit)
-        local name = '高级技能卡'
-        local x,y = unit:get_point():get() 
-        local item = hero:add_item(name)
+        local item = ac.item.create_item(name,unit:get_point())
         item_self_skill(item)
     end,
 
@@ -126,35 +97,16 @@ local reward = {
 
 
 local unit_reward = {
-    ['普通野怪'] =  {
-        { rand = 20,         name = '符文'},
-        { rand = 80,      name = {
-                { rand = 30,    name = '命运宝箱'},
-                { rand = 0.02, name = '随机紫装'},
-                { rand = 0.1, name = '随机蓝装'},
-                { rand = 0.01, name = '随机橙装'},
-                { rand = 0.5,    name = '普通技能卡'},
-                { rand = 0.2,    name = '高级技能卡'},
+    ['进攻怪'] =  {
+        -- { rand = 97.5,         name = '无'},
+        { rand = 2.5,      name = {
+                { rand = 60, name = '随机白装'},
+                { rand = 25, name = '随机蓝装'},
+                { rand = 10, name = '随机金装'},
+                { rand = 5, name = '随机红装'},
             }
         }
-    },
-
-    ['复生野怪'] =  {
-        { rand = 35,        name = '符文'},
-        { rand = 6,         name = {
-                { rand = 5, name = '随机蓝装'},
-                { rand = 1,  name = '随机紫装'},
-                { rand = 0.5,  name = '随机橙装'},
-            },
-        },
-        { rand = 10,        name = {
-                { rand = 50,    name = '普通技能卡'},
-                { rand = 20,    name = '高级技能卡'},
-            },
-        },
-        { rand = 80,        name = '命运宝箱'},
-
-    },
+    }
    
 }
 
@@ -198,33 +150,17 @@ local function get_reward_name_list(tbl,list,level)
 end
 
 
-local function hero_kill_unit(player,hero,unit)
+local function hero_kill_unit(player,hero,unit,fall_rate)
 
-    --判断是否是复生野怪 取各自的 随机模式
-    if unit.is_reborn_unit then 
-        local list = {}
-        get_reward_name_list(unit_reward['复生野怪'],list)
-        for index,name in ipairs(list) do 
-            local func = reward[name]
-            if func then 
-                --print('掉落',name)
-                if name == '符文' then 
-                    --复生野怪掉落的符文必定是3级符文
-                    func(player,hero,unit,3)
-                else 
-                    func(player,hero,unit)
-                end 
-                
-            end 
-        end 
-    else 
-        local name = get_reward_name(unit_reward['普通野怪'])
-        if name then 
-            local func = reward[name]
-            if func then 
-                print('掉落',name)
-                func(player,hero,unit)
-            end 
+    local change_unit_reward = unit_reward['进攻怪']
+    change_unit_reward['rand'] = fall_rate
+
+    local name = get_reward_name(change_unit_reward)
+    if name then 
+        local func = reward[name]
+        if func then 
+            print('掉落',name)
+            func(player,hero,unit)
         end 
     end 
 end 
@@ -233,19 +169,19 @@ end
 
 --如果死亡的是野怪的话
 ac.game:event '单位-死亡' (function (_,unit,killer)
-    if not unit:is_type('野怪') then
+    if unit.category ~='进攻怪' then
 		return
     end
+    local fall_rate = unit.fall_rate *( 1 + killer:get('物品获取率') )
 
     local player = killer:get_owner()
-    hero_kill_unit(player,killer,unit)
+    hero_kill_unit(player,killer,unit,fall_rate)
 
-    
 
 end)
 
 
-ac.game:event '单位-获得物品' (function (_,unit,item)
+ac.game:event '单位-获得物品后' (function (_,unit,item)
     local timer = item._self_skill_timer 
     if timer then 
         timer:remove()
@@ -265,7 +201,7 @@ for a = 1 , 5 do
     local count = 0
     for i = 0,1600 do 
         
-        local name = get_reward_name(unit_reward['普通野怪'])
+        local name = get_reward_name(unit_reward['进攻怪'])
         if name then 
             local num = map[name] or 0
             num = num + 1

@@ -87,10 +87,12 @@
                 it.recycle = true
                 --表示购买成功
                 u.buy_suc = true 
+                
                 return true
             end
 
         end
+
 
         --判断物品类型数量
         if u:get_type_count(it) then
@@ -120,10 +122,9 @@
         it:item_remove()
 
     end)   
+
     --注册出售物品事件 商店出售给玩家 商店 购买者 点击的物品名
     ac.game:event '单位-点击商店物品'(function(_,tra,u,it)
-        print('点击购买商品')
-
         --先判断钱是否够
         local player = u.owner
         local gold = u.owner.gold
@@ -151,58 +152,16 @@
     end)
 
 
-    ac.game:event '单位-给与物品'(function(_,source,target,it)
-        --判断是否为消耗品
-        if it.item_type == '消耗品' then
-            --先判断是否有同类物品
-            local item = nil
-            for i=1,6 do
-                local items = target:get_slot_item(i)
-                if items and items.item_type == '消耗品' and items.name == it.name then
-                    item = items
-                end
-            end
-
-            --有同类物品
-            if item then
-                item:add_item_count(it._count)
-                it:item_remove()
-                return
-            end
-            target:add_item(it)
-            return
-        end
-    
-        
-        --判断物品类型数量
-        if target:get_type_count(it) then
-            ac.player.self:sendMsg('该类型的物品只能携带一个')
-            return
-        end
-
-        --判断物品是否唯一
-        if it.unique then
-            if target:get_unique_name(it) then
-                ac.player.self:sendMsg('该物品唯一,只能携带一个')
-                return
-            end
-        end
-
-        --装备
-        target:add_item(it)
-    end)
-
 
     --丢在地上 给与其他玩家 都会触发
     ac.game:event '单位-丢弃物品'(function(_,u,it)
         if it.is_discard_event then 
             return
         end    
-        -- local x,y = jass.GetItemX(it.handle),jass.GetItemY(it.handle)
-        -- print('触发丢弃物品',it.owner,x,y,it.name,it._model)
         
         --触发丢弃物品时，没有马上返回物品位置。
         ac.wait(10,function()
+            print(it:get_point())
             it:show(true)
         end)            
         --true,掉落，不删除
@@ -223,7 +182,7 @@
             it.geiyu = false
         end	
         
-	    u:print_item(true)
+	    -- u:print_item(true)
         if it.is_pickup_event then
             return
         end
@@ -336,8 +295,14 @@
             item:_call_event 'on_cast_start'
             -- print('调用物品施法：',slot_id,item.name)
             if item.item_type == '消耗品'  then
+                -- print('使用消耗品')
+                --消耗品使用 增加对应的属性值
+                item:on_use_state()
+                --丢弃或是移除后，不删除对应的属性
+                item.state = nil
+
+                --删除消耗品
                 item._count = item._count - 1
-                
                 if item._count < 1 then 
                     item:item_remove()
                 end

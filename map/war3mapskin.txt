@@ -22,3 +22,4 @@ COLON_INTELLECT=|cffffff00智力|r
 
 BONUS_MANA= - 每点加|cffffff00 15 |r魔法上限
 BONUS_MANAREGEN= - 每点加|cffffff00 0.1% |r法爆伤害 |n - 每点加|cffffff00 0.1% |r技能伤害
+

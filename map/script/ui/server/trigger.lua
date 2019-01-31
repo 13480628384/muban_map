@@ -27,7 +27,6 @@ TriggerAddAction(trg,function ()
         local pos = hero:get_nil_slot(1) --获取一个空槽位
         if pos ~= nil then 
             hero:add_item(item)
-            print(handle)
             RemoveItem(GetManipulatedItem())
         else 
             print('捡起物品失败 背包满了')

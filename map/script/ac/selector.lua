@@ -291,12 +291,19 @@ function api:select(select_unit)
 	end
 end
 
+
 function api:get()
 	local units = {}
 	self:select(function (u) table_insert(units, u) end)
 	if self.sorter then
 		table_sort(units, self.sorter)
 	end
+
+	if self.sort_first then
+		units = self.sort_first
+	end
+	
+
 	return units
 end
 
@@ -311,6 +318,23 @@ function api:random()
 	if #g > 0 then
 		return g[math_random(1, #g)]
 	end
+end
+
+--设置第一个
+function api:set_sort_first(u)
+	local g = self:get()
+	local temp_1 = g[1]
+	
+	for _,target in ipairs(g) do
+		
+	   if target.handle == u.handle then 
+		   g[1]=u
+           g[_]=temp_1
+	   end	
+	end
+	self.sort_first = g
+	return self
+
 end
 
 function ac.selector()

@@ -1249,7 +1249,7 @@ function unit.init_unit(handle, p)
 	if not u then
 		return nil
 	end
-	local data = Table.UnitData[u:get_name()]
+	local data = ac.table.UnitData[u:get_name()]
 	if data then
 		u.unit_type = data.type
 		if data.attribute then
@@ -1287,7 +1287,7 @@ end
 --	位置
 --	[朝向]
 function player.__index:create_unit(id, where, face)
-	local data = Table.UnitData[id]
+	local data = ac.table.UnitData[id]
 	if data then
 		id = data.id
 	end
@@ -1310,7 +1310,7 @@ end
 
 function player.__index:create_dummy(id, where, face)
 	local id = id or self:get_type_id()
-	local data = Table.UnitData[id]
+	local data = ac.table.UnitData[id]
 	if data then
 		id = data.id
 	end
@@ -1754,14 +1754,14 @@ mt.timer = ac.utimer
 function unit.registerJassTriggers()
 
 	--任意单位死亡触发
-	local j_trg = war3.CreateTrigger(function()
-		local u = unit.j_unit(jass.GetTriggerUnit())
-		local killer = unit.j_unit(jass.GetKillingUnit()) 
-		u:event_notify('单位-死亡', u,killer)
-	end)
-	for i = 1, 16 do
-		jass.TriggerRegisterPlayerUnitEvent(j_trg, player[i].handle, jass.EVENT_PLAYER_UNIT_DEATH, nil)
-	end
+	-- local j_trg = war3.CreateTrigger(function()
+	-- 	local u = unit.j_unit(jass.GetTriggerUnit())
+	-- 	local killer = unit.j_unit(jass.GetKillingUnit()) 
+	-- 	u:event_notify('单位-死亡', u,killer)
+	-- end)
+	-- for i = 1, 16 do
+	-- 	jass.TriggerRegisterPlayerUnitEvent(j_trg, player[i].handle, jass.EVENT_PLAYER_UNIT_DEATH, nil)
+	-- end
 
 
 	--单位开始攻击事件
@@ -1927,6 +1927,12 @@ function unit.init()
 	--更新数据
 	unit.frame = 8
 
+	ac.loop(1000 / unit.frame, function()
+		for _, u in pairs(unit.all_units) do
+			u:update()
+		end
+	end)
+	
 	--单位移除队列
 	unit.wait_to_remove_table1 = {}
 	unit.wait_to_remove_table2 = {}

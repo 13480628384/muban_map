@@ -2,41 +2,40 @@ local jass = require 'jass.common'
 local heror = require 'types.hero'
 local unit = require 'types.unit'
 
+--1-12为12个技能模板，如玩家1是AA01-AA12，玩家2是AB01-AB12
+--排序
+--[[
+	9 10 11 12
+	5 6 7 8
+	1 2 3 4
+	
+	A S X C
+	Z D F G
+	Q W E R
+]]
+
+--13是拾取技能,AA13 AB13...
 
 local id_name = {'A','B','C','D','E','F','G','H','I','J','K','L'}
-local sq = {'A00C','A00D','A002','A003','A004','A005','A006','A007','A008','A009','A00A','A00B'}
 for i = 1, 12 do
 	local p = ac.player[i]
 	p.ability_list = {}
 	p.ability_list['英雄'] = {}
-	p.ability_list['宠物'] = {}
-	p.ability_list['召唤'] = {}
+	p.ability_list['隐藏'] = {}
 	p.ability_list['拾取'] = {}
 
-	p.ability_list['拾取'][1] = sq[i]
-	p.ability_list['切换背包-玩家'] = {}
-	p.ability_list['切换背包-宠物'] = {}
-	for t=1,2 do
-		for n=1,7 do
-			if t == 1 then
-				--英雄技能模板
-				local id = 'A'..id_name[i]..'0'..n
-				p.ability_list['英雄'][n] = id
-			else
-				--宠物技能模板
-				local id = 'A'..id_name[i]..'1'..n
-				p.ability_list['宠物'][n] = id
-			end
-		end
+	local n = 0
 
-		local id = 'AZ'..id_name[i]..t
-		if t == 1 then
-			p.ability_list['切换背包-玩家'][1] = id
+	for t=1,12 do
+		local id = 'A'..id_name[i]
+		if t < 10 then
+			id = id .. '0'..t
 		else
-			p.ability_list['切换背包-宠物'][1] = id
+			id = id ..t
 		end
-
+		p.ability_list['英雄'][t] = id
 	end
+	p.ability_list['拾取'][1] = 'A'..id_name[i]..'13'
 end
 
 
@@ -44,11 +43,20 @@ local function hero_register_main()
 	--注册英雄
 	ac.game:event '玩家-注册英雄' (function(_, player, hero)
 		SelectUnitForPlayerSingle(hero.handle,player.handle)
+		--创建一个背包表
+		hero.item_list = {}
+		--记录当前页面
+		hero.currentpage = 1
+		 
 		--添加技能
 		hero:add_all_hero_skills()
 
 		hero:add_skill('拾取','拾取',1)
-		hero:add_skill('切换背包','切换背包-玩家',1)
+		hero:add_skill('切换背包','英雄',5)
+
+		--添加英雄属性面板
+		hero:add_skill('英雄属性面板', '隐藏')
+
 		--创建一个宠物
 		player:create_pets()
 	end)

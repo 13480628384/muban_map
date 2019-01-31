@@ -184,7 +184,7 @@ function mt:on_attribute_attack()
 	if self.damage_type == '物理' then	
 		--致命一击
 		if self.physicals_crit_flag == nil then
-			self.physicals_crit_flag = (source:get '致命几率' >= math.random(100)) or (source:get '致命几率' >100)
+			self.physicals_crit_flag = (source:get '物爆几率' >= math.random(100)) or (source:get '物爆几率' >100)
 		end
 	else	
 		--法术暴击
@@ -571,11 +571,11 @@ end
 
 ]]
 
---计算致命一击
+--计算物理暴击
 function mt:on_physicals_crit_damage()
 	local source = self.source
-	local dmg = source:get '致命伤害'   
-	--致命伤害 <=0 ,返回0
+	local dmg = source:get '物爆伤害'   
+	--物爆伤害 <=0 ,返回0
 	if dmg <= -100 then
 		self.current_damage = 0
 	end 

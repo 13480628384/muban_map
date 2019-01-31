@@ -50,7 +50,7 @@ item_class = {
 
     --单位 槽位 名字 数量
     create = function (unit,page_id,slot_id,name,count)
-        local data = Table.ItemData[name]
+        local data = ac.table.ItemData[name]
         local cd   = data.Cooldown or 0
         local item = {
             unit        = unit,         --该物品的拥有者
@@ -131,7 +131,7 @@ item_class = {
     end,
 
     get_type = function (self)
-        local data = Table.ItemData[self.name]
+        local data = ac.table.ItemData[self.name]
         if data == nil then 
             return ''
         end
@@ -141,7 +141,7 @@ item_class = {
 
     --获取购买价格
     get_buy_price = function (self)
-        return self.buy_price or Table.ItemData[self.name].BuyPrice or 0
+        return self.buy_price or ac.table.ItemData[self.name].BuyPrice or 0
     end,
 
     set_buy_price = function (self,value)
@@ -150,7 +150,7 @@ item_class = {
 
     --获取出售价格
     get_sell_price = function (self)
-        local price =  self.sell_price or Table.ItemData[self.name].SellPrice or 0
+        local price =  self.sell_price or ac.table.ItemData[self.name].SellPrice or 0
         if self.count > 0 then 
             price = price * self.count
         end 
@@ -171,7 +171,7 @@ item_class = {
     end,
 
     get_level_type = function (self)
-        local data = Table.ItemData[self.name]
+        local data = ac.table.ItemData[self.name]
         if data == nil then 
             return 
         end 
@@ -200,7 +200,7 @@ item_class = {
 
     --附魔物品
     add_attach_item = function (self,name,level)
-        local data = Table.ItemData[name]
+        local data = ac.table.ItemData[name]
         if data == nil then 
             return 
         end 
@@ -227,7 +227,7 @@ item_class = {
 
         table.remove(self.attach_list,index)
 
-        local data = Table.ItemData[name]
+        local data = ac.table.ItemData[name]
         local desc = data.Description or ''
         local upgrade_value = 0
         local desc = data.Description or ''
@@ -275,11 +275,11 @@ item_class = {
     end,
 
     get_icon = function (self)
-        return 'image\\图标\\' .. Table.ItemData[self.name].IconName or ''
+        return 'image\\图标\\' .. ac.table.ItemData[self.name].IconName or ''
     end,
 
     get_type_icon = function (self)
-        return 'image\\图标背景\\' .. Table.ItemData[self.name].IconBackground or ''
+        return 'image\\图标背景\\' .. ac.table.ItemData[self.name].IconBackground or ''
     end,
     set_count = function (self,count)
         local page_id = self.page_id
@@ -392,13 +392,13 @@ item_class = {
     get_tip = function (self)
         local s = {}
     
-        local data = Table.ItemData[self.name]
+        local data = ac.table.ItemData[self.name]
         if data == nil then 
             return ''
         end
         s[#s + 1] = '类型 : ' .. self:get_type() .. '\n'
 
-        local tbl = Table.ItemData['强化规则表']['强化规则'][self:get_level()]
+        local tbl = ac.table.ItemData['强化规则表']['强化规则'][self:get_level()]
 
         local upgrade_value = 0
         if tbl then 
@@ -806,7 +806,7 @@ bag_class = extends( panel_class , {
             end
         end
         for index,data in ipairs(item_list) do 
-            local max_stack = Table.ItemData[data.name].MaxStack
+            local max_stack = ac.table.ItemData[data.name].MaxStack
             if max_stack ~= nil then
                 add(data.list,max_stack)
             end

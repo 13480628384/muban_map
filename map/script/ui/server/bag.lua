@@ -9,7 +9,7 @@ item_class = {
     equipment_type = {'武器','头盔','衣服','裤子','护手','鞋子','项链','玉佩','戒指','手镯'},
     
     create = function (unit,page_id,slot_id,name,count)
-        local data = Table.ItemData[name]
+        local data = ac.table.ItemData[name]
         if unit and unit:get_bag()[page_id][slot_id] ~= nil then 
             print('创建物品失败,该位置已有物品',page_id,slot_id)
             return 
@@ -98,7 +98,7 @@ item_class = {
     end,
 
     get_type = function (self)
-        local data = Table.ItemData[self.name]
+        local data = ac.table.ItemData[self.name]
         if data == nil then 
             return ''
         end
@@ -107,7 +107,7 @@ item_class = {
     
     --获取购买价格
     get_buy_price = function (self)
-        return self.buy_price or Table.ItemData[self.name].BuyPrice or 0
+        return self.buy_price or ac.table.ItemData[self.name].BuyPrice or 0
     end,
     
     set_buy_price = function (self,value)
@@ -130,7 +130,7 @@ item_class = {
     
     --获取出售价格
     get_sell_price = function (self)
-        local price =  self.sell_price or Table.ItemData[self.name].SellPrice or 0
+        local price =  self.sell_price or ac.table.ItemData[self.name].SellPrice or 0
         if self.count > 0 then 
             price = price * self.count
         end 
@@ -155,7 +155,7 @@ item_class = {
     end,
     
     set_cd = function (self)
-        local cd = Table.ItemData[self.name].Cooldown 
+        local cd = ac.table.ItemData[self.name].Cooldown 
         if cd == nil then 
             return 
         end 
@@ -227,7 +227,7 @@ item_class = {
     end,
 
     get_level_type = function (self)
-        local data = Table.ItemData[self.name]
+        local data = ac.table.ItemData[self.name]
         if data == nil then 
             return 
         end 
@@ -239,7 +239,7 @@ item_class = {
         if level_type == nil then 
             return 
         end 
-        local state_table = Table.ItemData['随机属性表']
+        local state_table = ac.table.ItemData['随机属性表']
         local list = {}
         for name,data in pairs(state_table) do
             list[#list + 1] = {name,data}
@@ -349,7 +349,7 @@ item_class = {
 
     --获取基础属性 返回一个数组 存放属性{name = 属性名,value = 数值}
     get_base_state = function (self,name)
-        local data = Table.ItemData[name or self.name]
+        local data = ac.table.ItemData[name or self.name]
         if data == nil then 
             return 
         end
@@ -366,7 +366,7 @@ item_class = {
 
     --附魔物品
     add_attach_item = function (self,name,level)
-        local data = Table.ItemData[name]
+        local data = ac.table.ItemData[name]
         if data == nil then 
             return 
         end 
@@ -420,7 +420,7 @@ item_class = {
         }
         ui.send_message(self.player,info)
 
-        local data = Table.ItemData[name]
+        local data = ac.table.ItemData[name]
         local desc = data.Description or ''
         local upgrade_value = 0
         local desc = data.Description or ''
@@ -625,7 +625,7 @@ unit_method = {
         if type(item_name) == 'table' then 
             return item_class.copy_create(unit,tbl[1][1],tbl[1][2],item_name)
         end
-        local data = Table.ItemData[item_name]
+        local data = ac.table.ItemData[item_name]
         if data == nil then 
             print(item_name,'数据不存在 添加物品失败')
         end
@@ -706,7 +706,7 @@ unit_method = {
             end
         end
         for index,data in ipairs(item_list) do 
-            local max_stack = Table.ItemData[data.name].MaxStack
+            local max_stack = ac.table.ItemData[data.name].MaxStack
             if max_stack ~= nil then
                 add(data.list,max_stack)
             end

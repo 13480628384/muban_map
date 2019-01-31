@@ -1,4 +1,17 @@
 
+--字符串是否包含 字符串 字符串 字符串
+function finds(str,...)
+	local flag = false
+	
+	for key , value in pairs{...} do
+		local _, q=string.find(str, value)
+		if _ then 
+			flag= true
+			break
+		end	
+	end
+	return flag
+end
 --获取字符串 字数
 function get_font_count(str)
 	local count = 0

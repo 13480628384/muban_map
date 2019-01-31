@@ -176,7 +176,7 @@ task_class = {
 task_data_class = {
     info_table = {},
     get_task_data = function (name)
-        local data_table = Table.TaskData
+        local data_table = ac.table.TaskData
         return data_table[name]
     end,
     compile_string = function (str)

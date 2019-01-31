@@ -28,10 +28,10 @@ local data_table = {
     'TaskData',
     'UnitData'
 }
-Table = {}
+-- Table = {}
 
 for index,name in ipairs(data_table) do
     ac.lni_loader(name)
-    Table[name] = ac.lni[name]
+    ac.table[name] = ac.lni[name]
 end
-Table['unit'] = ac.lni['unit']
+ac.table['unit'] = ac.lni['unit']

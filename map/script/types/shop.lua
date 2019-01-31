@@ -27,7 +27,7 @@ function shop.create(name,x,y,face)
 	unit:add_restriction '无敌'
 	--继承商店
 	setmetatable(unit, shop)
-	local data = Table.UnitData[name]
+	local data = ac.table.UnitData[name]
 	local sell = data.sell
 	for i,v in ipairs(sell) do
 		unit:add_sell_item(v)
@@ -65,7 +65,7 @@ end
 
 --添加商品
 function mt:add_sell_item(name)
-	local data = Table.ItemData[name]
+	local data = ac.table.ItemData[name]
 	if not data then
 		data = ac.skill[name]
 		if not data then

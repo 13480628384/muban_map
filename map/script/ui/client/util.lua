@@ -8,7 +8,7 @@ ui.event = {}
 ui.hashtable = {}
 
 ui.init = function () --预存数据表里的物的名字
-    for file_type,file_data in pairs(Table) do
+    for file_type,file_data in pairs(ac.table) do
         for name,value in pairs(file_data) do
             local hash = ui.get_hash(name)
             local value = ui.hashtable[hash]   

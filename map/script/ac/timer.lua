@@ -164,6 +164,9 @@ function ac.timer(timeout, count, on_timer)
 		on_timer(t)
 		count = count - 1
 		if count <= 0 then
+			if t.on_timerout then 
+				t:on_timerout()
+			end	
 			t:remove()
 		end
 	end)
@@ -212,4 +215,57 @@ function ac.utimer(u, timeout, count, on_timer)
 	local t = ac.timer(timeout, count, on_timer)
 	table_insert(u._timers, t)
 	return t
+end
+
+
+--计时器原始计时器+窗口
+ac.timer_ex = function(data)
+	local time = data.time
+	local loop = data.loop or false
+	local func = data.func
+	local title = data.title
+	local player = data.player
+
+	local jtm = jass.CreateTimer()
+	local timer = {
+		handle = jtm,
+		time = time,
+	}
+	jass.TimerStart(jtm,time,false,function ()
+		timer:remove()
+		if func then 
+			func()
+		end 
+	end)
+
+	function timer:create_timer_dialog(title)
+		local time_dialog = jass.CreateTimerDialog(jtm)
+		jass.TimerDialogSetTitle(time_dialog, title)
+
+		if player then
+			if player == ac.player.self then
+				jass.TimerDialogDisplay(time_dialog, true)
+			end
+		else
+			jass.TimerDialogDisplay(time_dialog, true)
+		end
+
+		timer.timer_dialog = time_dialog
+	end
+
+	function timer:remove()
+		if timer.timer_dialog then
+			jass.DestroyTimerDialog(timer.timer_dialog)
+		end
+		jass.PauseTimer(jtm)
+		jass.DestroyTimer(jtm)
+		jtm = nil
+		timer = nil
+	end
+	
+	if title then
+		timer:create_timer_dialog(title)
+	end
+
+	return timer
 end

@@ -27,7 +27,7 @@ end
 
 --获取类型
 function mt:get_type()
-    local data = Table.ItemData[self:get_name()]
+    local data = ac.table.ItemData[self:get_name()]
     return data.ItemType
 end
 
@@ -35,7 +35,7 @@ end
 --获取贴图
 function mt:get_art()
     local s = self:get_type()
-    local data = Table.ItemData[self:get_name()]
+    local data = ac.table.ItemData[self:get_name()]
     local art = 'image\\图标\\'..s..'\\'..data.IconName
     return art
 end

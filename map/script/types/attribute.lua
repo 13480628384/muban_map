@@ -43,9 +43,9 @@ local attribute = {
 	['能量获取率']   = true, --默认%
 	['攻击']       = true, --默认基础值
 	['护甲']       = true, --默认基础值
-	['魔抗']	   =	true, --默认基础值
+	['魔抗']	   = true, --默认基础值
 	['攻击间隔']    = true, --默认基础值
-	['攻击速度']    = true, --默认基础值
+	['攻击速度']    = true, --默认默认% 
 	['攻击距离']    = true, --默认基础值
 	['移动速度']    = true, --默认基础值 
 	['减耗']       = true,  --默认基础值 减少扣篮量
@@ -61,8 +61,8 @@ local attribute = {
 	['穿透']       = true,  --默认表示为% 穿透，伤害计算时，穿透/100 再扣除
 	['穿魔']       = true,  --默认表示为% 穿透，伤害计算时，穿透/100 再扣除
 	['护盾']       = true,  --默认表示为基础值 
-	['致命几率']		=	true, --默认%
-	['致命伤害']		=	true,--默认%
+	['物爆几率']		=	true, --默认%
+	['物爆伤害']		=	true,--默认%
 	['会心几率']		=	true,--默认%
 	['会心伤害']		=	true,--默认%
 	['法爆几率']		=	true,--默认%
@@ -74,16 +74,20 @@ local attribute = {
 	['金币加成']		=	true,--默认表示为%
 	['经验加成']		=	true,--默认表示为%
 	['天赋触发几率']	=	true,--默认表示为%
-	['额外投射物数量']	=	true,--默认表示为基础值
-	['额外连锁数量']	=	true,--默认表示为基础值
+	['多重射']	=	true,--默认表示为基础值
+	['额外连锁']	=	true,--默认表示为基础值
 	['额外范围']		=	true,--默认表示为基础值
 	['攻击回血']		=	true,--默认表示为基础值
 	['击杀回血']		=	true,--默认表示为基础值
 	['对BOSS额外伤害']  =   true,--默认表示为%
-	['基础金币']  =   true,--默认表示为
-	['积分加成']  =   true,--默认表示为
-	['理财提升']  =   true,--默认表示为
-	['额外伤害'] = true,
+	['基础金币']  =   true,--默认表示为基础值
+	['积分加成']  =   true,--默认表示为基础值
+	['额外伤害'] = true, --默认表示为基础值
+	['物品获取率'] = true,--默认表示为% 怪物物品掉落率加成
+	['法术攻击'] = true, --默认表示为% 技能的法术伤害加成
+	['召唤物'] = true, --默认表示为基础值,召唤物数量
+	['召唤物属性'] = true, --默认表示为%, 召唤物属性加成
+	['主动释放的增益效果'] = true  --默认表示为%
 }
 ac.unit.attribute = attribute
 local set = {}
@@ -92,6 +96,39 @@ local on_add = {}
 local on_get = {}
 local on_set = {}
 
+--基础值
+local base_attr =[[
+力量 敏捷 智力 生命 生命上限 生命恢复 生命脱战恢复 魔法 
+魔法上限 魔法脱战恢复 攻击 护甲 魔抗 攻击间隔 攻击距离 移动速度 减耗 破甲 
+破魔 护盾 减伤 技能基础伤害 多重射 额外连锁 额外范围 攻击回血 击杀回血 基础金币 积分加成
+额外伤害 召唤物
+]]
+
+--add('攻速%'，10,true) 直接+， 若攻速为200， 最终值为210, 会预设基础值属性先*再+
+function mt:add_tran(name, value)
+	
+	local base_name = name
+	
+	if name:sub(-1, -1) == '%' then
+
+		-- print(name)
+
+		base_name =  name:sub(1, -2)
+		-- print(base_name)
+		--如果是基础值，则调用英萌自带的加%函数，会先*基础值再+
+		if finds(base_attr,base_name) then 
+			self:add(name, value)
+		else
+		--%值 调用英萌自带的加，直接+
+			self:add(base_name, value)
+		end	
+	else	
+		--调用英萌自带的加，直接+
+		self:add(base_name, value)
+	end	
+
+end	
+--默认or false add('攻速%'，10) 先*再+，若攻速为200，最终值为220
 function mt:add(name, value)
 	local v1, v2 = 0, 0
 	if name:sub(-1, -1) == '%' then
@@ -277,7 +314,7 @@ on_set['力量'] = function(self)
         local value = self:get '力量' - old_value
 		self:add('生命上限',  value * str_hp)
 		-- 增加致命一击
-		self:add('致命伤害',  value * str_deadly)
+		self:add('物爆伤害',  value * str_deadly)
 		-- 增加攻击
 		self:add('攻击', value * str_attack)
 		-- 增加技能伤害
@@ -383,6 +420,7 @@ set['生命上限'] = function(self, max_life, old_max_life)
 end
 
 on_set['生命上限'] = function(self)
+	-- print('打印生命上限',self.name,self:get '生命上限')
 	local rate = self:get '生命' / self:get '生命上限'
 	return function()
 		self:set('生命', self:get '生命上限' * rate)

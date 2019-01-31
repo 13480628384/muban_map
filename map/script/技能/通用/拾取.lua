@@ -15,7 +15,7 @@ mt{
     target_data = '物品',
 
     --图标是否可见 0可见 1隐藏
-    --hide_count = 1,
+    hide_count = 1,
     
     --拾取cd，太快会触发2次。
     cool = 5,

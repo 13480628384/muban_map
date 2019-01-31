@@ -151,6 +151,8 @@ end
 --	where:创建位置(type:point;type:circle;type:rect;type:unit)
 --	face:面向角度
 function player.__index.createHero(p, name, where, face)
+	print(name,hero.hero_list[name])
+
 	local hero_data = hero.hero_list[name].data
 	local u = p:create_unit(hero_data.id, where, face)
 	setmetatable(u, hero_data)
@@ -161,6 +163,7 @@ function player.__index.createHero(p, name, where, face)
 	for k, v in pairs(hero_data.attribute) do
 		u:set(k, v)
 	end
+	print(u:get('生命上限'))
 	return u
 end
 
@@ -290,9 +293,9 @@ function hero.init()
 				hero:set('魔法', hero:get '魔法上限')
 			end)
 		end
-		hero:loop(100, function()
-			hero:updateActive()
-		end)
+		-- hero:loop(100, function()
+		-- 	hero:updateActive()
+		-- end)
 	end)
 end
 
@@ -305,6 +308,20 @@ function mt:addSkillPoint(points)
 	end
 	skl:call_updateSkillPoint()
 end
+
+--获取本级到下级所需的升级经验
+local  last_formula =  tonumber(slk.misc.Misc.NeedHeroXPFormulaA) --上一个值因素   1
+local  lv_formula =  tonumber(slk.misc.Misc.NeedHeroXPFormulaB) --等级因素  100
+local  regular_formula =  tonumber(slk.misc.Misc.NeedHeroXPFormulaC) --固定因素 0
+local  HeroXP = tonumber(slk.misc.Misc.NeedHeroXP)  --固定值 200  
+
+function mt:get_upgrade_xp(lv)
+	if lv > 1 then 
+		return self:get_upgrade_xp(lv-1)*last_formula + (lv+1)*lv_formula + regular_formula
+	else 
+		return HeroXP	 
+	end	 
+end	
 
 ac.hero = hero
 
