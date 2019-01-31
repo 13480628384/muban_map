@@ -177,7 +177,6 @@ function mt:on_change_creep(unit,lni_data)
         end
          --设置 boss 等 属性倍数
          if lni_data.attr_mul  then
-
             --属性
             unit:set('攻击',data.attribute['攻击'] * lni_data.attr_mul)
             unit:set('护甲',data.attribute['护甲'] * lni_data.attr_mul)
@@ -185,15 +184,13 @@ function mt:on_change_creep(unit,lni_data)
             unit:set('魔法上限',data.attribute['魔法上限'] * lni_data.attr_mul)
             unit:set('生命恢复',data.attribute['生命恢复'] * lni_data.attr_mul)
             unit:set('生命恢复',data.attribute['生命恢复'] * lni_data.attr_mul)
-
-            --掉落概率
-            unit.fall_rate = data.fall_rate * lni_data.food
-
-            --掉落金币和经验
-            unit.gold = data.gold * lni_data.food
-            unit.exp = data.exp * lni_data.food
-           
         end  
+        --掉落概率
+        unit.fall_rate = data.fall_rate * lni_data.food
+
+        --掉落金币和经验
+        unit.gold = data.gold * lni_data.food
+        unit.exp = data.exp * lni_data.food
 
     end 
 
@@ -216,6 +213,12 @@ ac.game:event '游戏-回合结束' (function(trg,index, creep)
 
     local self = creep
     local unit = ac.player[16]:create_unit('钥匙怪',ac.point(0,0))
+    
+    local name = '进攻怪-'..self.index
+    local data = ac.table.UnitData[name]
+
+    unit.gold = data.gold * 5
+    unit.exp = data.exp * 5
 
     unit:set('移动速度',800)
 

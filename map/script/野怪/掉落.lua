@@ -117,6 +117,7 @@ local function get_reward_name(tbl)
     local num = 0
     for index,info in ipairs(tbl) do 
         num = num + info.rand 
+        print("打印装备掉落概率",info.rand)
         if rand <= num then 
             if type(info.name) == 'string' then 
                 return info.name 
