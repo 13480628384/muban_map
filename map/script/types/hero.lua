@@ -161,9 +161,17 @@ function player.__index.createHero(p, name, where, face)
 	u.hero_data = hero_data
 
 	for k, v in pairs(hero_data.attribute) do
-		u:set(k, v)
+		if not finds(k,'力量','敏捷','智力')then
+			u:set(k, v)
+		end	
 	end
-	print(u:get('生命上限'))
+
+	for k, v in pairs(hero_data.attribute) do
+		if  finds(k,'力量','敏捷','智力')then
+			u:add(k, v)
+		end	
+	end
+	-- print(u:get('生命上限'))
 	return u
 end
 

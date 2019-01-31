@@ -153,8 +153,10 @@ end
 local function hero_kill_unit(player,hero,unit,fall_rate)
 
     local change_unit_reward = unit_reward['进攻怪']
-    change_unit_reward['rand'] = fall_rate
-
+    
+    for index,info in ipairs(change_unit_reward) do 
+        change_unit_reward[index].rand = fall_rate
+    end    
     local name = get_reward_name(change_unit_reward)
     if name then 
         local func = reward[name]
@@ -173,7 +175,7 @@ ac.game:event '单位-死亡' (function (_,unit,killer)
 		return
     end
     local fall_rate = unit.fall_rate *( 1 + killer:get('物品获取率') )
-
+    -- print('装备掉落概率：',fall_rate,unit.fall_rate)
     local player = killer:get_owner()
     hero_kill_unit(player,killer,unit,fall_rate)
 
