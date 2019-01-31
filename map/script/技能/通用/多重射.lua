@@ -3,7 +3,6 @@
 local self = {}
 local function range_attack_start(hero,damage)
 
-    -- print('打印改变攻击方式')
     if damage.skill and damage.skill.name == self.name then
         return
     end
@@ -34,7 +33,7 @@ local function range_attack_start(hero,damage)
                 model = model,
                 speed = speed,
                 damage = damage,
-                height = hero:get_point() * u:get_point() * arc,
+                height = 110,
                 skill = false,
             }
             if not mvr then
@@ -53,22 +52,21 @@ local function range_attack_start(hero,damage)
 
         end	
     end
-    hero.range_attack_start = self.oldfunc
+    -- hero.range_attack_start = self.oldfunc
 
 end
 
 
 
-ac.game:event '单位-攻击出手' (function(trg, damage)
-    if not damage.source:is_type('英雄') then 
+ac.game:event '单位-发动攻击'  (function(trg, damage)
+    if not damage.source:is_type('英雄') or damage.source:isMelee()  then 
         return
-    end        
+    end     
+      
     -- if math.random(1,100) > self.chance then
     --     return
     -- end
     local hero = damage.source
-    -- print('打印攻击出手',hero:isMelee())
-    self.oldfunc = hero.range_attack_start
-    hero.range_attack_start = range_attack_start
-    return false
+    range_attack_start(hero,damage)
+    return true
 end)

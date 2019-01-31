@@ -271,25 +271,25 @@ function mt:set_resource(type, value)
 	self:set(type, value)
 end
 
--- 每点力量增加1攻击力，每10点增加1%致命伤害，每1点增加15生命值，每20点增加1%技能伤害
--- 每25敏捷增加1%会心伤害，每10点增加1护甲，每点增加0.1%攻速
--- 每点智力增加15法力值，每10点增加1%技能伤害，每25点增加1%法爆伤害
+-- 每点力量增加8点生命上限，0.08点生命恢复，0.1%物爆伤害，如果是主属性，每点力量还增加4点攻击力
+-- 每点敏捷增加0.3点护甲，0.5%攻击速度，0.1%会心伤害，如果是主属性，每点敏捷还增加4点攻击力
+-- 每点智力增加8点魔法上限，0.08点魔法恢复，0.1%法爆伤害，如果是主属性，每点智力还增加4点攻击力
 
---力量
-local str_attack = 1.5
-local str_deadly = 0.1  --1点力量增加 1% 致命伤害
-local str_hp = 15
-local str_skill = 0.05
+--主属性 每点主属性增加4点攻击力
+local main_attribute_value = 4
+--力量 
+local str_hp = 8
+local str_hp_recover = 0.08
+local str_phy_split_damage = 0.1
 
 --敏捷
-local agi_speed = 0.1
-local agi_heart = 0.067
-local agi_defense = 0.1
-local agi_skill = 0.05
+local agi_speed = 0.5
+local agi_heart = 0.1
+local agi_defense = 0.3
 
 --智力
-local int_mp = 15
-local int_skill = 0.1
+local int_mp = 8
+local int_mp_recover = 0.08
 local int_explosion = 0.1
 
 
@@ -311,14 +311,18 @@ on_set['力量'] = function(self)
 	local old_value =  self:get '力量' --老值
 	
 	return function()
-        local value = self:get '力量' - old_value
+		local value = self:get '力量' - old_value
+		
+		if self.main_attribute and self.main_attribute == '力量' then
+			-- 增加攻击
+			self:add('攻击', value * main_attribute_value)
+		end	
+
 		self:add('生命上限',  value * str_hp)
-		-- 增加致命一击
-		self:add('物爆伤害',  value * str_deadly)
-		-- 增加攻击
-		self:add('攻击', value * str_attack)
-		-- 增加技能伤害
-		self:add('技能伤害', value * str_skill)
+		-- 增加生命恢复
+		self:add('生命恢复',  value * str_hp_recover)
+		-- 增加物爆伤害
+		self:add('物爆伤害',  value * str_phy_split_damage)
 	end	
 -- end
 end
@@ -341,14 +345,16 @@ on_set['敏捷'] = function(self,old_value)
 	local old_value =  self:get '敏捷' --老值
 	return function()
 		local value =  self:get '敏捷' - old_value
+		if self.main_attribute and self.main_attribute == '敏捷' then
+			-- 增加攻击
+			self:add('攻击', value * main_attribute_value)
+		end	
 		-- 增加护甲
 		self:add('护甲', value * agi_defense)
 		-- 增加会心伤害
 		self:add('会心伤害',  value * agi_heart)
 		-- 增加攻击
 		self:add('攻击速度', value * agi_speed)
-		-- 增加技能伤害
-		self:add('技能伤害', value * agi_skill)
 	end	
 end
 
@@ -370,10 +376,14 @@ on_set['智力'] = function(self,old_value)
 	local old_value =  self:get '智力' --老值
 	return function()
 		local value =  self:get '智力' - old_value
+		if self.main_attribute and self.main_attribute == '智力' then
+			-- 增加攻击
+			self:add('攻击', value * main_attribute_value)
+		end	
 		-- 增加魔法上限
 		self:add('魔法上限', value * int_mp)
-		-- 增加技能伤害
-		self:add('技能伤害', value * int_skill)
+		-- 增加魔法恢复
+		self:add('魔法恢复', value * int_mp_recover)
 		-- 增加法爆伤害
 		self:add('法爆伤害', value * int_explosion)
 	end

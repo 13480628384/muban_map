@@ -187,11 +187,11 @@ function mt:on_change_creep(unit,lni_data)
             unit:set('生命恢复',data.attribute['生命恢复'] * lni_data.attr_mul)
 
             --掉落概率
-            unit.fall_rate = data.fall_rate * lni_data.attr_mul
+            unit.fall_rate = data.fall_rate * lni_data.food
 
             --掉落金币和经验
-            unit.gold = data.gold * lni_data.attr_mul
-            unit.exp = data.exp * lni_data.attr_mul
+            unit.gold = data.gold * lni_data.food
+            unit.exp = data.exp * lni_data.food
            
         end  
 

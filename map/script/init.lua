@@ -24,7 +24,7 @@ ac.wait(100,function ()
     ac.game:event_notify('游戏-开始')
 
     local item = ac.item.create_item('新手剑')
-    u:add_item(item)
+    -- u:add_item(item)
     -- local item = ac.item.create_item('新手弓')
     -- u:add_item(item)
 
