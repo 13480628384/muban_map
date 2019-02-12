@@ -88,7 +88,13 @@ function mt:on_next()
     local temp_type ={}
 
     for i=1,int do 
-        local random_ty = type[math.random(1,#type)]
+        local random_ty  
+        if i < 2  then 
+            random_ty = type[math.random(1,#type)]
+        else
+            --如果时随机到两种怪，第二种怪不允许是boss
+            random_ty = type[math.random(1,3)]
+        end    
         -- if temp_type[1] and temp_type[1] == random_ty then 
         --     i = 1
         -- else
@@ -250,7 +256,7 @@ ac.game:event '游戏-回合结束' (function(trg,index, creep)
         end	
     end)    
 
-    return true
+    -- return true
 end);
 
 -- 注册英雄杀怪得奖励事件

@@ -1468,7 +1468,7 @@ function mt:attack_start(target, skill, attack_damage)
 	self.last_attack_damage = nil
 
 	if self:event_dispatch('单位-发动攻击', data) then
-		print('攻击中断')
+		-- print('攻击中断')
 		return false
 	end
 	
