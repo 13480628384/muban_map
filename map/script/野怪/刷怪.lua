@@ -89,14 +89,14 @@ function mt:on_next()
 
     for i=1,int do 
         local random_ty = type[math.random(1,#type)]
-        if temp_type[1] and temp_type[1] == random_ty then 
-            i = 1
-        else
+        -- if temp_type[1] and temp_type[1] == random_ty then 
+        --     i = 1
+        -- else
             table.insert(temp_type,random_ty) 
-        end    
+        -- end    
         
     end    
-    print('本回合怪物：'..int)
+    -- print('本回合怪物种类：'..int)
     --随机生成野怪数据
     local function random_creeps_datas()
 
