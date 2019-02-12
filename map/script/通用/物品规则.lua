@@ -298,8 +298,6 @@
                 -- print('使用消耗品')
                 --消耗品使用 增加对应的属性值
                 item:on_use_state()
-                --丢弃或是移除后，不删除对应的属性
-                item.state = nil
 
                 --删除消耗品
                 item._count = item._count - 1

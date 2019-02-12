@@ -194,17 +194,6 @@ function mt:on_change_creep(unit,lni_data)
 
     end 
 
-    unit:event '单位-死亡' (function(_,unit,killer)
-        --加钱
-        local player = killer:get_owner()
-        player:addGold(unit.gold,unit,true)
-
-        --加经验,100级最高级
-        if killer:is_hero() and killer.level <100 then
-            killer:addXp(unit.exp)
-        end
-    end);
-
 end
 
 
@@ -217,7 +206,7 @@ ac.game:event '游戏-回合结束' (function(trg,index, creep)
     local name = '进攻怪-'..self.index
     local data = ac.table.UnitData[name]
 
-    unit.gold = data.gold * 5
+    unit.gold = data.gold * 5 
     unit.exp = data.exp * 5
 
     unit:set('移动速度',800)
@@ -246,6 +235,7 @@ ac.game:event '游戏-回合结束' (function(trg,index, creep)
     end);
 
     unit:event '单位-死亡' (function(_,unit,killer)
+
          --如果有刷新时间配置 则 按照时间等待后刷新，没有的话立即刷新
          if self.cool then 
             ac.wait(self.cool  * 1000, function()
@@ -264,8 +254,27 @@ ac.game:event '游戏-回合结束' (function(trg,index, creep)
 end);
 
 -- 注册英雄杀怪得奖励事件
+ac.game:event '单位-死亡' (function(_,unit,killer) 
+    local player = killer:get_owner()
+    local gold 
+    local exp 
+    
+    --加钱
+    if unit.gold  then 
+        gold = unit.gold * ( 1 + killer:get('金币加成')/100)
+        player:addGold(gold,unit,true)
+    end   
+     
+    --加经验,100级最高级
+    if unit.exp and killer:is_hero() and killer.level <100 then
+        exp = unit.exp * ( 1 + killer:get('经验加成')/100)
+        killer:addXp(exp)
+    end
+
+end);
 
 
+    
 
 --进入游戏后3秒开始刷怪
 ac.wait(1000,function()

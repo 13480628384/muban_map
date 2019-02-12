@@ -452,7 +452,7 @@ local function init()
 
     ac.creep = setmetatable({}, {__index = function(self, name)
         return function(data)
-                return register_creep(self, name, data)
+            return register_creep(self, name, data)
         end
     end})
 

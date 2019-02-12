@@ -445,8 +445,8 @@ function mt:on_use_state()
 				player = hero:get_owner()
 			}
 		end
-		-- print('物品添加属性：',value.name,value.value)
 		if self.item_type == '消耗品' then
+			print('使用物品,增加属性：',name,value.name,value.value)
 			hero:add_tran(value.name,value.value)
 		end	
 	end 
