@@ -1,13 +1,33 @@
 local mt = ac.skill['霜冻新星']
 
+--目标类型
+mt.target_type = ac.skill.TARGET_TYPE_UNIT
+--初始等级
+mt.level = 1
+--技能图标
+mt.art = [[ReplaceableTextures\CommandButtons\BTNGlacier.blp]]
+--技能说明
+mt.title = '霜冻新星'
+mt.tip = [[
+       造成%damage_base%魔法伤害
+]]
+
+--伤害
+mt.damage_base = 100
+
+--冷却时间
+mt.cool = 30 
+
+--施法距离
+mt.range = 500
 
 function mt:on_add()
 
     local hero = self.owner 
  
-    if not hero:is_type('野怪') then 
-        return 
-    end 
+    -- if not hero:is_type('野怪') then 
+    --     return 
+    -- end 
     
     --给野怪注册自动释放的ai
 

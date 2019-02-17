@@ -56,10 +56,35 @@ function mt:revive(where)
 	self:event_notify('单位-传送完成', self, origin, where)
 end
 
---获得经验值
+--获得经验值 modify by jeff 20190215 添加文字显示
 function mt:addXp(xp)
 	jass.SetHeroXP(self.handle, jass.GetHeroXP(self.handle) + xp, true);
 	self.xp = jass.GetHeroXP(self.handle);
+
+	--显示文字
+	local x, y = self:get_point():get()
+	local z = self:get_point():getZ()
+	local position = ac.point(x - 30, y, z + 30)
+	--modify by jeff 经验小于0 也显示文字出来
+	local str = nil
+	if xp < 0 then 
+		 str =  'EXP ' .. math.floor(xp)
+	else
+		 str = 'EXP +' .. math.floor(xp)
+	end	
+	ac.texttag
+	{
+		string = str,
+		size = 10,
+		position = position,
+		speed = 86,
+		red = 9,
+		green = 211,
+		blue = 7,
+		player = self:get_owner(),
+		show = ac.texttag.SHOW_SELF
+	}
+
 end
 
 -- 变身

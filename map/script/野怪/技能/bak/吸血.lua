@@ -2,6 +2,7 @@ local mt = ac.skill['吸血']
 
 mt.ref = 'origin'
 mt.model = [[Abilities\Spells\Undead\VampiricAura\VampiricAura.mdl]]
+mt.life_rate = 10
 
 function mt:on_add()
 

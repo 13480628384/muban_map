@@ -371,8 +371,12 @@ local function on_damage_mul_div(self)
 	self.get_damage = false
 	self.get_current_damage = false
 	
-	self.source:event_notify('造成伤害', self)
-	self.target:event_notify('受到伤害', self)
+	if self.source:event_dispatch('造成伤害', self) then 
+		return 
+	end	
+	if self.target:event_dispatch('受到伤害', self) then 
+		return 
+	end	
 
 	self.get_damage = nil
 	self.get_current_damage = nil
@@ -394,6 +398,7 @@ local function on_damage_mul_div(self)
 			self.current_damage = self.current_damage * (1 - n)
 		end
 	end
+	return true
 end
 
 local function cost_shield(self)
@@ -533,6 +538,36 @@ local function on_texttag(self)
 	-- end
 	
 end
+
+
+function mt:on_miss()
+	if self.source:get_owner() ~= ac.player.self and self.target ~= ac.player.self.hero then
+		return
+	end
+	local tag = self.target.damage_texttag
+	if tag and ac.clock() - tag.time < 1000 then
+
+	else 
+		local x, y = self.source:get_point():get()
+		local tag = ac.texttag
+		{
+			player = self.source:get_owner(),
+			string = 'miss',
+			size = 12,
+			position = ac.point( x, y, 70),
+			speed = 86,
+			angle = 45,
+			red = 100*2.55,
+			green = 20*2.55,
+			blue = 20*2.55,
+			time = ac.clock(),
+		}
+	
+		self.target.damage_texttag_miss = tag
+
+	end
+	
+end 
 
 --死亡
 function mt:kill()
@@ -779,6 +814,12 @@ function damage:__call()
 			self.current_damage = 0
 			return
 		end
+		
+		local rand = math.random(100)
+		if rand <= self.target:get('闪避') then 
+			self:on_miss()
+			return 
+		end 
 	else
 		if target:has_restriction '魔免' then
 			self.current_damage = 0
@@ -889,8 +930,9 @@ function damage:__call()
 		self.current_damage = (self.current_damage ) * (1 + ewsh/100)
 
 		--加成和减免
-		on_damage_mul_div(self)
-		
+		if not on_damage_mul_div(self) then 
+			return 
+		end	
 	end
 
 	self.success = true
@@ -899,19 +941,9 @@ function damage:__call()
 		self.current_damage = 0
 	end
 
-	--消耗护盾
-	-- local effect_damage = cost_shield(self)
-	-- local life = target:get '生命'
-	-- if life <= effect_damage then
-	-- 	self:kill()
-	-- else
-	-- 	target:set('生命', life - effect_damage)
-	-- end
-	--消耗护盾
-
-
 	target:event_notify('伤害计算完毕', self)
 
+	--消耗护盾
 	local effect_damage = cost_shield(self)
 	local life = target:get '生命'
 	if life <= effect_damage then
@@ -932,10 +964,10 @@ function damage:__call()
 	if not self.real_damage then
 
 		if not target:is_type('建筑') then
-			-- --吸血
-			-- on_life_steal(self)
-			-- --溅射
-			-- on_splash(self)
+			--吸血
+			on_life_steal(self)
+			--溅射
+			on_splash(self)
 
 			--击杀回血
 			--self:count_kill_hp()

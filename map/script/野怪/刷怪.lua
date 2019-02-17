@@ -2,14 +2,12 @@
 -- 喽喽占 1个人口，小怪占 2个人口，头目占4人口，boss占20人口
 -- 小怪、头目、boss属性是喽喽的多倍
 -- 每个回合刷的 同怪物类型 的怪物都是同样。
+
 --boss 光环列表
 local buff_list = {
-    'buff-专注光环',
-    'buff-吸血光环',
-    'buff-命令光环',
-    'buff-耐久光环',
-    'buff-恢复光环'
 }
+
+local skill_list = ac.skill_list
 
 local all_creep = {}
 local all_food 
@@ -49,13 +47,63 @@ local function find_hero(unit)
     return ret 
 end 
 
+--每回合开始 从 ac.skill_list 随机取0-2个野怪技能
+local function get_creep_skill()
 
+    local rand_skill_cnt = math.random(0,2)
+    local rand_skill_list = {}
+    if rand_skill_cnt == 0 then 
+        return 
+    end  
+    for i = 1,rand_skill_cnt do  
+        local rand_skill_name = ac.skill_list[math.random(#ac.skill_list)]
+        table.insert(rand_skill_list,rand_skill_name)
+    end    
+    return rand_skill_list
+
+end
+--给野怪添加技能 
+--技能列表
+--野怪单位
+local function add_creep_skill(tab,unit)
+    if not tab or #tab == 0 then 
+        return 
+    end    
+    local prtin_str =''
+    for i = 1,#tab do  
+        local skill_name = tab[i]
+        local skill = ac.skill[skill_name]
+        --如果技能是光环
+        if skill.is_aura then 
+            -- 初始化时 创建一个敌对单位马甲
+            if ac.enemy_unit and ac.enemy_unit:find_skill(skill_name) then 
+                print('光环马甲单位已经添加过')
+            else
+                ac.enemy_unit = ac.player.com[2]:create_dummy('e001', ac.point(0,0),0)
+                ac.enemy_unit:add_restriction '无敌' 
+                ac.enemy_unit:add_skill(skill_name,'英雄')
+                -- 本回合结束时 删掉干掉光环怪
+                ac.game:event '游戏-回合结束'(function(trg,index, creep) 
+                    -- print('回合结束，删掉光环怪')
+                    ac.enemy_unit:remove()
+                end)
+            end    
+        else
+            if not unit:find_skill(skill_name) then 
+                unit:add_skill(skill_name,'英雄')    
+            end    
+        end    
+        prtin_str = prtin_str .. i .. skill_name ..','
+    end 
+    print('1111111111本回合野怪技能：',prtin_str)
+end    
 
 
 local mt = ac.creep['刷怪']{    
     region = '',
     creeps_datas = '',
     is_random = true,
+    creep_player = ac.player.com[2],
     tip ="郊区野怪刷新啦，请速速打怪升级，赢取白富美"
 
 }
@@ -165,6 +213,12 @@ function mt:on_next()
     --转化字符串 为真正的野怪数据
     self:set_creeps_datas()
 
+    self.rand_skill_list = get_creep_skill()
+    -- unit:add_skill(buff_list[math.random(#buff_list)],'隐藏',{level = 1})
+   
+    -- ac.enemy_unit:add_skill('慢动作光环','英雄')
+    -- ac.enemy_unit:add_skill('遗忘光环','英雄')
+
     print('当前波数 '..self.index)
 end
 --改变怪物
@@ -172,6 +226,9 @@ function mt:on_change_creep(unit,lni_data)
   
     local name = '进攻怪-'..self.index
     local data = ac.table.UnitData[name]
+    data.attr_mul = lni_data.attr_mul
+    data.food = lni_data.food
+    unit.data = data
 
     if unit and data  then 
     --    unit.gold = math.random(data.gold[1],data.gold[2])
@@ -182,23 +239,51 @@ function mt:on_change_creep(unit,lni_data)
             unit:set(k,v)
         end
          --设置 boss 等 属性倍数
-         if lni_data.attr_mul  then
+        if lni_data.attr_mul  then
             --属性
             unit:set('攻击',data.attribute['攻击'] * lni_data.attr_mul)
             unit:set('护甲',data.attribute['护甲'] * lni_data.attr_mul)
             unit:set('生命上限',data.attribute['生命上限'] * lni_data.attr_mul)
             unit:set('魔法上限',data.attribute['魔法上限'] * lni_data.attr_mul)
             unit:set('生命恢复',data.attribute['生命恢复'] * lni_data.attr_mul)
-            unit:set('生命恢复',data.attribute['生命恢复'] * lni_data.attr_mul)
+            unit:set('魔法恢复',data.attribute['魔法恢复'] * lni_data.attr_mul)
         end  
         --掉落概率
         unit.fall_rate = data.fall_rate * lni_data.food
-
         --掉落金币和经验
         unit.gold = data.gold * lni_data.food
         unit.exp = data.exp * lni_data.food
 
     end 
+    
+    add_creep_skill(self.rand_skill_list,unit)
+    --随机添加怪物技能
+    -- unit:add_skill('吸血','英雄')
+    -- unit:add_skill('霜冻新星','英雄')
+    -- unit:add_skill('肥胖','英雄')
+    -- unit:add_skill('强壮','英雄')
+    -- unit:add_skill('有钱','英雄')
+    -- unit:add_skill('学习','英雄')
+    -- unit:add_skill('收藏','英雄')
+    -- unit:add_skill('神盾','英雄')
+    -- unit:add_skill('躲猫猫','英雄')
+    -- unit:add_skill('我晕','英雄')
+    -- unit:add_skill('泡温泉','英雄')
+    -- unit:add_skill('重生','英雄')
+    -- unit:add_skill('死亡一指','英雄')
+    -- unit:add_skill('学霸','英雄')
+    -- unit:add_skill('刺猬','英雄')
+    -- unit:add_skill('怀孕','英雄')
+    -- unit:add_skill('抗魔','英雄')
+    -- unit:add_skill('魔免','英雄')
+    -- unit:add_skill('火焰','英雄')
+    -- unit:add_skill('净化','英雄')
+    -- unit:add_skill('远程攻击','英雄')
+    -- unit:add_skill('幽灵','英雄')
+    -- unit:add_skill('腐烂','英雄')
+    -- unit:add_skill('流血','英雄')
+    -- unit:add_skill('善恶有报','英雄')
+    
 
 end
 
@@ -208,18 +293,28 @@ ac.game:event '游戏-回合结束' (function(trg,index, creep)
 
     local self = creep
     local unit = ac.player[16]:create_unit('钥匙怪',ac.point(0,0))
-    
+    ac.key_unit = unit
+    -- print('钥匙怪队伍：',unit:get_team())
     local name = '进攻怪-'..self.index
     local data = ac.table.UnitData[name]
 
+    --设置属性
+    unit.category = '进攻怪' --设置为进攻怪的掉落物品规则
     unit.gold = data.gold * 5 
     unit.exp = data.exp * 5
-
+    unit.fall_rate = data.fall_rate * 5
     unit:set('移动速度',800)
+    --设置掉落技能书概率 暂时没实现
+    unit.fall_skill_book = 20
 
-    --每1秒 与距离最近英雄的反方向 跑
+    --逃跑路线
     local hero = find_hero(unit)
-    local angle = hero:get_point()/unit:get_point()
+    local angle
+    if hero then  
+        angle= hero:get_point()/unit:get_point()
+    else 
+        angle =math.random(0,360)
+    end    
     --优化钥匙怪跑路角度
     angle = angle - math.random(0,360)
     local target_point = unit:get_point() - {angle,1044}

@@ -1680,6 +1680,9 @@ function unit.__index:add_skill(name, type, slotid, data)
 	skill.owner = self
 
 	skill.ability_id = skill.ability_id or self:get_owner():get_ability_id(type, slotid)
+
+
+	-- print('技能类型：'..type..' 技能名称：'..name..' 技能id：'..skill.ability_id)
 	if skill.cooldown_mode == 1 then
 		skill.spell_stack = skill.charge_max_stack
 	end
@@ -1708,6 +1711,7 @@ function unit.__index:add_skill(name, type, slotid, data)
 		skill:add_ability()
 		self:makePermanent(skill.ability_id)
 		local order = skill:get_order()
+		-- print('打印 添加技能时取得的命令',order)
 		if order then
 			if not self._order_skills then
 				self._order_skills = {}
@@ -2175,7 +2179,7 @@ end
 
 -- 使用技能
 function mt:cast(target, data)
-
+	-- print('打印 是否可施法')
 	local self = self:create_cast(data)
 	self.target = target
 	if self.force_cast == 1 or (data and data.force_cast == 1) then
@@ -2464,6 +2468,7 @@ local function init()
 		end
 
 		local skill = hero._order_skills[order]
+		-- print('打印 进入发布命令3 ',order)
 		if skill then
 			if not hero._ignore_order_list then
 				hero._ignore_order_list = {}
@@ -2486,7 +2491,9 @@ local function init()
 				-- 对视野外的建筑物发布了单位目标指令
 				return
 			end
+			-- print('打印 进入发布命令5 ',target)
 			if not skill:is_in_range(target) then
+				-- print('打印 进入发布命令6 ',target)
 				skill:set('_out_range_target', target)
 				return
 			end
@@ -2498,7 +2505,7 @@ local function init()
 		local hero = unit.j_unit(jass.GetTriggerUnit())
 		local ability_id = base.id2string(jass.GetSpellAbilityId())
 		local skill
-
+		-- print('打印 进入施法流程 1 ',ability_id)
 		for skl in hero:each_skill() do
 			if skl.ability_id == ability_id then
 				skill = skl
@@ -2510,6 +2517,8 @@ local function init()
 			return
 		end
 
+		-- print('打印 进入施法流程 2 ',ability_id)
+
 		if skill:get_name() == '拾取' and skill.target_data == '物品' then
 			local target = ac.item.item_map[jass.GetSpellTargetItem()]
 			if not target then
@@ -2520,16 +2529,19 @@ local function init()
 			return
 		end
 
+		-- print('打印 进入施法流程 3 ',ability_id)
 		local out_target = skill._out_range_target
 		if not out_target then
 			return
 		end
 
+		-- print('打印 进入施法流程 4 ',ability_id)
 		skill:set('_out_range_target', nil)
 		local target = ac.unit(jass.GetSpellTargetUnit()) or ac.point(jass.GetSpellTargetX(), jass.GetSpellTargetY())
 		if out_target.type ~= target.type then
 			return
 		end
+		-- print('打印 进入施法流程 5 ',ability_id)
 
 		if out_target.type == 'unit' then
 			if out_target ~= target then

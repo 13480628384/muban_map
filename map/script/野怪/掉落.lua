@@ -110,7 +110,6 @@ local unit_reward = {
    
 }
 
-
 --递归匹配唯一奖励
 local function get_reward_name(tbl)
     local rand = math.random(1,10000) / 100
@@ -128,6 +127,8 @@ local function get_reward_name(tbl)
         end 
     end 
 end 
+
+ac.get_reward_name = get_reward_name
 
 --递归匹配多个奖励
 local function get_reward_name_list(tbl,list,level)

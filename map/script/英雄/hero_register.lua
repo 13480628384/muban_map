@@ -53,7 +53,17 @@ local function hero_register_main()
 
 		hero:add_skill('拾取','拾取',1)
 		hero:add_skill('切换背包','英雄',5)
-
+		hero:add_skill('测试','英雄')
+		hero:add_skill('闪烁','英雄')
+		hero:add_skill('流血','英雄')
+		-- hero:add_skill('测试2','英雄')
+		-- hero:add_skill('测试3','英雄')
+		-- hero:add_skill('测试4','英雄')
+		-- hero:add_skill('测试5','英雄')
+		-- hero:add_skill('测试6','英雄')
+		-- hero:add_skill('测试7','英雄')
+		-- hero:add_skill('测试8','英雄')
+		
 		--添加英雄属性面板
 		hero:add_skill('英雄属性面板', '隐藏')
 

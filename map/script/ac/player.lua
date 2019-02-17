@@ -212,6 +212,10 @@ end
 --	[漂浮文字显示位置]
 --	[不抛出加钱事件]
 function mt:addGold(gold, where, flag)
+	--modify by jeff 金币==0 直接返回
+	if gold == 0 then 
+		return 
+	end	
 	if gold > 0 and not flag then
 		local data = {player = self, gold = gold}
 		self:event_notify('玩家-即将获得金钱', data)
@@ -222,7 +226,6 @@ function mt:addGold(gold, where, flag)
 	gold = math.floor(gold)
 	self.gold = self.gold + gold
 	jass.SetPlayerState(self.handle, jass.ConvertUnitState(0x01), self.gold)
-	--or gold <= 0 modify by jeff 金币小于0 也显示文字出来
 	if not where  then
 		return
 	end

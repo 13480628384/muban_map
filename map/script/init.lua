@@ -14,6 +14,7 @@ require '英雄'
 require '野怪'
 require '测试'
 
+
 ac.wait(100,function ()
     local u = ac.player[1]:createHero('小黑',ac.point(0,0))
     local p = ac.player[1]
@@ -22,7 +23,7 @@ ac.wait(100,function ()
     p:event_notify('玩家-注册英雄', p, u)
     
     ac.game:event_notify('游戏-开始')
-
+    
     local item = ac.item.create_item('新手剑')
     -- u:add_item(item)
     -- local item = ac.item.create_item('新手弓')

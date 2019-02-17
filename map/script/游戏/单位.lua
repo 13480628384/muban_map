@@ -12,8 +12,8 @@ ac.game:event '玩家-注册英雄' (function(_, player, hero)
 
 	hero:event '单位-死亡' (function()
 	
-
-		local time = 10
+		--复活时间
+		local time = 1
 		ac.timer_ex
 		{
 			time = time,

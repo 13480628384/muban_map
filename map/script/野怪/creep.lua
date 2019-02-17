@@ -312,6 +312,10 @@ function mt:next()
                 u.gold = math.random(data.gold[1],data.gold[2])
             end    
             u.exp = data.exp
+            
+            u.attr_mul = data.attr_mul
+            u.food = data.food
+            u.data = data
 
             --设置模型大小
             if data.model_size  then

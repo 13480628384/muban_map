@@ -45,7 +45,9 @@ local function range_attack_start(hero,damage)
                     source = hero,
                     damage = damage,
                     skill = false,
-                    missile = self.mover
+                    missile = self.mover,
+                    attack = true,
+                    common_attack = true,
                 }
             end
             

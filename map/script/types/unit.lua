@@ -1060,10 +1060,38 @@ function mt:create_illusion(p, no_item)
 		dummy:event_notify('单位-创建', dummy)
 	end
 
-	for k, v in pairs(self.hero_data.attribute) do
-		dummy:set(k, v)
-	end
-	
+	if self:is_hero() then 
+		for k, v in pairs(self.hero_data.attribute) do
+			if not finds(k,'力量','敏捷','智力')then
+				dummy:set(k, v)
+			end	
+		end
+
+		for k, v in pairs(self.hero_data.attribute) do
+			if finds(k,'力量','敏捷','智力')then
+				dummy:add(k, v)
+			end	
+		end
+	else
+		--复制属性 1 复制与当前匹配的属性，如果是受光环影响 则最新属性将又受到光环、技能影响
+		--复制属性 2 一个一个属性复制，boss为喽喽的5倍，需要在这里不断加，代码直接加的都需要在这边添加
+		--先用属性 2 
+		for k, v in pairs(self.data.attribute) do
+			dummy:set(k, v)
+		end
+		 --设置 boss 等 属性倍数
+		 if self.data.attr_mul  then
+            --属性
+            dummy:set('攻击',self.data.attribute['攻击'] * self.data.attr_mul)
+            dummy:set('护甲',self.data.attribute['护甲'] * self.data.attr_mul)
+            dummy:set('生命上限',self.data.attribute['生命上限'] * self.data.attr_mul)
+            dummy:set('魔法上限',self.data.attribute['魔法上限'] * self.data.attr_mul)
+            dummy:set('生命恢复',self.data.attribute['生命恢复'] * self.data.attr_mul)
+            dummy:set('魔法恢复',self.data.attribute['魔法恢复'] * self.data.attr_mul)
+        end  
+
+	end	
+
 	--复制等级
 	for i = 1 + 1, self:get_level() do
 		dummy:event_dispatch('单位-英雄升级', dummy)
@@ -1251,6 +1279,7 @@ function unit.init_unit(handle, p)
 	end
 	local data = ac.table.UnitData[u:get_name()]
 	if data then
+		u.user_data = data
 		u.unit_type = data.type
 		if data.attribute then
 			for k, v in pairs(data.attribute) do
@@ -1395,6 +1424,7 @@ end
 
 function mt:range_attack_start(data)
 	--发射一个弹道
+	print('发射一个弹道',self.weapon['弹道速度'] )
 	local target = data.target
 	local size = self:get_size()
 	local start = self:get_launch_point()

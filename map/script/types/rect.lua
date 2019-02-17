@@ -3,6 +3,7 @@ local jass = require 'jass.common'
 
 local rect = {}
 setmetatable(rect, rect)
+ac.rect = rect 
 
 --矩形区域结构
 local mt = {}

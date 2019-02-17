@@ -10,7 +10,6 @@ local japi = require 'jass.japi'
 local japi = require 'jass.japi'
 local rect = require 'types.rect'
 
-ac.map_area = rect.create(-4000,-4000,4000,4000)
 --创建全图视野
 local function icu()
 	fogmodifier.create(ac.player(1), ac.map_area)
