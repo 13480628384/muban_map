@@ -27,25 +27,6 @@ for k,v in pairs(ac.table.UnitData) do
 end    
 
 
---搜索离单位最近的一个英雄
-local function find_hero(unit)
-    local point = unit:get_point()
-    local num = 99999
-    local ret = nil 
-    for i = 1,10 do 
-        local player = ac.player(i)
-        local hero = player.hero
-        if hero and hero:is_alive() then 
-            local dis = hero:get_point() * point
-            if dis < num then 
-                ret = hero 
-                num = dis 
-            end 
-        end 
-
-    end 
-    return ret 
-end 
 
 --每回合开始 从 ac.skill_list 随机取0-2个野怪技能
 local function get_creep_skill()
@@ -77,7 +58,7 @@ local function add_creep_skill(tab,unit)
         if skill.is_aura then 
             -- 初始化时 创建一个敌对单位马甲
             if ac.enemy_unit and ac.enemy_unit:find_skill(skill_name) then 
-                print('光环马甲单位已经添加过')
+                -- print('光环马甲单位已经添加过')
             else
                 ac.enemy_unit = ac.player.com[2]:create_dummy('e001', ac.point(0,0),0)
                 ac.enemy_unit:add_restriction '无敌' 
@@ -93,8 +74,10 @@ local function add_creep_skill(tab,unit)
                 unit:add_skill(skill_name,'英雄')    
             end    
         end    
+        
         prtin_str = prtin_str .. i .. skill_name ..','
     end 
+    -- unit:add_skill('学霸','英雄')    
     print('1111111111本回合野怪技能：',prtin_str)
 end    
 
@@ -308,7 +291,7 @@ ac.game:event '游戏-回合结束' (function(trg,index, creep)
     unit.fall_skill_book = 20
 
     --逃跑路线
-    local hero = find_hero(unit)
+    local hero = ac.find_hero(unit)
     local angle
     if hero then  
         angle= hero:get_point()/unit:get_point()
@@ -321,7 +304,7 @@ ac.game:event '游戏-回合结束' (function(trg,index, creep)
     unit:issue_order('move',target_point)
 
     unit:loop(2*1000,function()
-        local hero = find_hero(unit)
+        local hero = ac.find_hero(unit)
         local angle
         if hero then  
             angle= hero:get_point()/unit:get_point()
@@ -385,7 +368,7 @@ ac.wait(1000,function()
     --每3秒刷新一次攻击目标
     ac.loop(3 * 1000 ,function ()
         for _, unit in ipairs(mt.group) do
-            local hero = find_hero(unit)
+            local hero = ac.find_hero(unit)
             if hero then 
                 if unit.target_point and unit.target_point * hero:get_point() < 1000 then 
                     unit.target_point = hero:get_point()

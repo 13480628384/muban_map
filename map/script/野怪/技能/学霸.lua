@@ -37,12 +37,16 @@ function mt:on_add()
     hero:add('生命上限%', self.value)
     hero:add('护甲%', self.value)
     hero:add('攻击%', self.value)
+    -- print('技能被添加',hero.food,self.cnt)
     self.trg = hero:event '单位-死亡' (function(_,unit,killer)
-        if self.cnt >0 then 
+        if self.cnt > 0 then 
             -- 死亡随机掉落人口同等数量的消耗品
-            local item_name = cast_item[math.random(#cast_item)]
-            local item = ac.item.create_item(item_name,hero:get_point())
-            item:set_item_count(self.cnt)
+            -- print('学霸掉落的物品数量：',hero.food,self.cnt)
+            for i = 1,self.cnt do
+                local item_name = cast_item[math.random(#cast_item)]
+                ac.item.create_item(item_name,hero:get_point())
+                -- item:set_item_count(self.cnt)
+            end    
         end    
    end)    
 

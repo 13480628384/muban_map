@@ -1996,7 +1996,6 @@ function unit.init()
 
 	-- 创建一个dummy,用于使用马甲技能
 	ac.dummy = player[16]:create_unit('e003', ac.point(0, 0), 0)
-	print(ac.dummy)
 	-- 创建幻象
 	ac.dummy:add_ability 'A01W'
 	local j_trg = war3.CreateTrigger(function()

@@ -117,7 +117,7 @@ local function find_hero(unit)
     end 
     return ret 
 end 
-
+ac.find_hero = find_hero
 -- 通过 region 名 找到 creep 刷怪,然后返回
 -- region table 的话 无法判断。
 function creep:find_creep_by_region(region_str)

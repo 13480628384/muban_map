@@ -44,17 +44,35 @@ function mt:on_add()
         dummy:add('护甲', - dummy:get('护甲')*(1-(self.child_value+self.value)/100) )
         dummy:add('攻击', - dummy:get('攻击')*(1-(self.child_value+self.value)/100) )
         
-        --设置搜敌范围
-        dummy:set_search_range(99999)
+        --设置搜敌范围 对部分单位会失效。
+        -- dummy:set_search_range(99999)
         dummy:set_size(self.size)
 
-        -- 加入到刷怪组
-        -- table.insert(ac.creep['刷怪'].group,dummy)
-
+        --每3秒刷新一次攻击目标
+        self.trg1 = ac.loop(3 * 1000 ,function ()
+            local unit = dummy
+            local hero = ac.find_hero(unit)
+            if hero then 
+                if unit.target_point and unit.target_point * hero:get_point() < 1000 then 
+                    unit.target_point = hero:get_point()
+                    unit:issue_order('attack',hero:get_point())
+                else 
+                    unit.target_point = hero:get_point()
+                    if unit:get_point() * hero:get_point() < 1000 then 
+                        unit:issue_order('attack',hero)
+                    else  
+                        unit:issue_order('attack',hero:get_point())
+                    end 
+                end 
+            end 
+        end)
+        
+  
         self.cnt = self.cnt - 1 
         -- 本体正常死亡
         return false 
-    
+        
+      
     end)
 
 end
@@ -71,7 +89,10 @@ function mt:on_remove()
     if self.trg then
         self.trg:remove()
         self.trg = nil
+    end  
+    if self.trg1 then
+        self.trg1:remove()
+        self.trg1 = nil
     end    
-
 end
 
