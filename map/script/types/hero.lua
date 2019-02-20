@@ -176,8 +176,6 @@ end
 --	where:创建位置(type:point;type:circle;type:rect;type:unit)
 --	face:面向角度
 function player.__index.createHero(p, name, where, face)
-	print(name,hero.hero_list[name])
-
 	local hero_data = hero.hero_list[name].data
 	local u = p:create_unit(hero_data.id, where, face)
 	setmetatable(u, hero_data)

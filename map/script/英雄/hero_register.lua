@@ -37,7 +37,17 @@ for i = 1, 12 do
 	end
 	p.ability_list['拾取'][1] = 'A'..id_name[i]..'13'
 end
-
+--玩家16 技能预览图
+local i =16
+if i == 16 then
+	local p = ac.player[i]
+	p.ability_list = {}
+	p.ability_list['预览'] = {size = 4}
+	for x = 1, p.ability_list['预览'].size do
+		p.ability_list['预览'][x] = ('Q20%d'):format(x - 1)
+	end
+	
+end
 
 local function hero_register_main()
 	--注册英雄
@@ -47,13 +57,15 @@ local function hero_register_main()
 		hero.item_list = {}
 		--记录当前页面
 		hero.currentpage = 1
-		 
+
+		-- 统一设置搜敌范围
+		hero:set_search_range(1000)
 		--添加技能
 		hero:add_all_hero_skills()
 
 		hero:add_skill('拾取','拾取',1)
 		hero:add_skill('切换背包','英雄',5)
-		hero:add_skill('测试','英雄')
+		-- hero:add_skill('测试','英雄')
 		hero:add_skill('闪烁','英雄')
 		-- hero:add_skill('测试2','英雄')
 		-- hero:add_skill('测试3','英雄')

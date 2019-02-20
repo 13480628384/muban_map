@@ -18,8 +18,8 @@ else
         BJDebugMsg(s)
     end
 end
-
-runtime.handle_level = 2
+--阿七为2 ，英萌为0
+runtime.handle_level = 0
 runtime.sleep = true
 runtime.error_handle = function(msg)
     print("---------------------------------------")

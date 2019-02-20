@@ -507,14 +507,14 @@ end
 		--先计算冷却缩减
 		cool = cool * (1 - self:get '冷却缩减' / 100)
 		--再计算冷却加速
-		local cs = self:get '攻击速度' / 2
-		if cs > 0 then
-			--每点加速视为技能频率加快1%
-			cool = cool / (1 + cs / 100)
-		elseif cs < 0 then
-			--每点负加速视为技能间隔增加1%
-			cool = cool * (1 - cs / 100)
-		end
+		-- local cs = self:get '攻击速度' / 2
+		-- if cs > 0 then
+		-- 	--每点加速视为技能频率加快1%
+		-- 	cool = cool / (1 + cs / 100)
+		-- elseif cs < 0 then
+		-- 	--每点负加速视为技能间隔增加1%
+		-- 	cool = cool * (1 - cs / 100)
+		-- end
 		return cool
 	end
 
@@ -1079,7 +1079,7 @@ function mt:create_illusion(p, no_item)
 		for k, v in pairs(self.data.attribute) do
 			dummy:set(k, v)
 		end
-		 --设置 boss 等 属性倍数
+		 --设置  属性倍数
 		 if self.data.attr_mul  then
             --属性
             dummy:set('攻击',self.data.attribute['攻击'] * self.data.attr_mul)
@@ -1279,7 +1279,7 @@ function unit.init_unit(handle, p)
 	end
 	local data = ac.table.UnitData[u:get_name()]
 	if data then
-		u.user_data = data
+		-- print('创建单位，打印类型',u:get_name(),data.type)
 		u.unit_type = data.type
 		if data.attribute then
 			for k, v in pairs(data.attribute) do
@@ -1319,6 +1319,7 @@ function player.__index:create_unit(id, where, face)
 	local data = ac.table.UnitData[id]
 	if data then
 		id = data.id
+		print('打印创建单位的id',data.id)
 	end
 	local j_id = base.string2id(id)
 	local x, y

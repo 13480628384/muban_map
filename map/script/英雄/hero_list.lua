@@ -5,7 +5,20 @@ local japi = require 'jass.japi'
 local slk = require 'jass.slk'
 
 hero.hero_list = {
-	'小黑'
+	'亚瑟王',
+	'凯撒',
+	'牛魔王',
+	'山丘王',
+	'Pa',
+	'悟空',
+	'鲁大师',
+	'小黑',
+	'小昭君',
+	'诸葛亮',
+	'影歌',
+	'火焰领主',
+	'扁鹊',
+	'卜算子'
 }
 
 --加载英雄的数据

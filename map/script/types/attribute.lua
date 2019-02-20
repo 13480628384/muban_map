@@ -295,15 +295,22 @@ local int_explosion = 0.1
 
 
 get['力量'] = function(self)
-	return self:getStr()
+	if self.getStr then 
+		return self:getStr()
+	else
+		-- print('不是英雄单位，没有力量')
+		return 0	
+	end	
 end
 
 set['力量'] = function(self, val)
-	if val >= 1 then
-		self:setStr(val)
-	else
-		self:setStr(1)
-	end
+	if self.setStr then 
+		if val >= 1 then
+			self:setStr(val)
+		else
+			self:setStr(1)
+		end
+	end	
 end
 
 
@@ -330,16 +337,23 @@ end
 
 
 
-get['敏捷'] = function(self)
-	return self:getAgi()
+get['敏捷'] = function(self)	
+	if self.getAgi then 
+		return self:getAgi()
+	else
+		-- print('不是英雄单位，没有敏捷')
+		return 0	
+	end	
 end
 
 set['敏捷'] = function(self, val)
-	if val >= 1 then
-		self:setAgi(val)
-	else
-		self:setAgi(1)
-	end
+	if self.setAgi then 
+		if val >= 1 then
+			self:setAgi(val)
+		else
+			self:setAgi(1)
+		end
+	end	
 end
 
 on_set['敏捷'] = function(self,old_value)
@@ -361,15 +375,23 @@ end
 
 
 get['智力'] = function(self)
-	return self:getInt()
+	if self.getInt then 
+		return self:getInt()
+	else
+		-- print('不是英雄单位，没有智力')
+		return 0	
+	end	
+	
 end
 
 set['智力'] = function(self, val)
-	if val >= 1 then
-		self:setInt(val)
-	else
-		self:setInt(1)
-	end
+	if self.setInt then 
+		if val >= 1 then
+			self:setInt(val)
+		else
+			self:setInt(1)
+		end
+	end	
 end
 
 on_set['智力'] = function(self,old_value)
@@ -536,9 +558,9 @@ end
 set['攻击距离'] = function(self, attack_range)
 	japi.SetUnitState(self.handle, jass.ConvertUnitState(0x16), attack_range)
 	--修改攻击距离后同时修改主动攻击范围
-	if self.owner:is_player() then
-		self:set_search_range(self:get '攻击距离')
-	end
+	-- if self.owner:is_player() then
+	-- 	self:set_search_range(self:get '攻击距离')
+	-- end
 end
 
 get['移动速度'] = function(self)

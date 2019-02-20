@@ -16,13 +16,13 @@ require '测试'
 
 
 ac.wait(100,function ()
-    local u = ac.player[1]:createHero('小黑',ac.point(0,0))
-    local p = ac.player[1]
-    p.hero = u
-    p:addGold(1000000)
-    p:event_notify('玩家-注册英雄', p, u)
+    -- local u = ac.player[1]:createHero('小黑',ac.point(0,0))
+    -- local p = ac.player[1]
+    -- p.hero = u
+    -- p:addGold(1000000)
+    -- p:event_notify('玩家-注册英雄', p, u)
     
-    ac.game:event_notify('游戏-开始')
+    -- ac.game:event_notify('游戏-开始')
     
     local item = ac.item.create_item('新手剑')
     -- u:add_item(item)
@@ -73,8 +73,9 @@ ac.wait(100,function ()
     ac.item.create_item('敏捷丹',ac.point(500,500))
     ac.item.create_item('敏捷丹',ac.point(500,500))
     ac.item.create_item('敏捷丹',ac.point(500,500))
+    ac.item.create_item('霹雳弩',ac.point(0,0))
 
-    u:add_item('霹雳弩')
+    -- u:add_item('霹雳弩')
     -- u:add_item('厄运斧')
     -- u:add_item('腰带')
     -- u:add_item('寻觅丹')

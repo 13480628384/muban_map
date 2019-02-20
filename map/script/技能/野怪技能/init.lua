@@ -1,0 +1,28 @@
+
+
+require '技能.野怪技能.肥胖'
+require '技能.野怪技能.强壮'
+require '技能.野怪技能.有钱'
+require '技能.野怪技能.学习'
+require '技能.野怪技能.收藏'
+require '技能.野怪技能.神盾'
+require '技能.野怪技能.躲猫猫'
+require '技能.野怪技能.隐蔽者'
+require '技能.野怪技能.我晕'
+require '技能.野怪技能.泡温泉'
+require '技能.野怪技能.重生'
+require '技能.野怪技能.死亡一指'
+require '技能.野怪技能.学霸'
+require '技能.野怪技能.刺猬'
+require '技能.野怪技能.怀孕'
+require '技能.野怪技能.抗魔'
+require '技能.野怪技能.魔免'
+require '技能.野怪技能.火焰'
+require '技能.野怪技能.净化'
+require '技能.野怪技能.远程攻击'
+require '技能.野怪技能.幽灵'
+require '技能.野怪技能.腐烂'
+require '技能.野怪技能.流血'
+require '技能.野怪技能.善恶有报'
+
+

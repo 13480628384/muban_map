@@ -43,8 +43,8 @@ for x = 0, 10 do
 	player.force[1][x]:setTeam(1)
 	player.force[2][0]:setTeam(2)
 	--允许控制中立被动的单位
-	-- player.force[1][x]:enableControl(player[16])
-	-- player.force[2][0]:enableControl(player[16])
+	player.force[1][x]:enableControl(player[16])
+	player.force[2][0]:enableControl(player[16])
 end
 
 --电脑与野怪互相友好

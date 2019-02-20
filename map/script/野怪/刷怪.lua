@@ -6,6 +6,15 @@
 --boss 光环列表
 local buff_list = {
 }
+--技能列表
+ac.skill_list = {
+    '肥胖','强壮','有钱','学习','收藏',
+    '神盾','躲猫猫','隐蔽者','我晕','泡温泉',
+    '重生','死亡一指','学霸','刺猬','怀孕',
+    '抗魔','魔免','火焰','净化','远程攻击',
+    '幽灵','腐烂','流血','善恶有报',
+    '遗忘光环','慢动作光环'
+}
 
 local skill_list = ac.skill_list
 
@@ -77,7 +86,7 @@ local function add_creep_skill(tab,unit)
         
         prtin_str = prtin_str .. i .. skill_name ..','
     end 
-    -- unit:add_skill('学霸','英雄')    
+    unit:add_skill('火焰','英雄')    
     print('1111111111本回合野怪技能：',prtin_str)
 end    
 
@@ -361,28 +370,31 @@ end);
     
 
 --进入游戏后3秒开始刷怪
-ac.wait(1000,function()
-    --开始刷怪
-    mt:start()
-
-    --每3秒刷新一次攻击目标
-    ac.loop(3 * 1000 ,function ()
-        for _, unit in ipairs(mt.group) do
-            local hero = ac.find_hero(unit)
-            if hero then 
-                if unit.target_point and unit.target_point * hero:get_point() < 1000 then 
-                    unit.target_point = hero:get_point()
-                    unit:issue_order('attack',hero:get_point())
-                else 
-                    unit.target_point = hero:get_point()
-                    if unit:get_point() * hero:get_point() < 1000 then 
-                        unit:issue_order('attack',hero)
-                    else  
+ac.wait(0,function()
+    ac.game:event '游戏-开始' (function()
+        --开始刷怪
+        mt:start()
+         --每3秒刷新一次攻击目标
+        ac.loop(3 * 1000 ,function ()
+            for _, unit in ipairs(mt.group) do
+                local hero = ac.find_hero(unit)
+                if hero then 
+                    if unit.target_point and unit.target_point * hero:get_point() < 1000 then 
+                        unit.target_point = hero:get_point()
                         unit:issue_order('attack',hero:get_point())
+                    else 
+                        unit.target_point = hero:get_point()
+                        if unit:get_point() * hero:get_point() < 1000 then 
+                            unit:issue_order('attack',hero)
+                        else  
+                            unit:issue_order('attack',hero:get_point())
+                        end 
                     end 
                 end 
             end 
-        end 
+        end)
     end)
+
+   
 
 end);

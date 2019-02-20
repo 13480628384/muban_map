@@ -159,6 +159,12 @@ function mt:enableControl(dest, flag)
 		jass.SetPlayerAlliance(dest.handle, self.handle, jass.ConvertUnitState(7), true)
 	end
 end
+
+--不允许控制
+function mt:disableControl(dest)
+	jass.SetPlayerAlliance(dest.handle, self.handle, jass.ConvertUnitState(6), false)
+	
+end
 	
 --显示系统警告
 --	警告内容
