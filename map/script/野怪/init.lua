@@ -9,5 +9,5 @@
 -- require '野怪.领主-AI'
 require '野怪.creep'
 require '野怪.刷怪'
-require '野怪.掉落'
-require '野怪.BOSS-AI'
+-- require '野怪.掉落'
+-- require '野怪.BOSS-AI'

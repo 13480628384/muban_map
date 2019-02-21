@@ -168,6 +168,9 @@ function mt:on_attribute_attack()
 	if not self['穿透'] then
 		self['穿透'] = source:get '穿透'
 	end
+	if not self['穿魔'] then
+		self['穿魔'] = source:get '穿魔'
+	end
 	if not self['暴击'] then
 		self['暴击'] = source:get '暴击'
 	end

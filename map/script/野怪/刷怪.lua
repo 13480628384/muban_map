@@ -352,6 +352,15 @@ ac.game:event '单位-死亡' (function(_,unit,killer)
     local gold 
     local exp 
     
+    -- 英雄的召唤物 打死的怪，也给英雄加钱加经验
+    -- 英雄召唤物享有 英雄的金币、经验加成
+    if player and not killer:is_hero()  then 
+        killer = player.hero
+    end   
+    -- 进攻怪杀死单位，不用加钱和经验
+    if not killer then  
+        return
+    end    
     --加钱
     if unit.gold  then 
         gold = unit.gold * ( 1 + killer:get('金币加成')/100)
@@ -359,7 +368,7 @@ ac.game:event '单位-死亡' (function(_,unit,killer)
     end   
      
     --加经验,100级最高级
-    if unit.exp and killer:is_hero() and killer.level <100 then
+    if unit.exp  and killer.level <100 then
         exp = unit.exp * ( 1 + killer:get('经验加成')/100)
         killer:addXp(exp)
     end

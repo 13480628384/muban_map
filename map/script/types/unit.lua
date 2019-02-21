@@ -1250,7 +1250,7 @@ local function init_unit(handle, p)
 	u:remove_ability 'Arav'
 
 	--忽略警戒点
-	jass.RemoveGuardPosition(u.handle)
+	-- jass.RemoveGuardPosition(u.handle)
 	--jass.SetUnitCreepGuard(u.handle, true)
 
 	--设置高度
@@ -1425,7 +1425,7 @@ end
 
 function mt:range_attack_start(data)
 	--发射一个弹道
-	print('发射一个弹道',self.weapon['弹道速度'] )
+	-- print('发射一个弹道',self.weapon['弹道速度'] )
 	local target = data.target
 	local size = self:get_size()
 	local start = self:get_launch_point()

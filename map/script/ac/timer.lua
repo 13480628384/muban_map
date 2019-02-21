@@ -161,6 +161,10 @@ function ac.timer(timeout, count, on_timer)
 		return ac.loop(timeout, on_timer)
 	end
 	local t = ac.loop(timeout, function(t)
+		if not t.cnt then 
+			t.cnt = 0
+		end
+		t.cnt = t.cnt + 1	
 		on_timer(t)
 		count = count - 1
 		if count <= 0 then

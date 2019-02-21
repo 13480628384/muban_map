@@ -1,11 +1,3 @@
 require '英雄.小黑.测试'
-require '英雄.小黑.测试2'
-require '英雄.小黑.测试3'
-require '英雄.小黑.测试4'
-require '英雄.小黑.测试5'
-require '英雄.小黑.测试6'
-require '英雄.小黑.测试7'
-require '英雄.小黑.测试8'
-require '英雄.小黑.测试9'
 require '英雄.小黑.漫天花雨'
 

@@ -44,6 +44,9 @@ function mt:on_add()
         if rand <= self.rate then 
             --怪物受到伤害时，伤害来源为英雄。给伤害来源添加晕眩buff，来源为怪物本身
             local source = damage.source
+            if source:has_restriction '无敌' then 
+                return 
+            end    
             damage.source:add_buff '净化' 
             {
                 source = hero,

@@ -1950,7 +1950,6 @@ function config takes nothing returns nothing
     call DefineStartLocation(8, - 1746.3, - 886.5)
     call DefineStartLocation(9, - 2125.0, 34.4)
     call DefineStartLocation(10, - 2752.2, - 2767.9)
-    call DefineStartLocation(11, - 1057.1, - 1174.5)
     // Player setup
     call InitCustomPlayerSlots()
     call InitCustomTeams()
