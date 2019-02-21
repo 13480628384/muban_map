@@ -29,7 +29,7 @@ function mt:on_add()
     hero:add('攻击%', -self.value)
 
     -- 提升自己的魔抗
-    hero:add('魔抗', self.magic_defence)
+    hero:add('法术伤害减免', self.magic_defence)
 
 
 end
@@ -44,7 +44,7 @@ function mt:on_remove()
     hero:add('攻击%', self.value)
 
     -- 自己的魔抗
-    hero:add('魔抗', -self.magic_defence)
+    hero:add('法术伤害减免', -self.magic_defence)
 
     if self.trg then
         self.trg:remove()

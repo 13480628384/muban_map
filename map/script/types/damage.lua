@@ -741,6 +741,23 @@ function mt:Injury()
 
 end
 
+--计算法术伤害减免
+function mt:MagicInjury()
+	local target = self.target
+	local dmg = target:get '法术伤害减免'
+
+	if dmg <=0 then 
+		dmg = 0
+	end
+
+	if self.current_damage <= target:get '法术伤害减伤'  then 
+		self.current_damage = 0
+	else 
+	    self.current_damage = (self.current_damage - target:get '法术伤害减伤') * (1 - dmg/100)
+	end	
+
+end
+
 --计算技能伤害加成
 function mt:on_skill_damage()
 	local source = self.source
@@ -918,6 +935,8 @@ function damage:__call()
 		else
 			--计算魔抗和破魔 (技能法术)
 			self:count_mokang_defence()
+			--计算法术伤害减免
+			self:MagicInjury()
 		end	
 		--计算减伤
 		self:Injury()

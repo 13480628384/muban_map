@@ -45,27 +45,27 @@ function mt:on_add()
         dummy:add('攻击', - dummy:get('攻击')*(1-(self.child_value+self.value)/100) )
         
         --设置搜敌范围 对部分单位会失效。
-        -- dummy:set_search_range(99999)
+        dummy:set_search_range(99999)
         dummy:set_size(self.size)
 
         --每3秒刷新一次攻击目标
-        self.trg1 = ac.loop(3 * 1000 ,function ()
-            local unit = dummy
-            local hero = ac.find_hero(unit)
-            if hero then 
-                if unit.target_point and unit.target_point * hero:get_point() < 1000 then 
-                    unit.target_point = hero:get_point()
-                    unit:issue_order('attack',hero:get_point())
-                else 
-                    unit.target_point = hero:get_point()
-                    if unit:get_point() * hero:get_point() < 1000 then 
-                        unit:issue_order('attack',hero)
-                    else  
-                        unit:issue_order('attack',hero:get_point())
-                    end 
-                end 
-            end 
-        end)
+        -- self.trg1 = ac.loop(3 * 1000 ,function ()
+        --     local unit = dummy
+        --     local hero = ac.find_hero(unit)
+        --     if hero then 
+        --         if unit.target_point and unit.target_point * hero:get_point() < 1000 then 
+        --             unit.target_point = hero:get_point()
+        --             unit:issue_order('attack',hero:get_point())
+        --         else 
+        --             unit.target_point = hero:get_point()
+        --             if unit:get_point() * hero:get_point() < 1000 then 
+        --                 unit:issue_order('attack',hero)
+        --             else  
+        --                 unit:issue_order('attack',hero:get_point())
+        --             end 
+        --         end 
+        --     end 
+        -- end)
         
   
         self.cnt = self.cnt - 1 

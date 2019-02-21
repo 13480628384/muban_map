@@ -72,6 +72,8 @@ local attribute = {
 	['技能基础伤害']	 =	true, --默认表示为基础值
 	['减免']			=	true, --默认表示为%
 	['减伤']		    =	true, --默认表示为基础值
+	['法术伤害减免']			=	true, --默认表示为%
+	['法术伤害减伤']		    =	true, --默认表示为基础值
 	['金币加成']		=	true,--默认表示为%
 	['经验加成']		=	true,--默认表示为%
 	['天赋触发几率']	=	true,--默认表示为%
@@ -446,6 +448,9 @@ get['生命上限'] = function(self)
 end
 
 set['生命上限'] = function(self, max_life, old_max_life)
+	if max_life < 0 then 
+		max_life = 0
+	end	
 	japi.SetUnitState(self.handle, jass.UNIT_STATE_MAX_LIFE, max_life)
 	if self.freshDefenceInfo then
 		self:freshDefenceInfo()
@@ -454,6 +459,10 @@ end
 
 on_set['生命上限'] = function(self)
 	-- print('打印生命上限',self.name,self:get '生命上限')
+	if self:get '生命上限' <= 0 then 
+		self:kill()
+		return  
+	end	
 	local rate = self:get '生命' / self:get '生命上限'
 	return function()
 		self:set('生命', self:get '生命上限' * rate)
@@ -513,6 +522,9 @@ get['攻击'] = function(self)
 end
 
 set['攻击'] = function(self, attack)
+	if attack <= 1 then 
+		attack = 1
+	end	
 	japi.SetUnitState(self.handle, jass.ConvertUnitState(0x12), attack - 1)
 	if self.freshDamageInfo then
 		self:freshDamageInfo()

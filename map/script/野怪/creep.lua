@@ -103,7 +103,7 @@ local function find_hero(unit)
     local point = unit:get_point()
     local num = 99999
     local ret = nil 
-    for i = 1,9 do 
+    for i = 1,10 do 
         local player = ac.player(i)
         local hero = player.hero
         if hero and hero:is_alive() then 

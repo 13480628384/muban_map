@@ -5,7 +5,7 @@ mt{
     title = "学霸",
     tip = [[
         被动1：死亡必掉消耗品（品质白色，数量=怪物占用人口）
-        被动2：提升自己的三维50%
+        被动2：提升自己的三维40%
     ]],
 
     -- 消耗品数量
@@ -14,7 +14,7 @@ mt{
     end,
 
     -- 影响三维值 (怪物为：生命上限，护甲，攻击力)
-    value = 50,
+    value = 40,
     
     -- 特效
     effect = [[Abilities\Spells\Items\ResourceItems\ResourceEffectTarget.mdl]]
