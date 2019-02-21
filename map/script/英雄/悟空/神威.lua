@@ -39,7 +39,7 @@ mt{
 	cost = 1,
 
 	--特效模型
-	effect = [[AZ_Monkeykingbattle_Q_Impact.MDX]],
+	effect = [[AZ_Kaer_T1.mdx]],
 	-- effect = [[Hero_Juggernaut_N4S_F_Source.mdx]],
 	
 }
@@ -54,7 +54,7 @@ function mt:on_cast_shot()
     local skill = self
 	local hero = self.owner
 
-	self.eff = ac.effect(hero:get_point(), self.effect, 270, 1,'origin'):remove()
+	self.eff = ac.effect(hero:get_point(), self.effect, 270, 1.25,'origin'):remove()
 	-- 
 	for i, u in ac.selector()
 		: in_range(hero,self.area)
