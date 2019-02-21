@@ -10,4 +10,20 @@
 require '野怪.creep'
 require '野怪.刷怪'
 require '野怪.掉落'
-require '野怪.BOSS-AI'
+-- require '野怪.BOSS-AI'
+
+-- local mt = ac.creep['测试']{    
+--     region = '',
+--     creeps_datas = '强盗*40',
+--     is_random = true,
+--     creep_player = ac.player.com[2],
+--     tip ="郊区野怪刷新啦，请速速打怪升级，赢取白富美"
+
+-- }
+
+-- function mt:on_start()
+--     local rect = require 'types.rect'
+--     local region = rect.create('-2000','-2000','2000','2000')
+--     self.region = region
+-- end
+-- mt:start()
