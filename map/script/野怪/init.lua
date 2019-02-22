@@ -9,7 +9,7 @@
 -- require '野怪.领主-AI'
 require '野怪.creep'
 require '野怪.刷怪'
-require '野怪.掉落'
+-- require '野怪.掉落'
 -- require '野怪.BOSS-AI'
 
 -- local mt = ac.creep['测试']{    
@@ -25,5 +25,11 @@ require '野怪.掉落'
 --     local rect = require 'types.rect'
 --     local region = rect.create('-2000','-2000','2000','2000')
 --     self.region = region
+-- end
+
+-- --改变怪物
+-- function mt:on_change_creep(unit,lni_data)
+--     unit:set('移动速度',400)
+--     unit:set_search_range(99999)
 -- end
 -- mt:start()

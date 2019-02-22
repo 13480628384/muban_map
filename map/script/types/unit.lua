@@ -1319,7 +1319,7 @@ function player.__index:create_unit(id, where, face)
 	local data = ac.table.UnitData[id]
 	if data then
 		id = data.id
-		print('打印创建单位的id',data.id)
+		-- print('打印创建单位的id',data.id)
 	end
 	local j_id = base.string2id(id)
 	local x, y
