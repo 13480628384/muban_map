@@ -248,7 +248,7 @@ function mt:on_change_creep(unit,lni_data)
 
     end 
     --设置搜敌路径
-    -- unit:set_search_range(99999)
+    unit:set_search_range(99999)
     add_creep_skill(self.rand_skill_list,unit)
     --随机添加怪物技能
     -- unit:add_skill('吸血','英雄')
@@ -385,27 +385,27 @@ ac.wait(0,function()
         --开始刷怪
         mt:start()
          --每3秒刷新一次攻击目标
-        ac.loop(3 * 1000 ,function ()
-            for _, unit in ipairs(mt.group) do
-                -- print('野怪区的怪',unit:get_name())
-                if unit:is_alive() then 
-                    local hero = ac.find_hero(unit)
-                    if hero then 
-                        if unit.target_point and unit.target_point * hero:get_point() < 1000 then 
-                            unit.target_point = hero:get_point()
-                            unit:issue_order('attack',hero:get_point())
-                        else 
-                            unit.target_point = hero:get_point()
-                            if unit:get_point() * hero:get_point() < 1000 then 
-                                unit:issue_order('attack',hero)
-                            else  
-                                unit:issue_order('attack',hero:get_point())
-                            end 
-                        end 
-                    end 
-                end    
-            end 
-        end)
+        -- ac.loop(3 * 1000 ,function ()
+        --     for _, unit in ipairs(mt.group) do
+        --         -- print('野怪区的怪',unit:get_name())
+        --         if unit:is_alive() then 
+        --             local hero = ac.find_hero(unit)
+        --             if hero then 
+        --                 if unit.target_point and unit.target_point * hero:get_point() < 1000 then 
+        --                     unit.target_point = hero:get_point()
+        --                     unit:issue_order('attack',hero:get_point())
+        --                 else 
+        --                     unit.target_point = hero:get_point()
+        --                     if unit:get_point() * hero:get_point() < 1000 then 
+        --                         unit:issue_order('attack',hero)
+        --                     else  
+        --                         unit:issue_order('attack',hero:get_point())
+        --                     end 
+        --                 end 
+        --             end 
+        --         end    
+        --     end 
+        -- end)
     end)
 
    
