@@ -72,10 +72,12 @@ function mt:on_add()
 
 
     self.trg = hero:loop(1 * 1000,function()
-        if self:is_cooling() then
+        if self:is_cooling()  then
 			return
-		end
-        demon_bolt()
+        end
+        if hero:is_alive() then 
+            demon_bolt()
+        end    
 		self:active_cd()
     end)
 

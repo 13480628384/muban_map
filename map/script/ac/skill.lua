@@ -2143,6 +2143,8 @@ function mt:cast_by_client(target, data)
 	if not self:is_visible() then
 		return false
 	end
+	
+	-- print('打印 客户端使用技能1',target.type)
 	if not target then
 		if self.target_type ~= self.TARGET_TYPE_NONE then
 			return false
@@ -2158,6 +2160,7 @@ function mt:cast_by_client(target, data)
 	else
 		return false
 	end
+	
 	if self.force_cast == 0 and hero:has_restriction '晕眩' then
 		self._recover_skill = {self, target}
 		return false
@@ -2173,13 +2176,15 @@ function mt:cast_by_client(target, data)
 			end
 		end
 	end
+	
+	print('打印 客户端使用技能3')
 	self._recover_skill = nil
 	return self:cast(target, data)
 end
 
 -- 使用技能
 function mt:cast(target, data)
-	-- print('打印 是否可施法')
+	print('打印 是否可施法')
 	local self = self:create_cast(data)
 	self.target = target
 	if self.force_cast == 1 or (data and data.force_cast == 1) then
@@ -2204,7 +2209,6 @@ function mt:cast(target, data)
 			return false
 		end
 	end
-
 	-- 瞬发技能不允许多重施法
 	if self.instant == 1 then
 		local skills = self.owner._casting_list
@@ -2221,6 +2225,7 @@ end
 
 -- 强制施法(不检查状态)
 function mt:cast_force(target, data)
+	print('打印 强制施法')
 	local hero = self.owner
 	local self = self:create_cast(data)
 	self.target = target
@@ -2263,6 +2268,7 @@ function mt:cast_force(target, data)
 		end
 	end
 	
+	print('打印 强制施法5')
 	self:_change_step 'start'
 	ac.wait(0, function()
 		hero:set('魔法', hero:get '魔法')
@@ -2283,7 +2289,7 @@ function mt:_cast_start()
 	local hero = self.owner
 	self._has_cast_start = true
 	self._current_step = 'cast_start'
-	--print('技能-施法开始', self.name)
+	print('技能-施法开始', self.name)
 	self:_call_event 'on_cast_start'
 	if self.cast_start_time > 0 then
 		hero:wait(math_floor(self.cast_start_time * 1000), function()

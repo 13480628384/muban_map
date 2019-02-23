@@ -42,11 +42,14 @@ function mt:on_add()
         if self.cnt > 0 then 
             -- 死亡随机掉落人口同等数量的消耗品
             -- print('学霸掉落的物品数量：',hero.food,self.cnt)
-            for i = 1,self.cnt do
+            -- for i = 1,self.cnt do
+            hero:timer(0.1*1000,self.cnt,function()
                 local item_name = cast_item[math.random(#cast_item)]
                 ac.item.create_item(item_name,hero:get_point())
                 -- item:set_item_count(self.cnt)
-            end    
+            end)    
+               
+            -- end    
         end    
    end)    
 

@@ -51,7 +51,7 @@ end
 function mt:on_cast_shot()
     local skill = self
 	local hero = self.owner
-	local point = hero:get_point() - {math.random(1,360),math.random(100,400)} --在英雄附近 100 到 400 码 随机点
+	local point = hero:get_point()-{hero:get_facing(),100}--在英雄附近 100 到 400 码 随机点
 	local unit = hero:get_owner():create_unit('复仇天神',point)	
 
 	local index = ac.creep['刷怪'].index

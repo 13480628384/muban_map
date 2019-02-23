@@ -69,6 +69,7 @@ function mt:on_add()
 			time = self.reduce_defence_time,
 		}
 	end)
+	
 
 end	
 function mt:on_cast_shot()
@@ -135,6 +136,7 @@ end
 local mt = ac.buff['死吻-被动1']
 
 mt.cover_type = 1
+mt.keep = true
 
 function mt:on_add()
 	local hero = self.target
@@ -142,7 +144,6 @@ function mt:on_add()
 end
 
 function mt:on_pulse()
-	-- print('腐烂每秒伤害：',damage*self.pulse)
 	local hero = self.target
 	self.pulse = self.real_pulse
 	self.cnt = 0

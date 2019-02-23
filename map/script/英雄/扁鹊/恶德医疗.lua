@@ -7,22 +7,125 @@ mt{
 	--初始等级
 	level = 1,
 	
-	--技能图标
-	art = [[ReplaceableTextures\PassiveButtons\PASBTNScatterRockets.blp]],
+	tip = [[
+		主动：朝指定区域释放恶德医疗，对区域内的敌人造成 攻击力*2+智力*3 法术伤害 （%damage%） ；对区域内的友军英雄回复其 %life_rate% % 的最大生命值
+		被动：光环专精，对光环有着独特的理解力，使得他学习的光环，提升额外的效果30%
 
+	]],
+	
+	--技能图标
+	art = [[jineng\jineng011.blp]],
+
+	--技能目标类型 无目标
 	target_type = ac.skill.TARGET_TYPE_POINT,
 
-	--技能说明
-	title = '测试',
+	--马甲移动距离
+	distance = 600,
+	--马甲移动速度
+	speed = 800,
 
-	tip = [[这只是一个测试技能
-	第二行
-	]],
+	--碰撞范围
+	hit_area = 300,
+
+
+	--伤害
+	damage = function(self,hero)
+		return hero:get('攻击')*2 + hero:get('智力')*3
+	end,	
+
+	--生命上限
+	life_rate = 25,
+
+	--cd 5
+	cool = 1,
+
+	--耗蓝 20
+	cost = 20,
+
+	--特效模型
+	effect = [[Abilities\Spells\Undead\CarrionSwarm\CarrionSwarmMissile.mdl]],
+	-- effect = [[Hero_Juggernaut_N4S_F_Source.mdx]],
+	
 	--施法距离
-	range = 99999,
+	range = 600,
 }
 
-function mt:on_cast_channel()
+--恶得医疗
+--角度
+local function damage_shot(skill,angle)
+	local skill = skill
+	local hero = skill.owner
+	-- print('射线距离',skill.distance,skill.speed,angle)
+	--X射线
+	local mvr = ac.mover.line
+	{
+		source = hero,
+		distance = skill.distance,
+		speed = skill.speed,
+		skill = skill,
+		angle = angle,
+		high = 50,
+		model = skill.effect, 
+		hit_area = skill.hit_area,
+		hit_type = '全部',
+		size = 1
+	}
+	if not mvr then 
+		return
+	end
+	function mvr:on_hit(dest)
+		if dest:is_enemy(hero) then 
+			dest:damage
+			{
+				source = skill.owner,
+				damage = skill.damage,
+				skill = skill,
+				missile = skill.mover,
+				damage_type = '法术'
+			}
+		else
+			dest:heal 
+			{
+				source = hero,
+				skill = skill,
+				size = 10,
+				string = '治疗',
+				heal = hero:get('生命上限')*skill.life_rate/100 ,
+			}
+		end	
+	end	
+	hero:heal 
+	{
+		source = hero,
+		skill = skill,
+		size = 10,
+		string = '治疗',
+		heal = hero:get('生命上限')*skill.life_rate/100 ,
+	}
+end
+
+function mt:on_add()
+	local hero = self.owner 
+
+end	
+function mt:on_cast_shot()
+    local skill = self
 	local hero = self.owner
-	print('施放 测试技能, 技能id :',self.ability_id)
+	local target = self.target
+	local angle = hero:get_point() / target:get_point() 
+
+	damage_shot(skill,angle)
+	
+	
+end
+
+function mt:on_remove()
+
+    local hero = self.owner 
+	
+    if self.trg then
+        self.trg:remove()
+        self.trg = nil
+    end    
+
 end

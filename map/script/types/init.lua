@@ -24,6 +24,7 @@
 	local sync		= require 'types.sync'
 	local response	= require 'types.response'
 	local record	= require 'types.record'
+	local smart_cast	= require 'types.smart_cast'
 	
     
     

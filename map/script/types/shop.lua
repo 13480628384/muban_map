@@ -12,7 +12,7 @@ setmetatable(mt, unit)
 shop.unit_list = {}
 
 --类型
-mt.type = 'shop'
+mt.unit_type = 'shop'
 
 --页面记录
 mt.page_stack = nil

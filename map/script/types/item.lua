@@ -114,6 +114,7 @@ end
 
 --回收句柄
 function ac.remove_item_handle(handle)
+	print('回收句柄',handle)
 	table.insert(ac.item_list,handle)
 end
 
@@ -310,15 +311,17 @@ function mt:get_tip()
 	return tip
 	
 end
-function mt:register_item_destroy_event()
-
+local function register_item_destroy_event(item_handle)
+	if not  item_handle  or item_handle == 0 then 
+		return 
+	end	
 	local trg = jass.CreateTrigger()
 
-	jass.TriggerRegisterDeathEvent(trg,self.handle)
+	jass.TriggerRegisterDeathEvent(trg,item_handle)
 
 	jass.TriggerAddAction(trg,function ()
 		local handle = GetTriggerWidget()
-
+		print(handle,jass.GetHandleId(handle))
 		local it = ac.item.item_map[handle]
         -- print('触发丢弃物品',it.owner,it.name,it._model)
 		if not it then
@@ -786,9 +789,12 @@ function ac.item.create_item(name,poi,is)
 		x,y = poi:get()
 	end
 	
+	print('创建物品1：',type_id)
 	--创建一个实例物品
 	local item_handle = jass.CreateItem(base.string2id(type_id),x,y)
+	dbg.handle_ref(item_handle)
 	items.handle = item_handle
+	print('创建物品2：',name,type_id,item_handle)
 
 	x = jass.GetItemX(item_handle)
 	y = jass.GetItemY(item_handle)
@@ -798,6 +804,7 @@ function ac.item.create_item(name,poi,is)
 		items._eff = ac.effect(ac.point(x,y),items._model,270,1,'origin')
     end
 
+	print('创建物品3：',type_id,item_handle)
 	--设置使用次数
 	if items.item_type == '消耗品' and items._count == 0 then 
 		items._count = 1
@@ -809,25 +816,30 @@ function ac.item.create_item(name,poi,is)
 	--设置物品名
 	items:set_name(name)
 
+	print('创建物品4：',type_id,item_handle)
 	-- print(items.tip)
 	--设置tip
 	items:set_tip(items:get_tip())
 
+	print('创建物品5：',type_id,item_handle)
 	--设置贴图
 	items:set_art(items.art)
 
-	ac.item.item_map[items.handle] = items
-
+	print('创建物品6：',type_id,item_handle)
 	--是否可以丢弃
 	items:disable_drop(items.drop)
 
+	print('创建物品7：',type_id,item_handle)
 	local skill_id = items:get_item_skillid()
 	items.ability_id = skill_id
 
-
 	--绑定 物品被A时，地上特效删除 的事件
-	items:register_item_destroy_event()
+	-- 会引起掉线 不用
+	-- register_item_destroy_event(item_handle)
 
+	-- 记录全图物品
+	ac.item.item_map[items.handle] = items
+	
 	return items
 end
 

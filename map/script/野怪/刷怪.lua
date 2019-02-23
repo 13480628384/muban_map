@@ -74,7 +74,7 @@ local function add_creep_skill(tab,unit)
                 ac.enemy_unit:add_skill(skill_name,'隐藏')
                 -- 本回合结束时 删掉干掉光环怪
                 ac.game:event '游戏-回合结束'(function(trg,index, creep) 
-                    -- print('回合结束，删掉光环怪')
+                    print('回合结束，删掉光环怪')
                     ac.enemy_unit:remove()
                 end)
             end    
@@ -248,34 +248,34 @@ function mt:on_change_creep(unit,lni_data)
 
     end 
     --设置搜敌路径
-    unit:set_search_range(99999)
-    add_creep_skill(self.rand_skill_list,unit)
+    -- unit:set_search_range(99999)
+    -- add_creep_skill(self.rand_skill_list,unit)
     --随机添加怪物技能
-    -- unit:add_skill('吸血','英雄')
-    -- unit:add_skill('霜冻新星','英雄')
-    -- unit:add_skill('肥胖','英雄')
-    -- unit:add_skill('强壮','英雄')
-    -- unit:add_skill('有钱','英雄')
-    -- unit:add_skill('学习','英雄')
-    -- unit:add_skill('收藏','英雄')
-    -- unit:add_skill('神盾','英雄')
-    -- unit:add_skill('躲猫猫','英雄')
-    -- unit:add_skill('我晕','英雄')
-    -- unit:add_skill('泡温泉','英雄')
-    -- unit:add_skill('重生','英雄')
-    -- unit:add_skill('死亡一指','英雄')
-    -- unit:add_skill('学霸','英雄')
-    -- unit:add_skill('刺猬','英雄')
-    -- unit:add_skill('怀孕','英雄')
-    -- unit:add_skill('抗魔','英雄')
+    -- unit:add_skill('吸血','隐藏')
+    -- unit:add_skill('霜冻新星','隐藏')
+    -- unit:add_skill('肥胖','隐藏')
+    -- unit:add_skill('强壮','隐藏')
+    -- unit:add_skill('有钱','隐藏')
+    -- unit:add_skill('学习','隐藏')
+    -- unit:add_skill('收藏','隐藏')
+    -- unit:add_skill('神盾','隐藏')
+    -- unit:add_skill('躲猫猫','隐藏')
+    -- unit:add_skill('我晕','隐藏')
+    -- unit:add_skill('泡温泉','隐藏')
+    -- unit:add_skill('重生','隐藏')
+    -- unit:add_skill('死亡一指','隐藏')
+    -- unit:add_skill('学霸','隐藏')
+    -- unit:add_skill('刺猬','隐藏')
+    -- unit:add_skill('怀孕','隐藏')
+    -- unit:add_skill('抗魔','隐藏')
     -- unit:add_skill('魔免','隐藏')
-    -- unit:add_skill('火焰','英雄')
-    -- unit:add_skill('净化','英雄')
-    -- unit:add_skill('远程攻击','英雄')
-    -- unit:add_skill('幽灵','英雄')
-    -- unit:add_skill('腐烂','英雄')
-    -- unit:add_skill('流血','英雄')
-    -- unit:add_skill('善恶有报','英雄')
+    -- unit:add_skill('火焰','隐藏')
+    -- unit:add_skill('净化','隐藏')
+    -- unit:add_skill('远程攻击','隐藏')
+    -- unit:add_skill('幽灵','隐藏')
+    -- unit:add_skill('腐烂','隐藏')
+    -- unit:add_skill('流血','隐藏')
+    -- unit:add_skill('善恶有报','隐藏')
     
 
 end
@@ -385,27 +385,27 @@ ac.wait(0,function()
         --开始刷怪
         mt:start()
          --每3秒刷新一次攻击目标
-        -- ac.loop(3 * 1000 ,function ()
-        --     for _, unit in ipairs(mt.group) do
-        --         -- print('野怪区的怪',unit:get_name())
-        --         if unit:is_alive() then 
-        --             local hero = ac.find_hero(unit)
-        --             if hero then 
-        --                 if unit.target_point and unit.target_point * hero:get_point() < 1000 then 
-        --                     unit.target_point = hero:get_point()
-        --                     unit:issue_order('attack',hero:get_point())
-        --                 else 
-        --                     unit.target_point = hero:get_point()
-        --                     if unit:get_point() * hero:get_point() < 1000 then 
-        --                         unit:issue_order('attack',hero)
-        --                     else  
-        --                         unit:issue_order('attack',hero:get_point())
-        --                     end 
-        --                 end 
-        --             end 
-        --         end    
-        --     end 
-        -- end)
+        ac.loop(3 * 1000 ,function ()
+            for _, unit in ipairs(mt.group) do
+                -- print('野怪区的怪',unit:get_name())
+                if unit:is_alive() then 
+                    local hero = ac.find_hero(unit)
+                    if hero then 
+                        if unit.target_point and unit.target_point * hero:get_point() < 1000 then 
+                            unit.target_point = hero:get_point()
+                            unit:issue_order('attack',hero:get_point())
+                        else 
+                            unit.target_point = hero:get_point()
+                            if unit:get_point() * hero:get_point() < 1000 then 
+                                unit:issue_order('attack',hero)
+                            else  
+                                unit:issue_order('attack',hero:get_point())
+                            end 
+                        end 
+                    end 
+                end    
+            end 
+        end)
     end)
 
    
