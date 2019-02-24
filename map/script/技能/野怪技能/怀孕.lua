@@ -43,6 +43,18 @@ function mt:on_add()
         dummy:add('生命', dummy:get('生命上限'))
         dummy:add('护甲', - dummy:get('护甲')*(1-(self.child_value+self.value)/100) )
         dummy:add('攻击', - dummy:get('攻击')*(1-(self.child_value+self.value)/100) )
+
+        --设置搜敌范围 对部分单位会失效。
+        dummy:set_search_range(99999)
+        dummy:set_size(self.size)
+        
+        --创建幻象
+        local dummy = hero:create_illusion(hero:get_point())
+        --属性削弱
+        dummy:add('生命上限', - dummy:get('生命上限')*(1-(self.child_value+self.value)/100) )
+        dummy:add('生命', dummy:get('生命上限'))
+        dummy:add('护甲', - dummy:get('护甲')*(1-(self.child_value+self.value)/100) )
+        dummy:add('攻击', - dummy:get('攻击')*(1-(self.child_value+self.value)/100) )
         
         --设置搜敌范围 对部分单位会失效。
         dummy:set_search_range(99999)

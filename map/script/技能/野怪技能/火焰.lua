@@ -15,7 +15,7 @@ mt{
     magic_defence = 100,
 
     -- 范围
-    area = 150,
+    area = 300,
 
     -- 每几秒
     pulse = 0.2,

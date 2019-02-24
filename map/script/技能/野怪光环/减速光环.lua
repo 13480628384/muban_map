@@ -1,8 +1,8 @@
 --物品名称
-local mt = ac.skill['慢动作光环']
+local mt = ac.skill['减速光环']
 
 mt.art = [[ReplaceableTextures\PassiveButtons\PASBTNDevotion.blp]]
-mt.title = "慢动作光环"
+mt.title = "减速光环"
 mt.tip = [[
 	被动1：降低敌人的攻速50%，降低敌人的移速50
 	被动2：降低自己的三维20%
@@ -31,7 +31,7 @@ function mt:on_add()
 
 
 
-	self.buff = hero:add_buff '慢动作光环'
+	self.buff = hero:add_buff '减速光环'
 	{
 		source = hero,
 		skill = self,
@@ -56,7 +56,7 @@ end
 
 
 
-local mt = ac.aura_buff['慢动作光环']
+local mt = ac.aura_buff['减速光环']
 -- 魔兽中两个不同的专注光环会相互覆盖，但光环模版默认是不同来源的光环不会相互覆盖，所以要将这个buff改为全局buff。
 mt.cover_global = 1
 

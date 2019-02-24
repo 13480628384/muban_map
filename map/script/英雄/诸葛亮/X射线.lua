@@ -12,8 +12,8 @@ mt{
 		被动：睿智，智力+%int% %
 	]],
 	
-	--技能图标 3（60°扇形分三条，角度30%）+3+3+1+1，一共5波，
-	art = [[ReplaceableTextures\CommandButtons\BTNTranquility.blp]],
+	--技能图标 3（40°扇形分三条，角度20%）+3+3+1+1，一共5波，
+	art = [[jineng\jineng032.blp]],
 
 	--技能目标类型 无目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
@@ -22,7 +22,7 @@ mt{
 	pulse_time = 0.4,
 
 	--角度
-	angle = 30,
+	angle = 20,
 
 	--每次最大数量
 	count = 3,
@@ -45,7 +45,7 @@ mt{
 	--X射线距离
 	distance = 1600,
 	--X射线速度
-	speed = 700,
+	speed = 1600,
 	--碰撞范围
 	hit_area = 100,
 	-- effect = [[Hero_Juggernaut_N4S_F_Source.mdx]],

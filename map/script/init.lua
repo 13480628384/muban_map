@@ -74,6 +74,7 @@ ac.wait(100,function ()
     ac.item.create_item('敏捷丹',ac.point(500,500))
     ac.item.create_item('敏捷丹',ac.point(500,500))
     ac.item.create_item('霹雳弩',ac.point(0,0))
+    ac.item.create_item('变色龙之斧',ac.point(0,0))
 
     -- u:add_item('霹雳弩')
     -- u:add_item('厄运斧')

@@ -1,6 +1,6 @@
-local mt = ac.skill['有钱']
+local mt = ac.skill['钱多多']
 
-mt.title = "有钱"
+mt.title = "钱多多"
 mt.tip = [[
     被动1：提升自己死亡掉落的金钱100%
     被动2：降低自己死亡掉落的经验100%

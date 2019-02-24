@@ -1,15 +1,15 @@
-local mt = ac.skill['学习']
+local mt = ac.skill['物品多多']
 
-mt.title = "学习"
+mt.title = "物品多多"
 mt.tip = [[
-    被动1：提升自己死亡掉落的经验200%
-    被动2：降低自己死亡掉落的金钱100%，死亡不掉落物品
+    被动1：降低自己死亡掉落的金钱50%
+    被动2：提升自己死亡的物品掉落率100%
 ]]
 
 --经验
-mt.exp = 200
+mt.exp = 0
 --金钱
-mt.gold = 100
+mt.gold = 50
 
 --物品掉落率
 mt.fall_rate = 100
@@ -35,7 +35,7 @@ function mt:on_add()
 
     if hero.fall_rate then 
         self.fall_rate_base= hero.fall_rate
-        hero.fall_rate = hero.fall_rate * (1 - self.fall_rate/100)
+        hero.fall_rate = hero.fall_rate * (1 + self.fall_rate/100)
     end    
     
 

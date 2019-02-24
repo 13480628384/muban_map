@@ -9,7 +9,7 @@ mt{
 	
 	tip = [[
 		主动：将变大的武器直插入地，对周围 %area% 码的敌人造成 攻击力*2+敏捷*3 的物理伤害( %damage% ),将其晕眩 %time% 秒 
-		被动：+%physical_crite_rate% % 物爆几率
+		被动：+%physical_crite_rate% % 会心几率
 	]],
 	
 	--技能图标
@@ -47,7 +47,7 @@ mt{
 
 function mt:on_add()
 	local hero = self.owner 
-	hero:add('物爆几率',self.physical_crite_rate)
+	hero:add('会心几率',self.physical_crite_rate)
 
 end	
 function mt:on_cast_shot()
@@ -80,7 +80,7 @@ end
 function mt:on_remove()
 
     local hero = self.owner 
-	hero:add('物爆几率',-self.physical_crite_rate)
+	hero:add('会心几率',-self.physical_crite_rate)
 	
     if self.trg then
         self.trg:remove()

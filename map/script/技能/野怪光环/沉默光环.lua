@@ -1,7 +1,7 @@
 --物品名称
-local mt = ac.skill['遗忘光环']
+local mt = ac.skill['沉默光环']
 
-mt.title = "遗忘光环"
+mt.title = "沉默光环"
 mt.tip = [[
 	被动1：使得敌人无法使用主动魔法
 	被动2：降低自己的三维30%
@@ -26,7 +26,7 @@ function mt:on_add()
 
 
 
-	self.buff = hero:add_buff '遗忘光环'
+	self.buff = hero:add_buff '沉默光环'
 	{
 		source = hero,
 		skill = self,
@@ -49,7 +49,7 @@ end
 
 
 
-local mt = ac.aura_buff['遗忘光环']
+local mt = ac.aura_buff['沉默光环']
 -- 魔兽中两个不同的专注光环会相互覆盖，但光环模版默认是不同来源的光环不会相互覆盖，所以要将这个buff改为全局buff。
 mt.cover_global = 1
 

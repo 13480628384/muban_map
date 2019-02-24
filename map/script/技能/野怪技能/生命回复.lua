@@ -1,6 +1,6 @@
-local mt = ac.skill['泡温泉']
+local mt = ac.skill['生命回复']
 
-mt.title = "泡温泉"
+mt.title = "生命回复"
 mt.tip = [[
     被动1：每秒回复自己生命值5%
     被动2：降低自己的三维30%

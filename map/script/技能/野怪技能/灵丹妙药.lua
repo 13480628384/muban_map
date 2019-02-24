@@ -1,8 +1,8 @@
-local mt = ac.skill['学霸'] 
+local mt = ac.skill['灵丹妙药'] 
 
 mt{
     level = 1,
-    title = "学霸",
+    title = "灵丹妙药",
     tip = [[
         被动1：死亡必掉消耗品（品质白色，数量=怪物占用人口）
         被动2：提升自己的三维40%

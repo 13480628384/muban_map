@@ -1,6 +1,6 @@
-local mt = ac.skill['隐蔽者']
+local mt = ac.skill['闪避++']
 
-mt.title = "隐蔽者"
+mt.title = "闪避++"
 mt.tip = [[
     被动1：提升自己的闪避率90%
     被动2：降低自己的三维40%

@@ -6,12 +6,12 @@ require '测试.全图'
 
 ac.game:event '单位-死亡'(function(self,unit,killer)
     ac.timer(0.1*1000,1,function()
-        ac.item.create_item('新手剑',unit:get_point())
+        ac.item.create_item('神奇护腰',unit:get_point())
     
     end)
 end)
-
--- local unit = ac.player(1):create_unit('强盗',ac.point(1000,1000))
+local unit = ac.player(12):create_unit('冰霜巨龙',ac.point(1000,1000))
+unit:set_size(2)
 -- unit:add('生命上限',20000)
 
 

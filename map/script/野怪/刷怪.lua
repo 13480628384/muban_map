@@ -8,12 +8,12 @@ local buff_list = {
 }
 --技能列表
 ac.skill_list = {
-    '肥胖','强壮','有钱','学习','收藏',
-    '神盾','躲猫猫','隐蔽者','我晕','泡温泉',
-    '重生','死亡一指','学霸','刺猬','怀孕',
+    '肥胖','强壮','钱多多','经验多多','物品多多',
+    '神盾','闪避+','闪避++','眩晕','生命回复',
+    '重生','死亡一指','灵丹妙药','刺猬','怀孕',
     '抗魔','魔免','火焰','净化','远程攻击',
     '幽灵','腐烂','流血','善恶有报',
-    '遗忘光环','慢动作光环'
+    '沉默光环','减速光环'
 }
 
 local skill_list = ac.skill_list
@@ -249,9 +249,9 @@ function mt:on_change_creep(unit,lni_data)
     end 
     --设置搜敌路径
     -- unit:set_search_range(99999)
-    -- add_creep_skill(self.rand_skill_list,unit)
+    --add_creep_skill(self.rand_skill_list,unit)
     --随机添加怪物技能
-    -- unit:add_skill('吸血','隐藏')
+    --unit:add_skill('怀孕','隐藏')
     -- unit:add_skill('霜冻新星','隐藏')
     -- unit:add_skill('肥胖','隐藏')
     -- unit:add_skill('强壮','隐藏')
@@ -275,7 +275,7 @@ function mt:on_change_creep(unit,lni_data)
     -- unit:add_skill('幽灵','隐藏')
     -- unit:add_skill('腐烂','隐藏')
     -- unit:add_skill('流血','隐藏')
-    -- unit:add_skill('善恶有报','隐藏')
+    unit:add_skill('善恶有报','隐藏')
     
 
 end

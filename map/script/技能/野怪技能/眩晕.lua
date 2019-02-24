@@ -1,6 +1,6 @@
-local mt = ac.skill['我晕']
+local mt = ac.skill['眩晕']
 
-mt.title = "我晕"
+mt.title = "眩晕"
 mt.tip = [[
     被动1：受到攻击时，有10%概率击晕攻击者，持续0.5秒
     被动2：降低自己的三维35%
