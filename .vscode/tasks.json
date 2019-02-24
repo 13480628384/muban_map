@@ -6,7 +6,7 @@
         {
             "label": "运行",
             "type": "shell",
-            "command": "E:\\one_map\\w3x2lni_v2.4.1\\build.bat",
+            "command": "D:\\fengchao\\w3x2lni_v2.4.1\\build.bat",
             "args": [
                 "${workspaceRoot}"
             ],
@@ -17,7 +17,7 @@
         },
         {
             "label": "启动",
-            "command": "E:\\one_map\\w3x2lni_v2.4.1\\builda.bat",
+            "command": "D:\\fengchao\\w3x2lni_v2.4.1\\builda.bat",
             "args": [
                 "${workspaceRoot}"
             ],
