@@ -1,0 +1,7 @@
+require '技能.英雄技能.重击'
+require '技能.英雄技能.暴击'
+require '技能.英雄技能.粉碎'
+require '技能.英雄技能.硬化皮肤'
+require '技能.英雄技能.闪电手'
+require '技能.英雄技能.闪避'
+require '技能.英雄技能.望远镜'

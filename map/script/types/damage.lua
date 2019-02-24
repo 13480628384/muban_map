@@ -455,7 +455,7 @@ local function on_texttag(self)
 		color['g'] = 152
 		color['b'] = 0
 		size = 12
-		str = '致命'
+		str = '物爆'
 	end		
 	--法术暴击 颜色 蓝色
 	if self:is_spells_crit() then
@@ -463,7 +463,7 @@ local function on_texttag(self)
 		color['g'] = 165
 		color['b'] = 238
 		size = 12
-		str = '法暴'
+		str = '法爆'
 	end		
 	--会心一击 颜色 红色
 	if self:is_heart_crit() then

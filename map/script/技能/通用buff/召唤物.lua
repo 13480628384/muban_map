@@ -3,8 +3,6 @@ local mt = ac.buff['召唤物']
 mt.cover_type = 1
 mt.cover_max = 1
 
-mt.mul = 1
-
 mt.ref = 'origin'
 
 function mt:on_add()
@@ -21,10 +19,25 @@ function mt:on_add()
     --设置属性
 	if self.attribute then
 		for k, v in pairs(self.attribute) do
-			self.target:set(k, v*self.mul)
+			-- print('召唤物属性',k,v)
+			self.target:set(k, v)
 		end
     end
-    
+	--调整属性加成
+	if self.skill then 
+		local hero = player.hero
+		self.attr_mul = hero:get('召唤物属性') or 0
+		if self.attr_mul then 
+			self.target:add('攻击',self.target:get('攻击') * self.attr_mul/100)
+			self.target:add('护甲',self.target:get('护甲') * self.attr_mul/100)
+			self.target:add('生命上限',self.target:get('生命上限') * self.attr_mul/100)
+			self.target:add('魔法上限',self.target:get('魔法上限') * self.attr_mul/100)
+			self.target:add('生命恢复',self.target:get('生命恢复') * self.attr_mul/100)
+			self.target:add('魔法恢复',self.target:get('魔法恢复') * self.attr_mul/100)
+		end	
+	end	
+
+
 	if self.follow == true then
 		self.target:add_buff '召唤物跟随'
 		{

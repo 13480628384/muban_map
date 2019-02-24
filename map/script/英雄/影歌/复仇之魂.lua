@@ -11,6 +11,7 @@ mt{
 	
 	tip = [[
 		被动：攻击有 %chance% % 概率召唤 复仇之魂 (无敌,无碰撞体积，属性为当前波的怪物基础值的一半，拥有和英雄一样的经验、金币、物品获取率）
+		|cff1FA5EE召唤物|r:
 	]],
 	
 	--技能图标 3（60°扇形分三条，角度30%）+3+3+1+1，一共5波，
@@ -44,14 +45,20 @@ function mt:on_add()
 			local point = hero:get_point()-{hero:get_facing(),100}
 			local unit = hero:get_owner():create_unit('幻象马甲-蝗虫',point)	
 			local index = ac.creep['刷怪'].index
-			local data = ac.table.UnitData['进攻怪-'..index]
+			local unit_data = ac.table.UnitData['进攻怪-'..index]
+
+			local data ={}
+			data.attribute = {}
+			for k, v in pairs(unit_data.attribute) do
+				data.attribute[k] = v 
+			end
 			data.attribute['攻击'] = data.attribute['攻击'] * 0.5
 			
 			self.buff = unit:add_buff '召唤物' {
 				skill = self,
 				time = self.time,
 				attribute = data.attribute,
-				model = self.effect
+				model = self.effect,
 			}
 			unit:add_restriction '无敌'
 			
