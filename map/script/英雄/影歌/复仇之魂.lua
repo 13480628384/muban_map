@@ -14,7 +14,7 @@ mt{
 		|cff1FA5EE召唤物|r:
 	]],
 	
-	--技能图标 3（60°扇形分三条，角度30%）+3+3+1+1，一共5波，
+	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNSpiritOfVengeance.blp]],
 
 	--技能目标类型 无目标

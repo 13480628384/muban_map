@@ -303,13 +303,6 @@ end)
 
 
 
-ac.game:event '物品-合成成功前' (function(trg, dest_str,source_names,del_item) 
-
-end)
-
-
-
-
 ac.game:event '物品-合成成功' (function(trg, new_item, source_names) 
     if not new_item then 
         return

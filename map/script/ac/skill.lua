@@ -166,6 +166,8 @@ mt.slot_type = '隐藏'
 --是否隐藏技能图标
 mt.is_art = true
 
+--默认的施法动作 --modify by jeff 20190226
+mt.cast_animation = 'spell'
 
 --获得技能句柄(jass)
 function mt:get_handle()
@@ -2268,7 +2270,6 @@ function mt:cast_force(target, data)
 		end
 	end
 	
-	print('打印 强制施法5')
 	self:_change_step 'start'
 	ac.wait(0, function()
 		hero:set('魔法', hero:get '魔法')

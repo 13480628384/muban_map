@@ -30,6 +30,9 @@ mt.type = 'item'
 --物品分类
 mt.item_type = '无'
 
+--技能分类
+-- mt.skill_type = '物品'
+
 --物品等级
 mt.level = 1
 
@@ -72,6 +75,8 @@ mt.sell = true
 
 --物品出售折扣
 mt.discount = 0.5
+--默认物品图标 书籍
+mt.art = [[ReplaceableTextures\CommandButtons\BTNSnazzyScrollPurple.blp]]
 
 --商品最大库存
 
@@ -156,9 +161,9 @@ end
 
 --设置贴图
 function mt:set_art(art)
-	self.art = art
+	self.art = art or self.art
 	local id = self.type_id
-	japi.EXSetItemDataString(base.string2id(id),1,art)
+	japi.EXSetItemDataString(base.string2id(id),1,self.art)
 end
 
 --设置位置
@@ -789,12 +794,10 @@ function ac.item.create_item(name,poi,is)
 		x,y = poi:get()
 	end
 	
-	print('创建物品1：',type_id)
 	--创建一个实例物品
 	local item_handle = jass.CreateItem(base.string2id(type_id),x,y)
 	dbg.handle_ref(item_handle)
 	items.handle = item_handle
-	print('创建物品2：',name,type_id,item_handle)
 
 	x = jass.GetItemX(item_handle)
 	y = jass.GetItemY(item_handle)
@@ -804,7 +807,6 @@ function ac.item.create_item(name,poi,is)
 		items._eff = ac.effect(ac.point(x,y),items._model,270,1,'origin')
     end
 
-	print('创建物品3：',type_id,item_handle)
 	--设置使用次数
 	if items.item_type == '消耗品' and items._count == 0 then 
 		items._count = 1
@@ -816,20 +818,16 @@ function ac.item.create_item(name,poi,is)
 	--设置物品名
 	items:set_name(name)
 
-	print('创建物品4：',type_id,item_handle)
 	-- print(items.tip)
 	--设置tip
 	items:set_tip(items:get_tip())
 
-	print('创建物品5：',type_id,item_handle)
 	--设置贴图
 	items:set_art(items.art)
 
-	print('创建物品6：',type_id,item_handle)
 	--是否可以丢弃
 	items:disable_drop(items.drop)
 
-	print('创建物品7：',type_id,item_handle)
 	local skill_id = items:get_item_skillid()
 	items.ability_id = skill_id
 

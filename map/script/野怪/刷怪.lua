@@ -35,8 +35,6 @@ for k,v in pairs(ac.table.UnitData) do
     end    
 end    
 
-
-
 --每回合开始 从 ac.skill_list 随机取0-2个野怪技能
 local function get_creep_skill()
 
@@ -206,11 +204,27 @@ function mt:on_next()
     self:set_creeps_datas()
 
     self.rand_skill_list = get_creep_skill()
-    -- unit:add_skill(buff_list[math.random(#buff_list)],'隐藏',{level = 1})
-   
-    -- ac.enemy_unit:add_skill('慢动作光环','英雄')
-    -- ac.enemy_unit:add_skill('遗忘光环','英雄')
 
+    --发送本层怪物特性 
+    --@次数
+    --@持续时间
+    local function send_skill_message(cnt,time)
+        local creep_skill_message ='|cff1FA5EE本层怪物特性：|r|cffFF9800'
+        if #self.rand_skill_list == 0 then 
+            creep_skill_message = creep_skill_message ..'无|r'
+        end    
+        for i = 1,#self.rand_skill_list do  
+            creep_skill_message = creep_skill_message .. self.rand_skill_list[i]..','
+        end
+        creep_skill_message = creep_skill_message ..'|r'
+        for x=1,cnt do 
+            for i = 1,10 do 
+                ac.player(i):sendMsg(creep_skill_message,time)
+            end  
+        end    
+    end  
+    --发送本层怪物信息 3次5秒
+    send_skill_message(3,10)
     print('当前波数 '..self.index)
 end
 --改变怪物
@@ -220,10 +234,12 @@ function mt:on_change_creep(unit,lni_data)
     local data = ac.table.UnitData[name]
     data.attr_mul = lni_data.attr_mul
     data.food = lni_data.food
-    unit.data = data
-
+    --继承进攻怪lni 值
+    for k,v in pairs(data) do 
+        unit.data[k] = v
+    end    
+  
     if unit and data  then 
-    --    unit.gold = math.random(data.gold[1],data.gold[2])
         unit.gold = data.gold
         unit.exp = data.exp
         unit.category = data.category
@@ -283,7 +299,7 @@ end
 
 --回合结束时，创建钥匙怪，打死才能进入下一回合
 ac.game:event '游戏-回合结束' (function(trg,index, creep) 
-
+    -- print('游戏-回合结束，即将创建钥匙怪')
     local self = creep
     local unit = ac.player[16]:create_unit('钥匙怪',ac.point(0,0))
     ac.key_unit = unit
@@ -330,8 +346,8 @@ ac.game:event '游戏-回合结束' (function(trg,index, creep)
 
     unit:event '单位-死亡' (function(_,unit,killer)
 
-         --如果有刷新时间配置 则 按照时间等待后刷新，没有的话立即刷新
-         if self.cool then 
+        --如果有刷新时间配置 则 按照时间等待后刷新，没有的话立即刷新
+        if self.cool then 
             ac.wait(self.cool  * 1000, function()
                 self:next()
             end)
@@ -344,7 +360,7 @@ ac.game:event '游戏-回合结束' (function(trg,index, creep)
         end	
     end)    
 
-    -- return true
+    --  return true
 end);
 
 -- 注册英雄杀怪得奖励事件

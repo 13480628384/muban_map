@@ -1,2 +1,5 @@
 require '技能.通用buff.预警圈'
 require '技能.通用buff.召唤物'
+require '技能.通用buff.时停'
+require '技能.通用buff.变身'
+require '技能.通用buff.镜像特效'

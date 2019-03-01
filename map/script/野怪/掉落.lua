@@ -12,14 +12,23 @@ for name,data in pairs(ac.table.ItemData) do
     end 
 end 
 
+--英雄技能，钥匙怪掉落表
+ac.skill_list2 = ac.skill_list2
 
-local function item_self_skill(item)
+local function item_self_skill(item,unit)
     local timer = ac.wait(100 * 1000,function (timer)
         if item.owner == nil then 
             item:remove()
         end 
     end)
     item._self_skill_timer = timer 
+
+    --处理偷窃完的物品位置
+    if ac.game['偷窃'] then 
+        if unit then 
+            item:setPoint(unit:get_point())
+        end        
+    end
 end 
 
 
@@ -55,7 +64,7 @@ local reward = {
         local name = list[math.random(#list)]
         print('掉落物品：',name)
         local item = ac.item.create_item(name,unit:get_point())
-        item_self_skill(item)
+        item_self_skill(item,hero)
     end,
     ['随机蓝装'] = function (player,hero,unit)
         local list = quality_item['蓝']
@@ -66,7 +75,7 @@ local reward = {
         local name = list[math.random(#list)]
         print('掉落物品：',name)
         local item = ac.item.create_item(name,unit:get_point())
-        item_self_skill(item)
+        item_self_skill(item,hero)
     end,
 
 
@@ -78,7 +87,7 @@ local reward = {
         end 
         local name = list[math.random(#list)]
         local item = ac.item.create_item(name,unit:get_point())
-        item_self_skill(item)
+        item_self_skill(item,hero)
     end,
 
     ['随机红装'] = function (player,hero,unit)
@@ -89,7 +98,17 @@ local reward = {
         end 
         local name = list[math.random(#list)]
         local item = ac.item.create_item(name,unit:get_point())
-        item_self_skill(item)
+        item_self_skill(item,hero)
+    end,
+    ['随机技能'] = function (player,hero,unit)
+        local list = ac.skill_list2
+        if list == nil then 
+            print('没有任何技能')
+            return 
+        end 
+        local name = list[math.random(#list)]
+        local item = ac.item.create_skill_item(name,unit:get_point())
+        item_self_skill(item,hero)
     end,
 
 }
@@ -106,7 +125,16 @@ local unit_reward = {
                 { rand = 5, name = '随机红装'},
             }
         }
-    }
+    },
+    ['随机物品'] =  {
+        { rand = 100,      name = {
+                { rand = 60, name = '随机白装'},
+                { rand = 25, name = '随机蓝装'},
+                { rand = 10, name = '随机金装'},
+                { rand = 5, name = '随机红装'},
+            }
+        }
+    },
    
 }
 
@@ -116,7 +144,7 @@ local function get_reward_name(tbl)
     local num = 0
     for index,info in ipairs(tbl) do 
         num = num + info.rand 
-        print("打印装备掉落概率",info.rand)
+        -- print("打印装备掉落概率",info.rand)
         if rand <= num then 
             if type(info.name) == 'string' then 
                 return info.name 
@@ -163,26 +191,82 @@ local function hero_kill_unit(player,hero,unit,fall_rate)
     if name then 
         local func = reward[name]
         if func then 
-            print('掉落',name)
+            -- print('掉落',name)
             func(player,hero,unit)
         end 
     end 
 end 
-
-
 
 --如果死亡的是野怪的话
 ac.game:event '单位-死亡' (function (_,unit,killer)
     if unit.category ~='进攻怪' then
 		return
     end
-    local fall_rate = unit.fall_rate *( 1 + killer:get('物品获取率')/100 )
-    -- print('装备掉落概率：',fall_rate,unit.fall_rate)
     local player = killer:get_owner()
+    local dummy_unit = player.hero or ac.dummy
+    local fall_rate = unit.fall_rate *( 1 + dummy_unit:get('物品获取率')/100 )
+    -- print('装备掉落概率：',fall_rate,unit.fall_rate)
+    hero_kill_unit(player,killer,unit,fall_rate)
+end)
+
+--如果死亡的是钥匙怪的话
+ac.game:event '单位-死亡' (function (_,unit,killer)
+    if unit:get_name() ~='钥匙怪' then
+		return
+    end
+    local func = reward['随机技能']
+    local player = killer:get_owner()
+    if func then 
+        func(player,killer,unit)
+    end 
+end)
+
+
+--物品掉落，主动发起掉落而不是单位死亡时掉落 。
+-- 应用：张全蛋技能
+ac.game:event '物品-偷窃' (function (_,unit,killer)
+
+    ac.game['偷窃'] = true
+
+    if unit.category ~='进攻怪' then
+		return
+    end
+    -- print('触发 物品-偷窃')
+    local player = killer:get_owner()
+    local dummy_unit = player.hero or ac.dummy
+    local fall_rate = unit.fall_rate *( 1 + dummy_unit:get('物品获取率')/100 )
+    -- print('装备掉落概率：',killer,fall_rate,unit.fall_rate)
     hero_kill_unit(player,killer,unit,fall_rate)
 
+    ac.game['偷窃'] = false
 
 end)
+
+--物品掉落，直接获得随机装备
+-- 应用： 摔破罐子
+ac.game:event '物品-随机装备' (function (_,unit,killer)
+
+    ac.game['偷窃'] = true
+
+    if unit.category ~='进攻怪' then
+		return
+    end
+    -- print('触发 物品-偷窃')
+    local player = killer:get_owner()
+
+    local name = get_reward_name(unit_reward['随机物品'])
+    if name then 
+        local func = reward[name]
+        if func then 
+            -- print('掉落',name)
+            func(player,killer,unit)
+        end 
+    end 
+
+    ac.game['偷窃'] = false
+
+end)
+
 
 
 ac.game:event '单位-获得物品后' (function (_,unit,item)

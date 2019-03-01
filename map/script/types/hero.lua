@@ -108,6 +108,17 @@ function mt:transform(target_id)
 	japi.EXSetAbilityAEmeDataA(japi.EXGetUnitAbility(self.handle, base.string2id 'AEme'), base.string2id(target_id))
 	self:remove_ability 'AEme'
 
+	--变身 改 一样无效
+	-- self:add_ability 'AEme'
+	-- japi.EXSetAbilityDataInteger(japi.EXGetUnitAbility(self.handle, base.string2id 'AEme'), 1, 117, base.string2id(self:get_type_id()))
+	-- japi.EXSetAbilityAEmeDataA(japi.EXGetUnitAbility(self.handle, base.string2id 'AEme'), base.string2id(self:get_type_id()))
+	-- self:remove_ability 'AEme'
+
+	-- self:add_ability 'AEme'
+	-- japi.EXSetAbilityAEmeDataA(japi.EXGetUnitAbility(self.handle, base.string2id 'AEme'), base.string2id(target_id))
+	-- self:remove_ability 'AEme'
+	
+
 	--修改ID
 	self.id = target_id
 
@@ -182,7 +193,8 @@ function player.__index.createHero(p, name, where, face)
 
 	u:add_ability 'AInv'
 	u.hero_data = hero_data
-
+	-- print(u.name,u:get('力量'),u:get('敏捷'),u:get('智力'))
+	-- 属性已经在创建单位时初始化所以不用再重复
 	for k, v in pairs(hero_data.attribute) do
 		if not finds(k,'力量','敏捷','智力')then
 			u:set(k, v)

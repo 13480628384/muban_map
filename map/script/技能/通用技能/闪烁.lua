@@ -13,7 +13,7 @@ mt{
 	target_type = ac.skill.TARGET_TYPE_POINT,
 
 	--施法动作
-    cast_animation = 'spell throw',
+    cast_animation = 'spell',
     cast_animation_speed = 1.5,
 
     --施法前摇后摇

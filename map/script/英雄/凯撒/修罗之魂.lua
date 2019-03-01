@@ -16,7 +16,8 @@ mt{
 		     持续 %time% S
 		被动：凯撒周围%area%码的单位每增加1个，凯撒的攻击力增加 %attack_increase% %
 	]],
-	
+	--播放动画
+	-- show_animation = { 'Attack Alternate', 'spell channel' },
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNMetamorphosis.blp]],
 
@@ -77,6 +78,9 @@ end
 function mt:on_cast_shot()
 	local hero = self.owner
 	-- hero:add_effect('origin',self.effect)
+	--播放动画
+	hero:set_animation('Attack Alternate')
+	
 	self.trg1 = hero:add_buff '修罗之魂' 
 	{
 		source = hero,
@@ -118,11 +122,14 @@ function mt:on_add()
 	local hero = self.target
 	--特效
 	hero:get_point():add_effect([[modeldekan\ability\dekan_goku_r_effect_add.mdl]]):remove()
-	hero:set_animation('alternateex')
 	self.origin_id = hero:get_type_id()
 
 	--变身
 	hero:transform(self.unit_type_id)
+
+	--变远程
+	self.old_weapon = hero.weapon
+	hero.weapon = ac.table.UnitData['凯撒(恶魔形态)'].weapon
 
 	--增加攻击力与生命恢复速度
 	hero:add('攻击%', self.attack)
@@ -141,7 +148,8 @@ function mt:on_remove()
 			
 	--变回去
 	hero:transform(self.origin_id)
-
+	hero.weapon = self.old_weapon
+	
 	--增加攻击力与生命恢复速度
 	hero:add('攻击%', -self.attack)
 	hero:add('移动速度%', -self.move_speed)

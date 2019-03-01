@@ -293,6 +293,15 @@
             end
 
             item:_call_event 'on_cast_start'
+            --额外支持施法出手
+			if item.cast_start_time > 0 then
+				hero:wait(math_floor(item.cast_start_time * 1000), function()
+					item:_call_event 'on_cast_shot'
+				end)
+			else
+				item:_call_event 'on_cast_shot'
+            end
+            
             -- print('调用物品施法：',slot_id,item.name)
             if item.item_type == '消耗品'  then
                 -- print('使用消耗品')

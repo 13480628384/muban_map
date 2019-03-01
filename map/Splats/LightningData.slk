@@ -558,17 +558,17 @@ C;X12;K0.3
 C;X13;K2
 C;X14;K0
 C;Y18;X1;K"LN00"
-C;X2;K"激光 50粗细"
+C;X2;K"交叉闪电01"
 C;X3;K"lightnings"
-C;X4;K"LN00.blp"
-C;X5;K30
-C;X6;K2
+C;X4;K"drainmanalightning.blp"
+C;X5;K100
+C;X6;K30
 C;X7;K255
 C;X8;K255
 C;X9;K255
 C;X10;K255
 C;X11;K0
-C;X12;K0
+C;X12;K0.5
 C;X13;K2
 C;X14;K1
 C;Y19;X1;K"LN01"
@@ -602,7 +602,7 @@ C;X14;K1
 C;Y21;X1;K"LN03"
 C;X2;K"激光 200粗细"
 C;X3;K"lightnings"
-C;X4;K"LN00.blp"
+C;X4;K"drainmanalightning.blp"
 C;X5;K30
 C;X6;K200
 C;X7;K255

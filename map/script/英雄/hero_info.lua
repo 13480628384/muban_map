@@ -23,6 +23,8 @@ local mt = ac.skill['英雄属性面板']
 生命:    %life% / %max_life% %life_recover% 
 %resource_type%:    %mana% / %max_mana% %mana_recover% 
 %shield%
+
+攻击:    %attack% （已加成 %attack_per% %）
 攻击间隔:    %attack_gip% 
 攻速:    %attack_speed% (每秒攻击%attack_rate%次)
 溅射:    %splash% %
@@ -47,6 +49,14 @@ local mt = ac.skill['英雄属性面板']
 
 ]],
 }
+
+function mt:attack()
+	return ('|cffF9C801%.f|r'):format(self.owner:get '攻击')
+end
+function mt:attack_per()
+	return ('|cffF9C801%.2f|r'):format(self.owner:get '攻击%')
+end
+
 
 function mt:physical_rate()
 	return ('|cffF9C801%.2f|r'):format(self.owner:get '物爆几率')

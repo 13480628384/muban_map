@@ -1283,7 +1283,9 @@ function unit.init_unit(handle, p)
 		u.unit_type = data.unit_type
 		if data.attribute then
 			for k, v in pairs(data.attribute) do
-				u:set(k, v)
+				if not finds(k,'力量','敏捷','智力')then
+					u:set(k, v)
+				end	
 			end
 		end
 		if data.restriction then
@@ -1306,6 +1308,20 @@ function unit.init_unit(handle, p)
 				u:add_skill(skl, '隐藏')
 			end
 		end
+		if data.weapon then
+			if not u.weapon  then 
+				u.weapon ={}
+			end	
+			u.weapon = data.weapon
+		end	
+
+		if data.missile_art then
+			if not u.weapon  then 
+				u.weapon ={}
+			end	
+			u.weapon['弹道模型'] = data.missile_art
+			u.weapon['弹道速度'] = data.missile_speed or 1000
+		end	
 	end
 	
 	return u
@@ -1362,6 +1378,7 @@ function player.__index:create_dummy(id, where, face)
 	dbg.handle_ref(handle)
 	ignore_flag = false
 	local u = unit.init_unit(handle, self)
+	-- u.unit_type = 'unit'
 	u._is_dummy = true
 	u._dummy_point = ac.point(x, y)
 	u._dummy_angle = face or 0

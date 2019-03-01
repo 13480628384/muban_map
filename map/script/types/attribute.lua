@@ -114,8 +114,6 @@ function mt:add_tran(name, value)
 	
 	if name:sub(-1, -1) == '%' then
 
-		-- print(name)
-
 		base_name =  name:sub(1, -2)
 		-- print(base_name)
 		--如果是基础值，则调用英萌自带的加%函数，会先*基础值再+
@@ -403,6 +401,7 @@ on_set['智力'] = function(self,old_value)
 		local value =  self:get '智力' - old_value
 		if self.main_attribute and self.main_attribute == '智力' then
 			-- 增加攻击
+			-- print('主属性为',self.main_attribute,self:get '智力',old_value,main_attribute_value)
 			self:add('攻击', value * main_attribute_value)
 		end	
 		-- 增加魔法上限

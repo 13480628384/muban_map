@@ -1,8 +1,6 @@
 --物品名称
 local mt = ac.skill['新手剑']
 mt{
---必填
-is_skill = true,
 
 tip = [[
     闪烁,cd%cool%s.
@@ -36,17 +34,21 @@ function mt:on_add()
     print('新手剑技能添加')
 
 end
-
+-- 物品只支持施法开始，额外支出施法出手
 function mt:on_cast_start()
     local hero = self.owner
     local target = self.target
     -- print(hero,target)
-    print(self.tip)
+    -- print(self.tip)
     
     print(self.cool)
     print('新手剑技能使用')
 end
 
+function mt:on_cast_shot()
+    print('新手剑出手')
+
+end    
 function mt:on_remove()
     -- print('施法-删除技能',self.name)
 end

@@ -776,6 +776,24 @@ function mt:on_skill_damage()
 	
 end
 
+--计算法术攻击 伤害加成
+function mt:on_more_magic_damage()
+	local source = self.source
+	local dmg = source:get '法术攻击'
+	-- local dmg_base = source:get '技能基础伤害'
+
+	if dmg <=0 then 
+		dmg = 0
+	end 	
+	-- if dmg_base <= 0  then 
+	-- 	dmg_base = 0
+	-- end	
+
+	-- self.current_damage = (self.current_damage + dmg_base) * (1 + dmg/100)
+	self.current_damage = (self.current_damage ) * (1 + dmg/100)
+	
+end
+
 
 
 
@@ -945,6 +963,8 @@ function damage:__call()
 		if not self:is_common_attack()  then
 			--计算技能伤害加成
 			self:on_skill_damage()
+			--计算计算法术攻击加成
+			self:on_more_magic_damage()
 		end
 
 		local ewsh = source:get '额外伤害'

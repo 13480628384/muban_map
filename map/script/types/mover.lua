@@ -148,7 +148,7 @@ mover.__index = {
 	hit_unit = nil,
 
 	--false的话就强制不还原高度，否则（true）只有非missile会还原高度 dekan
-	do_reset_high = true,
+	do_reset_high = false,
 
 	--暂停
 	paused = 0,
@@ -267,11 +267,12 @@ mover.__index = {
 		
 		--线性
 		local target_high = self.target_high
+		local height_n = (target_high - self.high) * progress
 		if self.target then
 			target_high = target_high + self.target:get_high()
+			progress = speed / (self.target:get_point()*self.mover:get_point())
+			height_n = (target_high - self.high) * progress--/((self.target:get_point()*self.mover:get_point()) / self.speed) * 0.03 * 0.03-- * progress
 		end
-		local height_n = (target_high - self.high) * progress
-		--print('height_n', target_high, self.high, progress)
 		self.high = self.high + height_n
 		height = height + height_n
 		self.height_l = self.height_l + height_n
@@ -365,6 +366,7 @@ mover.__index = {
 		if not self.start then
 			self.start = self.mover or self.source
 		end
+		
 		if not self.high then
 			self.high = self.start[3] or 0
 		end
@@ -374,6 +376,7 @@ mover.__index = {
 		else
 			self.high = self.high + self.start:get_high()
 		end
+		
 		self.selector = ac.selector():is_not(self.source)
 
 		if self.hit_type == '敌人' then
@@ -417,6 +420,10 @@ mover.__index = {
 
 		if self.model then
 			self.effect = self.mover:add_effect('origin', self.model)
+		end
+
+		if self.size then
+			self.mover:set_size(self.size)
 		end
 
 		--设置缩放

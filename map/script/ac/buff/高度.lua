@@ -18,7 +18,7 @@ function mt:on_pulse()
 end
 
 function mt:on_finish()
-	self.reduction_when_remove = false
+	-- self.reduction_when_remove = false
 end
 
 function mt:on_remove()

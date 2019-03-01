@@ -308,8 +308,8 @@ function mt:next()
             self.current_count = self.current_count + 1
             
             --设置奖励
-            if data.gold then
-                u.gold = math.random(data.gold[1],data.gold[2])
+            if data.gold  then
+                u.gold = data.gold
             end    
             u.exp = data.exp
             
@@ -344,10 +344,11 @@ function mt:next()
                 if  not self.allow_next then 
                     return
                 end    
+                -- print('进攻怪死亡:3',#self.group)
                 local i = 0
                 local cool_count = self.cool_count or 0 
                 for _, uu in ipairs(self.group) do
-                    --print('存活数量:'..#self.group..'当前死亡:'..uu:get_name())
+                    -- print('存活数量:'..#self.group..'当前死亡:'..uu:get_name())
                     if uu:is_alive() then
                         i = i + 1
                         --如果怪物存活数量 > 刷新数量条件 直接返回，不进行下一波的刷新
@@ -359,8 +360,6 @@ function mt:next()
                     end
                 end
                 
-
-
                 if self.index > self.max_index then 
                     self.allow_next = false
                     self:finish() 
@@ -394,18 +393,18 @@ function mt:next()
         -- 如果 每杀死一只并就判断一次数量 小于 某个值就刷新，这又会导致一瞬间多刷很多只。
         -- print(t.count,v )
         --[[ self.creep_timer = {},table.insert(self.creep_timer,timer)
-              timer:on_timerout()
+              timer:on_timeout()
 
         ]]
         timer.creep_name = k
         self.creep_timer[timer.creep_name] = timer
 
         local temp_self =self
-        function timer:on_timerout()
+        function timer:on_timeout()
             temp_self.creep_timer[self.creep_name] = nil
         end  
         if cnt == max_cnt then 
-            function timer:on_timerout()
+            function timer:on_timeout()
                 temp_self.allow_next = true
             end  
         end    

@@ -38,6 +38,4 @@ function mt:on_remove()
     local hero = self.owner 
 	hero:add('闪避',-self.dodge)
 
-	
-
 end
