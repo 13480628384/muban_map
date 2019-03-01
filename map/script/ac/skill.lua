@@ -410,7 +410,6 @@ local function get_blend_art(art, blends, type)
 	end
 	local file_name = [[blend\blend_]] .. type .. file .. [[b_]] .. file_name
 	if not blend_icons[file_name] then
-		print('暗图标',file_name)
 		japi.EXBlendButtonIcon([[blend\]] .. type .. [[\]] .. file .. [[.blp]], art, file_name)
 	end
 	return file_name
@@ -2179,14 +2178,12 @@ function mt:cast_by_client(target, data)
 		end
 	end
 	
-	print('打印 客户端使用技能3')
 	self._recover_skill = nil
 	return self:cast(target, data)
 end
 
 -- 使用技能
 function mt:cast(target, data)
-	print('打印 是否可施法')
 	local self = self:create_cast(data)
 	self.target = target
 	if self.force_cast == 1 or (data and data.force_cast == 1) then
@@ -2227,7 +2224,6 @@ end
 
 -- 强制施法(不检查状态)
 function mt:cast_force(target, data)
-	print('打印 强制施法')
 	local hero = self.owner
 	local self = self:create_cast(data)
 	self.target = target

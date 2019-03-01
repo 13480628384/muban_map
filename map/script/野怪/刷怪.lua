@@ -210,12 +210,13 @@ function mt:on_next()
     --@持续时间
     local function send_skill_message(cnt,time)
         local creep_skill_message ='|cff1FA5EE本层怪物特性：|r|cffFF9800'
-        if #self.rand_skill_list == 0 then 
+        if not self.rand_skill_list  then 
             creep_skill_message = creep_skill_message ..'无|r'
+        else    
+            for i = 1,#self.rand_skill_list do  
+                creep_skill_message = creep_skill_message .. self.rand_skill_list[i]..','
+            end
         end    
-        for i = 1,#self.rand_skill_list do  
-            creep_skill_message = creep_skill_message .. self.rand_skill_list[i]..','
-        end
         creep_skill_message = creep_skill_message ..'|r'
         for x=1,cnt do 
             for i = 1,10 do 
