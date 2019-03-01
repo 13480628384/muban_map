@@ -135,6 +135,9 @@ local unit_reward = {
             }
         }
     },
+    ['钥匙怪'] =  {
+        { rand = 20,      name = '随机技能'}
+    },
    
 }
 
@@ -214,11 +217,14 @@ ac.game:event '单位-死亡' (function (_,unit,killer)
     if unit:get_name() ~='钥匙怪' then
 		return
     end
-    local func = reward['随机技能']
-    local player = killer:get_owner()
-    if func then 
-        func(player,killer,unit)
-    end 
+    local name = get_reward_name(unit_reward['钥匙怪'])
+    if name then 
+        local func = reward[name]
+        local player = killer:get_owner()
+        if func then 
+            func(player,killer,unit)
+        end 
+    end    
 end)
 
 
