@@ -26,7 +26,9 @@ mt{
 	addint = 0.5,
 	--伤害
 	damage = function(self,hero)
-		return self.owner:get('智力')*2
+		if self and self.owner then 
+			return self.owner:get('智力')*2
+		end	
 	end	,
 	damage_type = '法术'
 }

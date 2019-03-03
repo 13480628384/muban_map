@@ -26,7 +26,9 @@ mt{
 	effect1 = [[Abilities\Spells\Undead\Impale\ImpaleMissTarget.mdx]],
 	--伤害
 	damage = function(self,hero)
+		if self and self.owner then 
 		return self.owner:get('力量') * 6
+		end
 	end,
 	--持续时间
 	time = 3 ,

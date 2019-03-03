@@ -18,7 +18,9 @@ mt{
 	art = [[ReplaceableTextures\CommandButtons\BTNMirrorImage.blp]],
 	--召唤物
     unit_name = function(self,hero)
-        return self.owner:get_name()
+		if self and self.owner then 
+         return self.owner:get_name()
+        end 
     end,
 	--召唤物属性倍数
 	attr_mul = 0.5,

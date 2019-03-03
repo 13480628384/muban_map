@@ -26,7 +26,9 @@ mt{
 	effect1 = [[Abilities\Spells\Human\ThunderClap\ThunderclapTarget.mdx]],
 	--伤害
 	damage = function(self,hero)
+		if self and self.owner then 
 		return self.owner:get('力量') * 5
+		end
 	end,
 	--持续时间
 	time = 2 ,

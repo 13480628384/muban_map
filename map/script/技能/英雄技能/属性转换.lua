@@ -27,7 +27,9 @@ mt{
     --当前状态 1停止（刚开始图标）   2力量转敏捷(图标为力量转敏捷) 3敏捷转力量(图标为敏捷转力量)
     current_status = 1,
     tip2 = function(self,hero)
-        return self.owner.tran_tip 
+        if self and self.owner then 
+            return self.owner.tran_tip 
+        end    
     end,
 }
 function mt:on_add()

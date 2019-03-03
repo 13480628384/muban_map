@@ -19,7 +19,9 @@ mt{
 	--概率%
 	chance = 100,
 	damage = function(self,hero)
-		return self.owner:get('智力')*self.damage_int + 1200
+		if self and self.owner then 
+			return self.owner:get('智力')*self.damage_int + 1200
+		end	
 	end	,
 	--参数智力
 	damage_int = {1,2,3,4,5},

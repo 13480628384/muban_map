@@ -26,7 +26,9 @@ mt{
 	effect1 = [[Abilities\Spells\Human\ThunderClap\ThunderclapTarget.mdx]],
 	--伤害
 	damage = function(self,hero)
-		return self.owner:get('攻击') * 1.5
+		if self and self.owner then 
+			return self.owner:get('攻击') * 1.5
+		end
 	end,
 
 	--移动速度

@@ -24,11 +24,15 @@ mt{
 	effect = [[Abilities\Spells\Undead\DeathCoil\DeathCoilMissile.mdl]],
 	--治疗
 	heal = function(self,hero)
-		return self.owner:get('智力')*4
+		if self and self.owner then 
+			return self.owner:get('智力')*4
+		end	
 	end	,
 	--伤害
 	damage = function(self,hero)
-		return self.owner:get('智力')*4
+		if self and self.owner then 
+			return self.owner:get('智力')*4
+		end
 	end	,
 	damage_type = '法术'
 }

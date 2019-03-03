@@ -22,7 +22,9 @@ mt{
 	art = [[jineng\jineng003.blp]],
 	--伤害
 	damage = function(self,hero)
-		return self.owner:get('智力')*12
+		if self and self.owner then 
+			return self.owner:get('智力')*12
+		end	
 	end,
 	--伤害类型
 	damage_type = '法术'

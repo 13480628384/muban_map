@@ -496,7 +496,7 @@ function mt:item_remove(is)
 
 	jass.RemoveItem(self.handle)
 	dbg.handle_unref(self.handle)
-	if self.owner then 
+	if self  then 
 		if self.slot_id then 
 			self.owner.item_list[self.slot_id] =nil
 		end	
@@ -843,7 +843,8 @@ end
 
 
 --创建物品 - 商店使用
-function item.create(name)
+--@商品位置 必填
+function item.create(name,pos)
 	
 	--创建一个物品
 	local items = setmetatable({},item)
@@ -863,7 +864,7 @@ function item.create(name)
 		end
 	end
 
-	local type_id = ac.get_shop_item_handle()
+	local type_id = ac.get_shop_item_handle(pos)
 	items.type_id = type_id
 
 	--创建一个实例物品

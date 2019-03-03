@@ -1,5 +1,5 @@
 local mt = ac.skill['学习技能']
-
+mt.skill_cnt = 7 --一共技能数量
 function mt:on_cast_shot()
     local hero = self.owner 
     local player = hero:get_owner()
@@ -16,6 +16,15 @@ function mt:on_cast_shot()
 
         if upgrade_count >= 5 then 
             player:sendMsg('技能已经学满了')
+            
+            if self._count > 1 then 
+                -- print('数量')
+                self:set_item_count(self._count+1)
+            else
+                --重新添加给英雄
+                ac.item.add_skill_item(name,hero)
+            end     
+
             return 
         end 
         upgrade_count = upgrade_count + 1
@@ -31,7 +40,7 @@ function mt:on_cast_shot()
 
     local list = {}
 
-    for i=1,4 do 
+    for i=1,self.skill_cnt do 
         local skill = hero:find_skill(i,'英雄')
         if skill then 
             local key = skill:get_hotkey() 
@@ -43,7 +52,7 @@ function mt:on_cast_shot()
             table.insert(list,info)
         end
     end 
-    if #list < 4 then 
+    if #list < self.skill_cnt then 
         hero:add_skill(name,'英雄')
     else 
         local info = {

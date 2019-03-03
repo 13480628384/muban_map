@@ -136,7 +136,19 @@
 
         --购买成功才扣钱
         u.buy_suc = false 
-        u:add_item(it.name)
+        -- print(it.name)
+        local flag 
+        for i,v in ipairs(ac.skill_list2) do
+            if v == it.name then 
+                flag = true
+                break
+            end    
+        end    
+        if flag then 
+            ac.item.add_skill_item(it.name,u)
+        else    
+            u:add_item(it.name)   
+        end    
         if u.buy_suc then 
             -- print('扣钱')
             player:addGold( - golds,u)
@@ -284,7 +296,7 @@
                 return
             end
 
-            -- print('发布使用物品命令：',slot_id,item.name,target)
+            print('发布使用物品命令：',slot_id,item.name,target)
             --判断施法条件是否满足
             if item:conditions(item,target) ~= true then
                 --如果施法条件不满足，重置CD
@@ -302,9 +314,9 @@
 				item:_call_event 'on_cast_shot'
             end
             
-            -- print('调用物品施法：',slot_id,item.name)
+            print('调用物品施法：',slot_id,item.name)
             if item.item_type == '消耗品'  then
-                -- print('使用消耗品')
+                print('使用消耗品',item.name,item.type_id)
                 --消耗品使用 增加对应的属性值
                 item:on_use_state()
 

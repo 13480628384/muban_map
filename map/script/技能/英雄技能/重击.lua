@@ -23,7 +23,9 @@ mt{
 
 	--伤害
 	damage = function(self,hero)
+		if self and self.owner then 
 		return self.owner:get('攻击')*1.5
+		end
 	end,	
 
 }

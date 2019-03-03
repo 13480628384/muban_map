@@ -11,7 +11,7 @@ for name,data in pairs(ac.table.ItemData) do
         quality_item[color] = list 
     end 
 end 
-
+ac.quality_item = quality_item
 --英雄技能，钥匙怪掉落表
 ac.skill_list2 = ac.skill_list2
 
@@ -112,7 +112,7 @@ local reward = {
     end,
 
 }
-
+ac.reward = reward
 
 
 local unit_reward = {
@@ -138,8 +138,21 @@ local unit_reward = {
     ['钥匙怪'] =  {
         { rand = 20,      name = '随机技能'}
     },
+    ['商店随机技能'] =  {
+        { rand = 100,      name = '随机技能'}
+    },
+    ['商店随机物品'] =  {
+        { rand = 100,      name = {
+                { rand = 60, name = '白'},
+                { rand = 25, name = '蓝'},
+                { rand = 10, name = '金'},
+                { rand = 5, name = '红'},
+            }
+        }
+    },
    
 }
+ac.unit_reward = unit_reward
 
 --递归匹配唯一奖励
 local function get_reward_name(tbl)

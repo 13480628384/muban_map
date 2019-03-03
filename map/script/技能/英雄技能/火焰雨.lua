@@ -15,7 +15,9 @@ mt{
 	--概率%
 	chance = 100,
 	damage = function(self,hero)
-		return self.owner:get('智力')*1+1200
+		if self and self.owner then 
+			return self.owner:get('智力')*1+1200
+		end	
 	end	,
 	--是否被动
 	passive = true,

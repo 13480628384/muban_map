@@ -269,7 +269,7 @@ taskbar.event = {
 
         dialog_map[name] = true 
         local self = player:add_task(name)
-        if self then 
+        if self  then 
             ac.game:event '任务-删除' (function (_,task)
                 if task == self then 
                     dialog_map[task:get_name()] = nil

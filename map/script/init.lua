@@ -103,8 +103,9 @@ ac.wait(100,function ()
     -- ac.item.create_skill_item('穿刺',ac.point(-300,0))
     -- ac.item.create_skill_item('专心',ac.point(-300,0))
     -- ac.item.create_skill_item('专心',ac.point(-300,0))
+    ac.game:event '游戏-开始' (function()
+    
+    end)
 
-    local u = ac.shop.create('商店A',0,0)
-    ac.item.create_item('力量之书',ac.point(100,100))
-
+    
 end);
