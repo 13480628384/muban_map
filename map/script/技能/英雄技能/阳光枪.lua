@@ -24,6 +24,8 @@ mt{
 	passive = true,
 	--伤害类型
 	damage_type = '物理',
+	--必填
+	is_skill = true,
 
 
 }

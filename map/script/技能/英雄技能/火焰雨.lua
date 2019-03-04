@@ -1,6 +1,9 @@
 
 local mt = ac.skill['火焰雨']
 mt{
+	
+	--必填
+	is_skill = true,
 	--初始等级
 	level = 1,
 	--技能图标

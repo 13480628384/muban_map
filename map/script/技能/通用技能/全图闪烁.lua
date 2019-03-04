@@ -1,4 +1,4 @@
-local mt = ac.skill['闪烁']
+local mt = ac.skill['全图闪烁']
 
 mt{
     --等级
@@ -8,7 +8,7 @@ mt{
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNBlink.blp]],
-	cool = 5,
+	cool = 1,
 
 	target_type = ac.skill.TARGET_TYPE_POINT,
 
@@ -23,7 +23,7 @@ mt{
 	--施法距离
 	range = 99999,
 	--移动距离
-	blink_range = 1000,
+	blink_range = 99999,
 	--新目标点
 	new_point =nil,
 	is_skill = true

@@ -284,6 +284,10 @@ end
 
 		unit.removed_units[self] = self
 		dbg.handle_unref(self.handle)
+		--商店移除时使用
+		if self.on_remove then 
+			self:on_remove()
+		end	
 	end
 
 --是否存活

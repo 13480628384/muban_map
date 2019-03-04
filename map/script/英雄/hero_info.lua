@@ -63,21 +63,21 @@ function mt:physical_rate()
 end
 
 function mt:physical_damage()
-	return ('|cffF9C801%.f|r'):format(self.owner:get '物爆伤害')
+	return ('|cffF9C801%.f|r'):format(self.owner:get '物爆伤害'+100)
 end
 
 function mt:magic_rate()
 	return ('|cffF9C801%.2f|r'):format(self.owner:get '法爆几率')
 end
 function mt:magic_damage()
-	return ('|cffF9C801%.f|r'):format(self.owner:get '法爆伤害')
+	return ('|cffF9C801%.f|r'):format(self.owner:get '法爆伤害'+100)
 end
 
 function mt:heart_rate()
 	return ('|cffF9C801%.2f|r'):format(self.owner:get '会心几率')
 end
 function mt:heart_damage()
-	return ('|cffF9C801%.f|r'):format(self.owner:get '会心伤害')
+	return ('|cffF9C801%.f|r'):format(self.owner:get '会心伤害'+100)
 end
 
 function mt:dummy()

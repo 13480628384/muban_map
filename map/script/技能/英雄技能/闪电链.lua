@@ -25,6 +25,8 @@ mt{
 	time = 15,
 	--冷却
 	cool = 0,
+	--是否技能
+	is_skill = true,
 }
 mt.ref = 'origin'
 mt.model = [[Abilities\Weapons\Bolt\BoltImpact.mdl]]

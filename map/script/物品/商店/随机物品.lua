@@ -9,7 +9,7 @@ art = [[ReplaceableTextures\CommandButtons\BTNSnazzyScrollPurple.blp]],
 
 --说明
 tip = [[
-    随机物品
+随机物品
 ]],
 
 --物品类型
@@ -56,6 +56,7 @@ function mt:on_cast_start()
     local list = ac.quality_item[rand_name] 
     --添加 
     local name = list[math.random(#list)]
+    --满时，掉在地上
     hero:add_item(name,true)
 
 

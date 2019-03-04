@@ -149,7 +149,7 @@ function mt:on_remove()
 	--变回去
 	hero:transform(self.origin_id)
 	hero.weapon = self.old_weapon
-	
+
 	--增加攻击力与生命恢复速度
 	hero:add('攻击%', -self.attack)
 	hero:add('移动速度%', -self.move_speed)
@@ -162,9 +162,9 @@ end
 
 
 local mt = ac.buff['修罗之魂-被动']
-
+mt.keep = true --死亡时依旧保持
 mt.cover_type = 1
-
+-- mt.attack_sum = 0
 function mt:on_add()
 	local hero = self.target
 	--特效
@@ -193,7 +193,9 @@ function mt:on_pulse()
 	hero:add('攻击%',self.skill.cnt*self.attack_increase)
 	-- print('周围单位个数：'..self.skill.cnt,hero:get('攻击%'))
 end
-
+--人物死亡时，需要移除已添加的被动加成
 function mt:on_remove()
-    
+	if self.skill.cnt then 
+		hero:add('攻击%',-self.skill.cnt*self.attack_increase)
+	end	
 end

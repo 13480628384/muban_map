@@ -139,9 +139,8 @@ function mt:set_name(name)
 	self.name = name
 	local id = self.type_id
 	local color = color_code[self.color or '白']
-
 	local str = '|cff'..color..tostring(name)..'|r'
-
+	self.store_name = str
 	japi.EXSetItemDataString(base.string2id(id),4,str)
 end
 
@@ -288,6 +287,7 @@ end
 --获取物品描述
 function mt:get_tip()
 	local owner = self.owner
+	local store_title =''
 	local gold
 	local skill_tip = self:get_simple_tip() or ''
 	local item_tip = self:get_item_lni_tip() or ''
@@ -303,16 +303,18 @@ function mt:get_tip()
 		 gold = '|cffebd43d出售：'..self:sell_price()..'|r|n'
 	else
 		--否则就是在地上或商店里，地上不用管，商店的话修改出售价格
-		 gold = '|cffebd43d购买价格：'..self:buy_price()..'|r|n'
+		 store_title = self.store_name..'|r'
+		--否则就是在地上或商店里，地上不用管，商店的话修改出售价格
+		 gold = '|cffebd43d(价格：'..self:buy_price()..')|r|n'
 	end
 	
-	tip = '\n'..gold..'\n'.. item_tip ..'\n'
+	tip = store_title..'\n'..gold..'\n\n'.. item_tip ..'\n'
 
 	if skill_tip and t_str ~= s_str then 
 		local temp_tip = '|cff'..color_code['灰']..'技能：'..'|r'..'\n' 
 		tip = tip..temp_tip..skill_tip..'\n'
 	end	
-	
+	tip = tip ..'\n' 
 	return tip
 	
 end
@@ -400,14 +402,16 @@ function mt:on_add_state()
 
 	self.state = state
 end
---单位使用物品 添加属性
+--单位 使用物品 添加属性
 function mt:on_use_state()
 	local hero = self.owner
-
+	
 	if not hero then 
 		return
 	end	
-
+	--让宠物使用物品时给英雄增加对应的属性
+	hero = hero:get_owner().hero
+	
 	--保存物品
 	local name = self.name
 
@@ -486,7 +490,7 @@ end
 
 --删除物品
 function mt:item_remove(is)
-	-- print('即将移除物品：',self.slot_id,self.name,self.handle)
+	print('即将移除物品：',self.slot_id,self.name,self.handle)
 	
     -- if self._eff then 
     --     print('即将移除物品：:',self.handle,self.name,self._eff.unit:get_point())
@@ -621,7 +625,7 @@ function unit.__index:add_item(it,is_fall)
 	self.item_list[slot] = it
 	it.slot_id = slot
 	-- print('获得物品',it.handle,it.owner,it.name,it.slot_id)
-
+	self:print_item(true)
 	-- 如果单位身上已经有这个物品的handle了，再添加一次会触发先丢弃再获得物品事件。
 	jass.UnitAddItem(self.handle,it.handle)
 
@@ -886,7 +890,7 @@ end
 
 --商店标题
 function mt:set_store_title(title)
-	japi.EXSetItemDataString(base.string2id(self.type_id), 2, '购买' .. title)
+	japi.EXSetItemDataString(base.string2id(self.type_id), 2,title)
 end
 
 --更新商店信息
@@ -897,8 +901,8 @@ function mt:set_sell_state()
 	self:set_art(self.art)
 	--设置tip
 	self:set_tip(self:get_tip())
-	--设置商店出售名
-	self:set_store_title(self.name)
+	--设置商店出售名 颜色没法呈现
+	self:set_store_title(' ')
 end
 
 

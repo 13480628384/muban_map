@@ -29,7 +29,10 @@ mt{
 	--数量
 	num = 20,
 	--冷却
-	cool = 3
+	cool = 3,
+	
+	--必填
+	is_skill = true,
 }
 mt.model = [[Abilities\Weapons\PhoenixMissile\Phoenix_Missile_mini.mdl]]
 

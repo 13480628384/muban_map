@@ -1,6 +1,9 @@
 
 local mt = ac.skill['暴风雪']
 mt{
+	
+	--必填
+	is_skill = true,
 	--初始等级
 	level = 1,
 	--技能图标
@@ -17,7 +20,9 @@ mt{
 	chance = 100,
 	--伤害
 	damage = function(self,hero)
-		return self.owner:get('智力')*1+1200
+		if self and self.owner then 
+			return self.owner:get('智力')*1+1200
+		end	
 	end	,
 	--是否被动
 	passive = true,

@@ -53,7 +53,7 @@
         if it.item_type == '神符' then
           
             -- local items = ac.item.create_item(it.name)
-            it.slot_id = 1
+            -- it.slot_id = 1
             it.owner = u
             --为物品添加技能
             it:item_init_skill()
@@ -279,24 +279,27 @@
         ['使用第5格物品'] = 5,
         ['使用第6格物品'] = 6,}
         ac.game:event '单位-发布指令' (function(self, hero, order, target, player_order)
-            
+            -- print('发布使用物品命令1：')
             if order == '' then
                 return
             end
 
+            -- print('发布使用物品命令2：')
             if not it_id[order] then
                 return
             end
 
             local slot_id = it_id[order]
             -- print('发布使用物品命令：',slot_id)
+            -- hero:print_item(true)
             --取出单位身上的物品
             local item = hero:get_slot_item(slot_id)
+            -- print('发布使用物品命令3：',item)
             if not item then
                 return
             end
 
-            print('发布使用物品命令：',slot_id,item.name,target)
+            -- print('发布使用物品命令：',slot_id,item.name,target)
             --判断施法条件是否满足
             if item:conditions(item,target) ~= true then
                 --如果施法条件不满足，重置CD
@@ -314,7 +317,7 @@
 				item:_call_event 'on_cast_shot'
             end
             
-            print('调用物品施法：',slot_id,item.name)
+            -- print('调用物品施法：',slot_id,item.name)
             if item.item_type == '消耗品'  then
                 print('使用消耗品',item.name,item.type_id)
                 --消耗品使用 增加对应的属性值

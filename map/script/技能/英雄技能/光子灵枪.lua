@@ -31,6 +31,9 @@ mt{
 	num = 12,
 	--冷却
 	cool = 1,
+	
+	--必填
+	is_skill = true,
 }
 mt.model = [[war3mapImported\[Effect]566.mdl]]
 

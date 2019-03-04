@@ -617,7 +617,7 @@ function mt:on_physicals_crit_damage()
 	if dmg <= -100 then
 		self.current_damage = 0
 	end 
-	self.current_damage = self.current_damage * ( 1 + dmg/100 ) 
+	self.current_damage = self.current_damage * ( 1 + dmg/100 + 1 ) 
 end
 
 --计算会心一击
@@ -628,7 +628,7 @@ function mt:on_heart_crit_damage()
 	if dmg <= -100 then
 		self.current_damage = 0
 	end 
-	self.current_damage = self.current_damage * (1 + dmg/100)
+	self.current_damage = self.current_damage * (1 + dmg/100 + 1)
 end
 
 --计算法术暴击
@@ -639,7 +639,7 @@ function mt:on_spells_crit_damage()
 	if dmg <=  -100 then
 		self.current_damage = 0
 	end 
-	self.current_damage = self.current_damage * (1 + dmg/100)
+	self.current_damage = self.current_damage * (1 + dmg/100 + 1)
 end
 
 

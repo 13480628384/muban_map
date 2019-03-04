@@ -13,14 +13,14 @@ local multiboard = require 'types.multiboard'
 require '英雄.skills'
 
 local hero_types = {}
-local cent = rect.j_rect('choose_hero'):get_point() or ac.point(-3000,3000)
+-- local cent = rect.j_rect('choose_hero'):get_point() or ac.point(-3000,3000)
 local target_angle
 local skip
 local radius
 local last_target
-
+--rect.j_rect('choose_hero') or
 map.rects={
-	['选人区域'] = rect.j_rect('choose_hero') or rect.create(-3000,2000,-2000,3000),
+	['选人区域'] =  rect.create(-2000,2000,-2000,2000),
 	['出生点'] = rect.create(0,0,0,0)
 }
 

@@ -17,25 +17,38 @@ mt.unit_type = 'shop'
 --页面记录
 mt.page_stack = nil
 
---商店物品列表
-mt.sell_item_list = {}
-
---商店物品列表(名字)
-mt.sell = {}
-
---拥有的商品
-
+--文字显示
+local function on_texttag(string,hero)
+	local target = hero
+	local x, y = target:get_point():get()
+	local z = target:get_point():getZ()
+	local tag = ac.texttag
+	{
+		string = string,
+		size = 18,
+		position = ac.point(x-100 , y, z + 200),
+		red = 238,
+		green = 31,
+		blue = 39,
+		fade = 0.5,
+		permanent = true,
+		time = ac.clock(),
+	}
+	return tag
+end
 --创建一个商店
 function shop.create(name,x,y,face,is_selling)
 	local unit = ac.player[11]:create_unit(name,ac.point(x,y),face)
-	unit:add_restriction '物免'
-	unit:add_restriction '魔免'
 	unit:add_restriction '无敌'
+	unit:add_restriction '缴械'
 	--继承商店
 	setmetatable(unit, shop)
 	if not is_selling then 
 		local data = ac.table.UnitData[name]
 		local sell = data.sell
+		if not unit.sell then 
+			unit.sell = {}
+		end	
 		unit.sell = sell
 		if sell then 
 			for i,v in ipairs(sell) do
@@ -43,6 +56,8 @@ function shop.create(name,x,y,face,is_selling)
 			end
 		end	
 	end	
+	--创建文字
+	unit.texttag = on_texttag(name,unit)
 
 	shop.unit_list[unit.handle] = unit
 
@@ -54,7 +69,10 @@ function shop.create(name,x,y,face,is_selling)
 		-- 被购买的物品名，没办法保存物品handle，因为物品添加给商店时就被删除了
 		-- 添加颜色代码会导致物品没有在商店里面创建。
 		local it_name = jass.GetItemName(jass.GetSoldItem())
-		-- print(it_name)
+		-- 如果英雄在两个商店的中间，购买一次物品会触发两次购买事件。
+		if not it_name then 
+			return
+		end	
 		it_name = clean_color(it_name)
 		local it = ac.item.shop_item_map[it_name]
 
@@ -75,6 +93,15 @@ function shop.create(name,x,y,face,is_selling)
 	return unit
 end
 
+--移除时的处理
+function mt:on_remove()
+	--全部删除
+	self:remove_all()
+	--移除文字显示
+	if self.texttag then 
+		self.texttag:remove()
+	end	
+end	
 --打印商品
 function mt:print_item()
 	local str =""
@@ -95,7 +122,7 @@ function mt:add_sell_item(name,i)
 	if not data then
 		data = ac.skill[name]
 		if not data.is_skill then
-			print('商店添加物品失败,不存在数据',name)
+			-- print('商店添加物品失败,不存在数据',name)
 			return
 		end
 	end
@@ -104,16 +131,19 @@ function mt:add_sell_item(name,i)
 	item.shop_slot_id = i
 	--刷新物品数据
 	item:set_sell_state()
-
+	if not self.sell_item_list then 
+		self.sell_item_list = {}
+	end	
 	if item then 
 		self.sell_item_list[i] = item
 		self.sell[i] = item.name
 	end	
 	--添加到商店
 	jass.AddItemToStock(self.handle,base.string2id(item.type_id),1,1)
-
+	item:hide()
 	--删掉物品
-	jass.RemoveItem(item.handle)
+	-- jass.RemoveItem(item.handle)
+	-- print(item.handle)
 	return item
 end
 
@@ -152,10 +182,11 @@ function mt:remove_sell_item(it)
 	ac.shop_item_list[item.type_id] = false --true回收模板
 	self.sell_item_list[shop_slot_id] = nil
 	self.sell[shop_slot_id] = nil
-
-	print('从商店移除',item.type_id,item.name,item.shop_slot_id)
+	
+	-- print('从商店移除',item.type_id,item.name,item.shop_slot_id)
 	--从商店移除
 	jass.RemoveItemFromStock(self.handle,base.string2id(item.type_id))
+	jass.RemoveItem(item.handle)
 
 end
 --移除全部商品
@@ -175,31 +206,35 @@ function mt:fresh_sell()
 	end	
 end	
 --刷新一次商店（删除商店再创建商店）
---无用
+--sell 即将刷新的清单， sell_item_list 现在拥有的清单，执行添加会刷新sell清单。
 function mt:fresh()
+
 	local sell = self.sell
 	local data = {}
 	data.sell = {}
+	data.sell_item_list = {}
 	for i=1,12 do 
 		data.sell[i] = sell[i]
+		data.sell_item_list[i] = self.sell_item_list[i]
 	end	
-	local name = self:get_name()
-	local x,y = self:get_point():get()
-	local face = self:get_facing()
+
 	--全部删除
 	self:remove_all()
-	self:remove()
 
-	print(name,x,y,face)
 	--再添加一次
-	local unit = shop.create(name,x,y,face,true)
 	for i=1,12 do 
 		if data.sell[i] then 
-			print('刷新后添加物品',data.sell[i])
-			unit:add_sell_item(data.sell[i] ,i)
+			local new_shop_item = self:add_sell_item(data.sell[i] ,i)
+			--新物品继承属性
+			if new_shop_item  then 
+				if data.sell_item_list[i] and data.sell_item_list[i].gold then 
+					new_shop_item.gold = data.sell_item_list[i].gold
+					--刷新数据
+					new_shop_item:set_sell_state()
+				end	
+			end	
 		end	
 	end	
-	return unit
 end	
 
 --native RemoveItemFromStock takes unit whichUnit, integer itemId returns nothing

@@ -1,4 +1,5 @@
 --物品名称
+--随机技能添加给英雄貌似有点问题。
 local mt = ac.skill['随机技能']
 mt{
 --等久
@@ -9,7 +10,7 @@ art = [[ReplaceableTextures\CommandButtons\BTNSnazzyScrollPurple.blp]],
 
 --说明
 tip = [[
-    随机技能
+随机技能
 ]],
 
 --物品类型

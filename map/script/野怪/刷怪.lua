@@ -224,7 +224,7 @@ function mt:on_next()
             end  
         end    
     end  
-    --发送本层怪物信息 3次5秒
+    --发送本层怪物信息 3次10秒
     send_skill_message(3,10)
     print('当前波数 '..self.index)
 end
@@ -266,8 +266,8 @@ function mt:on_change_creep(unit,lni_data)
     end 
     --设置搜敌路径
     -- unit:set_search_range(99999)
-    --add_creep_skill(self.rand_skill_list,unit)
     --随机添加怪物技能
+    add_creep_skill(self.rand_skill_list,unit)
     --unit:add_skill('怀孕','隐藏')
     -- unit:add_skill('霜冻新星','隐藏')
     -- unit:add_skill('肥胖','隐藏')
@@ -292,7 +292,7 @@ function mt:on_change_creep(unit,lni_data)
     -- unit:add_skill('幽灵','隐藏')
     -- unit:add_skill('腐烂','隐藏')
     -- unit:add_skill('流血','隐藏')
-    unit:add_skill('善恶有报','隐藏')
+    -- unit:add_skill('善恶有报','隐藏')
     
 
 end

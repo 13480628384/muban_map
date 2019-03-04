@@ -18,5 +18,6 @@ ac.game:event '游戏-开始' (function()
         local p = ac.player(i)
         p:addGold(1000000)
     end    
+    
      
 end)    

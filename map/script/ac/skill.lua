@@ -1681,9 +1681,9 @@ function unit.__index:add_skill(name, type, slotid, data)
 	skill.owner = self
 
 	skill.ability_id = skill.ability_id or self:get_owner():get_ability_id(type, slotid)
-
-
-	-- print('技能类型：'..type..' 技能名称：'..name..' 技能id：'..skill.ability_id)
+	if skill.ability_id then 
+		print('技能类型：'..type..' 技能名称：'..name..' 技能id：'.. skill.ability_id)
+	end	
 	if skill.cooldown_mode == 1 then
 		skill.spell_stack = skill.charge_max_stack
 	end

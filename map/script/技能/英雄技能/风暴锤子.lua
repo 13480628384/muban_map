@@ -32,6 +32,8 @@ mt{
 	end	,
 	--投射物移动速度
 	speed = 1000,
+	--必填
+	is_skill = true,
 	
 }
 function mt:on_add()
