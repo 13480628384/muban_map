@@ -411,7 +411,7 @@ function mt:on_use_state()
 	end	
 	--让宠物使用物品时给英雄增加对应的属性
 	hero = hero:get_owner().hero
-	
+
 	--保存物品
 	local name = self.name
 
@@ -492,20 +492,30 @@ end
 function mt:item_remove(is)
 	print('即将移除物品：',self.slot_id,self.name,self.handle)
 	
+	--移除技能
     -- if self._eff then 
     --     print('即将移除物品：:',self.handle,self.name,self._eff.unit:get_point())
 	-- end
-	
-	ac.item.item_map[self.handle] = nil
-
+	-- if self.owner then 
+	-- 	self:_call_event 'on_remove'
+	-- end	
 	jass.RemoveItem(self.handle)
 	dbg.handle_unref(self.handle)
-	if self  then 
-		if self.slot_id then 
-			self.owner.item_list[self.slot_id] =nil
-		end	
-		self:on_remove_state()
+	
+	--移除物品时，如果物品在单位身上，会触发单位丢弃物品事件，会先执行下面代码，再执行单位丢弃。
+	self.is_discard_event = true
+	if self.owner then 
+		self.owner:remove_item(self)
 	end	
+
+	-- if self  then 
+	-- 	if self.slot_id then 
+	-- 		self.owner.item_list[self.slot_id] =nil
+	-- 	end	
+	-- 	self:on_remove_state()
+	-- end	
+
+	ac.item.item_map[self.handle] = nil
 	self.handle = nil
 	self.owner = nil
 	self.slot_id = nil
@@ -513,6 +523,7 @@ function mt:item_remove(is)
 	if self._eff then
 		self._eff:remove()
 	end
+	
 end
 
 --单位是否有物品,查到立即返回
@@ -570,7 +581,9 @@ function unit.__index:add_item(it,is_fall)
 		it:hide()
 		it.recycle = true
 	end	
-	
+	if not self.item_list  then 
+		self.item_list ={}
+	end	
 	if self:has_item_handle(it.handle) then 
 		-- print('单位已有该物品不需要添加')
 		--不阻止 丢弃物品事件
@@ -620,7 +633,6 @@ function unit.__index:add_item(it,is_fall)
 	end
 
 	self.buy_suc = true 
-	
 	it.owner = self
 	self.item_list[slot] = it
 	it.slot_id = slot
@@ -677,23 +689,29 @@ end
 --单位移除找到的物品
 --	具体的某物品或根据名字找到的第一个物品
 --	false 真删 ,true 丢在地上。
-function unit.__index:remove_item(it ,is_drop)
+-- modify by jeff 从单位身上移除装备，都是丢在地上
+function unit.__index:remove_item(it)
 	if not it  then
 		return false
 	end
 	
+	-- print('即将从单位移除物品：',it.slot_id,it.name,it.handle,ac.clock())
 	it:on_remove_state()
 	--移除技能
 	it:_call_event 'on_remove'
 
+	--神符类的物品，有所有者，但是没有slot_id 所以，需要做一重判断
 	local slot = it.slot_id
+
 	--删除单位身上的table值
-	self.item_list[slot] = nil
+	if slot then 
+		self.item_list[slot] = nil
+	end	
 	it.slot_id = nil
 	it.owner = nil
-	if not is_drop then 
-		it:item_remove()
-	end	
+	-- if not is_drop then 
+	-- 	it:item_remove()
+	-- end	
 	
 	return true
 end

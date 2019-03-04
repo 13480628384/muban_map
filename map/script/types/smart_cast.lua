@@ -294,7 +294,8 @@ function message.hook(msg)
 	if msg.type == 'key_down' then
 		local code = msg.code
 		local state = msg.state
-		local list = {'Q', 'W', 'E', 'R','D', 'F', 'G','Z','X','C','V'}
+		--'Q', 'W', 'E', 'R','D', 'F', 'G',
+		local list = {'Z','X','C','V'}
 
 		-- ,按键代码，按键类型,message
 		ac.game:event_notify('玩家-按下按键',  code,state,message)

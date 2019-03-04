@@ -7,5 +7,5 @@ function player.__index:create_pets()
     u:add_restriction '无敌'
     u:add_restriction '缴械'
     u:add_skill('拾取','拾取',1)
-    -- u:add_skill('全图闪烁','英雄',1)
+    u:add_skill('全图闪烁','英雄')
 end

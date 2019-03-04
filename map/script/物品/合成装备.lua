@@ -26,9 +26,9 @@ local streng_item_list = {
     -- {'新手剑+1','生命药水*5 新手石*1'},
     -- {'新手剑+2','生命药水*5 魔法药水*5'},
     --合成品质为消耗品会出错 ^10 表示10%几率合成
-    {'蓝^25','白*1 白*1 白*1 白*1 装备合成书*1'},
-    {'金^25','蓝*1 蓝*1 蓝*1 蓝*1 装备合成书*1'},
-    {'红^25','金*1 金*1 金*1 金*1 装备合成书*1'}
+    {'蓝^33','白*1 白*1 白*1 装备合成书*1'},
+    {'金^33','蓝*1 蓝*1 蓝*1 装备合成书*1'},
+    {'红^33','金*1 金*1 金*1 装备合成书*1'}
 
 }
 local function streng_item(alltable,unit,it)
@@ -176,7 +176,8 @@ local function streng_item(alltable,unit,it)
                     --不是即将获得的物品，就删掉单位身上的
                     if u_it then 
                         table.insert(del_item,u_it)
-                        u:remove_item(u_it)
+                        -- u:remove_item(u_it) modify by jeff 20190305
+                        u_it:item_remove()
                     else   
                         if k == trg_it.name or k == trg_it.color  then 
                             
@@ -204,7 +205,8 @@ local function streng_item(alltable,unit,it)
                             local u_it = u:has_item(k)
                             if u_it then
                                 table.insert(del_item,u_it)
-                                u:remove_item(u_it)
+                                -- u:remove_item(u_it) modify by jeff 20190305
+                                u_it:item_remove()
                             end     
                         end   
                         
@@ -263,7 +265,7 @@ local function streng_item(alltable,unit,it)
                 end    
                 print('提升概率：',max_strong_rate)
                 if dest_rate then 
-                    dest_rate = dest_rate + 25 * max_strong_rate
+                    dest_rate = dest_rate + dest_rate * max_strong_rate
                 end 
             end    
             

@@ -188,7 +188,8 @@ end
 --	[蓝色]
 function mt:pingMinimap(where, time, red, green, blue, flag)
 	if self == player.self then
-		local x, y = where:get_point():get()
+		--modify by jeff ,由rect 改为 point
+		local x, y = where:get()
 		jass.PingMinimapEx(x, y, time, red or 0, green or 255, blue or 0, not not flag)
 	end
 end

@@ -114,23 +114,43 @@ local function hero_register_main()
 		
 		
 		-- hero:add('物品获取率',50)
-    	ac.item.add_skill_item('巨浪',hero)
-    	ac.item.add_skill_item('巨浪',hero)
-    	ac.item.add_skill_item('巨浪',hero)
-        ac.item.add_skill_item('粉碎',hero)
-        ac.item.add_skill_item('粉碎',hero)
-        ac.item.add_skill_item('专心',hero)
-        ac.item.add_skill_item('专心',hero)
-        ac.item.add_skill_item('穿刺',hero)
-        ac.item.add_skill_item('穿刺',hero)
-        ac.item.add_skill_item('魔王降临',hero)
+    	-- ac.item.add_skill_item('巨浪',hero)
+    	-- ac.item.add_skill_item('巨浪',hero)
+    	-- ac.item.add_skill_item('巨浪',hero)
+        -- ac.item.add_skill_item('粉碎',hero)
+        -- ac.item.add_skill_item('粉碎',hero)
+        -- ac.item.add_skill_item('专心',hero)
+        -- ac.item.add_skill_item('专心',hero)
+        -- ac.item.add_skill_item('穿刺',hero)
+        -- ac.item.add_skill_item('穿刺',hero)
+        -- ac.item.add_skill_item('魔王降临',hero)
 		
+		hero:add_item('新人寻宝石') 
+		hero:add_item('新人寻宝石') 
+		hero:add_item('新人寻宝石') 
+		hero:add_item('新人寻宝石') 
+
+		-- hero:add_item('勇气之证')
 		--添加英雄属性面板
 		hero:add_skill('英雄属性面板', '隐藏')
 
 		--创建一个宠物
 		player:create_pets()
 	end)
+
 end
 
 hero_register_main()
+
+
+
+ac.game:event '玩家-选择单位' (function(self, player, hero)
+	if hero:get_owner() ~= player then 
+		return 
+	end 
+	player.selected = hero 
+	for skill in hero:each_skill '英雄' do 
+		skill:fresh()
+	end 
+
+end)

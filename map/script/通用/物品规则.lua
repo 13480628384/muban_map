@@ -67,6 +67,20 @@
             return true
         end
 
+        --判断物品类型数量
+        if u:get_type_count(it) then
+            ac.player.self:sendMsg('该类型的物品只能携带一个')
+            return true
+        end
+
+        --判断物品是否唯一
+        if it.unique then
+            if u:get_unique_name(it) then
+                ac.player.self:sendMsg('该物品唯一,只能携带一个')
+                return true
+            end
+        end
+        
         --判断是否为消耗品
         if it.item_type == '消耗品' then
             --先判断是否有同类物品
@@ -94,19 +108,6 @@
         end
 
 
-        --判断物品类型数量
-        if u:get_type_count(it) then
-            ac.player.self:sendMsg('该类型的物品只能携带一个')
-            return true
-        end
-
-        --判断物品是否唯一
-        if it.unique then
-            if u:get_unique_name(it) then
-                ac.player.self:sendMsg('该物品唯一,只能携带一个')
-                return true
-            end
-        end
 
 
     end)    
@@ -177,7 +178,7 @@
             it:show(true)
         end)            
         --true,掉落，不删除
-        u:remove_item(it,true)
+        u:remove_item(it)
         -- u:print_item()
     end)
 

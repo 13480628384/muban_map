@@ -1,5 +1,5 @@
 local rect = require "types.rect"
-
+--键盘事件
 --code,state,message
 ac.game:event '玩家-按下按键' (function(trg,code,state,message)
     local keyboard = message.keyboard
@@ -68,7 +68,7 @@ ac.game:event '玩家-聊天' (function(self, player, str)
                 table.insert(cast_item,name)
             end 
         end 
-        
+
         for i = 1,50 do
 
             --hero:timer(0.1*1000,self.cnt,function()
