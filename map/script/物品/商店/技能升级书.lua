@@ -9,7 +9,7 @@ mt{
     
     --说明
     tip = [[
-用于可升级技能
+用于升级技能
     ]],
     
     --物品类型
@@ -18,26 +18,19 @@ mt{
     --目标类型
     target_type = ac.skill.TARGET_TYPE_NONE,
     
-    --冷却
-    cool = 0,
-    
-    --购买价格
-    gold = 1000,
-    --每次增加
-    cre_gold = 1000,
-    
     --物品技能
     is_skill = true,
     
 }
     
-
+function mt:on_add()
+    self.first_use =true
+end
 function mt:on_cast_start()
     local hero = self.owner
     local player = hero:get_owner()
     local item = self 
     local list = {}
-    local count = 0 
     for skill in hero:each_skill '英雄' do 
 
         local upgrade_count = skill.upgrade_count or 1
@@ -73,16 +66,18 @@ function mt:on_cast_start()
     if not self.dialog  then 
         self.dialog = create_dialog(player,'选择你要升级的技能',list,
         function (index)
+            self.dialog = nil
             local skill = list[index].skill
             if skill then 
                 local upgrade_count = skill.upgrade_count or 1
                 skill:set_level(skill:get_level() + 1)
                 skill.upgrade_count = (upgrade_count + 1)
-                self:add_item_count(-1)
-                self.dialog = nil
-                if self._count > 0 then 
+                if self._count > 0 then  
                     self:on_cast_start()
+                    self:add_item_count(-1)
                 end    
+            else
+                self:add_item_count(1)       
             end 
         end)
     else
