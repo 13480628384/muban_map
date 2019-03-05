@@ -10,6 +10,7 @@
 require '野怪.creep'
 require '野怪.刷怪'
 require '野怪.掉落'
+require '野怪.游戏结束'
 -- require '野怪.BOSS-AI'
 
 -- local mt = ac.creep['测试']{    

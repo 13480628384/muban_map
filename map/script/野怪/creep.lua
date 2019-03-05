@@ -262,6 +262,17 @@ function mt:next()
     
     --当前波数加1,若限定最大波数，则下一波大于最大波数时，跳出
     self.index = self.index +1
+
+    --游戏胜利
+    if not self.game_win_timer then 
+        self.game_win_timer = ac.loop(1*1000,function(t)
+            if self.index > 100 then 
+                t:remove()
+                ac.game:event_notify('游戏-结束',true)
+            end    
+        end)
+    end    
+
     if self.on_next then 
         self:on_next()
     end 
