@@ -21,7 +21,7 @@ mt{
     --护甲
     defence = 25,
     --杀敌个数
-    kill_cnt = 10,
+    kill_cnt = 500,
     --唯一
     unique = true
 }
