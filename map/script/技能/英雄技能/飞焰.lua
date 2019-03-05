@@ -9,11 +9,11 @@ mt{
 	--技能说明
 	title = '|cff00bdec飞焰|r',
 	tip = [[
-	攻击有%chance% %的概率召 %num% 个 %title% 
+	攻击有%chance% % 的概率召 %num% 个 %title% 
 	造成属性物理伤害  (%damage%)
 	]],
 	--概率%
-	chance = 100,
+	chance = 10,
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 

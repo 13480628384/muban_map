@@ -1,4 +1,4 @@
-local mt = ac.skill['盗取']
+local mt = ac.skill['妙手空空']
 mt{
     --必填
     is_skill = true,

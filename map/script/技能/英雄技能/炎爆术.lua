@@ -11,12 +11,12 @@ mt{
 	--技能说明
 	title = '炎爆术',
 	tip = [[
-		攻击有 %chance% %的概率对 %area% 范围造成物理伤害  (%damage%)
+		攻击有 %chance% % 的概率对 %area% 范围造成物理伤害  (%damage%)
 	]],
 	--范围
 	area = 1000,
 	--概率%
-	chance = 100,
+	chance = 10,
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 

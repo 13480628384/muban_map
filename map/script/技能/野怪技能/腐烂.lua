@@ -4,7 +4,7 @@ mt{
     level = 1,
     title = "腐烂",
     tip = [[
-        被动1：死亡时，对凶手单位造成每秒1%最大生命值的伤害，持续60秒
+        被动1：死亡时，对凶手单位造成每秒3%最大生命值的伤害，持续30秒
         被动2：降低自己的三维40%
     ]],
 
@@ -12,12 +12,12 @@ mt{
     value = 40,
    
     -- 持续时间
-    time = 60,
+    time = 30,
 
     -- 最大生命值伤害
-    life_rate = 1,
+    life_rate = 1.5,
     -- 每秒
-    pulse = 1,
+    pulse = 0.5,
     -- 特效
     effect = [[Abilities\Spells\Undead\PlagueCloud\PlagueCloudCaster.mdl]]
 

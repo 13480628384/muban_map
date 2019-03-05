@@ -7,14 +7,14 @@ mt{
 	--技能说明
 	title = '阳光枪',
 	tip = [[
-	攻击有 %chance% %的概率对 %hit_area% 范围造成物理伤害 (%damage%)
+	攻击有 %chance% % 的概率对 %hit_area% 范围造成物理伤害 (%damage%)
 	伤害:智力+1200
 	]],
 	--范围
 	hit_area = 150,
 	distance = 900,
 	--概率%
-	chance = 100,
+	chance = 10,
 	damage = function(self,hero)
 		if self and self.owner then 
 		return self.owner:get('智力')*1+1200

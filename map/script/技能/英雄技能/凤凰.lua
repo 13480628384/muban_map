@@ -15,7 +15,7 @@ mt{
 	--介绍
 	tip = [[召唤1只凤凰帮助英雄作战（当前波属性*1.5）；持续时间25S；CD65S]],
 	--技能图标
-	art = [[ReplaceableTextures\PassiveButtons\PASBTNImmolation.blp]],
+	art = [[ReplaceableTextures\CommandButtons\BTNMarkOfFire.blp]],
 	--特效
 	effect = [[units\human\phoenix\phoenix.mdl]],
 	--召唤物

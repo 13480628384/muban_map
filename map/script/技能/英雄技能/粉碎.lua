@@ -27,7 +27,7 @@ mt{
 	life_rate = 5,
 
 	--特效模型
-	effect = [[AZ_SSCrow_D.mdx]],
+	effect = [[Hero_DeathProphet_N1_Missile.mdx]],
 
 
 }
@@ -45,7 +45,8 @@ function mt:on_add()
 				return
 			end
 			--创建特效
-			hero:add_effect('origin',self.effect):remove()
+			-- target:add_effect('chest',self.effect):remove()
+			ac.effect(target:get_point(),self.effect,0,2,'chest'):remove()
 	 	    for i, u in ac.selector()
 				: in_range(hero,self.area)
 				: is_enemy(hero)

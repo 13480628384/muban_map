@@ -1,4 +1,4 @@
-local mt = ac.skill['才华']
+local mt = ac.skill['辉煌光环']
 mt{
     --必填
     is_skill = true,
@@ -25,7 +25,7 @@ function mt:on_add()
     local skill = self
     local hero = self.owner
 
-    self.buff = hero:add_buff '才华'
+    self.buff = hero:add_buff '辉煌光环'
     {
         source = hero,
         skill = self,
@@ -49,7 +49,7 @@ function mt:on_remove()
     end
 end
 
-local mt = ac.aura_buff['才华']
+local mt = ac.aura_buff['辉煌光环']
 -- 魔兽中两个不同的专注光环会相互覆盖，但光环模版默认是不同来源的光环不会相互覆盖，所以要将这个buff改为全局buff。
 mt.cover_global = 1
 mt.cover_type = 1

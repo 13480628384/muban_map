@@ -1,4 +1,4 @@
-local mt = ac.skill['吸精']
+local mt = ac.skill['光明契约']
 mt{
     --必填
     is_skill = true,

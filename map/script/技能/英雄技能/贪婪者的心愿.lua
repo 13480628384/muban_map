@@ -1,4 +1,4 @@
-local mt = ac.skill['长者']
+local mt = ac.skill['贪婪者的心愿']
 mt{
     --必填
     is_skill = true,
@@ -11,19 +11,19 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤物属性+50%]],
+	tip = [[物品获取率+50%]],
 	--技能图标
-	art = [[jineng\jineng014.blp]],
-	summon_attr = 50,
+	art = [[jineng\jineng017.blp]],
+	item_rate = 50,
 }
 function mt:on_add()
     local skill = self
     local hero = self.owner
-    hero:add('召唤物属性',self.summon_attr)
+    hero:add('物品获取率',self.item_rate)
 end
 function mt:on_remove()
     local hero = self.owner
-    hero:add('召唤物属性',-self.summon_attr)
+    hero:add('物品获取率',-self.item_rate)
     if self.trg then
         self.trg:remove()
         self.trg = nil

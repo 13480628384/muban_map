@@ -1,4 +1,4 @@
-local mt = ac.skill['耐力']
+local mt = ac.skill['强击光环']
 mt{
     --必填
     is_skill = true,
@@ -11,35 +11,38 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[增加部队移动力20%]],
+	tip = [[所有友军远程攻击力增加15%]],
 	--技能图标
-	art = [[jineng\jineng007.blp]],
+	art = [[ReplaceableTextures\PassiveButtons\PASBTNTrueShot.blp]],
 	--特效
-	effect = [[Abilities\Spells\Orc\CommandAura\CommandAura.mdl]],
+    effect = [[Abilities\Spells\NightElf\TrueshotAura\TrueshotAura.mdl]],
     --光环影响范围
-    area = 99999,
-    --值
-    value = 20,
+	area = 9999,
+	--值
+	value = 15,
 }
 function mt:on_add()
     local skill = self
     local hero = self.owner
 
-    self.buff = hero:add_buff '耐力'
-    {
-        source = hero,
+	self.buff = hero:add_buff '强击光环'
+	{
+		source = hero,
         skill = self,
         target_effect = self.effect,
-        selector = ac.selector()
-            : in_range(hero, self.area)
-            : is_ally(hero)
-            ,
+		selector = ac.selector()
+			: in_range(hero, self.area)
+			: is_ally(hero)
+            : add_filter(function(u)
+                return not u:isMelee()
+            end)
+			,
         -- buff的数据，会在所有自己的子buff里共享这个数据表
         data = {
-            value = self.value,
+			value = self.value,
         },
     }
- 
+    
 end
 function mt:on_remove()
     local hero = self.owner
@@ -49,26 +52,35 @@ function mt:on_remove()
     end
 end
 
-local mt = ac.aura_buff['耐力']
+local mt = ac.aura_buff['强击光环']
 -- 魔兽中两个不同的专注光环会相互覆盖，但光环模版默认是不同来源的光环不会相互覆盖，所以要将这个buff改为全局buff。
 mt.cover_global = 1
+
 mt.cover_type = 1
 mt.cover_max = 1
+
 mt.effect = [[]]
 
 
 function mt:on_add()
-    local target = self.target
-    -- print('打印受光环英雄的单位',self.target:get_name())
+	local target = self.target
+	-- print('打印受光环英雄的单位',self.target:get_name())
+    --不是近战
+    -- if not target:isMelee() then 
     self.target_eff = self.target:add_effect('origin', self.target_effect)
-    target:add('移动速度%',self.data.value)
+    target:add('攻击%',self.data.value)
+    -- end
 
 end
 
 function mt:on_remove()
-    local target = self.target
-    if self.source_eff then self.source_eff:remove() end
+	local target = self.target
+	if self.source_eff then self.source_eff:remove() end
     if self.target_eff then self.target_eff:remove() end
     
-    target:add('移动速度%',-self.data.value)
+    --不是近战
+    -- if not target:isMelee() then 
+    target:add('攻击%',-self.data.value)
+    -- end
 end
+

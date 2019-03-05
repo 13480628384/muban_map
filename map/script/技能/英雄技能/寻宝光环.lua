@@ -1,4 +1,4 @@
-local mt = ac.skill['信仰']
+local mt = ac.skill['寻宝光环']
 mt{
     --必填
     is_skill = true,
@@ -11,21 +11,21 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[所有友军护甲增加15%]],
+	tip = [[所有友军物品获取率+20%]],
 	--技能图标
-	art = [[ReplaceableTextures\PassiveButtons\PASBTNDevotion.blp]],
+	art = [[jineng\jineng021.blp]],
 	--特效
-	effect = [[Abilities\Spells\Human\DevotionAura\DevotionAura.mdl]],
+	effect = [[Hero_Silencer_N2S_T_start.MDX]],
     --光环影响范围
     area = 99999,
     --值
-    value = 15,
+    value = 20,
 }
 function mt:on_add()
     local skill = self
     local hero = self.owner
 
-    self.buff = hero:add_buff '信仰'
+    self.buff = hero:add_buff '寻宝光环'
     {
         source = hero,
         skill = self,
@@ -49,19 +49,20 @@ function mt:on_remove()
     end
 end
 
-local mt = ac.aura_buff['信仰']
+local mt = ac.aura_buff['寻宝光环']
 -- 魔兽中两个不同的专注光环会相互覆盖，但光环模版默认是不同来源的光环不会相互覆盖，所以要将这个buff改为全局buff。
 mt.cover_global = 1
 mt.cover_type = 1
 mt.cover_max = 1
 mt.effect = [[]]
+mt.keep = true
 
 
 function mt:on_add()
     local target = self.target
     -- print('打印受光环英雄的单位',self.target:get_name())
     self.target_eff = self.target:add_effect('origin', self.target_effect)
-    target:add('护甲%',self.data.value)
+    target:add('物品获取率',self.data.value)
 
 end
 
@@ -70,5 +71,5 @@ function mt:on_remove()
     if self.source_eff then self.source_eff:remove() end
     if self.target_eff then self.target_eff:remove() end
     
-    target:add('护甲%',-self.data.value)
+    target:add('物品获取率',-self.data.value)
 end

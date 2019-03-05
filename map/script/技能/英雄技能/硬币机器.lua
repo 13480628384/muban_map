@@ -13,7 +13,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤1只硬币机器帮助英雄作战（当前波属性*1，攻击时有概率获得额外金钱（10%触发，金钱为攻击怪死亡时的钱））；持续时间20S；CD45S]],
+	tip = [[召唤1只硬币机器帮助英雄作战（当前波属性*1，攻击时有概率获得额外金钱（10% 触发，金钱为攻击怪死亡时的钱））；持续时间20S；CD45S]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNChestOfGold.blp]],
 	--特效

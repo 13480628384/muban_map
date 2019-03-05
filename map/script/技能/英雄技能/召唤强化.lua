@@ -1,4 +1,4 @@
-local mt = ac.skill['智者']
+local mt = ac.skill['召唤强化']
 mt{
     --必填
     is_skill = true,
@@ -8,25 +8,22 @@ mt{
 	skill_type = "被动",
 	--被动
 	passive = true,
-	--伤害
-	damage = 1.15,
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[法术伤害+15%]],
+	tip = [[召唤物属性+50%]],
 	--技能图标
-	art = [[jineng\jineng018.blp]],
-	--法术伤害
-	magic_damage = 15,
+	art = [[jineng\jineng014.blp]],
+	summon_attr = 50,
 }
 function mt:on_add()
     local skill = self
     local hero = self.owner
-    hero:add('法术攻击',self.magic_damage)
+    hero:add('召唤物属性',self.summon_attr)
 end
 function mt:on_remove()
     local hero = self.owner
-    hero:add('法术攻击',-self.magic_damage)
+    hero:add('召唤物属性',-self.summon_attr)
     if self.trg then
         self.trg:remove()
         self.trg = nil

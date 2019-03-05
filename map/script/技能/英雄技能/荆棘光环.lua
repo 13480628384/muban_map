@@ -1,4 +1,4 @@
-local mt = ac.skill['荆棘']
+local mt = ac.skill['荆棘光环']
 mt{
     --必填
     is_skill = true,

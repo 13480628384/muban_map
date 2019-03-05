@@ -10,14 +10,14 @@ mt{
 	--技能说明
 	title = '巨浪',
 	tip = [[
-		攻击有 %chance% %的概率对 %distance% 范围造成物理伤害  (%damage%)
+		攻击有 %chance% % 的概率对 %distance% 范围造成物理伤害  (%damage%)
 		伤害公式: 智力 * %damage_int% +1200
 	]],
 	--范围
 	distance = 1500,
 	hit_area = 125,
 	--概率%
-	chance = 100,
+	chance = 10,
 	damage = function(self,hero)
 		if self and self.owner then 
 			return self.owner:get('智力')*self.damage_int + 1200
