@@ -99,9 +99,17 @@ local color_code = {
     ['黑'] = '000000',
     ['金'] = 'ffff00',
     ['灰'] = 'cccccc',
-
 }
 
+--颜色模型 目前应用于仙丹
+local color_model = {
+    ['白'] = [[faguangbai.mdx]],
+    ['蓝'] = [[faguanglan.mdx]],
+    ['金'] = [[faguanghuang.mdx]],
+    ['红'] = [[faguanghong.mdx]],
+    ['绿'] = [[faguanglv.mdx]],
+    
+}
 local drop_flag = false
 local item_slk = slk.item
 
@@ -133,6 +141,7 @@ end
 function mt:get_name()
 	return self.name
 end
+
 
 --设置物品名
 function mt:set_name(name)
@@ -824,7 +833,11 @@ function ac.item.create_item(name,poi,is)
 	x = jass.GetItemX(item_handle)
 	y = jass.GetItemY(item_handle)
 
-	-- print(name,items._model,x,)
+	--设置物品模型 消耗品
+	if items.color and items.item_type == '消耗品' then 
+		items._model = color_model[items.color]
+	end
+
 	if not is then 
 		items._eff = ac.effect(ac.point(x,y),items._model,270,1,'origin')
     end

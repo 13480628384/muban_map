@@ -1,3 +1,4 @@
+local jass = require 'jass.common'
 local mt = ac.buff['召唤物']
 
 mt.cover_type = 1
@@ -60,7 +61,9 @@ function mt:on_add()
 	{
 		skill = self.skill,
 	}
-    
+	--设置水元素类型的生命周期
+	-- @目标handle，水元素类型，持续时间
+	jass.UnitApplyTimedLife(self.target.handle,base.string2id('BHwe'),self.time)
 end
 
 function mt:on_remove()

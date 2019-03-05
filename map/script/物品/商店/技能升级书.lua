@@ -5,7 +5,7 @@ mt{
     level = 1,
     
     --图标
-    art = [[ReplaceableTextures\CommandButtons\BTNSnazzyScrollPurple.blp]],
+    art = [[other\shengjishu.blp]],
     
     --说明
     tip = [[

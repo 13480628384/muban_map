@@ -405,7 +405,7 @@ function mt:creat_key_unit()
     unit.gold = data.gold * 5 
     unit.exp = data.exp * 5
     unit.fall_rate = data.fall_rate * 5
-    unit:set('移动速度',800)
+    unit:set('移动速度',650)
 
     --逃跑路线
     local hero = ac.find_hero(unit)
@@ -417,7 +417,7 @@ function mt:creat_key_unit()
     end    
     --优化钥匙怪跑路角度
     angle = angle - math.random(0,360)
-    local target_point = unit:get_point() - {angle,1044}
+    local target_point = unit:get_point() - {angle,800}
     unit:issue_order('move',target_point)
 
     self.key_unit_trg = unit:loop(2*1000,function()
@@ -430,7 +430,7 @@ function mt:creat_key_unit()
         end    
         --优化钥匙怪跑路角度
         angle = angle - math.random(0,360)
-        local target_point = unit:get_point() - {angle,1044}
+        local target_point = unit:get_point() - {angle,800}
         unit:issue_order('move',target_point)
 
     end);
@@ -447,12 +447,6 @@ function mt:on_finish()
     if self.mode_timer then 
         self.mode_timer:remove()
     end   
-    if self.timer_ex1 then 
-        self.timer_ex1:remove()
-    end 
-    if self.timer_ex2 then 
-        self.timer_ex2:remove()
-    end    
 end    
 
 -- 注册英雄杀怪得奖励事件
