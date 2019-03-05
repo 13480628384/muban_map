@@ -1694,13 +1694,17 @@ function unit.__index:add_skill(name, type, slotid, data)
 	skill:update_data()
 	
 	--每秒刷新技能
+	--选择英雄时，如果是重复用同一套 ability，技能描述会再被刷新为最后一次添加的描述
+	--改为 刷新 当前选择的单位的tip
 	if skill.auto_fresh_tip then
 		ac.loop(1000, function(t)
 			if skill.removed then
 				t:remove()
 				return
 			end
-			skill:fresh_tip()
+			if self:get_owner().selected and skill.owner == self:get_owner().selected then 
+				skill:fresh_tip()
+			end	
 		end)
 	end
 
