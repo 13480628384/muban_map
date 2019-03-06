@@ -130,6 +130,8 @@ function mt:on_add()
 	--变远程
 	self.old_weapon = hero.weapon
 	hero.weapon = ac.table.UnitData['凯撒(恶魔形态)'].weapon
+	--设置为远程
+	hero:setMelee(false)
 
 	--增加攻击力与生命恢复速度
 	hero:add('攻击%', self.attack)
@@ -148,7 +150,12 @@ function mt:on_remove()
 			
 	--变回去
 	hero:transform(self.origin_id)
-	hero.weapon = self.old_weapon
+	--设置为近战
+	hero:setMelee(true)
+	print(hero:isMelee())
+	-- print(hero.weapon['弹道模型'])
+	-- hero.weapon = self.old_weapon
+	-- print(hero.weapon['弹道模型'],self.old_weapon)
 
 	--增加攻击力与生命恢复速度
 	hero:add('攻击%', -self.attack)

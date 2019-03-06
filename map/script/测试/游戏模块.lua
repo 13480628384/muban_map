@@ -18,3 +18,12 @@ end
 icu()
 
 
+--输入 over 游戏结束
+ac.game:event '玩家-聊天' (function(self, player, str)
+    local hero = player.hero
+	local p = player
+	
+    if str == 'over' then
+		ac.game:event_notify('游戏-结束')
+	end    
+end)	

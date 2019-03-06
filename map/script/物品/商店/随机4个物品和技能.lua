@@ -12,6 +12,7 @@ local function fresh_shop_item(shop)
         --添加 
         local name = list[math.random(#list)]
         shop.sell[i] = name
+        shop.sell_new_gold[i] = true
         -- shop:add_sell_item(name,i)
     end 
     --刷新商店物品，先全部删除，再挨个添加
@@ -56,6 +57,8 @@ local function fresh_shop_skill(shop)
         -- print('即将添加商店物品：',name,i)
         -- shop:add_sell_item(name,i)
         shop.sell[i] = name
+        shop.sell_new_gold[i] = true
+        
     end   
     --刷新商店物品，先全部删除，再挨个添加
     shop:fresh()

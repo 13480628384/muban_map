@@ -853,17 +853,20 @@ function damage:__call()
 			return
 		end
 		
-		local rand = math.random(100)
-		if rand <= self.target:get('闪避') then 
-			self:on_miss()
-			return 
-		end 
 	else
 		if target:has_restriction '魔免' then
 			self.current_damage = 0
 			return
 		end
 	end
+	--不是技能造成的，进行闪避处理
+	if not self:is_skill() then 
+		local rand = math.random(100)
+		if rand <= self.target:get('闪避') then 
+			self:on_miss()
+			return 
+		end 
+	end	
 	
 	ac.game:event_notify('伤害初始化', self)
 

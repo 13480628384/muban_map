@@ -2,7 +2,7 @@
 
 local self = {}
 local function range_attack_start(hero,damage)
-    print('英雄 重新进行攻击')
+    -- print('英雄 重新进行攻击')
     if damage.skill and damage.skill.name == self.name then
         return
     end

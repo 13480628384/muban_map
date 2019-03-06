@@ -25,11 +25,10 @@ function mt:on_add()
     local skill = self
     local hero = self.owner
 
-    self.buff = hero:add_buff '耐力光环'
+    self.buff = hero:add_buff '战鼓光环'
     {
         source = hero,
         skill = self,
-        target_effect = self.effect,
         selector = ac.selector()
             : in_range(hero, self.area)
             : is_ally(hero)
@@ -37,6 +36,7 @@ function mt:on_add()
         -- buff的数据，会在所有自己的子buff里共享这个数据表
         data = {
             value = self.value,
+            target_effect = self.effect,
         },
     }
  
@@ -49,18 +49,19 @@ function mt:on_remove()
     end
 end
 
-local mt = ac.aura_buff['耐力光环']
+local mt = ac.aura_buff['战鼓光环']
 -- 魔兽中两个不同的专注光环会相互覆盖，但光环模版默认是不同来源的光环不会相互覆盖，所以要将这个buff改为全局buff。
 mt.cover_global = 1
 mt.cover_type = 1
 mt.cover_max = 1
 mt.effect = [[]]
+mt.keep = true
 
 
 function mt:on_add()
     local target = self.target
     -- print('打印受光环英雄的单位',self.target:get_name())
-    self.target_eff = self.target:add_effect('origin', self.target_effect)
+    self.target_eff = self.target:add_effect('origin', self.data.target_effect)
     target:add('攻击%',self.data.value)
 
 end

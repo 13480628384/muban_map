@@ -46,6 +46,9 @@ function mt:on_cast_shot()
 		local unit = hero:get_owner():create_unit(self.unit_name,point)	
 
 		local index = ac.creep['刷怪'].index
+		if not index or index == 0 then 
+			index = 1
+		end	
 		-- print('技能使用时 当前波数',index)
 		local data = ac.table.UnitData['进攻怪-'..index]
 
@@ -56,7 +59,10 @@ function mt:on_cast_shot()
 			skill = self,
 			follow = true
 		}
-		unit:add('物爆几率',self.physical_rate)
+		unit:add_skill('致命一击','英雄')
+		--改变 暴击几率
+		ac.skill['致命一击'].physical_rate = self.physical_rate
+		
 	end	
 
 

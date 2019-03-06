@@ -59,6 +59,7 @@ mt.cover_max = 1
 mt.effect = [[]]
 mt.target_effect = [[Abilities\Spells\Other\Silence\SilenceTarget.mdl]]
 
+mt.keep = true
 
 function mt:on_add()
 	

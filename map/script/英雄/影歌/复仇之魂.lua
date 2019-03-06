@@ -45,6 +45,9 @@ function mt:on_add()
 			local point = hero:get_point()-{hero:get_facing(),100}
 			local unit = hero:get_owner():create_unit('幻象马甲-蝗虫',point)	
 			local index = ac.creep['刷怪'].index
+			if not index or index == 0 then 
+				index = 1
+			end	
 			local unit_data = ac.table.UnitData['进攻怪-'..index]
 
 			local data ={}

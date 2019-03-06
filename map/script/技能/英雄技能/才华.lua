@@ -1,4 +1,4 @@
-local mt = ac.skill['耐力光环']
+local mt = ac.skill['才华']
 mt{
     --必填
     is_skill = true,
@@ -11,21 +11,21 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[增加部队移动力20%]],
+	tip = [[所有友军法术伤害增加10%]],
 	--技能图标
-	art = [[jineng\jineng007.blp]],
+	art = [[ReplaceableTextures\PassiveButtons\PASBTNBrilliance.blp]],
 	--特效
-	effect = [[Abilities\Spells\Orc\CommandAura\CommandAura.mdl]],
+	effect = [[Abilities\Spells\Human\Brilliance\Brilliance.mdl]],
     --光环影响范围
-    area = 99999,
+    area = 9999,
     --值
-    value = 20,
+    value = 10,
 }
 function mt:on_add()
     local skill = self
     local hero = self.owner
 
-    self.buff = hero:add_buff '耐力光环'
+    self.buff = hero:add_buff '才华'
     {
         source = hero,
         skill = self,
@@ -49,7 +49,7 @@ function mt:on_remove()
     end
 end
 
-local mt = ac.aura_buff['耐力光环']
+local mt = ac.aura_buff['才华']
 -- 魔兽中两个不同的专注光环会相互覆盖，但光环模版默认是不同来源的光环不会相互覆盖，所以要将这个buff改为全局buff。
 mt.cover_global = 1
 mt.cover_type = 1
@@ -62,7 +62,7 @@ function mt:on_add()
     local target = self.target
     -- print('打印受光环英雄的单位',self.target:get_name())
     self.target_eff = self.target:add_effect('origin', self.data.target_effect)
-    target:add('移动速度%',self.data.value)
+    target:add('法术攻击',self.data.value)
 
 end
 
@@ -71,5 +71,5 @@ function mt:on_remove()
     if self.source_eff then self.source_eff:remove() end
     if self.target_eff then self.target_eff:remove() end
     
-    target:add('移动速度%',-self.data.value)
+    target:add('法术攻击',-self.data.value)
 end

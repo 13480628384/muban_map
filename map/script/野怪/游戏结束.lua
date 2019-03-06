@@ -7,12 +7,18 @@ ac.game:event '游戏-结束' (function(trg,flag)
 
 	if flag then 
 		ac.player.self:sendMsg("【游戏胜利】")
+		ac.player.self:sendMsg("【游戏胜利】")
+		ac.player.self:sendMsg("【游戏胜利】")
 	else
+		ac.player.self:sendMsg("【游戏失败】")
+		ac.player.self:sendMsg("【游戏失败】")
 		ac.player.self:sendMsg("【游戏失败】")
 	end	
 
 	--停止刷兵
-	ac.creep['刷怪']:finish()
+	-- if ac.creep['刷怪'] and ac.creep['刷怪'].finish then 
+	-- 	ac.creep['刷怪']:finish()
+	-- end	
 
 	--停止运动
 	local group = {}
@@ -77,11 +83,11 @@ ac.game:event '游戏-结束' (function(trg,flag)
 	
 	--镜头动画
 	local p = player.self
-	p:setCamera(u:get_point() + {0, 300}, 3)
-	p:hideInterface(2)
+	p:setCamera(u:get_point() + {0, 300}, 1.5)
+	p:hideInterface(1.5)
 
 	local t = ac.wait(10 * 1000, function()
-		p:showInterface(2)
+		p:showInterface(1.5)
 		eff:remove()
 		eff2:remove()
 		eff3:remove()
@@ -112,7 +118,7 @@ ac.game:event '游戏-结束' (function(trg,flag)
 				u:add_restriction '阿卡林'
 				u:add_buff '淡化'
 				{
-					time = 1,
+					time = 2,
 					remove_when_hit = not u:is_hero(),
 				}
 				n = n - 1

@@ -263,10 +263,14 @@ function mt:next()
     --当前波数加1,若限定最大波数，则下一波大于最大波数时，跳出
     self.index = self.index +1
 
+    if ac.game:event_dispatch('游戏-回合开始',self.index,self)  then 
+        return 
+    end 
+
     --游戏胜利
     if not self.game_win_timer then 
         self.game_win_timer = ac.loop(1*1000,function(t)
-            if self.index > 100 then 
+            if self.index > self.max_index then 
                 t:remove()
                 ac.game:event_notify('游戏-结束',true)
             end    
@@ -347,6 +351,12 @@ function mt:next()
             end 
             --监听这个单位挂掉
             self.trg = u:event '单位-死亡' (function(_,unit,killer)
+                for _, uu in ipairs(self.group) do
+                    if uu.handle == unit.handle then 
+                        table.remove(self.group,_)
+                        break
+                    end    
+                end
                 self.current_count = self.current_count - 1
                 if(self.is_finish) then 
                     return

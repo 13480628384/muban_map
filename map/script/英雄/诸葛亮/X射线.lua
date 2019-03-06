@@ -9,7 +9,7 @@ mt{
 	
 	tip = [[
 		主动：在英雄朝向每 %pulse_time% 秒，发射一波X射线，每条造成攻击力*0.5+智力*1.5的法术伤害 (%damage%) ；
-		被动：睿智，智力+%int% %
+		被动：睿智，智力 + %int% %
 	]],
 	
 	--技能图标 3（40°扇形分三条，角度20%）+3+3+1+1，一共5波，
@@ -37,6 +37,9 @@ mt{
 
 	--耗蓝
 	cost = 35,
+
+	--被动加的智力
+	int = 20,
 
 	--特效模型
 	-- effect = [[Effect_coarse slash Blue.mdx]],
@@ -87,6 +90,7 @@ local function damage_shot(skill,angle)
 end
 function mt:on_add()
 	local hero = self.owner 
+	hero:add('智力%',self.int)
 
 end	
 function mt:on_cast_shot()
@@ -117,6 +121,7 @@ end
 function mt:on_remove()
 
     local hero = self.owner 
+	hero:add('智力%',-self.int)
 	
     if self.trg then
         self.trg:remove()

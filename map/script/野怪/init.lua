@@ -34,3 +34,15 @@ require '野怪.游戏结束'
 --     unit:set_search_range(99999)
 -- end
 -- mt:start()
+
+--如下代码可以释放 内存
+-- ac.loop(10*1000,function()
+--     for i=1,40 do 
+--         local unit = ac.player.com[2]:create_unit('强盗',ac.point(0,0))
+--         unit:set('移动速度',400)
+--         unit:set_search_range(99999)
+--     end    
+-- end)
+
+
+

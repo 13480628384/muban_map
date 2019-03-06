@@ -37,6 +37,7 @@ function mt:on_add()
         -- buff的数据，会在所有自己的子buff里共享这个数据表
         data = {
             value = self.value,
+            target_effect = self.effect,
         },
     }
  
@@ -55,12 +56,13 @@ mt.cover_global = 1
 mt.cover_type = 1
 mt.cover_max = 1
 mt.effect = [[]]
+mt.keep = true
 
 
 function mt:on_add()
     local target = self.target
     -- print('打印受光环英雄的单位',self.target:get_name())
-    self.target_eff = self.target:add_effect('origin', self.target_effect)
+    self.target_eff = self.target:add_effect('origin', self.data.target_effect)
     target:add('吸血',self.data.value)
 
 end

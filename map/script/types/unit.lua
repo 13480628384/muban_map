@@ -1283,7 +1283,6 @@ function unit.init_unit(handle, p)
 	end
 	local data = ac.table.UnitData[u:get_name()]
 	if data then
-		-- print('创建单位，打印类型',u:get_name(),data.type)
 		u.unit_type = data.unit_type
 		if data.attribute then
 			for k, v in pairs(data.attribute) do

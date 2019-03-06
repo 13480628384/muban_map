@@ -66,6 +66,7 @@ mt.cover_max = 1
 mt.effect = [[]]
 mt.target_effect = [[Abilities\Spells\Other\FrostDamage\FrostDamage.mdl]]
 
+mt.keep = true
 
 function mt:on_add()
 	
@@ -77,7 +78,7 @@ function mt:on_add()
         self.target_eff = self.target:add_effect('origin', self.target_effect)
 		-- 降低目标攻击速度、移动速度
 		self.target:add('攻击速度', -self.data.attack_speed)
-		self.target:add('移动速度', -self.data.move_speed)
+		self.target:add('移动速度%', -self.data.move_speed)
 		-- print('打印敌对单位',self.target:get_name(),self.target:get('移动速度'))
 	else
 		--光环持有者的同盟单位处理
@@ -98,7 +99,7 @@ function mt:on_remove()
 	if self.source:is_enemy(self.target) then 
 		-- 降低目标攻击速度、移动速度
 		self.target:add('攻击速度', self.data.attack_speed)
-		self.target:add('移动速度', self.data.move_speed)
+		self.target:add('移动速度%', self.data.move_speed)
 	else
 		--光环持有者的同盟单位处理
 		-- 降低三维(生命上限，护甲，攻击)

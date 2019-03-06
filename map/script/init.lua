@@ -2,18 +2,26 @@ base = require 'base'
 japi = require 'jass.japi'
 jass = require 'jass.common'
 storm = require 'jass.storm'
+dzapi = require 'jass.dzapi'
 require 'util'
 require 'war3'
 require 'types'
 require 'ac'
+-- require '平台'
 require '通用'
 require '游戏'
 require '物品'
 require '技能'
 require '英雄'
 require '野怪'
+-- require 'Other'
 require '测试'
 
+--官方存档和商城
+mtp_dzapi = {}
+for key, value in pairs(dzapi) do
+    mtp_dzapi[key] = value
+end
 
 ac.wait(100,function ()
     -- local u = ac.player[1]:createHero('小黑',ac.point(0,0))
@@ -24,7 +32,7 @@ ac.wait(100,function ()
     
     -- ac.game:event_notify('游戏-开始')
     
-    -- local item = ac.item.create_item('新手剑')
+    local item = ac.item.create_item('新手剑')
     -- u:add_item(item)
     -- local item = ac.item.create_item('新手弓')
     -- u:add_item(item)
@@ -38,7 +46,7 @@ ac.wait(100,function ()
     -- ac.item.create_item('新手石',ac.point(500,500))
     -- ac.item.create_item('新手石',ac.point(500,500))
     -- ac.item.create_item('新手石',ac.point(500,500))
-     ac.item.create_item('新手剑',ac.point(500,500))
+    -- ac.item.create_item('新手剑',ac.point(500,500))
     -- ac.item.create_item('新手剑',ac.point(500,500))
     -- ac.item.create_item('新手戒指',ac.point(500,500))
     -- ac.item.create_item('新手戒指',ac.point(500,500))
@@ -98,7 +106,7 @@ ac.wait(100,function ()
     -- ac.item.create_skill_item('贪婪者的心愿',ac.point(-300,0))
     -- ac.item.add_skill_item('粉碎',u)
     -- ac.item.create_skill_item('粉碎',ac.point(-300,0))
-     ac.item.create_skill_item('黑暗契约',ac.point(-300,0))
+    -- ac.item.create_skill_item('粉碎',ac.point(-300,0))
     -- ac.item.create_skill_item('粉碎',ac.point(-300,0))
     -- ac.item.create_skill_item('穿刺',ac.point(-300,0))
     -- ac.item.create_skill_item('穿刺',ac.point(-300,0))

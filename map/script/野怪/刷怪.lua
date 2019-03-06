@@ -66,19 +66,22 @@ local function add_creep_skill(tab,unit)
         local skill = ac.skill[skill_name]
         --如果技能是光环
         if skill.is_aura then 
-            -- 初始化时 创建一个敌对单位马甲
-            if ac.enemy_unit and ac.enemy_unit:find_skill(skill_name) then 
-                -- print('光环马甲单位已经添加过')
-            else
+            -- 初始化时 创建一个敌对单位马甲 and ac.enemy_unit:find_skill(skill_name) 
+            if not ac.enemy_unit then 
                 ac.enemy_unit = ac.player.com[2]:create_dummy('e001', ac.point(0,0),0)
                 ac.enemy_unit:add_restriction '无敌' 
+            end
+            --没找到 光环技能才添加
+            if not  ac.enemy_unit:find_skill(skill_name)  then 
                 ac.enemy_unit:add_skill(skill_name,'隐藏')
-                -- 本回合结束时 删掉干掉光环怪
-                ac.game:event '游戏-回合结束'(function(trg,index, creep) 
-                    print('回合结束，删掉光环怪')
-                    ac.enemy_unit:remove()
-                end)
             end    
+            -- 本回合结束时 删掉干掉光环怪
+            -- 直接进入下一波的会跳过回合结束
+            ac.game:event '游戏-回合开始'(function(trg,index, creep) 
+                -- print('回合结束，删掉光环怪')
+                ac.enemy_unit:remove()
+            end)
+                
         else
             if not unit:find_skill(skill_name) then 
                 unit:add_skill(skill_name,'隐藏')    
@@ -95,6 +98,7 @@ end
 local mt = ac.creep['刷怪']{    
     region = '',
     creeps_datas = '',
+    max_index = 100,
     is_random = true,
     creep_player = ac.player.com[2],
     tip ="郊区野怪刷新啦，请速速打怪升级，赢取白富美"
@@ -305,7 +309,7 @@ function mt:on_next()
         }
         ac.game:event '游戏-回合结束' (function(trg,index, creep) 
             --回合结束，阻止下一波
-            return false
+            return true
         end)    
         
         --@游戏失败 场上怪物超过50只
@@ -315,7 +319,7 @@ function mt:on_next()
                     ac.player.self:sendMsg("【系统提示】当前怪物已达|cffE51C23 "..self.current_count.." |r，请及时清怪")
                     ac.player.self:sendMsg("【系统提示】当前怪物已达|cffE51C23 "..self.current_count.." |r，请及时清怪")
                 end    
-                if self.current_count >= 50 then 
+                if self.current_count >= 5000 then 
                     t:remove()
                     ac.game:event_notify('游戏-结束')
                 end    
@@ -343,7 +347,7 @@ function mt:on_change_creep(unit,lni_data)
         for k,v in pairs(data.attribute) do 
             unit:set(k,v)
         end
-         --设置 boss 等 属性倍数
+        --设置 boss 等 属性倍数
         if lni_data.attr_mul  then
             --属性
             unit:set('攻击',data.attribute['攻击'] * lni_data.attr_mul)
@@ -353,6 +357,7 @@ function mt:on_change_creep(unit,lni_data)
             unit:set('生命恢复',data.attribute['生命恢复'] * lni_data.attr_mul)
             unit:set('魔法恢复',data.attribute['魔法恢复'] * lni_data.attr_mul)
         end  
+
         --掉落概率
         unit.fall_rate = data.fall_rate * lni_data.food
         --掉落金币和经验
@@ -389,6 +394,7 @@ function mt:on_change_creep(unit,lni_data)
     -- unit:add_skill('腐烂','隐藏')
     -- unit:add_skill('流血','隐藏')
     -- unit:add_skill('善恶有报','隐藏')
+    -- unit:add_skill('闪避++','隐藏')
     
 
 end
@@ -451,17 +457,21 @@ end
 
 -- 注册英雄杀怪得奖励事件
 ac.game:event '单位-死亡' (function(_,unit,killer) 
+    if killer.category =='进攻怪' then
+		return
+    end
+
     local player = killer:get_owner()
     local gold 
     local exp 
     
     -- 英雄的召唤物 打死的怪，也给英雄加钱加经验
     -- 英雄召唤物享有 英雄的金币、经验加成
-    if player and not killer:is_hero()  then 
+    if player  then 
         killer = player.hero
     end   
     -- 进攻怪杀死单位，不用加钱和经验
-    if not killer then  
+    if not killer:is_hero() then  
         return
     end    
     --加钱
@@ -566,8 +576,8 @@ ac.wait(0,function()
         mt:start()
         --每3秒刷新一次攻击目标
         ac.loop(3 * 1000 ,function ()
+            -- print('野怪区的怪数量',#mt.group)
             for _, unit in ipairs(mt.group) do
-                -- print('野怪区的怪',unit:get_name())
                 if unit:is_alive() then 
                     local hero = ac.find_hero(unit)
                     if hero then 

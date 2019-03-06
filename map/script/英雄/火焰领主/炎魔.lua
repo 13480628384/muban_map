@@ -64,6 +64,9 @@ local function create_summon_unit(skill,where)
 	local unit = hero:get_owner():create_unit('炎魔',point)	
 
 	local index = ac.creep['刷怪'].index
+	if not index or index == 0 then 
+		index = 1
+	end	
 	-- print('技能使用时 当前波数',index)
 	local data = ac.table.UnitData['进攻怪-'..index]
 	unit:add_buff '召唤物' {

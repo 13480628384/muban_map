@@ -279,8 +279,7 @@ function mt:item_init_skill()
 	self.is_skill_init = true
 end
 function mt:get_item_lni_tip(str)
-
-	local item_tip = str or self.tip or ''
+	local item_tip = str or (self.lni_data and self.lni_data.tip ) or ''
 	-- print(item_tip)
 	item_tip = item_tip:gsub('%%([%S_]*)%%', function(k)
 		local value = self[k]
@@ -309,19 +308,21 @@ function mt:get_tip()
 
 	if owner then
 		--有所属单位则说明物品在身上
-		 gold = '|cffebd43d出售：'..self:sell_price()..'|r|n'
+		 gold = '|cffebd43d(出售：'..self:sell_price()..')|r|n'
 	else
 		--否则就是在地上或商店里，地上不用管，商店的话修改出售价格
-		 store_title = self.store_name..'|r'
+		 store_title = self.store_name..'|r\n'
 		--否则就是在地上或商店里，地上不用管，商店的话修改出售价格
 		 gold = '|cffebd43d(价格：'..self:buy_price()..')|r|n'
 	end
 	
-	tip = store_title..'\n'..gold..'\n\n'.. item_tip ..'\n'
+	tip = store_title..gold..'\n\n'.. item_tip
 
 	if skill_tip and t_str ~= s_str then 
-		local temp_tip = '|cff'..color_code['灰']..'技能：'..'|r'..'\n' 
-		tip = tip..temp_tip..skill_tip..'\n'
+	    if item_tip ~='' then  
+			local temp_tip = '|cff'..color_code['灰']..'技能：'..'|r'..'\n' 
+		end	
+		tip = tip..(temp_tip or '')..skill_tip..'\n'
 	end	
 	tip = tip ..'\n' 
 	return tip
@@ -808,6 +809,7 @@ function ac.item.create_item(name,poi,is)
 
 	--如果存在lni则继承lni的属性
 	local data = ac.table.ItemData[name]
+	items.lni_data = data
 	if data then
 		for k, v in pairs(data) do
 			items[k] = v
@@ -925,7 +927,7 @@ function mt:set_store_title(title)
 end
 
 --更新商店信息
-function mt:set_sell_state()
+function mt:set_sell_state(str)
 	--设置物品名
 	self:set_name(self.name)
 	--设置贴图
@@ -933,10 +935,8 @@ function mt:set_sell_state()
 	--设置tip
 	self:set_tip(self:get_tip())
 	--设置商店出售名 颜色没法呈现
-	self:set_store_title(' ')
+	self:set_store_title(str or ' ')
 end
-
-
 
 
 

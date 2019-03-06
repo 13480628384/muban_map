@@ -15,7 +15,7 @@ mt{
 	--技能图标
 	art = [[jineng\jineng023.blp]],
 	--特效
-	effect = [[Abilities\Spells\Undead\RegenerationAura\ObsidianRegenAura.mdl]],
+	source_effect = [[Abilities\Spells\Undead\RegenerationAura\ObsidianRegenAura.mdl]],
     --光环影响范围
     area = 99999,
     --值
@@ -29,7 +29,6 @@ function mt:on_add()
     {
         source = hero,
         skill = self,
-        target_effect = self.effect,
         selector = ac.selector()
             : in_range(hero, self.area)
             : is_enemy(hero)
@@ -37,6 +36,8 @@ function mt:on_add()
         -- buff的数据，会在所有自己的子buff里共享这个数据表
         data = {
             value = self.value,
+            target_effect = self.effect,
+            source_effect = self.source_effect,
         },
     }
  
@@ -55,13 +56,19 @@ mt.cover_global = 1
 mt.cover_type = 1
 mt.cover_max = 1
 mt.effect = [[]]
+mt.keep = true
 
 
 function mt:on_add()
     local target = self.target
     -- print('打印受光环英雄的单位',self.target:get_name())
-    self.target_eff = self.target:add_effect('origin', self.target_effect)
-    target:add('护甲%',-self.data.value)
+    if self.target ==  self.source then 
+        self.source_eff = self.target:add_effect('origin', self.data.source_effect)
+    else
+        -- self.target_eff = self.target:add_effect('origin', self.data.target_effect)
+        target:add('护甲%',-self.data.value)
+    end  
+    
 
 end
 

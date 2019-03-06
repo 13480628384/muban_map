@@ -43,12 +43,16 @@ function shop.create(name,x,y,face,is_selling)
 	unit:add_restriction '缴械'
 	--继承商店
 	setmetatable(unit, shop)
+	if not unit.sell then 
+		unit.sell = {}
+	end	
+	if not unit.sell_new_gold then 
+		unit.sell_new_gold = {}
+	end	
+
 	if not is_selling then 
 		local data = ac.table.UnitData[name]
 		local sell = data.sell
-		if not unit.sell then 
-			unit.sell = {}
-		end	
 		unit.sell = sell
 		if sell then 
 			for i,v in ipairs(sell) do
@@ -129,7 +133,8 @@ function mt:add_sell_item(name,i)
 
 	local item = ac.item.create(name,i)
 	item.shop_slot_id = i
-	--刷新物品数据
+	--刷新物品数据                        ''..self:get_name()
+	-- print(item.name,self:get_name())
 	item:set_sell_state()
 	if not self.sell_item_list then 
 		self.sell_item_list = {}
@@ -207,15 +212,18 @@ function mt:fresh_sell()
 end	
 --刷新一次商店（删除商店再创建商店）
 --sell 即将刷新的清单， sell_item_list 现在拥有的清单，执行添加会刷新sell清单。
+--是否继承价格 默认都是不继承价格的
 function mt:fresh()
 
 	local sell = self.sell
 	local data = {}
 	data.sell = {}
 	data.sell_item_list = {}
+	data.sell_new_gold = {}
 	for i=1,12 do 
 		data.sell[i] = sell[i]
 		data.sell_item_list[i] = self.sell_item_list[i]
+		data.sell_new_gold[i] = self.sell_new_gold[i]
 	end	
 
 	--全部删除
@@ -226,7 +234,7 @@ function mt:fresh()
 		if data.sell[i] then 
 			local new_shop_item = self:add_sell_item(data.sell[i] ,i)
 			--新物品继承属性
-			if new_shop_item  then 
+			if new_shop_item and not data.sell_new_gold[i]  then 
 				if data.sell_item_list[i] and data.sell_item_list[i].gold then 
 					new_shop_item.gold = data.sell_item_list[i].gold
 					--刷新数据

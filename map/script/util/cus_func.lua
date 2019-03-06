@@ -86,3 +86,8 @@ function clean_color(str)
 	str = str:gsub('|[cC]%w%w%w%w%w%w%w%w(.-)|[rR]','%1'):gsub('|n','\n'):gsub('\r','\n')
     return str
 end    
+
+
+
+
+

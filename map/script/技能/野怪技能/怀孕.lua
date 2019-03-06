@@ -29,13 +29,12 @@ function mt:on_add()
     hero:add('护甲%', self.value)
     hero:add('攻击%', self.value)
 
-    --
     self.trg = hero:event '单位-即将死亡' (function (_,unit,killer)
         --重生次数 -1 小于1时 ,无法重生，技能移除
         if self.cnt < 1 then 
             return 
         end 
-
+        
         --创建幻象
         local dummy = hero:create_illusion(hero:get_point())
         --属性削弱

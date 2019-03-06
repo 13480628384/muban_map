@@ -9,8 +9,7 @@ mt{
 	
 	tip = [[
 		主动：朝指定区域释放恶德医疗，对区域内的敌人造成 攻击力*2+智力*3 法术伤害 （%damage%） ；对区域内的友军英雄回复其 %life_rate% % 的最大生命值
-		被动：光环专精，对光环有着独特的理解力，使得他学习的光环，提升额外的效果30%
-
+		被动：主动释放的增益效果 + %value% %
 	]],
 	
 	--技能图标
@@ -27,6 +26,8 @@ mt{
 	--碰撞范围
 	hit_area = 300,
 
+	--主动释放的增益效果
+	value = 30,
 
 	--伤害
 	damage = function(self,hero)
@@ -106,6 +107,7 @@ end
 
 function mt:on_add()
 	local hero = self.owner 
+	hero:add('主动释放的增益效果',self.value)
 
 end	
 function mt:on_cast_shot()
@@ -122,6 +124,7 @@ end
 function mt:on_remove()
 
     local hero = self.owner 
+	hero:add('主动释放的增益效果',-self.value)
 	
     if self.trg then
         self.trg:remove()
