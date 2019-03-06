@@ -25,7 +25,7 @@ mt{
 	--持续时间
 	time = 20,
 	--数量
-	cnt = 1,
+	cnt = 2,
 	--暴击几率
 	physical_rate = 20,
 }

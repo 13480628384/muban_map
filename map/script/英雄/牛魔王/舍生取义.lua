@@ -9,7 +9,8 @@ mt{
 	
 	tip = [[
 		主动：每秒恢复 %life_rate% %的血量，持续时间 %time% 秒, 冷却 %cool%秒
-		被动：每损失1点的最大生命值， 额外获得 %attack% 点的攻击力提升
+		被动1：每损失1点的最大生命值， 额外获得 %attack% 点的攻击力提升
+		被动2：增加 %reduce_rate% % 的减伤
 	]],
 	
 	--技能图标
@@ -34,6 +35,8 @@ mt{
 	attack = 1,
 	--cd
 	cool = 20,
+    --减免
+	reduce_rate =30,
 
 	--耗蓝
 	cost = 35,
@@ -44,10 +47,10 @@ mt{
 	-- range = 99999,
 }
 
-
 function mt:on_add()
     local skill = self
 	local hero = self.owner 
+	hero:add('减伤%',self.reduce_rate)
 
 	self.trg = hero:add_buff '舍生取义-被动' 
 	{
@@ -57,8 +60,8 @@ function mt:on_add()
 		pulse = 0.02, --立即生效
 		real_pulse = 0.1  --实际每几秒检测一次
 	}
-
 end	
+
 function mt:on_cast_shot()
 	local hero = self.owner
 	-- hero:add_effect('origin',self.effect)
@@ -74,8 +77,9 @@ function mt:on_cast_shot()
 end
 
 function mt:on_remove()
-
-	
+	local hero = self.owner 
+    -- 提升三维(生命上限，护甲，攻击)
+    hero:add('减伤%',-self.reduce_rate)
     if self.trg then
         self.trg:remove()
         self.trg = nil
@@ -106,7 +110,9 @@ function mt:on_pulse()
 
 end	
 function mt:on_remove()
-    
+	local hero = self.owner 
+    -- 提升三维(生命上限，护甲，攻击)
+    hero:add('减伤%',-self.reduce_rate)
 end
 
 local mt = ac.buff['舍生取义-被动']

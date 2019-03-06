@@ -8,8 +8,9 @@ mt{
 	level = 1,
 	
 	tip = [[
-		主动：对指定区域的敌人进行轰炸，造成攻击力*%attack% 的物理伤害( %damage% )，并砸晕敌人 %time% 秒,cd %cool% 秒
-		被动：增加 %defence_rate% % 的护甲"
+		主动：对指定区域的敌人进行轰炸，造成攻击力* %attack% 的物理伤害( %damage% )，并砸晕敌人 %time% 秒,cd %cool% 秒
+		被动1：增加 %defence_rate% % 的护甲
+		被动2：增加 %reduce_rate% % 的减伤
 	]],
 	
 	--技能图标
@@ -35,6 +36,9 @@ mt{
 	--护甲
 	defence_rate = 50,
 
+	--减免
+	reduce_rate = 30,
+
 	--cd
 	cool = 1,
 
@@ -53,8 +57,9 @@ mt{
 function mt:on_add()
 	local hero = self.owner 
 	hero:add('护甲%',self.defence_rate)
-
+	hero:add('减伤%',self.reduce_rate)
 end	
+
 function mt:on_cast_shot()
     local skill = self
 	local hero = self.owner
@@ -99,7 +104,7 @@ function mt:on_remove()
     local hero = self.owner 
     -- 提升三维(生命上限，护甲，攻击)
 	hero:add('护甲%',-self.defence_rate)
-	
+    hero:add('减伤%',-self.reduce_rate)
     if self.trg then
         self.trg:remove()
         self.trg = nil

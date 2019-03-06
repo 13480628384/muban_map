@@ -19,7 +19,7 @@ mt{
 	--技能图标
 	art = [[jineng\jineng031.blp]],
 	--特效
-	effect = [[Abilities\Spells\Human\CloudOfFog\CloudOfFog.mdl]],
+	effect = [[Hero_Undying_N1S_F_Target.mdx]],
 	--物暴
 	physical_rate = 8,
 	--法爆
