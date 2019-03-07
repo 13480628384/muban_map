@@ -61,7 +61,7 @@ end
 
 
 ac.game:event '单位-发动攻击'  (function(trg, damage)
-    if not damage.source:is_type('英雄') or damage.source:isMelee()  then 
+    if damage.source:isMelee()  then 
         return
     end     
       

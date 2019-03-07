@@ -126,6 +126,11 @@ local function hero_register_main()
 		 ac.item.add_skill_item('冰冷核心',hero)
 		 ac.item.add_skill_item('魔王降临',hero)
 		 ac.item.add_skill_item('专注光环',hero)
+		 hero:add_item('吞噬丹')
+		 hero:add_item('吞噬丹')
+		 hero:add_item('吞噬丹')
+		 hero:add_item('吞噬丹')
+		 hero:add_item('吞噬丹')
 		 
         -- ac.item.add_skill_item('粉碎',hero)
         -- ac.item.add_skill_item('贪婪者的心愿',hero)
@@ -134,6 +139,9 @@ local function hero_register_main()
         -- ac.item.add_skill_item('穿刺',hero)
         -- ac.item.add_skill_item('魔王降临',hero)
 		
+		
+
+
 		-- hero:add_item('新人寻宝石') 
 		-- hero:add_item('勇气之证')
 		--添加英雄属性面板

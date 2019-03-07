@@ -163,11 +163,11 @@ local reward = {
         end 
         local name = list[math.random(#list)]
         if not is_on_hero then 
-            local item = ac.item.create_item(name,unit:get_point())
+            local item = ac.item.create_skill_item(name,unit:get_point())
             item_self_skill(item,hero)
         else
             hero = hero:get_owner().hero
-            hero:add_item(name,true)    
+            ac.item.add_skill_item(name,hero)
         end 
     end,
 

@@ -38,7 +38,7 @@ end
 function mt:on_cast_start()
     local hero = self.owner
     local target = self.target
-    -- print(hero,target)
+    print(hero,target)
     -- print(self.tip)
     
     print(self.cool)

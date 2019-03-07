@@ -100,6 +100,7 @@ local color_code = {
     ['金'] = 'ffff00',
     ['灰'] = 'cccccc',
 }
+ac.color_code = color_code
 
 --颜色模型 目前应用于仙丹
 local color_model = {

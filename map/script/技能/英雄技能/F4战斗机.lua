@@ -23,7 +23,7 @@ mt{
 	--召唤物属性倍数
 	attr_mul = 1,
 	--持续时间
-	time = 15,
+	time = 150,
 	--数量
 	cnt = 1,
 	--多重射
@@ -59,7 +59,6 @@ function mt:on_cast_shot()
 			skill = self,
 			follow = true
 		}
-		
 		unit:add('多重射',self.attack_cnt)
 		unit:add('攻击距离', 800)
 	end	
