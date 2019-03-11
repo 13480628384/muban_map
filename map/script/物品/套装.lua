@@ -123,7 +123,7 @@ local function unit_remove_suit(unit,item)
     local suit_count = get_suit_count(unit,item.suit_type)
     local name = item.suit_name 
    
-    tip = tip ..'|cffAAAAAA'.. name..' (已拥有|r|cffffffff'..suit_cnt..'|r|cffAAAAAA) |r'..'\n'
+    tip = tip ..'|cffAAAAAA'.. name..' (已拥有|r|cffffffff'..suit_count..'|r|cffAAAAAA) |r'..'\n'
     -- print(tip)
     --刷新tip
                  

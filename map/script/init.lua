@@ -79,6 +79,7 @@ ac.wait(100,function ()
      ac.item.create_item('幸运石',ac.point(0,0))
      ac.item.create_item('圣甲虫石',ac.point(0,0))
      ac.item.create_item('空瓶',ac.point(0,0))
+     ac.item.create_item('迷你熊爪',ac.point(0,0))
 
     -- local items = ac.item.create_item('变色龙之斧',ac.point(0,0))
 

@@ -27,10 +27,19 @@ icu()
 -- local unit = ac.player(12):create_unit('凯撒(恶魔形态)',ac.point(1000,1000))
 -- -- unit:set_size(2)
 -- unit:add('生命上限',20000)
-local unit = ac.player(1):create_unit('死骑',ac.point(1000,1000))
+local unit = ac.player(1):create_unit('死骑',ac.point(1000,1000),270)
 unit:set_size(2.5)
 unit:add('生命上限',20000)
 unit:add('移动速度',400)
+-- unit:setColor(100,100,100)
+-- unit:setColor(68,68,68)
+unit:add_buff '时停'
+{
+	time = 30,
+	skill = '游戏模块',
+	source = unit,
+	show = true
+}
 
 
 -- local u = ac.player(2):createHero('小黑',ac.point(1100,1100))
