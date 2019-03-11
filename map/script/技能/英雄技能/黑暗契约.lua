@@ -7,7 +7,7 @@ mt{
 	--技能类型
 	skill_type = "主动",
 	--冷却时间
-	cool = 25,
+	cool = 20,
 	--伤害
 	damage = 2,
 	--技能目标
