@@ -17,6 +17,6 @@ FogEnable( false )
 FogMaskEnableOff(  )
 
 
-ac.wait(5000,function ()
-    japi.SetWar3MapMap('LoadingScreenBR.blp')
-end)
+-- ac.wait(5000,function ()
+--     japi.SetWar3MapMap('LoadingScreenBR.blp')
+-- end)

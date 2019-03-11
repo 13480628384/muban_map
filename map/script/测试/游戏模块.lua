@@ -28,7 +28,7 @@ icu()
 -- -- unit:set_size(2)
 -- unit:add('生命上限',20000)
 local unit = ac.player(1):create_unit('死骑',ac.point(1000,1000))
--- unit:set_size(2)
+unit:set_size(2.5)
 unit:add('生命上限',20000)
 unit:add('移动速度',400)
 

@@ -1,5 +1,5 @@
-local Base64 = require 'ac.Base64'
-local store = require 'ui.client.store'
+-- local Base64 = require 'ac.Base64'
+-- local store = require 'ui.client.store'
 
 ac.jm_sjs = math.random(1,4399)
 
@@ -47,7 +47,7 @@ for i=1,8 do
 
         --设置客户端的积分
         if player:is_self() then
-            c_ui.store.set_jifen(jifen)
+            -- c_ui.store.set_jifen(jifen)
         end
 
         --保存服务端积分

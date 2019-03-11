@@ -723,7 +723,7 @@ function unit.__index:remove_item(it)
 	-- if not is_drop then 
 	-- 	it:item_remove()
 	-- end	
-	
+	self:event_notify('单位-丢弃物品后',self, it)
 	return true
 end
 

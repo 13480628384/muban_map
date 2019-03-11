@@ -5,6 +5,7 @@ require '物品.杂类'
 require '物品.寻宝石'
 require '物品.商店'
 require '物品.合成装备'
+require '物品.套装'
 
 
 

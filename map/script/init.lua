@@ -3,10 +3,16 @@ japi = require 'jass.japi'
 jass = require 'jass.common'
 storm = require 'jass.storm'
 dzapi = require 'jass.dzapi'
+--官方存档和商城
+mtp_dzapi = {}
+for key, value in pairs(dzapi) do
+    mtp_dzapi[key] = value
+end
 require 'util'
 require 'war3'
 require 'types'
 require 'ac'
+require 'ui'
 -- require '平台'
 require '通用'
 require '游戏'
@@ -17,20 +23,8 @@ require '野怪'
 -- require 'Other'
 require '测试'
 
---官方存档和商城
-mtp_dzapi = {}
-for key, value in pairs(dzapi) do
-    mtp_dzapi[key] = value
-end
-
 ac.wait(100,function ()
-    -- local u = ac.player[1]:createHero('小黑',ac.point(0,0))
-    -- local p = ac.player[1]
-    -- p.hero = u
-    -- p:addGold(1000000)
-    -- p:event_notify('玩家-注册英雄', p, u)
-    
-    -- ac.game:event_notify('游戏-开始')
+   
     
     local item = ac.item.create_item('新手剑')
     -- u:add_item(item)
@@ -81,7 +75,9 @@ ac.wait(100,function ()
     -- ac.item.create_item('敏捷丹',ac.point(500,500))
     -- ac.item.create_item('敏捷丹',ac.point(500,500))
     -- ac.item.create_item('敏捷丹',ac.point(500,500))
-     ac.item.create_item('巫毒爪',ac.point(0,0))
+     ac.item.create_item('迷你羊石',ac.point(0,0))
+     ac.item.create_item('幸运石',ac.point(0,0))
+     ac.item.create_item('圣甲虫石',ac.point(0,0))
      ac.item.create_item('空瓶',ac.point(0,0))
 
     -- local items = ac.item.create_item('变色龙之斧',ac.point(0,0))
