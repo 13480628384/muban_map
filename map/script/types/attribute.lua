@@ -107,13 +107,14 @@ local base_attr =[[
 额外伤害 召唤物
 ]]
 
---add('攻速%'，10,true) 直接+， 若攻速为200， 最终值为210, 会预设基础值属性先*再+
+--如果加成的属性名有%,则部分转化为 直加
+--add_tran(力量%,10) ,实际为 add(力量%,10)
+--add_tran(攻击速度%,10) ,实际为 add(攻击速度,10)
 function mt:add_tran(name, value)
 	
 	local base_name = name
 	
 	if name:sub(-1, -1) == '%' then
-
 		base_name =  name:sub(1, -2)
 		-- print(base_name)
 		--如果是基础值，则调用英萌自带的加%函数，会先*基础值再+

@@ -186,6 +186,7 @@ for i=1,8 do
     if p:is_player() then
         --先判断是否存在皮肤，如果存在则添加道具
         local is = p:Map_GetServerValue('ydpf')
+        print('测试服务器读dang',is)
         if is and is == '1' then
             p.hero:add_item('小黑零号',1)
         end

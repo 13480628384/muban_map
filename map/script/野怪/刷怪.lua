@@ -37,9 +37,103 @@ for k,v in pairs(ac.table.UnitData) do
         all_food = v.all_food
     end    
 end    
+ 
+
+
+local mt = ac.creep['刷怪']{    
+    region = '',
+    creeps_datas = '',
+    max_index = 100,
+    is_random = true,
+    creep_player = ac.player.com[2],
+    tip ="郊区野怪刷新啦，请速速打怪升级，赢取白富美"
+
+}
+
+--查找当前波野怪数据是否已经有此类型的怪
+-- 类型或是名字都可查找
+function mt:has_unit(str)
+    -- print('打印当前野怪',self.current_creep)
+    local u
+    for k,v in pairs(self.current_creep) do
+        if v.type == str or v.name == str then 
+            u = v
+            break
+        end    
+    end   
+    return u 
+end   
+--从野怪类型获取1-2种类型
+function mt:get_temp_type()
+    local type = {'喽喽','小怪','头目','boss'}
+    local int = math.random(1,2)
+    local temp_type ={}
+    for i=1,int do 
+        local random_ty  
+        if i < 2  then 
+            random_ty = type[math.random(1,#type)]
+        else
+            --如果时随机到两种怪，第二种怪不允许是boss
+            random_ty = type[math.random(1,3)]
+        end    
+        table.insert(temp_type,random_ty) 
+    end   
+    return temp_type
+end 
+--随机生成野怪数据
+function mt:random_creeps_datas(temp_type)
+
+    local rand_type = temp_type[math.random(1,#temp_type)]
+
+    local rand_name
+    local u = self:has_unit(rand_type)
+    if u then 
+        rand_name = u.name
+    else    
+        rand_name = self.all_creep[rand_type][math.random(1,#self.all_creep[rand_type])]
+    end    
+
+    self.used_food = self.used_food  + ac.table.UnitData[rand_name].food
+
+    if self.used_food <= self.all_food then 
+        local u = self:has_unit(rand_type)
+        if u then
+            self.current_creep[rand_name]['cnt'] = self.current_creep[rand_name]['cnt'] +1
+        else 
+            --保存当前生成的数据
+            for k,v in pairs(ac.table.UnitData[rand_name]) do
+                if not self.current_creep[rand_name]  then 
+                    self.current_creep[rand_name] = {}
+                end 
+                self.current_creep[rand_name]['name'] =  rand_name
+                self.current_creep[rand_name]['cnt'] =  1
+                self.current_creep[rand_name][k]=v 
+            end    
+        end
+
+        if self.used_food == self.all_food then 
+            local result = ''
+            for k,v in pairs(self.current_creep) do
+                result = result ..v.name..'*'..tostring(v.cnt)..' '
+            end   
+            -- print('函数内的返回结果',result)
+            -- 没搞懂return 外面没接收到值
+            self.creeps_datas = result
+            return result
+        end    
+
+        self:random_creeps_datas(temp_type)
+
+    else
+        self.used_food = self.used_food - ac.table.UnitData[rand_name].food 
+        print('已经超出人口，需要重新筛选',self.used_food)
+        self:random_creeps_datas(temp_type)
+    end       
+
+end
 
 --每回合开始 从 ac.skill_list 随机取0-2个野怪技能
-local function get_creep_skill()
+function mt:get_creep_skill()
 
     local rand_skill_cnt = math.random(0,2)
     local rand_skill_list = {}
@@ -56,7 +150,7 @@ end
 --给野怪添加技能 
 --技能列表
 --野怪单位
-local function add_creep_skill(tab,unit)
+function mt:add_creep_skill(tab,unit)
     if not tab or #tab == 0 then 
         return 
     end    
@@ -77,7 +171,10 @@ local function add_creep_skill(tab,unit)
             end    
             -- 本回合结束时 删掉干掉光环怪
             -- 直接进入下一波的会跳过回合结束
-            ac.game:event '游戏-回合开始'(function(trg,index, creep) 
+            ac.game:event '游戏-回合结束'(function(trg,index, creep) 
+                if creep.name ~= '刷怪' then
+                    return
+                end    
                 -- print('回合结束，删掉光环怪')
                 ac.enemy_unit:remove()
             end)
@@ -92,22 +189,33 @@ local function add_creep_skill(tab,unit)
     end 
     -- unit:add_skill('火焰','隐藏')    
     print('1111111111本回合野怪技能：',prtin_str)
-end    
+end 
 
-
-local mt = ac.creep['刷怪']{    
-    region = '',
-    creeps_datas = '',
-    max_index = 100,
-    is_random = true,
-    creep_player = ac.player.com[2],
-    tip ="郊区野怪刷新啦，请速速打怪升级，赢取白富美"
-
-}
+--发送本层怪物特性 
+--@次数
+--@持续时间
+function mt:send_skill_message(cnt,time)
+    local creep_skill_message ='|cff1FA5EE本层怪物特性：|r|cffFF9800'
+    if not self.rand_skill_list  then 
+        creep_skill_message = creep_skill_message ..'无|r'
+    else    
+        for i = 1,#self.rand_skill_list do  
+            creep_skill_message = creep_skill_message .. self.rand_skill_list[i]..','
+        end
+    end    
+    creep_skill_message = creep_skill_message ..'|r'
+    for x=1,cnt do 
+        for i = 1,10 do 
+            ac.player(i):sendMsg(creep_skill_message,time)
+        end  
+    end    
+end  
+--进攻怪刷新时的初始化
 function mt:on_start()
     local rect = require 'types.rect'
     local region = rect.create('-2000','-2000','2000','2000')
     self.region = region
+    self.all_creep = all_creep
     -- 刷怪初始化 难度、玩家影响
     if ac.g_game_degree == 1 then 
         self.game_degree_attr_mul = 1  --难度一 属性倍数1倍
@@ -125,94 +233,9 @@ function mt:on_next()
     self.all_food = all_food * get_player_count()   --每多一个玩家， 多1倍的怪物总人口,每回合开始都去检测人口数量
     self.used_food = 0 
     self.current_creep ={}
-    
-    --查找当前波野怪数据是否已经有此类型的怪
-    -- 类型或是名字都可查找
-    local function has_unit(str)
-        -- print('打印当前野怪',self.current_creep)
-        local u
-        for k,v in pairs(self.current_creep) do
-            if v.type == str or v.name == str then 
-                u = v
-                break
-            end    
-        end   
-        return u 
-    end    
-    local type = {'喽喽','小怪','头目','boss'}
-    local int = math.random(1,2)
-    local temp_type ={}
-
-    for i=1,int do 
-        local random_ty  
-        if i < 2  then 
-            random_ty = type[math.random(1,#type)]
-        else
-            --如果时随机到两种怪，第二种怪不允许是boss
-            random_ty = type[math.random(1,3)]
-        end    
-        -- if temp_type[1] and temp_type[1] == random_ty then 
-        --     i = 1
-        -- else
-            table.insert(temp_type,random_ty) 
-        -- end    
-        
-    end    
-    -- print('本回合怪物种类：'..int)
-    --随机生成野怪数据
-    local function random_creeps_datas()
-
-        local rand_type = temp_type[math.random(1,#temp_type)]
-
-        local rand_name
-        local u = has_unit(rand_type)
-        if u then 
-            rand_name = u.name
-        else    
-            rand_name = all_creep[rand_type][math.random(1,#all_creep[rand_type])]
-        end    
-
-        self.used_food = self.used_food  + ac.table.UnitData[rand_name].food
-
-        if self.used_food <= self.all_food then 
-            local u = has_unit(rand_type)
-            if u then
-                self.current_creep[rand_name]['cnt'] = self.current_creep[rand_name]['cnt'] +1
-            else 
-                --保存当前生成的数据
-                for k,v in pairs(ac.table.UnitData[rand_name]) do
-                    if not self.current_creep[rand_name]  then 
-                        self.current_creep[rand_name] = {}
-                    end 
-                    self.current_creep[rand_name]['name'] =  rand_name
-                    self.current_creep[rand_name]['cnt'] =  1
-                    self.current_creep[rand_name][k]=v 
-                end    
-            end
-
-            if self.used_food == self.all_food then 
-                local result = ''
-                for k,v in pairs(self.current_creep) do
-                    result = result ..v.name..'*'..tostring(v.cnt)..' '
-                end   
-                -- print('函数内的返回结果',result)
-                -- 没搞懂return 外面没接收到值
-                self.creeps_datas = result
-                return result
-            end    
-
-            random_creeps_datas()
-
-        else
-            self.used_food = self.used_food - ac.table.UnitData[rand_name].food 
-            print('已经超出人口，需要重新筛选',self.used_food)
-            random_creeps_datas()
-        end       
-
-    end
-
-    random_creeps_datas()
-
+    --获得随机 1-2 个种类的进攻怪
+    local temp_type = self:get_temp_type()
+    self:random_creeps_datas(temp_type)
     print(self.creeps_datas)
 
     --转化字符串 为真正的区域
@@ -220,32 +243,21 @@ function mt:on_next()
     --转化字符串 为真正的野怪数据
     self:set_creeps_datas()
 
-    self.rand_skill_list = get_creep_skill()
+    self.rand_skill_list = self:get_creep_skill()
 
-    --发送本层怪物特性 
-    --@次数
-    --@持续时间
-    local function send_skill_message(cnt,time)
-        local creep_skill_message ='|cff1FA5EE本层怪物特性：|r|cffFF9800'
-        if not self.rand_skill_list  then 
-            creep_skill_message = creep_skill_message ..'无|r'
-        else    
-            for i = 1,#self.rand_skill_list do  
-                creep_skill_message = creep_skill_message .. self.rand_skill_list[i]..','
-            end
-        end    
-        creep_skill_message = creep_skill_message ..'|r'
-        for x=1,cnt do 
-            for i = 1,10 do 
-                ac.player(i):sendMsg(creep_skill_message,time)
-            end  
-        end    
-    end  
     --发送本层怪物信息 3次10秒
-    send_skill_message(3,10)
+    self:send_skill_message(3,10)
     print('当前波数 '..self.index)
 
-
+    --难度相关处理
+    -- if not self.game_win_timer then 
+    --     self.game_win_timer = ac.loop(1*1000,function(t)
+    --         if self.index > self.max_index then 
+    --             t:remove()
+    --             ac.game:event_notify('游戏-结束',true)
+    --         end    
+    --     end)
+    -- end   
 
     --标准模式 
     -- @刷兵规则：回合结束时，创建钥匙怪，打死才能进下一波
@@ -256,6 +268,9 @@ function mt:on_next()
     if ac.g_game_mode == 1 then 
         --@刷兵规则
         ac.game:event '游戏-回合结束' (function(trg,index, creep) 
+            if creep.name ~= '刷怪' then
+                return
+            end    
             local self = creep
             local key_unit = self:creat_key_unit()
             --钥匙怪打死了马上下一波
@@ -270,17 +285,17 @@ function mt:on_next()
 
         --@游戏失败
         -- 每回合开始 都会先检查计时器是否还存在，存在则清空，重新计时。
-        if self.timer_ex2 then 
-            self.timer_ex2:remove()
-        end    
-        self.timer_ex2 = ac.timer_ex 
-        {
-            time = 60,
-            title = "游戏失败 倒计时",
-            func = function ()
-                ac.game:event_notify('游戏-结束')
-            end,
-        }
+        -- if self.timer_ex2 then 
+        --     self.timer_ex2:remove()
+        -- end    
+        -- self.timer_ex2 = ac.timer_ex 
+        -- {
+        --     time = 60,
+        --     title = "游戏失败 倒计时",
+        --     func = function ()
+        --         ac.game:event_notify('游戏-结束')
+        --     end,
+        -- }
     end    
 
     --嘉年华 钥匙怪死亡或是 15秒后 ,直接进入下一波
@@ -308,6 +323,9 @@ function mt:on_next()
             end,
         }
         ac.game:event '游戏-回合结束' (function(trg,index, creep) 
+            if creep.name ~= '刷怪' then
+                return
+            end  
             --回合结束，阻止下一波
             return true
         end)    
@@ -350,12 +368,12 @@ function mt:on_change_creep(unit,lni_data)
         --设置 boss 等 属性倍数
         if lni_data.attr_mul  then
             --属性
-            unit:set('攻击',data.attribute['攻击'] * lni_data.attr_mul)
-            unit:set('护甲',data.attribute['护甲'] * lni_data.attr_mul)
-            unit:set('生命上限',data.attribute['生命上限'] * lni_data.attr_mul)
-            unit:set('魔法上限',data.attribute['魔法上限'] * lni_data.attr_mul)
-            unit:set('生命恢复',data.attribute['生命恢复'] * lni_data.attr_mul)
-            unit:set('魔法恢复',data.attribute['魔法恢复'] * lni_data.attr_mul)
+            unit:set('攻击',data.attribute['攻击'] * lni_data.attr_mul * self.game_degree_attr_mul)
+            unit:set('护甲',data.attribute['护甲'] * lni_data.attr_mul * self.game_degree_attr_mul)
+            unit:set('生命上限',data.attribute['生命上限'] * lni_data.attr_mul * self.game_degree_attr_mul)
+            unit:set('魔法上限',data.attribute['魔法上限'] * lni_data.attr_mul * self.game_degree_attr_mul)
+            unit:set('生命恢复',data.attribute['生命恢复'] * lni_data.attr_mul * self.game_degree_attr_mul)
+            unit:set('魔法恢复',data.attribute['魔法恢复'] * lni_data.attr_mul * self.game_degree_attr_mul)
         end  
 
         --掉落概率
@@ -368,7 +386,7 @@ function mt:on_change_creep(unit,lni_data)
     --设置搜敌路径
     -- unit:set_search_range(99999)
     --随机添加怪物技能
-    add_creep_skill(self.rand_skill_list,unit)
+    self:add_creep_skill(self.rand_skill_list,unit)
     --unit:add_skill('怀孕','隐藏')
     -- unit:add_skill('霜冻新星','隐藏')
     -- unit:add_skill('肥胖','隐藏')
@@ -452,12 +470,42 @@ function mt:on_finish()
     end    
     if self.mode_timer then 
         self.mode_timer:remove()
-    end   
+    end    
+    if self.attack_hero_timer then 
+        self.attack_hero_timer:remove()
+    end  
+    ac.game:event_dispatch('游戏-最终boss',self.index,self)
+      
+end   
+--每3秒刷新一次攻击目标
+function mt:attack_hero() 
+    self.attack_hero_timer = ac.loop(3 * 1000 ,function ()
+        -- print('野怪区的怪数量',#mt.group)
+        for _, unit in ipairs(self.group) do
+            if unit:is_alive() then 
+                local hero = ac.find_hero(unit)
+                if hero then 
+                    if unit.target_point and unit.target_point * hero:get_point() < 1000 then 
+                        unit.target_point = hero:get_point()
+                        unit:issue_order('attack',hero:get_point())
+                    else 
+                        unit.target_point = hero:get_point()
+                        if unit:get_point() * hero:get_point() < 1000 then 
+                            unit:issue_order('attack',hero)
+                        else  
+                            unit:issue_order('attack',hero:get_point())
+                        end 
+                    end 
+                end 
+            end    
+        end 
+    end) 
+    self.attack_hero_timer:on_timer()
 end    
 
 -- 注册英雄杀怪得奖励事件
 ac.game:event '单位-死亡' (function(_,unit,killer) 
-    if killer.category =='进攻怪' then
+    if killer.category =='进攻怪' or killer.category =='boss' then
 		return
     end
 
@@ -471,7 +519,7 @@ ac.game:event '单位-死亡' (function(_,unit,killer)
         killer = player.hero
     end   
     -- 进攻怪杀死单位，不用加钱和经验
-    if not killer:is_hero() then  
+    if not killer or not killer:is_hero()  then  
         return
     end    
     --加钱
@@ -573,29 +621,10 @@ ac.wait(0,function()
 
     ac.game:event '游戏-开始刷兵' (function ()
         --开始刷怪
+        print('开始刷兵啦')
         mt:start()
         --每3秒刷新一次攻击目标
-        ac.loop(3 * 1000 ,function ()
-            -- print('野怪区的怪数量',#mt.group)
-            for _, unit in ipairs(mt.group) do
-                if unit:is_alive() then 
-                    local hero = ac.find_hero(unit)
-                    if hero then 
-                        if unit.target_point and unit.target_point * hero:get_point() < 1000 then 
-                            unit.target_point = hero:get_point()
-                            unit:issue_order('attack',hero:get_point())
-                        else 
-                            unit.target_point = hero:get_point()
-                            if unit:get_point() * hero:get_point() < 1000 then 
-                                unit:issue_order('attack',hero)
-                            else  
-                                unit:issue_order('attack',hero:get_point())
-                            end 
-                        end 
-                    end 
-                end    
-            end 
-        end)
+        mt:attack_hero() 
     end)    
    
 

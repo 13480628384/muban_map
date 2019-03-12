@@ -84,7 +84,7 @@ local function get_kda()
     local death = 0
 
     --计算出总值
-    for i=1,8 do
+    for i=1,10 do
         local p = ac.player[i]
         kill_count = kill_count + p.kill_count
         gold_count = gold_count + p.gold_count

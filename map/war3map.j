@@ -182,7 +182,29 @@ endglobals
     native SetHeroLevels takes code f returns nothing 
     native TeleportCaptain takes real x, real y returns nothing
     native GetUnitGoldCost takes integer unitid returns integer
-
+    
+	native DzAPI_Map_SaveServerValue        takes player whichPlayer, string key, string value returns boolean
+    native DzAPI_Map_GetServerValue         takes player whichPlayer, string key returns string
+    native DzAPI_Map_Ladder_SetStat         takes player whichPlayer, string key, string value returns nothing
+    native DzAPI_Map_IsRPGLadder            takes nothing returns boolean
+    native DzAPI_Map_GetGameStartTime       takes nothing returns integer
+    native DzAPI_Map_Stat_SetStat           takes player whichPlayer, string key, string value returns nothing
+    native DzAPI_Map_GetMatchType      		takes nothing returns integer
+    native DzAPI_Map_Ladder_SetPlayerStat   takes player whichPlayer, string key, string value returns nothing
+	native DzAPI_Map_GetServerValueErrorCode takes player whichPlayer returns integer
+    native DzAPI_Map_GetLadderLevel         takes player whichPlayer returns integer
+	native DzAPI_Map_IsRedVIP               takes player whichPlayer returns boolean
+	native DzAPI_Map_IsBlueVIP              takes player whichPlayer returns boolean
+	native DzAPI_Map_GetLadderRank          takes player whichPlayer returns integer
+	native DzAPI_Map_GetMapLevelRank        takes player whichPlayer returns integer
+	native DzAPI_Map_GetGuildName           takes player whichPlayer returns string
+	native DzAPI_Map_GetGuildRole           takes player whichPlayer returns integer
+	native DzAPI_Map_GetMapLevel            takes player whichPlayer returns integer
+	native DzAPI_Map_MissionComplete        takes player whichPlayer, string key, string value returns nothing
+	native DzAPI_Map_GetActivityData        takes nothing returns string
+	native DzAPI_Map_IsRPGLobby             takes nothing returns boolean
+	native DzAPI_Map_GetMapConfig           takes string key returns string
+	native DzAPI_Map_HasMallItem            takes player whichPlayer, string key returns boolean
 
 //library BzAPI:
     //hardware

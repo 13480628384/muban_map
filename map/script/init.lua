@@ -20,7 +20,6 @@ require '物品'
 require '技能'
 require '英雄'
 require '野怪'
--- require 'Other'
 require '测试'
 
 ac.wait(100,function ()

@@ -259,24 +259,22 @@ function mt:start(player)
 end
   
 function mt:next()
-    
+    --已经结束
+    if is_finish then
+        return
+    end   
     --当前波数加1,若限定最大波数，则下一波大于最大波数时，跳出
     self.index = self.index +1
 
-    if ac.game:event_dispatch('游戏-回合开始',self.index,self)  then 
-        return 
-    end 
-
-    --游戏胜利
-    if not self.game_win_timer then 
-        self.game_win_timer = ac.loop(1*1000,function(t)
-            if self.index > self.max_index then 
-                t:remove()
-                ac.game:event_notify('游戏-结束',true)
-            end    
-        end)
+    if self.index > self.max_index then 
+        self.allow_next = false
+        self:finish() 
+        return
     end    
 
+    if ac.game:event_dispatch('游戏-回合开始',self.index,self)  then 
+        return 
+    end  
     if self.on_next then 
         self:on_next()
     end 
@@ -380,12 +378,6 @@ function mt:next()
                       
                     end
                 end
-                
-                if self.index > self.max_index then 
-                    self.allow_next = false
-                    self:finish() 
-                end    
-            
                 -- 在当前怪没清完前 不允许下一波
                 self.allow_next = false
 
@@ -464,7 +456,7 @@ function mt:finish(is_unit_kill)
         for _, uu in ipairs(self.group) do
             uu:kill()
         end     
-     end
+    end
  
     --creep.all_creep[self.name] = nil
     

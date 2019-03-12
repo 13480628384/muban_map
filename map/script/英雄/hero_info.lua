@@ -81,7 +81,7 @@ function mt:heart_damage()
 end
 
 function mt:dummy()
-	return ('|cffF9C801%.f|r'):format(self.owner:get '召唤物')
+	return ('|cffF9C801%.1f|r'):format(self.owner:get '召唤物')
 end
 function mt:dummy_attr()
 	return ('|cffF9C801%.f|r'):format(self.owner:get '召唤物属性')

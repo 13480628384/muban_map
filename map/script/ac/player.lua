@@ -97,6 +97,10 @@ function mt:setName(name)
 	jass.SetPlayerName(self.handle, name)
 end
 
+--获得玩家所拥有的英雄
+function mt:get_hero()
+	return self.hero 
+end
 --是否是玩家
 function mt:is_player()
 	return jass.GetPlayerController(self.handle) == jass.MAP_CONTROL_USER and jass.GetPlayerSlotState(self.handle) == jass.PLAYER_SLOT_STATE_PLAYING

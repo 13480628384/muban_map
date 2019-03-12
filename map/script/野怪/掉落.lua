@@ -278,7 +278,7 @@ ac.hero_kill_unit = hero_kill_unit
 
 --如果死亡的是野怪的话
 ac.game:event '单位-死亡' (function (_,unit,killer)
-    if unit.category ~='进攻怪' then
+    if unit.category ~='进攻怪' or unit.category ~='boss' then
 		return
     end
     local player = killer:get_owner()

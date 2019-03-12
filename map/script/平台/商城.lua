@@ -1,4 +1,5 @@
 -- local Base64 = require 'ac.Base64'
+local japi = require 'jass.japi'
 
 --开启FPS
 japi.ShowFpsText(true)

@@ -19,5 +19,6 @@ ac.game:event '游戏-开始' (function()
         p:addGold(1000000)
     end    
     
+    -- require '平台.商城'
      
 end)    

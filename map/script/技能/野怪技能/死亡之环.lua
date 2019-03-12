@@ -1,26 +1,34 @@
-local mt = ac.skill['死亡一指'] 
+local mt = ac.skill['死亡之环'] 
 
 mt{
     level = 1,
-    title = "死亡一指",
+    title = "死亡之环",
     tip = [[
-        被动1：每隔5秒触发，对范围600内的最近的一个敌人施放死亡一指，伤害=攻击力*3
+        被动1：每隔5秒触发，对范围600内的最近的一个敌人施放死亡之环，伤害=攻击力*3
         被动2：降低自己的三维40%
     ]],
+
+	--施法动作
+    cast_animation = 'spell',
+    cast_animation_speed = 1,
+
+    --施法前摇后摇
+    -- cast_start_time = 0.35,
+    cast_channel_time = 0.75,
 
     -- 原始伤害
     damage = function(self,hero)
         return hero:get('攻击') * 3
     end,
 
-    -- 影响三维值 (怪物为：生命上限，护甲，攻击力)
-    value = 40,
+    -- 伤害为敌人血量的60%
+    value = 60,
     -- cd
     cool = 5,
     -- 多少个死亡一指
-    cnt = 1,
+    cnt = 10,
     -- 技能范围
-    area = 1200,
+    area = 99999,
     -- 特效
     effect = [[Abilities\Spells\Demon\DemonBoltImpact\DemonBoltImpact.mdl]]
 
@@ -30,10 +38,11 @@ mt{
 function mt:on_add()
     local skill = self
     local hero = self.owner 
-    -- 降低三维(生命上限，护甲，攻击)
-    hero:add('生命上限%', -self.value)
-    hero:add('护甲%', -self.value)
-    hero:add('攻击%', -self.value)
+end
+
+function mt:on_cast_shot()
+    local skill = self
+    local hero = self.owner 
 
     --计算高度
     local function get_hith(u)
@@ -48,8 +57,8 @@ function mt:on_add()
 
         for i, u in ac.selector()
             : in_range(hero,self.area)
-            : is_not(ac.key_unit)
             : is_enemy(hero)
+            : is_not(ac.key_unit)
 			: of_not_building()
 			: sort_nearest_hero(hero) --优先选择距离英雄最近的敌人。
 			: ipairs()
@@ -64,34 +73,18 @@ function mt:on_add()
                 u:damage{
                     source = hero,
                     skill = self,
-                    damage = self.damage
+                    damage = u:get('生命上限') * self.value / 100,
+                    real_damage = true
                 }
             end    
         end
-
     end
+    demon_bolt()
 
-
-    self.trg = hero:loop(1 * 1000,function()
-        if self:is_cooling()  then
-			return
-        end
-        if hero:is_alive() then 
-            demon_bolt()
-        end    
-		self:active_cd()
-    end)
-
-end
-
-
+end    
 function mt:on_remove()
 
     local hero = self.owner 
-    -- 提升三维(生命上限，护甲，攻击)
-    hero:add('生命上限%', self.value)
-    hero:add('护甲%', self.value)
-    hero:add('攻击%', self.value)
 
     if self.trg then
         self.trg:remove()
