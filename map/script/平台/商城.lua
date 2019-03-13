@@ -2,12 +2,14 @@
 local japi = require 'jass.japi'
 
 --开启FPS
-japi.ShowFpsText(true)
-ac.loop(1000,function()
-    if ac.player.self then
-        c_ui.kzt.top_panel.fps:set_text('FPS:'..math.floor(japi.GetFps()))
-    end
-end)
+ac.wait(0,function() 
+    japi.ShowFpsText(true)
+    ac.loop(1000,function()
+        if ac.player.self then
+            c_ui.kzt.top_panel.fps:set_text('FPS:'..math.floor(japi.GetFps()))
+        end
+    end)
+end);
 
 --添加新手buff及新手礼包
 if ac.Gamemode == '新手' then
@@ -29,19 +31,6 @@ if ac.Gamemode == '新手' then
     end
 end
 
-
---记录最大单位数
-ac.game:event '单位-创建'(function(_,u)
-    if not u.owner:is_player() then
-        ac.yg_count = ac.yg_count + 1
-    end
-end)
-
-ac.game:event '单位-死亡'(function(_,u)
-    if not u.owner:is_player() then
-        ac.yg_count = ac.yg_count - 1
-    end
-end)
 
 --读取玩家的商城道具
 local item = {
@@ -111,128 +100,6 @@ for i=1,8 do
     end
 end
 
---创建NPC装饰物
-local npc = ac.player[16]:create_unit('我是装饰物2',ac.point(- 1134.5, 602.5),298.830)
-npc.name = '我是装饰物2'
-npc:add_restriction '无敌'
-
-local npc = ac.player[16]:create_unit('我是装饰物3',ac.point(- 22.1, - 434.9),162.960)
-npc.name = '我是装饰物3'
-npc:add_restriction '无敌'
-
-local npc = ac.player[16]:create_unit('我是装饰物1',ac.point(- 1310.6, - 331.0),39.670)
-npc.name = '我是装饰物1'
-npc:add_restriction '无敌'
-
-local npc = ac.player[16]:create_unit('我是装饰物4',ac.point(- 98.1, 504.7),235.870)
-npc.name = '我是装饰物4'
-npc:add_restriction '无敌'
-
-
-
---清理地上的物品
-local bag = require 'ui.server.bag'
-ac.game:event '玩家-聊天'(function(_,p,str)
-
-    if str ~= '-ql' then
-        return
-    end
-
-    --记录物品数量
-    local item_count = 0
-    --记录累计金额
-    local gold_count = 0
-
-    for id,item in pairs(bag.item_map) do
-        local data = Table.ItemData[item:get_name()].SellPrice
-        item_count = item_count + 1
-        if data then
-            gold_count = gold_count + data
-        end
-        local eff = s_ui.item_eff[id]
-        eff:remove()
-        jass.RemoveItem(jass.ConvertUnitState(id))
-    end
-
-    --计算一下平均值
-    local value = gold_count / ac.player.count
-    ac.player.self:sendMsg('本次共清理:'..item_count..'个物品,价值:'..gold_count..'元，每位玩家获得:'..value)
-    for i = 1,ac.player.count do
-        local p = ac.player[i]
-        p:addGold(value)
-    end
-
-end)
-
-
-local function dw_jiangli()
-    --创建一只王者马甲
-    local wz = ac.player[16]:create_dummy('e001',ac.point(0,0))
-    wz.name = '王者'
-    wz:add_restriction '无敌'
-    local wz_skl = wz:add_skill('王者','隐藏')
-
-
-    --创建一只大师马甲
-    local ds = ac.player[16]:create_dummy('e001',ac.point(0,0))
-    ds.name = '大师'
-    ds:add_restriction '无敌'
-    local ds_skl = ds:add_skill('大师','隐藏')
-
-    --记录一下王者人数
-    local wz_count = 0
-    --记录一下大师人数
-    local ds_count = 0
-
-    --段位奖励
-    if ac.nandu_id == 3 then
-        --遍历一下英雄组
-        for _, u in ipairs(ac.player_hero_group) do
-            --如果是王者
-            if u.owner.rank == 8 then
-                wz_count = wz_count + 1
-            end
-
-            --如果是大师
-            if u.owner.rank == 7 then
-                ds_count = ds_count + 1
-            end
-        end
-    end
-
-    --给所有玩家添加王者buff
-    for i=1,wz_count do
-        for _, u in ipairs(ac.player_hero_group) do
-            u:add_buff '王者'
-            {
-                source = wz,
-                skill = wz_skl
-            }
-        end
-    end
-
-    --给所有玩家添加大师buff
-    for i=1,ds_count do
-        for _, u in ipairs(ac.player_hero_group) do
-            u:add_buff '大师'
-            {
-                source = ds,
-                skill = ds_skl
-            }
-        end
-    end
-
-    --修改一下buff层数
-    if wz_count > 0 then
-        wz_skl:set_stack(wz_count)
-    end
-
-    if ds_count > 0 then
-        ds_skl:set_stack(ds_count)
-    end
-
-end
-dw_jiangli()
 
 --地图等级奖励
 for i=1,8 do

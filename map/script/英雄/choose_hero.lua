@@ -1,5 +1,4 @@
 local player = require 'ac.player'
-local map = {}
 local fogmodifier = require 'types.fogmodifier'
 local hero = require 'types.hero'
 local game = require 'types.game'
@@ -19,10 +18,13 @@ local skip
 local radius
 local last_target
 --rect.j_rect('choose_hero') or
-map.rects={
-	['选人区域'] =  rect.create(-2000,2000,-2000,2000),
-	['出生点'] = rect.create(0,0,0,0)
-}
+
+-- local map = {}
+-- map.rects={
+-- 	['选人区域'] =  rect.create(-2000,2000,-2000,2000),
+-- 	['出生点'] = rect.create(0,0,0,0)
+-- }
+local map = ac.map
 
 
 
@@ -299,8 +301,8 @@ local function start()
 			p:hideInterface(1)
 			--创建英雄给选择者
 			local pnt	= map.rects['出生点']:get_point()
-			local r		= 360 / 5 * p:get()
-			p.hero = p:createHero(hero_name, pnt - {r, 150}, r + 180)
+			-- local r		= 360 / 5 * p:get()
+			p.hero = p:createHero(hero_name, pnt, 270)
 	
 			player_hero_count = player_hero_count + 1
 	

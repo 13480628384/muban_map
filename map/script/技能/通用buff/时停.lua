@@ -1,9 +1,9 @@
 local mt = ac.buff['时停']
 
-mt.cover_type = 1
-mt.cover_max = 1
+mt.cover_type = 0
+-- mt.cover_max = 1
 
-mt.control = 10
+-- mt.control = 10
 mt.debuff = true
 mt.model = [[]]
 

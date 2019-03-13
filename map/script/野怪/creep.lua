@@ -306,7 +306,6 @@ function mt:next()
             print('lni 数据 没有被加载')
             return 
         end
-
         local timer = ac.timer(0.1 * 1000,v,function(t)
             local where 
             if region.type == 'rect' and self.is_random then

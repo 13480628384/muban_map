@@ -5,13 +5,12 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
     if creep.name ~= '刷怪' then
         return
     end  
-    local time = 10
+    -- 回合开始，倒计时释放死亡之环
+    local time = 60
 
     if not creep.boss then 
-        local unit = ac.player.com[2]:create_unit('最终boss',ac.point(1000,1000),270)
-        unit:set_size(2.5)
-        unit:add('生命上限',20000)
-        unit:add('移动速度',400)
+        local unit = ac.player.com[2]:create_unit('最终boss',ac.map['刷怪中心点'],270)
+        unit:set_size(1)
         -- unit:add_restriction '定身'
         -- unit:add_restriction '缴械'
         unit:add_restriction '无敌'
@@ -19,6 +18,7 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
         -- unit:setColor(68,68,68)
         -- unit:set_animation 'Stand Ready'
         unit:add_skill('死亡之环','英雄')
+
         creep.boss = unit
     end 
     local c_boss_buff = creep.boss:find_buff '时停' 
@@ -27,6 +27,7 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
         c_boss_buff:remove()
     end   
 
+    --释放完后，等待2秒继续僵硬
     creep.boss:add_buff '时停'
     {
         time = time,
@@ -34,10 +35,25 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
         source = unit,
         show = true
     }
+    if creep.boss.waiter1 then 
+        creep.boss.waiter1:remove()
+    end
+     
+    if creep.boss.waiter2 then 
+        creep.boss.waiter2:remove()
+    end   
+    creep.boss.waiter1 = creep.boss:wait(time*1000,function()
 
-    ac.wait(time*1000,function()
-        creep.boss:cast('死亡之环')
+        creep.boss:force_cast('死亡之环')
         --释放完后，等待2秒继续僵硬
+        creep.boss.waiter2 = creep.boss:wait(2*1000,function()
+            creep.boss:add_buff '时停'
+            {
+                time = 99999,
+                skill = '游戏模块',
+                source = unit,
+            }
+        end);    
     end);
    
 end)

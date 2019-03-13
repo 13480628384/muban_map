@@ -213,7 +213,7 @@ end
 --进攻怪刷新时的初始化
 function mt:on_start()
     local rect = require 'types.rect'
-    local region = rect.create('-2000','-2000','2000','2000')
+    local region = ac.map.rects['刷怪']
     self.region = region
     self.all_creep = all_creep
     -- 刷怪初始化 难度、玩家影响
@@ -430,6 +430,7 @@ function mt:creat_key_unit()
     unit.exp = data.exp * 5
     unit.fall_rate = data.fall_rate * 5
     unit:set('移动速度',650)
+    unit:add_high(220)
 
     --逃跑路线
     local hero = ac.find_hero(unit)

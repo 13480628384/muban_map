@@ -317,7 +317,7 @@ function mt:get_tip()
 		 gold = '|cffebd43d(价格：'..self:buy_price()..')|r|n'
 	end
 	
-	tip = store_title..gold..'\n\n'.. item_tip
+	tip = store_title..gold..'\n'.. item_tip
 
 	if skill_tip and t_str ~= s_str then 
 	    if item_tip ~='' then  

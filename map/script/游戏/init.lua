@@ -4,7 +4,6 @@
 require '游戏.游戏设置'
 require '游戏.玩家'
 require '游戏.多面板'
-require '游戏.单位'
 require '游戏.数据统计'
 -- require '游戏.数据统计2'
 require '游戏.系统提示'

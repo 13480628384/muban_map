@@ -71,9 +71,20 @@ string array Player_name
 
 trigger l__library_init
 
-//JASSHelper struct globals:
+rect gg_rct_sg001= null
+rect gg_rct_sg002= null
+rect gg_rct_sg003= null
+rect gg_rct_sg004= null
+rect gg_rct_wpsd= null
+rect gg_rct_jnsd= null
+rect gg_rct_jfsd= null
+rect gg_rct_xxsd= null
+rect gg_rct_xr= null
+rect gg_rct_csd= null
+trigger gg_trg_______u= null
 
 endglobals
+
     native DzGetMouseTerrainX takes nothing returns real
     native DzGetMouseTerrainY takes nothing returns real
     native DzGetMouseTerrainZ takes nothing returns real
@@ -182,7 +193,7 @@ endglobals
     native SetHeroLevels takes code f returns nothing 
     native TeleportCaptain takes real x, real y returns nothing
     native GetUnitGoldCost takes integer unitid returns integer
-    
+
 	native DzAPI_Map_SaveServerValue        takes player whichPlayer, string key, string value returns boolean
     native DzAPI_Map_GetServerValue         takes player whichPlayer, string key returns string
     native DzAPI_Map_Ladder_SetStat         takes player whichPlayer, string key, string value returns nothing
@@ -1558,6 +1569,25 @@ function Trig_luaActions takes nothing returns nothing
     endif
     call FlushChildHashtable(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
 endfunction
+//***************************************************************************
+//*
+//*  Regions
+//*
+//***************************************************************************
+function CreateRegions takes nothing returns nothing
+    local weathereffect we
+    set gg_rct_sg001=Rect(- 544.0, - 864.0, 256.0, 2624.0)
+    set gg_rct_sg002=Rect(- 960.0, - 416.0, 704.0, 2176.0)
+    set gg_rct_sg003=Rect(- 1440.0, 32.0, 1152.0, 1696.0)
+    set gg_rct_sg004=Rect(- 1888.0, 480.0, 1600.0, 1280.0)
+    set gg_rct_wpsd=Rect(- 2048.0, - 544.0, - 1792.0, - 320.0)
+    set gg_rct_jnsd=Rect(- 1536.0, - 1024.0, - 1344.0, - 768.0)
+    set gg_rct_jfsd=Rect(- 2080.0, - 1472.0, - 1792.0, - 1248.0)
+    set gg_rct_xxsd=Rect(- 2496.0, - 1056.0, - 2272.0, - 768.0)
+    set gg_rct_xr=Rect(- 5088.0, 544.0, - 3392.0, 2240.0)
+    set gg_rct_csd=Rect(- 2048.0, - 1024.0, - 1792.0, - 800.0)
+endfunction
+
 //===========================================================================
 function InitTrig_lua takes nothing returns nothing
     set gg_trg_lua=CreateTrigger()
@@ -1946,12 +1976,13 @@ endfunction
 function main takes nothing returns nothing
     call JapiConstantLib_init()
  call initializePlugin()
- call SetCameraBounds(- 3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), - 3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 3328.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 3072.0 - GetCameraMargin(CAMERA_MARGIN_TOP), - 3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 3072.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 3328.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), - 3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
+call SetCameraBounds(- 7424.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), - 7680.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 7424.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 7168.0 - GetCameraMargin(CAMERA_MARGIN_TOP), - 7424.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 7168.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 7424.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), - 7680.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
     call SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
     call NewSoundEnvironment("Default")
     call SetAmbientDaySound("LordaeronSummerDay")
     call SetAmbientNightSound("LordaeronSummerNight")
     call SetMapMusic("Music", true, 0)
+    call CreateRegions()
     call InitBlizzard()
 
 call ExecuteFunc("Mtpplayername__initgetname")

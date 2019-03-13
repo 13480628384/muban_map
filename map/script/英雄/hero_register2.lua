@@ -1,7 +1,5 @@
 
 local player_hero_tm_list = {}
---免费复活次数
-local tm = 3
 
 ac.game:event '玩家-注册英雄' (function(_, player, hero)
 	if not player_hero_tm_list[player] then
@@ -21,7 +19,8 @@ ac.game:event '玩家-注册英雄' (function(_, player, hero)
 			player = hero:get_owner(),
 		}
 		ac.timer(time*1000,1,function()
-			hero:revive(ac.point(-740,-1100))
+			local random_point = ac.map.rects['刷怪']:get_point()
+			hero:revive(random_point)
 		end)
 	end)
 

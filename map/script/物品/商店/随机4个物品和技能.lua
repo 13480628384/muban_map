@@ -63,28 +63,5 @@ local function fresh_shop_skill(shop)
     --刷新商店物品，先全部删除，再挨个添加
     shop:fresh()
 end   
-
-ac.game:event '游戏-开始' (function()
-    
-    local shop = ac.shop.create('物品商店',-500,300)
-    -- 添加到商店
-	-- jass.AddItemToStock(shop.handle,base.string2id("S009"),1,1)
-	-- jass.AddItemToStock(shop.handle,base.string2id("S00A"),1,1)
-	-- jass.AddItemToStock(shop.handle,base.string2id("S00B"),1,1)
-    ac.loop(fresh_time*1000,function()
-        fresh_shop_item(shop)
-    end)
-
-    local shop1 = ac.shop.create('技能商店',500,300)
-    ac.loop(fresh_time*1000 + 100,function()
-        fresh_shop_skill(shop1)
-    end)
-
-    local shop2 = ac.shop.create('积分商店',-500,-300)
-    local shop3 = ac.shop.create('XX商店',500,-300)
-    -- shop:remove_sell_item('新手石')
-    -- shop:add_sell_item('错乱精髓',1)
-    -- local shop = ac.shop.create('商店B',100,0)
-    
-
-end);
+ac.map.fresh_shop_skill = fresh_shop_skill
+ac.map.fresh_shop_item = fresh_shop_item
