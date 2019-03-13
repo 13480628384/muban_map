@@ -430,6 +430,7 @@ function mt:creat_key_unit()
     unit.exp = data.exp * 5
     unit.fall_rate = data.fall_rate * 5
     unit:set('移动速度',650)
+    unit:set('生命上限',20)
     unit:add_high(220)
 
     --逃跑路线

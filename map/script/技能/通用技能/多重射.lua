@@ -61,14 +61,14 @@ end
 
 
 ac.game:event '单位-发动攻击'  (function(trg, damage)
-    if damage.source:isMelee() or damage.target:is_enemy(damage.source)  then 
+    if damage.source:isMelee() or damage.target:is_ally(damage.source)  then 
         return
     end        
-      
     local hero = damage.source
     local count = hero:get('多重射') or 0
+    -- print('重新进行攻击',count)  
     if count <= 1 then
-        return
+        return 
     end
 
     -- if math.random(1,100) > self.chance then

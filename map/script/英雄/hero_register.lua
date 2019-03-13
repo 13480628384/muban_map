@@ -131,6 +131,7 @@ local function hero_register_main()
 		--  hero:add_item('吞噬丹')
 		--  hero:add_item('吞噬丹')
 		--  hero:add_item('吞噬丹')
+		-- hero:add_item('霹雳弩')
 		 
         -- ac.item.add_skill_item('粉碎',hero)
         -- ac.item.add_skill_item('贪婪者的心愿',hero)
