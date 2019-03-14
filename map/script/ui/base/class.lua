@@ -11,6 +11,52 @@ game_ui     = japi.GetGameUI()
 
 global_blp_map = {}
 
+handle_system_class = {
+    is_show = true,
+
+    create = function ()
+        local object = {}
+        object.top = 1 
+        object.stack = {}
+        object.map = {}
+        object.id_table = {}
+        setmetatable(object,{__index = handle_system_class})
+        return object
+    end,
+
+    destroy = function (self)
+        
+    end,
+    create_handle = function (self)
+        local id = self.top
+        local stack = self.stack
+        if #stack == 0 then
+            id = self.top
+            self.top = self.top + 1
+        else
+            id = stack[#stack]
+            table.remove(stack,#stack)
+            self.map[id] = nil
+        end
+        self.id_table[id] = 1
+        return id
+    end,
+
+    close_handle = function (self,id)
+        if self.id_table[id] == nil and self.map[id] ~= nil then
+            ui_print('重复回收',id)
+        elseif self.id_table[id] == nil then
+            ui_print('非法回收',id)
+        end
+        if self.map[id] == nil and self.id_table[id] ~= nil then
+            self.map[id] = 1
+            self.id_table[id] = nil
+            table.insert(self.stack,id)
+        end
+    end,
+
+
+}
 
 function blp_rect(path,left,top,right,bottom)
     left = math.modf(left)

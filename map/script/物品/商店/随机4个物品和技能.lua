@@ -1,4 +1,4 @@
-local fresh_time = 10 --单位秒
+
 
 local function fresh_shop_item(shop)
     for i = 5, 8 do 

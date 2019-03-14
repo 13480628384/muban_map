@@ -56,4 +56,15 @@ ac.game:event '玩家-聊天' (function(self, player, str)
     if str == 'over' then
 		ac.game:event_notify('游戏-结束')
 	end    
+
+    if str == 'qlwp' then
+		--开始清理物品
+		for _,v in pairs(ac.item.item_map) do 
+			--没有所有者 ，视为在地图上
+			-- print(v.name,v.owner)
+			if not v.owner  then 
+				v:item_remove()
+			end	
+		end
+	end   
 end)	

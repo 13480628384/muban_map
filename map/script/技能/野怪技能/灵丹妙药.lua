@@ -15,6 +15,9 @@ mt{
 
     -- 影响三维值 (怪物为：生命上限，护甲，攻击力)
     value = 40,
+
+    -- 几率掉落
+    rate = 50,
     
     -- 特效
     effect = [[Abilities\Spells\Items\ResourceItems\ResourceEffectTarget.mdl]]
@@ -38,19 +41,24 @@ function mt:on_add()
     hero:add('护甲%', self.value)
     hero:add('攻击%', self.value)
     -- print('技能被添加',hero.food,self.cnt)
+
     self.trg = hero:event '单位-死亡' (function(_,unit,killer)
-        if self.cnt > 0 then 
-            -- 死亡随机掉落人口同等数量的消耗品
-            -- print('学霸掉落的物品数量：',hero.food,self.cnt)
-            -- for i = 1,self.cnt do
-            hero:timer(0.1*1000,self.cnt,function()
-                local item_name = cast_item[math.random(#cast_item)]
-                ac.item.create_item(item_name,hero:get_point())
-                -- item:set_item_count(self.cnt)
-            end)    
-               
-            -- end    
-        end    
+        local rand = math.random(1,100)
+        --几率掉落
+        if rand <= self.rate then 
+            if self.cnt > 0 then 
+                -- 死亡随机掉落人口同等数量的消耗品
+                -- print('学霸掉落的物品数量：',hero.food,self.cnt)
+                -- for i = 1,self.cnt do
+                hero:timer(0.1*1000,self.cnt,function()
+                    local item_name = cast_item[math.random(#cast_item)]
+                    ac.item.create_item(item_name,hero:get_point())
+                    -- item:set_item_count(self.cnt)
+                end)    
+                
+                -- end    
+            end 
+        end       
    end)    
 
 

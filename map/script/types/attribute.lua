@@ -660,3 +660,35 @@ set['暴击伤害'] = function(self)
 		self:freshDamageInfo()
 	end
 end
+
+on_get['物爆几率'] = function(self, physical_rate)
+	if physical_rate > 90 then
+		return 90
+	end
+	return physical_rate
+end
+
+
+on_get['法爆几率'] = function(self, magic_rate)
+	if magic_rate > 90 then
+		return 90
+	end
+	return magic_rate
+end
+
+
+on_get['会心几率'] = function(self, heart_rate)
+	if heart_rate > 90 then
+		return 90
+	end
+	return heart_rate
+end
+
+
+on_get['减免'] = function(self, reduce_damage)
+	if reduce_damage > 90 then
+		return 90
+	end
+	return reduce_damage
+end
+

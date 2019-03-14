@@ -14,7 +14,7 @@ mt{
 	tip = [[造成周围伤害（每秒损失 2% 的魔法值， 对范围200码的造成 2% 的生命损失）]],
 	--技能图标
     art = [[ReplaceableTextures\CommandButtons\BTNImmolationOn.blp]],
-    art1 = [[BTNpjq.blp]],
+    art1 = [[ReplaceableTextures\CommandButtons\BTNImmolationOff.blp]],
     
 	--特效
 	effect = [[Abilities\Spells\NightElf\Immolation\ImmolationTarget.mdl]],

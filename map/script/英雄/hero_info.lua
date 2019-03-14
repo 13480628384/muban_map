@@ -22,7 +22,6 @@ local mt = ac.skill['英雄属性面板']
 	tip = [[
 生命:    %life% / %max_life% %life_recover% 
 %resource_type%:    %mana% / %max_mana% %mana_recover% 
-%shield%
 
 攻击:    %attack% （已加成 %attack_per% %）
 攻击间隔:    %attack_gip% 
@@ -30,15 +29,14 @@ local mt = ac.skill['英雄属性面板']
 溅射:    %splash% %
 破甲:    %pene% (%pene_rate% %)
 吸血:    %life_steal%
-冷却:    %cool_speed% %
-防御:    %defence% (减免%defence_rate% %的伤害)
-受到伤害:    %damaged_rate% %
+防御:    %defence% (减免 %defence_rate% %的伤害)
 
 物爆几率: %physical_rate% %  物爆伤害:  %physical_damage% %
 法爆几率: %magic_rate% %  法爆伤害:  %magic_damage% %
 会心几率: %heart_rate% %  会心伤害:  %heart_damage% %
 
-召 唤 物加成： %dummy%   召唤物属性加成： %dummy_attr% %
+召 唤 物加成： %dummy%   
+召唤物属性加成： %dummy_attr% %
 法术攻击加成： %magic_attack% % 
 
 主动释放的增益效果： %moregood% % 
@@ -46,7 +44,6 @@ local mt = ac.skill['英雄属性面板']
 金币加成：   %moregold% %
 经验加成：   %moreexp% %
 物品获取率： %item_rate% %
-
 ]],
 }
 
@@ -254,14 +251,7 @@ function mt:defence()
 end
 
 function mt:defence_rate()
-	local def = self.owner:get '护甲'
-	local rate = 0
-	if def > 0 then
-		rate = def * damage.DEF_SUB * 100 / (1 + def * damage.DEF_SUB)
-	else
-		rate = - def * damage.DEF_ADD
-	end
-	return ('|cffF9C801%.2f|r'):format(rate)
+	return ('|cffF9C801%.2f|r'):format(self.owner:get '减免')
 end
 
 function mt:block_chance()

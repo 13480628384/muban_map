@@ -179,19 +179,19 @@ local unit_reward = {
     ['进攻怪'] =  {
         -- { rand = 97.5,         name = '无'},
         { rand = 2.5,      name = {
-                { rand = 60, name = '随机白装'},
-                { rand = 25, name = '随机蓝装'},
-                { rand = 10, name = '随机金装'},
-                { rand = 5, name = '随机红装'},
+                { rand = 80, name = '随机白装'},
+                { rand = 16, name = '随机蓝装'},
+                { rand = 3.3, name = '随机金装'},
+                { rand = 0.7, name = '随机红装'},
             }
         }
     },
     ['随机物品'] =  {
         { rand = 100,      name = {
-                { rand = 60, name = '随机白装'},
-                { rand = 25, name = '随机蓝装'},
-                { rand = 10, name = '随机金装'},
-                { rand = 5, name = '随机红装'},
+                { rand = 80, name = '随机白装'},
+                { rand = 16, name = '随机蓝装'},
+                { rand = 3.3, name = '随机金装'},
+                { rand = 0.7, name = '随机红装'},
             }
         }
     },
@@ -266,6 +266,7 @@ local function hero_kill_unit(player,hero,unit,fall_rate,is_on_hero)
     end    
     local name = get_reward_name(change_unit_reward)
     if name then 
+        -- print('掉落物品类型',name)
         local func = reward[name]
         if func then 
             -- print('掉落',name)
@@ -278,13 +279,13 @@ ac.hero_kill_unit = hero_kill_unit
 
 --如果死亡的是野怪的话
 ac.game:event '单位-死亡' (function (_,unit,killer)
-    if unit.category ~='进攻怪' or unit.category ~='boss' then
+    if unit.category ~='进攻怪'  then
 		return
     end
     local player = killer:get_owner()
     local dummy_unit = player.hero or ac.dummy
     local fall_rate = unit.fall_rate *( 1 + dummy_unit:get('物品获取率')/100 )
-    -- print('装备掉落概率：',fall_rate,unit.fall_rate)
+    print('装备掉落概率：',fall_rate,unit.fall_rate)
     hero_kill_unit(player,killer,unit,fall_rate)
 end)
 
@@ -293,13 +294,17 @@ ac.game:event '单位-死亡' (function (_,unit,killer)
     if unit:get_name() ~='钥匙怪' then
 		return
     end
-    local name = get_reward_name(unit_reward['钥匙怪'])
-    if name then 
-        local func = reward[name]
-        local player = killer:get_owner()
-        if func then 
-            func(player,killer,unit)
-        end  
+    
+    local p_count = get_player_count()
+    for i = 1 ,p_count do  
+        local name = get_reward_name(unit_reward['钥匙怪'])
+        if name then 
+            local func = reward[name]
+            local player = killer:get_owner()
+            if func then 
+                func(player,killer,unit)
+            end  
+        end    
     end    
 end)
 

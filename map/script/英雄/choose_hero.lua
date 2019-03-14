@@ -80,20 +80,8 @@ local function showHeroState(p, u)
 	local hero = u
 
 	local tip = [[
-|cffffcc11力量:                                     |cffcccccc%attribute.力量%|cff00ff00(+%upgrade.力量%)|r
-|cffffcc11敏捷:                                     |cffcccccc%attribute.敏捷%|cff00ff00(+%upgrade.敏捷%)|r
-|cffffcc11智力:                                     |cffcccccc%attribute.智力%|cff00ff00(+%upgrade.智力%)|r
-|cffffcc11生命:                                     |cffcccccc%attribute.生命上限%|r
-|cffffcc11%resource_type%:                                     |cffcccccc%attribute.魔法上限%|r
-|cffffcc11攻击:                                     |cffcccccc%attribute.攻击%|r
-|cffffcc11防御:                                     |cffcccccc%attribute.护甲%|r
-|cffffcc11生命恢复:                               |cffcccccc%attribute.生命恢复%|r
-|cffffcc11%resource_type%恢复:                               |cffcccccc%attribute.魔法恢复%|r
-
-|cff888888登场作品                                |cff888888%production%
-|cff888888模型来源                                |cff888888%model_source%
-|cff888888设计                                      |cff888888%hero_designer%
-|cff888888代码                                      |cff888888%hero_scripter%
+|cff888888登场作品   |cff888888%production%
+|cff888888模型来源   |cff888888%model_source%
 ]]
 	local difficulty_level = {
 		'|cffffaaaa★|r|cffeeeeee☆☆☆☆|r',
@@ -102,7 +90,9 @@ local function showHeroState(p, u)
 		'|cffff4444★★★★|r|cffeeeeee☆|r',
 		'|cffff2222★★★★★|r|cffeeeeee|r',
 	}
-	local difficulty_tip = '|cffffcc11操作难度:                              ' .. difficulty_level[hero_data.difficulty or 1]
+	local difficulty_tip = '|cffffcc11操作难度:  ' .. difficulty_level[hero_data.difficulty or 1]
+
+	
 	p:sendMsg(difficulty_tip .. '\n' .. tip:gsub('%%(.-)%%', function(name)
 		local data = hero_data
 		for path in name:gmatch '[^%.]+' do

@@ -29,8 +29,9 @@ mt{
     
 function mt:on_add()
     --全图随机刷
-    local minx, miny, maxx, maxy = ac.map_area:get()
-    self.random_point =  ac.point(math.random(minx,maxx),math.random(miny,maxy))
+    -- local minx, miny, maxx, maxy = ac.map.rects['刷怪']:get()
+    -- self.random_point =  ac.point(math.random(minx,maxx),math.random(miny,maxy))
+    self.random_point =  ac.map.rects['刷怪']:get_point()
     
 end
 

@@ -40,15 +40,27 @@ local function range_attack_start(hero,damage)
                 return
             end
             function mvr:on_finish()
-                u:damage
-                {
-                    source = hero,
-                    damage = damage,
-                    skill = false,
-                    missile = self.mover,
-                    attack = true,
-                    common_attack = true,
-                }
+                -- 主弹为普攻，其他弹道为多重射技能
+                if i == 1 then 
+                    u:damage
+                    {
+                        source = hero,
+                        damage = damage,
+                        skill = false,
+                        missile = self.mover,
+                        attack = true,
+                        common_attack = true,
+                    }
+                else
+                    u:damage
+                    {
+                        source = hero,
+                        damage = damage,
+                        skill = '多重射',
+                        missile = self.mover,
+                    }
+                    
+                end    
             end
             
 

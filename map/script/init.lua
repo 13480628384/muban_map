@@ -18,7 +18,7 @@ require '游戏'
 require '物品'
 require '技能'
 require '英雄'
-require '野怪'
+require '刷怪'
 require '平台'
 require '测试'
 

@@ -3,7 +3,8 @@ mt.skill_cnt =8 --一共技能数量
 function mt:on_cast_shot()
     local hero = self.owner 
     local player = hero:get_owner()
-
+    --宠物也帮忙学技能
+    hero = player.hero
     local name = self.skill_name
     if name == nil then 
         return 

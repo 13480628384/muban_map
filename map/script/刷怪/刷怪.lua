@@ -29,7 +29,10 @@ for k,v in pairs(ac.table.UnitData) do
             if not all_creep[v.type] then 
                 all_creep[v.type] = {}
             end
-            table.insert(all_creep[v.type],k)    
+            --排除，以免刷到最终boss怪
+            if k ~= '最终boss' then
+                table.insert(all_creep[v.type],k)    
+            end    
             -- print(k,v.type) 
         end    
     end    
@@ -92,12 +95,15 @@ function mt:random_creeps_datas(temp_type)
     else    
         rand_name = self.all_creep[rand_type][math.random(1,#self.all_creep[rand_type])]
     end    
-
+    -- print(rand_name)
+    -- print(ac.table.UnitData[rand_name].food)
     self.used_food = self.used_food  + ac.table.UnitData[rand_name].food
 
     if self.used_food <= self.all_food then 
         local u = self:has_unit(rand_type)
         if u then
+            print(rand_name,self.current_creep[rand_name])
+            print(self.current_creep[rand_name]['cnt'])
             self.current_creep[rand_name]['cnt'] = self.current_creep[rand_name]['cnt'] +1
         else 
             --保存当前生成的数据
@@ -169,9 +175,9 @@ function mt:add_creep_skill(tab,unit)
             if not  ac.enemy_unit:find_skill(skill_name)  then 
                 ac.enemy_unit:add_skill(skill_name,'隐藏')
             end    
-            -- 本回合结束时 删掉干掉光环怪
+            -- 本回合开始时 删掉干掉光环怪
             -- 直接进入下一波的会跳过回合结束
-            ac.game:event '游戏-回合结束'(function(trg,index, creep) 
+            ac.game:event '游戏-回合开始'(function(trg,index, creep) 
                 if creep.name ~= '刷怪' then
                     return
                 end    
@@ -229,6 +235,8 @@ function mt:on_start()
 
 end
 function mt:on_next()
+    --进攻提示
+    ac.ui.kzt.up_jingong_title(' 第 '..self.index..' 层 ')
     --每一波开始时，进行初始化数据
     self.all_food = all_food * get_player_count()   --每多一个玩家， 多1倍的怪物总人口,每回合开始都去检测人口数量
     self.used_food = 0 
@@ -361,6 +369,7 @@ function mt:on_change_creep(unit,lni_data)
     if unit and data  then 
         unit.gold = data.gold
         unit.exp = data.exp
+        -- print(unit.category,data.category)
         unit.category = data.category
         for k,v in pairs(data.attribute) do 
             unit:set(k,v)
@@ -412,7 +421,7 @@ function mt:on_change_creep(unit,lni_data)
     -- unit:add_skill('腐烂','隐藏')
     -- unit:add_skill('流血','隐藏')
     -- unit:add_skill('善恶有报','隐藏')
-    -- unit:add_skill('闪避++','隐藏')
+    -- unit:add_skill('灵丹妙药','隐藏')
     
 
 end
@@ -432,6 +441,7 @@ function mt:creat_key_unit()
     unit:set('移动速度',650)
     unit:set('生命上限',20)
     unit:add_high(220)
+    unit:add_restriction('魔免')
 
     --逃跑路线
     local hero = ac.find_hero(unit)
@@ -460,7 +470,12 @@ function mt:creat_key_unit()
         unit:issue_order('move',target_point)
 
     end);
-
+    unit:event '单位-受到伤害开始'(function(trg,damage)
+        --不是普攻就跳出
+        if not damage:is_common_attack() or not damage.skill then 
+            return true
+        end    
+    end)
     return unit
 
 end
@@ -507,7 +522,7 @@ end
 
 -- 注册英雄杀怪得奖励事件
 ac.game:event '单位-死亡' (function(_,unit,killer) 
-    if killer.category =='进攻怪' or killer.category =='boss' then
+    if killer.category =='进攻怪' or killer.category =='boss' or unit == killer then
 		return
     end
 
@@ -527,15 +542,60 @@ ac.game:event '单位-死亡' (function(_,unit,killer)
     --加钱
     if unit.gold  then 
         gold = unit.gold * ( 1 + killer:get('金币加成')/100)
-        player:addGold(gold,unit,true)
     end   
-     
-    --加经验,100级最高级
-    if unit.exp  and killer.level <100 then
+    --加经验,
+    if unit.exp  then
         exp = unit.exp * ( 1 + killer:get('经验加成')/100)
-        killer:addXp(exp)
+    end  
+    --100级最高级  
+    if killer.level >= 100 then 
+        exp = 0
+    end 
+
+    local source = killer
+    local target = unit
+    --自己得50%，其他人平分剩余经验和钱
+    local other_exp_per = 0.5
+    local other_gold_per = 0.5
+    --找到附近的其他英雄
+    local from_p = source and source:get_owner()
+    local heros = ac.hero.all_heros
+    local group = {}
+    for u,_ in pairs(heros) do
+        if u:is_alive() and from_p ~= u:get_owner() and u:is_in_range(source, 20000) and target:is_enemy(u) then
+            table.insert(group, u)
+        end
     end
 
+    --附近没有其他英雄，经验加100%
+    if #group == 0 then	
+        --自己加经验
+        if source:is_alive() and source:is_hero() then 
+            source:addXp(exp)
+        end	
+        --加钱
+        player:addGold(gold,unit,true)
+        return
+    end
+
+    --自己加经验
+    if source:is_alive() and source:is_hero() then 
+        source:addXp( exp*(1-other_exp_per) )
+    end	
+    --加钱
+    player:addGold(gold*(1-other_gold_per),unit,true)
+    
+    local len = #group
+    --附近其他英雄平分经验
+    for _, hero in ipairs(group) do
+        -- print(hero)
+        if exp then
+            hero:addXp( exp * other_exp_per / len)
+        end
+        if gold then
+            hero:get_owner():addGold(gold * other_gold_per / len,unit,true)
+        end
+    end
 end);
 
 
@@ -606,7 +666,7 @@ ac.wait(0,function()
     end 
 
     ac.game:event '游戏-开始' (function()
-        local time = 5
+        local time = 10
         if ac.test == true then
             time = 0
         end

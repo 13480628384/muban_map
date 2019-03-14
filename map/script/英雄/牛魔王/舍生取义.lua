@@ -110,7 +110,7 @@ function mt:on_pulse()
 
 end	
 function mt:on_remove()
-	local hero = self.owner 
+	local hero = self.target 
     -- 提升三维(生命上限，护甲，攻击)
     hero:add('减伤%',-self.reduce_rate)
 end

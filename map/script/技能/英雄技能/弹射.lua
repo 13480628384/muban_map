@@ -37,6 +37,9 @@ function mt:on_add()
 	hero:add('攻击%',-self.attack)
 
 	self.trg = hero:event '造成伤害效果' (function (trg,damage) 
+		if not damage:is_common_attack() then 
+			return
+		end	
 		-- self = self:create_cast()
 		self.current_cnt = self.current_cnt + 1
 		-- print('弹射：',self.current_cnt)
@@ -47,7 +50,7 @@ function mt:on_add()
 
 		local target = damage.target
 		-- print('弹射起始位置：',target,target:get_point())
-		local u = ac.selector():in_range(target,700):is_enemy(hero):is_not(target):random()
+		local u = ac.selector():in_range(target,700):is_enemy(hero):is_not(target):is_not(ac.key_unit):random()
 		if not u then 
 			return 
 		end	
@@ -72,6 +75,8 @@ function mt:on_add()
 			{
 				source = hero,
 				skill = skill,
+				attack = true,
+				common_attack = true,
 				damage = damage.damage * (1 - skill.reduce/100)
 			}
 		end	
