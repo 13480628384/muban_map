@@ -9,15 +9,6 @@
 --boss 光环列表
 local buff_list = {
 }
---技能列表
-ac.skill_list = {
-    '肥胖','强壮','钱多多','经验多多','物品多多',
-    '神盾','闪避+','闪避++','眩晕','生命回复',
-    '重生','死亡一指','灵丹妙药','刺猬','怀孕',
-    '抗魔','魔免','火焰','净化','远程攻击',
-    '幽灵','腐烂','流血','善恶有报',
-    '沉默光环','减速光环'
-}
 
 local skill_list = ac.skill_list
 
@@ -374,6 +365,8 @@ function mt:on_change_creep(unit,lni_data)
         for k,v in pairs(data.attribute) do 
             unit:set(k,v)
         end
+        --设置魔抗
+        -- unit:set('魔抗',data.attribute['护甲'])
         --设置 boss 等 属性倍数
         if lni_data.attr_mul  then
             --属性
@@ -383,6 +376,8 @@ function mt:on_change_creep(unit,lni_data)
             unit:set('魔法上限',data.attribute['魔法上限'] * lni_data.attr_mul * self.game_degree_attr_mul)
             unit:set('生命恢复',data.attribute['生命恢复'] * lni_data.attr_mul * self.game_degree_attr_mul)
             unit:set('魔法恢复',data.attribute['魔法恢复'] * lni_data.attr_mul * self.game_degree_attr_mul)
+            --设置魔抗 
+            -- unit:set('魔抗',data.attribute['护甲']* lni_data.attr_mul * self.game_degree_attr_mul)
         end  
 
         --掉落概率
@@ -528,7 +523,7 @@ ac.game:event '单位-死亡' (function(_,unit,killer)
 
     local player = killer:get_owner()
     local gold 
-    local exp 
+    local exp =0
     
     -- 英雄的召唤物 打死的怪，也给英雄加钱加经验
     -- 英雄召唤物享有 英雄的金币、经验加成
@@ -547,10 +542,14 @@ ac.game:event '单位-死亡' (function(_,unit,killer)
     if unit.exp  then
         exp = unit.exp * ( 1 + killer:get('经验加成')/100)
     end  
-    --100级最高级  
+    --100级最高级  未测试
+    local total_killer_xp = killer.xp + exp
+    if total_killer_xp - killer:get_upgrade_xp(99) > 0  then 
+        exp = killer:get_upgrade_xp(99) - killer.xp
+    end    
     if killer.level >= 100 then 
         exp = 0
-    end 
+    end    
 
     local source = killer
     local target = unit

@@ -40,7 +40,7 @@ mt{
 	reduce_rate = 30,
 
 	--cd
-	cool = 1,
+	cool = 20,
 
 	--耗蓝
 	cost = 30,

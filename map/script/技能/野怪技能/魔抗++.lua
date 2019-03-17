@@ -1,10 +1,10 @@
-local mt = ac.skill['魔免'] 
+local mt = ac.skill['魔抗++'] 
 
 mt{
     level = 1,
-    title = "魔免",
+    title = "魔抗++",
     tip = [[
-        被动1：降低自己受到的法术伤害100%
+        被动1：降低自己受到的法术伤害90%
         被动2：降低自己的三维40%
     ]],
 
@@ -12,7 +12,7 @@ mt{
     value = 40,
 
     -- 魔抗
-    magic_defence = 100,
+    magic_defence = 90,
   
     -- 特效
     effect = [[]]

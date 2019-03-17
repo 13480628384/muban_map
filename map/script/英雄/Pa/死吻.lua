@@ -26,7 +26,7 @@ mt{
 	time = 3,
 
 	--cd 25
-	cool = 10,
+	cool = 25,
 
 	--耗蓝
 	cost = 10,

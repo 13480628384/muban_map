@@ -9,7 +9,7 @@ mt{
 	--耗蓝
 	cost = 30,
 	--冷却时间 20
-	cool = 1,
+	cool = 20,
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_UNIT,
 	--施法距离

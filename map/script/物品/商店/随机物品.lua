@@ -23,6 +23,8 @@ cool = 0,
 
 --购买价格
 gold = 1000,
+--每次增加
+cre_gold = 1000,
 
 --物品技能
 is_skill = true,
@@ -32,19 +34,26 @@ is_skill = true,
 function mt:on_cast_start()
     print('施法-随机物品',self.name)
     local hero = self.owner
-    local cre_gold = 1000
+
     local shop_item = ac.item.shop_item_map[self.name]
-    if not hero.buy_cnt then 
-        hero.buy_cnt = 1
-    end    
+    if not hero.buy_item_cnt then 
+        hero.buy_item_cnt = 0
+    end 
+    if not shop_item.player_gold then 
+        shop_item.player_gold = {}
+    end
+
+    local old_gold = shop_item.gold
     --可能会异步
     if hero:get_owner() == ac.player.self then 
         --改变商店物品物价
-        shop_item.gold = shop_item.gold + cre_gold
+        hero.buy_item_cnt = hero.buy_item_cnt + 1  
+        shop_item.gold = shop_item.gold + self.cre_gold * hero.buy_item_cnt
+        -- print( shop_item.gold,self.buy_cnt)
         shop_item:set_tip(shop_item:get_tip())
-        
-    end     
-    hero.buy_cnt = hero.buy_cnt + 1 
+        shop_item.player_gold[hero:get_owner()] = shop_item.gold
+        shop_item.gold = old_gold
+    end 
 
     --给英雄随机添加物品
     local rand_list = ac.unit_reward['商店随机物品']

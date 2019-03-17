@@ -135,7 +135,7 @@ function mt:add_sell_item(name,i)
 	item.shop_slot_id = i
 	--刷新物品数据                        ''..self:get_name()
 	-- print(item.name,self:get_name())
-	item:set_sell_state()
+	item:set_sell_state('                   '..self:get_name())
 	if not self.sell_item_list then 
 		self.sell_item_list = {}
 	end	
@@ -230,15 +230,24 @@ function mt:fresh()
 	self:remove_all()
 
 	--再添加一次
+	--也要继承玩家价
 	for i=1,12 do 
 		if data.sell[i] then 
 			local new_shop_item = self:add_sell_item(data.sell[i] ,i)
 			--新物品继承属性
 			if new_shop_item and not data.sell_new_gold[i]  then 
 				if data.sell_item_list[i] and data.sell_item_list[i].gold then 
-					new_shop_item.gold = data.sell_item_list[i].gold
+					local it = data.sell_item_list[i]
+					new_shop_item.player_gold = it.player_gold
+					local gold 
+					if it.player_gold then 
+						gold = it.player_gold[ac.player.self] 
+					end	
+					new_shop_item.gold = gold or it.gold
 					--刷新数据
-					new_shop_item:set_sell_state()
+					new_shop_item:set_sell_state('                   '..self:get_name())
+					--设置回原来的价格
+					new_shop_item.gold = it.gold
 				end	
 			end	
 		end	

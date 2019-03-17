@@ -33,10 +33,10 @@ mt{
 	physical_crite_rate = 20,
 
 	--cd 20
-	cool = 1,
+	cool = 20,
 
 	--耗蓝 30
-	cost = 1,
+	cost = 30,
 
 	--特效模型
 	effect = [[AZ_Kaer_T1.mdx]],

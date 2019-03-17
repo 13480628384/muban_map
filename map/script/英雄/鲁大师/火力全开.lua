@@ -46,10 +46,10 @@ mt{
 	end,	
 
 	--cd 40
-	cool = 1,
+	cool = 40,
 
 	--耗蓝 60
-	cost = 1,
+	cost = 60,
 
 	--特效模型
 	effect1 = [[Abilities\Weapons\Mortar\MortarMissile.mdl]],

@@ -46,7 +46,7 @@ mt{
 	life_rate = 20,
 
 	--cd
-	cool = 1,
+	cool = 25,
 
 	--耗蓝
 	cost = 35,

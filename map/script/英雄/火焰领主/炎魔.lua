@@ -24,7 +24,7 @@ mt{
 	end	,
 
 	--cd 45
-	cool = 1,
+	cool = 45,
 
 	--耗蓝
 	cost = 60,

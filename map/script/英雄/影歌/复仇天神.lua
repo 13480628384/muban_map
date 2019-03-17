@@ -30,7 +30,7 @@ mt{
 	fuchou_chance = 10,
 
 	--cd 45
-	cool = 1,
+	cool = 45,
 
 	--耗蓝
 	cost = 60,

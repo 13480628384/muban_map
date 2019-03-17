@@ -1,5 +1,5 @@
 
-
+--需要考虑套装在地上时的文字显示
 --套装
 local item ={}
 item.suit_type = '召唤'
@@ -119,20 +119,22 @@ local function unit_remove_suit(unit,item)
         return
     end    
     local tip = ''
+    local item_self_tip = ''
     -- unit.suit[]
     --只需要减属性即可
     local suit_count = get_suit_count(unit,item.suit_type)
     local name = item.suit_name 
    
     tip = tip ..'|cffAAAAAA'.. name..' (已拥有|r|cffffffff'..suit_count..'|r|cffAAAAAA) |r'..'\n'
+    item_self_tip = item_self_tip ..'|cffAAAAAA'.. name..'|r\n'
     -- print(tip)
     --刷新tip
                  
     for k,v in pairs(unit.suit) do 
         for i = 1,6 do 
-            if v[i] then 
+            if v[i] and v[i][2] == item.suit_type then 
                 --如果类型一样且已激活
-                if v[i][1] and v[i][2] == item.suit_type and suit_count < i then 
+                if v[i][1]   and suit_count < i then 
                     --减属性
                     for k,v in v[i][3]:gmatch '(%S+)%+(%d+%s-)' do
                         --额外增加人物属性
@@ -146,9 +148,12 @@ local function unit_remove_suit(unit,item)
                 else
                     tip = tip..v[i][3]..'('..i..')\n'
                 end    
+                item_self_tip = item_self_tip ..'|cffffffff'..v[i][3]..'('..i..')|r\n'
             end 
         end 
     end 
+    --先刷新丢地上的物品
+    item:set_tip(item:get_tip()..item_self_tip)
     --刷新 套装说明 移除时的套装变色说明未解决
     fresh_suit_tip(unit,item.suit_type,tip)
 

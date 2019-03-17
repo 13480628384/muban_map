@@ -312,7 +312,7 @@ function mt:get_tip()
 		 gold = '|cffebd43d(出售：'..self:sell_price()..')|r|n'
 	else
 		--否则就是在地上或商店里，地上不用管，商店的话修改出售价格
-		 store_title = self.store_name..'|r\n'
+		 store_title = '购买 '..self.store_name..'|r\n'
 		--否则就是在地上或商店里，地上不用管，商店的话修改出售价格
 		 gold = '|cffebd43d(价格：'..self:buy_price()..')|r|n'
 	end
@@ -648,7 +648,7 @@ function unit.__index:add_item(it,is_fall)
 	self.item_list[slot] = it
 	it.slot_id = slot
 	-- print('获得物品',it.handle,it.owner,it.name,it.slot_id)
-	self:print_item(true)
+	-- self:print_item(true)
 	-- 如果单位身上已经有这个物品的handle了，再添加一次会触发先丢弃再获得物品事件。
 	jass.UnitAddItem(self.handle,it.handle)
 

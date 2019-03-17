@@ -31,10 +31,10 @@ mt{
 	attack_gap = 0.2,
 
 	--cd 15
-	cool = 1,
+	cool = 15,
 
 	--耗蓝35
-	cost = 1,
+	cost = 35,
 
 	--特效模型
 	effect = [[Abilities\Spells\Orc\Bloodlust\BloodlustTarget.mdl]],

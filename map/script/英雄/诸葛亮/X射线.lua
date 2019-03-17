@@ -33,7 +33,7 @@ mt{
 	end,	
 
 	--cd 30
-	cool = 1,
+	cool = 30,
 
 	--耗蓝
 	cost = 35,

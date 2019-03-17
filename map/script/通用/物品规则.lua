@@ -130,6 +130,10 @@
         local player = u.owner
         local gold = u.owner.gold
         local golds = it:buy_price()
+        --如果有玩家自身价格，则售价为玩家自身价
+        if it.player_gold then 
+            golds = it.player_gold[player] or golds
+        end    
         if gold < golds then
             ac.player.self:sendMsg('钱不够')
             return
@@ -150,6 +154,7 @@
         else    
             u:add_item(it.name)   
         end    
+        --给单位添加物品时，会进行一系列逻辑处理，处理完后会改变 buy_suc 状态
         if u.buy_suc then 
             -- print('扣钱')
             player:addGold( - golds,u)

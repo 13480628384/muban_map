@@ -125,7 +125,7 @@ local function hero_register_main()
 		--  ac.item.add_skill_item('摔破罐子',hero)
 		--  ac.item.add_skill_item('冰冷核心',hero)
 		--  ac.item.add_skill_item('魔王降临',hero)
-		 ac.item.add_skill_item('献祭',hero)
+		--  ac.item.add_skill_item('献祭',hero)
 		--  hero:add_item('吞噬丹')
 		--  hero:add_item('吞噬丹')
 		--  hero:add_item('吞噬丹')
@@ -135,8 +135,8 @@ local function hero_register_main()
 		 
         -- ac.item.add_skill_item('粉碎',hero)
         -- ac.item.add_skill_item('贪婪者的心愿',hero)
-        ac.item.add_skill_item('弹射',hero)
-        ac.item.add_skill_item('F4战斗机',hero)
+        -- ac.item.add_skill_item('弹射',hero)
+        -- ac.item.add_skill_item('F4战斗机',hero)
         -- ac.item.add_skill_item('穿刺',hero)
         -- ac.item.add_skill_item('魔王降临',hero)
 		
@@ -144,13 +144,23 @@ local function hero_register_main()
 		-- print(hero:get_point())
 
 
-		hero:add('物爆几率',110)
-		hero:add('法爆几率',110)
-		hero:add('会心几率',110)
-		hero:add('减免',110)
-		hero:add('多重射',3)
+		-- hero:add('物爆几率',110)
+		-- hero:add('法爆几率',110)
+		-- hero:add('会心几率',110)
+		-- hero:add('减免',110)
+		-- hero:add('多重射',3)
 		hero:add_item('新人寻宝石') 
 		-- hero:add_item('勇气之证')
+
+		-- hero:add_item('账簿')
+		-- hero:add_item('故事书')
+		-- hero:add_item('故事集')
+		-- hero:add_item('故事集')
+		-- hero:add_item('故事集')
+		-- hero:add_item('故事集')
+
+
+
 		--添加英雄属性面板
 		hero:add_skill('英雄属性面板', '隐藏')
 
