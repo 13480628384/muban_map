@@ -50,7 +50,7 @@ mt{
 function mt:on_add()
     local skill = self
 	local hero = self.owner 
-	hero:add('减伤%',self.reduce_rate)
+	hero:add('减免',self.reduce_rate)
 
 	self.trg = hero:add_buff '舍生取义-被动' 
 	{
@@ -79,7 +79,7 @@ end
 function mt:on_remove()
 	local hero = self.owner 
     -- 提升三维(生命上限，护甲，攻击)
-    hero:add('减伤%',-self.reduce_rate)
+    hero:add('减免',-self.reduce_rate)
     if self.trg then
         self.trg:remove()
         self.trg = nil
@@ -111,8 +111,6 @@ function mt:on_pulse()
 end	
 function mt:on_remove()
 	local hero = self.target 
-    -- 提升三维(生命上限，护甲，攻击)
-    hero:add('减伤%',-self.reduce_rate)
 end
 
 local mt = ac.buff['舍生取义-被动']

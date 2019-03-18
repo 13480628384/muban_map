@@ -21,8 +21,9 @@ mt{
         return hero:get('攻击') * 3
     end,
 
-    -- 伤害为敌人血量的60%
-    value = 60,
+    -- 伤害为敌人血量的80%
+    value = 80,
+    
     -- cd
     cool = 5,
     -- 多少个死亡一指

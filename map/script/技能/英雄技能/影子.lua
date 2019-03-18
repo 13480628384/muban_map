@@ -13,7 +13,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤1只影子助战（属性与智力相关）；持续时间30S],
+	tip = [[召唤1只影子助战（属性与智力相关）；持续时间30S]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNMirrorImage.blp]],
 	--召唤物

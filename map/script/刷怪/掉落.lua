@@ -279,22 +279,26 @@ ac.hero_kill_unit = hero_kill_unit
 
 --如果死亡的是野怪的话
 ac.game:event '单位-死亡' (function (_,unit,killer)
-    if unit.category ~='进攻怪'  then
-		return
+    -- 进攻怪 和 boss 掉落
+    if unit.category and unit.category =='进攻怪' or unit.category =='boss'  then
+
+        local player = killer:get_owner()
+        local dummy_unit = player.hero or ac.dummy
+        local fall_rate = unit.fall_rate *( 1 + dummy_unit:get('物品获取率')/100 )
+        print('装备掉落概率：',fall_rate,unit.fall_rate)
+        hero_kill_unit(player,killer,unit,fall_rate)
+        
     end
-    local player = killer:get_owner()
-    local dummy_unit = player.hero or ac.dummy
-    local fall_rate = unit.fall_rate *( 1 + dummy_unit:get('物品获取率')/100 )
-    print('装备掉落概率：',fall_rate,unit.fall_rate)
-    hero_kill_unit(player,killer,unit,fall_rate)
+
 end)
 
---如果死亡的是钥匙怪的话
+-- 如果死亡的是钥匙怪的话
+-- 按照玩家数 多产生掉落次数
 ac.game:event '单位-死亡' (function (_,unit,killer)
     if unit:get_name() ~='钥匙怪' then
 		return
     end
-    
+
     local p_count = get_player_count()
     for i = 1 ,p_count do  
         local name = get_reward_name(unit_reward['钥匙怪'])
@@ -312,12 +316,10 @@ end)
 --物品掉落，主动发起掉落而不是单位死亡时掉落 。
 -- 应用：张全蛋技能 妙手空空
 ac.game:event '物品-偷窃' (function (_,unit,killer)
-
-    ac.game['偷窃'] = true
-
-    if unit.category ~='进攻怪' then
+    if unit.category ~='进攻怪' or (unit.data and unit.data.type =='boss' ) then
 		return
     end
+    ac.game['偷窃'] = true
     -- print('触发 物品-偷窃')
     local player = killer:get_owner()
     local dummy_unit = player.hero or ac.dummy
@@ -336,11 +338,11 @@ end)
 -- 应用： 摔破罐子
 ac.game:event '物品-随机装备' (function (_,unit,killer)
 
-    ac.game['偷窃'] = true
-
     if unit.category ~='进攻怪' then
 		return
     end
+
+    ac.game['偷窃'] = true
     -- print('触发 物品-偷窃')
     local player = killer:get_owner()
 

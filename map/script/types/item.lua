@@ -119,6 +119,8 @@ local zb_color_model = {
     ['红'] = [[File00000376 -R.mdx]],
     ['绿'] = [[File00000376 - G.mdx]],
 }
+ac.zb_color_model = zb_color_model
+
 local drop_flag = false
 local item_slk = slk.item
 

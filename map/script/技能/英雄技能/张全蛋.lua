@@ -26,9 +26,8 @@ mt{
 	time = 20,
 	--数量
 	cnt = 1,
-
 	--几率
-	chance = 100,
+	chance = 10,
 }
 	
 function mt:on_add()

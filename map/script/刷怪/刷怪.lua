@@ -24,7 +24,6 @@ for k,v in pairs(ac.table.UnitData) do
             if k ~= '最终boss' then
                 table.insert(all_creep[v.type],k)    
             end    
-            -- print(k,v.type) 
         end    
     end    
     if v.category =='进攻怪' then
@@ -93,7 +92,7 @@ function mt:random_creeps_datas(temp_type)
     if self.used_food <= self.all_food then 
         local u = self:has_unit(rand_type)
         if u then
-            print(rand_name,self.current_creep[rand_name])
+            print(rand_name,rand_type,self.current_creep[rand_name])
             print(self.current_creep[rand_name]['cnt'])
             self.current_creep[rand_name]['cnt'] = self.current_creep[rand_name]['cnt'] +1
         else 
