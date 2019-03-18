@@ -11,7 +11,7 @@ mt{
 	--技能说明
 	title = '|cff00bdec火焰雨|r',
 	tip = [[
-	攻击有 %chance% % 的概率对 %area% 范围造成物理伤害  (%damage%)
+	攻击有 %chance% % 的概率对 %area% 范围造成法术伤害  (%damage%)
 	]],
 	--范围
 	area = 1500,
@@ -19,13 +19,13 @@ mt{
 	chance = 10,
 	damage = function(self,hero)
 		if self and self.owner then 
-			return self.owner:get('智力')*1+1200
+			return self.owner:get('智力')*2+500
 		end	
 	end	,
 	--是否被动
 	passive = true,
 	--伤害类型
-	damage_type = '物理',
+	damage_type = '法术',
 	--波次
 	tm = 1
 }

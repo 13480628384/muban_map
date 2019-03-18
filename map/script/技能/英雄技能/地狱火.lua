@@ -13,7 +13,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤1只地狱火帮助英雄作战（当前波属性*2）；持续时间20S；CD75S]],
+	tip = [[召唤1只地狱火助战（属性和智力相关）；持续时间20S]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNInfernal.blp]],
 	--特效

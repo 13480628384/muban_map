@@ -13,7 +13,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤1只凤凰帮助英雄作战（当前波属性*1.5）；持续时间25S；CD65S]],
+	tip = [[召唤1只凤凰助战（属性和智力相关）；持续时间25S]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNMarkOfFire.blp]],
 	--特效

@@ -15,7 +15,7 @@ mt{
 	--施法范围
 	area = 800,
 	--介绍
-	tip = [[召唤刀刃对范围800码的敌方单位攻击，造成敏捷*5的法术伤害]],
+	tip = [[召唤刀刃对范围800码的敌方单位攻击，造成敏捷*5的物理伤害]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNFanOfKnives.blp]],
 	--特效
@@ -28,7 +28,7 @@ mt{
 			return self.owner:get('敏捷')*self.int
 		end
 	end	,
-	damage_type = '法术'
+	damage_type = '物理'
 }
 function mt:on_add()
     local skill = self

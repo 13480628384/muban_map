@@ -17,7 +17,7 @@ mt{
 	--施法范围
 	area = 600,
 	--介绍
-	tip = [[对范围600码的敌人造成移动力减少 50% 和攻击速度减少 25% ，持续3秒，并造成攻击力*1.5的法术伤害 （%damage%） ]],
+	tip = [[对范围600码的敌人造成移动力减少 50% 和攻击速度减少 25% ，持续3秒，并造成攻击力*1.5的物理伤害 （%damage%） ]],
 	--技能图标
 	art = [[jineng\jineng008.blp]],
 	--特效
@@ -73,7 +73,7 @@ function mt:on_cast_shot()
 			skill = self,
 			source = hero,
 			damage = self.damage,
-			damage_type = '法术'
+			damage_type = '物理'
 		}
 	end	
 end	
