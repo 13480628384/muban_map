@@ -11,8 +11,8 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
     if not creep.boss then 
         local unit = ac.player.com[2]:create_unit('最终boss',ac.map['刷怪中心点'],270)
         unit:set_size(1)
-        -- unit:add_restriction '定身'
-        -- unit:add_restriction '缴械'
+        unit:add_restriction '定身'
+        unit:add_restriction '缴械'
         unit:add_restriction '无敌'
         -- unit:setColor(100,100,100)
         -- unit:setColor(68,68,68)
@@ -68,6 +68,8 @@ ac.game:event '游戏-最终boss' (function(trg,index, creep)
         c_boss_buff:remove()
     end   
     creep.boss:remove_restriction '无敌' 
+    creep.boss:remove_restriction '定身'
+    creep.boss:remove_restriction '缴械'
     --设置搜敌路径
     creep.boss:set_search_range(99999)
     --注册事件

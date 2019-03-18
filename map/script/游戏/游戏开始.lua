@@ -19,8 +19,8 @@ ac.game:event '游戏-开始' (function()
     end    
     
     -- require '平台.商城'
-    -- local fresh_time = 5*60 --刷新时间
-    local fresh_time = 10 --刷新时间
+    local fresh_time = 5*60 --刷新时间
+    -- local fresh_time = 10 --刷新时间
 
     --创建物品商店
     local x,y = ac.map.rects['物品商店']:get_point():get()

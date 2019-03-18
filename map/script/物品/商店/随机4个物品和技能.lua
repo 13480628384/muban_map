@@ -1,7 +1,7 @@
 
 
 local function fresh_shop_item(shop)
-    for i = 5, 8 do 
+    for i = 9, 12 do 
         local rand_list = ac.unit_reward['商店随机物品']
         local rand_name = ac.get_reward_name(rand_list)
         if not rand_name then 
@@ -37,7 +37,7 @@ local function fresh_shop_item(shop)
 end    
 
 local function fresh_shop_skill(shop)
-    for i = 5, 8 do 
+    for i = 9, 12 do 
         --删除商店的物品
         -- local old_item = shop.sell_item_list[i]
         -- if old_item then 

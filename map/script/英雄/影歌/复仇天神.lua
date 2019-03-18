@@ -12,9 +12,6 @@ mt{
 			 这个天神攻击有 %fuchou_chance% % 概率 召唤无敌的复仇之魂（无碰撞体积，攻击为当前波的怪物基础值的一半，拥有和英雄一样的经验、金币、物品获取率），
 			 持续 %time% 秒；
 		被动：攻击有 %chance% % 概率召唤 复仇之魂
-
-		|cff1FA5EE召唤物|r:
-
 	]],
 	
 	--技能图标 3（60°扇形分三条，角度30%）+3+3+1+1，一共5波，
@@ -37,7 +34,8 @@ mt{
 
 	--持续时间
 	time = 30,
-
+	--数量
+	cnt = 1,
 
 	--特效模型
 	effect = [[]],
@@ -53,25 +51,40 @@ end
 function mt:on_cast_shot()
     local skill = self
 	local hero = self.owner
-	local point = hero:get_point()-{hero:get_facing(),100}--在英雄附近 100 到 400 码 随机点
-	local unit = hero:get_owner():create_unit('复仇天神',point)	
 
-	local index = ac.creep['刷怪'].index
-	if not index or index == 0 then 
-		index = 1
+	local cnt = (self.cnt + hero:get('召唤物')) or 1
+	--多个召唤物
+	for i=1,cnt do 
+		local point = hero:get_point()-{hero:get_facing(),100}--在英雄附近 100 到 400 码 随机点
+		local unit = hero:get_owner():create_unit('复仇天神',point)	
+		
+		local life_mul, defence_mul, attack_mul = ac.get_summon_mul(hero.level)
+		local data = {}
+		data.attribute={
+			['生命上限'] = hero:get('智力') * life_mul,
+			['护甲'] = hero:get('智力') * defence_mul,
+			['攻击'] = hero:get('智力') * attack_mul,
+			['魔法上限'] = 60,
+			['移动速度'] = 325,
+			['攻击间隔'] = 1.5,
+			['生命恢复'] = 1.2,
+			['魔法恢复'] = 0.6,
+			['攻击距离'] = 100,
+		}
+		
+		-- print('技能使用时 当前波数',index)
+		local data = ac.table.UnitData['进攻怪-'..index]
+
+		self.buff = unit:add_buff '召唤物' {
+			time = 30,
+			attribute = data.attribute,
+			skill = self,
+		}
+
+		local skl = unit:add_skill('复仇之魂','英雄')
+		skl.chance = self.fuchou_chance
+		-- print(unit:get('移动速度'))
 	end	
-	-- print('技能使用时 当前波数',index)
-	local data = ac.table.UnitData['进攻怪-'..index]
-
-	self.buff = unit:add_buff '召唤物' {
-		time = 30,
-		attribute = data.attribute,
-		skill = self,
-	}
-
-	local skl = unit:add_skill('复仇之魂','英雄')
-	skl.chance = self.fuchou_chance
-	-- print(unit:get('移动速度'))
 	
 
 end

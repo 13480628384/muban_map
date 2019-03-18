@@ -109,7 +109,15 @@ local color_model = {
     ['金'] = [[faguanghuang.mdx]],
     ['红'] = [[faguanghong.mdx]],
     ['绿'] = [[faguanglv.mdx]],
-    
+}
+
+--颜色模型 目前应用于装备
+local zb_color_model = {
+    ['白'] = [[File00000376 -W.mdx]],
+    ['蓝'] = [[File00000376 - B.mdx]],
+    ['金'] = [[File00000376 -Y.mdx]],
+    ['红'] = [[File00000376 -R.mdx]],
+    ['绿'] = [[File00000376 - G.mdx]],
 }
 local drop_flag = false
 local item_slk = slk.item
@@ -839,6 +847,11 @@ function ac.item.create_item(name,poi,is)
 	--设置物品模型 消耗品
 	if items.color and items.item_type == '消耗品' then 
 		items._model = color_model[items.color]
+	end
+	
+	--设置物品模型 装备
+	if items.color and items.item_type == '装备' then 
+		items._model = zb_color_model[items.color]
 	end
 
 	if not is then 

@@ -8,8 +8,9 @@ mt{
 	level = 1,
 	
 	tip = [[
-		主动：对周围%area%码的敌人每 %pulse% 秒造成 攻击力* %attack% +力量* %power% 的物理伤害(%damage%)，持续时间 %time% 秒
+		主动：对周围%area%码的敌人每 %pulse% 秒造成物理伤害，持续时间 %time% 秒
 		被动：提升自己的生命上限%life_rate% %
+		|cff00bdec伤害：攻击力*%attack% |cff00bdec+力量*%power% |cff00bdec(%damage%|cff00bdec)|r
 	]],
 	
 	--技能图标

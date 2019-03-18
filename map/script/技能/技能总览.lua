@@ -22,6 +22,13 @@ ac.skill_list2 = {
     '光明契约','摔破罐子','刀刃旋风','黑暗契约','死亡飞镖','闪烁','狂猛','属性转换','献祭','群体治疗','圣光','治疗守卫','冰甲','心灵之火',
     '闪电手','愤怒','爱屋及乌','妙手空空','自然之力','水元素','影子','狼','地狱火','凤凰','F4战斗机','战鹰','硬币机器','张全蛋'
 }
+
+--统一定 技能价格 技能售价
+for _,name in ipairs(ac.skill_list2) do
+    ac.skill[name].gold = 1000
+end    
+
+
 local function initialize()
     local unit = ac.player(16):create_dummy('e001',ac.point(0,0),0)
 

@@ -44,18 +44,21 @@ function mt:on_add()
 
 			local point = hero:get_point()-{hero:get_facing(),100}
 			local unit = hero:get_owner():create_unit('幻象马甲-蝗虫',point)	
-			local index = ac.creep['刷怪'].index
-			if not index or index == 0 then 
-				index = 1
-			end	
-			local unit_data = ac.table.UnitData['进攻怪-'..index]
 
-			local data ={}
-			data.attribute = {}
-			for k, v in pairs(unit_data.attribute) do
-				data.attribute[k] = v 
-			end
-			data.attribute['攻击'] = data.attribute['攻击'] * 0.5
+			local life_mul, defence_mul, attack_mul = ac.get_summon_mul(hero.level)
+			local data = {}
+			data.attribute={
+				['生命上限'] = hero:get('智力') * life_mul,
+				['护甲'] = hero:get('智力') * defence_mul,
+				['攻击'] = hero:get('智力') * attack_mul * 0.5,
+				['魔法上限'] = 60,
+				['移动速度'] = 325,
+				['攻击间隔'] = 1.5,
+				['生命恢复'] = 1.2,
+				['魔法恢复'] = 0.6,
+				['攻击距离'] = 100,
+			}
+
 			
 			self.buff = unit:add_buff '召唤物' {
 				skill = self,

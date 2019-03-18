@@ -78,8 +78,8 @@ ac.game:event '单位-发动攻击'  (function(trg, damage)
     end        
     local hero = damage.source
     local count = hero:get('多重射') or 0
-    -- print('重新进行攻击',count)  
-    if count <= 1 then
+    -- print('重新进行攻击',count,hero)  
+    if count < 1 then
         return 
     end
 

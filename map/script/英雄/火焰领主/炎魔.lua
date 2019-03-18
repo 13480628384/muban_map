@@ -29,6 +29,9 @@ mt{
 	--耗蓝
 	cost = 60,
 
+	--数量
+	cnt = 1,
+
 	--持续时间
 	time = 25,
 
@@ -63,12 +66,21 @@ local function create_summon_unit(skill,where)
 	local point = where
 	local unit = hero:get_owner():create_unit('炎魔',point)	
 
-	local index = ac.creep['刷怪'].index
-	if not index or index == 0 then 
-		index = 1
-	end	
-	-- print('技能使用时 当前波数',index)
-	local data = ac.table.UnitData['进攻怪-'..index]
+
+	local life_mul, defence_mul, attack_mul = ac.get_summon_mul(hero.level)
+	local data = {}
+	data.attribute={
+		['生命上限'] = hero:get('智力') * life_mul,
+		['护甲'] = hero:get('智力') * defence_mul,
+		['攻击'] = hero:get('智力') * attack_mul,
+		['魔法上限'] = 60,
+		['移动速度'] = 325,
+		['攻击间隔'] = 1.5,
+		['生命恢复'] = 1.2,
+		['魔法恢复'] = 0.6,
+		['攻击距离'] = 100,
+	}
+
 	unit:add_buff '召唤物' {
 		time = skill.time,
 		attribute = data.attribute,
@@ -101,8 +113,13 @@ end
 function mt:on_cast_shot()
     local skill = self
 	local hero = self.owner
-	local where = hero:get_point() - { hero:get_facing(),100 }
-	create_summon_unit(skill,where)
+	
+	local cnt = (self.cnt + hero:get('召唤物')) or 1
+	--多个召唤物
+	for i=1,cnt do 
+		local where = hero:get_point() - { hero:get_facing(),100 }
+		create_summon_unit(skill,where)
+	end	
 	
 end
 

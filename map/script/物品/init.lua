@@ -17,8 +17,9 @@ function ac.item.create_skill_item(name,poi,is)
     local skill = ac.dummy:add_skill(name,'隐藏')
     local tip = skill:get_simple_tip(ac.dummy,1)
     local art = skill:get_art()
+    item.gold = skill.gold
     skill:remove()
-
+    
     item:set_name(name) 
     item.skill_name = name
     item.tip =  tip .. '|n|cff808080使用即可习得该技能|r' 
