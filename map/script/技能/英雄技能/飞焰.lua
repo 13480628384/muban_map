@@ -10,14 +10,14 @@ mt{
 	title = '|cff00bdec飞焰|r',
 	tip = [[
 	攻击有%chance% % 的概率召 %num% 个 %title% 
-	造成属性物理伤害  (%damage%)
+	造成属性法术伤害  (%damage%)
 	]],
 	--概率%
 	chance = 10,
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 
-		return self.owner:get('智力')*1+1200
+		return self.owner:get('智力')*2+500
 		end
 	end	,
 	--是否被动
@@ -30,6 +30,9 @@ mt{
 	num = 20,
 	--冷却
 	cool = 3,
+	
+	--伤害类型
+	damage_type = '法术',
 	
 	--必填
 	is_skill = true,

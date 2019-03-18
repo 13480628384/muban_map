@@ -17,7 +17,7 @@ mt{
 	--施法范围
 	area = 500,
 	--介绍
-	tip = [[对范围500码敌人晕眩2S，并造成力量*5的法术伤害 （%damage%） ]],
+	tip = [[对范围500码敌人晕眩2S，并造成力量*5的物理伤害 （%damage%） ]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNWarStomp.blp]],
 	--特效
@@ -66,7 +66,7 @@ function mt:on_cast_shot()
 			skill = self,
 			source = hero,
 			damage = self.damage,
-			damage_type = '法术'
+			damage_type = '物理'
 		}
 	end	
 end	

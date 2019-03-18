@@ -8,7 +8,7 @@ mt{
 	--技能说明
 	title = '闪电链',
 	tip = [[
-		攻击有 %chance% % 的概率对 %area% 范围造成物理伤害  (%damage%)
+		攻击有 %chance% % 的概率对 %area% 范围造成法术伤害  (%damage%)
 	]],
 	--弹射范围(直径)
 	area = 1000,
@@ -16,7 +16,7 @@ mt{
 	chance = 10,
 	damage = function(self,hero)
 		if self and self.owner then 
-		return self.owner:get('智力')*1+1200
+		return self.owner:get('智力')*2
 		end
 	end	,
 	--是否被动
@@ -27,6 +27,9 @@ mt{
 	cool = 0,
 	--是否技能
 	is_skill = true,
+	
+	--伤害类型
+	damage_type = '法术',
 }
 mt.ref = 'origin'
 mt.model = [[Abilities\Weapons\Bolt\BoltImpact.mdl]]

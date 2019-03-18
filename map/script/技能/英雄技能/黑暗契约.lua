@@ -15,7 +15,7 @@ mt{
 	--施法距离
 	range = 500,
 	--介绍
-	tip = [[与黑暗签下契约，损失50% 当前生命值，对指定敌人进行一次吸魂，造成敏捷*10的法术伤害，该技能如果杀死敌人，英雄将永久提高 0.5% 的敏捷]],
+	tip = [[损失50% 当前生命值，对指定敌人造成敏捷*10的物理伤害，如果杀死敌人，英雄将永久提高 0.5% 的敏捷]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNDeathPact.blp]],
 	--永久智力
@@ -28,7 +28,7 @@ mt{
 		return self.owner:get('敏捷')*10
 		end
 	end	,
-	damage_type = '法术'
+	damage_type = '物理'
 }
 function mt:on_cast_shot()
     local skill = self

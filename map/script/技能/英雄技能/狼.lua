@@ -13,7 +13,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤2只狼帮助英雄作战（当前波属性的一半，拥有被动暴击）；持续时间20S；CD40S]],
+	tip = [[召唤2只狼助战（属性与智力相关，拥有被动暴击）；持续时间20S]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNSpiritWolf.blp]],
 	--特效

@@ -17,7 +17,7 @@ mt{
 	--施法距离
 	range = 800,
 	--介绍
-	tip = [[对一条直线上的敌人晕眩1S，并造成力量*6的法术伤害 （%damage%） ]],
+	tip = [[对一条直线上的敌人晕眩1S，并造成力量*6的物理伤害 （%damage%） ]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNImpale.blp]],
 	--特效
@@ -101,7 +101,7 @@ function mt:on_cast_shot()
 				skill = skill,
 				source = hero,
 				damage = skill.damage,
-				damage_type = '法术'
+				damage_type = '物理'
 			}
 		end	
 	end	

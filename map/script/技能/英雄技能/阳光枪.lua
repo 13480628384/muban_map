@@ -8,7 +8,7 @@ mt{
 	title = '阳光枪',
 	tip = [[
 	攻击有 %chance% % 的概率对 %hit_area% 范围造成物理伤害 (%damage%)
-	伤害:智力+1200
+	伤害:敏捷*5+1500
 	]],
 	--范围
 	hit_area = 150,
@@ -17,7 +17,7 @@ mt{
 	chance = 10,
 	damage = function(self,hero)
 		if self and self.owner then 
-		return self.owner:get('智力')*1+1200
+		return self.owner:get('敏捷')*5+1500
 		end
 	end	,
 	--是否被动

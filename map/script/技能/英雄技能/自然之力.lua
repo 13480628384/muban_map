@@ -13,7 +13,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤2只枯木战士帮助英雄作战（当前波属性的一半）；持续时间25S；CD40S]],
+	tip = [[召唤2只枯木战士助战（属性与智力相关）；持续时间25S]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNEnt.blp]],
 	--特效

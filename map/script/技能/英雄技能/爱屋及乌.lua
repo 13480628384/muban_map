@@ -57,7 +57,7 @@ end
 
 
 local mt = ac.buff['爱屋及乌']
-mt.ref = 'overhead' 
+mt.ref = 'origin' 
 mt.cover_type = 1
 mt.cover_max = 1
 mt.keep = true

@@ -17,7 +17,7 @@ mt{
 	--施法距离
 	range = 900,
 	--介绍
-	tip = [[对单一敌人造成晕眩3S，并造成攻击力*3的法术伤害]],
+	tip = [[对单一敌人造成晕眩3S，并造成攻击力*3的物理伤害]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNStormBolt.blp]],
 	--特效
@@ -74,7 +74,7 @@ function mt:on_cast_shot()
 			skill = skill,
 			source = hero,
 			damage = skill.damage,
-			damage_type = '法术'
+			damage_type = '物理'
 		}
 	end	
 	
