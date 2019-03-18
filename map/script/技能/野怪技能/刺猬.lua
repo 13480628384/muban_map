@@ -29,6 +29,7 @@ function mt:on_add()
     hero:add('生命上限%', -self.value)
     hero:add('护甲%', -self.value)
     hero:add('攻击%', -self.value)
+    hero:add('魔抗%', -self.value)
 
     hero:add_effect('origin',self.effect)
 
@@ -64,6 +65,7 @@ function mt:on_remove()
     hero:add('生命上限%', self.value)
     hero:add('护甲%', self.value)
     hero:add('攻击%', self.value)
+    hero:add('魔抗%', self.value)
 
     if self.trg then
         self.trg:remove()

@@ -15,11 +15,11 @@ mt{
 |cff00bdec%tip2%|r
     ]],
 	--技能图标
-	art = [[ReplaceableTextures\CommandButtons\BTNReplenishManaOn.blp]],
+	art = [[sxzh1.blp]],
 	--技能图标
-	art1 = [[BTNpjq.blp]],
+	art1 = [[sxzh2.blp]],
 	--技能图标
-	art2 = [[ReplaceableTextures\CommandButtons\BTNImmolationOn.blp]],
+	art2 = [[sxzh3.blp]],
 	--每秒
     pulse = 1,
     --值

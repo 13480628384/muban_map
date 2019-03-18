@@ -31,6 +31,7 @@ function mt:on_add()
     -- 降低三维(生命上限，护甲，攻击)
     hero:add('生命上限%', -self.value)
     hero:add('护甲%', -self.value)
+    hero:add('魔抗%', -self.value)
     hero:add('攻击%', -self.value)
 
 
@@ -69,6 +70,7 @@ function mt:on_remove()
     -- 提升三维(生命上限，护甲，攻击)
     hero:add('生命上限%', self.value)
     hero:add('护甲%', self.value)
+    hero:add('魔抗%', self.value)
     hero:add('攻击%', self.value)
 
     if self.trg then

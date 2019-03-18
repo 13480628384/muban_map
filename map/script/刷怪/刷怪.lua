@@ -366,7 +366,7 @@ function mt:on_change_creep(unit,lni_data)
             unit:set(k,v)
         end
         --设置魔抗
-        -- unit:set('魔抗',data.attribute['护甲'])
+        unit:set('魔抗',data.attribute['护甲'])
         --设置 boss 等 属性倍数
         if lni_data.attr_mul  then
             --属性
@@ -377,7 +377,7 @@ function mt:on_change_creep(unit,lni_data)
             unit:set('生命恢复',data.attribute['生命恢复'] * lni_data.attr_mul * self.game_degree_attr_mul)
             unit:set('魔法恢复',data.attribute['魔法恢复'] * lni_data.attr_mul * self.game_degree_attr_mul)
             --设置魔抗 
-            -- unit:set('魔抗',data.attribute['护甲']* lni_data.attr_mul * self.game_degree_attr_mul)
+            unit:set('魔抗',data.attribute['护甲']* lni_data.attr_mul * self.game_degree_attr_mul)
         end  
 
         --掉落概率

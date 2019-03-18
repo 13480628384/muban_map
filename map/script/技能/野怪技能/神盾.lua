@@ -25,6 +25,7 @@ function mt:on_add()
     hero:add('生命上限%', -self.value)
     hero:add('护甲%', -self.value)
     hero:add('攻击%', -self.value)
+    hero:add('魔抗%', -self.value)
 
     -- 降低自己攻击速度、移动速度
     hero:add('移动速度', -self.move_speed)
@@ -42,6 +43,7 @@ function mt:on_remove()
     hero:add('生命上限%', self.value)
     hero:add('护甲%', self.value)
     hero:add('攻击%', self.value)
+    hero:add('魔抗%', self.value)
 
     -- 降低自己攻击速度、移动速度
     hero:add('移动速度', self.move_speed)

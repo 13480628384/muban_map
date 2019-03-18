@@ -23,6 +23,7 @@ function mt:on_add()
     hero:add('生命上限%', self.value)
     hero:add('护甲%', self.value)
     hero:add('攻击%', self.value)
+    hero:add('魔抗%', self.value)
     self.exp_base = 0
     self.gold_vase = 0
     -- 提升经验、金钱
@@ -46,6 +47,7 @@ function mt:on_remove()
     hero:add('生命上限%', -self.value)
     hero:add('护甲%', -self.value)
     hero:add('攻击%', -self.value)
+    hero:add('魔抗%', -self.value)
 
     -- 降低经验、金钱
     if hero.exp then 

@@ -23,6 +23,7 @@ function mt:on_add()
     hero:add('生命上限%', -self.value)
     hero:add('护甲%', -self.value)
     hero:add('攻击%', -self.value)
+    hero:add('魔抗%', -self.value)
 
     --重生相关
     self.trg = hero:event '单位-即将死亡' (function (_,unit,killer)
@@ -65,6 +66,7 @@ function mt:on_remove()
     hero:add('生命上限%', self.value)
     hero:add('护甲%', self.value)
     hero:add('攻击%', self.value)
+    hero:add('魔抗%', self.value)
 
     if self.trg then
         self.trg:remove()
