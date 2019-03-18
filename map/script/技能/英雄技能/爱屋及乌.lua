@@ -19,7 +19,7 @@ mt{
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNGoldMine.blp]],
 	--特效
-	effect = [[Effect_BlueSlashloop.mdx]],
+	effect = [[Hero_Silencer_N2S_T_start.MDX]],
 	--物品获取率
 	item_rate = 40,
 	--持续时间

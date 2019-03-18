@@ -11,7 +11,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[吸血+0.5%]],
+	tip = [[周围的单位能将他们自己对敌人的伤害值转化成自己的生命值]],
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNVampiricAura.blp]],
 	--特效

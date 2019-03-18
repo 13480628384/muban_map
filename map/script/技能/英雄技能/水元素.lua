@@ -13,7 +13,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤1只水元素帮助英雄作战（当前波属性的一半）；持续时间30S；CD40S]],
+	tip = [[召唤1只水元素助战（属性与智力相关）；持续时间30S]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNSummonWaterElemental.blp]],
 	--特效

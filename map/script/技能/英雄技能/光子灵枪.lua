@@ -9,14 +9,14 @@ mt{
 	title = '光子灵枪',
 	tip = [[
 		攻击有 %chance% % 的概率召 %num% 个 %title% 
-		造成 智力*1+1200 的物理伤害  ( %damage% )
+		造成 敏捷*2 的物理伤害  ( %damage% )
 	]],
 	--概率%
 	chance = 10,
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 
-			return self.owner:get('智力')*1 + 1200
+			return self.owner:get('敏捷')*2
 		end	
 	end	,
 	--是否被动

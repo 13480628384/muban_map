@@ -15,7 +15,7 @@ mt{
 	--施法距离
 	range = 800,
 	--介绍
-	tip = [[增加指定队友 30% 的护甲，受攻击时可以减慢敌人行动4秒（移动力减少 50% 和攻击速度减少 25% ），持续15S]],
+	tip = [[增加 30% 护甲持续15秒，受击时减少敌人移速和攻速持续4秒]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNFrostArmor.blp]],
 	--特效

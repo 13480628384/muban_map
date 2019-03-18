@@ -13,7 +13,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤1只战斗机帮助英雄作战（当前波属性*1，多重射+3）；持续时间15S；CD35S]],
+	tip = [[召唤1只战斗机助战（属性和智力相关，多重射+3），持续15S]],
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNFlakCannons.blp]],
 	--特效

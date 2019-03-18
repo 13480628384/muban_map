@@ -13,7 +13,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[攻击力 -20% ，可以攻击多个目标，从第二个开始，每次弹射，目标所受伤害衰减 30% ，弹射5个]],
+	tip = [[攻击力 -20% ，弹射5个目标，每次弹射伤害衰减 30% ]],
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNUpgradeMoonGlaive.blp]],
 	--特效1

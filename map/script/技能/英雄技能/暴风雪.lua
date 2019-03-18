@@ -11,8 +11,8 @@ mt{
 	--技能说明
 	title = '暴风雪',
 	tip = [[
-	攻击有 %chance% % 的概率对 %area% 范围造成物理伤害 (%damage%)
-	伤害:智力+1200
+	攻击有 %chance% % 的概率对 %area% 范围造成法术伤害 (%damage%)
+	伤害:智力*4+2000
 	]],
 	--范围
 	area = 425,
@@ -21,13 +21,13 @@ mt{
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 
-			return self.owner:get('智力')*1+1200
+			return self.owner:get('智力')*4+2000
 		end	
 	end	,
 	--是否被动
 	passive = true,
 	--伤害类型
-	damage_type = '物理',
+	damage_type = '法术',
 }
 mt.model = [[Abilities\Spells\Human\Blizzard\BlizzardTarget.mdl]]
 

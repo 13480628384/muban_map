@@ -13,7 +13,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤1只张全蛋帮助英雄作战（当前波属性*1，攻击时有概率获得额外物品（概率= 10% * 2.5% *怪物占用人口，物品品质=不同品质物品掉落概率））；持续时间20S；CD45S]],
+	tip = [[召唤1只张全蛋助战（属性和智力相关，攻击时有概率获得额外物品）；持续时间20S]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNPocketFactory.blp]],
 	--特效

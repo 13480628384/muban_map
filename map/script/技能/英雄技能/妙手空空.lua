@@ -9,13 +9,13 @@ mt{
 	--耗蓝
 	cost = 25,
 	--冷却时间
-	cool = 15,
+	cool = 30,
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_UNIT,
 	--施法距离
 	range = 800,
 	--介绍
-	tip = [[有几率从敌人身上获得物品，成功概率为 怪物的物品掉率 ，CD15S]],
+	tip = [[有几率从敌人身上获得物品]],
 	--技能图标
 	art = [[jineng\jineng025.blp]],
 

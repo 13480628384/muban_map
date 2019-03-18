@@ -11,7 +11,7 @@ mt{
 	title = '巨浪',
 	tip = [[
 		攻击有 %chance% % 的概率对 %distance% 范围造成物理伤害  (%damage%)
-		伤害公式: 智力 * %damage_int% +1200
+		伤害公式: 力量 * %damage_int%
 	]],
 	--范围
 	distance = 1500,
@@ -20,11 +20,11 @@ mt{
 	chance = 10,
 	damage = function(self,hero)
 		if self and self.owner then 
-			return self.owner:get('智力')*self.damage_int + 1200
+			return self.owner:get('力量')*self.damage_int
 		end	
 	end	,
 	--参数智力
-	damage_int = {1,2,3,4,5},
+	damage_int = {4},
 	--是否被动
 	passive = true,
 	--弹道数量

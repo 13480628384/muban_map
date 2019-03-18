@@ -20,7 +20,7 @@ mt{
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 
-		return self.owner:get('智力')*1+1200
+		return self.owner:get('力量')*3+1200
 		end
 	end	,
 	--是否被动
