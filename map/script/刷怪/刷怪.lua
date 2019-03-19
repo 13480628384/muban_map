@@ -627,9 +627,10 @@ end)
 
 
 --进入游戏后3秒开始刷怪
-ac.wait(0,function()
+ac.wait(20,function()
     --1选择难度 2选择英雄 3游戏开始
     --全部英雄选完才会进入游戏开始.主机在选难度，所以不会有事。
+    print('开始选择难度')
     local player = get_first_player()
     local list = {
         { name = "标准模式" },
@@ -664,6 +665,7 @@ ac.wait(0,function()
     end 
 
     ac.game:event '游戏-开始' (function()
+        print('游戏开始6')
         local time = 10
         if ac.test == true then
             time = 0
@@ -677,6 +679,7 @@ ac.wait(0,function()
                 ac.game:event_notify('游戏-开始刷兵')
             end,
         }
+        print('游戏开始7')
     end)
 
     ac.game:event '游戏-开始刷兵' (function ()

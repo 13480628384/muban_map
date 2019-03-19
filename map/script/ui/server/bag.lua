@@ -805,9 +805,9 @@ bag.create_item = function (name,count,point)
 end 
 
 
-ac.game:event '玩家-注册英雄' (function(self, player, hero)
-    bag.init_bag(hero)
-end)
+-- ac.game:event '玩家-注册英雄' (function(self, player, hero)
+--     bag.init_bag(hero)
+-- end)
 
 --开一个计时器 发送玩家金钱给背包客户端
 

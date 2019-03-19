@@ -39,6 +39,7 @@ function mt:on_cast_shot()
 		hero:add('魔法',self.cost)
 		self:set_cd(0)
 		self:fresh()
+		ac.on_texttag('【对boss无效】','橙',hero)
 	else
 		target:kill()
 		hero:add('智力',- math.ceil(hero:get('智力')*self.addint/100))

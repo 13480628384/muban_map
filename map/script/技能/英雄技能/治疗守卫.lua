@@ -58,7 +58,7 @@ function mt:on_cast_shot()
 				source = hero,
 				skill = self,
 				size = 10,
-				string = self.name,
+				-- string = self.name,
 				heal = hero:get('生命上限')*self.life_rate/100 *( 1 + hero:get('主动释放的增益效果')/100),
 			}
 		end	

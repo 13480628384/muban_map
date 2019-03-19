@@ -1682,7 +1682,7 @@ function unit.__index:add_skill(name, type, slotid, data)
 
 	skill.ability_id = skill.ability_id or self:get_owner():get_ability_id(type, slotid)
 	if skill.ability_id then 
-		print('技能类型：'..type..' 技能名称：'..name..' 技能id：'.. skill.ability_id)
+		-- print('技能类型：'..type..' 技能名称：'..name..' 技能id：'.. skill.ability_id)
 	end	
 	if skill.cooldown_mode == 1 then
 		skill.spell_stack = skill.charge_max_stack
@@ -2290,7 +2290,7 @@ function mt:_cast_start()
 	local hero = self.owner
 	self._has_cast_start = true
 	self._current_step = 'cast_start'
-	print('技能-施法开始', self.name)
+	-- print('技能-施法开始', self.name)
 	self:_call_event 'on_cast_start'
 	if self.cast_start_time > 0 then
 		hero:wait(math_floor(self.cast_start_time * 1000), function()

@@ -92,7 +92,7 @@ local function showHeroState(p, u)
 	}
 	local difficulty_tip = '|cffffcc11操作难度:  ' .. difficulty_level[hero_data.difficulty or 1]
 
-	
+
 	p:sendMsg(difficulty_tip .. '\n' .. tip:gsub('%%(.-)%%', function(name)
 		local data = hero_data
 		for path in name:gmatch '[^%.]+' do
@@ -144,18 +144,9 @@ local function start()
 		table.insert(flygroup, hero)
 
 		hero_types[name] = hero
-		-- hero:event '受到伤害效果' (function()
-		-- 	print(hero.name)
-		-- end)
 	end
 
-	--初始化英雄漂浮
-	-- for _, hero in ipairs(flygroup) do
-	-- 	hero.DEKAN_flyheight_X = math.random(-130,380)
-	-- 	hero.DEKAN_flyheight_base = math.random(6,20) + 3000
-	-- 	DEKAN_flyfunction(hero)
-	-- end
-	-- map.rects['选人区域']
+	
 	for i = 1, 10 do
 		local p = player[i]
 		--在选人区域创建可见度修整器(对每个玩家,永久)
@@ -179,58 +170,7 @@ local function start()
 		-- lookAtHero(p, hero_types[name], true)
 	end
 
-	--启动计时器
-	local look_timer = ac.loop(10, function()
-		local p = player.self
-		if p.hero then
-			return
-		end
-		local current_target = p:getCamera()
-		local angle
-		if skip then
-			skip = nil
-			angle = target_angle
-		else
-			angle = p:getCameraField 'CAMERA_FIELD_ROTATION'
-			local a, w = ac.math_angle(angle, target_angle)
-			if a < 1 then
-				--计算当前镜头距离与上次镜头距离的偏差,检测玩家是否自己拖动了镜头
-				local dis = current_target * last_target
-				if dis > 30 then
-					local _, w = ac.math_angle(cent / last_target, cent / current_target)
-					target_angle = angle + w * 360 / hero.hero_count * 3
-					a, w = ac.math_angle(angle, target_angle)
-				end
-			end
-			angle = angle + a * w / 10
-		end
-		
-		local target = cent - {angle, radius}
-		last_target = target
-		if current_target * last_target > 1 then
-			p:setCamera(target)
-		end
-		p:setCameraField('CAMERA_FIELD_ROTATION', angle)
-		p:setCameraField('CAMERA_FIELD_ANGLE_OF_ATTACK', 0)
-		p:setCameraField('CAMERA_FIELD_ZOFFSET', 3130)
-		p:setCameraField('CAMERA_FIELD_TARGET_DISTANCE', 500)
 	
-		--漂浮的英雄
-		for _, hero in ipairs(flygroup) do
-			hero.DEKAN_flyheight_X = hero.DEKAN_flyheight_X + 1.5
-			DEKAN_flyfunction(hero)
-		end
-	end)
-	look_timer:remove()
-	
-	-- ac.loop(200, function()
-	-- 	local p = player.self
-	-- 	if p.hero then
-	-- 		if p.camera_high then
-	-- 			p:setCameraField('CAMERA_FIELD_TARGET_DISTANCE', p.camera_high)
-	-- 		end
-	-- 	end
-	-- end)
 
 	local player_hero_count = 0
 
@@ -295,7 +235,7 @@ local function start()
 			p.hero = p:createHero(hero_name, pnt, 270)
 	
 			player_hero_count = player_hero_count + 1
-	
+			print('注册英雄1')
 			p:event_notify('玩家-注册英雄', p, p.hero)
 	
 			p:setCameraBounds(-7200, -7200, 7200, 7200)
@@ -336,7 +276,6 @@ local function start()
 			end
 		end
 
-		look_timer:remove()
 		select_unit_trg:remove()
 		random_hero_trg:remove()
 	end)
@@ -344,6 +283,7 @@ local function start()
 	local has_started = false
 	local function f(obj)
 		--检查是否还有人没选英雄
+		print('注册英雄2',ac.clock())
 		local flag = true
 		for i = 1, 10 do
 			local p = player[i]

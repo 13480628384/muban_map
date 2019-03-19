@@ -70,6 +70,8 @@ local function on_texttag(string,color,hero)
     return tag
 end
 
+ac.on_texttag =  on_texttag
+
 --先列出所有奖励 再按概率抽取
 local reward = {
     ['符文'] = function (player,hero,unit,level)

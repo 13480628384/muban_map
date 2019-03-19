@@ -52,6 +52,7 @@ end
 local function hero_register_main()
 	--注册英雄
 	ac.game:event '玩家-注册英雄' (function(_, player, hero)
+		print('注册英雄3')
 		SelectUnitForPlayerSingle(hero.handle,player.handle)
 		--创建一个背包表
 		hero.item_list = {}
@@ -111,6 +112,8 @@ local function hero_register_main()
 		-- hero:add_skill('刀刃旋风','英雄')
 		-- hero:add_skill('黑暗契约','英雄')
 		-- hero:add_skill('死亡飞镖','英雄')
+		-- hero:add_skill('妙手空空','英雄')
+		-- hero:add_skill('摔破罐子','英雄')
 		
 		
 		-- hero:add('物品获取率',50)
@@ -128,9 +131,9 @@ local function hero_register_main()
 		--  ac.item.add_skill_item('献祭',hero)
 		--  hero:add_item('吞噬丹')
 		--  hero:add_item('吞噬丹')
-		 hero:add_item('翔龙')
-		 hero:add_item('树皮')
-		 hero:add_item('奇幻头盔')
+		--  hero:add_item('翔龙')
+		--  hero:add_item('树皮')
+		--  hero:add_item('奇幻头盔')
 		-- hero:add_item('霹雳弩')
 		 
         -- ac.item.add_skill_item('粉碎',hero)
@@ -150,6 +153,7 @@ local function hero_register_main()
 		-- hero:add('减免',110)
 		-- hero:add('多重射',3)
 		hero:add_item('新人寻宝石') 
+		hero:add_item('生命药水') 
 		-- hero:add_item('大弓') 
 		-- hero:add_item('勇气之证')
 

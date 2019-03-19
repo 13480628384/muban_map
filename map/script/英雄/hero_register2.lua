@@ -2,6 +2,7 @@
 local player_hero_tm_list = {}
 
 ac.game:event '玩家-注册英雄' (function(_, player, hero)
+	print('注册英雄4')
 	if not player_hero_tm_list[player] then
 		player_hero_tm_list[player] = tm
 	end

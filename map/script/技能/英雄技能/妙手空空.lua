@@ -15,7 +15,7 @@ mt{
 	--施法距离
 	range = 800,
 	--介绍
-	tip = [[有几率从敌人身上获得物品]],
+	tip = [[有几率从敌人身上获得物品，对boss无效]],
 	--技能图标
 	art = [[jineng\jineng025.blp]],
 
@@ -31,8 +31,15 @@ function mt:on_cast_shot()
     local skill = self
 	local hero = self.owner
 	local target = self.target
-	ac.game:event_dispatch('物品-偷窃',target,hero) 
 
+	if target.data.type =='boss' then
+		hero:add('魔法',self.cost)
+		self:set_cd(0)
+		self:fresh()
+		ac.on_texttag('【对boss无效】','橙',hero)
+	else
+		ac.game:event_dispatch('物品-偷窃',target,hero) 
+	end	
 end
 
 function mt:on_remove()

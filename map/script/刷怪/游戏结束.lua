@@ -5,6 +5,8 @@ local jass = require 'jass.common'
 
 -- 同一时间 全部玩家死亡，游戏失败
 ac.game:event '游戏-开始' (function()
+	
+	print('游戏开始8')
 	for i = 1 ,10 do 
 		local hero = ac.player(i).hero
 		if hero then 
@@ -23,6 +25,7 @@ ac.game:event '游戏-开始' (function()
 			end);
 		end
 	end
+	print('游戏开始9')
 end);
 --进入 无尽 改变游戏结束的触发
 ac.game:event '游戏-无尽开始' (function()

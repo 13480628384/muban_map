@@ -34,6 +34,7 @@ end)
 
 
 ac.game:event '玩家-注册英雄' (function(_, player, hero)
+	print('注册英雄5')
 	player.count_data = {
 		--记录杀害的单位数量
 		kill_count = {},
