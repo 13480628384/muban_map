@@ -21,6 +21,9 @@ mt{
 	--概率
 	chance = 10,
 
+	--晕眩时间
+	time = 1,
+
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 

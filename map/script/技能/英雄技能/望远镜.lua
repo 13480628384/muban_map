@@ -17,7 +17,7 @@ mt{
 	]],
 	attack_range = 20,
 	--技能图标
-	art = [[ReplaceableTextures\PassiveButtons\PASBTNEvasion.blp]],
+	art = [[item\jineng015.blp]],
 
 	--闪避
 	dodge = 20,
