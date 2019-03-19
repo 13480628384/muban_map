@@ -34,6 +34,8 @@ function mt:on_cast_start()
     local target = self.target
     local items = self
     
+    -- 宠物可以帮忙吃
+    hero = hero:get_owner().hero
     -- items._count = items._count - 1
     hero:heal
     {
