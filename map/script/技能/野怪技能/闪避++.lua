@@ -2,7 +2,7 @@ local mt = ac.skill['闪避++']
 
 mt.title = "闪避++"
 mt.tip = [[
-    被动1：提升自己的闪避率90%
+    被动1：提升自己的闪避率80%
     被动2：降低自己的三维40%
 ]]
 
@@ -10,7 +10,7 @@ mt.tip = [[
 mt.value = 40
 
 --闪避
-mt.dodge = 90
+mt.dodge = 80
 
 
 function mt:on_add()

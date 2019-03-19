@@ -4,7 +4,7 @@ mt{
     level = 1,
     title = "刺猬",
     tip = [[
-        被动1：受到攻击时，有10%概率降低攻击者1%的生命
+        被动1：受到攻击时，有50%概率降低攻击者1%的生命
         被动2：降低自己的三维20%
     ]],
 
@@ -15,7 +15,7 @@ mt{
     life_rate = 1,
 
     -- 概率
-    rate = 90,
+    rate = 50,
     -- 特效
     effect = [[Abilities\Spells\NightElf\ThornsAura\ThornsAura.mdl]]
 
