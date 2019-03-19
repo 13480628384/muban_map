@@ -3,6 +3,8 @@ local mt = ac.skill['巨浪']
 mt{
 	--初始等级
 	level = 1,
+	--技能类型
+	skill_type = "被动",
 	--初始等级
 	max_level = 5,
 	--技能图标

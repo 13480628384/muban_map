@@ -4,6 +4,8 @@ mt{
 	
 	--初始等级
 	level = 1,
+	--技能类型
+	skill_type = "被动",
 	--技能图标
 	art = [[icon\card2_61.blp]],
 	--技能说明
@@ -33,7 +35,7 @@ mt{
 	
 	--伤害类型
 	damage_type = '法术',
-	
+
 	--必填
 	is_skill = true,
 }

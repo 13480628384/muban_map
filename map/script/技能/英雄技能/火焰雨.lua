@@ -4,6 +4,8 @@ mt{
 	
 	--必填
 	is_skill = true,
+	--技能类型
+	skill_type = "被动",
 	--初始等级
 	level = 1,
 	--技能图标

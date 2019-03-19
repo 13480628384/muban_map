@@ -25,6 +25,8 @@ mt{
 	area = 300,
 	--最大生命值率
 	life_rate = 5,
+	--技能类型
+	skill_type = "被动",
 
 	--特效模型
 	effect = [[Hero_DeathProphet_N1_Missile.mdx]],

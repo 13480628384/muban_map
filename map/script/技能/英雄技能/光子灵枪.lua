@@ -3,6 +3,8 @@ local mt = ac.skill['光子灵枪']
 mt{
 	--初始等级
 	level = 1,
+	--技能类型
+	skill_type = "被动",
 	--技能图标
 	art = [[icon\card1_30.blp]],
 	--技能说明

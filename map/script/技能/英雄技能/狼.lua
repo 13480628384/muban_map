@@ -5,7 +5,7 @@ mt{
     --初始等级
     level = 1,
 	--技能类型
-	skill_type = "主动",
+	skill_type = "召唤",
 	--耗蓝
 	cost = 60,
 	--冷却时间

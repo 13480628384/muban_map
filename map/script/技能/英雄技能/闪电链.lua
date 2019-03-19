@@ -3,6 +3,8 @@ local mt = ac.skill['闪电链']
 mt{
 	--初始等级
 	level = 1,
+	--技能类型
+	skill_type = "被动",
 	--技能图标
 	art = [[icon\card1_2.blp]],
 	--技能说明
@@ -27,7 +29,7 @@ mt{
 	cool = 0,
 	--是否技能
 	is_skill = true,
-	
+
 	--伤害类型
 	damage_type = '法术',
 }
