@@ -38,6 +38,10 @@ function mt:on_add()
         
         --创建幻象
         local dummy = hero:create_illusion(hero:get_point())
+        --没创建成果就返回
+        if not dummy then 
+            return 
+        end
         --属性削弱
         dummy:add('生命上限', - dummy:get('生命上限')*(1-(self.child_value+self.value)/100) )
         dummy:add('生命', dummy:get('生命上限'))

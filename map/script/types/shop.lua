@@ -67,7 +67,7 @@ function shop.create(name,x,y,face,is_selling)
 
 	local j_trg = war3.CreateTrigger(function()
 		--贩卖者
-		local tra = shop.unit_list[jass.GetSellingUnit()]
+		local seller = shop.unit_list[jass.GetSellingUnit()]
 		--购买者
 		local u = ac.unit.j_unit(jass.GetBuyingUnit())
 		-- 被购买的物品名，没办法保存物品handle，因为物品添加给商店时就被删除了
@@ -83,11 +83,11 @@ function shop.create(name,x,y,face,is_selling)
 		--删掉物品排泄(神符类物品需要删除)
 		jass.RemoveItem(jass.GetSoldItem())
 
-		if not u or not tra or not it then
+		if not u or not seller or not it then
 			return
 		end
 
-		u:event_notify('单位-点击商店物品',tra,u,it)
+		u:event_notify('单位-点击商店物品',seller,u,it)
 	end)
 
 	for i = 1, 13 do

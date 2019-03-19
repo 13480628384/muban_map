@@ -10,6 +10,7 @@ mt{
 攻击加 %attack%
 生命加 %life%
 护甲加 %defence%
+|cff00ffff【进化】杀死|r %kill_cnt% |cff00ffff个敌人|r
     ]],
 
     --技能图标

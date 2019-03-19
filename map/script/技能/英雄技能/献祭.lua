@@ -14,7 +14,7 @@ mt{
 	tip = [[造成周围伤害（每秒损失 2% 的魔法值， 对范围200码的造成 2% 的生命损失）]],
 	--技能图标
     art = [[ReplaceableTextures\CommandButtons\BTNImmolationOn.blp]],
-    art1 = [[ReplaceableTextures\CommandButtons\BTNImmolationOff.blp]],
+    art1 = [[jineng033]],
     
 	--特效
 	effect = [[Abilities\Spells\NightElf\Immolation\ImmolationTarget.mdl]],
@@ -70,8 +70,8 @@ mt.keep = true
 function mt:on_add()
 	local hero =self.target;
 	self.eff = hero:add_effect(self.ref,self.model)
-    -- self.blend = self.skill:add_blend('2', 'frame', 2)
-    self.skill:set_art(self.skill.art1)
+    self.blend = self.skill:add_blend(self.skill.art1, 'frame', 2)
+    -- self.skill:set_art(self.skill.art1)
 	-- hero:add('物品获取率',self.value * (1+hero:get('主动释放的增益效果')/100))
 
 end

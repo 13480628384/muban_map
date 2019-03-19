@@ -125,7 +125,7 @@
     end)   
 
     --注册出售物品事件 商店出售给玩家 商店 购买者 点击的物品名
-    ac.game:event '单位-点击商店物品'(function(_,tra,u,it)
+    ac.game:event '单位-点击商店物品'(function(_,seller,u,it)
         --先判断钱是否够
         local player = u.owner
         local gold = u.owner.gold
@@ -158,6 +158,10 @@
         if u.buy_suc then 
             -- print('扣钱')
             player:addGold( - golds,u)
+            -- 购买成功，删掉商店在售物品
+            if it.on_selled_remove then 
+                seller:remove_sell_item(it)
+            end    
 
         end
     end)

@@ -412,6 +412,7 @@ local function get_blend_art(art, blends, type)
 	if not blend_icons[file_name] then
 		japi.EXBlendButtonIcon([[blend\]] .. type .. [[\]] .. file .. [[.blp]], art, file_name)
 	end
+	-- print([[blend\]] .. type .. [[\]] .. file .. [[.blp]],art,file_name)
 	return file_name
 end
 

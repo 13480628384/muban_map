@@ -17,23 +17,13 @@ local function fresh_shop_item(shop)
     end 
     --刷新商店物品，先全部删除，再挨个添加
     shop:fresh()
+    
+    --再循环一次，添加物品被购买时移除的触发。
+    for i = 9, 12 do 
+        local old_item = shop.sell_item_list[i]
+        old_item.on_selled_remove = true 
+    end    
 
-    -- shop:remove_sell_item('账簿')  
-    -- shop:remove_sell_item('新手戒指')  
-    -- shop:remove_sell_item('新手弓')  
-    -- shop:add_sell_item('新手戒指',9)  
-    -- shop:add_sell_item('新手戒指',10)  
-    -- shop:add_sell_item('新手弓',11)  
-    --================以下为测试代码==================
-    --从商店移除
-    -- jass.RemoveItemFromStock(shop.handle,base.string2id("S009"))
-    -- jass.RemoveItemFromStock(shop.handle,base.string2id("S00A"))
-    -- jass.RemoveItemFromStock(shop.handle,base.string2id("S00B"))
-
-    -- --添加到商店
-	-- jass.AddItemToStock(shop.handle,base.string2id("S009"),1,1)
-	-- jass.AddItemToStock(shop.handle,base.string2id("S00A"),1,1)
-	-- jass.AddItemToStock(shop.handle,base.string2id("S00B"),1,1)
 end    
 
 local function fresh_shop_skill(shop)
@@ -62,6 +52,11 @@ local function fresh_shop_skill(shop)
     end   
     --刷新商店物品，先全部删除，再挨个添加
     shop:fresh()
+    --再循环一次，添加物品被购买时移除的触发。
+    for i = 9, 12 do 
+        local old_item = shop.sell_item_list[i]
+        old_item.on_selled_remove = true 
+    end    
 end   
 ac.map.fresh_shop_skill = fresh_shop_skill
 ac.map.fresh_shop_item = fresh_shop_item

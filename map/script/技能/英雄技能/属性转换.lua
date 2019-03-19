@@ -15,11 +15,11 @@ mt{
 |cff00bdec%tip2%|r
     ]],
 	--技能图标
-	art = [[sxzh1.blp]],
+	art =  [[sxzh1.blp]],
 	--技能图标
-	art1 = [[sxzh2.blp]],
+	art1 = [[sxzh3]],
 	--技能图标
-	art2 = [[sxzh3.blp]],
+	art2 = [[sxzh2]],
 	--每秒
     pulse = 1,
     --值
@@ -36,17 +36,20 @@ function mt:on_add()
     local skill = self
     local hero = self.owner
     self.origin_tip = self.tip
+    self.mark = {}
 end
 
 function mt:on_cast_shot()
 	local skill = self
     local hero = self.owner
-    
     local buf = hero:find_buff '属性转换'
     if buf then 
         if buf.conver_target == '力量' then
             -- print('设置转化目标为敏捷')
-            self:set_art(self.art2)
+            self.mark['敏捷'] = skill:add_blend(self.art1, 'frame', 3)
+            
+            -- print(skill:get_art())
+            -- self:set_art(self.art2)
             hero.tran_tip = '当前：力量转敏捷 '
             hero:add_buff '属性转换'
             {
@@ -59,15 +62,21 @@ function mt:on_cast_shot()
             }
 
         else 
-            -- print('移除属性转移')
-            self:set_art(self.art)
+            --清空混合图标
+            for key,value in pairs(self.mark) do 
+                value:remove()
+            end
+            -- self:set_art(self.art)
+            -- print()
             hero.tran_tip = '无'
             if buf.conver_target == '敏捷' then
                 buf:remove()
             end
         end    
     else
-        self:set_art(self.art1)
+        self.mark['力量'] = skill:add_blend(self.art2, 'frame', 2)
+        -- print(skill:get_art())
+
         hero.tran_tip = '当前：敏捷转力量'
         hero:add_buff '属性转换'
         {
