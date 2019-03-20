@@ -547,6 +547,13 @@ get['攻击间隔'] = function(self)
 	return japi.GetUnitState(self.handle, jass.ConvertUnitState(0x25))
 end
 
+on_get['攻击间隔'] = function(self, attack_gap)
+	if attack_gap < 0.6 then
+		attack_gap = 0.6
+	end
+	return attack_gap
+end
+
 set['攻击间隔'] = function(self, attack_cool)
 	japi.SetUnitState(self.handle, jass.ConvertUnitState(0x25), attack_cool)
 end

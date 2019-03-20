@@ -29,6 +29,8 @@ end
 function mt:on_cast_start()
     local hero = self.owner
     local player = hero:get_owner()
+    --宠物也帮忙升级
+    hero = player.hero
     local item = self 
     local list = {}
     for skill in hero:each_skill '英雄' do 

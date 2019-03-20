@@ -205,10 +205,10 @@ local unit_reward = {
     },
     ['商店随机物品'] =  {
         { rand = 100,      name = {
-                { rand = 60, name = '白'},
-                { rand = 25, name = '蓝'},
-                { rand = 10, name = '金'},
-                { rand = 5, name = '红'},
+                { rand = 80, name = '白'},
+                { rand = 16, name = '蓝'},
+                { rand = 3.3, name = '金'},
+                { rand = 0.7, name = '红'},
             }
         }
     },

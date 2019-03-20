@@ -25,12 +25,11 @@ local function on_texttag(string,hero)
 	local tag = ac.texttag
 	{
 		string = string,
-		size = 18,
+		size = 16,
 		position = ac.point(x-100 , y, z + 200),
 		red = 238,
 		green = 31,
 		blue = 39,
-		fade = 0.5,
 		permanent = true,
 		time = ac.clock(),
 	}

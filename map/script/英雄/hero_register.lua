@@ -152,9 +152,10 @@ local function hero_register_main()
 		-- hero:add('会心几率',110)
 		-- hero:add('减免',110)
 		-- hero:add('多重射',3)
-		hero:add_item('新人寻宝石') 
-		hero:add_item('生命药水') 
-		-- hero:add_item('大弓') 
+		-- hero:add_item('新人寻宝石') 
+		-- hero:add_item('生命药水') 
+		hero:add_item('新手礼包') 
+		
 		-- hero:add_item('勇气之证')
 
 		-- hero:add_item('账簿')
