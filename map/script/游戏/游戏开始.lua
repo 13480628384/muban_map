@@ -1,4 +1,4 @@
-
+-- 加载脚本 → 选择难度 → 注册英雄 → 游戏-开始 → 开始刷兵
 g_game_min = 1
 
 ac.game:event '游戏-开始' (function()
@@ -18,6 +18,12 @@ ac.game:event '游戏-开始' (function()
     for i=1 ,12 do 
         local p = ac.player(i)
         p:addGold(100000)
+        if p.hero then 
+            -- local item = p.hero:add_item('新手礼包') 
+            -- local item = p.hero:add_item('迷你熊爪') 
+            -- print(item.slot_id,item.type_id,item.name)
+
+        end    
     end    
     
     -- require '平台.商城'

@@ -84,7 +84,7 @@
         --判断是否为消耗品
         if it.item_type == '消耗品' then
             --先判断是否有同类物品
-            local item = nil
+            local item 
             for i=1,6 do
                 local items = u:get_slot_item(i)
                 if items and items.item_type == '消耗品' and items.name == it.name then
@@ -289,7 +289,7 @@
         ['使用第5格物品'] = 5,
         ['使用第6格物品'] = 6,}
         ac.game:event '单位-发布指令' (function(self, hero, order, target, player_order)
-            -- print('发布使用物品命令1：')
+            -- print('发布使用物品命令1：',order)
             if order == '' then
                 return
             end
@@ -301,7 +301,6 @@
 
             local slot_id = it_id[order]
             -- print('发布使用物品命令：',slot_id)
-            -- hero:print_item(true)
             --取出单位身上的物品
             local item = hero:get_slot_item(slot_id)
             -- print('发布使用物品命令3：',item)
@@ -309,7 +308,7 @@
                 return
             end
 
-            -- print('发布使用物品命令：',slot_id,item.name,target)
+            print('发布使用物品命令：',slot_id,item.name,target)
             --判断施法条件是否满足
             if item:conditions(item,target) ~= true then
                 --如果施法条件不满足，重置CD
@@ -329,7 +328,7 @@
             
             -- print('调用物品施法：',slot_id,item.name)
             if item.item_type == '消耗品'  then
-                print('使用消耗品',item.name,item.type_id)
+                -- print('使用消耗品',item.name,item.type_id)
                 --消耗品使用 增加对应的属性值
                 item:on_use_state()
 

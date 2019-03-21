@@ -145,6 +145,7 @@ local function start()
 
 		hero_types[name] = hero
 	end
+	player[16].hero_lists = flygroup
 
 	
 	for i = 1, 10 do
@@ -235,8 +236,8 @@ local function start()
 			p.hero = p:createHero(hero_name, pnt, 270)
 	
 			player_hero_count = player_hero_count + 1
-			print('注册英雄1')
 			p:event_notify('玩家-注册英雄', p, p.hero)
+			p:event_notify('玩家-注册英雄后', p, p.hero)
 	
 			p:setCameraBounds(-7200, -7200, 7200, 7200)
 			--把镜头移动过去
@@ -305,7 +306,7 @@ local function start()
 		end
 	end
 	
-	ac.game:event '玩家-注册英雄' (f)
+	ac.game:event '玩家-注册英雄后' (f)
 	ac.game:event '玩家-离开' (f)
 	ac.wait(60000, f)
 end

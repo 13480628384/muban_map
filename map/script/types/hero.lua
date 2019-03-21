@@ -206,7 +206,8 @@ function player.__index.createHero(p, name, where, face)
 			u:add(k, v)
 		end	
 	end
-	-- print(u:get('生命上限'))
+	--应用：选择英雄时，替换皮肤英雄
+	p:event_notify('玩家-创建英雄', p, u)
 	return u
 end
 

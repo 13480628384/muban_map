@@ -43,16 +43,16 @@ function mt:on_cast_start()
     local item = self 
     local list = {}
 
-    if not hero.skill_list_xs then 
-        hero.skill_list_xs = {}
+    -- if not self.skill_list_xs then 
+        self.skill_list_xs = {}
         for i=1,self.cnt do 
             local skl_list = ac.skill_list2
             local name = skl_list[math.random(#skl_list)]
-            table.insert(hero.skill_list_xs,name)
+            table.insert(self.skill_list_xs,name)
         end 
-    end    
+    -- end    
     
-    for _,skill_name in ipairs(hero.skill_list_xs) do
+    for _,skill_name in ipairs(self.skill_list_xs) do
         local skill = ac.skill[skill_name]
         local info = {
             name = skill:get_name() .. '  (' .. (skill.skill_type or '') ..')' ,
@@ -74,11 +74,11 @@ function mt:on_cast_start()
         return
     end 
 
-    local info = {
-        name = '取消 (Esc)',
-        key = 512
-    }
-    table.insert(list,info)
+    -- local info = {
+    --     name = '取消 (Esc)',
+    --     key = 512
+    -- }
+    -- table.insert(list,info)
     
     if not self.dialog  then 
         self.dialog = create_dialog(player,'选择你要的技能',list,

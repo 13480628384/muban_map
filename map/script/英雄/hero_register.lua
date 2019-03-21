@@ -54,10 +54,6 @@ local function hero_register_main()
 	ac.game:event '玩家-注册英雄' (function(_, player, hero)
 		print('注册英雄3')
 		SelectUnitForPlayerSingle(hero.handle,player.handle)
-		--创建一个背包表
-		hero.item_list = {}
-		--记录当前页面
-		hero.currentpage = 1
 
 		-- 统一设置搜敌范围
 		hero:set_search_range(1000)
@@ -136,7 +132,7 @@ local function hero_register_main()
 		--  hero:add_item('奇幻头盔')
 		-- hero:add_item('霹雳弩')
 		 
-         ac.item.add_skill_item('重击',hero)
+        --  ac.item.add_skill_item('重击',hero)
         -- ac.item.add_skill_item('贪婪者的心愿',hero)
         -- ac.item.add_skill_item('弹射',hero)
         -- ac.item.add_skill_item('F4战斗机',hero)

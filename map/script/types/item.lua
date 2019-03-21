@@ -715,7 +715,6 @@ function unit.__index:remove_item(it)
 	if not it  then
 		return false
 	end
-	
 	-- print('即将从单位移除物品：',it.slot_id,it.name,it.handle,ac.clock())
 	it:on_remove_state()
 	--移除技能
