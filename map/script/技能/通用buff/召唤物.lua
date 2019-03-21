@@ -63,14 +63,19 @@ function mt:on_add()
 	}
 	--设置水元素类型的生命周期
 	-- @目标handle，水元素类型，持续时间
-	jass.UnitApplyTimedLife(self.target.handle,base.string2id('BHwe'),self.time)
-end
+	jass.UnitApplyTimedLife(self.target.handle,base.string2id('BHwe'),self.time+0.1)
 
+end
 function mt:on_remove()
     if self.effect then 
         self.effect:remove()
-    end     
-	-- 召唤物buff 移除时 ，移除召唤物 ， 不受单位死亡事件
+	end   
+	print('buff移除')
+	--暂停生命周期
+	jass.UnitPauseTimedLife(self.target.handle,true)  
+	--移除水元素技能
+	-- self.target:remove_ability 'BHwe'
+	-- 召唤物 buff 移除时 ，移除召唤物 ， 不受单位死亡事件
 	if self.remove_target then 
 		self.target:remove()
 	else 
@@ -94,6 +99,11 @@ end
 function mt:on_cover(new)
 	if new.time > self:get_remaining() then
 		self:set_remaining(new.time)
+		--设置水元素类型的生命周期
+		-- @目标handle，水元素类型，持续时间
+		--暂停再设置
+		jass.UnitPauseTimedLife(self.target.handle,true)  
+		jass.UnitApplyTimedLife(self.target.handle,base.string2id('BHwe'),new.time+0.1)
 	end
 	return false
 end

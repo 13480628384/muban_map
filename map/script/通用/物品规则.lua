@@ -241,8 +241,8 @@
         local source_id = item.slot_id
         local target_id = id
 
-        --取出当前页面
-        local page = unit.currentpage
+        --取出当前页面 如果没有切换背包的话，默认为第一页
+        local page = unit.currentpage or 1
         target_id = (page - 1) * 6 + target_id
 
         --切换背包不响应移动物品事件
