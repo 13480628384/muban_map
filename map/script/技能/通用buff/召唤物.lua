@@ -9,10 +9,12 @@ mt.ref = 'origin'
 
 function mt:on_add()
 	local player = self.target:get_owner()
-	self.old_model = self.target:get_slk 'file'..'.mdl'
+	self.old_model = self.target:get_slk 'file'
 	self.old_size = self.target:get_size()
-	
-	-- print(self.old_model,self.model)
+	if not getextension(self.old_model) then 
+		self.old_model = self.old_model..'.mdl'
+	end	
+	print(self.old_model,self.model)
 	--改变模型
 	if self.model then
 		japi.SetUnitModel(self.target.handle,self.model)

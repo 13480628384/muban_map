@@ -154,7 +154,7 @@ local function unit_remove_suit(unit,item)
     end 
     --先刷新丢地上的物品
     item:set_tip(item:get_tip()..item_self_tip)
-    --刷新 套装说明 移除时的套装变色说明未解决
+    --刷新 套装说明 
     fresh_suit_tip(unit,item.suit_type,tip)
 
 end    
@@ -170,3 +170,44 @@ ac.game:event '单位-丢弃物品后' (function (_,unit,item)
     unit_remove_suit(unit,item)
 end)
 
+ac.game:event '物品-创建' (function (_,item)
+    if not item or not item.suit_type then 
+        return 
+    end
+    
+    for _, data in ipairs(ac.item.suit) do
+        local name, type,attr1,attr2,attr3,attr4,attr5,attr6 = table.unpack(data)
+        local temp_attr ={}
+        temp_attr[1] = attr1 
+        temp_attr[2] = attr2 
+        temp_attr[3] = attr3 
+        temp_attr[4] = attr4 
+        temp_attr[5] = attr5 
+        temp_attr[6] = attr6 
+
+        if type == item.suit_type then 
+            local tip = '' 
+            tip = tip ..'|cffAAAAAA'.. name..'|r'..'\n'
+            item.suit_name = name
+            for i = 1,6 do
+                if temp_attr[i] then  
+                    local first_flag = true
+                    local cnt = 0
+                    local attr_tip =''
+                    for value in temp_attr[i]:gmatch '%S+' do
+                        if first_flag  then 
+                            first_flag=false
+                            cnt = tonumber(value)
+                        else
+                            attr_tip = attr_tip.. value ..' '
+                        end    
+                    end  
+                    tip = tip..attr_tip..'('..cnt..')\n'
+                end
+            end    
+            -- print(item:get_tip()..tip)
+            item:set_tip(item:get_tip()..tip)    
+        end    
+    end   
+         
+end)

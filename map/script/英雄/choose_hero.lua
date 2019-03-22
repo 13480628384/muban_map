@@ -80,17 +80,20 @@ local function showHeroState(p, u)
 	local hero = u
 
 	local tip = [[
-|cff888888登场作品   |cff888888%production%
-|cff888888模型来源   |cff888888%model_source%
+|cff00bdec定位   |cffffcc00%production%
 ]]
 	local difficulty_level = {
-		'|cffffaaaa★|r|cffeeeeee☆☆☆☆|r',
-		'|cffff8888★★|r|cffeeeeee☆☆☆|r',
-		'|cffff6666★★★|r|cffeeeeee☆☆|r',
-		'|cffff4444★★★★|r|cffeeeeee☆|r',
-		'|cffff2222★★★★★|r|cffeeeeee|r',
+		'|cffffaaaa★|r|cffeeeeee☆☆☆☆☆|r',
+		'|cffff8888★★|r|cffeeeeee☆☆☆☆|r',
+		'|cffff6666★★★|r|cffeeeeee☆☆☆|r',
+		'|cffff4444★★★★|r|cffeeeeee☆☆|r',
+		'|cffff2222★★★★★|r|cffeeeeee☆|r',
+		'|cffff0000★★★★★★|r|cffeeeeee|r',
 	}
-	local difficulty_tip = '|cffffcc11操作难度:  ' .. difficulty_level[hero_data.difficulty or 1]
+	local difficulty_tip = '|cffffcc11生存:  ' .. difficulty_level[hero_data.survival_lv or 1]..'\n'
+	difficulty_tip = difficulty_tip ..'|cffffcc11攻击:  ' .. difficulty_level[hero_data.attack_lv or 1]..'\n'
+	difficulty_tip = difficulty_tip ..'|cffffcc11成长:  ' .. difficulty_level[hero_data.grow_lv or 1]..'\n'
+	difficulty_tip = difficulty_tip ..'|cffffcc11操作难度:  ' .. difficulty_level[hero_data.diff_lv or 1]..'\n'
 
 
 	p:sendMsg(difficulty_tip .. '\n' .. tip:gsub('%%(.-)%%', function(name)

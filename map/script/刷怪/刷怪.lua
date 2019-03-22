@@ -22,7 +22,7 @@ for k,v in pairs(ac.table.UnitData) do
                 all_creep[v.type] = {}
             end
             --排除，以免刷到最终boss怪
-            if k ~= '最终boss' then
+            if not finds(k,'最终boss','挑战','金币') then
                 table.insert(all_creep[v.type],k)    
             end    
         end    

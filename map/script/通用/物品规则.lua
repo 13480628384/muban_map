@@ -150,7 +150,7 @@
             end    
         end    
         if flag then 
-            ac.item.add_skill_item(it.name,u)
+            ac.item.add_skill_item(it.name,u,true)
         else    
             u:add_item(it.name)   
         end    

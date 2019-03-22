@@ -15,9 +15,10 @@ local function fresh_shop_item(shop)
         shop.sell_new_gold[i] = true
         -- shop:add_sell_item(name,i)
     end 
+    shop.sell[5] = '翔龙'
     --刷新商店物品，先全部删除，再挨个添加
     shop:fresh()
-    
+
     --再循环一次，添加物品被购买时移除的触发。
     for i = 9, 12 do 
         local old_item = shop.sell_item_list[i]

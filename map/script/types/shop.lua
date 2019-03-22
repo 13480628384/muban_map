@@ -132,9 +132,9 @@ function mt:add_sell_item(name,i)
 
 	local item = ac.item.create(name,i)
 	item.shop_slot_id = i
-	--刷新物品数据                        ''..self:get_name()
 	-- print(item.name,self:get_name())
-	item:set_sell_state('                   '..self:get_name())
+	-- item:set_sell_state('                   '..self:get_name())
+	item:set_store_title('                   '..self:get_name())
 	if not self.sell_item_list then 
 		self.sell_item_list = {}
 	end	

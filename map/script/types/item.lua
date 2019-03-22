@@ -889,7 +889,7 @@ function ac.item.create_item(name,poi,is)
 
 	-- 记录全图物品
 	ac.item.item_map[items.handle] = items
-	
+	ac.game:event_notify('物品-创建', items)
 	return items
 end
 
@@ -933,6 +933,8 @@ function item.create(name,pos)
 	if ac.skill[name].is_skill then
 		items.is_skill = true
 	end
+	
+	ac.game:event_notify('物品-创建', items)
 	return items
 end
 
