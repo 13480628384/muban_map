@@ -7,6 +7,8 @@ mt{
 	--初始等级
 	level = 1,
 	
+	max_level = 5,
+	
 	tip = [[
 		主动：对周围%area%码的敌人每 %pulse% 秒造成物理伤害，持续时间 %time% 秒
 		被动：提升自己的生命上限%life_rate% %
@@ -23,10 +25,10 @@ mt{
 	area = 500,
 
 	--持续时间
-	time = 4,
+	time = {4,4.25,4.5,4.75,5},
 
 	--每几秒
-	pulse = 0.2,
+	pulse = {0.2,0.18,0.15,0.13,0.1},
 
 	--伤害参数1：攻击力
 	attack = function(self,hero)
@@ -44,13 +46,13 @@ mt{
 	end,	
 
 	--生命上限
-	life_rate = 20,
+	life_rate = {10,20,30,40,50},
 
 	--cd
-	cool = 25,
+	cool = {25,23,20,18,15},
 
 	--耗蓝
-	cost = 35,
+	cost = {50,200,350,500,750},
 
 	--特效模型
 	effect = [[Hero_Juggernaut_N4S_F_Source.mdx]],
