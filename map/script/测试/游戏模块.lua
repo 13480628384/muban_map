@@ -14,8 +14,11 @@ local rect = require 'types.rect'
 local function icu()
 	fogmodifier.create(ac.player(1), ac.map_area)
 end
-
 icu()
+
+-- local u = ac.player(16):create_unit('挑战怪10',ac.point(100,200))
+-- u:set('生命上限',2000)
+-- u:set('移动速度',300)
 
 --输入 over 游戏结束
 ac.game:event '玩家-聊天' (function(self, player, str)

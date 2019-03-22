@@ -319,6 +319,13 @@ function helper:black()
 	jass.SetDayNightModels('', 'Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl')
 end
 
+function helper:add_skill(str,cnt)
+	local cnt = cnt or 1
+	for i=1,cnt do
+		ac.item.add_skill_item(str,self)
+	end	
+end
+
 function helper:wtf()
 	ac.wtf = not ac.wtf
 	if ac.wtf then
