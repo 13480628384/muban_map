@@ -102,9 +102,9 @@ function mt:random_creeps_datas(temp_type)
                 if not self.current_creep[rand_name]  then 
                     self.current_creep[rand_name] = {}
                 end 
+                self.current_creep[rand_name][k]=v 
                 self.current_creep[rand_name]['name'] =  rand_name
                 self.current_creep[rand_name]['cnt'] =  1
-                self.current_creep[rand_name][k]=v 
             end    
         end
 
