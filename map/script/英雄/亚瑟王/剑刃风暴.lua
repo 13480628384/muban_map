@@ -64,12 +64,11 @@ mt{
     folow_model_size = 0.8,
     follow_move_skip = 10,
 }
-
+mt.life_rate_now = 0
 
 function mt:on_add()
     local skill = self
 	local hero = self.owner 
-	hero:add('生命上限%',self.life_rate)
 
 	--创建一个透明的剑刃风暴 跟随英雄
 	local mvr = hero:follow{
@@ -81,11 +80,17 @@ function mt:on_add()
 		size = self.folow_model_size,
 	}
 	mvr.mover:setAlpha(0)
-	-- if not mvr then
-	-- 	return
-	-- end
-
 end	
+-- 360,396,432,468,504
+function mt:on_upgrade()
+	local hero = self.owner
+	-- print(self.life_rate_now)
+	hero:add('生命上限%', -self.life_rate_now)
+	self.life_rate_now = self.life_rate
+	hero:add('生命上限%', self.life_rate)
+end
+
+
 function mt:on_cast_shot()
 	local hero = self.owner
 	-- hero:add_effect('origin',self.effect)
@@ -97,7 +102,7 @@ function mt:on_cast_shot()
 		damage = self.damage,
 		effect = self.effect,
 		pulse = 0.02, --剑刃风暴 立即受伤害
-		real_pulse = 0.25,  --实际每秒受伤害
+		real_pulse = self.pulse,  --实际每秒受伤害
 		time = self.time
 	}
 end

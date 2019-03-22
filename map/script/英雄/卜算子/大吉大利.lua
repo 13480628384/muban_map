@@ -6,6 +6,7 @@ mt{
 	
 	--初始等级
 	level = 1,
+	max_level = 5,
 	
 	tip = [[
 		主动：同时只能连接一个目标；
@@ -32,9 +33,9 @@ mt{
 	end,
 
 	--物品获取率
-	item_rate = 50,
+	item_rate = {10,20,30,40,50},
 	--金币获取率
-	gold_rate = 50,
+	gold_rate = {10,20,30,40,50},
 
 	--每秒
 	pulse = 0.5,
@@ -55,13 +56,27 @@ mt{
 	-- range = 1200,
 }
 
-
+mt.item_rate_now = 0
+mt.gold_rate_now = 0
 function mt:on_add()
 	local hero = self.owner 
-	hero:add('物品获取率',self.item_rate)
-	hero:add('金币加成',self.gold_rate)
 
 end	
+function mt:on_upgrade()
+	local hero = self.owner
+	-- print(self.life_rate_now)
+
+	hero:add('物品获取率', -self.item_rate_now)
+	self.item_rate_now = self.item_rate
+	hero:add('物品获取率', self.item_rate)
+	
+	hero:add('金币加成', -self.gold_rate_now)
+	self.gold_rate_now = self.gold_rate
+	hero:add('金币加成', self.gold_rate)
+
+end
+
+
 function mt:on_cast_shot()
 	print('目标单位0',target_unit)
     local skill = self
