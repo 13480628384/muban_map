@@ -185,7 +185,7 @@ function mt:add_creep_skill(tab,unit)
         prtin_str = prtin_str .. i .. skill_name ..','
     end 
     -- unit:add_skill('火焰','隐藏')    
-    print('1111111111本回合野怪技能：',prtin_str)
+    -- print('1111111111本回合野怪技能：',prtin_str)
 end 
 
 --发送本层怪物特性 
@@ -223,7 +223,9 @@ function mt:on_start()
     if ac.g_game_degree == 3 then 
         self.game_degree_attr_mul = 3  --难度三 属性倍数3倍
     end  
-
+    --特殊回合处理。
+    self.gold_index = 5
+    self.challenge_index = 10
 end
 function mt:on_next()
     --进攻提示
@@ -232,10 +234,21 @@ function mt:on_next()
     self.all_food = all_food * get_player_count()   --每多一个玩家， 多1倍的怪物总人口,每回合开始都去检测人口数量
     self.used_food = 0 
     self.current_creep ={}
-    --获得随机 1-2 个种类的进攻怪
-    local temp_type = self:get_temp_type()
-    self:random_creeps_datas(temp_type)
-    print(self.creeps_datas)
+    self.player_damage = {}
+    --金币怪
+    if self.index == self.gold_index then 
+        self.creeps_datas = "金币怪*1"
+    --挑战怪    
+    elseif self.index == self.challenge_index then
+        self.creeps_datas = "挑战怪"..self.challenge_index.."*1"
+    --普通怪    
+    else 
+        --获得随机 1-2 个种类的进攻怪
+        local temp_type = self:get_temp_type()
+        self:random_creeps_datas(temp_type)
+    end   
+
+    print(self.creeps_datas) 
 
     --转化字符串 为真正的区域
     self:set_region()
@@ -345,10 +358,48 @@ function mt:on_next()
     end 
     
 end
+--发送当前这层怪物受伤害信息
+function mt:sendMsg_unit()
+    local tip = '|cffffff00结算奖励：|r\n'
+    for i=1,10 do 
+        if self.player_damage[i].player:is_player() then
+        tip = tip ..'|cffffff00No.'..i..'、 |r|cffff0000'..self.player_damage[i].player:get_name()..'|r|cffffff00: 伤害[|cffff0000'..ac.numerical(self.player_damage[i].damage)..'|r|cffffff00]金币奖励100|r'..'\n'
+        end   
+    end
+    ac.player.self:sendMsg(tip,10)   
+end    
 --改变怪物
 function mt:on_change_creep(unit,lni_data)
-  
-    local name = '进攻怪-'..self.index
+    local name
+     --金币怪
+    if self.index == self.gold_index then 
+        self.gold_index = self.gold_index + 10
+        name = "金币怪-"..self.index
+        --金币怪处理
+        unit:add_restriction '缴械'
+        --钥匙怪逃跑路线
+        self.key_unit_trg = self:move_random_way(unit)
+        --倒计时30秒结束
+        self.gold_unit_timer_ex1 = ac.timer_ex 
+        {
+            time = 30,
+            title = "金币怪消失倒计时",
+            func = function ()
+                unit:kill() 
+                self:sendMsg_unit()
+                --发送金币奖励
+            end,
+        }    
+        
+    --挑战怪    当前数据统计 current_data_trace
+    elseif self.index == self.challenge_index then
+        self.challenge_index = self.challenge_index + 10
+        name = "挑战怪-"..self.index
+    --普通怪    
+    else 
+        name = '进攻怪-'..self.index
+    end   
+
     local data = ac.table.UnitData[name]
     data.attr_mul = lni_data.attr_mul
     data.food = lni_data.food
@@ -383,8 +434,8 @@ function mt:on_change_creep(unit,lni_data)
         --掉落概率
         unit.fall_rate = data.fall_rate * lni_data.food
         --掉落金币和经验
-        unit.gold = data.gold * lni_data.food
-        unit.exp = data.exp * lni_data.food
+        unit.gold = (data.gold or 0) * lni_data.food
+        unit.exp = (data.exp or 0) * lni_data.food
 
     end 
     --设置搜敌路径
@@ -392,34 +443,67 @@ function mt:on_change_creep(unit,lni_data)
     --随机添加怪物技能
     self:add_creep_skill(self.rand_skill_list,unit)
     --unit:add_skill('怀孕','隐藏')
-    -- unit:add_skill('霜冻新星','隐藏')
-    -- unit:add_skill('肥胖','隐藏')
-    -- unit:add_skill('强壮','隐藏')
-    -- unit:add_skill('有钱','隐藏')
-    -- unit:add_skill('学习','隐藏')
-    -- unit:add_skill('收藏','隐藏')
-    -- unit:add_skill('神盾','隐藏')
-    -- unit:add_skill('躲猫猫','隐藏')
-    -- unit:add_skill('我晕','隐藏')
-    -- unit:add_skill('泡温泉','隐藏')
-    -- unit:add_skill('重生','隐藏')
-    -- unit:add_skill('死亡一指','隐藏')
-    -- unit:add_skill('学霸','隐藏')
-    -- unit:add_skill('刺猬','隐藏')
-    -- unit:add_skill('怀孕','隐藏')
-    -- unit:add_skill('抗魔','隐藏')
-    -- unit:add_skill('魔免','隐藏')
-    -- unit:add_skill('火焰','隐藏')
-    -- unit:add_skill('净化','隐藏')
-    -- unit:add_skill('远程攻击','隐藏')
-    -- unit:add_skill('幽灵','隐藏')
-    -- unit:add_skill('腐烂','隐藏')
-    -- unit:add_skill('流血','隐藏')
-    -- unit:add_skill('善恶有报','隐藏')
-    -- unit:add_skill('灵丹妙药','隐藏')
+
+    --统计伤害 
+    unit:event '伤害计算完毕'(function (_,damage)
+        if not self.player_damage then 
+            self.player_damage = {}
+        end    
+        local p = damage.source:get_owner()
+        for i = 1 ,10 do 
+            if not self.player_damage[i] then
+                self.player_damage[i] = {}
+                self.player_damage[i].player = ac.player(i)
+                self.player_damage[i].damage = 0
+            end    
+            local v = self.player_damage[i]
+            if v.player == p then 
+                v.damage = v.damage + damage.current_damage
+            end    
+            -- print(v.player,v.damage)
+        end
+
+        table.sort(self.player_damage,function (a,b)
+            return a.damage > b.damage
+        end)
+       
+        -- self.player_damage[p.id] = (self.player_damage[p.id] or 0) + damage.current_damage
+    end)    
     
 
 end
+--AI逃跑路线（随机）
+function mt:move_random_way(unit)
+    --逃跑路线
+    local hero = ac.find_hero(unit)
+    local angle
+    if hero then  
+        angle= hero:get_point()/unit:get_point()
+    else 
+        angle =math.random(0,360)
+    end    
+    --优化钥匙怪跑路角度
+    angle = angle - math.random(0,360)
+    local target_point = unit:get_point() - {angle,800}
+    unit:issue_order('move',target_point)
+
+    local trg = unit:loop(2*1000,function()
+        local hero = ac.find_hero(unit)
+        local angle
+        if hero then  
+            angle= hero:get_point()/unit:get_point()
+        else 
+            angle =math.random(0,360)
+        end    
+        --优化钥匙怪跑路角度
+        angle = angle - math.random(0,360)
+        local target_point = unit:get_point() - {angle,800}
+        unit:issue_order('move',target_point)
+
+    end);
+    return trg
+end    
+
 --创建钥匙怪
 function mt:creat_key_unit()
     local unit = ac.player[16]:create_unit('钥匙怪',ac.point(0,0))
@@ -437,34 +521,9 @@ function mt:creat_key_unit()
     unit:set('生命上限',20)
     unit:add_high(220)
     unit:add_restriction('魔免')
+    --钥匙怪逃跑路线
+    self.key_unit_trg = self:move_random_way(unit)
 
-    --逃跑路线
-    local hero = ac.find_hero(unit)
-    local angle
-    if hero then  
-        angle= hero:get_point()/unit:get_point()
-    else 
-        angle =math.random(0,360)
-    end    
-    --优化钥匙怪跑路角度
-    angle = angle - math.random(0,360)
-    local target_point = unit:get_point() - {angle,800}
-    unit:issue_order('move',target_point)
-
-    self.key_unit_trg = unit:loop(2*1000,function()
-        local hero = ac.find_hero(unit)
-        local angle
-        if hero then  
-            angle= hero:get_point()/unit:get_point()
-        else 
-            angle =math.random(0,360)
-        end    
-        --优化钥匙怪跑路角度
-        angle = angle - math.random(0,360)
-        local target_point = unit:get_point() - {angle,800}
-        unit:issue_order('move',target_point)
-
-    end);
     unit:event '单位-受到伤害开始'(function(trg,damage)
         --不是普攻就跳出
         if not damage:is_common_attack() or not damage.skill then 

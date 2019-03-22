@@ -287,7 +287,7 @@ ac.game:event '单位-死亡' (function (_,unit,killer)
         local player = killer:get_owner()
         local dummy_unit = player.hero or ac.dummy
         local fall_rate = unit.fall_rate *( 1 + dummy_unit:get('物品获取率')/100 )
-        print('装备掉落概率：',fall_rate,unit.fall_rate)
+        -- print('装备掉落概率：',fall_rate,unit.fall_rate)
         hero_kill_unit(player,killer,unit,fall_rate)
         
     end

@@ -26,6 +26,11 @@ ac.game:event '游戏-开始' (function()
         end    
     end    
     
+    --进行数据统计
+    require '游戏.数据统计2'
+
+
+
     -- require '平台.商城'
     local fresh_time = 5*60 --刷新时间
     -- local fresh_time = 10 --刷新时间

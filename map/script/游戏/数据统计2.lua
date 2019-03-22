@@ -23,7 +23,7 @@ for i=1,10 do
     player.ctl = 0
     --kda
     player.kda = 0
-
+    player.boshu = 0
     --段位为1-7 青铜 白银 黄金 白金 钻石 大师 王者
     if player.boshu <= 20 then
         player.rank = 1
@@ -57,6 +57,7 @@ local function numerical(value)
     end
 
 end
+ac.numerical = numerical
 
 --段位贴图
 local rank_art = {
@@ -94,7 +95,8 @@ local function get_kda()
     end
 
     local t = {}
-    for i,p in ipairs(ac.player_list) do
+    local list = get_player_list()
+    for i,p in ipairs(list) do
         local a = 0
         local b = 0
         local c = 0
@@ -167,7 +169,7 @@ end
 
 
 --注册事件
-for _,hero in ipairs(ac.player_hero_group) do
+for hero,_ in pairs(ac.hero.all_heros) do
     local p = hero.owner
     hero:event '单位-死亡'(function()
         p.death = p.death + 1
@@ -177,18 +179,18 @@ for _,hero in ipairs(ac.player_hero_group) do
         p.damage_count = p.damage_count + self.current_damage
     end)
 
-    hero:event '受到伤害结束'(function(_,self)
-        p.take_damage_count = p.take_damage_count + self.damage
-        if hero:get '生命' / hero:get '生命上限' < 0.12 then
-            local fl = hero:get_owner():cinematic_filter
-            {   
-                file = 'xueliangguodi.blp',
-                start = {100, 100, 100, 100},
-                finish = {100, 100, 100, 0},
-                time = 5,
-            }
-        end
-    end)
+    -- hero:event '受到伤害结束'(function(_,self)
+    --     p.take_damage_count = p.take_damage_count + self.damage
+    --     if hero:get '生命' / hero:get '生命上限' < 0.12 then
+    --         local fl = hero:get_owner():cinematic_filter
+    --         {   
+    --             file = 'xueliangguodi.blp',
+    --             start = {100, 100, 100, 100},
+    --             finish = {100, 100, 100, 0},
+    --             time = 5,
+    --         }
+    --     end
+    -- end)
 
     hero.owner:event '玩家-即将获得金钱'(function(_,data)
         local p = data.player
