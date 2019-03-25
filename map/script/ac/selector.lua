@@ -320,6 +320,26 @@ function api:random()
 	end
 end
 
+--选取并随机出x个单位，返回ipairs
+function api:random_int(n)
+	if not n then
+		n = 1
+	end
+
+	local g = self:get()
+	local a = {}
+	local t
+	for i=1,n do
+		if #g > 0 then
+			t = math_random(1, #g)
+			table_insert(a, g[t])
+			table.remove(g,t)
+		end
+	end
+	
+	return ipairs(a)
+end
+
 --设置第一个
 function api:set_sort_first(u)
 	local g = self:get()

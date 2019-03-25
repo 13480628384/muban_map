@@ -81,3 +81,11 @@ require '技能.英雄技能.光子灵枪'
 require '技能.英雄技能.闪电链'
 require '技能.英雄技能.暴风雪'
 
+require '技能.英雄技能.万箭齐发'
+require '技能.英雄技能.回旋刃'
+require '技能.英雄技能.交叉闪电'
+require '技能.英雄技能.御甲'
+require '技能.英雄技能.绿野之矛'
+require '技能.英雄技能.风暴之力'
+
+

@@ -234,7 +234,7 @@ function mt:on_next()
     self.all_food = all_food * get_player_count()   --每多一个玩家， 多1倍的怪物总人口,每回合开始都去检测人口数量
     self.used_food = 0 
     self.current_creep ={}
-    self.player_damage = {}
+    -- self.player_damage = {}
     --金币怪
     if self.index == self.gold_index then 
         self.creeps_datas = "金币怪*1"
@@ -389,7 +389,32 @@ function mt:on_change_creep(unit,lni_data)
                 self:sendMsg_unit()
                 --发送金币奖励
             end,
-        }    
+        }  
+        --统计伤害 
+        unit:event '伤害计算完毕'(function (_,damage)
+            if not self.player_damage then 
+                self.player_damage = {}
+            end    
+            local p = damage.source:get_owner()
+            for i = 1 ,10 do 
+                if not self.player_damage[i] then
+                    self.player_damage[i] = {}
+                    self.player_damage[i].player = ac.player(i)
+                    self.player_damage[i].damage = 0
+                end    
+                local v = self.player_damage[i]
+                if v.player == p then 
+                    v.damage = v.damage + damage.current_damage
+                end    
+            end
+            table.sort(self.player_damage,function (a,b)
+                return a.damage > b.damage
+            end)
+        end)  
+        --单位死亡时，清空伤害统计。   
+        unit:event '单位-死亡'(function(_,unit,killer)
+            self.player_damage[i] = {}
+        end)
         
     --挑战怪    当前数据统计 current_data_trace
     elseif self.index == self.challenge_index then
@@ -444,31 +469,6 @@ function mt:on_change_creep(unit,lni_data)
     self:add_creep_skill(self.rand_skill_list,unit)
     --unit:add_skill('怀孕','隐藏')
 
-    --统计伤害 
-    unit:event '伤害计算完毕'(function (_,damage)
-        if not self.player_damage then 
-            self.player_damage = {}
-        end    
-        local p = damage.source:get_owner()
-        for i = 1 ,10 do 
-            if not self.player_damage[i] then
-                self.player_damage[i] = {}
-                self.player_damage[i].player = ac.player(i)
-                self.player_damage[i].damage = 0
-            end    
-            local v = self.player_damage[i]
-            if v.player == p then 
-                v.damage = v.damage + damage.current_damage
-            end    
-            -- print(v.player,v.damage)
-        end
-
-        table.sort(self.player_damage,function (a,b)
-            return a.damage > b.damage
-        end)
-       
-        -- self.player_damage[p.id] = (self.player_damage[p.id] or 0) + damage.current_damage
-    end)    
     
 
 end
@@ -524,9 +524,9 @@ function mt:creat_key_unit()
     --钥匙怪逃跑路线
     self.key_unit_trg = self:move_random_way(unit)
 
-    unit:event '单位-受到伤害开始'(function(trg,damage)
-        --不是普攻就跳出
-        if not damage:is_common_attack() or not damage.skill then 
+    unit:event '受到伤害开始'(function(trg,damage)
+        --不是普攻就跳出 or not damage.skill
+        if not damage:is_common_attack()  then 
             return true
         end    
     end)

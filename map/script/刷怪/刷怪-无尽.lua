@@ -25,6 +25,8 @@ function mt:on_start()
 
 end
 function mt:on_next()    
+    --进攻提示
+    ac.ui.kzt.up_jingong_title('无尽 - 第 '..self.index..' 层 ')
     --每一波开始时，进行初始化数据
     self.all_food = ac.creep['刷怪'].all_food
     self.used_food = 0 
