@@ -2,7 +2,7 @@ local mt = ac.skill['绿野之矛']
 mt{
     --等级
     level = 1,
-
+    max_level = 5,
     --是被动
     passive = true,
 	--技能类型
@@ -10,13 +10,13 @@ mt{
 
     --原始伤害
     damage = function(self,hero)
-        return hero:get '力量' * 4 + hero:get '智力' * 5 + hero:get '敏捷' * 4
+        return hero:get '智力' * self.int
     end,
 
+    int = {4,6,8,10,12},
+
     --释放几率
-    chance = function (self,hero)
-        return 15 + hero:get '天赋触发几率'
-    end,
+    chance = {5,7.5,10,12.5,15},
 
     --投射物数量
     count = 4,
@@ -33,19 +33,14 @@ mt{
         return 4 + ac.player.self.hero:get '额外投射物数量'
     end,
     --几率
-    my_chance = function (self)
-        return 15 + ac.player.self.hero:get '天赋触发几率'
-    end,
-
+    my_chance = {5,7.5,10,12.5,15},
     --投射物模型
     model = [[lvyezhimao.MDX]],
     title = '绿野之矛',
     tip = [[标签：|cff0c97d1投射物|r
-%my_chance% % 几率发射 %client_count% 只绿野之矛，35% 几率为友军英雄添加一个治疗Buff,每秒恢复智力*0.3+目标最大生命值 1% 的生命值,持续 %time% 秒
-伤害计算：|cffd10c44全属性 * 4|r
-伤害类型：|cff04be12法术伤害|r]],
+%my_chance% % 几率对敌人发射 %client_count% 只绿野之矛，造成 和智力相关的 法术伤害.也许还有隐藏技能.
+]]
 }
-
 function mt:on_add()
     local hero = self.owner
     local skill = self

@@ -2,7 +2,7 @@ local mt = ac.skill['回旋刃']
 mt{
     --等级
     level = 1,
-
+    max_level = 5,
     --是被动
     passive = true,
 	--技能类型
@@ -11,14 +11,14 @@ mt{
     --原始伤害
     damage = function(self,hero)
 		if self and self.owner then 
-			return self.owner:get('敏捷')*2
+			return self.owner:get('力量')*self.int
 		end	
 	end,
 
+    int = {2,3,4,5,6},
+
     --释放几率
-    chance = function (self,hero)
-        return 100 + hero:get '天赋触发几率'
-    end,
+    chance = {5,7.5,10,12.5,15},
     
     --图标
     art = [[huixuanren.blp]],
@@ -55,7 +55,7 @@ mt{
     title = '回旋刃',
     tip = [[标签：|cff0c97d1投射物 范围|r
 攻击时 %my_chance% % 几率发射 %client_count% 个回旋刃，以目标为起始点向前移动 %distance% 距离对碰到单位造成伤害，停留 %stay_time% s后以最快的速度返回到英雄位置，回旋时造成 %cycle_round_damage% % 伤害
-伤害计算：|cffd10c44力量 * 6.5|r
+伤害计算：|cffd10c44力量 * %int%|r
 伤害类型：|cff04be12物理伤害|r]],
 
 }

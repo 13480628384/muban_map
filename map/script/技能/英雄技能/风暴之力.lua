@@ -2,19 +2,19 @@ local mt = ac.skill['风暴之力']
 mt{
     --等级
     level = 1,
-
+    max_level = 5,
     --是被动
     passive = true,
 
     --伤害
     damage = function (self,hero)
-        return hero:get '智力'  * 5 + hero:get '敏捷' * 2
+        return hero:get '智力'  * self.int
     end,
     
+    int = {4,5,6,7,8},
+
     --释放几率
-    chance = function (self,hero)
-        return 15 + hero:get '天赋触发几率'
-    end,
+    chance = {5,7.5,10,12.5,15},
 
     --自由碰撞时的碰撞半径
     hit_area = function(self,hero)
@@ -31,17 +31,17 @@ mt{
     areaa = function(self)
         return 100 + ac.player.self.hero:get '额外范围'
     end,
+
     --几率
-    my_chance = function (self)
-        return 15 + ac.player.self.hero:get '天赋触发几率'
-    end,
+    my_chance = {5,7.5,10,12.5,15},
+
     --模型
     model = [[AZ_Kaer_X1.mdx]],
     title = '风暴之力',
     tip = [[标签：|cff0c97d1范围|r
 %my_chance% % 几率发动一个龙卷风向前方移动 %dis% 码，对经过的范围 %areaa% 区域造成伤害,龙卷风到达终点时分裂出四个，造成 40% 伤害
-伤害计算：|cffd10c44智力 * 5 + 敏捷 * 2|r
-伤害类型：|cff04be12法术伤害|r]],
+伤害计算：|cffd10c44智力 * %int% |r
+伤害类型：|cff04be12法术伤害|r]]
 }
 
 --分散龙卷风

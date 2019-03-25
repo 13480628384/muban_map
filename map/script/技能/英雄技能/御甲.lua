@@ -2,7 +2,7 @@ local mt = ac.skill['御甲']
 mt{
     --等级
     level = 1,
-
+    max_level = 5,
     --是被动
     passive = true,
 	--技能类型
@@ -10,13 +10,15 @@ mt{
 
     --伤害
     damage = function(self,hero)
-        return (hero:get '护甲' * 30) * (1 + hero:get '护甲' * (8 / 10000))
-    end,
+		if self and self.owner then 
+			return self.owner:get('力量')*self.int
+		end	
+	end,
+
+    int = {3,4,5,6,7},
 
     --释放几率
-    chance = function (self,hero)
-        return 15 + hero:get '天赋触发几率'
-    end,
+    chance = {5,7.5,10,12.5,15},
 
     --连锁数量
     count = 5,
@@ -39,17 +41,15 @@ mt{
     end,
 
     --几率
-    my_chance = function (self)
-        return 15 + ac.player.self.hero:get '天赋触发几率'
-    end,
+    my_chance =  {5,7.5,10,12.5,15},
 
     --模型
     model = [[AZ_[Sepll]LinaSun _T2_Blast.MDX]],
     title = '御甲',
     tip = [[标签：|cff0c97d1连锁 范围|r
 %my_chance% % 几率发动御甲对单位造成伤害并向周围连锁 %client_count% 次,并对周围 %areaa% 内单位造成 30% 伤害 
-伤害计算：|cffd10c44护甲*30(每10点护甲提升0.8%伤害)|r
-伤害类型：|cff04be12法术伤害|r]]
+伤害计算：|cffd10c44 力量 * %int% |r
+伤害类型：|cff04be12物理伤害|r]]
 }
 
 function mt:on_add()
@@ -72,7 +72,7 @@ function mt:on_add()
             source = hero,
             skill = self,
             damage = max_damage,
-            damage_type = '法术',
+            damage_type = '物理',
         }
 
         local count = self.count + hero:get '额外连锁数量' - 1
@@ -99,7 +99,7 @@ function mt:on_add()
                 source = hero,
                 skill = self,
                 damage = max_damage,
-                damage_type = '法术',
+                damage_type = '物理',
             }
 
             for _, u_t in ac.selector():in_range(target,self.hit_area):is_enemy(hero):is_not(target):ipairs() do
@@ -108,7 +108,7 @@ function mt:on_add()
                     source = hero,
                     skill = self,
                     damage = max_damage * 0.3,
-                    damage_type = '法术',
+                    damage_type = '物理',
                 }
             end
         end)

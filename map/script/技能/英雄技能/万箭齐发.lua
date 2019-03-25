@@ -2,30 +2,35 @@ local mt = ac.skill['万箭齐发']
 mt{
     --等级
     level = 1,
+    max_level = 5,
+
 	--技能类型
 	skill_type = "被动",
 
     --是被动
     passive = true,
 
+
+
     --原始伤害
     damage = function(self,hero)
 		if self and self.owner then 
-			return self.owner:get('敏捷')*2
+			return self.owner:get('敏捷')*self.agi
 		end	
-	end,
+    end,
+    
+    agi = {2.5,3,3.5,4,5},
 
     --释放几率
-    chance = function (self,hero)
-        return 100 
-    end,
+    chance = {5,7.5,10,12.5,15},
+
     --图标
     art = 'wanjianqifa.tga',
     --暗影之箭范围
     area =  600,
     
     --数量
-    count = 8,
+    count = {6,8,10,12,14},
     
     --投射物碰撞距离
     hit_area = 150,
@@ -39,11 +44,10 @@ mt{
     boom_model = [[anyingzhijing.mdx]],
     title = '万箭齐发',
     tip = [[标签：|cff0c97d1投射物 范围|r
-攻击时 %chance% % 几率丢出 %count% 个从天而降的暗影之箭，击中目标时，对目标及 %hit_area% 范围的敌人造成 %main_damage% % 伤害(受额外投射物数量*2的加成)
-伤害计算：|cffd10c44 力量 * 6.5|r
-伤害类型：|cff04be12法术伤害|r]],
+攻击时 %chance% % 几率丢出 %count% 个从天而降的暗影之箭，击中目标时，对目标及 %hit_area% 范围的敌人造成 %main_damage% % 伤害
+伤害计算：|cffd10c44 敏捷 * %agi% |r
+伤害类型：|cff04be12物理伤害|r]],
 }
-
 
 function mt:on_add()
     local skill = self
@@ -125,7 +129,7 @@ function mt:on_add()
                                     damage = max_damage * skill.main_damage / 100,
                                     skill = skill,
                                     missile = self.mover,
-                                    damage_type = '法术'
+                                    damage_type = '物理'
                                 }
                             end
                         end

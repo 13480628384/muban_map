@@ -2,6 +2,7 @@ local mt = ac.skill['交叉闪电']
 mt{
     --等级
     level = 1,
+    max_level = 5,
     --是被动
     passive = true,
 	--技能类型
@@ -10,9 +11,11 @@ mt{
     --原始伤害
     damage = function(self,hero)
 		if self and self.owner then 
-			return self.owner:get('敏捷')*2
+			return self.owner:get('敏捷')*self.agi
 		end	
 	end,
+
+    agi = {2,2.5,3,3.5,4},
 
     --投射物数量
     count = function(self,hero)
@@ -22,12 +25,10 @@ mt{
     art = [[weisuoshandianjian.tga]],
 
     --释放几率
-    chance = function (self,hero)
-        return 100 + hero:get '天赋触发几率'
-    end,
+    chance = {5,7.5,10,12.5,15},
 
     --交叉闪电数量
-    lig_count = 3,
+    lig_count = {2,3,4,5,6},
 
     --二段伤害
     ejection_damage = 45,
@@ -38,7 +39,7 @@ mt{
     title = '交叉闪电',
     tip = [[标签：|cff0c97d1投射物|r
 攻击时有 %chance% % 几率释放 %count% 个金钱镖飞向敌人造成伤害，命中时会对周围 %lig_count% 个敌人释放交叉闪电，造成 %ejection_damage% % 的伤害
-伤害计算：|cffd10c44力量 * 2|r(伤害: %damage% )
+伤害计算：|cffd10c44 敏捷 * %agi%|r(伤害: %damage% )
 伤害类型：物理伤害]],
 }
 

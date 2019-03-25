@@ -2,7 +2,7 @@ local mt = ac.skill['神盾']
 
 mt.title = "神盾"
 mt.tip = [[
-    被动1：提升自己的护甲20点，提升自己护甲400%
+    被动1：提升自己的护甲20点，提升自己护甲200%
     被动2：降低自己的移速50%
     被动3：降低自己的三维40%
 ]]
@@ -15,7 +15,7 @@ mt.move_speed = 50
 
 --护甲
 mt.defence_base = 20
-mt.defence_rate = 400
+mt.defence_rate = 200
 
 function mt:on_add()
 
