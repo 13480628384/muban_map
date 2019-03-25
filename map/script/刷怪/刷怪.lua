@@ -57,6 +57,27 @@ local mt = ac.creep['刷怪']{
 
 }
 
+--进攻怪刷新时的初始化
+function mt:on_start()
+    local rect = require 'types.rect'
+    local region = ac.map.rects['刷怪']
+    self.region = region
+    self.all_creep = all_creep
+    -- 刷怪初始化 难度、玩家影响
+    if ac.g_game_degree == 1 then 
+        self.game_degree_attr_mul = 1  --难度一 属性倍数1倍
+    end    
+    if ac.g_game_degree == 2 then 
+        self.game_degree_attr_mul = 2  --难度二 属性倍数2倍
+    end  
+    if ac.g_game_degree == 3 then 
+        self.game_degree_attr_mul = 3  --难度三 属性倍数3倍
+    end  
+    --特殊回合处理。
+    self.gold_index = 5
+    self.challenge_index = 10
+end
+
 --查找当前波野怪数据是否已经有此类型的怪
 -- 类型或是名字都可查找
 function mt:has_unit(str)
@@ -220,26 +241,6 @@ function mt:send_skill_message(cnt,time)
         end  
     end    
 end  
---进攻怪刷新时的初始化
-function mt:on_start()
-    local rect = require 'types.rect'
-    local region = ac.map.rects['刷怪']
-    self.region = region
-    self.all_creep = all_creep
-    -- 刷怪初始化 难度、玩家影响
-    if ac.g_game_degree == 1 then 
-        self.game_degree_attr_mul = 1  --难度一 属性倍数1倍
-    end    
-    if ac.g_game_degree == 2 then 
-        self.game_degree_attr_mul = 2  --难度二 属性倍数2倍
-    end  
-    if ac.g_game_degree == 3 then 
-        self.game_degree_attr_mul = 3  --难度三 属性倍数3倍
-    end  
-    --特殊回合处理。
-    self.gold_index = 5
-    self.challenge_index = 10
-end
 function mt:on_next()
     --进攻提示
     ac.ui.kzt.up_jingong_title(' 第 '..self.index..' 层 ')
@@ -396,7 +397,7 @@ function mt:on_change_creep(unit,lni_data)
         --倒计时30秒结束
         self.gold_unit_timer_ex1 = ac.timer_ex 
         {
-            time = 30,
+            time = 15,
             title = "金币怪消失倒计时",
             func = function ()
                 --发送金币奖励

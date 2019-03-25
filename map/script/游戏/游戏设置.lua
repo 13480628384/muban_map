@@ -12,7 +12,7 @@ ac.map.rects={
     ['物品商店'] =rect.j_rect('wpsd') ,
     ['技能商店'] =rect.j_rect('jnsd') ,
     ['积分商店'] =rect.j_rect('jfsd') ,
-    ['XX商店'] =rect.j_rect('xxsd') ,
+    ['图书馆'] =rect.j_rect('xxsd') ,
     ['出生点'] =rect.j_rect('csd') ,
 }
 ac.map['刷怪中心点'] = rect.j_rect('sg002'):get_point()

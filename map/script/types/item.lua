@@ -430,9 +430,13 @@ function mt:on_use_state()
 	if not hero then 
 		return
 	end	
-	--让宠物使用物品时给英雄增加对应的属性
-	hero = hero:get_owner().hero
+	--神符类的，宠物不替代英雄
+	if not self.item_type =='神符' then
+		--让宠物使用物品时给英雄增加对应的属性
+		hero = hero:get_owner().hero
+	end	
 
+	-- print(hero)
 	--保存物品
 	local name = self.name
 
@@ -478,7 +482,7 @@ function mt:on_use_state()
 				player = hero:get_owner()
 			}
 		end
-		if self.item_type == '消耗品' then
+		if self.item_type == '消耗品' or self.item_type == '神符' then
 			print('使用物品,增加属性：',name,value.name,value.value)
 			hero:add_tran(value.name,value.value)
 		end	

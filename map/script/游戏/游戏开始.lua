@@ -61,7 +61,7 @@ ac.game:event '游戏-开始' (function()
     local x,y = ac.map.rects['积分商店']:get_point():get()
     local shop2 = ac.shop.create('积分商店',x,y+200)
     --创建xx商店
-    local x,y = ac.map.rects['XX商店']:get_point():get()
-    local shop3 = ac.shop.create('XX商店',x,y)
+    local x,y = ac.map.rects['图书馆']:get_point():get()
+    local shop3 = ac.shop.create('图书馆',x,y)
 
 end)    

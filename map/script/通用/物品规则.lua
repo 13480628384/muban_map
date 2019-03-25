@@ -57,8 +57,15 @@
             it.owner = u
             --为物品添加技能
             it:item_init_skill()
+
             --进入施法流程
-            it:_call_event 'on_cast_start'
+            if it:_call_event 'on_cast_start' then 
+                it.owner = nil
+                return true
+            end    
+            --使用物品，类似消耗品
+            it:on_use_state()
+
             it:_call_event 'on_remove'
             --表示购买成功
             u.buy_suc = true

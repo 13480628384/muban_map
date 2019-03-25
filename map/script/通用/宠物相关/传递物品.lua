@@ -1,4 +1,5 @@
-local mt = ac.skill['拾取']
+local mt = ac.skill['传递物品']
+
 mt{
     --必填
     is_skill = true,
@@ -8,34 +9,40 @@ mt{
     --目标类型
     target_type = ac.skill.TARGET_TYPE_UNIT,
 
-    --拾取距离 测试没用
-	range = 150,
-
     --目标允许
     target_data = '物品',
 
-    --图标是否可见 0可见 1隐藏
-    hide_count = 1,
-    
-    --拾取cd，太快会触发2次。
-    cool = 5,
+	tip = [[
+传递物品给英雄
+	]],
+	
+	--技能图标
+	art = [[icon\jineng037.blp]],
+
+	--cd
+	cool = 1,
+	
+	--施法距离
+	range = 99999,
 }
 
+
 function mt:on_add()
-    
-end
+	local hero = self.owner 
+end	
 
 function mt:on_cast_start()
     local hero = self.owner
-    local it = self.target
+	local it = self.target
+	print(it)
     -- hero:event_notify('单位-拾取物品',hero,it)
     -- 点太快 重复触发两次拾取。
     if it.owner then 
         print('重复拾取') 
         return
     end    
-
-    hero:add_item(it) 
 end
 
+function mt:on_remove()
 
+end

@@ -6,9 +6,11 @@ local quality_item ={}
 for name,data in pairs(ac.table.ItemData) do 
     local color = data.color 
     if color then 
-        local list = quality_item[color] or {}
-        table.insert(list,name)
-        quality_item[color] = list 
+        if data.item_type == '装备' or data.item_type == '消耗品' then
+            local list = quality_item[color] or {}
+            table.insert(list,name)
+            quality_item[color] = list 
+        end    
     end 
 end 
 ac.quality_item = quality_item
@@ -224,6 +226,19 @@ local unit_reward = {
                 { rand = 0.7, name = '红'},
             }
         }
+    },
+    ['命运花'] =  {
+        {   rand = 7, name = '无' },
+        {    rand = 11.5, name = '中毒',},
+        {    rand = 11.5, name = '沉默',},
+        {    rand = 11.5, name = '减速',},
+        {    rand = 11.5, name = '暴击率翻倍',},
+        {    rand = 11.5, name = '生命全满',},
+        {    rand = 11.5, name = '攻击力翻倍',},
+        {    rand = 11.5, name = '全属性加100',},
+        {    rand = 11.5, name = '全属性加1000',},
+        {    rand = 1, name = '全属性加10000',},
+        
     },
    
 }

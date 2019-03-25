@@ -8,7 +8,7 @@ local function fresh_shop_item(shop)
             return
         end    
         
-        local list = ac.quality_item[rand_name] 
+        local list = ac.quality_item[rand_name]   
         --添加 
         local name = list[math.random(#list)]
         shop.sell[i] = name
@@ -47,7 +47,6 @@ local function fresh_shop_skill(shop)
         local name = list[math.random(#list)]
         -- print('即将添加商店物品：',name,i)
         -- shop:add_sell_item(name,i)
-        print(name)
         shop.sell[i] = name
         shop.sell_new_gold[i] = true
         
@@ -57,7 +56,6 @@ local function fresh_shop_skill(shop)
     --再循环一次，添加物品被购买时移除的触发。
     for i = 9, 12 do 
         local old_item = shop.sell_item_list[i]
-        print(i,old_item)
         old_item.on_selled_remove = true 
     end    
     

@@ -15,11 +15,13 @@ mt{
 	--技能说明
 	title = '切换背包',
 
-	tip = [[这只是一个测试技能
-	第二行
+	tip = [[
+点击切换背包，总共有3背包
+第 %currentpage% 个背包
     ]],
     --最大页数
     page = 3,
+    currentpage = 1,
 }
 
 function mt:on_add()
@@ -36,6 +38,7 @@ function mt:on_cast_start()
     local hero = self.owner
     --记录一下当前页面
     local page = hero.currentpage
+    self.currentpage = hero.currentpage
 
 
     --先移出当前页的物品

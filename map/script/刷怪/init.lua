@@ -13,6 +13,8 @@ require '刷怪.最终boss'
 require '刷怪.刷怪-无尽'
 require '刷怪.游戏结束'
 require '刷怪.掉落'
+require '刷怪.命运花'
+
 -- require '野怪.BOSS-AI'
 
 -- local mt = ac.creep['测试']{    
