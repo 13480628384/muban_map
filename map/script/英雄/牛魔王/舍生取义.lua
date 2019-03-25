@@ -6,6 +6,7 @@ mt{
 	
 	--初始等级
 	level = 1,
+	max_level = 5,
 	
 	tip = [[
 		主动：每秒恢复 %life_rate% %的血量，持续时间 %time% 秒, 冷却 %cool%秒
@@ -32,14 +33,14 @@ mt{
 	life_rate = 6,
 
 	--攻击提升
-	attack = 1,
+	attack = {1,1.5,2,2.5,3},
 	--cd
-	cool = 20,
+	cool = {20,17.5,15,12.5,10},
     --减免
-	reduce_rate =30,
+	reduce_rate = 30,
 
 	--耗蓝
-	cost = 35,
+	cost = {35,175,325,475,650},
 
 	--特效模型
 	effect = [[Hero_Juggernaut_N4S_F_Source.mdx]],

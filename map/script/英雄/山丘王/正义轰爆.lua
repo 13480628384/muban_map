@@ -6,6 +6,9 @@ mt{
 	
 	--初始等级
 	level = 1,
+
+	max_level = 5,
+	
 	
 	tip = [[
 		主动：对指定区域的敌人进行轰炸，造成攻击力* %attack% 的物理伤害( %damage% )，并砸晕敌人 %time% 秒,cd %cool% 秒
@@ -26,7 +29,7 @@ mt{
 	time = 2,
 
 	--伤害参数1：攻击力
-	attack = 2,
+	attack = {2,3,4,5,6},
 
 	--伤害
 	damage = function(self,hero)
@@ -40,10 +43,10 @@ mt{
 	reduce_rate = 30,
 
 	--cd
-	cool = 20,
+	cool = {20,17.5,15,12.5,10},
 
 	--耗蓝
-	cost = 30,
+	cost = {30,130,250,400,600},
 
 	--特效模型
 	effect = [[AZ_Doomdragon_T.mdx]],

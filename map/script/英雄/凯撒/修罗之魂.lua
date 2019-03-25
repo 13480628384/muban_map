@@ -6,10 +6,12 @@ mt{
 	
 	--初始等级
 	level = 1,
-	
+
+	max_level = 5,
 	tip = [[
 		主动：变身大帝，强化自身 
-		     攻击力 %attack% % 
+			 攻击力 %attack% % 
+			 攻击间隔 %attack_gap% 
 		     移动速度	%move_speed% % 
 		     伤害减免 %reduce_damage% %，
 		     攻击距离 %attack_range%，
@@ -25,24 +27,29 @@ mt{
 	target_type = ac.skill.TARGET_TYPE_NONE,
 
 	--攻击
-	attack = 50,
+	attack = {40,45,50,55,60},
 
 	--移动速度
 	move_speed = 50,
 
+	--攻击间隔
+	attack_gap = -0.2,
+
 	--伤害减免
 	reduce_damage = 50,
+
 	--攻击距离
-	attack_range = 650,
+	attack_range = 800,
+
 
 	--持续时间
-	time = 10,
+	time = {20,22.5,25,27.5,30},
 
 	--cd 45
-	cool = 45,
+	cool = {40,37.5,35,32.5,30},
 
 	--耗蓝
-	cost = 60,
+	cost = {50,200,350,500,650},
 
 	--特效模型
 	effect = [[]],
@@ -53,7 +60,7 @@ mt{
 	-- 周围范围
 	area = 600,
 	-- 攻击加成
-	attack_increase = 10,
+	attack_increase = {10,12.5,15,17.5,20},
 	--施法距离
 	-- range = 99999,
 }
@@ -86,6 +93,7 @@ function mt:on_cast_shot()
 		source = hero,
 		skill = self,
 		attack = self.attack,
+		attack_gap = self.attack_gap,
 		move_speed = self.move_speed,
 		attack_range = self.attack_range,
 		reduce_damage = self.reduce_damage,
@@ -138,6 +146,7 @@ function mt:on_add()
 	hero:add('移动速度%', self.move_speed)
 	hero:add('攻击距离', self.attack_range)
 	hero:add('减免', self.reduce_damage)
+	hero:add('攻击间隔', self.attack_gap)
 
 
 end
@@ -162,7 +171,7 @@ function mt:on_remove()
 	hero:add('移动速度%', -self.move_speed)
 	hero:add('攻击距离', -self.attack_range)
 	hero:add('减免', -self.reduce_damage)
-
+	hero:add('攻击间隔', -self.attack_gap)
     
 end
 
