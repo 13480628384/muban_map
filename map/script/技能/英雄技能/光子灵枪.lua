@@ -3,6 +3,7 @@ local mt = ac.skill['光子灵枪']
 mt{
 	--初始等级
 	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "被动",
 	--技能图标
@@ -11,14 +12,17 @@ mt{
 	title = '光子灵枪',
 	tip = [[
 		攻击有 %chance% % 的概率召 %num% 个 %title% 
-		造成 敏捷*2 的物理伤害  ( %damage% )
+		造成 敏捷相关 的物理伤害  ( %damage% )
 	]],
 	--概率%
-	chance = 10,
+	chance = {5,7.5,10,12.5,15},
+    --伤害参数1
+	agi_mul = {2,2.5,3,3.5,4},
+
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 
-			return self.owner:get('敏捷')*2
+			return self.owner:get('敏捷')*self.agi_mul
 		end	
 	end	,
 	--是否被动

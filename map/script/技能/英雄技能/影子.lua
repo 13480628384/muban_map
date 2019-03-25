@@ -3,13 +3,14 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "召唤",
 	--耗蓝
-	cost = 60,
+	cost = {60,120,240,480,960},
 	--冷却时间40
-	cool = 40,
+	cool = {40,35,30,25,20},
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
@@ -23,7 +24,7 @@ mt{
         end 
     end,
 	--召唤物属性倍数
-	attr_mul = 0.5,
+	attr_mul = {0.5,1,1.5,2,2.5},
 	--持续时间
 	time = 30,
 	--数量

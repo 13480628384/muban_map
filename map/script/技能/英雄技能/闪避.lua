@@ -11,6 +11,7 @@ mt{
 	
 	--初始等级
 	level = 1,
+	max_level = 5,
 	
 	tip = [[
 		|cff00ccff被动|r:
@@ -22,16 +23,23 @@ mt{
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNEvasion.blp]],
 
 	--闪避
-	dodge = 20,
+	dodge = {10,20,30,40,50},
 
 }
 
+mt.dodge_now = 0
+
+function mt:on_upgrade()
+	local hero = self.owner
+	-- print(self.life_rate_now)
+	hero:add('闪避', -self.dodge_now)
+	self.dodge_now = self.dodge
+	hero:add('闪避', self.dodge)
+end	
 
 function mt:on_add()
 	local skill = self
 	local hero = self.owner 
-
-	hero:add('闪避',self.dodge)
 
 end	
 

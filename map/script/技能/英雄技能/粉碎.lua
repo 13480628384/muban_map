@@ -9,6 +9,7 @@ mt{
 	
 	--初始等级
 	level = 1,
+	max_level = 5,
 	
 	tip = [[
 		|cff00ccff被动|r:
@@ -19,12 +20,12 @@ mt{
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNSmash.blp]],
 
 	--概率
-	chance = 10,
+	chance = {5,7.5,10,12.5,15},
 
 	--范围
 	area = 300,
 	--最大生命值率
-	life_rate = 5,
+	life_rate = {5,6,7,8,10},
 	--技能类型
 	skill_type = "被动",
 

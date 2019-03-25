@@ -3,7 +3,8 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--生成文件
 	ignore_file = "string",
 	--技能类型
@@ -13,17 +14,17 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[攻击力 -20% ，弹射5个目标，每次弹射伤害衰减 30% ]],
+	tip = [[攻击力 -%attack% % ，弹射%cnt%个目标，每次弹射伤害衰减 %reduce% % ]],
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNUpgradeMoonGlaive.blp]],
 	--特效1
 	effect1 = [[Hero_EmberSpirit_N2S_C_Effect.mdx]],
 	--弹射目标
-	cnt = 5,
+	cnt = {4,5,6,7,8},
 	--每次递减
-	reduce = 30,
+	reduce = {35,30,25,20,15},
 	--攻击减少
-	attack = 20,
+	attack = {25,20,15,10,5},
 
 	--弹射目标
 	current_cnt = 0,
@@ -31,10 +32,19 @@ mt{
 	--弹射速度
 	speed = 800,
 }
+mt.attack_now = 0
+
+function mt:on_upgrade()
+	local hero = self.owner
+	-- print(self.life_rate_now)
+	hero:add('攻击%', self.attack_now)
+	self.attack_now = self.attack
+	hero:add('攻击%', -self.attack)
+end
+
 function mt:on_add()
     local skill = self
     local hero = self.owner
-	hero:add('攻击%',-self.attack)
 
 	self.trg = hero:event '造成伤害效果' (function (trg,damage) 
 		if not damage:is_common_attack() then 

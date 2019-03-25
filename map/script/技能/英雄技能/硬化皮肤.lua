@@ -11,6 +11,7 @@ mt{
 	
 	--初始等级
 	level = 1,
+	max_level = 5,
 	
 	tip = [[
 		|cff00ccff被动|r:
@@ -22,16 +23,24 @@ mt{
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNResistantSkin.blp]],
 
 	--护甲
-	defence = 20,
+	defence = {30,40,50,75,100},
 
 }
+
+mt.defence_now = 0
+
+function mt:on_upgrade()
+	local hero = self.owner
+	-- print(self.life_rate_now)
+	hero:add('护甲%', -self.defence_now)
+	self.defence_now = self.defence
+	hero:add('护甲%', self.defence)
+end	
 
 
 function mt:on_add()
 	local skill = self
 	local hero = self.owner 
-
-	hero:add('护甲%',self.defence)
 
 end	
 

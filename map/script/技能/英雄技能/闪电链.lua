@@ -3,6 +3,7 @@ local mt = ac.skill['闪电链']
 mt{
 	--初始等级
 	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "被动",
 	--技能图标
@@ -10,15 +11,16 @@ mt{
 	--技能说明
 	title = '闪电链',
 	tip = [[
-		攻击有 %chance% % 的概率对 %area% 范围造成法术伤害  (%damage%)
+		攻击有 %chance% % 的概率对 %area% 范围造成 和智力相关的 法术伤害  (%damage%)
 	]],
 	--弹射范围(直径)
 	area = 1000,
 	--概率%
-	chance = 10,
+	chance = {5,7.5,10,12.5,15},
+	int= {2,2.5,3,3.5,4},
 	damage = function(self,hero)
 		if self and self.owner then 
-		return self.owner:get('智力')*2
+		return self.owner:get('智力')*self.int
 		end
 	end	,
 	--是否被动

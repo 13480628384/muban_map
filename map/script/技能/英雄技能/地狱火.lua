@@ -3,13 +3,14 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "召唤",
 	--耗蓝
-	cost = 120,
+	cost = {120,240,360,480,600},
 	--冷却时间
-	cool = 75,
+	cool = {75,70,65,60,55},
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
@@ -21,9 +22,9 @@ mt{
 	--召唤物
 	unit_name = "地狱火",
 	--召唤物属性倍数
-	attr_mul = 2,
+	attr_mul = {1.5,2,2.5,3,3.5},
 	--持续时间
-	time = 20,
+	time = {20,25,30,35,40},
 	--数量
 	cnt = 1,
 }

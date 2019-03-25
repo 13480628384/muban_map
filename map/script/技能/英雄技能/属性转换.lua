@@ -4,6 +4,7 @@ mt{
     is_skill = true,
     --初始等级
     level = 1,
+    max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--技能目标
@@ -11,7 +12,7 @@ mt{
 	--介绍
     tip = [[
     力量和敏捷互相转换，转化3%/秒的属性点。点击可切换
-
+被动:增加生命上限 %value1% %
 |cff00bdec%tip2%|r
     ]],
 	--技能图标
@@ -24,6 +25,9 @@ mt{
     pulse = 1,
     --值
     value = 3,
+
+    value1={10,20,30,40,50},
+
     --当前状态 1停止（刚开始图标）   2力量转敏捷(图标为力量转敏捷) 3敏捷转力量(图标为敏捷转力量)
     current_status = 1,
     tip2 = function(self,hero)
@@ -32,6 +36,18 @@ mt{
         end    
     end,
 }
+
+
+mt.value1_now = 0
+
+function mt:on_upgrade()
+	local hero = self.owner
+	-- print(self.life_rate_now)
+	hero:add('生命上限%', -self.value1_now)
+	self.value1_now = self.value1
+	hero:add('生命上限%', self.value1)
+end
+
 function mt:on_add()
     local skill = self
     local hero = self.owner
@@ -102,6 +118,7 @@ function mt:on_remove()
     if buf then 
         buf:remove()
     end    
+    hero:add('生命上限%', -self.value1)
 end
 
 

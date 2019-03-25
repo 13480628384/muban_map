@@ -3,19 +3,20 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
-	cost = 30,
+	cost = {30,150,270,390,500},
 	--冷却时间 20
-	cool = 20,
+	cool = {30,25,20,15,10},
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_UNIT,
 	--施法距离
 	range = 900,
 	--介绍
-	tip = [[将指定敌人变成小动物，持续4S]],
+	tip = [[将指定敌人变成小动物，持续%time%S]],
 	--技能图标
 	art = [[jineng\jineng004.blp]],
 	--特效
@@ -25,7 +26,7 @@ mt{
 	--特效
 	effect2 = [[babyhippo.mdx]],
 	--持续时间
-	time = 4,
+	time = {3,3.5,4,4.5,5},
 	unit_id = '小河马'
 }
 function mt:on_add()

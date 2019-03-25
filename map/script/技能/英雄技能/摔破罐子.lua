@@ -3,13 +3,14 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
 	cost = 1,
 	--冷却时间90
-	cool = 90,
+	cool = {100,90,80,70,60},
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_UNIT,
 	--施法距离
@@ -21,7 +22,7 @@ mt{
 	--扣智力
 	addint = 15,
 	--几率
-	rate = 100,
+	rate = 50,
 }
 function mt:on_add()
     local skill = self

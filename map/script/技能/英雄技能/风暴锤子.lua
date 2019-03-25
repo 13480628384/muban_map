@@ -3,21 +3,22 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
-	cost = 30,
+	cost = {30,150,270,390,500},
 	--冷却时间
-	cool = 20,
-	--伤害
-	damage = 12,
+	cool = {20,17.5,15,12.5,10},
+
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_UNIT,
 	--施法距离
 	range = 900,
+	int = {3,4,5,6,7},
 	--介绍
-	tip = [[对单一敌人造成晕眩3S，并造成攻击力*3的物理伤害]],
+	tip = [[对单一敌人造成晕眩3S，并造成攻击力*%int%的物理伤害]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNStormBolt.blp]],
 	--特效
@@ -28,7 +29,7 @@ mt{
 	time = 3,
 	--伤害
 	damage = function(self,hero)
-		return self.owner:get('攻击')*3
+		return self.owner:get('攻击')*self.int
 	end	,
 	--投射物移动速度
 	speed = 1000,

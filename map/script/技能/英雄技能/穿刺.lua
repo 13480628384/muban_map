@@ -3,35 +3,38 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
-	cost = 30,
+	cost = {30,150,280,400,600},
 	--冷却时间20
-	cool = 20,
-	--伤害
-	damage = 6,
+	cool = {20,17.5,15,12.5,10},
+
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_POINT,
 	--施法距离
 	range = 800,
 	--介绍
-	tip = [[对一条直线上的敌人晕眩1S，并造成力量*6的物理伤害 （%damage%） ]],
+	tip = [[对一条直线上的敌人晕眩1S，并造成力量*%int%的物理伤害 （%damage%） ]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNImpale.blp]],
 	--特效
 	effect = [[Abilities\Spells\Undead\Impale\ImpaleHitTarget.mdx]],
 	--特效1
 	effect1 = [[Abilities\Spells\Undead\Impale\ImpaleMissTarget.mdx]],
+
+	int = {5,10,20,25,30},
+
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 
-		return self.owner:get('力量') * 6
+		return self.owner:get('力量') * self.int
 		end
 	end,
 	--持续时间
-	time = 3 ,
+	time = 1 ,
 	--碰撞范围
 	hit_area = 200,
 	--特效移动速度

@@ -3,27 +3,28 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
-	cost = 15,
+	cost = {15,115,215,315,500},
 	--冷却时间
 	cool = 10,
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[战斗的怒意暂时提升自身的攻击速度（35%）和移动速度（35%），持续4S]],
+	tip = [[战斗的怒意暂时提升自身的攻击速度（%attack_speed% %）和移动速度（%move_speed% %）]],
 	--技能图标
 	art = [[jineng\jineng029.blp]],
 	--特效
 	effect = [[Abilities\Spells\Orc\Bloodlust\BloodlustTarget.mdl]],
 	--攻击速度
-	attack_speed = 35,
+	attack_speed = {50,75,100,125,150},
 	--移动速度
-	move_speed = 35,
+	move_speed = {15,20,25,30,35},
 	--持续时间
-	time = 4,
+	time = 15,
 }
 function mt:on_add()
 	local hero = self.owner 

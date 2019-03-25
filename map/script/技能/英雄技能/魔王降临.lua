@@ -4,6 +4,7 @@ mt{
     is_skill = true,
     --初始等级
     level = 1,
+    max_level = 5,
 	--技能类型
 	skill_type = "光环",
 	--被动
@@ -11,7 +12,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[所有敌人的护甲-20%]],
+	tip = [[所有敌人的护甲-%value% %]],
 	--技能图标
 	art = [[jineng\jineng023.blp]],
 	--特效
@@ -19,9 +20,9 @@ mt{
     --光环影响范围
     area = 99999,
     --值
-    value = 20,
+    value = {15,20,25,30,35},
 }
-function mt:on_add()
+function mt:on_upgrade()
     local skill = self
     local hero = self.owner
 

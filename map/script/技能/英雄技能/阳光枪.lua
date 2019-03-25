@@ -2,6 +2,7 @@ local mt = ac.skill['阳光枪']
 mt{
 	--初始等级
 	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "被动",
 	--技能图标
@@ -9,17 +10,19 @@ mt{
 	--技能说明
 	title = '阳光枪',
 	tip = [[
-	攻击有 %chance% % 的概率对 %hit_area% 范围造成物理伤害 (%damage%)
+	攻击有 %chance% % 的概率对 %hit_area% 范围造成 和敏捷相关的 物理伤害 (%damage%)
 	伤害:敏捷*5+1500
 	]],
 	--范围
 	hit_area = 150,
 	distance = 900,
 	--概率%
-	chance = 10,
+	chance = {5,7.5,10,12.5,15},
+
+	int = {5,6,7,8,9},
 	damage = function(self,hero)
 		if self and self.owner then 
-		return self.owner:get('敏捷')*5+1500
+		return self.owner:get('敏捷')*self.int+1500
 		end
 	end	,
 	--是否被动

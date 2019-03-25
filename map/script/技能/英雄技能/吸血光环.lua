@@ -4,6 +4,7 @@ mt{
     is_skill = true,
     --初始等级
     level = 1,
+    max_level = 5,
 	--技能类型
 	skill_type = "光环",
 	--被动
@@ -11,7 +12,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[周围的单位能将他们自己对敌人的伤害值转化成自己的生命值]],
+	tip = [[周围的单位能将他们自己对敌人的伤害值%value% %转化成自己的生命值]],
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNVampiricAura.blp]],
 	--特效
@@ -19,9 +20,9 @@ mt{
     --光环影响范围
     area = 99999,
     --值
-    value = 0.5,
+    value = {0.2,0.3,0.4,0.5,0.6},
 }
-function mt:on_add()
+function mt:on_upgrade()
     local skill = self
     local hero = self.owner
 

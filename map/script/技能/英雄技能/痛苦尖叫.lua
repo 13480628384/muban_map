@@ -3,27 +3,27 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
-	cost = 15,
+	cost = {15,115,215,315,450},
 	--冷却时间10
-	cool = 10,
-	--伤害
-	damage = 5,
+	cool = {12,11,10,9,8},
+
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--施法范围
 	area = 600,
 	--介绍
-	tip = [[发出锐利的尖叫，对范围300码的敌方单位造成智力*4法术伤害 （%damage%） ]],
+	tip = [[发出锐利的尖叫，对范围300码的敌方单位造成智力%int% 法术伤害 （%damage%） ]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNPossession.blp]],
 	--特效
 	effect = [[Abilities\Spells\Undead\Possession\PossessionMissile.mdl]],
 	--伤害参数1
-	int = {4,8,10},
+	int = {5,10,20,30,40},
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 

@@ -3,13 +3,14 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
-	cost = 50,
+	cost = {50,150,250,350,500},
 	--冷却时间35
-	cool = 35,
+	cool = {45,40,30,25,20},
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_POINT,
 	--施法距离
@@ -23,7 +24,7 @@ mt{
 	--特效
 	effect = [[cronosphere.mdx]],
 	--持续时间
-	time = 3,
+	time = {3,3.5,4,4.5,5},
 }
 function mt:on_add()
     local skill = self

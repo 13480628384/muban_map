@@ -3,23 +3,24 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
-	cost = 40,
+	cost = {40,150,260,370,500},
 	--冷却时间
-	cool = 25,
+	cool = {30,25,20,15,10},
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[回复全体队友25%的血]],
+	tip = [[回复全体队友%life_rate% %的血]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNScrollOfTownPortal.blp]],
 	--特效
 	effect = [[Abilities\Spells\Human\HolyBolt\HolyBoltSpecialArt.mdl]],
 	--生命上限比
-	life_rate = 25,
+	life_rate = {20,25,30,35,40},
 }
 function mt:on_add()
     local skill = self

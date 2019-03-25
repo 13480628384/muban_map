@@ -4,6 +4,7 @@ mt{
     is_skill = true,
     --初始等级
     level = 1,
+    max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--技能目标
@@ -11,7 +12,7 @@ mt{
 	--施法范围
 	area = 200,
 	--介绍
-	tip = [[造成周围伤害（每秒损失 2% 的魔法值， 对范围200码的造成 2% 的生命损失）]],
+	tip = [[造成周围伤害（每秒损失 %magic_value% % 的魔法值， 对范围200码的造成 %life_value% % 的生命损失）]],
 	--技能图标
     art = [[ReplaceableTextures\CommandButtons\BTNImmolationOn.blp]],
     art1 = [[jineng033]],
@@ -19,9 +20,9 @@ mt{
 	--特效
 	effect = [[Abilities\Spells\NightElf\Immolation\ImmolationTarget.mdl]],
 	--魔法值
-	magic_value = 2,
+	magic_value = {1,2,3,4,5},
 	--生命值
-	life_value = 2,
+	life_value = {1,2,3,4,5},
 	--每秒
 	pulse = 1,
 }

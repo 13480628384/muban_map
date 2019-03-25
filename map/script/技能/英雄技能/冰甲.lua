@@ -3,11 +3,12 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
-	cost = 10,
+	cost = {10,50,100,200,400},
 	--冷却时间 7
 	cool = 7,
 	--技能目标
@@ -15,19 +16,19 @@ mt{
 	--施法距离
 	range = 800,
 	--介绍
-	tip = [[增加 30% 护甲持续15秒，受击时减少敌人移速和攻速持续4秒]],
+	tip = [[增加 %defence% % 护甲持续15秒，受击时减少敌人移速和攻速持续4秒]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNFrostArmor.blp]],
 	--特效
 	effect = [[Abilities\Spells\Undead\FrostArmor\FrostArmorTarget.mdl]],
 	--护甲
-	defence = 30,
+	defence = {20,30,40,65,100},
 	--持续时间
 	time = 15,
 	--移动速度
-	move_speed = 50,
+	move_speed = {40,45,50,55,60},
 	--移动速度
-	attack_speed = 25,
+	attack_speed = {20,25,30,35,40},
 	--减少时间
 	reduce_time = 4,
 	--目标允许	

@@ -6,6 +6,7 @@ mt{
 	
 	--初始等级
 	level = 1,
+	max_level = 5,
 	
 	tip = [[
 		主动：每 %pulse% 秒对指定区域范围内的敌人投掷炸弹，造成攻击力*0.5+敏捷*0.5的物理伤害( %damage% )，持续时间 %time% 秒
@@ -13,7 +14,7 @@ mt{
 	]],
 	
 	--技能图标
-	art = [[jineng\jineng006.blp]],
+	art = [[ReplaceableTextures\PassiveButtons\PASBTNFragmentationBombs.blp]],
 
 	--技能目标类型 无目标
 	target_type = ac.skill.TARGET_TYPE_POINT,
@@ -22,7 +23,7 @@ mt{
 	area = 600,
 
 	--持续时间
-	time = 8,
+	time = {5,6,7,8,9},
 	--每多少秒
 	pulse = 1,
 
@@ -30,7 +31,7 @@ mt{
 	attack_stack = 5,
 	-- current_attack_cnt =0,
 	--被动，攻击倍数
-	attack_mul = 3,
+	attack_mul = {2.5,2.75,3,3.25,3.5},
 	--被动，距离1600
 	distance = 1600,
 	--被动，撞击范围
@@ -46,10 +47,10 @@ mt{
 	end,	
 
 	--cd 40
-	cool = 40,
+	cool = {40,35,30,25,20},
 
 	--耗蓝 60
-	cost = 60,
+	cost = {60,200,350,525,750},
 
 	--特效模型
 	effect1 = [[Abilities\Weapons\Mortar\MortarMissile.mdl]],

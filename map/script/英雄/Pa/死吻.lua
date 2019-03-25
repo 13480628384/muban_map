@@ -6,6 +6,7 @@ mt{
 	
 	--初始等级
 	level = 1,
+	max_level = 5,
 	
 	tip = [[
 		主动：闪现到指定敌人的身边，并造成 攻击力*%attack_mul% 的物理伤害
@@ -23,13 +24,13 @@ mt{
 	target_type = ac.skill.TARGET_TYPE_UNIT,
 
 	--攻击
-	attack_mul = 3,
+	attack_mul = {3,4,5,6,7},
 
 	--cd 25
-	cool = 25,
+	cool = {25,22.5,20,17.5,15},
 
 	--耗蓝
-	cost = 10,
+	cost = {10,25,50,100,200},
 
 	--护甲持续时间
 	reduce_defence_time = 5,
@@ -40,7 +41,7 @@ mt{
 	-- 周围范围
 	passive_area = 600,
 	-- 攻击减护甲
-	reduce_defence = 20,
+	reduce_defence = {20,25,30,35,40},
 	--施法距离
 	range = 1200,
 }

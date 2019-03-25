@@ -6,7 +6,7 @@ mt{
 	
 	--初始等级
 	level = 1,
-	
+	max_level = 5,
 	tip = [[
 		主动：朝指定区域释放恶德医疗，对区域内的敌人造成 攻击力*2+智力*3 法术伤害 （%damage%） ；对区域内的友军英雄回复其 %life_rate% % 的最大生命值
 		被动：主动释放的增益效果 + %value% %
@@ -35,13 +35,13 @@ mt{
 	end,	
 
 	--生命上限
-	life_rate = 25,
+	life_rate = {15,20,25,30,35},
 
 	--cd 5
-	cool = 5,
+	cool = {7,6.5,6,5.5,5},
 
 	--耗蓝 20
-	cost = 20,
+	cost = {20,166.5,276,395.5,500},
 
 	--特效模型
 	effect = [[Abilities\Spells\Undead\CarrionSwarm\CarrionSwarmMissile.mdl]],

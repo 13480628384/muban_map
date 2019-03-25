@@ -3,13 +3,14 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
-	cost = 45,
+	cost = {45,150,250,400,600},
 	--冷却时间30
-	cool = 30,
+	cool = {30,25,20,15,10},
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_POINT,
 	--施法范围

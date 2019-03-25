@@ -3,25 +3,26 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
-	cost = 20,
+	cost = {20,130,240,350,460},
 	--冷却时间 15
-	cool = 15,
+	cool = {15,12.5,10,7.5,5},
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--施法范围
 	area = 800,
 	--介绍
-	tip = [[召唤刀刃对范围800码的敌方单位攻击，造成敏捷*5的物理伤害]],
+	tip = [[召唤刀刃对范围800码的敌方单位攻击，造成敏捷*%int%的物理伤害]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNFanOfKnives.blp]],
 	--特效
 	effect = [[Abilities\Spells\NightElf\FanOfKnives\FanOfKnivesMissile.mdl]],
 	--伤害参数1
-	int = {4,8,10},
+	int = {4,6,8,10,12},
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 

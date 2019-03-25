@@ -6,6 +6,7 @@ mt{
 	
 	--初始等级
 	level = 1,
+	max_level = 5,
 	
 	tip = [[
 		主动：多重射 +%cnt% ，攻击力提升 %attack_mul% 倍，持续时间 %time% 秒
@@ -19,22 +20,22 @@ mt{
 	target_type = ac.skill.TARGET_TYPE_NONE,
 
 	--多重射数量
-	cnt = 2,
+	cnt = {2,3,4,5,6},
 
 	--持续时间
-	time = 5,
+	time = {5,6,7,8,9},
 
 	--攻击力倍数
-	attack_mul = 0.5,
+	attack_mul = {0.3,0.4,0.5,0.6,0.7},
 
 	--攻击间隔
-	attack_gap = 0.2,
+	attack_gap = {0.05,0.075,0.1,0.125,0.15},
 
 	--cd 15
-	cool = 15,
+	cool = {15,14,13,12,11},
 
 	--耗蓝35
-	cost = 35,
+	cost = {35,140,313,512,861},
 
 	--特效模型
 	effect = [[Abilities\Spells\Orc\Bloodlust\BloodlustTarget.mdl]],
@@ -42,10 +43,18 @@ mt{
 	
 }
 
+mt.attack_gap_now = 0
+
+function mt:on_upgrade()
+	local hero = self.owner
+	-- print(self.physical_crite_rate_now)
+	hero:add('攻击间隔', -self.attack_gap_now)
+	self.attack_gap_now = self.attack_gap
+	hero:add('攻击间隔', self.attack_gap)
+end
 
 function mt:on_add()
 	local hero = self.owner 
-	hero:add('攻击间隔',-self.attack_gap)
 
 end	
 function mt:on_cast_shot()

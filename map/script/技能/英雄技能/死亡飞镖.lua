@@ -3,21 +3,22 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
-	cost = 10,
+	cost = {10,110,210,310,400},
 	--冷却时间8
 	cool = 8,
 	--伤害
-	damage = 12,
+	agi = {12,24,36,48,60},
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_UNIT,
 	--施法距离
 	range = 800,
 	--介绍
-	tip = [[对指定敌人造成敏捷*12的物理伤害，该技能如果杀死敌人，将刷新冷却]],
+	tip = [[对指定敌人造成敏捷*%agi%的物理伤害，该技能如果杀死敌人，将刷新冷却]],
 	--技能图标
 	art = [[jineng\jineng028.blp]],
 	--特效
@@ -25,7 +26,7 @@ mt{
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 
-			return self.owner:get('敏捷')*12
+			return self.owner:get('敏捷')*self.agi
 		end	
 	end,
 	--伤害类型

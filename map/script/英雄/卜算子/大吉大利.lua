@@ -22,10 +22,10 @@ mt{
 	target_type = ac.skill.TARGET_TYPE_UNIT,
 
 	--增加主属性
-	target_main_attr = 30,
+	target_main_attr = {25,30,35,40,45},
 
 	--减少主属性 
-	source_main_attr = 30,
+	source_main_attr = {25,30,35,40,45},
 
 	--伤害
 	damage = function(self,hero)
@@ -33,9 +33,9 @@ mt{
 	end,
 
 	--物品获取率
-	item_rate = {10,20,30,40,50},
+	item_rate = {25,30,35,40,50},
 	--金币获取率
-	gold_rate = {10,20,30,40,50},
+	gold_rate = {25,30,35,40,50},
 
 	--每秒
 	pulse = 0.5,
@@ -44,7 +44,7 @@ mt{
 	cool = 0,
 
 	--耗蓝
-	cost = 10,
+	cost = {25,130,235,340,450},
 
 	--施法距离
 	range = 1200,

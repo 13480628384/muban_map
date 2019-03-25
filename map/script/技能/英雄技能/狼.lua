@@ -3,17 +3,18 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "召唤",
 	--耗蓝
-	cost = 60,
+	cost = {60,180,300,450,600},
 	--冷却时间
-	cool = 40,
+	cool = {40,35,30,25,20},
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤2只狼助战（属性与智力相关，拥有被动暴击）；持续时间20S]],
+	tip = [[召唤2只狼助战（属性与智力相关，拥有被动暴击）]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNSpiritWolf.blp]],
 	--特效
@@ -21,13 +22,13 @@ mt{
 	--召唤物
 	unit_name = "狼",
 	--召唤物属性倍数
-	attr_mul = 0.5,
+	attr_mul = {0.5,0.6,0.7,0.8,1},
 	--持续时间
 	time = 20,
 	--数量
 	cnt = 2,
 	--暴击几率
-	physical_rate = 20,
+	physical_rate = {20,30,40,50,60},
 }
 	
 function mt:on_add()

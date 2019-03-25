@@ -4,6 +4,7 @@ mt{
     is_skill = true,
     --初始等级
     level = 1,
+    max_level = 5,
 	--技能类型
 	skill_type = "被动",
 	--被动
@@ -11,15 +12,25 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[物品获取率+50%]],
+	tip = [[物品获取率+%item_rate% %]],
 	--技能图标
 	art = [[jineng\jineng017.blp]],
-	item_rate = 50,
+	item_rate = {20,30,40,50,60},
 }
+
+mt.item_rate_now = 0
+
+function mt:on_upgrade()
+	local hero = self.owner
+	-- print(self.life_rate_now)
+	hero:add('物品获取率', -self.item_rate_now)
+	self.item_rate_now = self.item_rate
+	hero:add('物品获取率', self.item_rate)
+end	
+
 function mt:on_add()
     local skill = self
     local hero = self.owner
-    hero:add('物品获取率',self.item_rate)
 end
 function mt:on_remove()
     local hero = self.owner

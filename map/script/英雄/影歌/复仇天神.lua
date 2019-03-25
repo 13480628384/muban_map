@@ -6,6 +6,7 @@ mt{
 	
 	--初始等级
 	level = 1,
+	max_level = 5,
 	
 	tip = [[
 		主动：创造一个强大的复仇天神（远程攻击，属性与智力相关），
@@ -21,21 +22,21 @@ mt{
 	target_type = ac.skill.TARGET_TYPE_NONE,
 
 	--几率
-	chance = 5,
+	chance = {5,7.5,10,12.5,15},
 
 	--复仇天神几率
-	fuchou_chance = 10,
+	fuchou_chance = {5,7.5,10,12.5,15},
 
 	--cd 45
-	cool = 45,
+	cool = {45,40,35,30,25},
 
 	--耗蓝
-	cost = 60,
+	cost = {45,140,235,330,425},
 
 	--持续时间
-	time = 30,
+	time = 25,
 	--数量
-	cnt = 1,
+	cnt = {1,1.25,1.5,2,2.25},
 
 	--特效模型
 	effect = [[]],
@@ -48,6 +49,7 @@ function mt:on_add()
 	skill.chance = self.chance
 
 end	
+
 function mt:on_cast_shot()
     local skill = self
 	local hero = self.owner
@@ -71,9 +73,7 @@ function mt:on_cast_shot()
 			['魔法恢复'] = 0.6,
 			['攻击距离'] = 100,
 		}
-		
 		-- print('技能使用时 当前波数',index)
-		local data = ac.table.UnitData['进攻怪-'..index]
 
 		self.buff = unit:add_buff '召唤物' {
 			time = 30,

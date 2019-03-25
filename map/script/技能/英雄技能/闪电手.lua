@@ -3,11 +3,12 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
-	cost = 10,
+	cost = {15,150,300,450,600},
 	--冷却时间
 	cool = 7,
 	--技能目标
@@ -15,13 +16,13 @@ mt{
 	--施法距离
 	range = 800,
 	--介绍
-	tip = [[增加指定队友40%的攻击速度，持续15S]],
+	tip = [[增加指定队友%attack_speed% %的攻击速度，持续15S]],
 	--技能图标
 	art = [[jineng\jineng030.blp]],
 	--特效
 	effect = [[Abilities\Spells\Orc\Bloodlust\BloodlustTarget.mdl]],
 	--攻击速度
-	attack_speed = 40,
+	attack_speed = {40,60,80,100,120},
 	--持续时间
 	time = 15,
 	--目标允许	

@@ -3,17 +3,18 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "召唤",
 	--耗蓝
-	cost = 60,
+	cost = {60,120,180,360,720},
 	--冷却时间
-	cool = 35,
+	cool = {40,35,30,25,20},
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤1只战斗机助战（属性和智力相关，多重射+3），持续15S]],
+	tip = [[召唤1只战斗机助战（属性和智力相关，多重射）]],
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNFlakCannons.blp]],
 	--特效
@@ -23,11 +24,11 @@ mt{
 	--倍数
 	attr_mul = 1,
 	--持续时间
-	time = 150,
+	time = {15,20,25,30,35},
 	--数量
 	cnt = 1,
 	--多重射
-	attack_cnt = 3,
+	attack_cnt = {2,3,4,5,6},
 }
 function mt:on_add()
     local skill = self

@@ -3,21 +3,23 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
+
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
-	cost = 30,
+	cost = {30,140,250,360,470},
 	--冷却时间 20 
-	cool = 20,
+	cool = {20,17.5,15,12.5,10},
 	--伤害
-	damage = 6,
+	attack_mul = {1,1.5,2,2.5,3},
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--施法范围
 	area = 600,
 	--介绍
-	tip = [[对范围600码的敌人造成移动力减少 50% 和攻击速度减少 25% ，持续3秒，并造成攻击力*1.5的物理伤害 （%damage%） ]],
+	tip = [[对范围600码的敌人造成移动力减少 50% 和攻击速度减少 25% ，持续3秒，并造成攻击力*%attack_mul%的物理伤害 （%damage%） ]],
 	--技能图标
 	art = [[jineng\jineng008.blp]],
 	--特效
@@ -27,7 +29,7 @@ mt{
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 
-			return self.owner:get('攻击') * 1.5
+			return self.owner:get('攻击') * self.attack_mul
 		end
 	end,
 

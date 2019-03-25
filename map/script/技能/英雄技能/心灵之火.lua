@@ -3,11 +3,12 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
-	cost = 10,
+	cost = {10,110,210,310,450},
 	--冷却时间
 	cool = 7,
 	--技能目标
@@ -21,7 +22,7 @@ mt{
 	--特效
 	effect = [[Abilities\Spells\Human\InnerFire\InnerFireTarget.mdl]],
 	--攻击力
-	attack = 40,
+	attack = {40,50,75,100,150},
 	--持续时间
 	time = 15,
 	--目标允许	

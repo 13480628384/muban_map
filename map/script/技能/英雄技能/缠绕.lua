@@ -3,15 +3,14 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
-	cost = 30,
+	cost = {30,150,270,400,500},
 	--冷却时间
-	cool = 20,
-	--伤害
-	damage = 6,
+	cool = {20,17.5,15,12.5,10},
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_POINT,
 	--施法距离
@@ -26,10 +25,11 @@ mt{
 	effect = [[Abilities\Spells\NightElf\EntanglingRoots\EntanglingRootsTarget.mdl]],
 	--持续时间
 	time = 1 ,
+	int = {1.5,2,2.5,3,4},
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 
-		return self.owner:get('攻击') * 1.5
+		return self.owner:get('攻击') * self.int
 		end
 	end
 }

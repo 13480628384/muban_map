@@ -3,35 +3,39 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
-	cost = 15,
+	cost = {15,115,215,315,415},
 	--冷却时间10
 	cool = 10,
-	--伤害
-	damage = 4,
+
 	--技能无目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--施法范围
 	area = 800,
+
 	--介绍
-	tip = [[释放出死亡脉冲，对范围800码的敌方单位造成 智力*4 法术伤害 （%damage%） ，对范围400码的友方单位有智力*4医疗效果 （%heal%）]],
+	tip = [[释放出死亡脉冲，对范围800码的敌方单位造成 智力*%int% 法术伤害 （%damage%） ，对范围400码的友方单位有智力*%int%医疗效果 （%heal%）]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNDeathCoil.blp]],
 	--特效
 	effect = [[Abilities\Spells\Undead\DeathCoil\DeathCoilMissile.mdl]],
+
+	int = {4,5,6,7,8},
+
 	--治疗
 	heal = function(self,hero)
 		if self and self.owner then 
-			return self.owner:get('智力')*4
+			return self.owner:get('智力')*self.int
 		end	
 	end	,
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 
-			return self.owner:get('智力')*4
+			return self.owner:get('智力')*self.int
 		end
 	end	,
 	damage_type = '法术'

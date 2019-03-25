@@ -3,11 +3,12 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
-	cost = 10,
+	cost = {10,100,200,400,600},
 	--冷却时间
 	cool = 7,
 	--技能目标
@@ -15,17 +16,17 @@ mt{
 	--施法距离
 	range = 800,
 	--介绍
-	tip = [[增加指定队友8%的物暴、法爆、会爆几率，持续15S]],
+	tip = [[增加指定队友%physical_rate% %的物暴、法爆、会爆几率，持续15S]],
 	--技能图标
 	art = [[jineng\jineng031.blp]],
 	--特效
 	effect = [[Hero_Undying_N1S_F_Target.mdx]],
 	--物暴
-	physical_rate = 8,
+	physical_rate = {5,7.5,10,12.5,15},
 	--法爆
-	magic_rate = 8,
+	magic_rate = {5,7.5,10,12.5,15},
 	--会心
-	heart_rate = 8,
+	heart_rate = {5,7.5,10,12.5,15},
 	--持续时间
 	time = 15,
 	--目标允许	

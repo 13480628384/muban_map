@@ -8,27 +8,31 @@ mt{
 	skill_type = "被动",
 	--初始等级
 	level = 1,
+	max_level = 5,
 	--技能图标
 	art = [[icon\card2_13.blp]],
 	--技能说明
 	title = '炎爆术',
 	tip = [[
-		攻击有 %chance% % 的概率对 %area% 范围造成物理伤害  (%damage%)
+		攻击有 %chance% % 的概率对 %area% 范围造成 和力量相关的 物理伤害  (%damage%)
 	]],
 	--范围
 	area = 1000,
 	--概率%
-	chance = 10,
+	chance = {5,7.5,10,12.5,15},
+
+	int = {3,4,5,6,7},
+
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 
-		return self.owner:get('力量')*3+1200
+		return self.owner:get('力量')*self.int+1200
 		end
 	end	,
 	--是否被动
 	passive = true,
 	--冷却
-	cool = 0.5
+	cool = 1
 
 }
 mt.model = [[war3mapimported\!huobao.mdx]]

@@ -6,9 +6,10 @@ mt{
 	
 	--初始等级
 	level = 1,
-	
+	max_level = 5,
+
 	tip = [[
-		主动：将变大的武器直插入地，对周围 %area% 码的敌人造成 攻击力*2+敏捷*3 的物理伤害( %damage% ),将其晕眩 %time% 秒 
+		主动：将变大的武器直插入地，对周围 %area% 码的敌人造成 和攻击力相关的 的物理伤害( %damage% ),将其晕眩 %time% 秒 
 		被动：+%physical_crite_rate% % 会心几率
 	]],
 	
@@ -24,19 +25,22 @@ mt{
 	--持续时间
 	time = 2,
 
+	--伤害参数
+	attack_mul={2,3,4,5,6},
+
 	--伤害
 	damage = function(self,hero)
-		return hero:get('攻击')*2 + hero:get('敏捷')*3
+		return hero:get('攻击')*self.attack_mul
 	end,	
 
-	--护甲
-	physical_crite_rate = 20,
+	--会心几率
+	physical_crite_rate = {15,20,25,30,35},
 
 	--cd 20
-	cool = 20,
+	cool = {20,17.5,15,12.5,10},
 
 	--耗蓝 30
-	cost = 30,
+	cost = {30,180,330,480,600},
 
 	--特效模型
 	effect = [[AZ_Kaer_T1.mdx]],
@@ -44,10 +48,18 @@ mt{
 	
 }
 
+mt.physical_crite_rate_now = 0
+
+function mt:on_upgrade()
+	local hero = self.owner
+	-- print(self.physical_crite_rate_now)
+	hero:add('会心几率', -self.physical_crite_rate_now)
+	self.physical_crite_rate_now = self.physical_crite_rate
+	hero:add('会心几率', self.physical_crite_rate)
+end
 
 function mt:on_add()
 	local hero = self.owner 
-	hero:add('会心几率',self.physical_crite_rate)
 
 end	
 function mt:on_cast_shot()

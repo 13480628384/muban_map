@@ -8,22 +8,25 @@ mt{
 	skill_type = "被动",
 	--初始等级
 	level = 1,
+	max_level = 5,
 	--技能图标
 	art = [[icon\card1_32.blp]],
 	--技能说明
 	title = '暴风雪',
 	tip = [[
 	攻击有 %chance% % 的概率对 %area% 范围造成法术伤害 (%damage%)
-	伤害:智力*4+2000
+	伤害:智力*%int%+2000
 	]],
 	--范围
 	area = 425,
 	--概率%
-	chance = 10,
+	chance = {5,7.5,10,12.5,15},
+
+	int ={4,5,6,7,8},
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 
-			return self.owner:get('智力')*4+2000
+			return self.owner:get('智力')*self.int+2000
 		end	
 	end	,
 	--是否被动

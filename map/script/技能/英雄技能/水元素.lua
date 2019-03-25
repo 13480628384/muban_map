@@ -3,17 +3,18 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "召唤",
 	--耗蓝
-	cost = 60,
+	cost = {15,250,350,450,600},
 	--冷却时间
-	cool = 40,
+	cool = {45,40,35,30,25},
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤1只水元素助战（属性与智力相关）；持续时间30S]],
+	tip = [[召唤水元素助战（属性与智力相关）]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNSummonWaterElemental.blp]],
 	--特效
@@ -25,7 +26,7 @@ mt{
 	--持续时间
 	time = 30,
 	--数量
-	cnt = 1,
+	cnt = {1,2,3,4,5},
 }
 	
 function mt:on_add()

@@ -6,6 +6,7 @@ mt{
 	
 	--初始等级
 	level = 1,
+	max_level = 5,
 	
 	tip = [[
 		主动：在英雄朝向每 %pulse_time% 秒，发射一波X射线，每条造成攻击力*0.5+智力*1.5的法术伤害 (%damage%) ；
@@ -33,13 +34,13 @@ mt{
 	end,	
 
 	--cd 30
-	cool = 30,
+	cool = {30,25,20,15,10},
 
 	--耗蓝
-	cost = 35,
+	cost = {30,150,320,415,510},
 
 	--被动加的智力
-	int = 20,
+	int = {10,20,30,40,50},
 
 	--特效模型
 	-- effect = [[Effect_coarse slash Blue.mdx]],
@@ -88,10 +89,20 @@ local function damage_shot(skill,angle)
 		}
 	end	
 end
+
+mt.int_now = 0
+
+function mt:on_upgrade()
+	local hero = self.owner
+	-- print(self.life_rate_now)
+	hero:add('智力%', -self.int_now)
+	self.int_now = self.int
+	hero:add('智力%', self.int)
+end
+
 function mt:on_add()
 	local hero = self.owner 
-	hero:add('智力%',self.int)
-
+	
 end	
 function mt:on_cast_shot()
     local skill = self

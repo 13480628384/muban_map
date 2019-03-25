@@ -3,10 +3,9 @@ local mt = ac.skill['巨浪']
 mt{
 	--初始等级
 	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "被动",
-	--初始等级
-	max_level = 5,
 	--技能图标
 	art = [[icon\3.blp]],
 	--技能说明
@@ -19,14 +18,15 @@ mt{
 	distance = 1500,
 	hit_area = 125,
 	--概率%
-	chance = 10,
+	chance = {5,7.5,10,12.5,15},
+
 	damage = function(self,hero)
 		if self and self.owner then 
 			return self.owner:get('力量')*self.damage_int
 		end	
 	end	,
 	--参数智力
-	damage_int = {4},
+	damage_int = {3,4,5,6,7},
 	--是否被动
 	passive = true,
 	--弹道数量

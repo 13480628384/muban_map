@@ -3,17 +3,18 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "召唤",
 	--耗蓝
-	cost = 70,
+	cost = {70,200,350,500,750},
 	--冷却时间
-	cool = 45,
+	cool = {45,40,35,30,25},
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤1只硬币机器助战（属性与智力相关，攻击时有概率获得额外金钱）；持续时间20S]],
+	tip = [[召唤1只硬币机器助战（属性与智力相关，攻击时有概率获得额外金钱）]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNChestOfGold.blp]],
 	--特效
@@ -23,12 +24,12 @@ mt{
 	--召唤物属性倍数
 	attr_mul = 1,
 	--持续时间
-	time = 20,
+	time = {15,20,25,30,35},
 	--数量
 	cnt = 1,
 
 	--几率
-	chance = 10,
+	chance = {10,20,30,40,50},
 }
 	
 function mt:on_add()

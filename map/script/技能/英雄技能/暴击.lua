@@ -12,41 +12,69 @@ mt{
 	
 	--初始等级
 	level = 1,
+	max_level = 5,
 	
 	tip = [[
 		|cff00ccff被动|r:
-		物爆几率+10% ，物爆伤害+50% 
-		会心几率+10% ，会心伤害+50% 
-		法爆几率+10% ，法爆伤害+50% 
+		物爆几率+%physical_rate% % ，物爆伤害+%physical_damage% % 
+		会心几率+%physical_rate% % ，会心伤害+%physical_damage% %
+		法爆几率+%physical_rate% % ，法爆伤害+%physical_damage% %
 	]],
 	
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNCriticalStrike.blp]],
 
 	--物爆
-	physical_rate = 10,
-	physical_damage = 50,
+	physical_rate = {5,7.5,10,12.5,15},
+	physical_damage = {25,50,75,100,150},
 	--会爆
-	heart_rate = 10,
-	heart_damage = 50,
+	heart_rate = {5,7.5,10,12.5,15},
+	heart_damage = {25,50,75,100,150},
 	--法爆
-	magic_rate = 10,
-	magic_damage = 50,
+	magic_rate = {5,7.5,10,12.5,15},
+	magic_damage = {25,50,75,100,150},
 
 
 }
+mt.physical_rate_now = 0
+mt.physical_damage_now = 0
+mt.heart_rate_now = 0
+mt.heart_damage_now = 0
+mt.magic_rate_now = 0
+mt.magic_damage_now = 0
+
+function mt:on_upgrade()
+	local hero = self.owner
+	-- print(self.life_rate_now)
+	hero:add('物爆几率', -self.physical_rate_now)
+	self.physical_rate_now = self.physical_rate
+	hero:add('物爆几率', self.physical_rate)
+
+	hero:add('物爆伤害', -self.physical_damage_now)
+	self.physical_damage_now = self.physical_damage
+	hero:add('物爆伤害', self.physical_damage)
+
+	hero:add('会心几率', -self.heart_rate_now)
+	self.heart_rate_now = self.heart_rate
+	hero:add('会心几率', self.heart_rate)
+
+	hero:add('会心伤害', -self.heart_damage_now)
+	self.heart_damage_now = self.heart_damage
+	hero:add('会心伤害', self.heart_damage)
+
+	hero:add('法爆几率', -self.magic_rate_now)
+	self.magic_rate_now = self.magic_rate
+	hero:add('法爆几率', self.magic_rate)
+
+	hero:add('法爆伤害', -self.magic_damage_now)
+	self.magic_damage_now = self.magic_damage
+	hero:add('法爆伤害', self.magic_damage)
+end
 
 
 function mt:on_add()
 	local skill = self
 	local hero = self.owner 
-
-	hero:add('物爆几率',self.physical_rate)
-	hero:add('物爆伤害',self.physical_damage)
-	hero:add('会心几率',self.heart_rate)
-	hero:add('会心伤害',self.heart_damage)
-	hero:add('法爆几率',self.magic_rate)
-	hero:add('法爆伤害',self.magic_damage)
 
 end	
 

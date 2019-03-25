@@ -3,31 +3,32 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
-	cost = 40,
+	cost = {40,80,160,320,450},
 	--冷却时间
-	cool = 25,
-	--伤害
-	damage = 5,
+	cool = {25,22.5,20,17.5,15},
+
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--施法范围
 	area = 500,
 	--介绍
-	tip = [[对范围500码敌人晕眩2S，并造成力量*5的物理伤害 （%damage%） ]],
+	tip = [[对范围500码敌人晕眩2S，并造成力量*%int%的物理伤害 （%damage%） ]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNWarStomp.blp]],
 	--特效
 	effect = [[Abilities\Spells\Human\ThunderClap\ThunderclapCaster.mdx]],
 	--特效1
 	effect1 = [[Abilities\Spells\Human\ThunderClap\ThunderclapTarget.mdx]],
+	int = {5,10,15,20,25},
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 
-		return self.owner:get('力量') * 5
+		return self.owner:get('力量') * self.int
 		end
 	end,
 	--持续时间

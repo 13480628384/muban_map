@@ -11,25 +11,28 @@ mt{
 	
 	--初始等级
 	level = 1,
+	max_level = 5,
 	
 	tip = [[
 		|cff00ccff被动|r:
-		攻击时 %chance% % 触发， 造成 攻击力*1.5 的物理伤害 (%damage%) ，并击晕敌人 %time% 秒，近战有效
+		攻击时 %chance% % 触发， 造成 攻击力*%int% 的物理伤害 (%damage%) ，并击晕敌人 %time% 秒，近战有效
 	]],
 	
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNBash.blp]],
 
 	--概率
-	chance = 10,
+	chance = {5,7.5,10,12.5,15},
 
 	--晕眩时间
 	time = 1,
 
+	int = {1.5,2,2.5,3,4},
+
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 
-		return self.owner:get('攻击')*1.5
+		return self.owner:get('攻击')*self.int
 		end
 	end,	
 

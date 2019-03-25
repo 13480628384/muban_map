@@ -5,6 +5,7 @@ mt{
 	
 	--初始等级
 	level = 1,
+	max_level = 5,
 
     title = '暴风雪',
     tip = [[
@@ -19,10 +20,10 @@ mt{
 	art = [[jineng\jineng012.blp]],
 
 	--cd 45
-	cool = 45,
+	cool = {55,45,35,25,15},
 
 	--耗蓝
-	cost = 60,
+	cost = {60,250,450,640,1350},
     --伤害
     damage = function(self,hero)
         return hero:get '攻击' * 1 + hero:get '智力' * 2 
@@ -37,7 +38,7 @@ mt{
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	
     --持续时间
-	time = 5,
+	time = {3,3.5,4,4.5,5},
 	
     --晕眩时间
 	yun_time = 0.3,
@@ -59,7 +60,7 @@ mt{
     end,
    
     --生成护盾时间
-	pulse_time = 5,
+	pulse_time = {8,7,6,5,4},
 
     --护盾抵消伤害
 	shield = function(self,hero)

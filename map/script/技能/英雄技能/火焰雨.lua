@@ -8,20 +8,24 @@ mt{
 	skill_type = "被动",
 	--初始等级
 	level = 1,
+	max_level = 5,
 	--技能图标
 	art = [[icon\card1_9.blp]],
 	--技能说明
 	title = '|cff00bdec火焰雨|r',
 	tip = [[
-	攻击有 %chance% % 的概率对 %area% 范围造成法术伤害  (%damage%)
+	攻击有 %chance% % 的概率对 %area% 范围造成 和智力相关的 法术伤害  (%damage%)
 	]],
 	--范围
 	area = 1500,
 	--概率%
-	chance = 10,
+	chance = {5,7.5,10,12.5,15},
+
+	int = {2,2.5,3,3.5,4},
+
 	damage = function(self,hero)
 		if self and self.owner then 
-			return self.owner:get('智力')*2+500
+			return self.owner:get('智力')*self.int+500
 		end	
 	end	,
 	--是否被动

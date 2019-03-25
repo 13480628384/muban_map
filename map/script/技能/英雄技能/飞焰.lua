@@ -4,6 +4,7 @@ mt{
 	
 	--初始等级
 	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "被动",
 	--技能图标
@@ -12,14 +13,15 @@ mt{
 	title = '|cff00bdec飞焰|r',
 	tip = [[
 	攻击有%chance% % 的概率召 %num% 个 %title% 
-	造成属性法术伤害  (%damage%)
+	造成 和智力相关的 法术伤害  (%damage%)
 	]],
 	--概率%
-	chance = 10,
+	chance = {5,7.5,10,12.5,15},
+	int = {2,2.5,3,3.5,4},
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 
-		return self.owner:get('智力')*2+500
+		return self.owner:get('智力')*self.int+500
 		end
 	end	,
 	--是否被动
@@ -31,7 +33,7 @@ mt{
 	--数量
 	num = 20,
 	--冷却
-	cool = 3,
+	cool = 0,
 	
 	--伤害类型
 	damage_type = '法术',

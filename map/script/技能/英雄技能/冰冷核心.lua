@@ -4,6 +4,7 @@ mt{
     is_skill = true,
     --初始等级
     level = 1,
+    max_level = 5,
 	--技能类型
 	skill_type = "光环",
 	--被动
@@ -11,7 +12,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[所有敌人的移动速度-50%]],
+	tip = [[所有敌人的移动速度减少%value% %]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNIceShard.blp]],
 	--受光环影响的特效
@@ -21,9 +22,9 @@ mt{
     --光环影响范围
     area = 99999,
     --值
-    value = 50,
+    value = {25,35,45,55,65},
 }
-function mt:on_add()
+function mt:on_upgrade()
     local skill = self
     local hero = self.owner
 

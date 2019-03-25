@@ -3,11 +3,12 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
-	cost = 10,
+	cost = {10,150,300,450,800},
 	--冷却时间
 	cool = 7,
 	--技能目标
@@ -15,13 +16,13 @@ mt{
 	--施法距离
 	range = 800,
 	--介绍
-	tip = [[增加指定队友40%的物品获取率，持续15S]],
+	tip = [[增加指定队友%item_rate% %的物品获取率，持续15S]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNGoldMine.blp]],
 	--特效
 	effect = [[Hero_Silencer_N2S_T_start.MDX]],
 	--物品获取率
-	item_rate = 40,
+	item_rate = {30,40,50,75,100},
 	--持续时间
 	time = 15,
 	--目标允许	

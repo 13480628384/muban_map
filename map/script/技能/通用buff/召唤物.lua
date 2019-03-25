@@ -14,7 +14,6 @@ function mt:on_add()
 	if not getextension(self.old_model) then 
 		self.old_model = self.old_model..'.mdl'
 	end	
-	print(self.old_model,self.model)
 	--改变模型
 	if self.model then
 		japi.SetUnitModel(self.target.handle,self.model)
@@ -40,12 +39,12 @@ function mt:on_add()
 			self.attr_mul =  (hero:get('召唤物属性') + attr_mul * 100 ) or 0
 		end	
 		if self.attr_mul then 
-			self.target:add('攻击%',self.attr_mul/100)
-			self.target:add('护甲%',self.attr_mul/100)
-			self.target:add('生命上限%',self.attr_mul/100)
-			self.target:add('魔法上限%',self.attr_mul/100)
-			self.target:add('生命恢复%',self.attr_mul/100)
-			self.target:add('魔法恢复%',self.attr_mul/100)
+			self.target:add('攻击%',self.attr_mul)
+			self.target:add('护甲%',self.attr_mul)
+			self.target:add('生命上限%',self.attr_mul)
+			self.target:add('魔法上限%',self.attr_mul)
+			self.target:add('生命恢复%',self.attr_mul)
+			self.target:add('魔法恢复%',self.attr_mul)
 		end	
 	end	
 

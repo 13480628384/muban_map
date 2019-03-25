@@ -3,25 +3,26 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+	level = 1,
+	max_level = 5,
 	--技能类型
 	skill_type = "主动",
 	--耗蓝
-	cost = 20,
+	cost = {20,130,240,350,460},
 	--冷却时间
-	cool = 15,
+	cool = {30,25,20,15,10},
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_UNIT,
 	--施法距离
 	range = 800,
 	--介绍
-	tip = [[回复指定队友40%的血]],
+	tip = [[回复指定队友 %life_rate% %的血]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNHolyBolt.blp]],
 	--特效
 	effect = [[Abilities\Spells\Human\HolyBolt\HolyBoltSpecialArt.mdl]],
 	--生命上限比
-	life_rate = 40,
+	life_rate = {20,30,40,50,60},
 	--目标允许	
 	target_data = '联盟 玩家单位 自己',
 }
