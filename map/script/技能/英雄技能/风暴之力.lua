@@ -5,6 +5,7 @@ mt{
     max_level = 5,
     --是被动
     passive = true,
+    is_skill = true,
 
     --伤害
     damage = function (self,hero)

@@ -294,8 +294,8 @@ function message.hook(msg)
 	if msg.type == 'key_down' then
 		local code = msg.code
 		local state = msg.state
-		--'Q', 'W', 'E', 'R','D', 'F', 'G',
-		local list = {'Z','X','C','V'}
+		--'Z','X','C','V','Q', 'W', 'E', 'R','D', 'F', 'G', 
+		local list = {}
 
 		-- ,按键代码，按键类型,message
 		ac.game:event_notify('玩家-按下按键',  code,state,message)
@@ -310,45 +310,45 @@ function message.hook(msg)
 		end	
 
 		--技能快捷键
-		for index, key in ipairs(list) do
-			if code == keyboard[key] then
+		-- for index, key in ipairs(list) do
+		-- 	if code == keyboard[key] then
 		
-				if state == 0 and is_select_shop() then
-					return true
-				end
+		-- 		if state == 0 and is_select_shop() then
+		-- 			return true
+		-- 		end
 
-				local hero = is_select_off_line_hero() or select_hero()
-				if not hero then
-					return true
-				end
+		-- 		local hero = is_select_off_line_hero() or select_hero()
+		-- 		if not hero then
+		-- 			return true
+		-- 		end
 
 
-				--判断是否是组合键
-				if state == 0 then
-					if is_book_ui() then
-						return true
-					end
-					local skill 
-					for skl in hero:each_skill '英雄' do 
-						if skl:get_hotkey() == key then 
-							skill = skl 
-							break 
-						end 
-					end 
-					if not skill then
-						return false
-					end
-					local name = skill.name
-					if not can_cast(name) then
-						return false
-					end
-					if cast_spell(msg, hero, name) then
-						return false
-					end
-				end
-				return true
-			end
-		end
+		-- 		--判断是否是组合键
+		-- 		if state == 0 then
+		-- 			if is_book_ui() then
+		-- 				return true
+		-- 			end
+		-- 			local skill 
+		-- 			for skl in hero:each_skill '英雄' do 
+		-- 				if skl:get_hotkey() == key then 
+		-- 					skill = skl 
+		-- 					break 
+		-- 				end 
+		-- 			end 
+		-- 			if not skill then
+		-- 				return false
+		-- 			end
+		-- 			local name = skill.name
+		-- 			if not can_cast(name) then
+		-- 				return false
+		-- 			end
+		-- 			if cast_spell(msg, hero, name) then
+		-- 				return false
+		-- 			end
+		-- 		end
+		-- 		return true
+		-- 	end
+		-- end
 
 		--如果是组合键,则跳过
 		if state ~= 0 then

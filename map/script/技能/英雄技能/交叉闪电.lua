@@ -5,6 +5,7 @@ mt{
     max_level = 5,
     --是被动
     passive = true,
+    is_skill = true,
 	--技能类型
 	skill_type = "被动",
 
@@ -18,9 +19,7 @@ mt{
     agi = {2,2.5,3,3.5,4},
 
     --投射物数量
-    count = function(self,hero)
-        return hero:get '额外投射物数量' + 2
-    end,
+    count = 2,
     --图标
     art = [[weisuoshandianjian.tga]],
 

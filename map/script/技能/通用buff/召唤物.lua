@@ -87,12 +87,12 @@ function mt:on_remove()
 		self.target:set_size(self.old_size)
 		--还原属性
 		if self.attr_mul then 
-			self.target:add('攻击%',-self.attr_mul/100)
-			self.target:add('护甲%',-self.attr_mul/100)
-			self.target:add('生命上限%',-self.attr_mul/100)
-			self.target:add('魔法上限%',-self.attr_mul/100)
-			self.target:add('生命恢复%',-self.attr_mul/100)
-			self.target:add('魔法恢复%',-self.attr_mul/100)
+			self.target:add('攻击%',-self.attr_mul)
+			self.target:add('护甲%',-self.attr_mul)
+			self.target:add('生命上限%',-self.attr_mul)
+			self.target:add('魔法上限%',-self.attr_mul)
+			self.target:add('生命恢复%',-self.attr_mul)
+			self.target:add('魔法恢复%',-self.attr_mul)
 		end	
 	end		
 end

@@ -3,6 +3,7 @@ mt{
     --等级
     level = 1,
     max_level = 5,
+    is_skill = true,
     --是被动
     passive = true,
 	--技能类型

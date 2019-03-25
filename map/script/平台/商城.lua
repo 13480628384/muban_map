@@ -54,7 +54,7 @@ ac.wait(10,function()
                         p:event '玩家-注册英雄后' (function(_, _, hero)
                             --物品形式
                             if item[n][2] == '金币礼包' or item[n][2] == '木材礼包' then
-                                hero:add_item(item[n][2]) 
+                                hero:add_item(item[n][2],true) 
                             end
                             --直接生效（技能）
                             if item[n][3]  then 

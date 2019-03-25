@@ -650,9 +650,16 @@ function unit.__index:add_item(it,is_fall)
 		if is_fall then
 			it:setPoint(self:get_point())
 		end 
+		--物品栏已满，需要回收
+		-- @应用在 购买商店物品 、 代码直接添加物品给英雄
+		if it.recycle then
+			-- print(it.name,it.handle)
+			it:item_remove()
+		end		
 		return
 	end
-
+	--单位真正获得物品时的处理
+	it.recycle = false
 	self.buy_suc = true 
 	it.owner = self
 	self.item_list[slot] = it

@@ -64,7 +64,4 @@ ac.game:event '游戏-开始' (function()
     local x,y = ac.map.rects['XX商店']:get_point():get()
     local shop3 = ac.shop.create('XX商店',x,y)
 
-    -- shop:remove_sell_item('新手石')
-    -- shop:add_sell_item('错乱精髓',1)
-    -- local shop = ac.shop.create('商店B',100,0)
 end)    

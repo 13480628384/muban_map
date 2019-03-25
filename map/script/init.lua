@@ -27,9 +27,23 @@ ac.wait(100,function ()
     
     -- local item = ac.item.create_item('新手剑')
     
-    -- ac.game:event '游戏-开始' (function()
-    
-    -- end)
+    ac.game:event '游戏-开始' (function()
+        -- local item = ac.item.create_item('新手剑')
+        -- local item = ac.item.create_item('生锈剑')
+        -- local item = ac.item.create_item('知识丹')
+        -- local item = ac.item.create_item('寻觅丹')
+        -- local item = ac.item.create_item('生锈剑')
+        -- local item = ac.item.create_item('生锈剑')
+        -- local item = ac.item.create_item('寻觅丹')
+        -- local item = ac.item.create_item('寻觅丹')
+        -- local item = ac.item.create_item('生锈剑')
+        -- local item = ac.item.create_item('生锈剑')
+        -- local item = ac.item.create_item('生锈剑')
+        -- local item = ac.item.create_skill_item('万箭齐发')
+        -- local item = ac.item.create_skill_item('万箭齐发')
+        -- local item = ac.item.create_skill_item('御甲')
+        -- local item = ac.item.create_skill_item('御甲')
+    end)
 
     
 end);

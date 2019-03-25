@@ -96,7 +96,7 @@ local reward = {
     ['随机白装'] = function (player,hero,unit,is_on_hero)
         local list = quality_item['白']
         if list == nil then 
-            print('没有蓝色装备 添加失败')
+            print('没有白色装备 添加失败')
             return 
         end 
         local name = list[math.random(#list)]
@@ -129,7 +129,7 @@ local reward = {
     ['随机金装'] = function (player,hero,unit,is_on_hero)
         local list = quality_item['金']
         if list == nil then 
-            print('没有橙色装备 添加失败')
+            print('没有金色装备 添加失败')
             return 
         end 
         local name = list[math.random(#list)]
@@ -145,7 +145,7 @@ local reward = {
     ['随机红装'] = function (player,hero,unit,is_on_hero)
         local list = quality_item['红']
         if list == nil then 
-            print('没有紫色装备 添加失败')
+            print('没有红色装备 添加失败')
             return 
         end 
         local name = list[math.random(#list)]
@@ -170,6 +170,16 @@ local reward = {
         else
             hero = hero:get_owner().hero
             ac.item.add_skill_item(name,hero)
+        end 
+    end,
+    ['吞噬丹'] = function (player,hero,unit,is_on_hero)
+        local name = '吞噬丹'
+        if not is_on_hero then 
+            local item = ac.item.create_item(name,unit:get_point())
+            item_self_skill(item,hero)
+        else
+            hero = hero:get_owner().hero
+            hero:add_item(name,true)    
         end 
     end,
 
@@ -199,6 +209,9 @@ local unit_reward = {
     },
     ['钥匙怪'] =  {
         { rand = 20,      name = '随机技能'}
+    },
+    ['挑战怪'] =  {
+        { rand = 30,      name = '吞噬丹'}
     },
     ['商店随机技能'] =  {
         { rand = 100,      name = '随机技能'}
@@ -314,6 +327,21 @@ ac.game:event '单位-死亡' (function (_,unit,killer)
     end    
 end)
 
+-- 如果死亡的是挑战怪的话
+ac.game:event '单位-死亡' (function (_,unit,killer)
+    if not finds(unit:get_name(),'挑战')then
+		return
+    end
+    local name = get_reward_name(unit_reward['挑战怪'])
+    if name then 
+        local func = reward[name]
+        local player = killer:get_owner()
+        if func then 
+            func(player,killer,unit)
+        end  
+    end    
+
+end)
 
 --物品掉落，主动发起掉落而不是单位死亡时掉落 。
 -- 应用：张全蛋技能 妙手空空

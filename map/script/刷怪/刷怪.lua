@@ -7,8 +7,22 @@
 -- 两个模式，标准和嘉年华，各自有3个难度 普通 噩梦 地狱 难度不同， 怪属性增强倍数不同
 -- 标准模式就常规模式，嘉年华为 无限生怪，打完直接进入下一波，钥匙怪也会出来。
 -- 根据玩家数 提高怪的总人口
---boss 光环列表
-local buff_list = {
+--金币怪奖励
+--造成X伤害获得1金币
+local gold_unit_award = {
+    [5] = 400,
+    [15] = 600,
+    [25] = 1200,
+    [35] = 2700,
+    [45] = 6480,
+    [55] = 16200,
+    [65] = 41657,
+    [75] = 109350,
+    [85] = 291600,
+    [95] = 787320,
+}
+ac.special_boss = {
+'挑战怪10','挑战怪20','挑战怪30','挑战怪40','挑战怪50','挑战怪60','挑战怪70','挑战怪80','挑战怪90','挑战怪100'
 }
 
 local skill_list = ac.skill_list
@@ -31,7 +45,6 @@ for k,v in pairs(ac.table.UnitData) do
         all_food = v.all_food
     end    
 end    
- 
 
 
 local mt = ac.creep['刷怪']{    
@@ -363,7 +376,7 @@ function mt:sendMsg_unit()
     local tip = '|cffffff00结算奖励：|r\n'
     for i=1,10 do 
         if self.player_damage[i].player:is_player() then
-        tip = tip ..'|cffffff00No.'..i..'、 |r|cffff0000'..self.player_damage[i].player:get_name()..'|r|cffffff00: 伤害[|cffff0000'..ac.numerical(self.player_damage[i].damage)..'|r|cffffff00]金币奖励100|r'..'\n'
+        tip = tip ..'|cffffff00No.'..i..'、 |r|cffff0000'..self.player_damage[i].player:get_name()..'|r|cffffff00: 伤害[|cffff0000'..ac.numerical(self.player_damage[i].damage)..'|r|cffffff00]金币奖励 '..self.player_damage[i].gold..' |r'..'\n'
         end   
     end
     ac.player.self:sendMsg(tip,10)   
@@ -374,6 +387,7 @@ function mt:on_change_creep(unit,lni_data)
      --金币怪
     if self.index == self.gold_index then 
         self.gold_index = self.gold_index + 10
+        local gold_unit_award_base = gold_unit_award[self.index]
         name = "金币怪-"..self.index
         --金币怪处理
         unit:add_restriction '缴械'
@@ -385,9 +399,9 @@ function mt:on_change_creep(unit,lni_data)
             time = 30,
             title = "金币怪消失倒计时",
             func = function ()
-                unit:kill() 
-                self:sendMsg_unit()
                 --发送金币奖励
+                self:sendMsg_unit()
+                unit:kill() 
             end,
         }  
         --统计伤害 
@@ -401,10 +415,12 @@ function mt:on_change_creep(unit,lni_data)
                     self.player_damage[i] = {}
                     self.player_damage[i].player = ac.player(i)
                     self.player_damage[i].damage = 0
+                    self.player_damage[i].gold = 0
                 end    
                 local v = self.player_damage[i]
                 if v.player == p then 
                     v.damage = v.damage + damage.current_damage
+                    v.gold = math.ceil( v.damage / gold_unit_award_base)
                 end    
             end
             table.sort(self.player_damage,function (a,b)
@@ -413,7 +429,11 @@ function mt:on_change_creep(unit,lni_data)
         end)  
         --单位死亡时，清空伤害统计。   
         unit:event '单位-死亡'(function(_,unit,killer)
-            self.player_damage[i] = {}
+            for i = 1 ,10 do 
+                if self.player_damage[i] then
+                    self.player_damage[i] = nil
+                end 
+            end       
         end)
         
     --挑战怪    当前数据统计 current_data_trace

@@ -5,6 +5,7 @@ mt{
     max_level = 5,
     --是被动
     passive = true,
+    is_skill = true,
 	--技能类型
 	skill_type = "被动",
 
