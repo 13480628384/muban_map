@@ -7,6 +7,7 @@ mt{
     passive = true,
     is_skill = true,
 
+    skill_type = "被动",
     --伤害
     damage = function (self,hero)
         return hero:get '智力'  * self.int
