@@ -516,7 +516,10 @@ end
 --删除物品
 function mt:item_remove(is)
 	print('即将移除物品：',self.slot_id,self.name,self.handle)
-	
+	--排除神符类的移除
+	if not self.handle then 
+		return
+	end	
 	--移除技能
     -- if self._eff then 
     --     print('即将移除物品：:',self.handle,self.name,self._eff.unit:get_point())

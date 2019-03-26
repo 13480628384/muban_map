@@ -26,6 +26,7 @@ function mt:on_create()
     local hero = self.owner
     local region = ac.map.rects['刷怪']
     local point = region:get_point()
+    -- print(self.item)
     if self.item then 
         self.item:item_remove() 
     end    
@@ -113,7 +114,9 @@ function mt:on_cast_start()
 end
 
 function mt:on_remove()
+    -- print('进行移除')
     if self.item then 
+        -- self.item:item_remove()
         self.item = nil
     end     
 end
