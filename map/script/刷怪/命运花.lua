@@ -53,7 +53,12 @@ function mt:on_cast_start()
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 拾取了命运花, |cff00ffff什么事都没发生|r',10)
     elseif  rand_name == '中毒' then
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 拾取了命运花, |cff00ffff中毒，当前生命-50% |r',10)
-        hero:add('生命',-hero:get('生命')*0.5)
+        hero:damage{
+            source = hero,
+            damage = hero:get('生命')*0.5,
+            skill = self,
+            real_damage = true
+        }
     elseif  rand_name == '沉默' then
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 拾取了命运花, |cff00ffff沉默，无法使用法术，持续10s |r',10)
         hero:add_buff '沉默'{

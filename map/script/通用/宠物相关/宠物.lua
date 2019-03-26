@@ -3,6 +3,8 @@ local player = require 'ac.player'
 function player.__index:create_pets()
     local u = self:create_unit('n003',ac.point(-500,0))
     u.unit_type = '宠物'
+    u:set('移动速度',522)
+    -- u:set_animation_speed(10)
     --添加切换背包
     u:add_skill('切换背包','英雄',5)
     u:add_restriction '无敌'
