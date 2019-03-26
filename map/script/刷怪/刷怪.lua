@@ -405,6 +405,10 @@ function mt:on_change_creep(unit,lni_data)
                 unit:kill() 
             end,
         }  
+        ac.timer(1*1000,15,function(t)
+            local cnt = 15 - t.cnt
+            ac.on_texttag_time(cnt,unit)
+        end)
         --统计伤害 
         unit:event '伤害计算完毕'(function (_,damage)
             if not self.player_damage then 

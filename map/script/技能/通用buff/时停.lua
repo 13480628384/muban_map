@@ -44,7 +44,7 @@ local function on_texttag(time,hero)
 		end)
 	end	
 end
-
+ac.on_texttag_time = on_texttag
 function mt:on_add()
 	if not self.eff and self.model then
 		self.eff = self.target:add_effect('overhead', self.model)

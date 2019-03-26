@@ -525,7 +525,7 @@ end
 
 set['攻击'] = function(self, attack)
 	if attack <= 1 then 
-		attack = 1
+		attack = 2
 	end	
 	japi.SetUnitState(self.handle, jass.ConvertUnitState(0x12), attack - 1)
 	if self.freshDamageInfo then

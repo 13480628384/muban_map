@@ -7,8 +7,6 @@ level = 1,
 
 --冷却
 cool = 0,
---图标
-art = [[icon\tunshi.blp]],
 
 --物品技能
 is_skill = true,
