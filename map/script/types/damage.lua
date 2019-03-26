@@ -924,7 +924,12 @@ function damage:__call()
 		else
 			source:event_notify('单位-造成技能伤害', self)
 			target:event_notify('单位-受到技能伤害', self)
+			--计算技能基础伤害
 			self.current_damage = self.current_damage + source:get('技能基础伤害')
+			--计算技能伤害加成
+			self:on_skill_damage()
+			--计算计算法术攻击加成
+			self:on_more_magic_damage()
 		end
 		--判断伤害类型
 		if self.damage_type == '物理' then	
@@ -962,13 +967,9 @@ function damage:__call()
 		--计算减伤
 		self:Injury()
 
-		--判断伤害类型
-		if not self:is_common_attack()  then
-			--计算技能伤害加成
-			self:on_skill_damage()
-			--计算计算法术攻击加成
-			self:on_more_magic_damage()
-		end
+		-- --判断伤害类型
+		-- if not self:is_common_attack()  then
+		-- end
 
 		local ewsh = source:get '额外伤害'
 		--计算额外伤害

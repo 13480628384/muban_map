@@ -184,6 +184,16 @@ local reward = {
             hero:add_item(name,true)    
         end 
     end,
+    ['召唤boss'] = function (player,hero,unit,is_on_hero)
+        local name = '召唤boss'
+        if not is_on_hero then 
+            local item = ac.item.create_item(name,unit:get_point())
+            item_self_skill(item,hero)
+        else
+            hero = hero:get_owner().hero
+            hero:add_item(name,true)    
+        end 
+    end,
 
 }
 ac.reward = reward
@@ -193,9 +203,10 @@ local unit_reward = {
     ['进攻怪'] =  {
         -- { rand = 97.5,         name = '无'},
         { rand = 2.5,      name = {
-                { rand = 80, name = '随机白装'},
+                { rand = 79, name = '随机白装'},
                 { rand = 16, name = '随机蓝装'},
                 { rand = 3.3, name = '随机金装'},
+                { rand = 1 ,  name = '召唤boss'},
                 { rand = 0.7, name = '随机红装'},
             }
         }
@@ -228,16 +239,17 @@ local unit_reward = {
         }
     },
     ['命运花'] =  {
-        {   rand = 7, name = '无' },
-        {    rand = 11.5, name = '中毒',},
-        {    rand = 11.5, name = '沉默',},
-        {    rand = 11.5, name = '减速',},
-        {    rand = 11.5, name = '暴击率翻倍',},
-        {    rand = 11.5, name = '生命全满',},
-        {    rand = 11.5, name = '攻击力翻倍',},
+        {    rand = 4, name = '无' },
+        {    rand = 12.5, name = '中毒',},
+        {    rand = 12.5, name = '沉默',},
+        {    rand = 12.5, name = '减速',},
+        {    rand = 12.5, name = '暴击率翻倍',},
+        {    rand = 12.5, name = '生命全满',},
+        {    rand = 12.5, name = '攻击力翻倍',},
+        {    rand = 5, name = '护甲加50',},
         {    rand = 11.5, name = '全属性加100',},
-        {    rand = 11.5, name = '全属性加1000',},
-        {    rand = 1, name = '全属性加10000',},
+        {    rand = 4, name = '全属性加1000',},
+        {    rand = 0.5, name = '全属性加10000',},
         
     },
    

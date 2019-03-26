@@ -4,7 +4,7 @@ mt{
     level = 1,
     title = "火焰",
     tip = [[
-        被动1：对自己150范围内的所有敌人，每0.3秒造成其1%最大生命值的伤害
+        被动1：对自己150范围内的所有敌人，每0.2秒造成其1%最大生命值的伤害
         被动2：降低自己的三维30%
     ]],
 
@@ -18,7 +18,7 @@ mt{
     area = 300,
 
     -- 每几秒
-    pulse = 0.3,
+    pulse = 0.2,
 
     -- 每几秒
     life_rate = 1,
@@ -36,7 +36,6 @@ function mt:on_add()
     hero:add('生命上限%', -self.value)
     hero:add('护甲%', -self.value)
     hero:add('攻击%', -self.value)
-    hero:add('魔抗%', -self.value)
 
 
     self.eff = hero:add_effect('origin',self.effect)
@@ -79,7 +78,6 @@ function mt:on_remove()
     hero:add('生命上限%', self.value)
     hero:add('护甲%', self.value)
     hero:add('攻击%', self.value)
-    hero:add('魔抗%', self.value)
 
     if self.eff then 
         self.eff:remove()
@@ -94,7 +92,10 @@ end
 
 
 
-local mt = ac.dot_buff['火焰']
+local mt = ac.buff['火焰']
+mt.ref = 'origin' 
+mt.cover_type = 1
+mt.cover_max = 1
 
 function mt:on_add()
 	self.eff = self.target:add_effect('chest', [[Abilities\Spells\Other\BreathOfFire\BreathOfFireDamage.mdl]])
@@ -104,11 +105,11 @@ function mt:on_remove()
 	self.eff:remove()
 end
 
-function mt:on_pulse(damage)
+function mt:on_pulse()
 	self.target:damage
 	{
 		source = self.source,
-		damage = damage ,
+		damage = self.damage ,
         skill = self.skill,
         real_damage = true
 	}

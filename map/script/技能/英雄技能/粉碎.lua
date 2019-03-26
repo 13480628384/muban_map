@@ -51,8 +51,8 @@ function mt:on_add()
 			-- target:add_effect('chest',self.effect):remove()
 			ac.effect(target:get_point(),self.effect,0,2,'chest'):remove()
 	 	    for i, u in ac.selector()
-				: in_range(hero,self.area)
-				: is_enemy(hero)
+				: in_range(target,self.area)
+				: is_enemy(target)
 				: of_not_building()
 				: ipairs()
 			do
@@ -60,7 +60,7 @@ function mt:on_add()
 				{
 					skill = self,
 					source = hero,
-					damage = target:get('生命上限')*self.life_rate/100,
+					damage = u:get('生命上限')*self.life_rate/100,
 					real_damage = true
 				}
 			end	

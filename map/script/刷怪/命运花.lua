@@ -99,6 +99,9 @@ function mt:on_cast_start()
             source = hero,
             value = 100,
         }
+    elseif  rand_name == '护甲加50' then
+        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 拾取了命运花, |cff00ffff护甲加50 |r',10)
+        hero:add('护甲',50)
     elseif  rand_name == '全属性加100' then
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 拾取了命运花, |cff00ffff全属性加100 |r',10)
         hero:add('力量',100)

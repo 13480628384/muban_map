@@ -276,7 +276,7 @@ function mt:set_resource(type, value)
 end
 
 -- 每点力量增加8点生命上限，0.08点生命恢复，0.1%物爆伤害，如果是主属性，每点力量还增加4点攻击力
--- 每点敏捷增加0.3点护甲，0.5%攻击速度，0.1%会心伤害，如果是主属性，每点敏捷还增加4点攻击力
+-- 每点敏捷增加0点护甲，0.05%攻击速度，0.1%会心伤害，如果是主属性，每点敏捷还增加4点攻击力
 -- 每点智力增加8点魔法上限，0.08点魔法恢复，0.1%法爆伤害，如果是主属性，每点智力还增加4点攻击力
 
 --主属性 每点主属性增加4点攻击力
@@ -287,14 +287,15 @@ local str_hp_recover = 0.08
 local str_phy_split_damage = 0.1
 
 --敏捷
-local agi_speed = 0.5
+local agi_speed = 0.05
 local agi_heart = 0.1
-local agi_defense = 0.3
+local agi_defense = 0
 
 --智力
 local int_mp = 8
 local int_mp_recover = 0.08
 local int_explosion = 0.1
+local int_skill_base_damage = 4
 
 
 get['力量'] = function(self)
@@ -413,6 +414,8 @@ on_set['智力'] = function(self,old_value)
 		self:add('魔法恢复', value * int_mp_recover)
 		-- 增加法爆伤害
 		self:add('法爆伤害', value * int_explosion)
+		-- 增加技能基础伤害
+		self:add('技能基础伤害', value * int_skill_base_damage)
 	end
 end
 

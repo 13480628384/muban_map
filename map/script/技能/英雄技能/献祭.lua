@@ -85,7 +85,8 @@ function mt:on_pulse()
         : is_enemy(hero)
         : of_not_building()
         : ipairs()
-    do
+    do  
+        u:add_effect('chest', [[Abilities\Spells\Other\BreathOfFire\BreathOfFireDamage.mdl]]):remove()
         u:damage
         {
             source = hero,

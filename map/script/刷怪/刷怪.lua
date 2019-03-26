@@ -173,7 +173,11 @@ function mt:get_creep_skill()
     end  
     for i = 1,rand_skill_cnt do  
         local rand_skill_name = ac.skill_list[math.random(#ac.skill_list)]
-        table.insert(rand_skill_list,rand_skill_name)
+        -- 嘉年华模式 排除掉光环怪
+        if ac.skill[rand_skill_name].is_aura and ac.g_game_mode == 2 then 
+        else    
+            table.insert(rand_skill_list,rand_skill_name)
+        end    
     end    
     return rand_skill_list
 
@@ -376,8 +380,8 @@ end
 function mt:sendMsg_unit()
     local tip = '|cffffff00结算奖励：|r\n'
     for i=1,10 do 
-        if self.player_damage[i].player:is_player() then
-        tip = tip ..'|cffffff00No.'..i..'、 |r|cffff0000'..self.player_damage[i].player:get_name()..'|r|cffffff00: 伤害[|cffff0000'..ac.numerical(self.player_damage[i].damage)..'|r|cffffff00]金币奖励 '..self.player_damage[i].gold..' |r'..'\n'
+        if self.player_damage and self.player_damage[i] and self.player_damage[i].player:is_player() then
+            tip = tip ..'|cffffff00No.'..i..'、 |r|cffff0000'..self.player_damage[i].player:get_name()..'|r|cffffff00: 伤害[|cffff0000'..ac.numerical(self.player_damage[i].damage)..'|r|cffffff00]金币奖励 '..self.player_damage[i].gold..' |r'..'\n'
         end   
     end
     ac.player.self:sendMsg(tip,10)   
@@ -492,8 +496,11 @@ function mt:on_change_creep(unit,lni_data)
     -- unit:set_search_range(99999)
     --随机添加怪物技能
     self:add_creep_skill(self.rand_skill_list,unit)
-    --unit:add_skill('怀孕','隐藏')
-
+    -- unit:add_skill('火焰','隐藏')
+    -- unit:add_skill('神盾','隐藏')
+    -- unit:add_skill('减速光环','隐藏')
+    -- unit:add_skill('沉默光环','隐藏')
+    
     
 
 end
@@ -531,7 +538,8 @@ end
 
 --创建钥匙怪
 function mt:creat_key_unit()
-    local unit = ac.player[16]:create_unit('钥匙怪',ac.point(0,0))
+    local point = self.region:get_point()
+    local unit = ac.player[16]:create_unit('钥匙怪',point)
     ac.key_unit = unit
     -- print('钥匙怪队伍：',unit:get_team())
     local name = '进攻怪-'..self.index

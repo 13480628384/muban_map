@@ -63,7 +63,6 @@ ac.game:event '玩家-注册英雄' (function(_, player, hero)
 				-- 每级增加的三围属性和上一级有关
 				
 				local function get_attr_by_lv (attr,lv)
-					
 					if lv > 1 then 
 						return ( get_attr_by_lv(attr,lv-1) + base_formula ) * lv_formula + regular_formula
 					else 
@@ -77,7 +76,21 @@ ac.game:event '玩家-注册英雄' (function(_, player, hero)
 				hero:add(k,value)
 			end	
 		end
+
+		--护甲相关
+		local function get_defence_by_lv (lv)
+			if lv > 1 then 
+				return ( get_defence_by_lv(lv-1) + 1 ) * 1.04 + 0
+			else 
+				return 1
+			end	 
+		end	
 		
+		local lv = hero.level 
+		local value = get_defence_by_lv(lv) - get_defence_by_lv(lv-1)
+		-- print('打印人物升级增加的属性',lv,k,value)
+		hero:add('护甲',value)
+
 		--hero:add('冷却缩减', 1.5)
 
 		
