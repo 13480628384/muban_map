@@ -303,9 +303,7 @@ function mt:show(is)
 	local handle = self.handle
 	jass.SetItemVisible(handle,true)
 	if is then
-		--丢弃在地上时，就不可回收 有点问题
-		-- self.recycle = false
-
+        -- self.recycle = false
 		if self._eff then
 			self._eff:remove()
 		end
@@ -708,14 +706,14 @@ function unit.__index:add_item(it,is_fall)
 	end
 	
 	if self:event_dispatch('单位-即将获得物品', self, it) then
-		print(it.name,it.recycle)
-		--满格时，掉落地上
+		--装备唯一时，要求掉落在地上 如果代码直接添加，无法被加在地上。
 		if is_fall then
 			it:setPoint(self:get_point())
-		elseif it.recycle then
-			--物品栏已满，需要回收
+		end	
+		--消耗品 就算 掉地上也要回收
+		if it.recycle then
 			it:item_remove()
-		end			
+		end	
 		 
 		--给与 时的处理逻辑
 		-- 唯一装备可能要处理下。
@@ -741,13 +739,6 @@ function unit.__index:add_item(it,is_fall)
 			-- @应用在 购买商店物品 、 代码直接添加物品给英雄
 			it:item_remove()
 		end		
-		
-		--物品栏已满，需要回收
-		-- @应用在 购买商店物品 、 代码直接添加物品给英雄
-		-- if it.recycle then
-		-- 	-- print(it.name,it.handle)
-		-- 	it:item_remove()
-		-- end		
 		return
 	end
 	--单位真正获得物品时的处理
@@ -838,6 +829,7 @@ function unit.__index:remove_item(it)
 		-- print(it:get_point())
 		it:show(true)
 	end)   
+	
 	jass.UnitRemoveItem(self.handle,it.handle)
 	self:event_notify('单位-丢弃物品后',self, it)
 	return true

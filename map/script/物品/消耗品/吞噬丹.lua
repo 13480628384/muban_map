@@ -14,11 +14,12 @@ is_skill = true,
 }
 
 function mt:on_cast_start()
+    local unit = self.owner
     local hero = self.owner
     local player = hero:get_owner()
     local count = 0
     local name = self:get_name()
-
+    hero = player.hero
     local list = {}
 
     for i=1,6 do 
@@ -39,7 +40,7 @@ function mt:on_cast_start()
             self:set_item_count(self._count+1)
         else
             --重新添加给英雄
-            hero:add_item(name,true)
+            unit:add_item(name,true)
         end     
         return 
     end 
@@ -66,7 +67,7 @@ function mt:on_cast_start()
                     self:set_item_count(self._count+1)
                 else
                     --重新添加给英雄
-                    hero:add_item(name,true)
+                    unit:add_item(name,true)
                 end        
             end
             

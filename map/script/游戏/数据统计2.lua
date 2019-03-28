@@ -235,8 +235,7 @@ ac.game:event '游戏-开始' (function()
         local hero = killer
         local p = killer:get_owner()
         local hero = p.hero
-        print(p)
-        if not p then return end
+        if not p:is_player() then return end
         --使用杀敌数后，减少杀敌数
         p.kill_count = p.kill_count + 1
         --统计用，使用杀敌数后，不减少
