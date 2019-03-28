@@ -229,19 +229,25 @@ ac.game:event '游戏-开始' (function()
             p.gold_count = p.gold_count + gold
         end)
         
-        hero:event '单位-杀死单位'(function(trg, killer, target)
-            --使用杀敌数后，减少杀敌数
-            p.kill_count = p.kill_count + 1
-            --统计用，使用杀敌数后，不减少
-            p.total_kill_count = p.total_kill_count + 1
-            local jf_mul = 1
-            if ac.creep['刷怪-无尽'].index and ac.creep['刷怪-无尽'].index >=1 then
-                jf_mul = 2
-            end    
-            p.putong_jifen = (p.putong_jifen or 0) + jf_mul
-        end)
     end
     
+    ac.game:event '单位-杀死单位'(function(trg, killer, target)
+        local hero = killer
+        local p = killer:get_owner()
+        local hero = p.hero
+        print(p)
+        if not p then return end
+        --使用杀敌数后，减少杀敌数
+        p.kill_count = p.kill_count + 1
+        --统计用，使用杀敌数后，不减少
+        p.total_kill_count = p.total_kill_count + 1
+        local jf_mul = 1
+        if ac.creep['刷怪-无尽'].index and ac.creep['刷怪-无尽'].index >=1 then
+            jf_mul = 2
+        end    
+        p.putong_jifen = (p.putong_jifen or 0) + jf_mul
+    end)
+
     --刷新排行榜信息
     ac.loop(2000,function()
         get_kda()

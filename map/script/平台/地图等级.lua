@@ -6,6 +6,8 @@ mt{
     --初始等级
     level = 0,
     max_level = 100,
+    --标题颜色
+    color =  '青',
 	--介绍
     tip = [[
 %active3%地图等级3: 全属性加100 , 金币加成+5% （%nick_name3%）|r
@@ -15,8 +17,7 @@ mt{
 %active25%地图等级25: 全属性加15% , 物品获取率 +50% （%nick_name25%） |r
 
 |cffff0000点击领取对应称号，只能更换一次|r
-
-    ]],
+]],
     map_level = function(self,hero)
 		if self and self.owner and self.owner:get_owner() then 
 			return self.owner:get_owner():Map_GetMapLevel() or self.level or 0

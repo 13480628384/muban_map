@@ -377,6 +377,14 @@ function helper:add_item(str,cnt)
 	end	
 end
 
+function helper:set_item(str,cnt)
+	local item = self:has_item(str)
+	local cnt = tonumber(cnt) or 1
+	if item then 
+		item:set_item_count(cnt)
+	end	
+end
+
 function helper:remove_skill(str)
 	local skill = self:find_skill(str,'英雄',true)
 	if skill then 

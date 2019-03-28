@@ -23,11 +23,11 @@ mt{
 
     -- 伤害为敌人血量的80%
     value = 80,
-    
+
     -- cd
     cool = 5,
     -- 多少个死亡一指
-    cnt = 10,
+    -- cnt = 10,
     -- 技能范围
     area = 99999,
     -- 特效
@@ -64,7 +64,7 @@ function mt:on_cast_shot()
 			: sort_nearest_hero(hero) --优先选择距离英雄最近的敌人。
 			: ipairs()
         do
-			if i <= self.cnt then
+			-- if i <= self.cnt then
                 local ln = ac.lightning('TWLN', hero, u,get_hith(hero),get_hith(u))
 
                 ln:fade(-5)
@@ -77,7 +77,7 @@ function mt:on_cast_shot()
                     damage = u:get('生命上限') * self.value / 100,
                     real_damage = true
                 }
-            end    
+            -- end    
         end
     end
     demon_bolt()

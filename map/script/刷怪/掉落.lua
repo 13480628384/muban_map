@@ -6,7 +6,7 @@ local quality_item ={}
 for name,data in pairs(ac.table.ItemData) do 
     local color = data.color 
     if color then 
-        if data.item_type == '装备' or data.item_type == '消耗品' then
+        if data.item_type == '装备' or data.item_type == '消耗品'  then
             local list = quality_item[color] or {}
             table.insert(list,name)
             quality_item[color] = list 

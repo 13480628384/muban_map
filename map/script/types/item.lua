@@ -155,12 +155,20 @@ function mt:get_name()
 end
 
 
---设置物品名
+--设置物品名 增加显示等级
 function mt:set_name(name)
 	self.name = name
 	local id = self.type_id
 	local color = color_code[self.color or '白']
-	local str = '|cff'..color..tostring(name)..'|r'
+	local show_lv = ''
+	if self.show_level then 
+		if self.level == self.max_level then 
+			show_lv = 'Lvmax'
+		else
+			show_lv = 'Lv'..self.level 
+		end		
+	end	
+	local str = '|cff'..color..tostring(name)..show_lv..'|r'
 	self.store_name = str
 	japi.EXSetItemDataString(base.string2id(id),4,str)
 end
@@ -295,6 +303,9 @@ function mt:show(is)
 	local handle = self.handle
 	jass.SetItemVisible(handle,true)
 	if is then
+		--丢弃在地上时，就不可回收 有点问题
+		-- self.recycle = false
+
 		if self._eff then
 			self._eff:remove()
 		end
@@ -376,7 +387,7 @@ function mt:get_tip()
 		end	
 	else
 		--否则就是在地上或商店里，地上不用管，商店的话修改出售价格
-		store_title = '购买 '..self.store_name..'|r\n'
+		store_title = (self.store_affix or '购买 ')..self.store_name..'|r\n'
 		--否则就是在地上或商店里，地上不用管，商店的话修改出售价格
 		if self:buy_price() > 0 then 
 			gold = '|cffebd43d(价格：'..self:buy_price()..')|r|n'
@@ -589,19 +600,13 @@ end
 
 --删除物品
 function mt:item_remove(is)
-	print('即将移除物品：',self.slot_id,self.name,self.handle)
+	-- print('即将移除物品：',self.slot_id,self.name,self.handle)
 	self.removed = true
 	--排除神符类的移除
 	if not self.handle then 
 		return
 	end	
-	--移除技能
-    -- if self._eff then 
-    --     print('即将移除物品：:',self.handle,self.name,self._eff.unit:get_point())
-	-- end
-	-- if self.owner then 
-	-- 	self:_call_event 'on_remove'
-	-- end	
+	
 	jass.RemoveItem(self.handle)
 	dbg.handle_unref(self.handle)
 	
@@ -703,7 +708,8 @@ function unit.__index:add_item(it,is_fall)
 	end
 	
 	if self:event_dispatch('单位-即将获得物品', self, it) then
-		--唯一时，掉落地上
+		print(it.name,it.recycle)
+		--满格时，掉落地上
 		if is_fall then
 			it:setPoint(self:get_point())
 		elseif it.recycle then
@@ -832,7 +838,6 @@ function unit.__index:remove_item(it)
 		-- print(it:get_point())
 		it:show(true)
 	end)   
-
 	jass.UnitRemoveItem(self.handle,it.handle)
 	self:event_notify('单位-丢弃物品后',self, it)
 	return true

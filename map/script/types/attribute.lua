@@ -709,3 +709,10 @@ on_get['法术伤害减免'] = function(self, reduce_magic_damage)
 	end
 	return reduce_magic_damage
 end
+
+on_get['闪避'] = function(self, value)
+	if value > 90 then
+		return 90
+	end
+	return value
+end

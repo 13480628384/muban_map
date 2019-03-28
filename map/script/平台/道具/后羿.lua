@@ -1,5 +1,5 @@
 local japi = require("jass.japi")
-local mt = ac.skill['双倍积分卡']
+local mt = ac.skill['后羿']
 mt{
     --必填
     is_skill = true,
@@ -8,21 +8,24 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[]],
+	tip = [[移速+50，攻击间隔减少0.05]],
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNFlakCannons.blp]],
 	--特效
-	effect = [[]],
-    --获得积分双倍
-    jifen_mul = 2
+	effect = [[SylvanasHe.mdx]],
+	--移动速度
+	move_speed = 50,
+	--攻击间隔
+	attack_gap = 0.05,
 	
 }
 function mt:on_add()
     local skill = self
     local hero = self.owner
-    hero:add('积分加成',self.jifen_mul)
-    --添加称号
-    -- self.trg = hero:add_effect('chest',self.effect)
+    hero:add('移动速度',self.move_speed)
+    hero:add('攻击间隔',-self.attack_gap)
+    --改变模型
+    japi.SetUnitModel(hero.handle,self.effect)
 end
 function mt:on_remove()
     local hero = self.owner
@@ -30,6 +33,6 @@ function mt:on_remove()
         self.trg:remove()
         self.trg = nil
     end
-    
-    hero:add('积分加成',-self.jifen_mul)
+    hero:add('移动速度',-self.move_speed)
+    hero:add('攻击间隔',self.attack_gap)
 end
