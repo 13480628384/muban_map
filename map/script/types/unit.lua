@@ -1912,7 +1912,7 @@ function unit.registerJassTriggers()
 	local j_trg = war3.CreateTrigger(function()
 		local it = ac.item.item_map[jass.GetManipulatedItem()]
 		local u = unit.j_unit(jass.GetManipulatingUnit())
-        -- print('触发获得物品',it.owner,it.name,it._model)
+        -- print('触发获得物品',it.handle,it.owner,it.name,it._model)
 		if not it then
 			return
 		end

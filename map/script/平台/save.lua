@@ -44,6 +44,7 @@ for i=1,8 do
     if player:is_player() then
         --读取积分
         local jifen  = tonumber(ac.GetServerValue(player,'jifen'))
+        print('服务器积分：',jifen)
 
         --设置客户端的积分
         if player:is_self() then
@@ -52,7 +53,6 @@ for i=1,8 do
 
         --保存服务端积分
         player.jifen = ZZBase64.encode(jifen * ac.jm_sjs)
-        
         --读取波数
         local value = player:Map_GetServerValue('boshu')
         if not value or value == '' or value == "" then
@@ -114,70 +114,59 @@ ac.game:event '积分变化'(function(_,p,value)
     ac.jiami(p,'jifen',value)
 end)
 
+local function save_jifen()
+    for i=1,10 do
+        local p = ac.player[i]
+        if p:is_player() then
+            --只保存一次
+            local value
+            -- if not p.is_flag then  
+            --     value = (p.putong_jifen) * (p.hero:get '积分加成' + 1)
+            --     p.old_kill_count = p.putong_jifen 
+            --     p.is_flag = true
+            -- else
+            value = (p.putong_jifen - (p.old_putong_jifen or 0)) * (p.hero:get '积分加成' + 1)
 
-ac.game:event '游戏-回合开始'(function(_,army)
-    if ac.Gamemode == '新手' then
-        return
-    end
+            local total_value = p.putong_jifen  * (p.hero:get '积分加成' + 1)
+            -- end 
+            p.old_putong_jifen = p.putong_jifen
+            --保存积分
+            ac.jiami(p,'jifen',value)
 
-    if army.now_count - 11 > 0 then
-        for i=1,8 do
-            local p = ac.player[i]
-            if p:is_player() then
-                local value = 1 + p.hero:get '积分加成'
-                --保存积分
-                ac.jiami(p,'jifen',value)
-
-                --修改排行榜的积分
-                if p:is_self() then
-                    c_ui.ranking.ui.integral:set_text('本局累计获得积分：'..(army.now_count - 11)*value)
-                end
-
-                if ac.nandu_id <= 2 then
-                    --保存波数
-                    if army.now_count - 11 > p.boshu then
-                        p:Map_SaveServerValue('boshu',army.now_count - 11)
-                        set_fangjian_xm(p,army.now_count - 11)
-                    end
-                else
-                    --难3保存点数 段位小于王者的不保存
-                    if p.rank == 8 then
-                        if army.now_count - 11 > p.dianshu then
-                            p:Map_SaveServerValue('ds',army.now_count - 11)
-                            p:Map_Stat_SetStat('fjwz',army.now_count - 11)
-                        end
-                    end
-                end
+            --修改排行榜的积分
+            if p:is_self() then
+                c_ui.ranking.ui.integral:set_text('本局累计获得积分：'..total_value)
             end
+
+            -- if ac.nandu_id <= 2 then
+            --     --保存波数
+            --     if army.now_count - 11 > p.boshu then
+            --         p:Map_SaveServerValue('boshu',army.now_count - 11)
+            --         set_fangjian_xm(p,army.now_count - 11)
+            --     end
+            -- else
+            --     --难3保存点数 段位小于王者的不保存
+            --     if p.rank == 8 then
+            --         if army.now_count - 11 > p.dianshu then
+            --             p:Map_SaveServerValue('ds',army.now_count - 11)
+            --             p:Map_Stat_SetStat('fjwz',army.now_count - 11)
+            --         end
+            --     end
+            -- end
         end
     end
+end    
+ac.save_jifen = save_jifen
+--保存积分方式： 1.无尽后，每回合开始保存。2.打死最终boss保存
+ac.game:event '游戏-回合开始'(function(_,index,creep)
+    if creep.name ~= '刷怪-无尽' then
+        return
+    end    
+    ac.save_jifen()
 end)
 
 
---保存锋芒点
-ac.game:event '游戏-回合结束'(function(_,army)
-    if ac.nandu_id <= 2 then
-        return
-    end
 
-    if army.now_count <=10 then
-        return
-    end
-
-    local count = army.now_count - 10
-    --每5波加1精魄
-    local a,b = math.modf(count / 5)
-    if b == 0 then
-        for i=1,8 do
-            local p = ac.player[i]
-            if p:is_player() then
-                p.cd_jp = p.cd_jp + 1
-                p:Map_SaveServerValue('jp',p.cd_jp)
-                p:Map_Stat_SetStat('fjjp',p.cd_jp)
-            end
-        end
-    end
-end)
 
 
 --元旦

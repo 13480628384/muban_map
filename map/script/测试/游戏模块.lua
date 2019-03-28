@@ -38,5 +38,5 @@ ac.game:event '玩家-聊天' (function(self, player, str)
 				v:item_remove()
 			end	
 		end
-	end   
+	end  
 end)	

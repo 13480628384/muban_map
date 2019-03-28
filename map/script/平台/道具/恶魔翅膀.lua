@@ -9,9 +9,9 @@ mt{
 	--介绍
 	tip = [[]],
 	--技能图标
-	art = [[ReplaceableTextures\PassiveButtons\PASBTNFlakCannons.blp]],
+	art = [[icon\chibang.blp]],
 	--特效
-	effect = [[units\human\Gyrocopter\Gyrocopter.mdl]],
+	effect = [[Hero_Slayer_N5S_F_Chest.mdx]],
 	--移动速度
 	move_speed = 50,
 	--攻击速度

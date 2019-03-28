@@ -37,7 +37,7 @@ ac.game:event '游戏-开始' (function()
 
     --创建物品商店
     local x,y = ac.map.rects['物品商店']:get_point():get()
-    local shop = ac.shop.create('物品商店',x,y)
+    local shop = ac.shop.create('物品商店',x,y,270)
     ac.map.fresh_shop_item(shop)
     ac.loop(fresh_time*1000,function()
         ac.map.fresh_shop_item(shop)
@@ -48,7 +48,7 @@ ac.game:event '游戏-开始' (function()
 
     --创建技能商店
     local x,y = ac.map.rects['技能商店']:get_point():get()
-    local shop1 = ac.shop.create('技能商店',x,y)
+    local shop1 = ac.shop.create('技能商店',x,y,270)
     ac.map.fresh_shop_skill(shop1)
     ac.loop(fresh_time*1000 + 100,function()
         ac.map.fresh_shop_skill(shop1)
@@ -59,9 +59,13 @@ ac.game:event '游戏-开始' (function()
 
     --创建积分商店
     local x,y = ac.map.rects['积分商店']:get_point():get()
-    local shop2 = ac.shop.create('积分商店',x,y+200)
+    local shop2 = ac.shop.create('积分商店',x,y+200,270)
     --创建xx商店
     local x,y = ac.map.rects['图书馆']:get_point():get()
-    local shop3 = ac.shop.create('图书馆',x,y)
+    local shop3 = ac.shop.create('图书馆',x,y,270)
+
+    --创建天结散人
+    local x,y = ac.map.rects['物品商店']:get_point():get()
+    local shop3 = ac.shop.create('天结散人',x-250,y-250,300)
 
 end)    

@@ -83,7 +83,7 @@ end
 
 --获取玩家名字
 function mt:get_name()
-	return jass.GetPlayerName(self.handle)
+	return self.name or jass.GetPlayerName(self.handle)
 end
 
 

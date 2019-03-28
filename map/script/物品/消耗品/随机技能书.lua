@@ -40,6 +40,7 @@ end
 function mt:on_cast_start()
     local hero = self.owner
     local player = hero:get_owner()
+    hero = player.hero
     local item = self 
     local list = {}
 

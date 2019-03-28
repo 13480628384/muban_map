@@ -136,13 +136,32 @@
         --先判断钱是否够
         local player = u.owner
         local gold = u.owner.gold
+        local mutou = player:getlumber()
+        local kill_count = player.kill_count or 0
+        local jifen = tonumber(ac.GetServerValue(player,'jifen')) or 0
+
         local golds = it:buy_price()
+        local mutous = it:buy_mutou()
+        local kill_counts = it:buy_kill_count()
+        local jifens = it:buy_jifen()
         --如果有玩家自身价格，则售价为玩家自身价
         if it.player_gold then 
             golds = it.player_gold[player] or golds
         end    
-        if gold < golds then
+        if gold < golds  then
             ac.player.self:sendMsg('钱不够')
+            return
+        end 
+        if mutou < mutous then
+            ac.player.self:sendMsg('木头不够')
+            return
+        end
+        if kill_count < kill_counts then
+            ac.player.self:sendMsg('杀敌数不够')
+            return
+        end
+        if jifen < jifens then
+            ac.player.self:sendMsg('积分不够')
             return
         end
 
@@ -165,6 +184,25 @@
         if u.buy_suc then 
             -- print('扣钱')
             player:addGold( - golds,u)
+            player:addlumber( - mutous)
+            player.kill_count =  player.kill_count - kill_counts
+
+            if jifens > 0 then 
+                --扣除积分
+                player:event_notify('积分变化',player,-jifens)
+                --保存服务器存档 永久性的物品
+                -- print(it.name)
+                local key = ac.get_mallkey_byname(it.name)
+                if key then 
+                    print(it.name,key,1)
+                    player:Map_SaveServerValue(key,1)
+                    if not player.mall then 
+                        player.mall ={}
+                    end
+                    player.mall[it.name] = true    
+                end    
+            end   
+
             -- 购买成功，删掉商店在售物品
             if it.on_selled_remove then 
                 seller:remove_sell_item(it)
@@ -184,15 +222,16 @@
 
     --丢在地上 给与其他玩家 都会触发
     ac.game:event '单位-丢弃物品'(function(_,u,it)
+        
         if it.is_discard_event then 
             return
         end    
         
         --触发丢弃物品时，没有马上返回物品位置。
-        ac.wait(10,function()
-            print(it:get_point())
-            it:show(true)
-        end)            
+        -- ac.wait(10,function()
+        --     print(it:get_point())
+        --     it:show(true)
+        -- end)            
         --true,掉落，不删除
         u:remove_item(it)
         -- u:print_item()

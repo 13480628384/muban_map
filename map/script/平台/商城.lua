@@ -29,8 +29,22 @@ local item = {
     -- {'EMCB','恶魔翅膀'},
     {'SBJFK','双倍积分卡'},
     {'QTDS','齐天大圣','悟空'}, --表示皮肤
-    
+
+    {'XCB','小翅膀'}, --积分 
+    {'JK','杰克','亚瑟王'}, --积分
 }
+local function get_mallkey_byname(name)
+    local res
+    for i=1,#item do
+        if item[i][2] == name then 
+            res = item[i][1]
+            break
+        end    
+    end
+    return res
+end    
+--根据商城物品名取得对应的key
+ac.get_mallkey_byname = get_mallkey_byname
 ac.wait(10,function()
     for i=1,8 do
         local p = ac.player[i]
@@ -38,7 +52,8 @@ ac.wait(10,function()
         if p:is_player() then
             for n=1,#item do
                 -- print(item[n][2],p:Map_HasMallItem(item[n][1]))
-                if p:Map_HasMallItem(item[n][1]) then
+                --商城 或是 存档 有相关的key则进行处理
+                if p:Map_HasMallItem(item[n][1]) or (p:Map_GetServerValue(item[n][1]) == '1') then
                     -- if p.id <2 then 
                         --皮肤道具
                         --选择英雄时，异步改变英雄模型
@@ -67,21 +82,18 @@ ac.wait(10,function()
                             end  
 
                         end)
-
+                        if not p.mall then 
+                            p.mall = {}
+                        end  
+                        local key = item[n][2]  
+                        p.mall[key] = true
                     -- end    
-                end
+                end 
+
+
+
             end
-            -- --永久积分角色卡
-            -- print(p:Map_GetServerValue('yltg')) 
-            -- if p:Map_GetServerValue('yltg') == '1' then
-            --     p.hero:add_item('幽灵特工',1)
-            -- end
-            -- if p:Map_GetServerValue('assjan') == '1' then
-            --     p.hero:add_item('奥术师吉安娜',1)
-            -- end
-            -- if p:Map_GetServerValue('yssjan') == '1' then
-            --     p.hero:add_item('银-奥术法师吉安娜',1)
-            -- end
+         
         end
     end 
 end)

@@ -150,7 +150,7 @@ ranking.on_key_down = function(code)
         return
     end
 
-    if code == KEY.WAVES then
+    if code == KEY.TAB then
         -- print('波浪线')
         ranking.ui:show()
         return
@@ -162,7 +162,7 @@ ranking.on_key_up = function(code)
         return
     end
 
-    if code == KEY.WAVES then
+    if code == KEY.TAB then
         ranking.ui:hide()
         return
     end

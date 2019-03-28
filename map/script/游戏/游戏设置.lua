@@ -70,4 +70,6 @@ local function get_summon_mul(lv)
 	end 
 	return life_mul,defence_mul,attack_mul
 end	
+
 ac.get_summon_mul = get_summon_mul
+

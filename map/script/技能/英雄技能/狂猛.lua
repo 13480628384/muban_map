@@ -14,7 +14,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[战斗的怒意暂时提升自身的攻击速度（%attack_speed% %）和移动速度（%move_speed% %）]],
+	tip = [[战斗的怒意暂时提升自身的攻击速度（%attack_speed% %）和 移动速度（ %move_speed% % ）]],
 	--技能图标
 	art = [[jineng\jineng029.blp]],
 	--特效

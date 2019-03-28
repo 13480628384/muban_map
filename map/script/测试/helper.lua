@@ -224,6 +224,50 @@ function helper:lv(lv)
 	self:set_level(tonumber(lv))
 end
 
+--地图等级
+function helper:dtdj(lv)
+	local p = self:get_owner()
+	local peon = p.peon
+	if peon then
+		local skill = peon:find_skill('地图等级', '英雄', true)
+		print(skill,10)
+		if skill then 
+			skill:set_level(lv)
+		end	
+	end
+end
+
+--积分 正常模式下，101波，boss打完就进入无尽，没有保存当前积分。 貌似要在回合结束统计分数。
+function helper:jifen(jf)
+	local p = self:get_owner()
+	p.putong_jifen = jf
+	
+	local value = p.putong_jifen * (p.hero:get '积分加成' + 1)
+	print('积分',value)
+	--保存积分
+	ac.jiami(p,'jifen',value)
+
+	local jifen  = tonumber(ac.GetServerValue(player,'jifen'))
+	print('服务器积分：',jifen)
+end	
+
+--服务器存档 保存 
+function helper:save(key,value)
+	local p = self:get_owner()
+	p:Map_SaveServerValue(key,value)
+	print('服务器存档:'..key,p:Map_GetServerValue(key))
+end	
+
+--服务器存档 保存 
+function helper:get(key)
+	local p = self:get_owner()
+	print('服务器存档:'..key,p:Map_GetServerValue(key))
+end	
+--波数
+function helper:boshu(str,index)
+	local creep = ac.creep[str]
+	ac.creep[str].index = math.ceil(index)
+end
 --动画
 function helper:ani(name)
 	self:set_animation(name)
@@ -298,6 +342,7 @@ function helper:power()
 	if not ac.wtf then
 		helper.wtf(self)
 	end
+	self:add('攻击',10000000000)
 	self:add_restriction '免死'
 	self:addGold(999999)
 end
@@ -323,6 +368,27 @@ function helper:add_skill(str,cnt)
 	local cnt = cnt or 1
 	for i=1,cnt do
 		ac.item.add_skill_item(str,self)
+	end	
+end
+function helper:add_item(str,cnt)
+	local cnt = cnt or 1
+	for i=1,cnt do
+		self:add_item(str,true)
+	end	
+end
+
+function helper:remove_skill(str)
+	local skill = self:find_skill(str,'英雄',true)
+	if skill then 
+		skill:remove()
+	end	
+end
+--宠物移除技能
+function helper:peon_remove_skill(str)
+	local hero = self:get_owner().peon
+	local skill = hero:find_skill(str,'英雄',true)
+	if skill then 
+		skill:remove()
 	end	
 end
 

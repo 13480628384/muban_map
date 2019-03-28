@@ -2476,8 +2476,9 @@ local function init()
 		end
 
 		local skill = hero._order_skills[order]
-		-- print('打印 进入发布命令3 ',order)
+		-- print('打印 进入发布命令3 ',order,skill,target)
 		if skill then
+			-- print('打印 进入发布命令4 ',order,skill.target_type,target)
 			if not hero._ignore_order_list then
 				hero._ignore_order_list = {}
 			end
@@ -2495,7 +2496,8 @@ local function init()
 				end
 			end
 
-			if skill.target_type == skill.TARGET_TYPE_UNIT and target.type == 'point' then
+			-- print('打印 进入发布命令5 ',order,skill.target_type,target)
+			if skill.target_type == skill.TARGET_TYPE_UNIT and target and  target.type == 'point' then
 				-- 对视野外的建筑物发布了单位目标指令
 				return
 			end
@@ -2526,8 +2528,7 @@ local function init()
 		end
 
 		-- print('打印 进入施法流程 2 ',ability_id)
-
-		if skill:get_name() == '拾取' and skill.target_data == '物品' then
+		if skill.target_data == '物品' then 
 			local target = ac.item.item_map[jass.GetSpellTargetItem()]
 			if not target then
 				return
@@ -2535,7 +2536,10 @@ local function init()
 			skill.target = target
 			skill:_call_event 'on_cast_start'
 			return
-		end
+		end	
+
+		-- if skill:get_name() == '拾取'  then
+		-- end
 
 		-- print('打印 进入施法流程 3 ',ability_id)
 		local out_target = skill._out_range_target

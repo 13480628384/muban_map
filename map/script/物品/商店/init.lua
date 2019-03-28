@@ -1,4 +1,8 @@
 require '物品.商店.随机4个物品和技能'
 require '物品.商店.随机物品'
+require '物品.商店.随机物品2'
 require '物品.商店.随机技能'
+require '物品.商店.随机技能1'
+require '物品.商店.随机技能2'
 require '物品.商店.技能升级书'
+require '物品.商店.技能升级书1'

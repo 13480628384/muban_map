@@ -10,16 +10,16 @@
 --金币怪奖励
 --造成X伤害获得1金币
 local gold_unit_award = {
-    [5] = 400,
-    [15] = 600,
-    [25] = 1200,
-    [35] = 2700,
-    [45] = 6480,
-    [55] = 16200,
-    [65] = 41657,
-    [75] = 109350,
-    [85] = 291600,
-    [95] = 787320,
+    [5] = {400,250,10000},
+    [15] = {600,500,10000},
+    [25] = {1200,750,10000},
+    [35] = {2700,1000,10000},
+    [45] = {6480,1250,10000},
+    [55] = {16200,1500,10000},
+    [65] = {41657,1750,10000},
+    [75] = {109350,2000,10000},
+    [85] = {291600,2250,10000},
+    [95] = {787320,2500,10000},
 }
 ac.special_boss = {
 '挑战怪10','挑战怪20','挑战怪30','挑战怪40','挑战怪50','挑战怪60','挑战怪70','挑战怪80','挑战怪90','挑战怪100'
@@ -207,9 +207,6 @@ function mt:add_creep_skill(tab,unit)
             -- 本回合开始时 删掉干掉光环怪
             -- 直接进入下一波的会跳过回合结束
             ac.game:event '游戏-回合开始'(function(trg,index, creep) 
-                if creep.name ~= '刷怪' then
-                    return
-                end    
                 -- print('回合结束，删掉光环怪')
                 ac.enemy_unit:remove()
             end)
@@ -392,7 +389,9 @@ function mt:on_change_creep(unit,lni_data)
      --金币怪
     if self.index == self.gold_index then 
         self.gold_index = self.gold_index + 10
-        local gold_unit_award_base = gold_unit_award[self.index]
+        local gold_unit_award_base = gold_unit_award[self.index][1]
+        local gold_base = gold_unit_award[self.index][2]
+        local gold_max = gold_unit_award[self.index][3]
         name = "金币怪-"..self.index
         --金币怪处理
         unit:add_restriction '缴械'
@@ -429,7 +428,9 @@ function mt:on_change_creep(unit,lni_data)
                 local v = self.player_damage[i]
                 if v.player == p then 
                     v.damage = v.damage + damage.current_damage
-                    v.gold = math.ceil( v.damage / gold_unit_award_base)
+                    -- 最大值为10000元
+                    local gold = gold_base + math.ceil(v.damage /gold_unit_award_base) 
+                    v.gold = (gold > gold_max ) and gold_max or gold
                 end    
             end
             table.sort(self.player_damage,function (a,b)
@@ -453,7 +454,7 @@ function mt:on_change_creep(unit,lni_data)
     else 
         name = '进攻怪-'..self.index
     end   
-
+    print('打印：',name)
     local data = ac.table.UnitData[name]
     data.attr_mul = lni_data.attr_mul
     data.food = lni_data.food

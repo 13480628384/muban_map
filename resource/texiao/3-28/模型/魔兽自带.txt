@@ -1,0 +1,3 @@
+强有力的天赋技能（剑刃风暴+冲击波，冲击波模型：Abilities\Spells\Orc\Shockwave\ShockwaveMissile.mdl）
+天结散人 模型：units\nightelf\Furion\Furion.mdl
+点击成功飞升，播放下升级动画（模型Hero_CrystalMaiden_N2_V_boom.mdx）

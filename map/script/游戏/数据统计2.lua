@@ -10,6 +10,7 @@ ac.boss_count = 0
 for i=1,10 do
     local player = ac.player[i]
     --杀敌数
+    player.total_kill_count = 0
     player.kill_count = 0
     --死亡数
     player.death = 0
@@ -74,7 +75,7 @@ local rank_art = {'黑铁','英勇黄铜','不屈白银','荣耀黄金','华贵�
 --计算KDA
 local function get_kda()
     --杀敌数
-    local kill_count = 0
+    local total_kill_count = 0
     --金币
     local gold_count = 0
     --承受伤害
@@ -87,7 +88,7 @@ local function get_kda()
     --计算出总值
     for i=1,10 do
         local p = ac.player[i]
-        kill_count = kill_count + p.kill_count
+        total_kill_count = total_kill_count + p.total_kill_count
         gold_count = gold_count + p.gold_count
         take_damage_count = take_damage_count + p.take_damage_count
         damage_count = damage_count + p.damage_count
@@ -103,8 +104,8 @@ local function get_kda()
         local d = 0
         local e = 0
         local f = 0
-        if kill_count > 0 then
-            a = p.kill_count / kill_count * 20
+        if total_kill_count > 0 then
+            a = p.total_kill_count / total_kill_count * 20
         end
 
         if gold_count > 0 then
@@ -145,7 +146,7 @@ local function get_kda()
         ranking.ui.rank[i]:set_text(rank_art[p.rank])
         --ranking.ui.rank[i]:set_normal_image(rank_art[p.rank])
         --杀敌数
-        ranking.ui.kill_count[i]:set_text(p.kill_count)
+        ranking.ui.kill_count[i]:set_text(p.total_kill_count)
         --死亡数
         ranking.ui.death_count[i]:set_text(p.death)
         --获得金币
@@ -167,35 +168,133 @@ local function get_kda()
     end
 end
 
+ac.game:event '单位-创建' (function(_,unit)
+    local data = ac.table.UnitData[unit:get_name()]
+    if not data then 
+        return
+    end    
+    if data.type == 'boss' then
+        ac.boss_count = ac.boss_count + 1
 
---注册事件
-for hero,_ in pairs(ac.hero.all_heros) do
-    local p = hero.owner
-    hero:event '单位-死亡'(function()
-        p.death = p.death + 1
+        unit:event '受到伤害效果' (function (_,damage)
+            local hero = damage.source
+            local player = hero:get_owner()
+            if not unit.damage_source_mark then 
+                unit.damage_source_mark ={}
+            end    
+            --每个boss 记录下是否被玩家打过。打过记录数+1.下次不在增加
+            if not unit.damage_source_mark[player] then 
+                unit.damage_source_mark[player] = true
+                player.ctl = player.ctl + 1
+            end    
+
+        end)
+    end
+end)
+
+ac.game:event '游戏-开始' (function()
+
+    --注册事件
+    for hero,_ in pairs(ac.hero.all_heros) do
+        -- print(hero)
+        local p = hero:get_owner()
+        if not p:is_player() then 
+            return
+        end    
+        hero:event '单位-死亡'(function()
+            p.death = p.death + 1
+        end)
+
+        hero:event '造成伤害结束'(function(_,self)
+            -- print(p.damage_count)
+            p.damage_count = p.damage_count + self.current_damage
+        end)
+
+        hero:event '受到伤害结束'(function(_,self)
+            p.take_damage_count = p.take_damage_count + self.damage
+            if hero:get '生命' / hero:get '生命上限' < 0.12 then
+                local fl = hero:get_owner():cinematic_filter
+                {   
+                    file = 'xueliangguodi.blp',
+                    start = {100, 100, 100, 100},
+                    finish = {100, 100, 100, 0},
+                    time = 5,
+                }
+            end
+        end)
+
+        hero.owner:event '玩家-即将获得金钱'(function(_,data)
+            local p = data.player
+            local gold = data.gold
+            p.gold_count = p.gold_count + gold
+        end)
+        
+        hero:event '单位-杀死单位'(function(trg, killer, target)
+            --使用杀敌数后，减少杀敌数
+            p.kill_count = p.kill_count + 1
+            --统计用，使用杀敌数后，不减少
+            p.total_kill_count = p.total_kill_count + 1
+            local jf_mul = 1
+            if ac.creep['刷怪-无尽'].index and ac.creep['刷怪-无尽'].index >=1 then
+                jf_mul = 2
+            end    
+            p.putong_jifen = (p.putong_jifen or 0) + jf_mul
+        end)
+    end
+    
+    --刷新排行榜信息
+    ac.loop(2000,function()
+        get_kda()
     end)
+end)    
 
-    hero:event '造成伤害结束'(function(_,self)
-        p.damage_count = p.damage_count + self.current_damage
-    end)
 
-    -- hero:event '受到伤害结束'(function(_,self)
-    --     p.take_damage_count = p.take_damage_count + self.damage
-    --     if hero:get '生命' / hero:get '生命上限' < 0.12 then
-    --         local fl = hero:get_owner():cinematic_filter
-    --         {   
-    --             file = 'xueliangguodi.blp',
-    --             start = {100, 100, 100, 100},
-    --             finish = {100, 100, 100, 0},
-    --             time = 5,
-    --         }
-    --     end
-    -- end)
 
-    hero.owner:event '玩家-即将获得金钱'(function(_,data)
-        local p = data.player
-        local gold = data.gold
-        p.gold_count = p.gold_count + gold
-    end)
+local shijian = 120*60
 
-end
+local ti = ac.loop(1000,function(t)
+    local time = ac.clock() / 1000
+
+    local h = math.floor(time / 3600)
+    local m = math.floor((time % 3600) / 60)
+    local s = math.floor((time % 3600) % 60)
+    h = h..''
+    m = m..''
+    s = s..''
+    --当显示数字为个位数时，前位用0补上
+    if string.len(h) == 1 then
+        h = "0"..h
+    end
+
+    if string.len(m) == 1 then
+        m = "0"..m
+    end
+
+    if string.len(s) == 1 then
+        s = "0"..s
+    end
+
+    time = h..':'..m..':'..s
+    ranking.ui.date:set_text('游戏时间:'..time)
+
+    if ac.clock() / 1000 >= shijian then
+        ac.game:event_notify('游戏-结束','游戏胜利')
+        t:remove()
+    end
+
+end)
+
+local kzt = require 'ui.client.kzt'
+ac.game:event '游戏-回合开始'(function(_,index,creep)
+    local tip =''
+    if creep.name == '刷怪-无尽' then 
+        tip = '(无尽)'
+    end    
+    local name 
+    if ac.g_game_mode == 1 then 
+        name = '标准'..tip
+    else 
+        name = '嘉年华'..tip
+    end        
+    ranking.ui.two_title:set_text(name..'-第'..index..'波')
+end)

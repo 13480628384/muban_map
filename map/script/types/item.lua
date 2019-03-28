@@ -29,7 +29,8 @@ mt.type = 'item'
 
 --物品分类
 mt.item_type = '无'
-
+--默认不刷新tip
+mt.auto_fresh_tip = false
 --技能分类
 -- mt.skill_type = '物品'
 
@@ -215,6 +216,54 @@ function mt:sell_price()
 	return gold
 end
 
+--获取购买木头
+function mt:buy_mutou()
+	return self.mutou or 0
+end
+
+--获取出售木头
+function mt:sell_mutou()
+	local count = self:get_item_count()
+	local mutou = self.mutou
+	if count > 1 then
+		mutou = mutou * count
+	end
+	mutou = math.floor(mutou * self.discount)
+	return mutou
+end
+
+--获取购买杀敌数
+function mt:buy_kill_count()
+	return self.kill_count or 0
+end
+
+--获取出售杀敌数
+function mt:sell_kill_count()
+	local count = self:get_item_count()
+	local kill_count = self.kill_count
+	if count > 1 then
+		kill_count = kill_count * count
+	end
+	kill_count = math.floor(kill_count * self.discount)
+	return kill_count
+end
+
+--获取购买积分
+function mt:buy_jifen()
+	return self.jifen or 0
+end
+
+--获取出售积分
+function mt:sell_jifen()
+	local count = self:get_item_count()
+	local jifen = self.jifen
+	if count > 1 then
+		jifen = jifen * count
+	end
+	jifen = math.floor(jifen * self.discount)
+	return jifen
+end
+
 --增加物品层数
 function mt:add_item_count(count)
 	local i = self._count + count
@@ -307,7 +356,7 @@ end
 function mt:get_tip()
 	local owner = self.owner
 	local store_title =''
-	local gold
+	local gold =''
 	local skill_tip = self:get_simple_tip() or ''
 	local item_tip = self:get_item_lni_tip() or ''
     local tip = ''
@@ -319,12 +368,32 @@ function mt:get_tip()
 
 	if owner then
 		--有所属单位则说明物品在身上
-		 gold = '|cffebd43d(出售：'..self:sell_price()..')|r|n'
+		if self:sell_price() > 0 then 
+			gold = '|cffebd43d(出售：'..self:sell_price()..')|r|n'
+		end	
+		if self.get_sell_tip then 
+			gold = self:get_sell_tip(gold)
+		end	
 	else
 		--否则就是在地上或商店里，地上不用管，商店的话修改出售价格
-		 store_title = '购买 '..self.store_name..'|r\n'
+		store_title = '购买 '..self.store_name..'|r\n'
 		--否则就是在地上或商店里，地上不用管，商店的话修改出售价格
-		 gold = '|cffebd43d(价格：'..self:buy_price()..')|r|n'
+		if self:buy_price() > 0 then 
+			gold = '|cffebd43d(价格：'..self:buy_price()..')|r|n'
+		end	 
+		if self:buy_mutou() > 0 then 
+			gold = '|cffebd43d(木头：'..self:buy_mutou()..')|r|n'
+		end	 
+		if self:buy_jifen() > 0 then 
+			--可能会掉线
+			gold = '|cffebd43d(积分：'..self:buy_jifen()..')|r  |cff00ffff拥有'..(ac.GetServerValue(ac.player.self,'jifen') or '0')..'|r|n'
+		end	 
+		if self:buy_kill_count() > 0 then 
+			gold = '|cffebd43d(杀敌数：'..self:buy_kill_count()..')|r  |cff00ffff拥有'..(ac.player.self.kill_count or '0')..'|r|n'
+		end	 
+		if self.get_buy_tip then 
+			gold = self:get_buy_tip(gold)
+		end	
 	end
 	
 	tip = store_title..gold..'\n'.. item_tip
@@ -430,8 +499,13 @@ function mt:on_use_state()
 	if not hero then 
 		return
 	end	
-	--神符类的，宠物不替代英雄
-	if not self.item_type =='神符' then
+	--物品，是否宠物可代替英雄，默认不行。
+	if  self.item_type == '神符' and self.is_peon_on then
+		--让宠物使用物品时给英雄增加对应的属性
+		hero = hero:get_owner().hero
+	end	
+
+	if self.item_type == '消耗品' then
 		--让宠物使用物品时给英雄增加对应的属性
 		hero = hero:get_owner().hero
 	end	
@@ -516,6 +590,7 @@ end
 --删除物品
 function mt:item_remove(is)
 	print('即将移除物品：',self.slot_id,self.name,self.handle)
+	self.removed = true
 	--排除神符类的移除
 	if not self.handle then 
 		return
@@ -631,11 +706,10 @@ function unit.__index:add_item(it,is_fall)
 		--唯一时，掉落地上
 		if is_fall then
 			it:setPoint(self:get_point())
-		end 
-		if it.recycle then
-			-- print(it.name,it.handle)
+		elseif it.recycle then
+			--物品栏已满，需要回收
 			it:item_remove()
-		end		
+		end			
 		 
 		--给与 时的处理逻辑
 		-- 唯一装备可能要处理下。
@@ -656,13 +730,18 @@ function unit.__index:add_item(it,is_fall)
 		--满格时，掉落地上
 		if is_fall then
 			it:setPoint(self:get_point())
-		end 
-		--物品栏已满，需要回收
-		-- @应用在 购买商店物品 、 代码直接添加物品给英雄
-		if it.recycle then
-			-- print(it.name,it.handle)
+		elseif it.recycle then
+			--物品栏已满，需要回收
+			-- @应用在 购买商店物品 、 代码直接添加物品给英雄
 			it:item_remove()
 		end		
+		
+		--物品栏已满，需要回收
+		-- @应用在 购买商店物品 、 代码直接添加物品给英雄
+		-- if it.recycle then
+		-- 	-- print(it.name,it.handle)
+		-- 	it:item_remove()
+		-- end		
 		return
 	end
 	--单位真正获得物品时的处理
@@ -674,13 +753,15 @@ function unit.__index:add_item(it,is_fall)
 	-- print('获得物品',it.handle,it.owner,it.name,it.slot_id)
 	-- self:print_item(true)
 	-- 如果单位身上已经有这个物品的handle了，再添加一次会触发先丢弃再获得物品事件。
+	print('1',it.handle,it.owner,self.handle,it.is_skill_init)
 	jass.UnitAddItem(self.handle,it.handle)
+	print('2',it.handle,it.owner,self.handle,it.is_skill_init)
 
 	--不阻止 丢弃物品事件   
 	--有时很奇怪，已经获得这个物品了，再用UnitAddItem 添加时，没有丢弃物品。所以这边操作是个修补操作
 	it.is_discard_event = false 
 
-	
+	-- print(it.owner,self.handle,it.is_skill_init)
 	if not it.is_skill_init then
 		it:item_init_skill()
 	else
@@ -724,7 +805,6 @@ end
 --单位移除找到的物品
 --	具体的某物品或根据名字找到的第一个物品
 --	false 真删 ,true 丢在地上。
--- modify by jeff 从单位身上移除装备，都是丢在地上
 function unit.__index:remove_item(it)
 	if not it  then
 		return false
@@ -743,9 +823,17 @@ function unit.__index:remove_item(it)
 	end	
 	it.slot_id = nil
 	it.owner = nil
-	-- if not is_drop then 
-	-- 	it:item_remove()
-	-- end	
+
+	--阻止触发物品丢弃	modify by jeff 从单位身上移除装备，都是丢在地上
+	it.is_discard_event = true
+	
+	--触发丢弃物品时，没有马上返回物品位置。
+	ac.wait(10,function()
+		-- print(it:get_point())
+		it:show(true)
+	end)   
+
+	jass.UnitRemoveItem(self.handle,it.handle)
 	self:event_notify('单位-丢弃物品后',self, it)
 	return true
 end

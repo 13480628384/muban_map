@@ -62,6 +62,9 @@ ac.game:event '游戏-最终boss' (function(trg,index, creep)
     if creep.name ~= '刷怪' then
         return
     end  
+    -- print('删掉光环怪')
+    if ac.enemy_unit then ac.enemy_unit:remove() end
+    
     --boss 苏醒动画
     local c_boss_buff = creep.boss:find_buff '时停' 
     if c_boss_buff then 
@@ -74,13 +77,16 @@ ac.game:event '游戏-最终boss' (function(trg,index, creep)
     creep.boss:set_search_range(99999)
     --注册事件
     creep.boss:event '单位-死亡'(function(_,unit,killer) 
+        --保存积分
+        ac.save_jifen()
+
         --难1， 游戏胜利  
         --难2、3 ， 20秒后进入无尽 
         if ac.g_game_degree ==1 then 
-            ac.game:event_notify('游戏-结束',creep.index,true)
+            ac.game:event_notify('游戏-结束',true)
         else   
             ac.creep['刷怪-无尽']:start()
-            ac.game:event_dispatch('游戏-无尽开始',creep.index,creep) 
+            ac.game:event_dispatch('游戏-无尽开始',creep) 
         end    
     end)  
     
