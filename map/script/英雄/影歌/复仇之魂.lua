@@ -50,7 +50,7 @@ function mt:on_add()
 			data.attribute={
 				['生命上限'] = hero:get('智力') * life_mul,
 				['护甲'] = hero:get('智力') * defence_mul,
-				['攻击'] = hero:get('智力') * attack_mul * 0.5,
+				['攻击'] = hero:get('智力') * attack_mul * 1,
 				['魔法上限'] = 60,
 				['移动速度'] = 325,
 				['攻击间隔'] = 1.5,

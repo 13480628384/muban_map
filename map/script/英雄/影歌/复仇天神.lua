@@ -22,10 +22,10 @@ mt{
 	target_type = ac.skill.TARGET_TYPE_NONE,
 
 	--几率
-	chance = {5,7.5,10,12.5,15},
+	chance = {10,12.5,15,17.5,20},
 
 	--复仇天神几率
-	fuchou_chance = {5,7.5,10,12.5,15},
+	fuchou_chance = {10,12.5,15,17.5,20},
 
 	--cd 45
 	cool = {45,40,35,30,25},
@@ -36,7 +36,7 @@ mt{
 	--持续时间
 	time = 25,
 	--数量
-	cnt = {1,1.25,1.5,2,2.25},
+	cnt = 1,
 
 	--特效模型
 	effect = [[]],
@@ -63,9 +63,9 @@ function mt:on_cast_shot()
 		local life_mul, defence_mul, attack_mul = ac.get_summon_mul(hero.level)
 		local data = {}
 		data.attribute={
-			['生命上限'] = hero:get('智力') * life_mul,
-			['护甲'] = hero:get('智力') * defence_mul,
-			['攻击'] = hero:get('智力') * attack_mul,
+			['生命上限'] = hero:get('智力') * life_mul*1.5,
+			['护甲'] = hero:get('智力') * defence_mul*1.5,
+			['攻击'] = hero:get('智力') * attack_mul*1.5,
 			['魔法上限'] = 60,
 			['移动速度'] = 325,
 			['攻击间隔'] = 1.5,
