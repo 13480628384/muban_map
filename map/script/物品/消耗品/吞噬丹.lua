@@ -53,6 +53,8 @@ function mt:on_cast_start()
         self.dialog = create_dialog(player,'吞噬装备',list,function (index)
             local item = list[index].item
             if item then 
+                --宠物吞噬自己身上的装备，给英雄加属性
+                -- item.owner = hero:get_owner().hero
                 --再加一次属性
                 item:on_add_state()
                 --移除装备，移除一次属性

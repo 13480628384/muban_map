@@ -26,9 +26,9 @@ local streng_item_list = {
     -- {'新手剑+1','生命药水*5 新手石*1'},
     -- {'新手剑+2','生命药水*5 魔法药水*5'},
     --合成品质 ^10 表示10%几率合成
-    {'蓝^33','白*1 白*1 白*1 装备合成书*1'},
-    {'金^33','蓝*1 蓝*1 蓝*1 装备合成书*1'},
-    {'红^33','金*1 金*1 金*1 装备合成书*1'}
+    {'蓝^33.3','白*1 白*1 白*1 装备合成书*1'},
+    {'金^33.3','蓝*1 蓝*1 蓝*1 装备合成书*1'},
+    {'红^33.3','金*1 金*1 金*1 装备合成书*1'}
 
 }
 local function streng_item(alltable,unit,it)
@@ -263,10 +263,10 @@ local function streng_item(alltable,unit,it)
                         end
                     end    
                 end    
-                print('提升概率：',max_strong_rate)
                 if dest_rate then 
                     dest_rate = dest_rate + dest_rate * max_strong_rate
                 end 
+                print('提升概率：',max_strong_rate,dest_rate)
             end    
             
 

@@ -5,6 +5,8 @@ mt{
     is_skill = true,
     --物品类型
     item_type = '消耗品',
+    --颜色
+    color = '青',
 
     tip = [[
 攻击加 %attack%
@@ -22,7 +24,7 @@ mt{
     --护甲
     defence = 25,
     --杀敌个数
-    kill_cnt = 650,
+    kill_cnt = 350,
     --唯一
     unique = true
 }
@@ -36,12 +38,16 @@ function mt:on_add()
     hero:add('生命上限',self.life)
     hero:add('护甲',self.defence)
 
-    self.trg = hero:event '单位-杀死单位' (function(trg, killer, target)
-        self:add_item_count(1)
-        if self._count > self.kill_cnt then 
-            self:item_remove()
-            -- hero:remove_item(self)
-            hero:add_item('霸者之证',true)
+    self.trg = ac.game:event '单位-杀死单位' (function(trg, killer, target)
+        --召唤物杀死也继承
+        local hero = killer:get_owner().hero
+        if hero and hero:has_item(self.name) then 
+            self:add_item_count(1)
+            if self._count > self.kill_cnt then 
+                self:item_remove()
+                -- hero:remove_item(self)
+                hero:add_item('霸者之证',true)
+            end    
         end    
     end)
     

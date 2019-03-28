@@ -1,4 +1,4 @@
-local mt = ac.skill['恶魔翅膀']
+local mt = ac.skill['天使之光']
 mt{
     --必填
     is_skill = true,
@@ -30,7 +30,10 @@ function mt:on_add()
     hero:add('移动速度',self.move_speed)
     hero:add('攻击速度',self.attack_speed)
     --添加翅膀
-    self.trg = hero:add_effect('chest',self.effect)
+    if hero.chibang then 
+        hero.chibang:remove()
+    end    
+    hero.chibang = hero:add_effect('chest',self.effect)
 end
 function mt:on_remove()
     local hero = self.owner
@@ -43,4 +46,9 @@ function mt:on_remove()
     hero:add('经验加成',-self.exp_mul)
     hero:add('移动速度',-self.move_speed)
     hero:add('攻击速度',-self.attack_speed)
+
+    --添加翅膀
+    if hero.chibang then 
+        hero.chibang:remove()
+    end    
 end

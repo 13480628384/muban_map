@@ -37,6 +37,8 @@ mt{
 	time = 25,
 	--数量
 	cnt = 1,
+	--属性倍数
+	attr_mul = 1,
 
 	--特效模型
 	effect = [[]],
@@ -47,8 +49,15 @@ function mt:on_add()
 	local hero = self.owner 
 	local skill = hero:add_skill('复仇之魂','隐藏')
 	skill.chance = self.chance
-
 end	
+
+function mt:on_upgrade()
+	local hero = self.owner 
+	local skill = hero:find_skill('复仇之魂','隐藏')
+	if skill then 
+		skill.chance = self.chance
+	end	
+end
 
 function mt:on_cast_shot()
     local skill = self
@@ -76,10 +85,13 @@ function mt:on_cast_shot()
 		-- print('技能使用时 当前波数',index)
 
 		self.buff = unit:add_buff '召唤物' {
-			time = 30,
+			time = self.time,
 			attribute = data.attribute,
+			attr_mul = self.attr_mul - 1,
 			skill = self,
+			follow = true
 		}
+		unit:add('攻击距离', 800)
 
 		local skl = unit:add_skill('复仇之魂','英雄')
 		skl.chance = self.fuchou_chance

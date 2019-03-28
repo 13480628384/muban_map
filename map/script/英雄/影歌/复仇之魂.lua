@@ -25,7 +25,7 @@ mt{
 
 	--持续时间
 	time = 30,
-
+	attr_mul = 1,
 
 	--特效模型
 	effect = [[units\nightelf\Vengeance\Vengeance.mdl]],
@@ -44,13 +44,14 @@ function mt:on_add()
 
 			local point = hero:get_point()-{hero:get_facing(),100}
 			local unit = hero:get_owner():create_unit('幻象马甲-蝗虫',point)	
-
-			local life_mul, defence_mul, attack_mul = ac.get_summon_mul(hero.level)
+			local p_hero = hero:get_owner().hero
+			
+			local life_mul, defence_mul, attack_mul = ac.get_summon_mul(p_hero.level)
 			local data = {}
 			data.attribute={
-				['生命上限'] = hero:get('智力') * life_mul,
-				['护甲'] = hero:get('智力') * defence_mul,
-				['攻击'] = hero:get('智力') * attack_mul * 1,
+				['生命上限'] = p_hero:get('智力') * life_mul*1.5,
+				['护甲'] = p_hero:get('智力') * defence_mul*1.5,
+				['攻击'] = p_hero:get('智力') * attack_mul*1.5,
 				['魔法上限'] = 60,
 				['移动速度'] = 325,
 				['攻击间隔'] = 1.5,
@@ -61,9 +62,11 @@ function mt:on_add()
 
 			
 			self.buff = unit:add_buff '召唤物' {
-				skill = self,
 				time = self.time,
 				attribute = data.attribute,
+				attr_mul = self.attr_mul - 1,
+				skill = self,
+				follow = true,
 				model = self.effect,
 			}
 			unit:add_restriction '无敌'
