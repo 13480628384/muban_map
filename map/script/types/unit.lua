@@ -1015,7 +1015,7 @@ function mt:add_enemy_tag()
 	else
 		str = [[modeldekan\ui\DEKAN_Tag_Enmy.mdl]]
 	end
-	self.enemy_tag = self:add_effect('origin', str)
+	-- self.enemy_tag = self:add_effect('origin', str)
 end
 
 -- 设置所有者
