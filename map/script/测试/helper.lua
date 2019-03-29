@@ -364,6 +364,10 @@ function helper:black()
 	jass.SetDayNightModels('', 'Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl')
 end
 
+function helper:add(str,cnt)
+	self:add(str,tonumber(cnt))
+end
+
 function helper:add_skill(str,cnt)
 	local cnt = cnt or 1
 	for i=1,cnt do

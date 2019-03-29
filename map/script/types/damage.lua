@@ -334,6 +334,7 @@ local function on_splash(self)
 			damage = dmg,
 			aoe = true,
 			skill = self.skill,
+			real_damage = true,
 		}
 	end
 	--在地上创建特效
