@@ -22,11 +22,11 @@ mt{
 	--召唤物
 	unit_name = "凤凰",
 	--召唤物属性倍数
-	attr_mul = {1,1.25,1.5,1.75,2},
+	attr_mul = {1,1.5,2,2.5,3},
 	--持续时间
 	time = 25,
 	--数量
-	cnt = {1,1.25,1.5,1.75,2},
+	cnt = 1,
 }
 	
 function mt:on_add()
@@ -56,7 +56,7 @@ function mt:on_cast_shot()
 		data.attribute={
 			['生命上限'] = hero:get('智力') * life_mul,
 			['护甲'] = hero:get('智力') * defence_mul,
-			['攻击'] = hero:get('智力') * attack_mul,
+			['攻击'] = hero:get('智力') * attack_mul *1.5,
 			['魔法上限'] = 60,
 			['移动速度'] = 325,
 			['攻击间隔'] = 1.5,
@@ -73,6 +73,7 @@ function mt:on_cast_shot()
 			follow = true
 		}
 		unit:add('攻击距离',800)
+		unit:add('溅射',100)
 		
 	end	
 

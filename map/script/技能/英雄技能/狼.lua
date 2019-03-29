@@ -14,7 +14,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤2只狼助战（属性与智力相关，拥有被动暴击）]],
+	tip = [[召唤1只狼助战（属性与智力相关，拥有被动暴击）]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNSpiritWolf.blp]],
 	--特效
@@ -22,13 +22,15 @@ mt{
 	--召唤物
 	unit_name = "狼",
 	--召唤物属性倍数
-	attr_mul = {0.5,0.6,0.7,0.8,1},
+	attr_mul = 1,
 	--持续时间
 	time = 20,
 	--数量
-	cnt = 2,
+	cnt = 1,
 	--暴击几率
-	physical_rate = {20,30,40,50,60},
+	physical_rate = 8,
+	physical_damage = {100,200,400,800,1500},
+
 }
 	
 function mt:on_add()
@@ -61,7 +63,7 @@ function mt:on_cast_shot()
 			['攻击'] = hero:get('智力') * attack_mul,
 			['魔法上限'] = 60,
 			['移动速度'] = 325,
-			['攻击间隔'] = 1.5,
+			['攻击间隔'] = 0.85,
 			['生命恢复'] = 1.2,
 			['魔法恢复'] = 0.6,
 			['攻击距离'] = 100,
@@ -74,9 +76,13 @@ function mt:on_cast_shot()
 			skill = self,
 			follow = true
 		}
-		unit:add_skill('致命一击','英雄')
 		--改变 暴击几率
-		ac.skill['致命一击'].physical_rate = self.physical_rate
+		local skill = ac.skill['致命一击']
+		skill.physical_rate = self.physical_rate
+		skill.physical_damage = self.physical_damage
+		
+		unit:add_skill('致命一击','英雄')
+		
 		
 	end	
 

@@ -10,7 +10,7 @@ mt{
 	
 	tip = [[
 		主动：召唤一个炎魔(属性与智力相关)，它会在杀死敌人的时候吸取其精华，并分裂为两个（状态和母体一致），持续 %time% 秒；
-		被动： 本体 和 召唤物攻击，都附加 智力*1的法术攻击的伤害 （%%）
+		被动： 本体 和 召唤物攻击，都附加 智力*1.5的真实伤害 
 	]],
 	
 	--技能图标 
@@ -21,7 +21,7 @@ mt{
 
 	--伤害
 	damage = function(self,hero)
-		return hero:get('智力')*1
+		return hero:get('智力')*1.5
 	end	,
 
 	--cd 45
@@ -31,7 +31,7 @@ mt{
 	cost = {45,140,235,330,425},
 
 	--数量
-	cnt = {1,1.5,2,2.5,3},
+	cnt = 1,
 
 	--持续时间
 	time = 25,
@@ -56,7 +56,7 @@ function mt:on_add()
 				source = hero,
 				damage = skill.damage,
 				skill = skill,
-				damage_type = '法术'
+				real_damage = true
 			}
 		end)
 	end)
@@ -73,13 +73,13 @@ local function create_summon_unit(skill,where)
 	data.attribute={
 		['生命上限'] = hero:get('智力') * life_mul,
 		['护甲'] = hero:get('智力') * defence_mul,
-		['攻击'] = hero:get('智力') * attack_mul,
+		['攻击'] = hero:get('智力') * attack_mul * 1.5,
 		['魔法上限'] = 60,
 		['移动速度'] = 325,
 		['攻击间隔'] = 1.5,
 		['生命恢复'] = 1.2,
 		['魔法恢复'] = 0.6,
-		['攻击距离'] = 100,
+		['攻击距离'] = 800,
 	}
 
 	unit:add_buff '召唤物' {
@@ -104,7 +104,7 @@ local function create_summon_unit(skill,where)
 				source = unit,
 				damage = skill.damage,
 				skill = skill,
-				damage_type = '法术'
+				real_damage = true
 			}
 		end)
 	end)

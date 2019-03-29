@@ -26,7 +26,7 @@ mt{
 	--持续时间
 	time = 20,
 	--数量
-	cnt = {1,2,3,4,5},
+	cnt = 1,
 }
 	
 function mt:on_add()

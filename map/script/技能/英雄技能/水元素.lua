@@ -22,11 +22,11 @@ mt{
 	--召唤物
 	unit_name = "水元素",
 	--召唤物属性倍数
-	attr_mul = 0.5,
+	attr_mul = 1,
 	--持续时间
 	time = 30,
 	--数量
-	cnt = {1,2,3,4,5},
+	cnt = 1,
 }
 	
 function mt:on_add()
@@ -48,13 +48,13 @@ function mt:on_cast_shot()
 		data.attribute={
 			['生命上限'] = hero:get('智力') * life_mul,
 			['护甲'] = hero:get('智力') * defence_mul,
-			['攻击'] = hero:get('智力') * attack_mul,
+			['攻击'] = hero:get('智力') * attack_mul * 1.8,
 			['魔法上限'] = 60,
 			['移动速度'] = 325,
 			['攻击间隔'] = 1.5,
 			['生命恢复'] = 1.2,
 			['魔法恢复'] = 0.6,
-			['攻击距离'] = 100,
+			['攻击距离'] = 800,
 		}
 
 		self.buff = unit:add_buff '召唤物' {
@@ -65,8 +65,6 @@ function mt:on_cast_shot()
 			follow = true
 		}
 		
-		unit:add('攻击距离',800)
-		--增加技能
 
 		unit:add_skill('弹射','隐藏')
 	end	

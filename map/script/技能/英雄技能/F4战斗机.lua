@@ -57,10 +57,10 @@ function mt:on_cast_shot()
 		data.attribute={
 			['生命上限'] = hero:get('智力') * life_mul,
 			['护甲'] = hero:get('智力') * defence_mul,
-			['攻击'] = hero:get('智力') * attack_mul,
+			['攻击'] = hero:get('智力') * attack_mul * 2,
 			['魔法上限'] = 60,
 			['移动速度'] = 325,
-			['攻击间隔'] = 1.5,
+			['攻击间隔'] = 1,
 			['生命恢复'] = 1.2,
 			['魔法恢复'] = 0.6,
 			['攻击距离'] = 100,
