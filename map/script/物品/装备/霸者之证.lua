@@ -39,23 +39,27 @@ mt{
     --等级>=2 时新增的描述
     lv2_tip = function(self,hero)
         local tip = ''
-        if self.level >=2  then 
-            tip = tip .. '|cffdf19d0物爆几率+'..self.physical_rate ..'|r\n'
-            tip = tip .. '|cffdf19d0法爆几率+'..self.magic_rate ..'|r\n'
-            tip = tip .. '|cffdf19d0会心几率+'..self.heart_rate ..'|r\n'
-            tip = tip .. '|cffdffff00杀怪+5点全属性'..'|r\n'
-            tip = tip .. '|cffdffff00杀死敌人有概率（15%）收集灵魂（受物品获取率影响））|r\n'
-        end   
-        if self.level >=2 and self.level <=3  then  
-            tip = tip .. '|cff00ffff【进化】杀死|r %upgrade_cnt% |cff00ffff个敌人|r'
-        end   
-        if self.level ==4 then  
-            tip = tip .. '|cff00ffff【进化】杀死|r %upgrade_cnt% |cff00ffff个敌人，且成功挑战伏地魔（天结散人）|r'
-        end
-        if self.level ==5 then  
-            tip = tip .. '|cffdf19d0对BOSS额外伤害+'..self.boss_damage ..'%|r\n'
-            tip = tip .. '|cff00ffff【满级无法进化】|r'
-        end
+        if self.level == 1  then 
+            tip = tip .. '|cff00ffff【飞升】英雄达到100级,携带此物，前往天结散人。|r'
+        else    
+            if self.level >=2  then 
+                tip = tip .. '|cffdf19d0物爆几率+'..self.physical_rate ..'|r\n'
+                tip = tip .. '|cffdf19d0法爆几率+'..self.magic_rate ..'|r\n'
+                tip = tip .. '|cffdf19d0会心几率+'..self.heart_rate ..'|r\n'
+                tip = tip .. '|cffffff00杀怪+5点全属性'..'|r\n'
+                tip = tip .. '|cffffff00杀死敌人有概率（15%）收集灵魂（受物品获取率影响））|r\n'
+            end   
+            if self.level >=2 and self.level <=3  then  
+                tip = tip .. '|cff00ffff【进化】杀死|r %upgrade_cnt% |cff00ffff个敌人|r'
+            end   
+            if self.level ==4 then  
+                tip = tip .. '|cff00ffff【进化】杀死|r %upgrade_cnt% |cff00ffff个敌人，且成功挑战伏地魔（天结散人）|r'
+            end
+            if self.level ==5 then  
+                tip = tip .. '|cffdf19d0对BOSS额外伤害+'..self.boss_damage ..'%|r\n'
+                tip = tip .. '|cff00ffff【满级无法进化】|r'
+            end
+        end    
         return tip
     end,  
 
@@ -85,9 +89,6 @@ mt.magic_rate_now = 0
 
 function mt:on_upgrade()
     local hero = self.owner
-    self:set('art',[[hunqi.blp]])
-    self:set_art(self.art)
-    self:set_name(self.name)
 	-- print(self.life_rate_now)
 	hero:add('物爆几率', -self.physical_rate_now)
 	self.physical_rate_now = self.physical_rate

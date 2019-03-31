@@ -258,8 +258,8 @@ function helper:save(key,value)
 	print('服务器存档:'..key,p:Map_GetServerValue(key))
 end	
 
---服务器存档 保存 
-function helper:get(key)
+--服务器存档 读取 
+function helper:get_sever(key)
 	local p = self:get_owner()
 	print('服务器存档:'..key,p:Map_GetServerValue(key))
 end	
@@ -364,23 +364,36 @@ function helper:black()
 	jass.SetDayNightModels('', 'Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl')
 end
 
+--增加 属性
 function helper:add(str,cnt)
 	self:add(str,tonumber(cnt))
 end
-
+--读取 属性
+function helper:get(key)
+	self:get(key)
+end	
+--增加技能物品
 function helper:add_skill(str,cnt)
 	local cnt = cnt or 1
 	for i=1,cnt do
 		ac.item.add_skill_item(str,self)
 	end	
 end
+--移除技能
+function helper:remove_skill(str)
+	local skill = self:find_skill(str,'英雄',true)
+	if skill then 
+		skill:remove()
+	end	
+end
+--增加物品
 function helper:add_item(str,cnt)
 	local cnt = cnt or 1
 	for i=1,cnt do
 		self:add_item(str,true)
 	end	
 end
-
+--设置物品数量
 function helper:set_item(str,cnt)
 	local item = self:has_item(str)
 	local cnt = tonumber(cnt) or 1
@@ -389,12 +402,6 @@ function helper:set_item(str,cnt)
 	end	
 end
 
-function helper:remove_skill(str)
-	local skill = self:find_skill(str,'英雄',true)
-	if skill then 
-		skill:remove()
-	end	
-end
 --宠物移除技能
 function helper:peon_remove_skill(str)
 	local hero = self:get_owner().peon
@@ -403,7 +410,7 @@ function helper:peon_remove_skill(str)
 		skill:remove()
 	end	
 end
-
+--技能CD清零
 function helper:wtf()
 	ac.wtf = not ac.wtf
 	if ac.wtf then
@@ -428,16 +435,7 @@ function helper:never_dead(flag)
 		self:remove_restriction '免死'
 	end
 end
-
-function helper:creep()
-	local creeps = require 'maps.creeps'
-	for _, data in ipairs(creeps.group) do
-		data[3] = 0
-		data[4] = 0
-	end
-	creeps.start()
-end
-
+--设置昼夜模型
 function helper:light(type)
 	local light = {
 		'Ashenvale',

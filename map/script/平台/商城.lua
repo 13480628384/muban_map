@@ -51,14 +51,16 @@ ac.wait(10,function()
                     -- if p.id <2 then 
                         --皮肤道具
                         --选择英雄时，异步改变英雄模型
-                        for i,hero in ipairs(ac.player(16).hero_lists)do
-                            if hero.name == item[n][3] then 
-                                --可能会掉线
-                                if ac.player.self == p then
-                                    hero:add_skill(item[n][2],'隐藏')
+                        if ac.player(16).hero_lists then 
+                            for i,hero in ipairs(ac.player(16).hero_lists)do
+                                if hero.name == item[n][3] then 
+                                    --可能会掉线
+                                    if ac.player.self == p then
+                                        hero:add_skill(item[n][2],'隐藏')
+                                    end
                                 end
-                            end
 
+                            end 
                         end 
                         p:event '玩家-注册英雄后' (function(_, _, hero)
                             --物品形式

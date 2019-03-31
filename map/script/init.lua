@@ -9,18 +9,31 @@ for key, value in pairs(dzapi) do
     mtp_dzapi[key] = value
 end
 require 'util'
+print(1)
 require 'war3'
+print(2)
 require 'types'
+print(3)
 require 'ac'
+print(4)
 require 'ui'
+print(5)
 require '通用'
+print(6)
 require '游戏'
+print(7)
 require '物品'
+print(8)
 require '技能'
+print(9)
 require '英雄'
+print(10)
 require '刷怪'
+print(11)
 require '平台'
+print(12)
 require '测试'
+print(13)
 
 ac.wait(100,function ()
    

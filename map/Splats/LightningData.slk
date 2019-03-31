@@ -600,19 +600,19 @@ C;X12;K0
 C;X13;K2
 C;X14;K1
 C;Y21;X1;K"LN03"
-C;X2;K"激光 200粗细"
+C;X2;K"紫色闪电"
 C;X3;K"lightnings"
-C;X4;K"drainmanalightning.blp"
-C;X5;K30
-C;X6;K200
+C;X4;K"ln2.blp"
+C;X5;K100
+C;X6;K40
 C;X7;K255
 C;X8;K255
 C;X9;K255
 C;X10;K255
-C;X11;K0
-C;X12;K0
+C;X11;K0.05
+C;X12;K0.5
 C;X13;K2
-C;X14;K1
+C;X14;K0
 C;Y22;X1;K"LN04"
 C;X2;K"主医疗波 100粗细"
 C;X3;K"ReplaceableTextures\Weather"

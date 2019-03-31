@@ -272,14 +272,15 @@ local function streng_item(alltable,unit,it)
 
             -- ac.game:event_dispatch('物品-合成成功前', dest_str,source_names,del_item) 
             -- print('最终概率',dest_rate)
+            local color = ac.color_code[dest_str.color or '白']
             if math.random(1,100) <= (tonumber(dest_rate) or 100) then 
-                p:sendMsg('合成'..dest_str..'成功')
+                p:sendMsg('|cff00ffff合成|r|cff'..color..dest_str..'|r|cff00ff00成功|r')
                 local new_item  = u:add_item(dest_str,true)  
                 -- 新物品 ， 材料列表 k = 材料名 ，v =数量
                 -- 回调时 需要等 合成物品成功，程序继续进行
                 ac.game:event_dispatch('物品-合成成功',new_item,source_names) 
             else
-                p:sendMsg('合成'..dest_str..'失败')
+                p:sendMsg('|cff00ffff合成|r|cff'..color..dest_str..'|r|cffff0000失败|r')
                 ac.game:event_dispatch('物品-合成失败',dest_str,source_names) 
             end    
               

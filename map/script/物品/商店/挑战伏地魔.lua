@@ -36,7 +36,7 @@ function mt:on_cast_start()
     local shop_item = ac.item.shop_item_map[self.name]
     local item = hero:has_item('霸者之证')
     if item.level == 4 and item:get_item_count() >=150 then 
-        print('达到条件')
+        -- print('达到条件')
         ac.player.self:sendMsg('|cffff0000伏地魔|r |cff00ffff已出现，请大侠击杀，升级霸者之证|r')   
         --创建伏地魔
         local unit = ac.player.com[2]:create_unit('伏地魔',ac.map.rects['刷怪']:get_point())

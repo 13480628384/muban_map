@@ -504,7 +504,6 @@ end
 --单位 使用物品 添加属性
 function mt:on_use_state()
 	local hero = self.owner
-	
 	if not hero then 
 		return
 	end	
@@ -518,6 +517,8 @@ function mt:on_use_state()
 		--让宠物使用物品时给英雄增加对应的属性
 		hero = hero:get_owner().hero
 	end	
+	--播放特效
+	hero:add_effect('chest','Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdx'):remove()
 
 	-- print(hero)
 	--保存物品

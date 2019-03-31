@@ -33,15 +33,15 @@ store_affix = ''
 
 function mt:on_cast_start()
     local hero = self.owner
+    local player = hero:get_owner()
     local shop_item = ac.item.shop_item_map[self.name]
     local item = hero:has_item('霸者之证')
     if hero.level == 100 and item then 
-        print('达到条件')
         --物品进化
         item:upgrade(1)
-        ac.player.self:sendMsg('飞升成功')   
+        ac.player.self:sendMsg('恭喜|cffff0000'..player:get_name()..'|r |cff00ffff飞升成功，霸者之证获得进化能力|r')   
     else
-        ac.player.self:sendMsg('条件不足，飞升失败')    
+        player:sendMsg('|cff00ffff条件不足，飞升失败|r')    
     end    
 
 end
