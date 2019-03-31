@@ -12,7 +12,7 @@ mt{
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNFlakCannons.blp]],
 	--特效
-	effect = [[SylvanasHe.mdx]],
+	effect = [[Hero_WindRunner_N2.mdx]],
 	--移动速度
 	move_speed = 50,
 	--攻击间隔

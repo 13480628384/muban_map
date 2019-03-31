@@ -17,7 +17,7 @@ mt{
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNDrum.blp]],
 	--特效
-	effect = [[Abilities\Spells\Orc\CommandAura\CommandAura.mdl]],
+	effect = [[CommandAura.mdx]],
     --光环影响范围
     area = 99999,
     --值

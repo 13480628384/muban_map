@@ -42,14 +42,14 @@ mt{
     nick_name3 = '开心游戏',
     nick_name5 = '炉火纯青',
     nick_name10 = '完美主义',
-    nick_name15 = '不败神话',
+    nick_name15 = '无与伦比',
     nick_name25= '君临天下',
     
 	--模型
 	effect3 = [[kxyx.mdx]],
 	effect5 = [[lhcq.mdx]],
 	effect10 = [[wmzy.mdx]],
-	effect15 = [[bbsh.mdx]],
+	effect15 = [[wylb.mdx]],
     effect25 = [[jltx.mdx]],
     --测试
     -- test21 =0
