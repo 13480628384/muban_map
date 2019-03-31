@@ -1,5 +1,5 @@
 local japi = require("jass.japi")
-local mt = ac.skill['牛魔王']
+local mt = ac.skill['影歌']
 mt{
     --必填
     is_skill = true,
@@ -12,7 +12,7 @@ mt{
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNFlakCannons.blp]],
 	--特效
-	effect = [[HeroTaurenChieftain.mdx]],
+	effect = [[HeroSpecblue.mdx]],
 	--护甲值
 	value = 25,
 	--物爆伤害
@@ -28,7 +28,7 @@ function mt:on_add()
     --改变模型
     japi.SetUnitModel(hero.handle,self.effect)
 
-    self.buff = hero:add_buff '牛魔王'
+    self.buff = hero:add_buff '影歌'
     {
         source = hero,
         skill = self,
@@ -56,7 +56,7 @@ function mt:on_remove()
     
 end
 
-local mt = ac.aura_buff['牛魔王']
+local mt = ac.aura_buff['影歌']
 -- 魔兽中两个不同的专注光环会相互覆盖，但光环模版默认是不同来源的光环不会相互覆盖，所以要将这个buff改为全局buff。
 mt.cover_global = 1
 mt.cover_type = 1

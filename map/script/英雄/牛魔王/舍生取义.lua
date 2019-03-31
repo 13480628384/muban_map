@@ -132,6 +132,7 @@ local mt = ac.buff['舍生取义-被动']
 
 mt.cover_type = 1
 mt.cover_max = 1
+mt.keep = true --死亡时依旧保持
 
 function mt:on_add()
 	local hero = self.target

@@ -96,6 +96,10 @@ function mt:on_cast_start()
                 end    
 	            hero.chibang = hero:add_effect('chest',effect) 
                 -- self.is_choosed = true
+            else   
+                if hero.chibang then 
+                    hero.chibang:remove()
+                end      
             end 
         end)
     end   

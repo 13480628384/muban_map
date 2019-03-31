@@ -7,7 +7,7 @@ require '平台.道具.生存会员'
 require '平台.道具.小翅膀'
 require '平台.道具.杰克'
 require '平台.道具.后羿'
-require '平台.道具.牛魔王'
+require '平台.道具.影歌'
 require '平台.道具.王昭君'
 
 

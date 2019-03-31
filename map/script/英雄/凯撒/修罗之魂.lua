@@ -182,6 +182,7 @@ end
 local mt = ac.buff['修罗之魂-被动']
 mt.keep = true --死亡时依旧保持
 mt.cover_type = 1
+mt.cover_max = 1
 -- mt.attack_sum = 0
 function mt:on_add()
 	local hero = self.target
@@ -220,3 +221,6 @@ function mt:on_remove()
 	self.skill.cnt = 0
 end
 
+function mt:on_cover(new)
+	return new.attack_increase > self.attack_increase
+end
