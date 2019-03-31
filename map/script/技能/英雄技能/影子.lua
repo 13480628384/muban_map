@@ -14,7 +14,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤1只影子助战（属性与智力相关）；持续时间30S]],
+	tip = [[召唤1只影子助战（属性和英雄属性相关）；持续时间30S]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNMirrorImage.blp]],
 	--召唤物
@@ -24,7 +24,7 @@ mt{
         end 
     end,
 	--召唤物属性倍数
-	attr_mul = {0.5,1,1.5,2,2.5},
+	attr_mul = {0.6,0.8,1,1.2,1.4},
 	--持续时间
 	time = 30,
 	--数量
@@ -49,12 +49,17 @@ function mt:on_cast_shot()
         local data = {}
         data.attribute ={
             ['攻击'] = hero:get('攻击'),
-            ['护甲'] = hero:get('护甲'),
+			['护甲'] = hero:get('护甲') * 0.5,
+			['攻击速度'] = hero:get('攻击速度'),
             ['生命上限'] = hero:get('生命上限'),
             ['魔法上限'] = hero:get('魔法上限'),
             ['生命恢复'] = hero:get('生命恢复'),
             ['魔法恢复'] = hero:get('魔法恢复'),
-            ['移动速度'] = hero:get('移动速度'),
+			['移动速度'] = hero:get('移动速度'),
+			['物爆几率'] = hero:get('物爆几率'),
+			['物爆伤害'] = hero:get('物爆伤害'),
+			['会心几率'] = hero:get('会心几率'),
+			['会心伤害'] = hero:get('会心伤害'),
         }
 
 		self.buff = unit:add_buff '召唤物' {

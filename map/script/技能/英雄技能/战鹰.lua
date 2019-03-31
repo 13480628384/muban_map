@@ -14,7 +14,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤1只战鹰助战（属性和智力相关，拥有被动重击）]],
+	tip = [[召唤1只战鹰助战（属性和智力相关，拥有被动：攻速光环）]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNWarEagle.blp]],
 	--特效
@@ -24,7 +24,7 @@ mt{
 	--召唤物属性倍数
 	attr_mul = 1,
 	--持续时间
-	time = 20,
+	time = 40,
 	--数量
 	cnt = 1,
 }
@@ -72,7 +72,8 @@ function mt:on_cast_shot()
 			skill = self,
 			follow = true
 		}
-		
+
+		unit:add_skill('攻速光环','隐藏')
 	end	
 
 

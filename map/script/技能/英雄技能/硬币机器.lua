@@ -14,7 +14,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤1只硬币机器助战（属性与智力相关，攻击时有概率获得额外金钱）]],
+	tip = [[召唤1只硬币机器助战（属性与智力相关，攻击时有概率获得额外金钱），拥有被动：硬化皮肤]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNChestOfGold.blp]],
 	--特效
@@ -81,6 +81,7 @@ function mt:on_cast_shot()
 				unit:addGold(gold)
 			end
 		end)
+		unit:add_skill('硬化皮肤','隐藏')
 	end	
 
 

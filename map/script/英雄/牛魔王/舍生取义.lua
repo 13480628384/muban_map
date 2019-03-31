@@ -11,7 +11,7 @@ mt{
 	tip = [[
 		主动：每秒恢复 %life_rate% %的血量，持续时间 %time% 秒, 冷却 %cool%秒
 		被动1：每损失1点的最大生命值， 额外获得 %attack% 点的攻击力提升
-		被动2：增加 %reduce_rate% % 的减伤
+		被动2：增加 %reduce_rate% % 的生命上限
 	]],
 	
 	--技能图标
@@ -37,7 +37,7 @@ mt{
 	--cd
 	cool = {20,17.5,15,12.5,10},
     --减免
-	reduce_rate = 30,
+	reduce_rate = {20,40,60,80,100},
 
 	--耗蓝
 	cost = {35,175,325,475,650},
@@ -47,11 +47,14 @@ mt{
 	--施法距离
 	-- range = 99999,
 }
+mt.reduce_rate_now = 0
 
-function mt:on_add()
-    local skill = self
-	local hero = self.owner 
-	hero:add('减免',self.reduce_rate)
+function mt:on_upgrade()
+	local hero = self.owner
+	-- print(self.life_rate_now)
+	hero:add('生命上限%', -self.reduce_rate_now)
+	self.reduce_rate_now = self.reduce_rate
+	hero:add('生命上限%', self.reduce_rate)
 
 	self.trg = hero:add_buff '舍生取义-被动' 
 	{
@@ -61,6 +64,12 @@ function mt:on_add()
 		pulse = 0.02, --立即生效
 		real_pulse = 0.1  --实际每几秒检测一次
 	}
+end
+
+function mt:on_add()
+    local skill = self
+	local hero = self.owner 
+
 end	
 
 function mt:on_cast_shot()
@@ -80,7 +89,7 @@ end
 function mt:on_remove()
 	local hero = self.owner 
     -- 提升三维(生命上限，护甲，攻击)
-    hero:add('减免',-self.reduce_rate)
+    hero:add('生命上限%',-self.reduce_rate)
     if self.trg then
         self.trg:remove()
         self.trg = nil

@@ -338,11 +338,10 @@ end
 --测试
 function helper:power()
 	helper.move(self)
-	helper.lv(self, 18)
+	helper.lv(self, 100)
 	if not ac.wtf then
 		helper.wtf(self)
 	end
-	self:add('攻击',10000000000)
 	self:add_restriction '免死'
 	self:addGold(999999)
 end
