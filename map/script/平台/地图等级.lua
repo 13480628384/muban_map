@@ -143,6 +143,10 @@ function mt:on_cast_start()
                 end    
 	            self:set('eff', hero:add_effect('overhead',effect) )
                 -- self.is_choosed = true
+            else       
+                if self:get('eff') then 
+                    self:get('eff'):remove()
+                end      
             end 
         end)
     end   

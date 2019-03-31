@@ -49,6 +49,13 @@ mt{
 function mt:on_upgrade()
     local skill = self
 	local hero = self.owner 
+	
+
+end	
+function mt:on_add()
+    local skill = self
+	local hero = self.owner 
+
 	self.trg1 = hero:add_buff '死吻-被动1' 
 	{
 		source = hero,
@@ -69,11 +76,6 @@ function mt:on_upgrade()
 		}
 	end)
 	
-
-end	
-function mt:on_add()
-    local skill = self
-	local hero = self.owner 
 end	
 function mt:on_cast_channel()
 	local hero = self.owner

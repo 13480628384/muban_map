@@ -500,7 +500,8 @@ function mt:fresh_art()
 	self:set_art(self:get_art())
 end
 
--- 格式化数字
+-- 格式化数字 
+-- 理论要保留两位小数 
 local function format_number(v)
 	if type(v) ~= 'number' then
 		return v
