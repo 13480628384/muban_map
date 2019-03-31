@@ -30,13 +30,13 @@ mt{
 	attack = {40,45,50,55,60},
 
 	--移动速度
-	move_speed = 50,
+	move_speed = 30,
 
 	--攻击间隔
 	attack_gap = -0.2,
 
 	--伤害减免
-	reduce_damage = 50,
+	reduce_damage = 30,
 
 	--攻击距离
 	attack_range = 800,
