@@ -365,11 +365,12 @@ end
 
 --增加 属性
 function helper:add(str,cnt)
-	self:add(str,tonumber(cnt))
+	print(self:add(str,tonumber(cnt)))
 end
 --读取 属性
 function helper:get(key)
-	self:get(key)
+	print(self:get(key))
+
 end	
 --增加技能物品
 function helper:add_skill(str,cnt)

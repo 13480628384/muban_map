@@ -34,20 +34,25 @@ mt{
     active25 = '|cffcccccc',
 
     --称号
-    nick_name3 = '新手指导员',
-    nick_name5 = '热血青年',
-    nick_name10 = 'BOSS收割者',
-    nick_name15 = '神帝',
-    nick_name25= '肝帝',
+    -- nick_name3 = '新手指导员',
+    -- nick_name5 = '热血青年',
+    -- nick_name10 = 'BOSS收割者',
+    -- nick_name15 = '神帝',
+    -- nick_name25= '肝帝',    
+    nick_name3 = '开心游戏',
+    nick_name5 = '炉火纯青',
+    nick_name10 = '完美主义',
+    nick_name15 = '不败神话',
+    nick_name25= '君临天下',
     
 	--模型
-	effect3 = [[units\human\Gyrocopter\Gyrocopter.mdl]],
-	effect5 = [[units\human\Gyrocopter\Gyrocopter.mdl]],
-	effect10 = [[units\human\Gyrocopter\Gyrocopter.mdl]],
-	effect15 = [[units\human\Gyrocopter\Gyrocopter.mdl]],
-    effect25 = [[units\human\Gyrocopter\Gyrocopter.mdl]],
+	effect3 = [[kxyx.mdx]],
+	effect5 = [[lhcq.mdx]],
+	effect10 = [[wmzy.mdx]],
+	effect15 = [[bbsh.mdx]],
+    effect25 = [[jltx.mdx]],
     --测试
-    test21 =0
+    -- test21 =0
 	
 }
 function mt:on_add()

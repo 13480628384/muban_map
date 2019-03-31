@@ -17,7 +17,7 @@ mt{
 	]],
 	
 	--技能图标
-	art = [[icon\jineng037.blp]],
+	art = [[icon\jineng038.blp]],
 
 	--cd
 	cool = 1,
