@@ -78,7 +78,7 @@ end
 
 
 function mt:on_cast_shot()
-	print('目标单位0',target_unit)
+	-- print('目标单位0',target_unit)
     local skill = self
 	local hero = self.owner
 	-- hero:add_effect('origin',self.effect)
@@ -121,7 +121,7 @@ mt.cover_max = 1
 function mt:on_add()
 	local source_unit = self.source_unit
 	local target_unit = self.target_unit
-	print('目标单位1',target_unit)
+	-- print('目标单位1',target_unit)
 	--标识 目标被牵引 
 	self.target_unit.is_tacking = true
 
@@ -143,7 +143,7 @@ function mt:on_add()
 
 		local main_attr = self.target_unit.main_attribute..'%'
 		self.target_unit:add(main_attr,self.target_main_attr)
-		print(self.target_unit,main_attr)
+		-- print(self.target_unit,main_attr)
 
 		local main_attr = self.source_unit.main_attribute..'%'
 		self.source_unit:add(main_attr,-self.source_main_attr)

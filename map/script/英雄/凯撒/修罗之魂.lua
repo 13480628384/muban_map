@@ -65,11 +65,9 @@ mt{
 	-- range = 99999,
 }
 
-
-function mt:on_add()
+function mt:on_upgrade()
     local skill = self
 	local hero = self.owner 
-	
 	self.trg = hero:add_buff '修罗之魂-被动' 
 	{
 		source = hero,
@@ -79,6 +77,10 @@ function mt:on_add()
 		pulse = 0.02, --立即生效
 		real_pulse = 0.1  --实际每几秒检测一次
 	}
+end	
+function mt:on_add()
+    local skill = self
+	local hero = self.owner 
 
 
 end	
@@ -211,7 +213,10 @@ function mt:on_pulse()
 end
 --人物死亡时，需要移除已添加的被动加成
 function mt:on_remove()
+	local hero = self.target
 	if self.skill.cnt then 
 		hero:add('攻击%',-self.skill.cnt*self.attack_increase)
 	end	
+	self.skill.cnt = 0
 end
+

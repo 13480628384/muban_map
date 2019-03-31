@@ -33,7 +33,7 @@ mt{
 	life_rate = 6,
 
 	--攻击提升
-	attack = {1,1.5,2,2.5,3},
+	attack = {1,100,2,2.5,3},
 	--cd
 	cool = {20,17.5,15,12.5,10},
     --减免
@@ -47,11 +47,9 @@ mt{
 	--施法距离
 	-- range = 99999,
 }
-
-function mt:on_add()
+function mt:on_upgrade()
     local skill = self
 	local hero = self.owner 
-	hero:add('减免',self.reduce_rate)
 
 	self.trg = hero:add_buff '舍生取义-被动' 
 	{
@@ -61,6 +59,11 @@ function mt:on_add()
 		pulse = 0.02, --立即生效
 		real_pulse = 0.1  --实际每几秒检测一次
 	}
+end	
+function mt:on_add()
+    local skill = self
+	local hero = self.owner 
+	hero:add('减免',self.reduce_rate)
 end	
 
 function mt:on_cast_shot()
@@ -117,6 +120,7 @@ end
 local mt = ac.buff['舍生取义-被动']
 
 mt.cover_type = 1
+mt.cover_max = 1
 
 function mt:on_add()
 	local hero = self.target
@@ -139,5 +143,13 @@ function mt:on_pulse()
 end
 
 function mt:on_remove()
-    
+	local hero = self.target
+	if self.skill.cnt then 
+		hero:add('攻击',-self.skill.cnt*self.attack)
+	end	
+	self.skill.cnt = 0
+
+end	
+function mt:on_cover(new)
+	return new.attack > self.attack
 end
