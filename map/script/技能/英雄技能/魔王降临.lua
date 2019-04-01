@@ -67,7 +67,7 @@ function mt:on_add()
         self.source_eff = self.target:add_effect('origin', self.data.source_effect)
     else
         -- self.target_eff = self.target:add_effect('origin', self.data.target_effect)
-        target:add('护甲%',-self.data.value)
+        target:add('护甲',- (target:get('护甲') * self.data.value/100))
     end  
     
 
@@ -78,5 +78,5 @@ function mt:on_remove()
     if self.source_eff then self.source_eff:remove() end
     if self.target_eff then self.target_eff:remove() end
     
-    target:add('护甲%',self.data.value)
+    target:add('护甲', (target:get('护甲') * self.data.value/100))
 end
