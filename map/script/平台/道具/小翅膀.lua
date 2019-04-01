@@ -27,7 +27,7 @@ target_type = ac.skill.TARGET_TYPE_NONE,
 cool = 0,
 
 --购买价格
-jifen = 1,
+jifen = 7500,
 auto_fresh_tip = true,
 --物品技能
 is_skill = true,

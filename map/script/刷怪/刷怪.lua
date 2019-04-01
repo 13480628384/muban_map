@@ -127,8 +127,8 @@ function mt:random_creeps_datas(temp_type)
     if self.used_food <= self.all_food then 
         local u = self:has_unit(rand_type)
         if u then
-            print(rand_name,rand_type,self.current_creep[rand_name])
-            print(self.current_creep[rand_name]['cnt'])
+            -- print(rand_name,rand_type,self.current_creep[rand_name])
+            -- print(self.current_creep[rand_name]['cnt'])
             self.current_creep[rand_name]['cnt'] = self.current_creep[rand_name]['cnt'] +1
         else 
             --保存当前生成的数据
@@ -359,12 +359,13 @@ function mt:on_next()
         
         --@游戏失败 场上怪物超过50只
         if not self.mode_timer then 
-            self.mode_timer = ac.loop(1*1000,function(t)
-                if self.current_count >= 40 then 
+			self.mode_timer = ac.loop(1*1000,function(t)
+				local max_cnt = 50 * get_player_count()
+                if self.current_count >= max_cnt * 0.8 then 
                     ac.player.self:sendMsg("【系统提示】当前怪物已达|cffE51C23 "..self.current_count.." |r，请及时清怪")
                     ac.player.self:sendMsg("【系统提示】当前怪物已达|cffE51C23 "..self.current_count.." |r，请及时清怪")
                 end    
-                if self.current_count >= 5000 then 
+                if self.current_count >= max_cnt then 
                     t:remove()
                     ac.game:event_notify('游戏-结束')
                 end    
@@ -454,7 +455,7 @@ function mt:on_change_creep(unit,lni_data)
     else 
         name = '进攻怪-'..self.index
     end   
-    print('打印：',name)
+    -- print('打印：',name)
     local data = ac.table.UnitData[name]
     data.attr_mul = lni_data.attr_mul
     data.food = lni_data.food
@@ -736,7 +737,6 @@ ac.wait(20,function()
         { name = "噩梦" },
         { name = "地狱" },
     }
-    --可能会掉线
     ac.player.self:sendMsg("正在选择 模式、难度")
     if player then 
         create_dialog(player,"选择模式",list,function (index)

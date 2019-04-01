@@ -25,7 +25,7 @@ cool = 0,
 --购买价格
 gold = 1000,
 --每次增加
-cre_gold = 1000,
+cre_gold = 500,
 
 --物品技能
 is_skill = true,

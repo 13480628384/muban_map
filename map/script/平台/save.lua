@@ -125,9 +125,9 @@ local function save_jifen()
             --     p.old_kill_count = p.putong_jifen 
             --     p.is_flag = true
             -- else
-            value = (p.putong_jifen - (p.old_putong_jifen or 0)) * (p.hero:get '积分加成' + 1)
+            value = (p.putong_jifen - (p.old_putong_jifen or 0)) * (p.hero:get '积分加成' + (ac.g_game_degree or 1) )
 
-            local total_value = p.putong_jifen  * (p.hero:get '积分加成' + 1)
+            local total_value = p.putong_jifen  * (p.hero:get '积分加成' + (ac.g_game_degree or 1) ) 
             -- end 
             p.old_putong_jifen = p.putong_jifen
             --保存积分
@@ -169,15 +169,3 @@ end)
 
 
 
---元旦
-for i=1,8 do
-    local p = ac.player[i]
-    if p:is_player() then
-        --先判断是否存在皮肤，如果存在则添加道具
-        local is = p:Map_GetServerValue('ydpf')
-        print('测试服务器读dang',is)
-        if is and is == '1' then
-            p.hero:add_item('小黑零号',1)
-        end
-    end
-end

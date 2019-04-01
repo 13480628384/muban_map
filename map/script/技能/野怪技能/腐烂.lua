@@ -82,13 +82,19 @@ end
 
 function mt:on_pulse()
     -- print('腐烂每秒伤害：',damage*self.pulse)
-	self.target:damage
-	{
-		source = self.source,
-		damage = self.damage,
-        skill = self.skill,
-        real_damage = true
-	}
+    -- 不会致死
+    local life = self.target:get('生命')
+    if life < self.damage then 
+        self.target:set('生命',1)
+    else   
+        self.target:damage
+        {
+            source = self.source,
+            damage = self.damage,
+            skill = self.skill,
+            real_damage = true
+        }
+    end   
 end
 
 function mt:on_cover(new)

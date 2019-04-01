@@ -48,8 +48,42 @@ function mt:on_next()
 
     --发送本层怪物信息 3次10秒
     self:send_skill_message(3,10)
-    print('当前波数 '..self.index)
+    -- print('当前波数 '..self.index)
+    
+	--嘉年华 15秒后 ,直接进入下一波
+    if ac.g_game_mode == 2 then 
+        --@刷兵规则
+        local creep = self
 
+        if self.timer_ex1 then 
+            self.timer_ex1:remove()
+        end 
+
+        self.timer_ex1 = ac.timer_ex 
+        {
+            time = 15,
+            title = "距离下一波怪开始",
+            func = function ()
+                creep.timer_ex1 = nil
+                creep:next() --时间到马上下一波
+            end,
+        }
+        
+        --@游戏失败 场上怪物超过50只
+        if not self.mode_timer then 
+			self.mode_timer = ac.loop(1*1000,function(t)
+				local max_cnt = 50 * get_player_count()
+                if self.current_count >= max_cnt * 0.8 then 
+                    ac.player.self:sendMsg("【系统提示】当前怪物已达|cffE51C23 "..self.current_count.." |r，请及时清怪")
+                    ac.player.self:sendMsg("【系统提示】当前怪物已达|cffE51C23 "..self.current_count.." |r，请及时清怪")
+                end    
+                if self.current_count >= max_cnt then 
+                    t:remove()
+                    ac.game:event_notify('游戏-结束')
+                end    
+            end)
+        end    
+    end 
 
 end
 --改变怪物

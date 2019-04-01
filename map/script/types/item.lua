@@ -395,10 +395,23 @@ function mt:get_tip()
 		end	 
 		if self:buy_jifen() > 0 then 
 			--可能会掉线
-			gold = '|cffebd43d(积分：'..self:buy_jifen()..')|r  |cff00ffff拥有'..(ac.GetServerValue(ac.player.self,'jifen') or '0')..'|r|n'
+			-- 进入异步
+			for i=1,10 do
+				if ac.player(i) == ac.player.self then
+					if ac.GetServerValue then 
+						gold = '|cffebd43d(积分：'..self:buy_jifen()..')|r  |cff00ffff拥有'..(ac.GetServerValue(ac.player.self,'jifen') or '0')..'|r|n'
+					end	
+				end	
+			end
 		end	 
 		if self:buy_kill_count() > 0 then 
-			gold = '|cffebd43d(杀敌数：'..self:buy_kill_count()..')|r  |cff00ffff拥有'..(ac.player.self.kill_count or '0')..'|r|n'
+			for i=1,10 do
+				if ac.player(i) == ac.player.self then
+					if ac.player.self.kill_count then 
+						gold = '|cffebd43d(杀敌数：'..self:buy_kill_count()..')|r  |cff00ffff拥有'..(ac.player.self.kill_count or '0')..'|r|n'
+					end
+				end	
+			end
 		end	 
 		if self.get_buy_tip then 
 			gold = self:get_buy_tip(gold)

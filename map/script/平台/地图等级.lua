@@ -33,12 +33,7 @@ mt{
     active15 = '|cffcccccc',
     active25 = '|cffcccccc',
 
-    --称号
-    -- nick_name3 = '新手指导员',
-    -- nick_name5 = '热血青年',
-    -- nick_name10 = 'BOSS收割者',
-    -- nick_name15 = '神帝',
-    -- nick_name25= '肝帝',    
+    --称号   
     nick_name3 = '开心游戏',
     nick_name5 = '炉火纯青',
     nick_name10 = '完美主义',

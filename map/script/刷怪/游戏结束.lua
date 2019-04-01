@@ -5,7 +5,7 @@ local jass = require 'jass.common'
 
 -- 同一时间 全部玩家死亡，游戏失败
 ac.game:event '游戏-开始' (function()
-	
+	ac.game.challenge_cnt = 1
 	print('游戏开始8')
 	for i = 1 ,10 do 
 		local hero = ac.player(i).hero
@@ -20,7 +20,14 @@ ac.game:event '游戏-开始' (function()
 				--获取在线人数
 				local player_count = get_player_count()
 				if dead_count >= player_count then 
-					ac.game:event_notify('游戏-结束') --失败
+					ac.game.challenge_cnt = ac.game.challenge_cnt - 1	
+					if ac.game.challenge_cnt < 0 then 
+						ac.game:event_notify('游戏-结束') --失败
+					else
+						ac.player.self:sendMsg('|cff00ffff【系统消息】全部玩家死亡，剩余额外 |r|cffff0000'..ac.game.challenge_cnt..'|r'..' |cff00ffff挑战次数,务必小心中央boss倒计时结束造成80%伤害|r',10)
+						ac.player.self:sendMsg('|cff00ffff【系统消息】全部玩家死亡，剩余额外 |r|cffff0000'..ac.game.challenge_cnt..'|r'..' |cff00ffff挑战次数,务必小心中央boss倒计时结束造成80%伤害|r',10)
+						ac.player.self:sendMsg('|cff00ffff【系统消息】全部玩家死亡，剩余额外 |r|cffff0000'..ac.game.challenge_cnt..'|r'..' |cff00ffff挑战次数,务必小心中央boss倒计时结束造成80%伤害|r',10)
+					end	
 				end	
 			end);
 		end
@@ -31,13 +38,12 @@ end);
 ac.game:event '游戏-无尽开始' (function()
 	print('进入无尽啦')
 	--先移除
-	for i = 1 ,10 do 
-		local hero = ac.player(i).hero
-		if hero and hero.all_die_trg then 
-			hero.all_die_trg:remove()
-		end
-	end	
-	--再添加
+	-- for i = 1 ,10 do 
+	-- 	local hero = ac.player(i).hero
+	-- 	if hero and hero.all_die_trg then 
+	-- 		hero.all_die_trg:remove()
+	-- 	end
+	-- end	
 	
 end)
 
