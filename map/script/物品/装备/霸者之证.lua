@@ -47,7 +47,7 @@ mt{
                 tip = tip .. '|cffdf19d0法爆几率+'..self.magic_rate ..'|r\n'
                 tip = tip .. '|cffdf19d0会心几率+'..self.heart_rate ..'|r\n'
                 tip = tip .. '|cffffff00杀怪+5点全属性'..'|r\n'
-                tip = tip .. '|cffffff00杀死敌人有概率（15%）收集灵魂（受物品获取率影响））|r\n'
+                tip = tip .. '|cffffff00杀死敌人有概率（25%）收集灵魂（受物品获取率影响））|r\n'
             end   
             if self.level >=2 and self.level <=3  then  
                 tip = tip .. '|cff00ffff【进化】杀死|r %upgrade_cnt% |cff00ffff个敌人|r'
@@ -89,7 +89,8 @@ mt.magic_rate_now = 0
 
 function mt:on_upgrade()
     local hero = self.owner
-	-- print(self.life_rate_now)
+	-- print(self.life_rate_now)   
+    self:set_name(self.name)
 	hero:add('物爆几率', -self.physical_rate_now)
 	self.physical_rate_now = self.physical_rate
 	hero:add('物爆几率', self.physical_rate)
@@ -127,10 +128,7 @@ function mt:on_upgrade()
 
     if self.level == self.max_level then 
         hero:add('对BOSS额外伤害',self.boss_damage)
-        if self.trg then 
-            self.trg:remove()
-            self.trg = nil
-        end    
+        self.chance = 0   
     end     
     -- local tip = '升级时加的文字描述'
     -- self.tip = self:get_tip() .. tip .. '\n'
@@ -145,6 +143,10 @@ function mt:on_add()
     hero:add('攻击',self.attack)
     hero:add('生命上限',self.life)
     hero:add('护甲',self.defence)
+    
+	hero:add('物爆几率', self.physical_rate)
+	hero:add('会心几率', self.heart_rate)
+    hero:add('法爆几率', self.magic_rate)
 
     if self.level >=2 then 
         if not self.trg then 

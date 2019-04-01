@@ -125,11 +125,15 @@ local function save_jifen()
             --     p.old_kill_count = p.putong_jifen 
             --     p.is_flag = true
             -- else
-            value = (p.putong_jifen - (p.old_putong_jifen or 0)) * (p.hero:get '积分加成' + (ac.g_game_degree or 1) )
+            value = (ac.total_putong_jifen - (ac.old_total_putong_jifen or 0)) * (ac.g_game_degree or 1) / get_player_count() 
+            -- (p.putong_jifen - (p.old_putong_jifen or 0)) * (p.hero:get '积分加成' + (ac.g_game_degree or 1) )
+            value = value * (p.hero:get '积分加成' + 1)
+            print('当前回合最终加的积分',value,'总积分',ac.total_putong_jifen,'难度倍数',ac.g_game_degree,'在线玩家数',get_player_count(),'积分加成',p.hero:get '积分加成')
 
-            local total_value = p.putong_jifen  * (p.hero:get '积分加成' + (ac.g_game_degree or 1) ) 
+            local total_value = (ac.total_putong_jifen* (ac.g_game_degree or 1)) / get_player_count() * (p.hero:get '积分加成' + 1)
+            print('累计获得的积分',total_value)
             -- end 
-            p.old_putong_jifen = p.putong_jifen
+            ac.old_total_putong_jifen = ac.total_putong_jifen
             --保存积分
             ac.jiami(p,'jifen',value)
 

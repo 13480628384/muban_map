@@ -245,6 +245,7 @@ ac.game:event '游戏-开始' (function()
             jf_mul = 2
         end    
         p.putong_jifen = (p.putong_jifen or 0) + jf_mul
+        ac.total_putong_jifen = (ac.total_putong_jifen or 0) + jf_mul
     end)
 
     --刷新排行榜信息

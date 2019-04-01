@@ -13,8 +13,8 @@ mt{
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNFlakCannons.blp]],
 	--特效
 	effect = [[]],
-    --获得积分双倍
-    jifen_mul = 2
+    --获得积分额外倍数
+    jifen_mul = 1
 	
 }
 function mt:on_add()

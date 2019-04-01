@@ -43,7 +43,7 @@ function mt:on_add()
         local hero = killer:get_owner().hero
         if hero and hero:has_item(self.name) then 
             self:add_item_count(1)
-            if self._count > self.kill_cnt then 
+            if self._count >= self.kill_cnt then 
                 self:item_remove()
                 -- hero:remove_item(self)
                 hero:add_item('霸者之证',true)
