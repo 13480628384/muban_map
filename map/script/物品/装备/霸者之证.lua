@@ -69,7 +69,7 @@ mt{
     --概率收集
     chance = function(self,hero)
         if self and hero then 
-            return 15 * ( 1 + hero:get('物品获取率')/100 )
+            return 25 * ( 1 + hero:get('物品获取率')/100 )
         end
     end,       
     --唯一
