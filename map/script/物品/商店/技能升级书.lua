@@ -8,9 +8,6 @@ mt{
     art = [[other\shengjishu.blp]],
     
     --说明
-    tip = [[
-用于升级技能
-    ]],
     
     --物品类型
     item_type = '消耗品',
@@ -46,7 +43,7 @@ function mt:on_cast_start()
             table.insert(list,info)
         end 
     end 
-
+    local name = self.name
     if #list == 0 then
         player:sendMsg("没有可以升级的技能。")
 
@@ -54,7 +51,7 @@ function mt:on_cast_start()
             self:set_item_count(self._count+1)
         else
             --重新添加给英雄
-            ac.item.add_skill_item(name,hero)
+            hero:add_item(name)
         end   
 
         return
@@ -79,7 +76,13 @@ function mt:on_cast_start()
                     self:add_item_count(-1)
                 end    
             else
-                self:add_item_count(1)       
+                --取消
+                if self._count > 1 then 
+                   self:add_item_count(1) 
+                else
+                    --重新添加给英雄
+                    hero:add_item(name)
+                end      
             end 
         end)
     else

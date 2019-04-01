@@ -1,5 +1,5 @@
 [FrameDef]
-ITEM_PAWN_TOOLTIP=|cff808080将物品扔在地上以卖出|R
+ITEM_PAWN_TOOLTIP=|cff808080将物品扔在商店以卖出|R
 ITEM_USE_TOOLTIP= 
 
 --力量

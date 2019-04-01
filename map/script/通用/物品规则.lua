@@ -138,7 +138,10 @@
         local gold = u.owner.gold
         local mutou = player:getlumber()
         local kill_count = player.kill_count or 0
-        local jifen = tonumber(ac.GetServerValue(player,'jifen')) or 0
+        local jifen = 0
+        if ac.GetServerValue then  
+            jifen= tonumber(ac.GetServerValue(player,'jifen')) 
+        end
 
         local golds = it:buy_price()
         local mutous = it:buy_mutou()

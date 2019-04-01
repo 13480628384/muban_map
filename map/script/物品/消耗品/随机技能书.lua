@@ -7,9 +7,7 @@ mt{
     art = [[other\suijijineng.blp]],
 
     --说明
-    tip = [[
-点击获取 随机技能 
-    ]],
+    tip = [[点击获取 随机技能]],
 
     --物品类型
     item_type = '消耗品',

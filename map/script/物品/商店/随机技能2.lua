@@ -9,9 +9,7 @@ level = 1,
 art = [[other\suijijineng.blp]],
 
 --说明
-tip = [[
-随机技能
-]],
+tip = [[随机技能]],
 
 --物品类型
 item_type = '神符',

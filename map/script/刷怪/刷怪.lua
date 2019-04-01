@@ -542,6 +542,10 @@ function mt:creat_key_unit()
     local point = self.region:get_point()
     local unit = ac.player[16]:create_unit('钥匙怪',point)
     ac.key_unit = unit
+    local data = ac.table.UnitData['钥匙怪']
+    if data.model_size then 
+        unit:set_size(data.model_size)
+    end    
     -- print('钥匙怪队伍：',unit:get_team())
     local name = '进攻怪-'..self.index
     local data = ac.table.UnitData[name]

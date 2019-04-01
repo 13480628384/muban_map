@@ -39,7 +39,9 @@ function mt:on_cast_start()
 	-- print(it)
     -- hero:event_notify('单位-拾取物品',hero,it)
 	-- 点太快 重复触发两次拾取。
-	unit:remove_item(it)
+	if it.owner then 
+		unit:remove_item(it)
+	end	
 	-- print()
 	-- print(it.owner)
 	-- local item = ac.item.create_item('新手剑',ac.point(0,0))

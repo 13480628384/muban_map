@@ -4,7 +4,7 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 0,
+    level = 1,
     max_level = 100,
     --标题颜色
     color =  '青',

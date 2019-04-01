@@ -8,9 +8,7 @@ mt{
     art = [[other\xunbaoshi101.blp]],
     
     --说明
-    tip = [[
-到指定地点，挖开即可得 %target_item% (成长型装备)
-    ]],
+    tip = [[到指定地点，挖开即可得 %target_item% (成长型装备)]],
     
     --物品类型
     item_type = '消耗品',
