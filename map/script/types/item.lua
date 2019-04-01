@@ -93,7 +93,7 @@ local color_code = {
     ['黄'] = 'ffff00',
     ['青'] = '00ffff',
     ['紫'] = 'df19d0',
-    ['橙'] = 'ff8000',
+    ['橙'] = 'FFCC00',
     ['棕'] = 'a67d3d',
     ['粉'] = 'bc8f8f',
     ['白'] = 'ffffff',
@@ -356,7 +356,7 @@ function mt:get_item_lni_tip(str)
 		if tp == 'function' then
 			return value(data)
 		end
-		return '|cff'..color_code['金']..tostring(value)..'|r'
+		return '|cff'..color_code['橙']..tostring(value)..'|r'
 	end)
 
 	return item_tip
@@ -374,7 +374,7 @@ function mt:get_tip()
 	--去掉颜色代码
 	local t_str = skill_tip:gsub('|[cC]%w%w%w%w%w%w%w%w(.-)|[rR]','%1'):gsub('|n','\n'):gsub('\r','\n')
 	local s_str = item_tip:gsub('|[cC]%w%w%w%w%w%w%w%w(.-)|[rR]','%1'):gsub('|n','\n'):gsub('\r','\n')
-
+	-- print(t_str,s_str)
 	if owner then
 		--有所属单位则说明物品在身上
 		if self:sell_price() > 0 then 
@@ -388,10 +388,10 @@ function mt:get_tip()
 		store_title = (self.store_affix or '购买 ')..self.store_name..'|r\n'
 		--否则就是在地上或商店里，地上不用管，商店的话修改出售价格
 		if self:buy_price() > 0 then 
-			gold = '|cffebd43d(价格：'..self:buy_price()..')|r|n'
+			gold = '|cffebd43d(价格：'..self:buy_price()..')|r|n'..'\n'
 		end	 
 		if self:buy_mutou() > 0 then 
-			gold = '|cffebd43d(木头：'..self:buy_mutou()..')|r|n'
+			gold = '|cffebd43d(木头：'..self:buy_mutou()..')|r|n'..'\n'
 		end	 
 		if self:buy_jifen() > 0 then 
 			--可能会掉线
@@ -399,7 +399,7 @@ function mt:get_tip()
 			for i=1,10 do
 				if ac.player(i) == ac.player.self then
 					if ac.GetServerValue then 
-						gold = '|cffebd43d(积分：'..self:buy_jifen()..')|r  |cff00ffff拥有'..(ac.GetServerValue(ac.player.self,'jifen') or '0')..'|r|n'
+						gold = '|cffebd43d(积分：'..self:buy_jifen()..')|r  |cff00ffff拥有'..(ac.GetServerValue(ac.player.self,'jifen') or '0')..'|r|n'..'\n'
 					end	
 				end	
 			end
@@ -408,7 +408,7 @@ function mt:get_tip()
 			for i=1,10 do
 				if ac.player(i) == ac.player.self then
 					if ac.player.self.kill_count then 
-						gold = '|cffebd43d(杀敌数：'..self:buy_kill_count()..')|r  |cff00ffff拥有'..(ac.player.self.kill_count or '0')..'|r|n'
+						gold = '|cffebd43d(杀敌数：'..self:buy_kill_count()..')|r  |cff00ffff拥有'..(ac.player.self.kill_count or '0')..'|r|n'..'\n'
 					end
 				end	
 			end
@@ -418,7 +418,7 @@ function mt:get_tip()
 		end	
 	end
 	
-	tip = store_title..gold..'\n'.. item_tip
+	tip = store_title..gold.. item_tip
 
 	if skill_tip and t_str ~= s_str then 
 	    if item_tip ~='' then  
@@ -426,7 +426,7 @@ function mt:get_tip()
 		end	
 		tip = tip..(temp_tip or '')..skill_tip..'\n'
 	end	
-	tip = tip ..'\n' 
+	tip = tip .. '\n'
 	return tip
 	
 end
@@ -764,9 +764,9 @@ function unit.__index:add_item(it,is_fall)
 	-- print('获得物品',it.handle,it.owner,it.name,it.slot_id)
 	-- self:print_item(true)
 	-- 如果单位身上已经有这个物品的handle了，再添加一次会触发先丢弃再获得物品事件。
-	print('1',it.handle,it.owner,self.handle,it.is_skill_init)
+	-- print('1',it.handle,it.owner,self.handle,it.is_skill_init)
 	jass.UnitAddItem(self.handle,it.handle)
-	print('2',it.handle,it.owner,self.handle,it.is_skill_init)
+	-- print('2',it.handle,it.owner,self.handle,it.is_skill_init)
 
 	--不阻止 丢弃物品事件   
 	--有时很奇怪，已经获得这个物品了，再用UnitAddItem 添加时，没有丢弃物品。所以这边操作是个修补操作
@@ -790,6 +790,7 @@ function unit.__index:add_item(it,is_fall)
 	-- self:print_item(true)
 	--刷新tip
 	-- it:fresh_tip()
+	print(it:get_tip())
 	return it
 end
 --打印单位身上的物品 ，打印全部 或是 当前页

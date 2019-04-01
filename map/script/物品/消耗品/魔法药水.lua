@@ -8,9 +8,7 @@ level = 1,
 art = [[ReplaceableTextures\CommandButtons\BTNPotionGreen.blp]],
 
 --说明
-tip = [[
-使用恢复200生命值
-]],
+tip = [[使用恢复200生命值]],
 
 --物品类型
 item_type = '消耗品',

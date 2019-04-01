@@ -62,6 +62,14 @@ ac.game:event '游戏-最终boss' (function(trg,index, creep)
     if creep.name ~= '刷怪' then
         return
     end  
+    if creep.boss.waiter1 then 
+        creep.boss.waiter1:remove()
+    end
+     
+    if creep.boss.waiter2 then 
+        creep.boss.waiter2:remove()
+    end   
+    
     -- print('删掉光环怪')
     if ac.enemy_unit then ac.enemy_unit:remove() end
     
@@ -70,9 +78,18 @@ ac.game:event '游戏-最终boss' (function(trg,index, creep)
     if c_boss_buff then 
         c_boss_buff:remove()
     end   
-    creep.boss:remove_restriction '无敌' 
-    creep.boss:remove_restriction '定身'
-    creep.boss:remove_restriction '缴械'
+    creep.boss:add_buff '缩放' {
+        origin_size = 1,
+        target_size = 2.5,
+        time = 2
+    }
+    ac.wait(2*1000,function ()
+        creep.boss:remove_restriction '无敌' 
+        creep.boss:remove_restriction '定身'
+        creep.boss:remove_restriction '缴械'
+    end)
+
+
     --设置搜敌路径
     creep.boss:set_search_range(99999)
     --注册事件

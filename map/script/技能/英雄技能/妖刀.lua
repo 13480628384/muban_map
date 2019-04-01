@@ -40,7 +40,7 @@ function mt:on_cast_shot()
 	local target = self.target
 
 	hero:add_effect('overhead',self.effect):remove()
-	hero:add_effect('overhead',self.effect1):remove()
+	target:add_effect('chest',self.effect1):remove()
 	
 	--变身不支持单位
 	self.buff = target:add_buff '召唤物' {
