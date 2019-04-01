@@ -21,7 +21,7 @@ mt{
     --投射物数量
     count = 2,
     --图标
-    art = [[weisuoshandianjian.tga]],
+    art = [[weisuoshandianjian.blp]],
 
     --释放几率
     chance = {5,7.5,10,12.5,15},

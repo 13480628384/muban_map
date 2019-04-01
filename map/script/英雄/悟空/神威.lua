@@ -9,7 +9,7 @@ mt{
 	max_level = 5,
 
 	tip = [[
-		主动：将变大的武器直插入地，对周围 %area% 码的敌人造成 和攻击力相关的 的物理伤害( %damage% ),将其晕眩 %time% 秒 
+		主动：对周围 %area% 码的敌人造成 和攻击力相关的 的物理伤害( %damage% ),将其晕眩 %time% 秒 
 		被动：+%physical_crite_rate% % 会心几率
 	]],
 	
@@ -20,7 +20,7 @@ mt{
 	target_type = ac.skill.TARGET_TYPE_NONE,
 
 	--施法范围
-	area = 600,
+	area = 400,
 
 	--持续时间
 	time = 2,
@@ -43,7 +43,7 @@ mt{
 	cost = {30,180,330,480,600},
 
 	--特效模型
-	effect = [[AZ_Kaer_T1.mdx]],
+	effect = [[GoblinTech_R.mdx]],
 	-- effect = [[Hero_Juggernaut_N4S_F_Source.mdx]],
 	
 }
