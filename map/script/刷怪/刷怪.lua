@@ -701,18 +701,18 @@ ac.game:event '游戏-选择难度' (function (_,index)
     --难度1
     if index == 1 then 
         ac.g_game_degree = index 
-        ac.player.self:sendMsg("【普通】是男人就上 100 层 ")
+        ac.player.self:sendMsg("选择了 |cffffff00【普通难度】|r ")
     end
     
     --难度2
     if index == 2 then 
         ac.g_game_degree = index
-        ac.player.self:sendMsg("【噩梦】100 层后，进入无尽模式")
+        ac.player.self:sendMsg("选择了 |cffffff00【噩梦难度】（可进入无尽）|r")
     end 
     --难度3
     if index == 3 then 
         ac.g_game_degree = index
-        ac.player.self:sendMsg("【地狱】100 层后，进入无尽模式")
+        ac.player.self:sendMsg("选择了 |cffffff00【地狱难度】（可进入无尽 新手慎入）|r")
     end 
 
     --每3秒提醒玩家主机在选择难度
@@ -734,26 +734,26 @@ ac.wait(20,function()
     local player = get_first_player()
     local list = {
         { name = "标准模式" },
-        { name = "嘉年华模式" },
+        { name = "嘉年华模式（快速出怪）" },
     }
     
     local list2 = {
         { name = "普通" },
-        { name = "噩梦" },
-        { name = "地狱" },
+        { name = "噩梦（可进入无尽）" },
+        { name = "地狱（可进入无尽 新手慎入）" },
     }
-    ac.player.self:sendMsg("正在选择 模式、难度")
+    ac.player.self:sendMsg("正在选择 |cffffff00模式、难度|r")
     if player then 
         create_dialog(player,"选择模式",list,function (index)
             --模式1 标准模式
             if index == 1 then 
                 ac.g_game_mode = index 
-                ac.player.self:sendMsg("【标准模式】")
+                ac.player.self:sendMsg("选择了 |cffffff00【标准模式】|r")
             end
             --模式2 嘉年华模式
             if index == 2 then 
                 ac.g_game_mode = index 
-                ac.player.self:sendMsg("【嘉年华模式】 ")
+                ac.player.self:sendMsg("选择了 |cffffff00【嘉年华模式】（快速出怪）|r")
             end
 
             create_dialog(player,"选择难度",list2,function (index)
