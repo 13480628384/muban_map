@@ -172,6 +172,10 @@ function mt:set_name(name)
 			show_lv = 'Lv'..self.level 
 		end		
 	end	
+	if self.suit_type then 
+		color = color_code['绿']
+	end	
+
 	local str = '|cff'..color..tostring(name)..show_lv..'|r'
 	self.store_name = str
 	japi.EXSetItemDataString(base.string2id(id),4,str)
@@ -384,8 +388,8 @@ function mt:get_tip()
 		item_type_tip = '|cff'..ac.color_code['淡黄'].. '类型：|R|cff'..ac.color_code['绿']..self.item_type..'\n'
 	end	
 	
-	if self.cus_type =='技能' then 
-		item_type_tip = '|cff'..ac.color_code['淡黄'].. '类型：|R|cff'..ac.color_code['紫']..self.cus_type..'\n'
+	if self.cus_type then 
+		item_type_tip = '|cff'..ac.color_code['淡黄']..'类型：|R'..'|cff'..ac.color_code['紫']..self.cus_type..'\n'
 	end	
 	--如果物品tip和技能tip一致，不添加技能tip
 	--去掉颜色代码

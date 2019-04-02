@@ -5,7 +5,6 @@ mt{
     is_skill = true,
     --颜色
     color = '青',
-
     tip = [[
 攻击加 %attack%
 生命加 %life%
