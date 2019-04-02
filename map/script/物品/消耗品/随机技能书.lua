@@ -28,7 +28,10 @@ mt{
     cnt = 4,
 
     --技能模型
-    _model = ac.zb_color_model['绿']
+    _model = ac.zb_color_model['书'],
+    model_size = 1.5,
+    --物品详细介绍的title
+    content_tip = '使用说明：'
 
 }
 

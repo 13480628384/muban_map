@@ -386,6 +386,10 @@
                 if item._count < 1 then 
                     item:item_remove()
                 end
+            else 
+                if item._count > 0 then 
+                    item._count = item._count - 1
+                end
             end    
 
             hero:event_notify('物品-施法完成', hero,item)

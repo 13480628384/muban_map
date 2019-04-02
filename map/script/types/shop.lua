@@ -132,8 +132,8 @@ function mt:add_sell_item(name,i)
 
 	local item = ac.item.create(name,i)
 	item.shop_slot_id = i
-	item:set_store_title('                   '..self:get_name())
-	
+	-- item:set_store_title('                   '..self:get_name())
+	item:set_store_title(item.store_name)
 	--每秒刷新商店介绍
 	--选择英雄时，如果是重复用同一套 ability，技能描述会再被刷新为最后一次添加的描述
 	--改为 刷新 当前选择的单位的tip
@@ -256,7 +256,7 @@ function mt:fresh()
 					end	
 					new_shop_item.gold = gold or it.gold
 					--刷新数据
-					new_shop_item:set_sell_state('                   '..self:get_name())
+					new_shop_item:set_sell_state()
 					--设置回原来的价格
 					new_shop_item.gold = it.gold
 				end	

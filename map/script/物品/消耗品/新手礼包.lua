@@ -24,6 +24,8 @@ cool = 1,
 
 --购买价格
 gold = 0,
+--物品详细介绍的title
+content_tip = '使用说明：'
 
 }
 

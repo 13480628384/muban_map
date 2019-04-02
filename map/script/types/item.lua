@@ -99,7 +99,9 @@ local color_code = {
     ['白'] = 'ffffff',
     ['黑'] = '000000',
     ['金'] = 'ffff00',
-    ['灰'] = 'cccccc',
+	['灰'] = 'cccccc',
+	['淡黄'] = 'FFE799',
+	
 }
 ac.color_code = color_code
 
@@ -119,8 +121,10 @@ local zb_color_model = {
     ['金'] = [[File00000376 - Y.mdx]],
     ['红'] = [[File00000376 - R.mdx]],
     ['绿'] = [[File00000376 - G.mdx]],
+    ['书'] = [[ArcaneTome.mdx]],
 }
 ac.zb_color_model = zb_color_model
+
 
 local drop_flag = false
 local item_slk = slk.item
@@ -309,6 +313,11 @@ function mt:show(is)
 		end
 		-- print(self:get_point())
 		self._eff = ac.effect(self:get_point(),self._model,270,1,'origin')
+		
+		--设置物品模型 套装 模型大小
+		if self.model_size and self._eff then 
+			self._eff.unit:set_size(self.model_size )
+		end
 	end
 end
 
@@ -356,7 +365,7 @@ function mt:get_item_lni_tip(str)
 		if tp == 'function' then
 			return value(data)
 		end
-		return '|cff'..color_code['橙']..tostring(value)..'|r'
+		return '|cff'..color_code['金']..tostring(value)..'|r'
 	end)
 
 	return item_tip
@@ -368,24 +377,36 @@ function mt:get_tip()
 	local gold =''
 	local skill_tip = self:get_simple_tip() or ''
 	local item_tip = self:get_item_lni_tip() or ''
-    local tip = ''
-
+	local tip = ''
+	local color_tip = ''
+	local item_type_tip = ''
+	if self.item_type =='消耗品' then 
+		item_type_tip = '|cff'..ac.color_code['淡黄'].. '类型：|R|cff'..ac.color_code['绿']..self.item_type..'\n'
+	end	
+	
+	if self.cus_type =='技能' then 
+		item_type_tip = '|cff'..ac.color_code['淡黄'].. '类型：|R|cff'..ac.color_code['紫']..self.cus_type..'\n'
+	end	
 	--如果物品tip和技能tip一致，不添加技能tip
 	--去掉颜色代码
 	local t_str = skill_tip:gsub('|[cC]%w%w%w%w%w%w%w%w(.-)|[rR]','%1'):gsub('|n','\n'):gsub('\r','\n')
 	local s_str = item_tip:gsub('|[cC]%w%w%w%w%w%w%w%w(.-)|[rR]','%1'):gsub('|n','\n'):gsub('\r','\n')
 	-- print(t_str,s_str)
+	-- print(self.color)
+	if self.color then 
+		color_tip = '|cff'..ac.color_code['淡黄'].. '品质：|R'..self.color..'\n'
+	end	
 	if owner then
 		--有所属单位则说明物品在身上
 		if self:sell_price() > 0 then 
-			gold = '|cffebd43d(出售：'..self:sell_price()..')|r|n'
+			gold = '|cff'..ac.color_code['淡黄']..'售价：|R'..self:sell_price()..'|r|n'
 		end	
 		if self.get_sell_tip then 
 			gold = self:get_sell_tip(gold)
 		end	
 	else
 		--否则就是在地上或商店里，地上不用管，商店的话修改出售价格
-		store_title = (self.store_affix or '购买 ')..self.store_name..'|r\n'
+		-- store_title = (self.store_affix or '购买 ')..self.store_name..'|r\n'
 		--否则就是在地上或商店里，地上不用管，商店的话修改出售价格
 		if self:buy_price() > 0 then 
 			gold = '|cffebd43d(价格：'..self:buy_price()..')|r|n'..'\n'
@@ -417,8 +438,24 @@ function mt:get_tip()
 			gold = self:get_buy_tip(gold)
 		end	
 	end
+	local content_tip =''
+	if self.item_type =='装备' then 
+		content_tip = '|cff'..ac.color_code['淡黄']..'基本属性：|R\n'
+	end
+	if self.item_type =='消耗品' then 
+		content_tip = '|cff'..ac.color_code['淡黄']..'增加属性：|R\n'
+	end
+	--技能
+	if self.is_skill  then 
+		content_tip = '|cff'..ac.color_code['淡黄'].. '技能介绍：'..'|R\n'
+	end
+	--自定义 内容说明titile
+	if self.content_tip  then 
+		content_tip = '|cff'..ac.color_code['淡黄'].. self.content_tip ..'|R\n'
+	end
 	
-	tip = store_title..gold.. item_tip
+	
+	tip = store_title..gold..color_tip..item_type_tip..content_tip.. item_tip
 
 	if skill_tip and t_str ~= s_str then 
 	    if item_tip ~='' then  
@@ -790,7 +827,7 @@ function unit.__index:add_item(it,is_fall)
 	-- self:print_item(true)
 	--刷新tip
 	-- it:fresh_tip()
-	print(it:get_tip())
+	-- print(it:get_tip())
 	return it
 end
 --打印单位身上的物品 ，打印全部 或是 当前页
@@ -969,10 +1006,19 @@ function ac.item.create_item(name,poi,is)
 		items._model = zb_color_model[items.color]
 	end
 
+	--设置物品模型 套装
+	if items.color and items.suit_type  then 
+		items._model = zb_color_model['绿']
+	end
+
 	if not is then 
 		items._eff = ac.effect(ac.point(x,y),items._model,270,1,'origin')
-    end
-
+	end
+	--设置物品模型 套装 模型大小
+	if items.model_size and items._eff then 
+		items._eff.unit:set_size(items.model_size )
+	end
+	
 	--设置使用次数
 	if items.item_type == '消耗品' and items._count == 0 then 
 		items._count = 1
@@ -1054,11 +1100,12 @@ end
 
 --商店标题
 function mt:set_store_title(title)
+	local title = (self.store_affix or '购买 ')..title..'|r'
 	japi.EXSetItemDataString(base.string2id(self.type_id), 2,title)
 end
 
 --更新商店信息
-function mt:set_sell_state(str)
+function mt:set_sell_state()
 	--设置物品名
 	self:set_name(self.name)
 	--设置贴图
@@ -1066,7 +1113,7 @@ function mt:set_sell_state(str)
 	--设置tip
 	self:set_tip(self:get_tip())
 	--设置商店出售名 颜色没法呈现
-	self:set_store_title(str or ' ')
+	self:set_store_title(self.store_name)
 end
 
 

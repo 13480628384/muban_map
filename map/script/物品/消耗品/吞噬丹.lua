@@ -10,6 +10,8 @@ cool = 0,
 
 --物品技能
 is_skill = true,
+--物品详细介绍的title
+content_tip = '使用说明：'
 
 }
 

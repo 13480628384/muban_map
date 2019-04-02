@@ -22,7 +22,7 @@ function ac.item.create_skill_item(name,poi,is)
 
     item:set_name(name) 
     item.skill_name = name
-    item.tip =  tip .. '|n|cff808080使用即可习得该技能|r' 
+    item.tip =  tip .. '|n|cff808080点击 学习或升级 技能  |r' 
     item:set_art(art)
     item:set_tip(item.tip)
     

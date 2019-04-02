@@ -21,7 +21,9 @@ mt{
     --物品技能
     is_skill = true,
     --挖图范围
-    area = 600
+    area = 600,
+    --物品详细介绍的title
+    content_tip = '使用说明：'
     
 }
     

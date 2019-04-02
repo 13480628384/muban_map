@@ -3,8 +3,6 @@ local mt = ac.skill['勇气之证']
 mt{
     --物品技能
     is_skill = true,
-    --物品类型
-    item_type = '消耗品',
     --颜色
     color = '青',
 
@@ -26,7 +24,9 @@ mt{
     --杀敌个数
     kill_cnt = 350,
     --唯一
-    unique = true
+    unique = true,
+    --物品详细介绍的title
+    content_tip = '基本属性：'
 }
 
 
@@ -59,7 +59,6 @@ function mt:on_cast_start()
     local player = hero:get_owner()
     --需要先增加一个，否则消耗品点击则无条件先消耗
     self:add_item_count(1) 
-
 end    
 --实际是丢掉
 function mt:on_remove()

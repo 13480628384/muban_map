@@ -6,12 +6,12 @@ item.suit_type = '召唤'
 
 ac.item.suit = {
     --套装名，套装要求类型，符合类型个数及对应加成属性，符合类型个数及对应加成属性
-    {'召唤师的赠礼','召唤','3 召唤物+1 召唤物属性+100%','5 召唤物+1 召唤物属性+250%'},
-    {'法师的赠礼','智力','3 法爆几率+20 ','5 法爆伤害+2000%' },
-    {'战士的赠礼','力量','3 物爆几率+20 ','5 物爆伤害+2000%' },
-    {'射手的赠礼','敏捷','3 会心几率+20 ','5 会心伤害+2000%' },
-    {'肉盾的赠礼','护甲','3 减免+15%','5 减免+25%' },
-    {'辅助的赠礼','收益','3 经验加成+25% 金币加成+25% 物品获取率+25%','5 经验加成+25% 金币加成+25% 物品获取率+25%' },
+    {'【召唤师】','召唤师的赠礼','召唤','3 召唤物+1 召唤物属性+100%','5 召唤物+1 召唤物属性+250%'},
+    {'【法师】','法师的赠礼','智力','3 法爆几率+20 ','5 法爆伤害+2000%' },
+    {'【战士】','战士的赠礼','力量','3 物爆几率+20 ','5 物爆伤害+2000%' },
+    {'【射手】','射手的赠礼','敏捷','3 会心几率+20 ','5 会心伤害+2000%' },
+    {'【肉盾】','肉盾的赠礼','护甲','3 减免+15%','5 减免+25%' },
+    {'【海贼王】','海贼王的赠礼','收益','3 经验加成+25% 金币加成+25% 物品获取率+25%','5 经验加成+25% 金币加成+25% 物品获取率+25%' },
 }
 local function get_suit_count(unit,suit_type)
     local cnt =0 
@@ -40,7 +40,7 @@ local function unit_add_suit(unit,item)
     end    
 
     for _, data in ipairs(ac.item.suit) do
-        local name, type,attr1,attr2,attr3,attr4,attr5,attr6 = table.unpack(data)
+        local little_name,name, type,attr1,attr2,attr3,attr4,attr5,attr6 = table.unpack(data)
         local temp_attr ={}
         temp_attr[1] = attr1 
         temp_attr[2] = attr2 
@@ -52,7 +52,7 @@ local function unit_add_suit(unit,item)
         if type == item.suit_type then 
             local tip = '' 
             local unit_suit_cnt = get_suit_count(unit,item.suit_type) or 0 
-            tip = tip ..'|cffAAAAAA'.. name..' (已拥有|r|cffffffff'..unit_suit_cnt..'|r|cffAAAAAA) |r'..'\n'
+            tip = tip ..'|cffFFE799'.. name..' (套装)|r'..'\n'
             item.suit_name = name
             for i = 1,6 do
                 if temp_attr[i] then 
@@ -100,9 +100,9 @@ local function unit_add_suit(unit,item)
                         unit.suit[name][cnt][1] = true
                     end    
                     if active_flag then 
-                        tip = tip..'|cff00FF00'..attr_tip..' ('..cnt..')|r\n'
+                        tip = tip..'|cff00FF00'..attr_tip..' ('..unit_suit_cnt..'/'..cnt..')|r\n'
                     else
-                        tip = tip..attr_tip..'('..cnt..')\n'
+                        tip = tip..attr_tip..' ('..unit_suit_cnt..'/'..cnt..')|r\n'
                     end    
                     unit.suit[name][cnt][4] = tip  
                 end
@@ -125,8 +125,8 @@ local function unit_remove_suit(unit,item)
     local suit_count = get_suit_count(unit,item.suit_type)
     local name = item.suit_name 
    
-    tip = tip ..'|cffAAAAAA'.. name..' (已拥有|r|cffffffff'..suit_count..'|r|cffAAAAAA) |r'..'\n'
-    item_self_tip = item_self_tip ..'|cffAAAAAA'.. name..'|r\n'
+    tip = tip ..'|cffFFE799'.. name..' (套装)|r'..'\n'
+    item_self_tip = item_self_tip ..'|cffFFE799'.. name..' (套装)|r'..'\n'
     -- print(tip)
     --刷新tip
                  
@@ -144,11 +144,11 @@ local function unit_remove_suit(unit,item)
                     v[i][1] = false
                 end   
                 if v[i][1] then 
-                    tip = tip..'|cff00FF00'..v[i][3]..' ('..i..')|r\n'
+                    tip = tip..'|cff00FF00'..v[i][3]..'('..suit_count..'/'..i..')\n'
                 else
-                    tip = tip..v[i][3]..'('..i..')\n'
+                    tip = tip..v[i][3]..'('..suit_count..'/'..i..')\n'
                 end    
-                item_self_tip = item_self_tip ..'|cffffffff'..v[i][3]..'('..i..')|r\n'
+                item_self_tip = item_self_tip ..'|cffffffff'..v[i][3]..'('..suit_count..'/'..i..')\n'
             end 
         end 
     end 
@@ -176,7 +176,7 @@ ac.game:event '物品-创建' (function (_,item)
     end
     
     for _, data in ipairs(ac.item.suit) do
-        local name, type,attr1,attr2,attr3,attr4,attr5,attr6 = table.unpack(data)
+        local little_name,name, type,attr1,attr2,attr3,attr4,attr5,attr6 = table.unpack(data)
         local temp_attr ={}
         temp_attr[1] = attr1 
         temp_attr[2] = attr2 
@@ -187,7 +187,7 @@ ac.game:event '物品-创建' (function (_,item)
 
         if type == item.suit_type then 
             local tip = '' 
-            tip = tip ..'|cffAAAAAA'.. name..'|r'..'\n'
+            tip = tip ..'|cffFFE799'.. name..' (套装)|r'..'\n'
             item.suit_name = name
             for i = 1,6 do
                 if temp_attr[i] then  
@@ -207,6 +207,7 @@ ac.game:event '物品-创建' (function (_,item)
             end    
             -- print(item:get_tip()..tip)
             item:set_tip(item:get_tip()..tip)    
+            --更改物品名字
         end    
     end   
          

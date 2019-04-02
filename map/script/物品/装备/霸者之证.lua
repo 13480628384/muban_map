@@ -5,8 +5,6 @@ mt{
     is_skill = true,
     level = 1 ,
     max_level = 5,
-    --物品类型
-    item_type = '消耗品',
 
     --颜色
     color = '紫',
@@ -79,7 +77,8 @@ mt{
     --显示等级
     show_level = true,
     --升级特效
-    effect =[[Hero_CrystalMaiden_N2_V_boom.mdx]]
+    effect =[[Hero_CrystalMaiden_N2_V_boom.mdx]],
+    content_tip = '基本属性：'
 }
 
 
@@ -143,7 +142,7 @@ function mt:on_add()
     hero:add('攻击',self.attack)
     hero:add('生命上限',self.life)
     hero:add('护甲',self.defence)
-    
+
 	hero:add('物爆几率', self.physical_rate)
 	hero:add('会心几率', self.heart_rate)
     hero:add('法爆几率', self.magic_rate)
