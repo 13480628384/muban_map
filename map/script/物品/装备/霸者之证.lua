@@ -87,7 +87,8 @@ mt.magic_rate_now = 0
 
 function mt:on_upgrade()
     local hero = self.owner
-	-- print(self.life_rate_now)   
+    -- print(self.life_rate_now)   
+    hero:add_effect('chest',self.effect)
     self:set_name(self.name)
 	hero:add('物爆几率', -self.physical_rate_now)
 	self.physical_rate_now = self.physical_rate
