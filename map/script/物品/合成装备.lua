@@ -272,7 +272,11 @@ local function streng_item(alltable,unit,it)
 
             -- ac.game:event_dispatch('物品-合成成功前', dest_str,source_names,del_item) 
             -- print('最终概率',dest_rate)
-            local color = ac.color_code[dest_str.color or '白']
+            local data = ac.table.ItemData[dest_str]
+            local color
+            if data then  
+                color= ac.color_code[data.color or '白'] 
+            end
             if math.random(1,100) <= (tonumber(dest_rate) or 100) then 
                 p:sendMsg('|cff00ffff合成|r|cff'..color..dest_str..'|r|cff00ff00成功|r')
                 local new_item  = u:add_item(dest_str,true)  

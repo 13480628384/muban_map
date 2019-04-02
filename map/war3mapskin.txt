@@ -1,3 +1,11 @@
+[CustomSkin]
+MessageFont=resource\fonts\FZHTJW.TTF
+MasterFont=resource\fonts\FZHTJW.TTF
+InfoPanelTextFont=resource\fonts\FZHTJW.TTF
+EscMenuTextFont=resource\fonts\FZHTJW.TTF
+TextTagFont=resource\fonts\FZHTJW.TTF
+ChatFont=resource\fonts\FZHTJW.TTF
+
 [FrameDef]
 ITEM_PAWN_TOOLTIP=|cff808080将物品扔在商店以卖出|R
 ITEM_USE_TOOLTIP= 
