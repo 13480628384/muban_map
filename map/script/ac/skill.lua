@@ -610,7 +610,7 @@ local function format_string(self, str, hero, level, need_level)
 			v = tostring(v)
 		end
 		if color_flag then
-			return '|cffffcc00' .. v .. '|r'
+			return '|cffffff00' .. v .. '|r'
 		else
 			return v
 		end

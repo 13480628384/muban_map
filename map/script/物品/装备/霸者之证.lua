@@ -9,11 +9,11 @@ mt{
     --颜色
     color = '紫',
 
-    tip = [[|cffdf19d0攻击加 %attack%
-|cffdf19d0生命加 %life%
-|cffdf19d0护甲加 %defence%|r
-%lv2_tip% 
-]],
+    tip = [[
+|cffffff00+|r %attack% 攻击
+|cffffff00+|r %life% 生命
+|cffffff00+|r %defence% 护甲
+%lv2_tip%]],
 
     --技能图标
     art = [[other\zheng_401.blp]],
@@ -38,24 +38,23 @@ mt{
     lv2_tip = function(self,hero)
         local tip = ''
         if self.level == 1  then 
-            tip = tip .. '|cff00ffff【飞升】英雄达到100级,携带此物，前往天结散人。|r'
+            tip = tip .. '\n|cffFFE799【进阶】|r100级的英雄，携带此物，|cff00ffff找出生点的 天洁散人 |r'
         else    
             if self.level >=2  then 
-                tip = tip .. '|cffdf19d0物爆几率+'..self.physical_rate ..'|r\n'
-                tip = tip .. '|cffdf19d0法爆几率+'..self.magic_rate ..'|r\n'
-                tip = tip .. '|cffdf19d0会心几率+'..self.heart_rate ..'|r\n'
-                tip = tip .. '|cffffff00杀怪+5点全属性'..'|r\n'
-                tip = tip .. '|cffffff00杀死敌人有概率（25%）收集灵魂（受物品获取率影响））|r\n'
+                tip = tip .. '|cffffff00+'..self.physical_rate ..'%|r 物爆几率\n'
+                tip = tip .. '|cffffff00+'..self.magic_rate ..'%|r 法爆几率\n'
+                tip = tip .. '|cffffff00+'..self.heart_rate ..'%|r 会心几率\n'
+                tip = tip .. '|cffffff00+5|r 杀怪获得全属性'..'\n'
+                tip = tip .. '|cffffff00+25%|r 杀怪收集灵魂（受物品获取率影响）\n'
             end   
             if self.level >=2 and self.level <=3  then  
-                tip = tip .. '|cff00ffff【进化】杀死|r %upgrade_cnt% |cff00ffff个敌人|r'
+                tip = tip .. '\n|cffFFE799【进阶】|r收集%upgrade_cnt%个灵魂，自动进阶为|cffdf19d0 霸者之证LV'..(self.level+1)..'|r'
             end   
             if self.level ==4 then  
-                tip = tip .. '|cff00ffff【进化】杀死|r %upgrade_cnt% |cff00ffff个敌人，且成功挑战伏地魔（天结散人）|r'
+                tip = tip .. '\n|cffFFE799【进阶】|r收集%upgrade_cnt%个灵魂，找|cff00ffff出生点的 天洁散人 |r挑战伏地魔'
             end
             if self.level ==5 then  
-                tip = tip .. '|cffdf19d0对BOSS额外伤害+'..self.boss_damage ..'%|r\n'
-                tip = tip .. '|cff00ffff【满级无法进化】|r'
+                tip = tip .. '|cffffff00+'..self.boss_damage ..'%|r 对BOSS额外伤害'
             end
         end    
         return tip
