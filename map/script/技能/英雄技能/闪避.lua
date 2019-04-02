@@ -15,9 +15,7 @@ mt{
 	
 	tip = [[
 		|cff00ccff被动|r:
-		闪避加 %dodge% %
-
-	]],
+		闪避加 %dodge% %]],
 	
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNEvasion.blp]],

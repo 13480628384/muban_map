@@ -14,7 +14,11 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤1只战斗机助战（属性和智力相关，多重射）]],
+	tip = [[召唤1只战斗机助战
+	
+	|cff00bdec召唤物属性：和智力相关|r 
+
+	|cff00bdec召唤物技能：多重射|r]],
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNFlakCannons.blp]],
 	--特效

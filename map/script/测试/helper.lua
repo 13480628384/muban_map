@@ -229,7 +229,7 @@ function helper:dtdj(lv)
 	local p = self:get_owner()
 	local peon = p.peon
 	if peon then
-		local skill = peon:find_skill('地图等级', '英雄', true)
+		local skill = peon:find_skill('荣耀称号', '英雄', true)
 		print(skill,10)
 		if skill then 
 			skill:set_level(lv)

@@ -10,9 +10,9 @@ mt{
     color = '紫',
 
     tip = [[
-|cffffff00+|r %attack% 攻击
-|cffffff00+|r %life% 生命
-|cffffff00+|r %defence% 护甲
+|cffffff00+|r%attack% 攻击
+|cffffff00+|r%life% 生命
+|cffffff00+|r%defence% 护甲
 %lv2_tip%]],
 
     --技能图标

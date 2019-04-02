@@ -15,8 +15,8 @@ function player.__index:create_pets()
     u:add_skill('全图闪烁','英雄')
     u:add_skill('传递物品','英雄')
     u:add_skill('一键拾取','英雄')
-    u:add_skill('装备合成书','英雄')
-    u:add_skill('地图等级','英雄',8)
+    u:add_skill('装备合成','英雄')
+    u:add_skill('荣耀称号','英雄',8)
     u:add_skill('翅膀管理','英雄',7)
     
     
