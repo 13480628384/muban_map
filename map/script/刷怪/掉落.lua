@@ -11,7 +11,7 @@ for name,data in pairs(ac.table.ItemData) do
             table.insert(list,name)
             quality_item[color] = list 
             --打印 可合成或是掉落的物品
-            print(name,color)
+            -- print(name,color)
         end    
     end 
 end 
