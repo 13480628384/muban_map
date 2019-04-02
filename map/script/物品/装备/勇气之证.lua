@@ -6,9 +6,9 @@ mt{
     --颜色
     color = '青',
     tip = [[
-+ %attack% 攻击
-+ %life% 生命
-+ %defence% 护甲
++%attack% 攻击
++%life% 生命
++%defence% 护甲
 
 |cffFFE799【进阶】|r 杀死 %kill_cnt% 个敌人，自动进阶为|cffdf19d0 霸者之证|r]],
 

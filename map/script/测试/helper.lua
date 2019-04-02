@@ -257,7 +257,15 @@ function helper:save(key,value)
 	p:Map_SaveServerValue(key,value)
 	print('服务器存档:'..key,p:Map_GetServerValue(key))
 end	
-
+--服务器清空档案
+function helper:clear_server()
+	for i = 1, 10 do
+		local p = ac.player(i)
+		for n = 1,#ac.mall do 
+			p:Map_FlushStoredMission(ac.mall[n][1],'S')
+		end	
+	end
+end
 --服务器存档 读取 
 function helper:get_server(key)
 	local p = self:get_owner()

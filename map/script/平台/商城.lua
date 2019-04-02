@@ -36,7 +36,8 @@ local function get_mallkey_byname(name)
         end    
     end
     return res
-end    
+end 
+ac.mall =   item 
 --根据商城物品名取得对应的key
 ac.get_mallkey_byname = get_mallkey_byname
 ac.wait(10,function()

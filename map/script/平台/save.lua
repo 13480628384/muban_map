@@ -1,17 +1,18 @@
--- local Base64 = require 'ac.Base64'
--- local store = require 'ui.client.store'
 
-ac.jm_sjs = math.random(1,4399)
 
 function ac.jiami(p,key,value)
     local v = ZZBase64.decode(p[key])
-    v = (v / ac.jm_sjs + value)
-    p[key] = ZZBase64.encode(v *ac.jm_sjs )
+    v = v  + value
+    p[key] = ZZBase64.encode(v)
 
-    if p:GetServerValueErrorCode() then
-        p:Map_Stat_SetStat('fjjf',tostring(v))
-    end
     ac.SaveServerValue(p,key,v)
+end
+
+--存档
+function ac.SaveServerValue(p,KEY,value)
+    value = tostring(value)
+    local s = ZZBase64.encode(value)
+    p:Map_SaveServerValue(KEY,s)
 end
 
 --读取
@@ -29,83 +30,21 @@ function ac.GetServerValue(p,KEY)
     return ZZBase64.decode(value)
 end
 
---存档
-function ac.SaveServerValue(p,KEY,value)
-    value = tostring(value)
-    local s = ZZBase64.encode(value)
-    p:Map_SaveServerValue(KEY,s)
-    --保存一下，只清零一次
-    p:Map_SaveServerValue('is',1)
-end
-
 --读取积分
 for i=1,8 do
     local player = ac.player[i]
     if player:is_player() then
+
         --读取积分
         local jifen  = tonumber(ac.GetServerValue(player,'jifen'))
-        print('服务器积分：',jifen)
-
-        --设置客户端的积分
-        if player:is_self() then
-            -- c_ui.store.set_jifen(jifen)
-        end
+        print('服务器积分：',player,jifen)
 
         --保存服务端积分
-        player.jifen = ZZBase64.encode(jifen * ac.jm_sjs)
-        --读取波数
-        local value = player:Map_GetServerValue('boshu')
-        if not value or value == '' or value == "" then
-            player.boshu = 0
-        else
-            player.boshu = tonumber(value)
-        end
+        player.jifen = ZZBase64.encode(jifen)
 
-        --读取王者点数
-        local dianshu = player:Map_GetServerValue('ds')
-        if not dianshu or dianshu == '' or dianshu == "" then
-            player.dianshu = 0
-        else
-            dianshu = tonumber(dianshu)
-            if dianshu > 1500 then
-                player.dianshu = 0
-            else
-                player.dianshu = tonumber(dianshu)
-            end
-        end
     else
-        player.boshu = 0
         player.jifen = 0
-        player.dianshu = 0
-    end
-end
 
-
-local rank_art = {'黑铁','黄铜','白银','黄金','铂金','钻石','大师','王者'}
---设置房间KEY
-local function set_fangjian_xm(p,count)
-    local value = 1
-    --段位为1-7 青铜 白银 黄金 白金 钻石 大师 王者
-    if count <= 20 then
-        value = 1
-    elseif count <=40 then
-        value = 2
-    elseif count <=70 then
-        value = 3
-    elseif count <=100 then
-        value = 4
-    elseif count <=150 then
-        value = 5
-    elseif count <=170 then
-        value = 6
-    elseif count <=200 then
-        value = 7
-    elseif count >= 201 then
-        value = 8
-    end
-
-    if p:GetServerValueErrorCode() then
-        p:Map_Stat_SetStat('fjdw',rank_art[value])
     end
 end
 
@@ -120,18 +59,14 @@ local function save_jifen()
         if p:is_player() then
             --只保存一次
             local value
-            -- if not p.is_flag then  
-            --     value = (p.putong_jifen) * (p.hero:get '积分加成' + 1)
-            --     p.old_kill_count = p.putong_jifen 
-            --     p.is_flag = true
-            -- else
+          
             value = (ac.total_putong_jifen - (ac.old_total_putong_jifen or 0)) * (ac.g_game_degree or 1) / get_player_count() 
             -- (p.putong_jifen - (p.old_putong_jifen or 0)) * (p.hero:get '积分加成' + (ac.g_game_degree or 1) )
             value = value * (p.hero:get '积分加成' + 1)
-            print('当前回合最终加的积分',value,'总积分',ac.total_putong_jifen,'难度倍数',ac.g_game_degree,'在线玩家数',get_player_count(),'积分加成',p.hero:get '积分加成')
+            -- print('当前回合最终加的积分',value,'总积分',ac.total_putong_jifen,'难度倍数',ac.g_game_degree,'在线玩家数',get_player_count(),'积分加成',p.hero:get '积分加成')
 
             local total_value = (ac.total_putong_jifen* (ac.g_game_degree or 1)) / get_player_count() * (p.hero:get '积分加成' + 1)
-            print('累计获得的积分',total_value)
+            -- print('累计获得的积分',total_value)
             -- end 
             ac.old_total_putong_jifen = ac.total_putong_jifen
             --保存积分
@@ -142,21 +77,7 @@ local function save_jifen()
                 c_ui.ranking.ui.integral:set_text('本局累计获得积分：'..total_value)
             end
 
-            -- if ac.nandu_id <= 2 then
-            --     --保存波数
-            --     if army.now_count - 11 > p.boshu then
-            --         p:Map_SaveServerValue('boshu',army.now_count - 11)
-            --         set_fangjian_xm(p,army.now_count - 11)
-            --     end
-            -- else
-            --     --难3保存点数 段位小于王者的不保存
-            --     if p.rank == 8 then
-            --         if army.now_count - 11 > p.dianshu then
-            --             p:Map_SaveServerValue('ds',army.now_count - 11)
-            --             p:Map_Stat_SetStat('fjwz',army.now_count - 11)
-            --         end
-            --     end
-            -- end
+          
         end
     end
 end    
