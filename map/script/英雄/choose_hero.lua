@@ -180,6 +180,7 @@ local function start()
 
 	--注册事件
 	local select_unit_trg = ac.game:event '玩家-选择单位' (function(self, p, hero)
+
 		if not p.hero and hero_types[hero:get_data '英雄类型'] == hero then
 			p:clearMsg()
 			--记录英雄类型
