@@ -1,8 +1,12 @@
 local mt = ac.skill['学习技能']
 --技能模型
-mt._model = ac.zb_color_model['绿']
+mt._model = ac.zb_color_model['书']
+mt.model_size = 1.5
 
+mt.is_skill = true
+mt.cus_type = '技能' --类型
 mt.skill_cnt =8 --一共技能数量
+
 function mt:on_cast_shot()
     local hero = self.owner 
     local player = hero:get_owner()
