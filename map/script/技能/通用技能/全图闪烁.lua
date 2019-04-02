@@ -3,9 +3,7 @@ local mt = ac.skill['全图闪烁']
 mt{
     --等级
     level = 1,
-	tip = [[
-闪烁,cd%cool%s.
-	]],
+	tip = [[]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNBlink.blp]],
 	cool = 1,

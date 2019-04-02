@@ -8,34 +8,53 @@ mt{
     --标题颜色
     color =  '青',
 	--介绍
-    tip = [[
-|cffffff00小翅膀:|r %active1%
-金币加成+5%, 经验加成+5%,  物品获取率+5%|r
-|cffffff00天使之光:|r  %active2%
-金币获取率+5%, 经验获取率+5%, 物品获取率+5%
-移速+50，攻击速度+50%|r
-|cffff0000点击切换翅膀显示|r
-]],  
+    tip = [[|cffFFE799已拥有：|r %active3%小翅膀（通关积分兑换）|r %active4% 天使之光（商城购买）|r
+|cffFFE799翅膀说明：|r|cffff0000多个翅膀属性可叠加，点击可切换翅膀效果|r
+ %active3% 
+小翅膀：|r %active1% 
+金币加成+5% 经验加成+5% 物品获取率+5% |r %active4% 
+天使之光：|r %active2% 
+金币获取率+5% 经验加成+5% 物品获取率+5% 
+移速+50，攻击速度+50%|r]],  
 	--技能图标
     art = [[icon\chibang.blp]],
-    
+
     --激活标志
     active1 = function(self,hero)
         local color = '|cffcccccc'
         local player = hero:get_owner()
         if player and player.mall and player.mall['小翅膀'] then 
-            color = '|cff00ffff'
+            color = '|cff00ff00'
         end 
         return color
     end,
+
+    active3 = function(self,hero)
+        local color = '|cffcccccc'
+        local player = hero:get_owner()
+        if player and player.mall and player.mall['小翅膀'] then 
+            color = '|cffffff00'
+        end 
+        return color
+    end,
+
     active2 = function(self,hero)
         local color = '|cffcccccc'
         local player = hero:get_owner()
         if player and player.mall and player.mall['天使之光'] then 
-            color = '|cff00ffff'
+            color = '|cff00ff00'
         end 
         return color
     end,
+    active4 = function(self,hero)
+        local color = '|cffcccccc'
+        local player = hero:get_owner()
+        if player and player.mall and player.mall['天使之光'] then 
+            color = '|cffffff00'
+        end 
+        return color
+    end,
+
     
 	--模型 1小翅膀 2天使之光
 	effect1 = [[QX_chibang_d.mdx]],

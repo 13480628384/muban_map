@@ -822,13 +822,13 @@ function mt:get_target_type_tip()
 	end
 	local tt = self.target_type
 	if tt == self.TARGET_TYPE_NONE then
-		return '\n|cff3399ff目标类型|r: 无'
+		return ''
 	elseif tt == self.TARGET_TYPE_POINT then
-		return '\n|cff3399ff目标类型|r: 地面'
+		return ''
 	elseif tt == self.TARGET_TYPE_UNIT then
-		return '\n|cff3399ff目标类型|r: 单位'
+		return ''
 	elseif tt == self.TARGET_TYPE_UNIT_OR_POINT then
-		return '\n|cff3399ff目标类型|r: 单位或地面'
+		return ''
 	end
 	return ''
 end

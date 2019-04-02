@@ -1,5 +1,5 @@
 local japi = require("jass.japi")
-local mt = ac.skill['地图等级']
+local mt = ac.skill['荣耀称号']
 mt{
     --必填
     is_skill = true,
@@ -9,14 +9,18 @@ mt{
     --标题颜色
     color =  '青',
 	--介绍
-    tip = [[
-%active3%地图等级3: 全属性加100 , 金币加成+5% （%nick_name3%）|r
-%active5%地图等级5: 物品获取率+5% , 经验加成+5% ，金币加成+5% （%nick_name5%） |r
-%active10%地图等级10: 攻击力加25% , 对boss额外伤害 50% （%nick_name10%） |r 
-%active15%地图等级15: 全属性加1000 , 金币加成 +50% （%nick_name15%） |r
-%active25%地图等级25: 全属性加15% , 物品获取率 +50% （%nick_name25%） |r
+    tip = [[|cffFFE799称号说明：|r|cffff0000多个称号属性可叠加，点击可切换称号效果|r
 
-|cffff0000点击领取对应称号，只能更换一次|r
+|cffffff00%nick_name3%（地图等级3可激活）:|r 
+%active3%全属性 +100,金币加成 +5%|r
+|cffffff00%nick_name5%（地图等级5可激活）:|r 
+%active5%物品获取率 +5%,经验加成 +5%，金币加成 +5%|r
+|cffffff00%nick_name10%（地图等级10可激活）:|r 
+%active10%攻击力 +25%,对boss额外伤害 +50%|r 
+|cffffff00%nick_name15%（地图等级15可激活）:|r 
+%active15%全属性 +1000,金币加成 +50%|r
+|cffffff00%nick_name25%（地图等级25可激活）:|r 
+%active25%全属性 +15%,物品获取率 +50%|r
 ]],
     map_level = function(self,hero)
 		if self and self.owner and self.owner:get_owner() then 
@@ -61,28 +65,28 @@ function mt:on_add()
     self.map_level = self.level
     if self.map_level <3 then 
     elseif self.map_level <5 then
-        self.active3 = '|cff00ffff' 
+        self.active3 = '|cff00ff00' 
         hero:add('智力',100)
         hero:add('敏捷',100)
         hero:add('力量',100)
         hero:add('金币加成',5)
     elseif self.map_level <10 then
-        self.active5 = '|cff00ffff' 
+        self.active5 = '|cff00ff00' 
         hero:add('物品获取率',5)
         hero:add('经验加成',5)
         hero:add('金币加成',5)
     elseif self.map_level <15 then
-        self.active10 = '|cff00ffff' 
+        self.active10 = '|cff00ff00' 
         hero:add('攻击%',25)
         hero:add('对BOSS额外伤害',50)
     elseif self.map_level <25 then
-        self.active15 = '|cff00ffff' 
+        self.active15 = '|cff00ff00' 
         hero:add('智力',1000)
         hero:add('敏捷',1000)
         hero:add('力量',1000)
         hero:add('金币加成',50)
     else
-        self.active25 = '|cff00ffff' 
+        self.active25 = '|cff00ff00' 
         hero:add('智力%',15)
         hero:add('敏捷%',15)
         hero:add('力量%',15)
@@ -116,7 +120,7 @@ function mt:on_cast_start()
 
 
     if #list <= 0 then
-        player:sendMsg("地图等级不够，没有额外称号")
+        player:sendMsg("地图等级不够，没有荣耀称号")
         return
     end 
 

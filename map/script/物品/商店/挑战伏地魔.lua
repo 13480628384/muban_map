@@ -7,12 +7,8 @@ level = 1,
 --图标
 art = [[icon\hunqi.blp]],
 
---颜色
-color = '青',
-
 --说明
-tip = [[|cff00ffff挑战成功将 霸者之证升级Lvmax
-条件:霸者之证lv4的灵魂大于150|r]],
+tip = [[|cffffff00召唤伏地魔，挑战成功可以将霸者之证升到顶级|r]],
 
 --物品类型
 item_type = '神符',
@@ -22,6 +18,8 @@ target_type = ac.skill.TARGET_TYPE_NONE,
 
 --冷却
 cool = 0,
+
+content_tip = '',
 
 --物品技能
 is_skill = true,

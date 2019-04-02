@@ -9,17 +9,17 @@ level = 1,
 art = [[icon\jieke.blp]],
 
 --说明
-tip = [[
-|cff00ffff 
-有皮肤特效
-天赋技能 剑刃风暴 强化
-物品获取率+10%；
-|r
-|cffff0000兑换后立即激活，可在宠物切换翅膀|r   
-]],
+tip = [[消耗 |cff00ff00100000通关积分|r 兑换 |cffdf19d0亚瑟王的皮肤-杰克|r
+|cffff0000兑换后可立即激活，且永久拥有|r  
+
+|cffFFE799增加属性：|r 
+|cffffff00+10%|r 物品获取率
+|cffffff00强化|r 剑刃风暴]],
 
 --物品类型
 item_type = '神符',
+
+content_tip = '物品说明:',
 
 --目标类型
 target_type = ac.skill.TARGET_TYPE_NONE,

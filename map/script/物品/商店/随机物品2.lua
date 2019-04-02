@@ -8,7 +8,9 @@ level = 1,
 art = [[other\suiji101.blp]],
 
 --说明
-tip = [[随机物品]],
+tip = [[消耗 |cff00ff00500通关积分|r 兑换 一个随机物品]],
+
+content_tip = '物品说明:',
 
 --物品类型
 item_type = '神符',

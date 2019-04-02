@@ -8,7 +8,8 @@ mt{
     art = [[other\shengjishu.blp]],
     
     --说明
-    
+    tip = [[使用后升级一次指定技能]],
+
     --物品类型
     item_type = '消耗品',
     
@@ -18,6 +19,7 @@ mt{
     --物品技能
     is_skill = true,
     --物品详细介绍的title
+    
     content_tip = '使用说明：'
     
 }
