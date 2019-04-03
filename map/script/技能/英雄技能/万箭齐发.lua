@@ -26,7 +26,7 @@ mt{
     chance = {5,7.5,10,12.5,15},
 
     --图标
-    art = 'wanjianqifa.tga',
+    art = 'wanjianqifa.blp',
     --暗影之箭范围
     area =  600,
     

@@ -765,11 +765,11 @@ ac.wait(20,function()
 
     ac.game:event '游戏-开始' (function()
         print('游戏开始6')
-        local time = 10
+        local time = 15
         if ac.test == true then
             time = 0
         end
-        BJDebugMsg(time .. "秒后开始刷新进攻怪")
+        BJDebugMsg(time .. "秒后开始扫荡第一层怪物")
         ac.timer_ex 
         {
             time = time,

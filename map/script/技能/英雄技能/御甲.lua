@@ -25,7 +25,7 @@ mt{
     count = 5,
 
     --图标
-    art = 'yujia.tga',
+    art = 'yujia.blp',
 	--爆炸半径
     hit_area = function(self,hero)
         return 100 + hero:get '额外范围'
