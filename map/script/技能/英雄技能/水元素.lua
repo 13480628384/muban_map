@@ -6,7 +6,7 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "召唤",
+	skill_type = "召唤 智力",
 	--耗蓝
 	cost = {15,250,350,450,600},
 	--冷却时间
@@ -14,7 +14,12 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤水元素助战（属性与智力相关）]],
+	tip = [[召唤水元素助战
+	
+	|cff00bdec召唤物属性：和智力相关|r 
+
+	|cff00bdec召唤物技能：弹射|r
+	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNSummonWaterElemental.blp]],
 	--特效

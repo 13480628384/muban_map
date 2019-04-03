@@ -12,7 +12,8 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[金钱获取率+%more_gold% %]],
+	tip = [[金钱获取率+%more_gold% %
+	]],
 	--技能图标
 	art = [[jineng\jineng019.blp]],
 	more_gold = {20,30,40,50,60},

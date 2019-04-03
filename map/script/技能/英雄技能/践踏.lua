@@ -6,7 +6,7 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "主动",
+	skill_type = "主动 力量 控制",
 	--耗蓝
 	cost = {40,80,160,320,450},
 	--冷却时间
@@ -17,7 +17,8 @@ mt{
 	--施法范围
 	area = 500,
 	--介绍
-	tip = [[对范围500码敌人晕眩2S，并造成力量*%int%的物理伤害 （%damage%） ]],
+	tip = [[对范围500码敌人晕眩2S，并造成力量*%int%的物理伤害 （%damage%）
+	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNWarStomp.blp]],
 	--特效

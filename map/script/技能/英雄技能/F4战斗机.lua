@@ -6,7 +6,7 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "召唤",
+	skill_type = "召唤 智力",
 	--耗蓝
 	cost = {60,120,180,360,720},
 	--冷却时间
@@ -18,7 +18,8 @@ mt{
 	
 	|cff00bdec召唤物属性：和智力相关|r 
 
-	|cff00bdec召唤物技能：多重射|r]],
+	|cff00bdec召唤物技能：多重射|r
+	]],
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNFlakCannons.blp]],
 	--特效

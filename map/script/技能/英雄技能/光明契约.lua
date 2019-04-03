@@ -6,7 +6,7 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "主动",
+	skill_type = "主动 智力",
 	--耗蓝
 	cost = function(self,hero)
 		return hero:get('魔法')
@@ -20,7 +20,9 @@ mt{
 	--施法距离
 	range = 500,
 	--介绍
-	tip = [[耗尽魔法，对敌人造成智力* %int_mul% %的法术伤害，如果杀死敌人，将永久提高 %addint% %智力]],
+	tip = [[耗尽魔法，对敌人造成智力* %int_mul% %的法术伤害，如果杀死敌人，将永久提高 %addint% %智力
+伤害计算：|cffd10c44智力 * %int_mul%|r
+伤害类型：|cff04be12法术伤害|r]],
 	--技能图标 LNXQ
 	art = [[jineng\jineng026.blp]],
 	--永久智力

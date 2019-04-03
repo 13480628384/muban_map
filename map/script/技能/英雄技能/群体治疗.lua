@@ -6,7 +6,7 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "主动",
+	skill_type = "主动 治疗",
 	--耗蓝
 	cost = {40,150,260,370,500},
 	--冷却时间
@@ -14,7 +14,8 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[回复全体队友%life_rate% %的血]],
+	tip = [[回复全体队友%life_rate% %的血
+	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNScrollOfTownPortal.blp]],
 	--特效

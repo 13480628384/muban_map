@@ -18,8 +18,7 @@ mt{
 		|cff00ccff被动|r:
 		物爆几率+%physical_rate% % ，物爆伤害+%physical_damage% % 
 		会心几率+%physical_rate% % ，会心伤害+%physical_damage% %
-		法爆几率+%physical_rate% % ，法爆伤害+%physical_damage% %
-	]],
+		法爆几率+%physical_rate% % ，法爆伤害+%physical_damage% %]],
 	
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNCriticalStrike.blp]],

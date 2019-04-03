@@ -6,7 +6,7 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "主动",
+	skill_type = "主动 敏捷",
 	--耗蓝
 	cost = {20,130,240,350,460},
 	--冷却时间 15
@@ -16,7 +16,8 @@ mt{
 	--施法范围
 	area = 800,
 	--介绍
-	tip = [[召唤刀刃对范围800码的敌方单位攻击，造成敏捷*%int%的物理伤害]],
+	tip = [[召唤刀刃对范围800码的敌方单位攻击，造成敏捷*%int%的物理伤害
+	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNFanOfKnives.blp]],
 	--特效

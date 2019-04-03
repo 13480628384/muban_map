@@ -4,15 +4,16 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "被动",
+	skill_type = "被动 敏捷",
 	--技能图标
 	art = [[icon\card1_28.blp]],
 	--技能说明
 	title = '阳光枪',
 	tip = [[
-	攻击有 %chance% % 的概率对 %hit_area% 范围造成 和敏捷相关的 物理伤害 (%damage%)
-	伤害:敏捷*5+1500
-	]],
+	攻击有 %chance% % 的概率对 %hit_area% 范围造成伤害 (%damage%)
+伤害计算：|cffd10c44敏捷 * %int% +1500 |r
+伤害类型：|cff04be12物理伤害|r
+]],
 	--范围
 	hit_area = 150,
 	distance = 900,

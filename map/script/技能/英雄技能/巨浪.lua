@@ -9,11 +9,11 @@ mt{
 	--技能图标
 	art = [[icon\3.blp]],
 	--技能说明
-	title = '巨浪',
+	title = '巨浪 力量',
 	tip = [[
-		攻击有 %chance% % 的概率对 %distance% 范围造成物理伤害  (%damage%)
-		伤害公式: 力量 * %damage_int%
-	]],
+		攻击有 %chance% % 的概率对 %distance% 范围造成物理伤害
+		伤害计算：|cffd10c44力量 * %damage_int%|r
+		伤害类型：|cff04be12物理伤害|r]],
 	--范围
 	distance = 1500,
 	hit_area = 125,

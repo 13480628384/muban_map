@@ -5,8 +5,8 @@ mt{
     --初始等级
 	level = 1,
 	max_level = 5,
-	--技能类型
-	skill_type = "主动",
+	--技能类型 
+	skill_type = "主动 控制",
 	--耗蓝
 	cost = {45,150,250,400,600},
 	--冷却时间30
@@ -16,7 +16,8 @@ mt{
 	--施法范围
 	area = 300,
 	--介绍
-	tip = [[在一个地方放置一个静置陷阱，3S后晕眩范围300的所有人（包括友军），持续4S]],
+	tip = [[在一个地方放置一个静置陷阱，3S后晕眩范围300的所有人（包括友军），持续4S
+	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNStasisTrap.blp]],
 	--特效

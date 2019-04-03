@@ -6,7 +6,7 @@ mt{
     is_skill = true,
 
 	--技能类型
-	skill_type = "被动",
+	skill_type = "被动 敏捷",
 
     --是被动
     passive = true,
@@ -44,9 +44,9 @@ mt{
     --爆炸模型
     boom_model = [[anyingzhijing.mdx]],
     title = '万箭齐发',
-    tip = [[标签：|cff0c97d1投射物 范围|r
-攻击时 %chance% % 几率丢出 %count% 个从天而降的暗影之箭，击中目标时，对目标及 %hit_area% 范围的敌人造成 %main_damage% % 伤害
-伤害计算：|cffd10c44 敏捷 * %agi% |r
+    tip = [[
+攻击时 %chance% % 几率丢出从天而降的暗影之箭，对目标及 %hit_area% 范围的敌人造成 %main_damage% 伤害
+伤害计算：|cffd10c44敏捷 * %agi% |r
 伤害类型：|cff04be12物理伤害|r]],
 }
 

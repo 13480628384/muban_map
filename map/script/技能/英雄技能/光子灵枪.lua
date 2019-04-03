@@ -9,11 +9,11 @@ mt{
 	--技能图标
 	art = [[icon\card1_30.blp]],
 	--技能说明
-	title = '光子灵枪',
+	title = '光子灵枪 敏捷',
 	tip = [[
-		攻击有 %chance% % 的概率召 %num% 个 %title% 
-		造成 敏捷相关 的物理伤害  ( %damage% )
-	]],
+攻击时有 %chance% % 几率召 %num% 个 %title%飞向敌人造成伤害
+伤害计算：|cffd10c44敏捷 * %agi_mul%|r
+伤害类型：|cff04be12物理伤害|r]],
 	--概率%
 	chance = {5,7.5,10,12.5,15},
     --伤害参数1

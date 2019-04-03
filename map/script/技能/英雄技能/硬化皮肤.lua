@@ -16,8 +16,7 @@ mt{
 	tip = [[
 		|cff00ccff被动|r:
 		护甲加 %defence% %
-
-	]],
+		]],
 	
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNResistantSkin.blp]],

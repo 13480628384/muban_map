@@ -11,7 +11,7 @@ mt{
 	
 	
 	tip = [[
-		主动：对指定区域的敌人进行轰炸，造成攻击力* %attack% 的物理伤害( %damage% )，并砸晕敌人 %time% 秒,cd %cool% 秒
+		主动：对指定区域的敌人进行轰炸，造成攻击力* %attack% 的物理伤害( %damage% )，并砸晕敌人 %time% 秒
 		被动1：增加 %defence_rate% % 的护甲
 		被动2：增加 %reduce_rate% % 的减伤
 	]],

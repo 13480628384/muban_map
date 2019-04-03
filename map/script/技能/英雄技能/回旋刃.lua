@@ -7,7 +7,7 @@ mt{
     passive = true,
     is_skill = true,
 	--技能类型
-	skill_type = "被动",
+	skill_type = "被动 力量",
 
     --原始伤害
     damage = function(self,hero)
@@ -54,7 +54,7 @@ mt{
     --投射物模型
     model = [[SentinelMissile.mdx]],
     title = '回旋刃',
-    tip = [[标签：|cff0c97d1投射物 范围|r
+    tip = [[
 攻击时 %chance% % 几率发射 %client_count% 个回旋刃，以目标为起始点向前移动 %distance% 距离对碰到单位造成伤害，停留 %stay_time% s后以最快的速度返回到英雄位置，回旋时造成 %cycle_round_damage% % 伤害
 伤害计算：|cffd10c44力量 * %int%|r
 伤害类型：|cff04be12物理伤害|r]],

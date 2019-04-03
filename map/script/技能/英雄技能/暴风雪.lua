@@ -5,7 +5,7 @@ mt{
 	--必填
 	is_skill = true,
 	--技能类型
-	skill_type = "被动",
+	skill_type = "被动 智力",
 	--初始等级
 	level = 1,
 	max_level = 5,
@@ -14,9 +14,10 @@ mt{
 	--技能说明
 	title = '暴风雪',
 	tip = [[
-	攻击有 %chance% % 的概率对 %area% 范围造成法术伤害 (%damage%)
-	伤害:智力*%int%+2000
-	]],
+	攻击有 %chance% % 的概率对 %area% 范围造成伤害 (%damage%)
+伤害计算：|cffd10c44 智力 * %int% +2000 |r
+伤害类型：|cff04be12法术伤害|r
+]],
 	--范围
 	area = 425,
 	--概率%

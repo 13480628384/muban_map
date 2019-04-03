@@ -7,7 +7,7 @@ mt{
     --是被动
     passive = true,
 	--技能类型
-	skill_type = "被动",
+	skill_type = "被动 智力",
 
     --原始伤害
     damage = function(self,hero)
@@ -38,9 +38,11 @@ mt{
     --投射物模型
     model = [[lvyezhimao.MDX]],
     title = '绿野之矛',
-    tip = [[标签：|cff0c97d1投射物|r
-%my_chance% % 几率对敌人发射 %client_count% 只绿野之矛，造成 和智力相关的 法术伤害.也许还有隐藏技能.
-]]
+    tip = [[
+%my_chance% % 几率对敌人发射 %client_count% 只绿野之矛造成伤害
+伤害计算：|cffd10c44智力 * %int% +2000 |r
+伤害类型：|cff04be12法术伤害|r
+]],
 }
 function mt:on_add()
     local hero = self.owner

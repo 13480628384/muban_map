@@ -6,7 +6,7 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "召唤",
+	skill_type = "召唤 智力",
 	--耗蓝
 	cost = {120,240,360,480,600},
 	--冷却时间
@@ -14,7 +14,12 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤1只地狱火助战（属性和智力相关）；持续时间20S]],
+	tip = [[召唤1只地狱火助战
+	
+	|cff00bdec召唤物属性：和智力相关|r 
+
+	|cff00bdec召唤物技能：硬化皮肤、火焰风衣|r
+	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNInfernal.blp]],
 	--特效

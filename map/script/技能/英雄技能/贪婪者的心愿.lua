@@ -12,7 +12,8 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[物品获取率+%item_rate% %]],
+	tip = [[物品获取率+%item_rate% %
+	]],
 	--技能图标
 	art = [[jineng\jineng017.blp]],
 	item_rate = {20,30,40,50,60},

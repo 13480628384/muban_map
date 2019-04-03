@@ -12,7 +12,8 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[所有友军护甲增加%value% %]],
+    tip = [[所有友军护甲增加%value% %
+    ]],
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNDevotion.blp]],
 	--特效

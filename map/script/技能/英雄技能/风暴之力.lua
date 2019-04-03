@@ -7,7 +7,7 @@ mt{
     passive = true,
     is_skill = true,
 
-    skill_type = "被动",
+    skill_type = "被动 智力",
     --伤害
     damage = function (self,hero)
         return hero:get '智力'  * self.int
@@ -40,10 +40,10 @@ mt{
     --模型
     model = [[AZ_Kaer_X1.mdx]],
     title = '风暴之力',
-    tip = [[标签：|cff0c97d1范围|r
-%my_chance% % 几率发动一个龙卷风向前方移动 %dis% 码，对经过的范围 %areaa% 区域造成伤害,龙卷风到达终点时分裂出四个，造成 40% 伤害
+    tip = [[%my_chance% % 几率发动一个龙卷风向前方移动 %dis% 码，对经过的范围 %areaa% 区域造成伤害,龙卷风到达终点时分裂出四个，造成 40% 伤害
 伤害计算：|cffd10c44智力 * %int% |r
-伤害类型：|cff04be12法术伤害|r]]
+伤害类型：|cff04be12法术伤害|r
+]],
 }
 
 --分散龙卷风

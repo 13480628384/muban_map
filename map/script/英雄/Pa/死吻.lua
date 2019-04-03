@@ -11,7 +11,7 @@ mt{
 	tip = [[
 		主动：闪现到指定敌人的身边，并造成 攻击力*%attack_mul% 的物理伤害
 		被动1：周围 %passive_area% 码有敌人死亡，刷新所有技能的冷却时间
-		被动2：攻击对敌人造成护甲 -%reduce_defence% % ,持续 %reduce_defence_time% 秒
+		被动2：攻击对敌人造成护甲 -%reduce_defence% %
 	]],
 	
 	--技能图标

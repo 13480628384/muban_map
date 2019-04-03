@@ -6,7 +6,7 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "主动",
+	skill_type = "主动 智力 治疗",
 	--耗蓝
 	cost = {15,115,215,315,415},
 	--冷却时间10
@@ -18,7 +18,9 @@ mt{
 	area = 800,
 
 	--介绍
-	tip = [[释放出死亡脉冲，对范围800码的敌方单位造成 智力*%int% 法术伤害 （%damage%） ，对范围400码的友方单位有智力*%int%医疗效果 （%heal%）]],
+	tip = [[对范围800码的敌方单位造成 智力*%int% 法术伤害（%damage%）
+	对范围400码的友方单位有智力*%int%医疗效果 （%heal%）
+	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNDeathCoil.blp]],
 	--特效

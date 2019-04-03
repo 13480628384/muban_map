@@ -6,7 +6,7 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "主动",
+	skill_type = "主动 智力 控制",
 	--耗蓝
 	cost = {30,150,270,400,500},
 	--冷却时间
@@ -18,7 +18,8 @@ mt{
 	--施法范围
 	area = 300,
 	--介绍
-	tip = [[用树藤缠住目标区域敌人的脚，造成敌人不能行动1S，并造成攻击力*1.5的法术伤害]],
+	tip = [[用树藤缠住目标区域敌人的脚，造成敌人不能行动1S，并造成攻击力*1.5的法术伤害
+	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNEntanglingRoots.blp]],
 	--特效

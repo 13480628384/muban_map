@@ -7,7 +7,7 @@ mt{
     passive = true,
     is_skill = true,
 	--技能类型
-	skill_type = "被动",
+	skill_type = "被动 敏捷",
 
     --原始伤害
     damage = function(self,hero)
@@ -36,10 +36,10 @@ mt{
     --投射物模型
     model = [[FirecrackerArrow.mdx]],
     title = '交叉闪电',
-    tip = [[标签：|cff0c97d1投射物|r
-攻击时有 %chance% % 几率释放 %count% 个金钱镖飞向敌人造成伤害，命中时会对周围 %lig_count% 个敌人释放交叉闪电，造成 %ejection_damage% % 的伤害
-伤害计算：|cffd10c44 敏捷 * %agi%|r(伤害: %damage% )
-伤害类型：物理伤害]],
+    tip = [[
+攻击时有 %chance% % 几率释放金钱镖飞向敌人，命中时会对周围 %lig_count% 个敌人释放交叉闪电，造成 %ejection_damage% % 的伤害
+伤害计算：|cffd10c44敏捷 * %agi%|r
+伤害类型：|cff04be12物理伤害|r]],
 }
 
 --计算高度

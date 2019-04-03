@@ -6,7 +6,7 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "召唤",
+	skill_type = "召唤 智力",
 	--耗蓝
 	cost = {100,200,300,400,500},
 	--冷却时间
@@ -14,7 +14,12 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤1只凤凰助战（属性和智力相关）；持续时间25S]],
+	tip = [[召唤1只凤凰助战
+	
+	|cff00bdec召唤物属性：和智力相关|r 
+
+	|cff00bdec召唤物技能：溅射|r
+	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNMarkOfFire.blp]],
 	--特效

@@ -7,16 +7,15 @@ mt{
 	--是否被动
 	passive = true,
 	--技能类型
-	skill_type = "被动",
+	skill_type = "被动 控制",
 	
 	--初始等级
 	level = 1,
 	max_level = 5,
 	
 	tip = [[
-		|cff00ccff被动|r:
-		攻击时 %chance% % 触发， 造成 攻击力*%int% 的物理伤害 (%damage%) ，并击晕敌人 %time% 秒，近战有效
-	]],
+攻击时 %chance% % 触发， 造成 攻击力*%int% 的物理伤害 (%damage%) ，并击晕敌人 %time% 秒，近战有效
+		]],
 	
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNBash.blp]],

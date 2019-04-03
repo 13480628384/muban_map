@@ -12,7 +12,8 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[所有敌人的护甲-%value% %]],
+    tip = [[所有敌人的护甲-%value% %
+    ]],
 	--技能图标
 	art = [[jineng\jineng023.blp]],
 	--特效

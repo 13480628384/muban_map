@@ -6,7 +6,7 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "主动",
+	skill_type = "主动 治疗",
 	--耗蓝
 	cost = {20,130,240,350,460},
 	--冷却时间
@@ -16,7 +16,8 @@ mt{
 	--施法距离
 	range = 800,
 	--介绍
-	tip = [[回复指定队友 %life_rate% %的血]],
+	tip = [[回复指定队友 %life_rate% %的血
+	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNHolyBolt.blp]],
 	--特效

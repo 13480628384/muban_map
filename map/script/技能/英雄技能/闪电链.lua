@@ -5,13 +5,15 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "被动",
+	skill_type = "被动 智力",
 	--技能图标
 	art = [[icon\card1_2.blp]],
 	--技能说明
 	title = '闪电链',
 	tip = [[
-		攻击有 %chance% % 的概率对 %area% 范围造成 和智力相关的 法术伤害  (%damage%)
+		攻击有 %chance% % 的概率对 %area% 范围造成伤害(%damage%)
+伤害计算：|cffd10c44智力 * %int%|r
+伤害类型：|cff04be12法术伤害|r
 	]],
 	--弹射范围(直径)
 	area = 1000,

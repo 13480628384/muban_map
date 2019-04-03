@@ -6,7 +6,7 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "主动",
+	skill_type = "主动 智力",
 	--耗蓝
 	cost = {60,120,240,480,800},
 	--冷却时间40
@@ -14,7 +14,10 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤2只枯木战士助战（属性与智力相关）]],
+	tip = [[召唤2只枯木战士助战
+	
+	|cff00bdec召唤物属性：和智力相关|r
+	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNEnt.blp]],
 	--特效

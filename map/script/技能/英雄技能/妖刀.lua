@@ -6,7 +6,7 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "主动",
+	skill_type = "主动 控制",
 	--耗蓝
 	cost = {30,150,270,390,500},
 	--冷却时间 20
@@ -16,7 +16,8 @@ mt{
 	--施法距离
 	range = 900,
 	--介绍
-	tip = [[将指定敌人变成小动物，持续%time%S]],
+	tip = [[将指定敌人变成小动物，持续%time%S
+	]],
 	--技能图标
 	art = [[jineng\jineng004.blp]],
 	--特效

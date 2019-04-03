@@ -5,7 +5,7 @@ mt{
 	--必填
 	is_skill = true,
 	--技能类型
-	skill_type = "被动",
+	skill_type = "被动 力量",
 	--初始等级
 	level = 1,
 	max_level = 5,
@@ -14,8 +14,10 @@ mt{
 	--技能说明
 	title = '炎爆术',
 	tip = [[
-		攻击有 %chance% % 的概率对 %area% 范围造成 和力量相关的 物理伤害  (%damage%)
-	]],
+		攻击有 %chance% % 的概率对 %area% 范围造成伤害  (%damage%)
+伤害计算：|cffd10c44力量 * %int% +2000 |r
+伤害类型：|cff04be12物理伤害|r
+]],
 	--范围
 	area = 1000,
 	--概率%

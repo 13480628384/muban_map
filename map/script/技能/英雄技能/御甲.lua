@@ -7,7 +7,7 @@ mt{
     passive = true,
     is_skill = true,
 	--技能类型
-	skill_type = "被动",
+	skill_type = "被动 力量",
 
     --伤害
     damage = function(self,hero)
@@ -47,10 +47,10 @@ mt{
     --模型
     model = [[AZ_[Sepll]LinaSun _T2_Blast.MDX]],
     title = '御甲',
-    tip = [[标签：|cff0c97d1连锁 范围|r
-%my_chance% % 几率发动御甲对单位造成伤害并向周围连锁 %client_count% 次,并对周围 %areaa% 内单位造成 30% 伤害 
+    tip = [[%my_chance% % 几率发动御甲对单位造成伤害并向周围连锁 %client_count% 次,并对周围 %areaa% 内单位造成 30% 伤害 
 伤害计算：|cffd10c44 力量 * %int% |r
-伤害类型：|cff04be12物理伤害|r]]
+伤害类型：|cff04be12物理伤害|r
+]]
 }
 
 function mt:on_add()

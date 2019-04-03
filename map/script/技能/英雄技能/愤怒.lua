@@ -16,7 +16,8 @@ mt{
 	--施法距离
 	range = 800,
 	--介绍
-	tip = [[增加指定队友%physical_rate% %的物暴、法爆、会爆几率，持续15S]],
+	tip = [[增加指定队友%physical_rate% %的物暴、法爆、会爆几率，持续15S
+	]],
 	--技能图标
 	art = [[jineng\jineng031.blp]],
 	--特效

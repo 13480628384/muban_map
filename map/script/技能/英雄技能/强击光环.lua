@@ -12,9 +12,10 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[所有友军远程攻击力增加%value% %]],
+    tip = [[所有友军远程攻击力增加%value% %
+    ]],
 	--技能图标
-	art = [[ReplaceableTextures\PassiveButtons\PASBTNTrueShot.blp]],
+    art = [[ReplaceableTextures\PassiveButtons\PASBTNTrueShot.blp]],
 	--特效
     effect = [[Abilities\Spells\NightElf\TrueshotAura\TrueshotAura.mdl]],
     --光环影响范围

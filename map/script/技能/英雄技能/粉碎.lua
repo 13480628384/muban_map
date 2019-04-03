@@ -14,7 +14,7 @@ mt{
 	tip = [[
 		|cff00ccff被动|r:
 		攻击时 %chance% % 触发，对范围 %area% 码的敌人造成 %life_rate% % 的最大生命值， 近战有效
-	]],
+		]],
 	
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNSmash.blp]],

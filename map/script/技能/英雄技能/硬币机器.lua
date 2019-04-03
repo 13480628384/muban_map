@@ -6,7 +6,7 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "召唤",
+	skill_type = "召唤 智力",
 	--耗蓝
 	cost = {70,200,350,500,750},
 	--冷却时间
@@ -14,7 +14,12 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤1只硬币机器助战（属性与智力相关，攻击时有概率获得额外金钱），拥有被动：硬化皮肤]],
+	tip = [[召唤1只硬币机器助战
+	
+	|cff00bdec召唤物属性：和智力相关|r 
+
+	|cff00bdec召唤物技能：硬化皮肤、攻击时有概率获得额外金币|r
+	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNChestOfGold.blp]],
 	--特效

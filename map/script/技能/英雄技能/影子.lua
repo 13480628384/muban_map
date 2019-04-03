@@ -6,7 +6,7 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "召唤",
+	skill_type = "召唤 英雄属性",
 	--耗蓝
 	cost = {60,120,240,480,960},
 	--冷却时间40
@@ -14,7 +14,10 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤1只影子助战（属性和英雄属性相关）；持续时间30S]],
+	tip = [[召唤1只影子助战
+	
+	|cff00bdec召唤物属性：和英雄属性相关|r
+	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNMirrorImage.blp]],
 	--召唤物

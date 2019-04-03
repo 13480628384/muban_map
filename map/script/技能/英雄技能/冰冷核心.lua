@@ -12,7 +12,8 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[所有敌人的移动速度减少%value% %]],
+    tip = [[所有敌人的移动速度减少%value% %
+    ]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNIceShard.blp]],
 	--受光环影响的特效

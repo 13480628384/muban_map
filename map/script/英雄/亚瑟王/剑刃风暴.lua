@@ -12,7 +12,7 @@ mt{
 	tip = [[
 		主动：对周围%area%码的敌人每 %pulse% 秒造成物理伤害，持续时间 %time% 秒
 		被动：提升溅射%life_rate% %
-		|cff00bdec伤害：攻击力*%attack% |cff00bdec+力量*%power% |cff00bdec(%damage%|cff00bdec)|r
+		|cff00bdec伤害计算：攻击力*%attack% |cff00bdec+力量*%power% |cff00bdec(%damage%|cff00bdec)|r
 	]],
 	
 	--技能图标

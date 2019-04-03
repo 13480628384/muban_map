@@ -6,7 +6,7 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "主动",
+	skill_type = "主动 控制",
 	--耗蓝
 	cost = {30,150,270,390,500},
 	--冷却时间
@@ -18,7 +18,8 @@ mt{
 	range = 900,
 	int = {3,4,5,6,7},
 	--介绍
-	tip = [[对单一敌人造成晕眩3S，并造成攻击力*%int%的物理伤害]],
+	tip = [[对单一敌人造成晕眩3S，并造成攻击力*%int%的物理伤害
+	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNStormBolt.blp]],
 	--特效

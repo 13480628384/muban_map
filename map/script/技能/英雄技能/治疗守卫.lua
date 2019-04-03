@@ -6,7 +6,7 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "主动",
+	skill_type = "主动 治疗",
 	--耗蓝
 	cost = {45,150,250,350,500},
 	--冷却时间30
@@ -18,7 +18,8 @@ mt{
 	--施法范围
 	area = 400,
 	--介绍
-	tip = [[释放一个治疗守卫，持续回复范围400内的队友的血每秒 %life_rate% % ，持续10S]],
+	tip = [[释放一个治疗守卫，持续回复范围400内的队友的血每秒 %life_rate% % ，持续10S
+	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNHealingWard.blp]],
 	--特效

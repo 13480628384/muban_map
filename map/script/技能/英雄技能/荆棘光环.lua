@@ -12,7 +12,8 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[所有友军受攻击时，将反弹%value% %伤害]],
+    tip = [[所有友军受攻击时，将反弹%value% %伤害
+    ]],
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNThorns.blp]],
 	--特效

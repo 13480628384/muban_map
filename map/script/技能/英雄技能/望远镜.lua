@@ -16,8 +16,7 @@ mt{
 	tip = [[
 		|cff00ccff被动|r:
 		攻击距离加 %attack_range% %
-
-	]],
+		]],
 	attack_range = {20,40,60,80,100},
 	--技能图标
 	art = [[item\jineng015.blp]],

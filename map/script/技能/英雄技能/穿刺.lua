@@ -6,7 +6,7 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "主动",
+	skill_type = "主动 力量",
 	--耗蓝
 	cost = {30,150,280,400,600},
 	--冷却时间20
@@ -17,7 +17,8 @@ mt{
 	--施法距离
 	range = 800,
 	--介绍
-	tip = [[对一条直线上的敌人晕眩1S，并造成力量*%int%的物理伤害 （%damage%） ]],
+	tip = [[对一条直线上的敌人晕眩1S，并造成力量*%int%的物理伤害 （%damage%）
+	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNImpale.blp]],
 	--特效

@@ -6,7 +6,7 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "主动",
+	skill_type = "主动 智力",
 	--耗蓝
 	cost = {15,115,215,315,450},
 	--冷却时间10
@@ -17,7 +17,8 @@ mt{
 	--施法范围
 	area = 600,
 	--介绍
-	tip = [[发出锐利的尖叫，对范围300码的敌方单位造成智力%int% 法术伤害 （%damage%） ]],
+	tip = [[发出锐利的尖叫，对范围300码的敌方单位造成智力%int% 法术伤害 （%damage%）
+	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNPossession.blp]],
 	--特效

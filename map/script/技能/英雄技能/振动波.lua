@@ -6,7 +6,7 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "主动",
+	skill_type = "主动 力量",
 	--耗蓝
 	cost = 15,
 	--冷却时间
