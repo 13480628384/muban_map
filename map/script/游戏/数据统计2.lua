@@ -255,7 +255,7 @@ ac.game:event '游戏-开始' (function()
 end)    
 
 
-
+--游戏时间 2个小时
 local shijian = 120*60
 
 local ti = ac.loop(1000,function(t)
@@ -296,11 +296,30 @@ ac.game:event '游戏-回合开始'(function(_,index,creep)
     if creep.name == '刷怪-无尽' then 
         tip = '(无尽)'
     end    
+    local degree 
+    if ac.g_game_degree == 1 then 
+        degree = '普通'
+    elseif ac.g_game_degree == 2 then 
+        degree = '噩梦'
+    else 
+        degree = '地狱'
+    end    
     local name 
     if ac.g_game_mode == 1 then 
         name = '标准'..tip
     else 
         name = '嘉年华'..tip
-    end        
-    ranking.ui.two_title:set_text(name..'-第'..index..'波')
+    end               
+    ranking.ui.two_title:set_text(name..'-第'..index..'波('..degree..')')
 end)
+
+ac.game:event '游戏-结束' (function(trg,flag)
+	ac.wait(2*1000,function()
+		c_ui.ranking.ui:show()
+        -- if flag then
+        --     ranking.ui.title:set_text('排行榜-游戏胜利')
+        -- else
+        --     ranking.ui.title:set_text('排行榜-游戏失败')
+        -- end        
+	end);
+end)	

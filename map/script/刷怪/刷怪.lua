@@ -1,6 +1,6 @@
 -- 顺序： 加载脚本 → 选择难度 → 注册英雄 → 游戏-开始 → 开始刷兵
 -- 规则：
--- 每回合刷 25 人口的怪物
+-- 每回合刷 40 人口的怪物
 -- 喽喽占 1个人口，小怪占 2个人口，头目占4人口，boss占20人口
 -- 小怪、头目、boss属性是喽喽的多倍
 -- 每个回合刷的 同怪物类型 的怪物都是同样。
@@ -28,7 +28,7 @@ ac.special_boss = {
 local skill_list = ac.skill_list
 
 local all_creep = {}
-local all_food 
+local all_food = 40 --总人口
 for k,v in pairs(ac.table.UnitData) do
     if v.type then 
         if finds(v.type,'喽喽','小怪','头目','boss') then
@@ -40,9 +40,6 @@ for k,v in pairs(ac.table.UnitData) do
                 table.insert(all_creep[v.type],k)    
             end    
         end    
-    end    
-    if v.category =='进攻怪' then
-        all_food = v.all_food
     end    
 end    
 

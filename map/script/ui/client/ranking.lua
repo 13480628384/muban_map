@@ -14,6 +14,7 @@ ranking = extends( panel_class,{
         --标题
         local title = top_panel:add_text('排行榜',0,0,950,100,19,4)
         title:set_color(243,246,4,1)
+        panel.title = title
         --小标题 显示难度
         local two_title = top_panel:add_text('等待游戏开始',0,0,950,25,10,4)
         two_title:set_color(200,202,8,1)

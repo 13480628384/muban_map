@@ -262,8 +262,9 @@ function helper:clear_server()
 	for i = 1, 10 do
 		local p = ac.player(i)
 		for n = 1,#ac.mall do 
-			p:Map_FlushStoredMission(ac.mall[n][1],'S')
+			p:Map_SaveServerValue(ac.mall[n][1],0)
 		end	
+		ac.set_jiami(p,'jifen',0)
 	end
 end
 --服务器存档 读取 
@@ -398,6 +399,13 @@ function helper:remove_skill(str)
 		skill:remove()
 	end	
 end
+--升级技能
+function helper:upgrade(str,lv)
+	local skill = self:find_skill(str) or self:has_item(str)
+	if skill then 
+		skill:upgrade(tonumber(lv) or 1)
+	end	
+end
 --增加物品
 function helper:add_item(str,cnt)
 	local cnt = cnt or 1
@@ -435,6 +443,20 @@ function helper:wtf()
 			end
 		end
 	end
+end
+
+--增加物品
+function helper:print(str)
+	local obj = self[str]
+	if obj then 
+		if type(obj) == 'function' then 
+			print(obj())
+		elseif 	type(obj) == 'table' then 
+			print(tostring(obj))
+		else
+			print(tostring(obj))
+		end	
+	end	
 end
 
 function helper:never_dead(flag)

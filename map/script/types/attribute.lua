@@ -324,7 +324,6 @@ on_set['力量'] = function(self)
 	
 	return function()
 		local value = self:get '力量' - old_value
-		
 		if self.main_attribute and self.main_attribute == '力量' then
 			-- 增加攻击
 			self:add('攻击', value * main_attribute_value)
@@ -425,6 +424,7 @@ get['生命'] = function(self)
 end
 
 set['生命'] = function(self, life)
+	-- print('设置生命2',life)
 	if life > 1 then
 		jass.SetWidgetLife(self.handle, life)
 
@@ -463,13 +463,13 @@ set['生命上限'] = function(self, max_life, old_max_life)
 end
 
 on_set['生命上限'] = function(self)
-	-- print('打印生命上限',self.name,self:get '生命上限')
 	if self:get '生命上限' <= 0 then 
 		self:kill()
 		return  
 	end	
 	local rate = self:get '生命' / self:get '生命上限'
 	return function()
+		print('设置生命1',self:get '生命上限' * rate)
 		self:set('生命', self:get '生命上限' * rate)
 	end
 end
@@ -558,8 +558,11 @@ on_get['攻击间隔'] = function(self, attack_gap)
 	return attack_gap
 end
 
-set['攻击间隔'] = function(self, attack_cool)
-	japi.SetUnitState(self.handle, jass.ConvertUnitState(0x25), attack_cool)
+set['攻击间隔'] = function(self, attack_gap)
+	if attack_gap < 0.6 then
+		attack_gap = 0.6
+	end
+	japi.SetUnitState(self.handle, jass.ConvertUnitState(0x25), attack_gap)
 end
 
 set['攻击速度'] = function(self, attack_speed)
@@ -678,7 +681,6 @@ on_get['物爆几率'] = function(self, physical_rate)
 	end
 	return physical_rate
 end
-
 
 on_get['法爆几率'] = function(self, magic_rate)
 	if magic_rate > 90 then

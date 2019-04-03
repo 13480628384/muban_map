@@ -3,7 +3,7 @@ local function init()
 end
 
 ac.game:event '单位-创建' (function(_,unit)
-	if unit.unit_type == '野怪' then
+	if unit.category == '进攻怪' then
 		ac.game.multiboard.creep_count(1)
 	end
 end)

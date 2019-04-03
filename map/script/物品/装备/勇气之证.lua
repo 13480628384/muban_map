@@ -40,10 +40,14 @@ function mt:on_add()
     self.trg = ac.game:event '单位-杀死单位' (function(trg, killer, target)
         --召唤物杀死也继承
         local hero = killer:get_owner().hero
-        if hero and hero:has_item(self.name) then 
-            self:add_item_count(1)
-            if self._count >= self.kill_cnt then 
-                self:item_remove()
+        if hero ~= self.owner then 
+            return 
+        end    
+        if hero and hero:has_item(self.name) and (hero == self.owner) then 
+            local item = hero:has_item(self.name)
+            item:add_item_count(1)
+            if item._count >= item.kill_cnt then 
+                item:item_remove()
                 -- hero:remove_item(self)
                 hero:add_item('霸者之证',true)
             end    

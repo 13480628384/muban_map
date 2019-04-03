@@ -50,16 +50,29 @@ end)
 --基地爆炸的时候结算胜负
 ac.game:event '游戏-结束' (function(trg,flag)
 
+	local name 
 	if flag then 
+		name = '【游戏胜利】'
 		ac.player.self:sendMsg("【游戏胜利】")
 		ac.player.self:sendMsg("【游戏胜利】")
 		ac.player.self:sendMsg("【游戏胜利】")
 	else
+		name = '【游戏失败】'
 		ac.player.self:sendMsg("【游戏失败】")
 		ac.player.self:sendMsg("【游戏失败】")
 		ac.player.self:sendMsg("【游戏失败】")
 	end	
-
+	ac.wait(4000,function()
+        for i=1,8 do
+            local player = ac.player[i]
+            if player:is_player() then
+                CustomDefeatBJ(player.handle,name)
+                -- player.hero:add_restriction('无敌')
+                -- player.hero:add_restriction('缴械')
+                -- player.hero:add_restriction('定身')
+            end
+        end
+    end)
 	--停止刷兵
 	-- if ac.creep['刷怪'] and ac.creep['刷怪'].finish then 
 	-- 	ac.creep['刷怪']:finish()

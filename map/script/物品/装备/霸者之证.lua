@@ -152,13 +152,17 @@ function mt:on_add()
             self.trg = ac.game:event '单位-杀死单位' (function(trg, killer, target)
                 --召唤物杀死也继承
                 local hero = killer:get_owner().hero
+                if hero ~= self.owner then 
+                    return 
+                end    
                 if hero and hero:has_item(self.name) then 
+                    local item = hero:has_item(self.name)
                     local rand = math.random(100)
                     if rand <= self.chance then 
-                        self:add_item_count(1)
-                        if self._count >= self.upgrade_cnt and self.level < (self.max_level-1) then 
-                            self:add_item_count(-self.upgrade_cnt+1)
-                            self:upgrade(1)
+                        item:add_item_count(1)
+                        if item._count >= item.upgrade_cnt and item.level < (item.max_level-1) then 
+                            item:add_item_count(-item.upgrade_cnt+1)
+                            item:upgrade(1)
                         end  
                     end  
                     --杀怪加全属性 

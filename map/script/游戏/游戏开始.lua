@@ -17,7 +17,6 @@ ac.game:event '游戏-开始' (function()
     --每个玩家初始化金币
     for i=1 ,12 do 
         local p = ac.player(i)
-        p:addGold(100000)
         if p.hero then 
             -- local item = p.hero:add_item('新手礼包') 
             -- local item = p.hero:add_item('迷你熊爪') 

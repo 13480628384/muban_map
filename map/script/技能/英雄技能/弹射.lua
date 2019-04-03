@@ -46,50 +46,46 @@ end
 function mt:on_add()
     local skill = self
     local hero = self.owner
-
 	self.trg = hero:event '造成伤害效果' (function (trg,damage) 
-		if not damage:is_common_attack() then 
-			return
-		end	
-		-- self = self:create_cast()
-		self.current_cnt = self.current_cnt + 1
-		-- print('弹射：',self.current_cnt)
-		if self.current_cnt >= self.cnt then 
-			self.current_cnt = 0
-			return 	
-		end	 
+		if damage:is_common_attack() or damage.skill == self then 
+			-- self = self:create_cast()
+			self.current_cnt = self.current_cnt + 1
+			-- print('弹射：',self.current_cnt)
+			if self.current_cnt >= self.cnt then 
+				self.current_cnt = 0
+				return 	
+			end	 
 
-		local target = damage.target
-		-- print('弹射起始位置：',target,target:get_point())
-		local u = ac.selector():in_range(target,700):is_enemy(hero):is_not(target):is_not(ac.key_unit):random()
-		if not u then 
-			return 
-		end	
-		-- print('弹射目标：',u,u:get_point())
-		local mvr = ac.mover.target
-		{
-			source = hero,
-			start = target,
-			target = u,
-			speed = skill.speed,
-			skill = skill,
-			high = 110,
-			model = skill.effect1, 
-			size = 1
-		}
-		if not mvr then 
-			return
-		end
-
-		function mvr:on_finish()
-			u:damage
+			local target = damage.target
+			-- print('弹射起始位置：',target,target:get_point())
+			local u = ac.selector():in_range(target,700):is_enemy(hero):is_not(target):is_not(ac.key_unit):random()
+			if not u then 
+				return 
+			end	
+			-- print('弹射目标：',u,u:get_point())
+			local mvr = ac.mover.target
 			{
 				source = hero,
+				start = target,
+				target = u,
+				speed = skill.speed,
 				skill = skill,
-				attack = true,
-				common_attack = true,
-				damage = damage.damage * (1 - skill.reduce/100)
+				high = 110,
+				model = skill.effect1, 
+				size = 1
 			}
+			if not mvr then 
+				return
+			end
+
+			function mvr:on_finish()
+				u:damage
+				{
+					source = hero,
+					skill = skill,
+					damage = damage.damage * (1 - skill.reduce/100)
+				}
+			end	
 		end	
 	end)
 	

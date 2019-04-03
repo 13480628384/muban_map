@@ -33,11 +33,16 @@ function mt:on_cast_start()
     local player = hero.owner
     local shop_item = ac.item.shop_item_map[self.name]
     local item = hero:has_item('霸者之证')
-    if item.level == 4 and item:get_item_count() >=150 then 
-        -- print('达到条件')
-        ac.player.self:sendMsg('|cffff0000伏地魔|r |cff00ffff已出现，请大侠击杀，升级霸者之证|r')   
+
+    if item and item.level == 4 and item:get_item_count() >=150 then 
+        ac.player.self:sendMsg('|cffff0000伏地魔|r |cff00ffff已出现，请大侠击杀，升级霸者之证|r') 
+        --同一时间只能有一只伏地魔
+        if ac.flag_fdm then 
+            return   
+        end
+        ac.flag_fdm = true 
         --创建伏地魔
-        local unit = ac.player.com[2]:create_unit('伏地魔',ac.map.rects['刷怪']:get_point())
+        local unit = ac.player.com[2]:create_unit('伏地魔',ac.map.rects['刷怪']:get_point()) 
         local data = ac.table.UnitData['伏地魔']
         if data.model_size then 
             unit:set_size(data.model_size)
@@ -46,6 +51,7 @@ function mt:on_cast_start()
         unit:set_search_range(99999)
         --注册事件
         unit:event '单位-死亡'(function(_,unit,killer) 
+            ac.flag_fdm = false 
             --宠物打死也升级
             for i=1,10 do 
                 local hero = ac.player(i).hero
@@ -57,7 +63,7 @@ function mt:on_cast_start()
                         item:upgrade(1)
                     end
                 end
-            end    
+            end  
         end)  
 
 
