@@ -8,7 +8,12 @@ level = 1,
 art = [[other\suiji101.blp]],
 
 --说明
-tip = [[获得一个随机物品，价格随购买次数增加而增加，|cff00ff00且买且珍惜|r]],
+tip = [[获得一个随机物品，价格随购买次数增加而增加，|cff00ff00且买且珍惜|r
+
+|cffffff00白装概率：|r 67.5%
+|cffffff00蓝装概率：|r 22.5%
+|cffffff00金装概率：|r 7.5%
+|cffffff00红装概率：|r 2.5%]],
 
 content_tip = '物品说明:',
 
@@ -22,9 +27,9 @@ target_type = ac.skill.TARGET_TYPE_NONE,
 cool = 0,
 
 --购买价格
-gold = 1000,
+gold = 500,
 --每次增加
-cre_gold = 500,
+cre_gold = 250,
 
 --物品技能
 is_skill = true,

@@ -23,7 +23,7 @@ mt{
 	--特效
 	effect = [[Hero_Silencer_N2S_T_start.MDX]],
 	--物品获取率
-	item_rate = {30,40,50,75,100},
+	item_rate = {60,80,100,150,200},
 	--持续时间
 	time = 15,
 	--目标允许	
