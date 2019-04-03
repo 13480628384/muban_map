@@ -205,10 +205,10 @@ local unit_reward = {
     ['进攻怪'] =  {
         -- { rand = 97.5,         name = '无'},
         { rand = 2.5,      name = {
-                { rand = 79, name = '随机白装'},
+                { rand = 78, name = '随机白装'},
                 { rand = 16, name = '随机蓝装'},
                 { rand = 3.3, name = '随机金装'},
-                { rand = 1 ,  name = '召唤boss'},
+                { rand = 2 ,  name = '召唤boss'},
                 { rand = 0.7, name = '随机红装'},
             }
         }
@@ -226,7 +226,7 @@ local unit_reward = {
         { rand = 20,      name = '随机技能'}
     },
     ['挑战怪'] =  {
-        { rand = 30,      name = '吞噬丹'}
+        { rand = 35,      name = '吞噬丹'}
     },
     ['商店随机技能'] =  {
         { rand = 100,      name = '随机技能'}
@@ -248,8 +248,8 @@ local unit_reward = {
         {    rand = 12.5, name = '暴击率翻倍',},
         {    rand = 12.5, name = '生命全满',},
         {    rand = 12.5, name = '攻击力翻倍',},
-        {    rand = 5, name = '护甲加50',},
-        {    rand = 11.5, name = '全属性加100',},
+        {    rand = 4, name = '护甲加50',},
+        {    rand = 12.5, name = '全属性加100',},
         {    rand = 4, name = '全属性加1000',},
         {    rand = 0.5, name = '全属性加10000',},
         

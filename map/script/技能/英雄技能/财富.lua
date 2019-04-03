@@ -16,7 +16,7 @@ mt{
 	]],
 	--技能图标
 	art = [[jineng\jineng019.blp]],
-	more_gold = {20,30,40,50,60},
+	more_gold = {40,60,80,100,120},
 }
 mt.more_gold_now = 0
 

@@ -10,7 +10,7 @@ mt{
     --说明
     
     --物品类型
-    item_type = '消耗品',
+    item_type = '技能',
     
     --目标类型
     target_type = ac.skill.TARGET_TYPE_NONE,

@@ -16,7 +16,7 @@ mt{
 	]],
 	--技能图标
 	art = [[jineng\jineng017.blp]],
-	item_rate = {20,30,40,50,60},
+	item_rate = {40,60,80,100,120},
 }
 
 mt.item_rate_now = 0
