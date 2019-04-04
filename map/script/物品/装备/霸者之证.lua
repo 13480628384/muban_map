@@ -45,7 +45,7 @@ mt{
                 tip = tip .. '|cffffff00+'..self.magic_rate ..'%|r 法爆几率\n'
                 tip = tip .. '|cffffff00+'..self.heart_rate ..'%|r 会心几率\n'
                 tip = tip .. '|cffffff00+5|r 杀怪获得全属性'..'\n'
-                tip = tip .. '|cffffff00+25%|r 杀怪收集灵魂（受物品获取率影响）\n'
+                tip = tip .. '|cffffff00+15%|r 杀怪收集灵魂（受物品获取率影响）\n'
             end   
             if self.level >=2 and self.level <=3  then  
                 tip = tip .. '\n|cffFFE799【进阶】|r收集%upgrade_cnt%个灵魂，自动进阶为|cffdf19d0 霸者之证LV'..(self.level+1)..'|r'
@@ -62,17 +62,17 @@ mt{
 
    
     --杀怪加全属性 
-    kill_add_attr = 5,
+    kill_add_attr = 20,
     --概率收集
     chance = function(self,hero)
         if self and hero then 
-            return 25 * ( 1 + hero:get('物品获取率')/100 )
+            return 15 * ( 1 + hero:get('物品获取率')/100 )
         end
     end,       
     --唯一
     unique = true,
     --升级所需要的杀敌数
-    upgrade_cnt = {0,50,100,150,999999},
+    upgrade_cnt = {0,100,200,300,999999},
     --显示等级
     show_level = true,
     --升级特效
