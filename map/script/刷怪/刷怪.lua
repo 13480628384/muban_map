@@ -552,12 +552,12 @@ function mt:creat_key_unit()
 
     --设置属性
     unit.category = '进攻怪' --设置为进攻怪的掉落物品规则
-    unit.gold = data.gold * 5 
-    unit.exp = data.exp * 5
-    unit.fall_rate = data.fall_rate * 5
+    unit.gold = data.gold * 5 *0
+    unit.exp = data.exp * 5 *0
+    unit.fall_rate = data.fall_rate * 5 *0
     unit:set('移动速度',650)
     unit:set('生命上限',20)
-    unit:add_high(220)
+    unit:add_high(100)
     unit:add_restriction('魔免')
     --钥匙怪逃跑路线
     self.key_unit_trg = self:move_random_way(unit)

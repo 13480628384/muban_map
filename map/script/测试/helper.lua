@@ -360,6 +360,17 @@ function helper:power()
 end
 
 --创建一个敌方英雄在地图中间，如果playerid有参数，则是为playerid玩家创建
+function helper:create(str,cnt, playerid)
+	if not playerid then
+		playerid = 12
+	end
+	local p = player[playerid]
+	for i = 1 ,(cnt or 1) do
+		local unit = p:create_unit(str,ac.point(0,0))
+		unit:set('移动速度',455)
+	end	
+end
+--创建一个敌方英雄在地图中间，如果playerid有参数，则是为playerid玩家创建
 function helper:dummy(life, playerid)
 	if not playerid then
 		playerid = 13

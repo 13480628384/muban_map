@@ -36,7 +36,7 @@ end
 function mt:on_cast_start()
     local hero = self.owner
     local player = self.owner:get_owner()
-    if hero.unit_type == '宠物' then 
+    if hero.unit_type == '宠物' or hero.unit_type == '召唤物' then 
         player:sendMsg('|cff00ffff宠物不能拾取|r',10)
         player:sendMsg('|cff00ffff宠物不能拾取|r',10)
         return true

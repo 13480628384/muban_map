@@ -91,7 +91,11 @@ local attribute = {
 	['法术攻击'] = true, --默认表示为% 技能的法术伤害加成
 	['召唤物'] = true, --默认表示为基础值,召唤物数量
 	['召唤物属性'] = true, --默认表示为%, 召唤物属性加成
-	['主动释放的增益效果'] = true  --默认表示为%
+	['主动释放的增益效果'] = true,  --默认表示为%
+	['杀怪力量'] = true,  --默认表示为基础值
+	['杀怪敏捷'] = true,  --默认表示为基础值
+	['杀怪智力'] = true,  --默认表示为基础值
+	['杀怪全属性'] = true,  --默认表示为基础值
 }
 ac.unit.attribute = attribute
 local set = {}
@@ -107,6 +111,7 @@ local base_attr =[[
 破魔 护盾 减伤 技能基础伤害 多重射 额外连锁 额外范围 攻击回血 击杀回血 基础金币 积分加成
 额外伤害 召唤物
 ]]
+
 
 --如果加成的属性名有%,则部分转化为 直加
 --add_tran(力量%,10) ,实际为 add(力量%,10)
@@ -469,7 +474,7 @@ on_set['生命上限'] = function(self)
 	end	
 	local rate = self:get '生命' / self:get '生命上限'
 	return function()
-		print('设置生命1',self:get '生命上限' * rate)
+		-- print('设置生命1',self:get '生命上限' * rate)
 		self:set('生命', self:get '生命上限' * rate)
 	end
 end
@@ -718,3 +723,17 @@ on_get['闪避'] = function(self, value)
 	end
 	return value
 end
+
+--杀怪加全属性通用规则
+ac.game:event '单位-杀死单位' (function(trg, killer, target)
+	--召唤物杀死也继承
+	local hero = killer:get_owner().hero
+	if not hero then return end
+	local str = hero:get('杀怪力量') + hero:get('杀怪全属性')
+	local int = hero:get('杀怪智力') + hero:get('杀怪全属性')
+	local agi = hero:get('杀怪敏捷') + hero:get('杀怪全属性')
+	--杀怪加全属性 
+	hero:add('力量',str)
+	hero:add('智力',int)
+	hero:add('敏捷',agi)
+end) 

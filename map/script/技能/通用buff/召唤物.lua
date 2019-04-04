@@ -11,6 +11,10 @@ function mt:on_add()
 	local player = self.target:get_owner()
 	self.old_model = self.target:get_slk 'file'
 	self.old_size = self.target:get_size()
+	--单位类型
+	self.old_unit_type = self.target.unit_type
+
+	self.target.unit_type = '召唤物'
 	if not getextension(self.old_model) then 
 		self.old_model = self.old_model..'.mdl'
 	end	
@@ -71,7 +75,9 @@ function mt:on_remove()
     if self.effect then 
         self.effect:remove()
 	end   
-	print('buff移除')
+	-- print('buff移除')
+	--还原单位类型
+	self.target.unit_type = self.old_unit_type
 	--暂停生命周期
 	jass.UnitPauseTimedLife(self.target.handle,true)  
 	--移除水元素技能

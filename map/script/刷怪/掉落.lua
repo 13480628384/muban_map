@@ -223,7 +223,17 @@ local unit_reward = {
         }
     },
     ['钥匙怪'] =  {
-        { rand = 20,      name = '随机技能'}
+        {    rand = 30, name = '金币30' },
+        {    rand = 30, name = '经验30',},
+        {    rand = 8, name = '召唤boss',},
+        {    rand = 1, name = '吞噬丹',},
+        {    rand = 5, name = '杀怪全属性5',},
+        {    rand = 5, name = '全属性1000',},
+        {    rand = 1, name = '全属性10000',},
+        {    rand = 5, name = '护甲加50',},
+        {    rand = 5, name = '杀怪力量10',},
+        {    rand = 5, name = '杀怪敏捷10',},
+        {    rand = 5, name = '杀怪智力10',},
     },
     ['挑战怪'] =  {
         { rand = 35,      name = '吞噬丹'}
@@ -338,23 +348,23 @@ end)
 
 -- 如果死亡的是钥匙怪的话
 -- 按照玩家数 多产生掉落次数
-ac.game:event '单位-死亡' (function (_,unit,killer)
-    if unit:get_name() ~='钥匙怪' then
-		return
-    end
+-- ac.game:event '单位-死亡' (function (_,unit,killer)
+--     if unit:get_name() ~='钥匙怪' then
+-- 		return
+--     end
 
-    local p_count = get_player_count()
-    for i = 1 ,p_count do  
-        local name = get_reward_name(unit_reward['钥匙怪'])
-        if name then 
-            local func = reward[name]
-            local player = killer:get_owner()
-            if func then 
-                func(player,killer,unit)
-            end  
-        end    
-    end    
-end)
+--     local p_count = get_player_count()
+--     for i = 1 ,p_count do  
+--         local name = get_reward_name(unit_reward['钥匙怪'])
+--         if name then 
+--             local func = reward[name]
+--             local player = killer:get_owner()
+--             if func then 
+--                 func(player,killer,unit)
+--             end  
+--         end    
+--     end    
+-- end)
 
 -- 如果死亡的是挑战怪的话
 ac.game:event '单位-死亡' (function (_,unit,killer)

@@ -14,6 +14,7 @@ require '刷怪.刷怪-无尽'
 require '刷怪.游戏结束'
 require '刷怪.掉落'
 require '刷怪.命运花'
+require '刷怪.钥匙怪奖励'
 
 -- require '野怪.BOSS-AI'
 
