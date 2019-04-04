@@ -377,6 +377,7 @@ function mt:sendMsg_unit()
     for i=1,10 do 
         if self.player_damage and self.player_damage[i] and self.player_damage[i].player:is_player() then
             tip = tip ..'|cffffff00No.'..i..'、 |r|cffff0000'..self.player_damage[i].player:get_name()..'|r|cffffff00: 伤害[|cffff0000'..ac.numerical(self.player_damage[i].damage)..'|r|cffffff00]金币奖励 '..self.player_damage[i].gold..' |r'..'\n'
+            ac.player(i):addGold(self.player_damage[i].gold)
         end   
     end
     ac.player.self:sendMsg(tip,10)   
