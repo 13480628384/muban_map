@@ -21,7 +21,7 @@ mt{
     --护甲
     defence = 25,
     --杀敌个数
-    kill_cnt = 350,
+    kill_cnt = 700,
     --唯一
     unique = true,
     --物品详细介绍的title
