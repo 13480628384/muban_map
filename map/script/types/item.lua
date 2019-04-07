@@ -398,7 +398,7 @@ function mt:get_tip()
 	-- print(t_str,s_str)
 	-- print(self.color)
 	if self.color then 
-		color_tip = '|cff'..ac.color_code['淡黄'].. '品质：|R'..self.color..'\n'
+		color_tip = '|cff'..ac.color_code['淡黄'].. '品质：|R|cff'..ac.color_code[self.color]..self.color..'|r\n'
 	end	
 	if owner then
 		--有所属单位则说明物品在身上
