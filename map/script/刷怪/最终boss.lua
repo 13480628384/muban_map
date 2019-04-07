@@ -78,12 +78,23 @@ ac.game:event '游戏-最终boss' (function(trg,index, creep)
     if c_boss_buff then 
         c_boss_buff:remove()
     end   
+    
     creep.boss:add_buff '缩放' {
         origin_size = 1,
         target_size = 2.5,
-        time = 2
+        time = 3.5
     }
-    ac.wait(2*1000,function ()
+	--镜头动画
+	local p = ac.player.self
+	p:setCamera(creep.boss:get_point() + {0, 300}, 0.5)
+    p:hideInterface(0.5)
+
+    ac.wait(3.6*1000,function ()
+        p:showInterface(0.1)
+        p:setCamera(p.hero:get_point() + {0, 300}, 0.3)
+    end)
+
+    ac.wait(4*1000,function ()
         creep.boss:remove_restriction '无敌' 
         creep.boss:remove_restriction '定身'
         creep.boss:remove_restriction '缴械'
@@ -95,7 +106,9 @@ ac.game:event '游戏-最终boss' (function(trg,index, creep)
     --注册事件
     creep.boss:event '单位-死亡'(function(_,unit,killer) 
         --保存积分
-        ac.save_jifen()
+        if ac.save_jifen then 
+            ac.save_jifen()
+        end    
 
         --难1， 游戏胜利  
         --难2、3 ， 20秒后进入无尽 

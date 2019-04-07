@@ -47,7 +47,7 @@ end
 local mt = ac.creep['刷怪']{    
     region = '',
     creeps_datas = '',
-    max_index = 100,
+    max_index = 60,
     is_random = true,
     creep_player = ac.player.com[2],
     tip ="郊区野怪刷新啦，请速速打怪升级，赢取白富美"
