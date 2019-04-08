@@ -762,9 +762,9 @@ function unit.__index:add_item(it,is_fall)
 	
 	if self:event_dispatch('单位-即将获得物品', self, it) then
 		--装备唯一时，要求掉落在地上 如果代码直接添加，无法被加在地上。
-		if is_fall then
-			it:setPoint(self:get_point())
-		end	
+		-- if is_fall then
+		-- 	it:setPoint(self:get_point())
+		-- end	
 		--消耗品 就算 掉地上也要回收
 		if it.recycle then
 			it:item_remove()
@@ -775,9 +775,10 @@ function unit.__index:add_item(it,is_fall)
 		if it.geiyu then
 			it.geiyu = false 
 			-- print(it.name)
-			-- if it.item_type == '消耗品' then 
-			-- 	it:item_remove()
-			-- end	
+			if it.unique then 
+				it:setPoint(self:get_point())
+				it.recycle = false
+			end	
 		end 
 		return
 	end
@@ -789,6 +790,7 @@ function unit.__index:add_item(it,is_fall)
 		--满格时，掉落地上
 		if is_fall then
 			it:setPoint(self:get_point())
+			it.recycle = false
 		elseif it.recycle then
 			--物品栏已满，需要回收
 			-- @应用在 购买商店物品 、 代码直接添加物品给英雄

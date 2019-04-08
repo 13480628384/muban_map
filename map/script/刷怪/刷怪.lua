@@ -439,7 +439,7 @@ function mt:on_change_creep(unit,lni_data)
         --单位死亡时，清空伤害统计。   
         unit:event '单位-死亡'(function(_,unit,killer)
             for i = 1 ,10 do 
-                if self.player_damage[i] then
+                if self.player_damage and self.player_damage[i] then
                     self.player_damage[i] = nil
                 end 
             end       
