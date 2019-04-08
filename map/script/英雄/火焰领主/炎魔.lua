@@ -86,6 +86,7 @@ local function create_summon_unit(skill,where)
 		time = skill.time,
 		attribute = data.attribute,
 		skill = skill,
+		follow = true
 	}
 
 	unit:event '单位-杀死单位' (function(trg, killer, target)
