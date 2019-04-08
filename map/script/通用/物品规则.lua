@@ -357,7 +357,7 @@
                 return
             end
 
-            print('发布使用物品命令：',slot_id,item.name,target)
+            -- print('发布使用物品命令：',slot_id,item.name,target)
             --判断施法条件是否满足
             if item:conditions(item,target) ~= true then
                 --如果施法条件不满足，重置CD

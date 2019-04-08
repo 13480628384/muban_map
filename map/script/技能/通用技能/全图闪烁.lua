@@ -33,7 +33,7 @@ function mt:on_add()
 	
 	local hero = self.owner
 	local skill = self
-	print('添加全图闪烁技能')
+	-- print('添加全图闪烁技能')
 end
 
 function mt:on_can_cast()

@@ -143,7 +143,7 @@ end
 
 --回收句柄
 function ac.remove_item_handle(handle)
-	print('回收句柄',handle)
+	-- print('回收句柄',handle)
 	table.insert(ac.item_list,handle)
 end
 
@@ -349,7 +349,7 @@ end
 function mt:item_init_skill()
 	local hero = self.owner
 	if not hero then
-		print('初始化技能失败，没有所有者',self.name)
+		-- print('初始化技能失败，没有所有者',self.name)
 		return
 	end
 
@@ -481,7 +481,6 @@ local function register_item_destroy_event(item_handle)
 
 	jass.TriggerAddAction(trg,function ()
 		local handle = GetTriggerWidget()
-		print(handle,jass.GetHandleId(handle))
 		local it = ac.item.item_map[handle]
         -- print('触发丢弃物品',it.owner,it.name,it._model)
 		if not it then
@@ -621,7 +620,7 @@ function mt:on_use_state()
 			}
 		end
 		if self.item_type == '消耗品' or self.item_type == '神符' then
-			print('使用物品,增加属性：',name,value.name,value.value)
+			-- print('使用物品,增加属性：',name,value.name,value.value)
 			hero:add_tran(value.name,value.value)
 		end	
 	end 

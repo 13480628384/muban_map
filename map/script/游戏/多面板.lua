@@ -44,7 +44,7 @@ local function multiboard_init()
 			
 		end
 	end
-	mtb:setText(1,7,'按住tab查看详细数据')
+	mtb:setText(1,7,'按住|cffff0000tab|r查看详细数据')
 
 	--玩家信息初始化，设置英雄头像，玩家信息
 	ac.game.multiboard.player_init = function(player,hero)
