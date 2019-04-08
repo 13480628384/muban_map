@@ -1081,6 +1081,10 @@ function item.create(name,pos)
 	end
 
 	local type_id = ac.get_shop_item_handle(pos)
+	if not type_id then 
+		print('商店模板id超出限制')
+		return 
+	end	
 	items.type_id = type_id
 
 	--创建一个实例物品

@@ -131,6 +131,9 @@ function mt:add_sell_item(name,i)
 	end
 
 	local item = ac.item.create(name,i)
+	if not item then 
+		return 
+	end
 	item.shop_slot_id = i
 	-- item:set_store_title('                   '..self:get_name())
 	item:set_store_title(item.store_name)

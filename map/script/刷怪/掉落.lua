@@ -196,6 +196,17 @@ local reward = {
             hero:add_item(name,true)    
         end 
     end,
+    ['召唤练功怪'] = function (player,hero,unit,is_on_hero)
+        local name = '召唤练功怪'
+        if not is_on_hero then 
+            local item = ac.item.create_item(name,unit:get_point())
+            item_self_skill(item,hero)
+        else
+            hero = hero:get_owner().hero
+            hero:add_item(name,true)    
+        end 
+    end,
+
 
 }
 ac.reward = reward
@@ -205,7 +216,8 @@ local unit_reward = {
     ['进攻怪'] =  {
         -- { rand = 97.5,         name = '无'},
         { rand = 2.5,      name = {
-                { rand = 78, name = '随机白装'},
+                { rand = 70, name = '召唤练功怪'},
+                { rand = 8, name = '随机白装'},
                 { rand = 16, name = '随机蓝装'},
                 { rand = 3.3, name = '随机金装'},
                 { rand = 2 ,  name = '召唤boss'},

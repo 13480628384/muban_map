@@ -42,7 +42,7 @@ for k,v in pairs(ac.table.UnitData) do
         end    
     end    
 end    
-
+ac.all_creep = all_creep
 
 local mt = ac.creep['刷怪']{    
     region = '',
