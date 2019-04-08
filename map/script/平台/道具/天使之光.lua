@@ -17,9 +17,11 @@ mt{
 	--攻击速度
 	attack_speed = 50,
 	--金币加成
-	gold_mul = 5,
+	gold_mul = 10,
 	--经验加成
-    exp_mul = 5,
+    exp_mul = 10,
+
+    item_mul = 10,
 	
 }
 function mt:on_add()
@@ -29,6 +31,8 @@ function mt:on_add()
     hero:add('经验加成',self.exp_mul)
     hero:add('移动速度',self.move_speed)
     hero:add('攻击速度',self.attack_speed)
+    hero:add('物品获取率',self.item_mul)
+
     --添加翅膀
     if hero.chibang then 
         hero.chibang:remove()
@@ -46,6 +50,7 @@ function mt:on_remove()
     hero:add('经验加成',-self.exp_mul)
     hero:add('移动速度',-self.move_speed)
     hero:add('攻击速度',-self.attack_speed)
+    hero:add('物品获取率',-self.item_mul)
 
     --添加翅膀
     if hero.chibang then 

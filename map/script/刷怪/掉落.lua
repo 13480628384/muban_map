@@ -216,9 +216,9 @@ local unit_reward = {
     ['进攻怪'] =  {
         -- { rand = 97.5,         name = '无'},
         { rand = 2.5,      name = {
-                { rand = 70, name = '召唤练功怪'},
-                { rand = 8, name = '随机白装'},
-                { rand = 16, name = '随机蓝装'},
+                { rand = 10, name = '召唤练功怪'},
+                { rand = 70, name = '随机白装'},
+                { rand = 14, name = '随机蓝装'},
                 { rand = 3.3, name = '随机金装'},
                 { rand = 2 ,  name = '召唤boss'},
                 { rand = 0.7, name = '随机红装'},

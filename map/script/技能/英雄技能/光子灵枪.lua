@@ -5,11 +5,11 @@ mt{
 	level = 1,
 	max_level = 5,
 	--技能类型
-	skill_type = "被动",
+	skill_type = "被动 敏捷",
 	--技能图标
 	art = [[icon\card1_30.blp]],
 	--技能说明
-	title = '光子灵枪 敏捷',
+	title = '光子灵枪',
 	tip = [[
 攻击时有 %chance% % 几率召 %num% 个 %title%飞向敌人造成伤害
 伤害计算：|cffd10c44敏捷 * %agi_mul%|r
