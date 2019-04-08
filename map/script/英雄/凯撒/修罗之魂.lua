@@ -10,11 +10,11 @@ mt{
 	max_level = 5,
 	tip = [[
 		主动：变身大帝，强化自身，持续 %time% S
-			 攻击力 +%attack% % 
-			 攻击间隔 -%attack_gap% 
-		     移动速度 +%move_speed% % 
-		     伤害减免 %reduce_damage% %，
-		     攻击距离 +%attack_range%，
+			攻击力 +%attack% %
+			攻击间隔 %attack_gap%
+			移动速度 +%move_speed% %
+			伤害减免 %reduce_damage% %
+			攻击距离 +%attack_range%
 		被动：凯撒周围%area%码的单位每增加1个，凯撒的攻击力增加 %attack_increase% %
 	]],
 	--播放动画
