@@ -44,7 +44,7 @@ local function multiboard_init()
 			
 		end
 	end
-	mtb:setText(3,7,'怪物总数')
+	mtb:setText(1,7,'按住tab查看详细数据')
 
 	--玩家信息初始化，设置英雄头像，玩家信息
 	ac.game.multiboard.player_init = function(player,hero)
@@ -61,32 +61,17 @@ local function multiboard_init()
 
 	--玩家伤害数据刷新
 	local damage_list = {}
-	ac.game.multiboard.damage_init = function(player)
-		table.insert(damage_list,player)
+	ac.game.multiboard.damage_init = function(player, num)
+		mtb:setText( 4, player.id + 1, num )
 	end
 	local tm = os.time() - 57600
+	
 
 	ac.loop(1*1000,function()
 		local interval = os.time() - tm
 		local title = "生存模式"
 		local str = os.date("%H:%M:%S", interval)
-		if g_game_min > 30 then 
-			title = "无尽模式"
-		end 
 		mtb:setTitle(title .. '          游戏时间 ' .. str)
-		local list = {}
-		local tol = 0
-		for i = 1,#damage_list do
-			list[i] = damage_list[i].count_data.damage_data.damage or 0
-			tol = tol + list[i]
-		end
-		for i = 1,#damage_list do
-			if tol == 0 then
-				mtb:setText( 4, i + 1, '0%')
-			else
-				mtb:setText( 4, i + 1, math.floor(list[i]) )
-			end
-		end
 		
 		-- local list = get_player_list()
 		-- for _,player in ipairs(list) do 

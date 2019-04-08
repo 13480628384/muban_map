@@ -2,12 +2,6 @@
 local function init()
 end
 
-ac.game:event '单位-创建' (function(_,unit)
-	if unit.category == '进攻怪' then
-		ac.game.multiboard.creep_count(1)
-	end
-end)
-
 ac.game:event '单位-死亡' (function (_,unit,killer)
 	local data = killer:get_owner().count_data
 	if not data then

@@ -50,11 +50,11 @@ end
 --数值转换
 local function numerical(value)
     if value < 10000 then
-        return (' %.0f'):format(value)
+        return ('%.0f'):format(value)
     elseif value < 100000000 then
-        return (' %.1f'):format(value/10000)..'万'
+        return ('%.1f'):format(value/10000)..'万'
     else
-        return (' %.1f'):format(value/100000000)..'亿'
+        return ('%.1f'):format(value/100000000)..'亿'
     end
 
 end
@@ -153,6 +153,8 @@ local function get_kda()
         ranking.ui.gold_count[i]:set_text(numerical(p.gold_count))
         --累计伤害
         ranking.ui.damage_count[i]:set_text(numerical(p.damage_count))
+        --魔兽自带多面板统计
+        ac.game.multiboard.damage_init(p,numerical(p.damage_count))
         --受到伤害
         ranking.ui.take_damage[i]:set_text(numerical(p.take_damage_count))
         --参团率
@@ -208,6 +210,7 @@ ac.game:event '游戏-开始' (function()
         hero:event '造成伤害结束'(function(_,self)
             -- print(p.damage_count)
             p.damage_count = p.damage_count + self.current_damage
+
         end)
 
         hero:event '受到伤害结束'(function(_,self)
@@ -246,6 +249,9 @@ ac.game:event '游戏-开始' (function()
         end    
         p.putong_jifen = (p.putong_jifen or 0) + jf_mul
         ac.total_putong_jifen = (ac.total_putong_jifen or 0) + jf_mul
+        --魔兽自带的多面板统计
+        -- ac.game.multiboard.creep_count(-1)
+        ac.game.multiboard.player_kill_count(p,p.kill_count) 
     end)
 
     --刷新排行榜信息
@@ -323,3 +329,5 @@ ac.game:event '游戏-结束' (function(trg,flag)
         -- end        
 	end);
 end)	
+--魔兽自带的多面板 暂时有问题
+

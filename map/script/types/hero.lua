@@ -58,6 +58,16 @@ end
 
 --获得经验值 modify by jeff 20190215 添加文字显示
 function mt:addXp(xp)
+	--100级最高级
+    local total_killer_xp = self.xp + xp
+    if total_killer_xp - self:get_upgrade_xp(99) > 0  then 
+        xp = self:get_upgrade_xp(99) - self.xp
+    end    
+    if self.level >= 100 then 
+		xp = 0
+		return 
+	end    
+	
 	jass.SetHeroXP(self.handle, jass.GetHeroXP(self.handle) + xp, true);
 	self.xp = jass.GetHeroXP(self.handle);
 
