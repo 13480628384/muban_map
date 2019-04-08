@@ -285,22 +285,22 @@ end
 -- 每点智力增加8点魔法上限，0.08点魔法恢复，0.1%法爆伤害，如果是主属性，每点智力还增加4点攻击力
 
 --主属性 每点主属性增加4点攻击力
-local main_attribute_value = 4
+local main_attribute_value = 3
 --力量 
-local str_hp = 8
-local str_hp_recover = 0.08
-local str_phy_split_damage = 0.1
+local str_hp = 6
+local str_hp_recover = 0.06
+local str_phy_split_damage = 0.05
 
 --敏捷
-local agi_speed = 0.05
-local agi_heart = 0.1
+local agi_speed = 0.035
+local agi_heart = 0.05
 local agi_defense = 0
 
 --智力
 local int_mp = 8
 local int_mp_recover = 0.08
-local int_explosion = 0.1
-local int_skill_base_damage = 4
+local int_explosion = 0.05
+local int_skill_base_damage = 3
 
 
 get['力量'] = function(self)

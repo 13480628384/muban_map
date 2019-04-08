@@ -26,7 +26,7 @@ ac.skill_list2 = {
 
 --统一定 技能价格 技能售价
 for _,name in ipairs(ac.skill_list2) do
-    ac.skill[name].gold = 5000
+    ac.skill[name].gold = 2500
 end    
 
 

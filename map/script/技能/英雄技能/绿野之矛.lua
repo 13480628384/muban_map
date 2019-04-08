@@ -22,7 +22,7 @@ mt{
     --投射物数量
     count = 4,
     --图标
-    art = 'lvyezhimao.tga',
+    art = 'lvyezhimao.blp',
 
     --buff持续时间
     time = 3,

@@ -763,7 +763,7 @@ ac.wait(20,function()
 
     ac.game:event '游戏-开始' (function()
         print('游戏开始6')
-        local time = 15
+        local time = 30
         if ac.test == true then
             time = 0
         end
