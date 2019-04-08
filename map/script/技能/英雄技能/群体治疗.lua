@@ -14,7 +14,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[回复全体队友%life_rate% %的血
+	tip = [[|cff11ccff%skill_type%:|r 回复全体队友%life_rate% %的血
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNScrollOfTownPortal.blp]],

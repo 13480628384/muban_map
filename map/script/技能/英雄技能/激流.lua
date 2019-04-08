@@ -18,7 +18,7 @@ mt{
 	--施法范围
 	area = 400,
 	--介绍
-	tip = [[召唤激流对范围300码的敌方单位攻击，造成敏捷力*5的法术伤害]],
+	tip = [[|cff11ccff%skill_type%:|r 召唤激流对范围300码的敌方单位攻击，造成敏捷力*5的法术伤害]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNCrushingWave.blp]],
 	--特效

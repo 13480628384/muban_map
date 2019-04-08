@@ -10,7 +10,7 @@ mt{
 	--技能说明
 	title = '阳光枪',
 	tip = [[
-	攻击有 %chance% % 的概率对 %hit_area% 范围造成伤害 (%damage%)
+|cff11ccff%skill_type%:|r 攻击有 %chance% % 的概率对 %hit_area% 范围造成伤害 (%damage%)
 伤害计算：|cffd10c44敏捷 * %int% +1500 |r
 伤害类型：|cff04be12物理伤害|r
 ]],

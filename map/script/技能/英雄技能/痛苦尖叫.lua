@@ -17,7 +17,7 @@ mt{
 	--施法范围
 	area = 600,
 	--介绍
-	tip = [[发出锐利的尖叫，对范围300码的敌方单位造成智力%int% 法术伤害 （%damage%）
+	tip = [[|cff11ccff%skill_type%:|r 发出锐利的尖叫，对范围300码的敌方单位造成智力%int% 法术伤害 （%damage%）
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNPossession.blp]],

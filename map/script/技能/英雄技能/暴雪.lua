@@ -20,7 +20,7 @@ mt{
 	--施法范围
 	area = 300,
 	--介绍
-	tip = [[召唤暴雪进行范围攻击，范围300，造成智力*5的法术伤害，CD12S]],
+	tip = [[|cff11ccff%skill_type%:|r 召唤暴雪进行范围攻击，范围300，造成智力*5的法术伤害，CD12S]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNBlizzard.blp]],
 	--特效

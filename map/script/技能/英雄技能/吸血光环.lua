@@ -12,7 +12,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-    tip = [[周围的单位能将他们自己对敌人的伤害值%value% %转化成自己的生命值
+    tip = [[|cff11ccff%skill_type%:|r 周围的单位能将他们自己对敌人的伤害值%value% %转化成自己的生命值
     ]],
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNVampiricAura.blp]],

@@ -16,7 +16,7 @@ mt{
 	--施法距离
 	range = 800,
 	--介绍
-	tip = [[增加 %defence% % 护甲持续15秒，受击时减少敌人移速和攻速持续4秒
+	tip = [[|cff11ccff%skill_type%:|r 增加 %defence% % 护甲持续15秒，受击时减少敌人移速和攻速持续4秒
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNFrostArmor.blp]],

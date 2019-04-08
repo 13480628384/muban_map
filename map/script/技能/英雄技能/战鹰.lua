@@ -14,7 +14,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[召唤1只战鹰助战
+	tip = [[|cff11ccff%skill_type%:|r 召唤1只战鹰助战
 	
 	|cff00bdec召唤物属性：和智力相关|r 
 

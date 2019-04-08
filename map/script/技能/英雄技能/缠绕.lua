@@ -18,7 +18,7 @@ mt{
 	--施法范围
 	area = 300,
 	--介绍
-	tip = [[用树藤缠住目标区域敌人的脚，造成敌人不能行动1S，并造成攻击力*1.5的法术伤害
+	tip = [[|cff11ccff%skill_type%:|r 用树藤缠住目标区域敌人的脚，造成敌人不能行动1S，并造成攻击力*1.5的法术伤害
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNEntanglingRoots.blp]],

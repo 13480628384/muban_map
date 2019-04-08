@@ -16,7 +16,7 @@ mt{
 	--施法距离
 	range = 800,
 	--介绍
-	tip = [[增加指定队友%attack_speed% %的攻击速度，持续15S
+	tip = [[|cff11ccff%skill_type%:|r 增加指定队友%attack_speed% %的攻击速度，持续15S
 	]],
 	--技能图标
 	art = [[jineng\jineng030.blp]],

@@ -20,7 +20,7 @@ mt{
 	--施法范围
 	area = 400,
 	--介绍
-	tip = [[召唤流星进行范围攻击，范围400，造成智力*5的法术伤害，CD15S]],
+	tip = [[|cff11ccff%skill_type%:|r 召唤流星进行范围攻击，范围400，造成智力*5的法术伤害，CD15S]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNStarfall.blp]],
 	--特效

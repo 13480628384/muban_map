@@ -18,7 +18,7 @@ mt{
 	range = 900,
 	int = {3,4,5,6,7},
 	--介绍
-	tip = [[对单一敌人造成晕眩3S，并造成攻击力*%int%的物理伤害
+	tip = [[|cff11ccff%skill_type%:|r 对单一敌人造成晕眩3S，并造成攻击力*%int%的物理伤害
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNStormBolt.blp]],

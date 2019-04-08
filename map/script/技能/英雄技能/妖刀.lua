@@ -16,7 +16,7 @@ mt{
 	--施法距离
 	range = 900,
 	--介绍
-	tip = [[将指定敌人变成小动物，持续%time%S
+	tip = [[|cff11ccff%skill_type%:|r 将指定敌人变成小动物，持续%time%S
 	]],
 	--技能图标
 	art = [[jineng\jineng004.blp]],

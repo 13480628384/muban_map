@@ -12,7 +12,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-    tip = [[召唤物属性+ %summon_attr% %
+    tip = [[|cff11ccff%skill_type%:|r 召唤物属性+ %summon_attr% %
     ]],
 	--技能图标
     art = [[jineng\jineng014.blp]],

@@ -14,7 +14,7 @@ mt{
 	max_level = 5,
 	
 	tip = [[
-攻击时 %chance% % 触发， 造成 攻击力*%int% 的物理伤害 (%damage%) ，并击晕敌人 %time% 秒，近战有效
+|cff11ccff%skill_type%:|r 攻击时 %chance% % 触发， 造成 攻击力*%int% 的物理伤害 (%damage%) ，并击晕敌人 %time% 秒，近战有效
 		]],
 	
 	--技能图标

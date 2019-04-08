@@ -11,7 +11,7 @@ mt{
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
     tip = [[
-力量和敏捷互相转换，转化3%/秒的属性点。点击可切换
+|cff11ccff%skill_type%:|r 力量和敏捷互相转换，转化3%/秒的属性点。点击可切换
 
 被动:增加生命上限 %value1% %
 

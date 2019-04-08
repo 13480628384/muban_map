@@ -40,7 +40,7 @@ mt{
     --模型
     model = [[AZ_Kaer_X1.mdx]],
     title = '风暴之力',
-    tip = [[%my_chance% % 几率发动一个龙卷风向前方移动 %dis% 码，对经过的范围 %areaa% 区域造成伤害,龙卷风到达终点时分裂出四个，造成 40% 伤害
+    tip = [[|cff11ccff%skill_type%:|r  %my_chance% % 几率发动一个龙卷风向前方移动 %dis% 码，对经过的范围 %areaa% 区域造成伤害,龙卷风到达终点时分裂出四个，造成 40% 伤害
 伤害计算：|cffd10c44智力 * %int% |r
 伤害类型：|cff04be12法术伤害|r
 ]],

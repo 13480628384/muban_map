@@ -11,7 +11,7 @@ mt{
 	--技能说明
 	title = '光子灵枪',
 	tip = [[
-攻击时有 %chance% % 几率召 %num% 个 %title%飞向敌人造成伤害
+|cff11ccff%skill_type%:|r 攻击时有 %chance% % 几率召 %num% 个 %title%飞向敌人造成伤害
 伤害计算：|cffd10c44敏捷 * %agi_mul%|r
 伤害类型：|cff04be12物理伤害|r]],
 	--概率%

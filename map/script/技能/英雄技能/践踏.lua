@@ -17,7 +17,7 @@ mt{
 	--施法范围
 	area = 500,
 	--介绍
-	tip = [[对范围500码敌人晕眩2S，并造成力量*%int%的物理伤害 （%damage%）
+	tip = [[|cff11ccff%skill_type%:|r 对范围500码敌人晕眩2S，并造成力量*%int%的物理伤害 （%damage%）
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNWarStomp.blp]],

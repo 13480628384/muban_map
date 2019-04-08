@@ -12,7 +12,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-    tip = [[增加部队移动力%value% %
+    tip = [[|cff11ccff%skill_type%:|r 增加部队移动力%value% %
     ]],
 	--技能图标
 	art = [[jineng\jineng007.blp]],

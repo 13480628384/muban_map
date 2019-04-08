@@ -16,7 +16,7 @@ mt{
 	--施法距离
 	range = 800,
 	--介绍
-	tip = [[有几率从敌人身上获得物品，对boss无效
+	tip = [[|cff11ccff%skill_type%:|r 有几率从敌人身上获得物品，对boss无效
 	]],
 	--技能图标
 	art = [[jineng\jineng025.blp]],

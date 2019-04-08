@@ -17,7 +17,7 @@ mt{
 	--施法距离
 	range = 800,
 	--介绍
-	tip = [[对一条直线上的敌人晕眩1S，并造成力量*%int%的物理伤害 （%damage%）
+	tip = [[|cff11ccff%skill_type%:|r 对一条直线上的敌人晕眩1S，并造成力量*%int%的物理伤害 （%damage%）
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNImpale.blp]],

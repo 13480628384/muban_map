@@ -18,7 +18,7 @@ mt{
 	--施法范围
 	area = 400,
 	--介绍
-	tip = [[对指定区域范围400码敌人晕眩3S
+	tip = [[|cff11ccff%skill_type%:|r 对指定区域范围400码敌人晕眩3S
 	]],
 	--技能图标
 	art = [[jineng\jineng020.blp]],

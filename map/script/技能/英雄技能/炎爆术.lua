@@ -14,7 +14,7 @@ mt{
 	--技能说明
 	title = '炎爆术',
 	tip = [[
-		攻击有 %chance% % 的概率对 %area% 范围造成伤害  (%damage%)
+|cff11ccff%skill_type%:|r 攻击有 %chance% % 的概率对 %area% 范围造成伤害  (%damage%)
 伤害计算：|cffd10c44力量 * %int% +2000 |r
 伤害类型：|cff04be12物理伤害|r
 ]],

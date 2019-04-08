@@ -18,7 +18,7 @@ mt{
 	--施法范围
 	area = 400,
 	--介绍
-	tip = [[对一条直线上的敌人造成力量*5的伤害]],
+	tip = [[|cff11ccff%skill_type%:|r 对一条直线上的敌人造成力量*5的伤害]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNShockWave.blp]],
 	--特效

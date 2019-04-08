@@ -16,7 +16,7 @@ mt{
 	--施法范围
 	area = 800,
 	--介绍
-	tip = [[召唤刀刃对范围800码的敌方单位攻击，造成敏捷*%int%的物理伤害
+	tip = [[|cff11ccff%skill_type%:|r 召唤刀刃对范围800码的敌方单位攻击，造成敏捷*%int%的物理伤害
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNFanOfKnives.blp]],

@@ -14,7 +14,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[攻击力 -%attack% % ，弹射%cnt%个目标，每次弹射伤害衰减 %reduce% %
+	tip = [[|cff11ccff%skill_type%:|r 攻击力 -%attack% % ，弹射%cnt%个目标，每次弹射伤害衰减 %reduce% %
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNUpgradeMoonGlaive.blp]],

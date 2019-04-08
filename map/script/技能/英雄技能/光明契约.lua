@@ -20,7 +20,7 @@ mt{
 	--施法距离
 	range = 500,
 	--介绍
-	tip = [[耗尽魔法，对敌人造成智力* %int_mul% %的法术伤害，如果杀死敌人，将永久提高 %addint% %智力
+	tip = [[|cff11ccff%skill_type%:|r 耗尽魔法，对敌人造成智力* %int_mul% %的法术伤害，如果杀死敌人，将永久提高 %addint% %智力
 伤害计算：|cffd10c44智力 * %int_mul%|r
 伤害类型：|cff04be12法术伤害|r]],
 	--技能图标 LNXQ

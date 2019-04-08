@@ -16,7 +16,7 @@ mt{
 	--施法距离
 	range = 800,
 	--介绍
-	tip = [[回复指定队友 %life_rate% %的血
+	tip = [[|cff11ccff%skill_type%:|r 回复指定队友 %life_rate% %的血
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNHolyBolt.blp]],

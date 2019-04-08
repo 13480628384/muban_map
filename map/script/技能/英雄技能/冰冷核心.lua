@@ -12,7 +12,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-    tip = [[所有敌人的移动速度减少%value% %
+    tip = [[|cff11ccff%skill_type%:|r 所有敌人的移动速度减少%value% %
     ]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNIceShard.blp]],

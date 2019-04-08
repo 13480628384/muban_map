@@ -11,7 +11,7 @@ mt{
 	--技能说明
 	title = '巨浪 力量',
 	tip = [[
-		攻击有 %chance% % 的概率对 %distance% 范围造成物理伤害
+|cff11ccff%skill_type%:|r 攻击有 %chance% % 的概率对 %distance% 范围造成物理伤害
 		伤害计算：|cffd10c44力量 * %damage_int%|r
 		伤害类型：|cff04be12物理伤害|r]],
 	--范围

@@ -18,7 +18,7 @@ mt{
 	--施法范围
 	area = 400,
 	--介绍
-	tip = [[释放一个治疗守卫，持续回复范围400内的队友的血每秒 %life_rate% % ，持续10S
+	tip = [[|cff11ccff%skill_type%:|r 释放一个治疗守卫，持续回复范围400内的队友的血每秒 %life_rate% % ，持续10S
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNHealingWard.blp]],

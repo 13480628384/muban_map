@@ -39,7 +39,7 @@ mt{
     model = [[lvyezhimao.MDX]],
     title = '绿野之矛',
     tip = [[
-%my_chance% % 几率对敌人发射 %client_count% 只绿野之矛造成伤害
+|cff11ccff%skill_type%:|r %my_chance% % 几率对敌人发射 %client_count% 只绿野之矛造成伤害
 伤害计算：|cffd10c44智力 * %int% +2000 |r
 伤害类型：|cff04be12法术伤害|r
 ]],

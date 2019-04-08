@@ -16,7 +16,7 @@ mt{
 	--施法范围
 	area = 300,
 	--介绍
-	tip = [[在一个地方放置一个静置陷阱，3S后晕眩范围300的所有人（包括友军），持续4S
+	tip = [[|cff11ccff%skill_type%:|r 在一个地方放置一个静置陷阱，3S后晕眩范围300的所有人（包括友军），持续4S
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNStasisTrap.blp]],

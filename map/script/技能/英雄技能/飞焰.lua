@@ -12,7 +12,7 @@ mt{
 	--技能说明
 	title = '|cff00bdec飞焰|r',
 	tip = [[
-	攻击有%chance% % 的概率召 %num% 个 %title% 对敌人造成伤害(%damage%)
+|cff11ccff%skill_type%:|r 攻击有%chance% % 的概率召 %num% 个 %title% 对敌人造成伤害(%damage%)
 伤害计算：|cffd10c44智力 * %int% +500 |r
 伤害类型：|cff04be12法术伤害|r
 	]],

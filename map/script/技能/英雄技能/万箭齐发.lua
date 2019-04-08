@@ -45,7 +45,7 @@ mt{
     boom_model = [[anyingzhijing.mdx]],
     title = '万箭齐发',
     tip = [[
-攻击时 %chance% % 几率丢出从天而降的暗影之箭，对目标及 %hit_area% 范围的敌人造成 %main_damage% 伤害
+|cff11ccff%skill_type%:|r 攻击时 %chance% % 几率丢出从天而降的暗影之箭，对目标及 %hit_area% 范围的敌人造成 %main_damage% 伤害
 伤害计算：|cffd10c44敏捷 * %agi% |r
 伤害类型：|cff04be12物理伤害|r]],
 }

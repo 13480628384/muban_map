@@ -37,7 +37,7 @@ mt{
     model = [[FirecrackerArrow.mdx]],
     title = '交叉闪电',
     tip = [[
-攻击时有 %chance% % 几率释放金钱镖飞向敌人，命中时会对周围 %lig_count% 个敌人释放交叉闪电，造成 %ejection_damage% % 的伤害
+|cff11ccff%skill_type%:|r 攻击时有 %chance% % 几率释放金钱镖飞向敌人，命中时会对周围 %lig_count% 个敌人释放交叉闪电，造成 %ejection_damage% % 的伤害
 伤害计算：|cffd10c44敏捷 * %agi%|r
 伤害类型：|cff04be12物理伤害|r]],
 }

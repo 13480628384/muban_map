@@ -12,7 +12,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[法术伤害+%magic_damage% %
+	tip = [[|cff11ccff%skill_type%:|r 法术伤害+%magic_damage% %
 	]],
 	--技能图标
 	art = [[jineng\jineng018.blp]],
