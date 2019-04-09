@@ -3,7 +3,9 @@ local mt = ac.skill['光子灵枪']
 mt{
 	--初始等级
 	level = 1,
+
 	max_level = 5,
+	
 	--技能类型
 	skill_type = "被动 敏捷",
 	--技能图标
