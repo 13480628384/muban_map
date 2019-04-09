@@ -6,7 +6,7 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
         return
     end  
     -- 回合开始，倒计时释放死亡之环
-    local time = 10
+    local time = 60
 
     if not creep.boss then 
         local unit = ac.player.com[2]:create_unit('最终boss',ac.map['刷怪中心点'],270)
