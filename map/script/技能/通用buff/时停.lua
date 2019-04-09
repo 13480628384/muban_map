@@ -53,20 +53,33 @@ function mt:on_add()
 	self.target:cast_stop()
 	local time = self.time or 999999
 	--移除特效
-	self.wait1 = ac.wait(self.time * 1000,function()
-		if self.eff then
-			self.eff:remove()
-			self.eff = nil
-		end
-		self.target:remove_restriction '时停'
-		self:remove()
-	end)
+	-- self.wait1 = ac.wait(self.time * 1000,function()
+	-- 	if self.eff then
+	-- 		self.eff:remove()
+	-- 		self.eff = nil
+	-- 	end
+	-- 	self.target:remove_restriction '时停'
+	-- 	self:remove()
+	-- end)
 	-- 是否文字显示计时
 	if self.show then
 		on_texttag(time,self.target)
 		self.timer1 = ac.timer(1*1000, math.ceil(time),function()
 			time = time - 1
 			on_texttag(time,self.target)
+			if time <=0 then 
+				if self.on_finish then 
+					self:on_finish()
+				end	
+						
+				if self.eff then
+					self.eff:remove()
+					self.eff = nil
+				end
+				self.target:remove_restriction '时停'
+				self:remove()
+
+			end	
 		end);
 	end	
 	-- function timer:on_timeout()

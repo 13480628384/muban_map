@@ -274,7 +274,33 @@ local unit_reward = {
         {    rand = 12.5, name = '全属性加100',},
         {    rand = 4, name = '全属性加1000',},
         {    rand = 0.5, name = '全属性加10000',},
-        
+    },
+    ['藏宝图'] =  {
+        {    rand = 10, name = '无' },
+        {    rand = 25, name = '金币10' },
+        {    rand = 25, name = '经验10',},
+        {    rand = 10, name = '随机物品',},
+        {    rand = 10, name = '随机技能书',},
+        {    rand = 1, name = '召唤boss',},
+        {    rand = 1, name = '召唤练功怪',},
+        {    rand = 1, name = '吞噬丹',},
+        {    rand = 1, name = '杀怪全属性5',},
+        {    rand = 5, name = '全属性加1000',},
+        {    rand = 1, name = '全属性加10000',},
+        {    rand = 5, name = '护甲加50',},
+        {    rand = 1, name = '杀怪力量5',},
+        {    rand = 1, name = '杀怪敏捷5',},
+        {    rand = 1, name = '杀怪智力5',},
+        {    rand = 2, name = '通关积分25',},
+    },
+    ['均分随机物品'] =  {
+        { rand = 100,      name = {
+                { rand = 25, name = '白'},
+                { rand = 25, name = '蓝'},
+                { rand = 25, name = '金'},
+                { rand = 25, name = '红'},
+            }
+        }
     },
    
 }

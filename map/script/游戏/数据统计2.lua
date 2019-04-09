@@ -139,8 +139,7 @@ local function get_kda()
         local id = t[i].id
         local p = ac.player[id]
         --玩家名
-        local p_name = p:get_name()..' '
-
+        local p_name = p:get_name()..(p.unlucky and '(衰人)' or '' )..' '
         ranking.ui.player[i]:set_text(p_name)
         --段位
         ranking.ui.rank[i]:set_text(rank_art[p.rank])
@@ -262,34 +261,18 @@ end)
 
 
 --游戏时间 2个小时
-local shijian = 120*60
+local shijian = 2*60*60
+ac.g_game_time = shijian 
+local total_time = shijian 
 
 local ti = ac.loop(1000,function(t)
-    local time = ac.clock() / 1000
+    --modify by jeff 
+    total_time = total_time - 1
+    local str = os.date("!%H:%M:%S", total_time)
+    ranking.ui.date:set_text('游戏剩余时间:'..str)
+    ac.game.multiboard.set_time(str)
 
-    local h = math.floor(time / 3600)
-    local m = math.floor((time % 3600) / 60)
-    local s = math.floor((time % 3600) % 60)
-    h = h..''
-    m = m..''
-    s = s..''
-    --当显示数字为个位数时，前位用0补上
-    if string.len(h) == 1 then
-        h = "0"..h
-    end
-
-    if string.len(m) == 1 then
-        m = "0"..m
-    end
-
-    if string.len(s) == 1 then
-        s = "0"..s
-    end
-
-    time = h..':'..m..':'..s
-    ranking.ui.date:set_text('游戏时间:'..time)
-
-    if ac.clock() / 1000 >= shijian then
+    if total_time == 0  then
         ac.game:event_notify('游戏-结束','游戏胜利')
         t:remove()
     end

@@ -30,8 +30,8 @@ function mt:on_cast_start()
 
     local index = ac.creep['刷怪'].index or 1
     local data = ac.table.UnitData['进攻怪-'..index]
-    local gold = math.ceil( data.gold * 30  )
-    local exp = math.ceil(data.exp * 30 )
+    local gold = math.ceil( (data.gold or 0) * 30  )
+    local exp = math.ceil((data.exp or 0)  * 30 )
 
     if rand_name == '金币30' then
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 杀掉了钥匙怪, |cff00ffff奖励金币：'..gold..'|r',10)

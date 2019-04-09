@@ -6,7 +6,7 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
         return
     end  
     -- 回合开始，倒计时释放死亡之环
-    local time = 60
+    local time = 10
 
     if not creep.boss then 
         local unit = ac.player.com[2]:create_unit('最终boss',ac.map['刷怪中心点'],270)
@@ -28,13 +28,18 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
     end   
 
     --释放完后，等待2秒继续僵硬
-    creep.boss:add_buff '时停'
+    local buff = creep.boss:add_buff '时停'
     {
         time = time,
         skill = '游戏模块',
         source = unit,
         show = true
     }
+    function buff:on_finish()
+        -- print('时停结束，开始进行死亡之环')
+        creep.boss:force_cast('死亡之环')
+    end
+
     if creep.boss.waiter1 then 
         creep.boss.waiter1:remove()
     end
@@ -42,20 +47,24 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
     if creep.boss.waiter2 then 
         creep.boss.waiter2:remove()
     end   
-    creep.boss.waiter1 = creep.boss:wait(time*1000,function()
-
-        creep.boss:force_cast('死亡之环')
+    creep.boss.waiter1 = ac.loop((time+2)*1000,function()
+        local c_boss_buff = creep.boss:find_buff '时停' 
+        if c_boss_buff then 
+            c_boss_buff:remove()
+        end   
         --释放完后，等待2秒继续僵硬
-        creep.boss.waiter2 = creep.boss:wait(2*1000,function()
-            creep.boss:add_buff '时停'
-            {
-                time = 99999,
-                skill = '游戏模块',
-                source = unit,
-            }
-        end);    
-    end);
-   
+        local buff = creep.boss:add_buff '时停'
+        {
+            time = time,
+            skill = '游戏模块',
+            source = unit,
+            show = true
+        }
+        function buff:on_finish()
+            creep.boss:force_cast('死亡之环')
+        end
+    end)
+    
 end)
 --进入最终boss阶段，boss苏醒，打败boss进入无尽
 ac.game:event '游戏-最终boss' (function(trg,index, creep) 
@@ -118,7 +127,7 @@ ac.game:event '游戏-最终boss' (function(trg,index, creep)
             ac.creep['刷怪-无尽']:start()
             ac.game:event_dispatch('游戏-无尽开始',creep) 
         end    
-    end)  
+    end) ; 
     
 
 end);    

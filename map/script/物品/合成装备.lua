@@ -26,9 +26,9 @@ local streng_item_list = {
     -- {'新手剑+1','生命药水*5 新手石*1'},
     -- {'新手剑+2','生命药水*5 魔法药水*5'},
     --合成品质 ^10 表示10%几率合成
-    {'蓝^85','白*1 白*1 白*1 装备合成*1'},
-    {'金^85','蓝*1 蓝*1 蓝*1 装备合成*1'},
-    {'红^85','金*1 金*1 金*1 装备合成*1'}
+    {'蓝^30','白*1 白*1 白*1 装备合成*1'},
+    {'金^30','蓝*1 蓝*1 蓝*1 装备合成*1'},
+    {'红^30','金*1 金*1 金*1 装备合成*1'}
 
 }
 local function streng_item(alltable,unit,it)
@@ -277,15 +277,19 @@ local function streng_item(alltable,unit,it)
             if data then  
                 color= ac.color_code[data.color or '白'] 
             end
+            --倒霉 人的合成概率100%
+            if dest_rate and p.unlucky then 
+                dest_rate = 100
+            end    
             if math.random(1,100) <= (tonumber(dest_rate) or 100) then 
                 p:sendMsg('|cff00ffff合成|r|cff'..color..dest_str..'|r|cff00ff00成功|r')
                 local new_item  = u:add_item(dest_str,true)  
                 -- 新物品 ， 材料列表 k = 材料名 ，v =数量
                 -- 回调时 需要等 合成物品成功，程序继续进行
-                ac.game:event_dispatch('物品-合成成功',new_item,source_names) 
+                ac.game:event_dispatch('物品-合成成功',p,new_item,source_names) 
             else
                 p:sendMsg('|cff00ffff合成|r|cff'..color..dest_str..'|r|cffff0000失败|r')
-                ac.game:event_dispatch('物品-合成失败',dest_str,source_names) 
+                ac.game:event_dispatch('物品-合成失败',p,dest_str,source_names) 
             end    
               
             return is_block_trg_item 
@@ -310,7 +314,7 @@ end)
 
 
 
-ac.game:event '物品-合成成功' (function(trg, new_item, source_names) 
+ac.game:event '物品-合成成功' (function(trg, player,new_item, source_names) 
     if not new_item then 
         return
     end    
@@ -322,4 +326,27 @@ ac.game:event '物品-合成成功' (function(trg, new_item, source_names)
 end)
 
 
+
+ac.game:event '物品-合成失败' (function(trg,player,new_item, source_names) 
+    -- print('合成失败')
+    --概率
+    local rate = 80
+    -- 概率小于等于5 且 没有倒霉人，设置为倒霉人
+    if math.random(1,100)<=rate and not ac.unlucky  then 
+        ac.unlucky = player
+        player.unlucky = true
+        local hero = player.hero
+        hero:add('力量',10000)
+        hero:add('敏捷',10000)
+        hero:add('智力',10000)
+        --设置数据统计面板显示 (在数据统计2 里面已设置好)
+        --多面板
+        ac.game.multiboard.player_init(player,player.hero)
+        --给全部玩家发送消息
+        ac.player.self:sendMsg("【系统提示】玩家 |cffff0000"..player:get_name()..'|r 经常|cff00ffff合成装备失败|r,获得唯一称号|cffff0000"衰人" |r，称号效果：|cffff0000合成装备100%成功，全属性+10000.|r',10)
+        ac.player.self:sendMsg("【系统提示】玩家 |cffff0000"..player:get_name()..'|r 经常|cff00ffff合成装备失败|r,获得唯一称号|cffff0000"衰人" |r，称号效果：|cffff0000合成装备100%成功，全属性+10000.|r',10)
+
+
+    end    
+end)
 
