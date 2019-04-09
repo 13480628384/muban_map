@@ -88,29 +88,33 @@ function mt:on_next()
 end
 --改变怪物
 function mt:on_change_creep(unit,lni_data)
-    local base_attack = 500000 --每波 + 100000
-    local base_defence = 1500
-    local base_life = 10000000
-    local base_mana = 5000000
-    local base_move_speed = 400
-    local base_attack_gap = 1
-    local base_life_recover = 100000
-    local base_mana_recover = 50000
+    local base_attack = 300000 --每波 + 100000
+    local base_defence = 1000
+    local base_life = 5000000
+    local base_mana = 2500000
+    local base_move_speed = 325
+    local base_attack_gap = 2
+    local base_life_recover = 25000
+    local base_mana_recover = 25000
     local base_attack_distance = 100
+    local base_attack_speed = 50
+
 
     local upgrade_attr = {
         ['攻击'] = 100000,
-        ['护甲'] = 100,
-        ['魔抗'] = 100,
+        ['护甲'] = 50,
+        ['魔抗'] = 50,
         ['生命上限'] = 1000000,
         ['魔法上限'] = 500000,
-        ['生命恢复'] = 10000,
-        ['魔法恢复'] = 5000,
+        ['生命恢复'] = 25000,
+        ['魔法恢复'] = 2500,
+        ['攻击速度'] = 1,
     }
     --设置属性
     unit:set('移动速度',base_move_speed)
     unit:set('攻击间隔',base_attack_gap)
     unit:set('攻击距离',base_attack_distance)
+    unit:set('攻击速度',(base_attack_speed + upgrade_attr['攻击速度'] * self.index))
     --设置 boss 属性倍数 及 每波成长
     if lni_data.attr_mul  then
         unit:set('攻击',(base_attack + upgrade_attr['攻击'] * self.index) * lni_data.attr_mul * (self.game_degree_attr_mul ))
