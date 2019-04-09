@@ -19,10 +19,10 @@ mt{
     --物品技能
     is_skill = true,
     --挖图范围
-    area = 600,
+    area = 500,
 
     --售价
-    gold = 100,
+    gold = 250,
     --物品详细介绍的title
     content_tip = '使用说明：'
     
@@ -145,8 +145,8 @@ function mt:add_content()
         hero:add('敏捷',10000)
         hero:add('智力',10000)    
     elseif  rand_name == '护甲加50' then
-        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000护甲加50 |r',10)
-        hero:add('护甲',50)    
+        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000护甲加25 |r',10)
+        hero:add('护甲',25)    
     elseif  rand_name == '杀怪力量5' then
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000杀怪 力量+5 |r',10)
         hero:add('杀怪力量',5)
