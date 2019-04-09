@@ -16,13 +16,13 @@ mt{
 	chance = {100,20,30},
 
 	-- power
-	value = {10,20,30},
-	value_base = {100,20,30},
+	value = {30,20,30},
+	value_base = {300,20,30},
 
 	--持续时间
 	time = {5,10,15},
     --武器伤害
-	weapon_damage = 10
+	weapon_damage = 30
 
 
 }

@@ -14,10 +14,10 @@ mt{
         return hero:get '智力' * self.int
     end,
 
-    int = {4,6,8,10,12},
+    int = {5,7.5,10,12.5,15},
 
     --释放几率
-    chance = {5,7.5,10,12.5,15},
+    chance = {15},
 
     --投射物数量
     count = 4,

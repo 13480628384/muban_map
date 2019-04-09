@@ -29,7 +29,7 @@ mt{
 	time = 2,
 
 	--伤害参数1：攻击力
-	attack = {2,3,4,5,6},
+	attack = {4,6,8,10,12},
 
 	--伤害
 	damage = function(self,hero)
@@ -43,7 +43,7 @@ mt{
 	reduce_rate = 30,
 
 	--cd
-	cool = {20,17.5,15,12.5,10},
+	cool = {10},
 
 	--耗蓝
 	cost = {30,130,250,400,600},

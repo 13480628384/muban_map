@@ -17,7 +17,7 @@ mt{
 	--技能图标
 	art = [[jineng\jineng018.blp]],
 	--法术伤害
-	magic_damage = {30,40,50,75,100},
+	magic_damage = {35,50,75,100,125},
 }
 
 mt.magic_damage_now = 0

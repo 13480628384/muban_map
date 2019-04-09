@@ -26,7 +26,7 @@ mt{
 	--特效
 	effect = [[Abilities\Spells\Undead\DeathCoil\DeathCoilMissile.mdl]],
 
-	int = {4,5,6,7,8},
+	int = {10,12,14,16,20},
 
 	--治疗
 	heal = function(self,hero)

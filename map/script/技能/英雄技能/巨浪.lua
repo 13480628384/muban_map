@@ -18,7 +18,7 @@ mt{
 	distance = 1500,
 	hit_area = 125,
 	--概率%
-	chance = {5,7.5,10,12.5,15},
+	chance = {15},
 
 	damage = function(self,hero)
 		if self and self.owner then 
@@ -26,7 +26,7 @@ mt{
 		end	
 	end	,
 	--参数智力
-	damage_int = {3,4,5,6,7},
+	damage_int = {5,6,7,8,10},
 	--是否被动
 	passive = true,
 	--弹道数量

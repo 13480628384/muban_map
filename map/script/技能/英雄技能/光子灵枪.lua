@@ -15,9 +15,9 @@ mt{
 伤害计算：|cffd10c44敏捷 * %agi_mul%|r
 伤害类型：|cff04be12物理伤害|r]],
 	--概率%
-	chance = {5,7.5,10,12.5,15},
+	chance = {15},
     --伤害参数1
-	agi_mul = {2,2.5,3,3.5,4},
+	agi_mul = {3,3.5,4,4.5,5},
 
 	--伤害
 	damage = function(self,hero)
@@ -35,8 +35,6 @@ mt{
 	area = 100,
 	--数量
 	num = 12,
-	--冷却
-	cool = 1,
 	
 	--必填
 	is_skill = true,

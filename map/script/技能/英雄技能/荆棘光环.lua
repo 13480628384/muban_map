@@ -21,7 +21,7 @@ mt{
 	--光环影响范围
 	area = 9999,
 	--反弹伤害值
-	value = {50,100,200,300,500},
+	value = {100,200,300,400,500},
 }
 function mt:on_upgrade()
     local skill = self

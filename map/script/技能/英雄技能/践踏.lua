@@ -10,7 +10,7 @@ mt{
 	--耗蓝
 	cost = {40,80,160,320,450},
 	--冷却时间
-	cool = {25,22.5,20,17.5,15},
+	cool = {15},
 
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
@@ -25,7 +25,7 @@ mt{
 	effect = [[Abilities\Spells\Human\ThunderClap\ThunderclapCaster.mdx]],
 	--特效1
 	effect1 = [[Abilities\Spells\Human\ThunderClap\ThunderclapTarget.mdx]],
-	int = {5,10,15,20,25},
+	int = {10,20,30,40,50},
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 

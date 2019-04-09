@@ -9,7 +9,7 @@ mt{
 	max_level = 5,
 	
 	tip = [[
-		主动：每 %pulse% 秒对指定区域范围内的敌人投掷炸弹，造成攻击力*0.5+敏捷*0.5的物理伤害( %damage% )，持续时间 %time% 秒
+		主动：每 %pulse% 秒对指定区域范围内的敌人投掷炸弹，造成攻击力*1+敏捷*1的物理伤害( %damage% )，持续时间 %time% 秒
 		被动：每次第 %attack_stack% 次普通攻击时，会触发一次扫射，扫射会对范围内的敌人发射导弹，造成 %attack_mul% 倍攻击力的范围伤害( %beidong_damage% )
 	]],
 	
@@ -39,7 +39,7 @@ mt{
 
 	--伤害
 	damage = function(self,hero)
-		return hero:get('攻击')*0.5 + hero:get('敏捷')*0.5
+		return hero:get('攻击')*1 + hero:get('敏捷')*1
 	end,
 	--被动伤害
 	beidong_damage = function(self,hero)
@@ -47,7 +47,7 @@ mt{
 	end,	
 
 	--cd 40
-	cool = {40,35,30,25,20},
+	cool = {20},
 
 	--耗蓝 60
 	cost = {60,200,350,525,750},

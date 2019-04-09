@@ -9,7 +9,7 @@ mt.tip = [[
 --经验
 mt.exp = 100
 --金钱
-mt.gold = 100
+mt.gold = 200
 
 
 function mt:on_add()

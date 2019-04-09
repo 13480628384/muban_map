@@ -22,7 +22,7 @@ mt{
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNEvasion.blp]],
 
 	--闪避
-	dodge = {10,20,30,40,50},
+	dodge = {25,30,35,40,50},
 
 }
 

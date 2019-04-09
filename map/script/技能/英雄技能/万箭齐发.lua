@@ -20,10 +20,10 @@ mt{
 		end	
     end,
     
-    agi = {2.5,3,3.5,4,5},
+    agi = {5,6,7,8,10},
 
     --释放几率
-    chance = {5,7.5,10,12.5,15},
+    chance = {15},
 
     --图标
     art = 'wanjianqifa.blp',

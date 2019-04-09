@@ -10,7 +10,7 @@ mt{
 	--耗蓝
 	cost = {30,150,270,400,500},
 	--冷却时间
-	cool = {20,17.5,15,12.5,10},
+	cool = {10},
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_POINT,
 	--施法距离
@@ -26,7 +26,7 @@ mt{
 	effect = [[Abilities\Spells\NightElf\EntanglingRoots\EntanglingRootsTarget.mdl]],
 	--持续时间
 	time = 1 ,
-	int = {1.5,2,2.5,3,4},
+	int = {10,20,30,40,50},
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 

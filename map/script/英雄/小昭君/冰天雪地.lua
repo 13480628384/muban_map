@@ -9,29 +9,29 @@ mt{
 
     title = '暴风雪',
     tip = [[
-		主动：在周围 %hit_area% 码降下暴风雪，每1秒造成 攻击力*1+智力*2点 法术伤害( %damage% )，并晕眩 %yun_time% 秒，同时刷新寒冰护盾。
+		主动：在周围 %hit_area% 码降下暴风雪，每1秒造成 攻击力*2+智力*4点 法术伤害( %damage% )，并晕眩 %yun_time% 秒，同时刷新寒冰护盾。
 		
 		被动1（寒冰护盾）：每 %pulse_time% 秒自身获得一个护盾， 护盾可抵免 攻击力*1+智力*3点 伤害 (%shield%) 
 
-		被动2：对眩晕的敌人，额外造成 攻击力*0.5+智力*1.5 点的法术伤害 (%yun_damage%)
+		被动2：对眩晕的敌人，额外造成 攻击力*1+智力*3 点的法术伤害 (%yun_damage%)
 	]],
 
 	--技能图标
 	art = [[jineng\jineng012.blp]],
 
 	--cd 45
-	cool = {55,45,35,25,15},
+	cool = {40,30,20,15,10},
 
 	--耗蓝
 	cost = {60,250,450,640,1350},
     --伤害
     damage = function(self,hero)
-        return hero:get '攻击' * 1 + hero:get '智力' * 2 
+        return hero:get '攻击' * 2 + hero:get '智力' * 4
 	end,
 	
     --伤害
     yun_damage = function(self,hero)
-        return hero:get '攻击' * 0.5 + hero:get '智力' * 1.5 
+        return hero:get '攻击' * 1 + hero:get '智力' * 3
     end,
 
 	--技能目标类型 无目标

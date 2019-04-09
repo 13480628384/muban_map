@@ -20,7 +20,7 @@ mt{
 
 	--物爆
 	physical_rate = 10,
-	physical_damage = 50,
+	physical_damage = 500,
 
 
 }

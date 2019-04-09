@@ -21,9 +21,9 @@ mt{
 	--范围
 	area = 1500,
 	--概率%
-	chance = {5,7.5,10,12.5,15},
+	chance = {15},
 
-	int = {2,2.5,3,3.5,4},
+	int = {5,6,7,8,10},
 
 	damage = function(self,hero)
 		if self and self.owner then 

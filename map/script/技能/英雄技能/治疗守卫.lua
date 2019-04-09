@@ -10,7 +10,7 @@ mt{
 	--耗蓝
 	cost = {45,150,250,350,500},
 	--冷却时间30
-	cool = {35,30,25,20,15},
+	cool = {15},
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_POINT,
 	--施法距离

@@ -13,10 +13,10 @@ mt{
         return hero:get '智力'  * self.int
     end,
     
-    int = {4,5,6,7,8},
+    int = {5,6,7,8,10},
 
     --释放几率
-    chance = {5,7.5,10,12.5,15},
+    chance = {15},
 
     --自由碰撞时的碰撞半径
     hit_area = function(self,hero)
@@ -27,7 +27,7 @@ mt{
     dis = 550,
 
     --图标
-    art ='fengbaozhili.tga',
+    art ='fengbaozhili.blp',
 
     --异步下数据 只作为文本提示
     areaa = function(self)

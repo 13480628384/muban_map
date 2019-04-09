@@ -10,13 +10,13 @@ mt{
 	--耗蓝
 	cost = {30,150,270,390,500},
 	--冷却时间
-	cool = {20,17.5,15,12.5,10},
+	cool = {10},
 
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_UNIT,
 	--施法距离
 	range = 900,
-	int = {3,4,5,6,7},
+	int = {5,10,15,20,25},
 	--介绍
 	tip = [[|cff11ccff%skill_type%:|r 对单一敌人造成晕眩3S，并造成攻击力*%int%的物理伤害
 	]],

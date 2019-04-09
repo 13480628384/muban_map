@@ -10,7 +10,7 @@ mt{
 	--耗蓝
 	cost = {15,115,215,315,450},
 	--冷却时间10
-	cool = {12,11,10,9,8},
+	cool = {8},
 
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
@@ -24,7 +24,7 @@ mt{
 	--特效
 	effect = [[Abilities\Spells\Undead\Possession\PossessionMissile.mdl]],
 	--伤害参数1
-	int = {5,10,20,30,40},
+	int = {10,20,30,40,50},
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner then 

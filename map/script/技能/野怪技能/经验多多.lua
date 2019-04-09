@@ -7,7 +7,7 @@ mt.tip = [[
 ]]
 
 --经验
-mt.exp = 200
+mt.exp = 300
 --金钱
 mt.gold = 100
 

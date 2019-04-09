@@ -21,12 +21,12 @@ mt{
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNBash.blp]],
 
 	--概率
-	chance = {5,7.5,10,12.5,15},
+	chance = {15},
 
 	--晕眩时间
 	time = 1,
 
-	int = {1.5,2,2.5,3,4},
+	int = {5,6,7,8,10},
 
 	--伤害
 	damage = function(self,hero)

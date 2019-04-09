@@ -10,7 +10,7 @@ mt{
 	--耗蓝
 	cost = {30,150,280,400,600},
 	--冷却时间20
-	cool = {20,17.5,15,12.5,10},
+	cool = {10},
 
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_POINT,
@@ -26,7 +26,7 @@ mt{
 	--特效1
 	effect1 = [[Abilities\Spells\Undead\Impale\ImpaleMissTarget.mdx]],
 
-	int = {5,10,20,25,30},
+	int = {10,20,30,40,50},
 
 	--伤害
 	damage = function(self,hero)

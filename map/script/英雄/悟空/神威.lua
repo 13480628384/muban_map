@@ -26,7 +26,7 @@ mt{
 	time = 2,
 
 	--伤害参数
-	attack_mul={2,3,4,5,6},
+	attack_mul={4,6,8,10,12},
 
 	--伤害
 	damage = function(self,hero)
@@ -37,7 +37,7 @@ mt{
 	physical_crite_rate = {15,20,25,30,35},
 
 	--cd 20
-	cool = {20,17.5,15,12.5,10},
+	cool = {10},
 
 	--耗蓝 30
 	cost = {30,180,330,480,600},
