@@ -28,7 +28,8 @@ function mt:on_cast_start()
         return true
     end   
 
-    local index = ac.creep['刷怪'].index or 1
+    local index = ac.creep['刷怪'].index > 0 and ac.creep['刷怪'].index or 1
+    local index = (index - 1) > 0 and (index - 1) or 1
     local data = ac.table.UnitData['进攻怪-'..index]
     local gold = math.ceil( (data.gold or 0) * 30  )
     local exp = math.ceil((data.exp or 0)  * 30 )
@@ -37,7 +38,7 @@ function mt:on_cast_start()
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 杀掉了钥匙怪, |cff00ffff奖励金币：'..gold..'|r',10)
         hero:addGold(gold)
     elseif  rand_name == '经验30' then
-        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 杀掉了钥匙怪, |cff00ffff奖励经验：'..gold..'|r',10)
+        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 杀掉了钥匙怪, |cff00ffff奖励经验：'..exp..'|r',10)
         hero:addXp(exp)
     elseif  rand_name == '召唤boss' then
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 杀掉了钥匙怪, |cff00ffff奖励：召唤boss|r',10)

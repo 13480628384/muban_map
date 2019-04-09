@@ -30,23 +30,11 @@ mt{
     
 function mt:on_add()
     --全图随机刷 正式用
-    self.random_point =  ac.map.rects['刷怪']:get_point()
+    -- self.random_point =  ac.map.rects['刷怪']:get_point()
     --测试用
-    -- self.random_point = self.owner:get_point()
+    self.random_point = self.owner:get_point()
 end
 
--- ac.game:event '单位-点击商店物品'(function(_,seller,u,it)
---     if it.name ~= mt.name then 
---         return 
---     end   
---     local item = u:has_item(mt.name)
---     local player = u:get_owner()
---     if item and item:get_item_count() >= 10 then 
---         player:sendMsg('藏宝图数量不能大于10个，请挖完后再来补充')
---         return 
---     end    
-    
--- end)
 function mt:on_cast_start()
     local hero = self.owner
     local player = hero:get_owner()
@@ -90,13 +78,22 @@ function mt:add_content()
     -- print(rand_list,rand_name)
     if not rand_name then 
         return true
-    end   
+    end  
+    local index 
+    local data
+    local gold
+    local exp
+    if ac.creep['刷怪-无尽'].index >= 1 then 
+        gold = 0
+        exp = 0
+    else
+        index = ac.creep['刷怪'].index > 0 and ac.creep['刷怪'].index or 1
+        index = (index - 1) > 0 and (index - 1) or 1
 
-    local index = ac.creep['刷怪'].index or 1
-    local data = ac.table.UnitData['进攻怪-'..index]
-    local gold = math.ceil( (data.gold or 0) * 10  )
-    local exp = math.ceil((data.exp or 0)  * 10 )
-
+        data = ac.table.UnitData['进攻怪-'..index]
+        gold = math.ceil( (data.gold or 0) * 10  )
+        exp = math.ceil((data.exp or 0)  * 10 )
+    end
     
     if rand_name == '无' then
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000什么事都没发生|r',10)
@@ -104,17 +101,11 @@ function mt:add_content()
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000奖励金币：'..gold..'|r',10)
         hero:addGold(gold)
     elseif  rand_name == '经验10' then
-        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000奖励经验：'..gold..'|r',10)
+        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000奖励经验：'..exp..'|r',10)
         hero:addXp(exp)
     elseif  rand_name == '随机物品' then
-         --给英雄随机添加物品
-        local rand_list = ac.unit_reward['均分随机物品']
-        local rand_name = ac.get_reward_name(rand_list)
-        if not rand_name then 
-            return
-        end    
-        local list = ac.quality_item[rand_name] 
-        local name = list[math.random(#list)]
+        --给英雄随机添加物品
+        local name = ac.all_item[math.random( 1,#ac.all_item)]
         --满时，掉在地上
         hero:add_item(name,true)
         local lni_color ='白'
@@ -122,9 +113,19 @@ function mt:add_content()
             lni_color = ac.table.ItemData[name].color
         end    
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, 奖励：|cff'..ac.color_code[lni_color]..name..'|r',10)
-    elseif  rand_name == '随机技能书' then
-        hero:add_item('随机技能书',true)
-        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000奖励：随机技能书|r',10)
+    elseif  rand_name == '随机技能' then
+       --给英雄随机添加物品
+        local rand_list = ac.unit_reward['商店随机技能']
+        local rand_name = ac.get_reward_name(rand_list)
+        if not rand_name then 
+            return
+        end    
+        -- skill_list2 英雄技能库
+        local list = ac.skill_list2
+        --添加给英雄
+        local name = list[math.random(#list)]
+        ac.item.add_skill_item(name,hero)
+        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000奖励 技能书：'..name..'|r',10)
     elseif  rand_name == '召唤boss' then
         hero:add_item('召唤boss',true)
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000奖励：召唤boss|r',10)

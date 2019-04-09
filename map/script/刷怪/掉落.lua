@@ -3,6 +3,7 @@
 --按照装备品阶 筛选出 lni 装备。
 --quality_item={'白' = {'新手剑','新手戒指'},'蓝' = {..}}
 local quality_item ={}
+local all_item = {}
 for name,data in pairs(ac.table.ItemData) do 
     local color = data.color 
     if color then 
@@ -10,12 +11,14 @@ for name,data in pairs(ac.table.ItemData) do
             local list = quality_item[color] or {}
             table.insert(list,name)
             quality_item[color] = list 
-            --打印 可合成或是掉落的物品
+            --打印 可合成或是掉落的物品 
             -- print(name,color)
+            table.insert(all_item,name)
         end    
     end 
 end 
 ac.quality_item = quality_item
+ac.all_item = all_item
 --英雄技能，钥匙怪掉落表
 ac.skill_list2 = ac.skill_list2
 
@@ -280,7 +283,7 @@ local unit_reward = {
         {    rand = 25, name = '金币10' },
         {    rand = 25, name = '经验10',},
         {    rand = 10, name = '随机物品',},
-        {    rand = 10, name = '随机技能书',},
+        {    rand = 10, name = '随机技能',},
         {    rand = 1, name = '召唤boss',},
         {    rand = 1, name = '召唤练功怪',},
         {    rand = 1, name = '吞噬丹',},

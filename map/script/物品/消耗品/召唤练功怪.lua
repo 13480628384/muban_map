@@ -8,7 +8,8 @@ level = 1,
 art = [[icon\zhaohuan.blp]],
 
 --说明
-tip = [[左键点击使用，召唤出40只练功怪，属性、掉落与当前波喽喽一致。]],
+tip = [[左键点击使用，召唤出40只练功怪，属性、掉落与当前波喽喽一致。
+无尽后无效]],
 
 --品质
 color = '红',
@@ -36,7 +37,12 @@ function mt:on_cast_start()
     local hero = self.owner
     local target = self.target
     local items = self
+    local player = hero:get_owner()
     
+    if ac.creep['刷怪-无尽'].index >= 1 then 
+        player:sendMsg('【系统消息】召唤boss，召唤练功怪，进入无尽后无效')
+        return
+    end
     --处理模型
     local unit_name = ac.all_creep['喽喽'][math.random(1,#ac.all_creep['喽喽'])]
     local player = ac.creep['刷怪'].creep_player
@@ -52,11 +58,10 @@ function mt:on_cast_start()
             unit:set_size(data.model_size)
         end    
     
-        --处理属性
-        local index = ac.creep['刷怪'].index or 1
-        if index < 1 then 
-            index = 1
-        end    
+        --处理属性 无尽会有问题
+        local index = ac.creep['刷怪'].index > 0 and ac.creep['刷怪'].index or 1
+        index = (index - 1) > 0 and (index - 1) or 1
+
         local name = '进攻怪-'..index
         local data = ac.table.UnitData[name]
         data.attr_mul = 1

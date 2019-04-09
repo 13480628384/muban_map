@@ -9,7 +9,8 @@ art = [[icon\zhaohuan.blp]],
 
 --说明
 tip = [[左键点击使用，召唤出一只boss.
-BOSS掉落：100%掉落一件装备， 30%掉落吞噬丹]],
+BOSS掉落：100%掉落一件装备， 30%掉落吞噬丹
+无尽后无效]],
 
 --品质
 color = '红',
@@ -37,6 +38,12 @@ function mt:on_cast_start()
     local hero = self.owner
     local target = self.target
     local items = self
+    local player = hero:get_owner()
+
+    if ac.creep['刷怪-无尽'].index >= 1 then 
+        player:sendMsg('【系统消息】召唤boss，召唤练功怪，进入无尽后无效')
+        return
+    end
     
     --处理模型
     local unit_name = ac.special_boss[math.random(1,#ac.special_boss)]
@@ -50,13 +57,12 @@ function mt:on_cast_start()
         unit:set_size(data.model_size)
     end    
 
-    --处理属性
-    local index = ac.creep['刷怪'].index or 1
-    if index < 1 then 
-        index = 1
-    end    
+    --处理属性 
+    local index = ac.creep['刷怪'].index > 0 and ac.creep['刷怪'].index or 1
+    index = (index - 1) > 0 and (index - 1) or 1
+
     local name = '进攻怪-'..index
-    print(name)
+    -- print(name)
     local data = ac.table.UnitData[name]
     data.attr_mul = 5
     data.food = 20
