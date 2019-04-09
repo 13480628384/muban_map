@@ -40,7 +40,7 @@ function mt:on_cast_shot()
 	if target.data.type =='boss' then
 		hero:add('魔法',self.cost)
 		self:set_cd(0)
-		self:fresh()
+		-- self:fresh()
 		ac.on_texttag('【对boss无效】','橙',hero)
 	else
 		target:kill()

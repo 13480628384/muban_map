@@ -54,7 +54,7 @@ function mt:on_cast_shot()
 	}
 	if not target:is_alive() then 
 		self:set_cd(0)
-		self:fresh()
+		-- self:fresh()
 	end	
 end	
 function mt:on_remove()

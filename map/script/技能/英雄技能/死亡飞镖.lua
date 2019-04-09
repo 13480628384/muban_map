@@ -65,7 +65,7 @@ function mt:on_cast_shot()
 			}	
 			if not target:is_alive() then 
 				skill:set_cd(0)
-				skill:fresh()
+				-- skill:fresh()
 			end	
 		end	
 	end

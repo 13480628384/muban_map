@@ -20,16 +20,13 @@ local mt = ac.skill['英雄属性面板']
 	ability_id = 'B889',
 
 	tip = [[
-生命:    %life% / %max_life% %life_recover% 
-%resource_type%:    %mana% / %max_mana% %mana_recover% 
-
 攻击:    %attack% （已加成 %attack_per% %）
 攻击间隔:    %attack_gip% 
 攻速:    %attack_speed% (每秒攻击%attack_rate%次)
 溅射:    %splash% %
 破甲:    %pene% (%pene_rate% %)
 吸血:    %life_steal%
-防御:    %defence% (减免 %defence_rate% %的伤害)
+减免:    %defence_rate% %
 
 物爆几率: %physical_rate% %  物爆伤害:  %physical_damage% %
 法爆几率: %magic_rate% %  法爆伤害:  %magic_damage% %
@@ -38,18 +35,35 @@ local mt = ac.skill['英雄属性面板']
 召 唤 物加成： %dummy%   
 召唤物属性加成： %dummy_attr% %
 法术攻击加成： %magic_attack% % 
-
 主动释放的增益效果： %moregood% % 
 
 金币加成：   %moregold% %
 经验加成：   %moreexp% %
 物品获取率： %item_rate% %
+
+杀怪加力量： %kill_str%
+杀怪加敏捷： %kill_agi%
+杀怪加智力： %kill_int%
+杀怪加全属性： %kill_all_attr%
 ]],
 }
 
+function mt:kill_str()
+	return ('|cffF9C801%.f|r'):format(self.owner:get '杀怪力量')
+end
+function mt:kill_agi()
+	return ('|cffF9C801%.f|r'):format(self.owner:get '杀怪敏捷')
+end
+function mt:kill_int()
+	return ('|cffF9C801%.f|r'):format(self.owner:get '杀怪智力')
+end
+function mt:kill_all_attr()
+	return ('|cffF9C801%.f|r'):format(self.owner:get '杀怪全属性')
+end
 function mt:attack()
 	return ('|cffF9C801%.f|r'):format(self.owner:get '攻击')
 end
+
 function mt:attack_per()
 	return ('|cffF9C801%.2f|r'):format(self.owner:get '攻击%')
 end

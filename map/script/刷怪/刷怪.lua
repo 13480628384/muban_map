@@ -118,7 +118,7 @@ function mt:random_creeps_datas(temp_type)
         rand_name = self.all_creep[rand_type][math.random(1,#self.all_creep[rand_type])]
     end    
     -- print(rand_name)
-    -- print(ac.table.UnitData[rand_name].food)
+    print(rand_name,ac.table.UnitData[rand_name].food)
     self.used_food = self.used_food  + ac.table.UnitData[rand_name].food
 
     if self.used_food <= self.all_food then 

@@ -9,7 +9,7 @@ mt{
 	max_level = 5,
 	
 	tip = [[
-		主动：闪现到指定敌人的身边，并造成 攻击力*%attack_mul% 的物理伤害
+		主动：召唤刀刃对范围800码的敌方单位攻击，造成敏捷*%int%的物理伤害
 		被动1：周围 %passive_area% 码有敌人死亡，刷新所有技能的冷却时间
 		被动2：攻击对敌人造成护甲 -%reduce_defence% %
 	]],
@@ -17,11 +17,21 @@ mt{
 	--技能图标
 	art = [[jineng\jineng005.blp]],
 
+	--伤害参数1
+	int = {4,6,8,10,12},
+	--伤害
+	damage = function(self,hero)
+		if self and self.owner then 
+			return self.owner:get('敏捷')*self.int
+		end
+	end	,
+	damage_type = '物理',
+
 	--施法引导时间 （闪烁过去）
 	cast_channel_time = 0.2,
 
 	--技能目标类型 单位目标
-	target_type = ac.skill.TARGET_TYPE_UNIT,
+	target_type = ac.skill.TARGET_TYPE_NONE,
 
 	--攻击
 	attack_mul = {3,4,5,6,7},
@@ -37,6 +47,10 @@ mt{
 
 	--特效模型
 	effect = [[Abilities\Spells\Orc\Bloodlust\BloodlustTarget.mdl]],
+	--特效2
+	effect1 = [[Abilities\Spells\NightElf\FanOfKnives\FanOfKnivesMissile.mdl]],
+	--施法范围
+	area = 800,
 
 	-- 周围范围
 	passive_area = 600,
@@ -77,33 +91,53 @@ function mt:on_add()
 	end)
 	
 end	
-function mt:on_cast_channel()
-	local hero = self.owner
-	local target = self.target
-	self.eff = self.target:add_effect('chest',self.effect)
-	hero:add('攻击%',self.attack_mul*100)
-	hero:blink(target:get_point())
+-- function mt:on_cast_channel()
+-- 	local hero = self.owner
+-- 	local target = self.target
+-- 	self.eff = self.target:add_effect('chest',self.effect)
+-- 	hero:add('攻击%',self.attack_mul*100)
+-- 	hero:blink(target:get_point())
 	
 
-end	
-function mt:on_cast_shot()
+-- end	
+function mt:on_cast_shot() 
+	local skill = self
 	local hero = self.owner
 	local target = self.target
+	local angle_base = 0
+	local num = 3
+	for i = 1, num do
+		local mvr = ac.mover.line
+		{
+			source = hero,
+			skill = skill,
+			start = hero:get_point(),
+			model =  skill.effect1,
+			speed = 800,
+			angle = angle_base + 360/num * i,
+			distance = skill.area  ,
+			size = 2,
+			height = 120
+		}
+		if not mvr then
+			return
+		end
+	end	
 
-
-	target:damage{
-		source = hero,
-		skill = self,
-		damage = hero:get('攻击')
-	}
-
-	hero:add('攻击%',-self.attack_mul*100)
-	hero:issue_order('attack',target)
-
-    if self.eff then
-        self.eff:remove()
-        self.eff = nil
-    end     
+	for i, u in ac.selector()
+	: in_range(hero,self.area)
+	: is_enemy(hero)
+	: of_not_building()
+	: ipairs()
+	do
+		u:damage
+		{
+			source = hero,
+			damage = skill.damage ,
+			skill = skill,
+			damage_type =skill.damage_type
+		}	
+	end    
 	-- hero:add_effect('origin',self.effect)
 	-- self.eff = self.target:add_effect('chest',self.effect)
 
@@ -205,7 +239,7 @@ function mt:on_pulse()
 			if skl:get_type() == '英雄' and skl_name ~= '妙手空空' and skl_name ~= '摔破罐子' then
 				-- print('即将刷新技能',skl:get_name())
 				skl:set_cd(0)
-				skl:fresh()
+				-- skl:fresh()
 			end	
 		end	
 
