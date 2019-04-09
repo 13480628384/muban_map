@@ -23,7 +23,7 @@ mt{
 	--特效
 	effect = [[Abilities\Spells\Orc\Bloodlust\BloodlustTarget.mdl]],
 	--攻击速度
-	attack_speed = {40,60,80,100,120},
+	attack_speed = {100,150,200,250,300},
 	--持续时间
 	time = 15,
 	--目标允许	

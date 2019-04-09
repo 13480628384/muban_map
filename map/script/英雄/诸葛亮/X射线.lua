@@ -9,7 +9,7 @@ mt{
 	max_level = 5,
 	
 	tip = [[
-		主动：在英雄朝向每 %pulse_time% 秒，发射一波X射线，每条造成攻击力*0.5+智力*1.5的法术伤害 (%damage%) ；
+		主动：在英雄朝向每 %pulse_time% 秒，发射一波X射线，每条造成攻击力*1.5+智力*4.5的法术伤害 (%damage%) ；
 		被动：睿智，智力 + %int% %
 	]],
 	
@@ -30,11 +30,11 @@ mt{
 
 	--伤害
 	damage = function(self,hero)
-		return hero:get('攻击')*0.5 + hero:get('智力')*1.5
+		return hero:get('攻击')*1.5 + hero:get('智力')*4.5
 	end,	
 
 	--cd 30
-	cool = {30,25,20,15,10},
+	cool = {15,15,10,10,5},
 
 	--耗蓝
 	cost = {30,150,320,415,510},

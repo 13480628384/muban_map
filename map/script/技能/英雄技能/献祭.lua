@@ -23,7 +23,7 @@ mt{
 	--魔法值
 	magic_value = {1,2,3,4,5},
 	--生命值
-	life_value = {1,2,3,4,5},
+	life_value = {4,6,8,10,12},
 	--每秒
 	pulse = 1,
 }

@@ -16,7 +16,7 @@ mt{
 		end	
 	end,
 
-    agi = {2,2.5,3,3.5,4},
+    agi = {5,6,7,8,10},
 
     --投射物数量
     count = 2,
@@ -24,7 +24,7 @@ mt{
     art = [[weisuoshandianjian.blp]],
 
     --释放几率
-    chance = {5,7.5,10,12.5,15},
+    chance = {15},
 
     --交叉闪电数量
     lig_count = {2,3,4,5,6},

@@ -11,7 +11,7 @@ mt{
 	tip = [[
 		主动：同时只能连接一个目标；
 		以法器连接一名队友，减少自己主属性 %source_main_attr% %，增加队友主属性 %target_main_attr% %
-		以法器连接一名敌人，每0.5秒造成 攻击力*1+智力*3 的法术伤害 (%damage%) ；超过 %range% 距离断开
+		以法器连接一名敌人，每0.5秒造成 攻击力*2+智力*5 的法术伤害 (%damage%) ；超过 %range% 距离断开
 		被动：物品获取率+ %item_rate% %金钱获得+ %gold_rate% %
 	]],
 	
@@ -22,20 +22,20 @@ mt{
 	target_type = ac.skill.TARGET_TYPE_UNIT,
 
 	--增加主属性
-	target_main_attr = {25,30,35,40,45},
+	target_main_attr = {35,40,45,50,55},
 
 	--减少主属性 
-	source_main_attr = {25,30,35,40,45},
+	source_main_attr = {35,25,15,5,0},
 
 	--伤害
 	damage = function(self,hero)
-		return hero:get('攻击')*1 + hero:get('智力')*3
+		return hero:get('攻击')*2 + hero:get('智力')*5
 	end,
 
 	--物品获取率
-	item_rate = {50,60,70,80,100},
+	item_rate = {50,75,100,125,150},
 	--金币获取率
-	gold_rate = {50,60,70,80,100},
+	gold_rate = {50,75,100,125,150},
 
 	--每秒
 	pulse = 0.5,

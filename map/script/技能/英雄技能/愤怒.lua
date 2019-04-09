@@ -23,11 +23,11 @@ mt{
 	--特效
 	effect = [[Hero_Undying_N1S_F_Target.mdx]],
 	--物暴
-	physical_rate = {5,7.5,10,12.5,15},
+	physical_rate = {7.5,10,12.5,15,20},
 	--法爆
-	magic_rate = {5,7.5,10,12.5,15},
+	magic_rate = {7.5,10,12.5,15,20},
 	--会心
-	heart_rate = {5,7.5,10,12.5,15},
+	heart_rate = {7.5,10,12.5,15,20},
 	--持续时间
 	time = 15,
 	--目标允许	

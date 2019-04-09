@@ -4,7 +4,7 @@ mt{
     level = 1,
     title = "火焰",
     tip = [[
-        被动1：对自己150范围内的所有敌人，每0.2秒造成其1%最大生命值的伤害
+        被动1：对自己150范围内的所有敌人，每0.2秒造成其2%最大生命值的伤害
         被动2：降低自己的三维30%
     ]],
 
@@ -21,7 +21,7 @@ mt{
     pulse = 0.2,
 
     -- 每几秒
-    life_rate = 1,
+    life_rate = 2,
   
     -- 特效
     effect = [[Abilities\Spells\NightElf\Immolation\ImmolationTarget.mdl]]

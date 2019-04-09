@@ -17,7 +17,7 @@ mt{
     value = 40,
 
     -- 几率掉落
-    rate = 25,
+    rate = 30,
     
     -- 特效
     effect = [[Abilities\Spells\Items\ResourceItems\ResourceEffectTarget.mdl]]

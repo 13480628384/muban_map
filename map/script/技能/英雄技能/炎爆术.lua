@@ -21,9 +21,9 @@ mt{
 	--范围
 	area = 1000,
 	--概率%
-	chance = {5,7.5,10,12.5,15},
+	chance = {15},
 
-	int = {3,4,5,6,7},
+	int = {5,6,7,8,10},
 
 	--伤害
 	damage = function(self,hero)

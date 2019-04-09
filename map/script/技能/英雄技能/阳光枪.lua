@@ -18,9 +18,9 @@ mt{
 	hit_area = 150,
 	distance = 900,
 	--概率%
-	chance = {5,7.5,10,12.5,15},
+	chance = {15},
 
-	int = {5,6,7,8,9},
+	int = {5,6,7,8,10},
 	damage = function(self,hero)
 		if self and self.owner then 
 		return self.owner:get('敏捷')*self.int+1500

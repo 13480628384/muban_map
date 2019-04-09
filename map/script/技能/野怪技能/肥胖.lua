@@ -3,11 +3,11 @@ local mt = ac.skill['肥胖']
 mt.title = "肥胖"
 mt.tip = [[
 	被动1：降低自己的移速和攻速40%
-    被动2：提升自己的三维25%
+    被动2：提升自己的三维20%
 ]]
 
 --影响三维值 (怪物为：生命上限，护甲，攻击力)
-mt.value = 25
+mt.value = 20
 
 --攻速
 mt.attack_speed = 40
@@ -15,7 +15,7 @@ mt.attack_speed = 40
 mt.move_speed = 40
 
 --模型大小
-mt.model_size = 1.5
+mt.model_size = 1.25
 
 function mt:on_add()
 

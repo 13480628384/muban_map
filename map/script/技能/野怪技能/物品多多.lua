@@ -2,17 +2,17 @@ local mt = ac.skill['物品多多']
 
 mt.title = "物品多多"
 mt.tip = [[
-    被动1：降低自己死亡掉落的金钱50%
-    被动2：提升自己死亡的物品掉落率100%
+    被动1：降低自己死亡掉落的金钱00%
+    被动2：提升自己死亡的物品掉落率200%
 ]]
 
 --经验
 mt.exp = 0
 --金钱
-mt.gold = 50
+mt.gold = 0
 
 --物品掉落率
-mt.fall_rate = 100
+mt.fall_rate = 300
 
 
 function mt:on_add()
