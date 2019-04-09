@@ -29,7 +29,7 @@ function mt:on_cast_start()
     end   
 
     local index = ac.creep['刷怪'].index > 0 and ac.creep['刷怪'].index or 1
-    local index = (index - 1) > 0 and (index - 1) or 1
+    index = (index - 1) > 0 and (index - 1) or 1
     local data = ac.table.UnitData['进攻怪-'..index]
     local gold = math.ceil( (data.gold or 0) * 30  )
     local exp = math.ceil((data.exp or 0)  * 30 )

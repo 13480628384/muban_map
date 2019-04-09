@@ -36,7 +36,7 @@ for k,v in pairs(ac.table.UnitData) do
                 all_creep[v.type] = {}
             end
             --排除，以免刷到最终boss怪
-            if not finds(k,'最终boss','挑战','金币') then
+            if not finds(k,'最终boss','挑战','金币','伏地魔') then
                 table.insert(all_creep[v.type],k)    
             end    
         end    
@@ -118,8 +118,8 @@ function mt:random_creeps_datas(temp_type)
         rand_name = self.all_creep[rand_type][math.random(1,#self.all_creep[rand_type])]
     end    
     -- print(rand_name)
-    print(rand_name,ac.table.UnitData[rand_name].food)
-    self.used_food = self.used_food  + ac.table.UnitData[rand_name].food
+    -- print(rand_name,ac.table.UnitData[rand_name].food)
+    self.used_food = self.used_food  + ac.table.UnitData[rand_name].food or 20 --避免忘了排除特殊boss导致刷怪失败
 
     if self.used_food <= self.all_food then 
         local u = self:has_unit(rand_type)
