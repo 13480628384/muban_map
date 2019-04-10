@@ -21,6 +21,7 @@ mt{
     --释放几率
     chance = 15,
     
+    cool = 1,
     --图标
     art = [[huixuanren.blp]],
     --投射物数量
@@ -215,6 +216,10 @@ function mt:on_add()
 		if not damage:is_common_attack()  then 
 			return 
 		end 
+		--技能是否正在CD
+        if skill:is_cooling() then
+			return 
+		end
         --触发时修改攻击方式
         if math.random(100) <= self.chance then
             self = self:create_cast()
@@ -224,6 +229,8 @@ function mt:on_add()
 
             --hero.range_attack_start = range_attack_start
             range_attack_start(hero,damage)
+            --激活cd
+            skill:active_cd()
         end 
 
         return false

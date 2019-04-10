@@ -76,12 +76,24 @@ local function multiboard_init()
 		end	
 		mtb:setTitle(title .. '          游戏剩余时间 ' .. time)
 	end
+
+	mtb:setText(3,all_lines,'怪物总数')
 	--怪物总数
-	local creep_num = 0
-	ac.game.multiboard.creep_count = function(num)
-		creep_num = creep_num + num
-		mtb:setText(4,all_lines,creep_num)
-	end
+	-- local creep_num = 0
+	-- ac.game.multiboard.creep_count = function(num)
+	-- 	creep_num = creep_num + num
+	-- 	mtb:setText(4,all_lines,creep_num)
+	-- end
+	ac.loop(1*1000,function()
+		local current_count = 0
+		if ac.creep['刷怪'].index>=1 then
+			current_count = ac.creep['刷怪'].current_count 
+		end	
+		if ac.creep['刷怪-无尽'].index>=1 then
+			current_count = ac.creep['刷怪-无尽'].current_count 
+		end	
+		mtb:setText(4,all_lines,current_count)
+	end)
 end
 
 

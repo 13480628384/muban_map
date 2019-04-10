@@ -19,7 +19,7 @@ mt{
 	distance = 900,
 	--概率%
 	chance = 15,
-
+	cool = 1,
 	int = {5,6,7,8,10},
 	damage = function(self,hero)
 		if self and self.owner then 
@@ -86,9 +86,15 @@ function mt:on_add()
 			hero:add_effect(key,value)
 		end	
 	
+		--技能是否正在CD
+        if skill:is_cooling() then
+			return 
+		end
 		local rand = math.random(1,100)
 		if rand <= self.chance then 
 			skill:atk_pas_shot(damage)
+            --激活cd
+            skill:active_cd()
 		end
 
 	end)

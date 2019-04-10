@@ -30,7 +30,7 @@ mt{
 	--弹射次数
 	time = 15,
 	--冷却
-	cool = 0,
+	cool = 1,
 	--是否技能
 	is_skill = true,
 
@@ -107,9 +107,15 @@ function mt:on_add()
 			return 
 		end 
 	
+		--技能是否正在CD
+        if skill:is_cooling() then
+			return 
+		end
 		local rand = math.random(1,100)
 		if rand <= self.chance then 
 			skill:atk_pas_shot(damage)
+            --激活cd
+            skill:active_cd()
 		end
 	end)
 end

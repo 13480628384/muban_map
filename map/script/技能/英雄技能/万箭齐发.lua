@@ -11,8 +11,6 @@ mt{
     --是被动
     passive = true,
 
-
-
     --原始伤害
     damage = function(self,hero)
 		if self and self.owner then 
@@ -41,6 +39,8 @@ mt{
 
     --投射物模型
     model = [[K_WJQF2.mdx]],
+    --cd
+    cool = 1,
     --爆炸模型
     boom_model = [[anyingzhijing.mdx]],
     title = '万箭齐发',
@@ -149,7 +149,12 @@ function mt:on_add()
 	self.trg = hero:event '造成伤害效果' (function(_,damage)
 		if not damage:is_common_attack()  then 
 			return 
-		end 
+        end 
+		--技能是否正在CD
+        if skill:is_cooling() then
+			return 
+		end
+	
         --触发时修改攻击方式
         if math.random(100) <= self.chance then
             self = self:create_cast()
@@ -157,10 +162,11 @@ function mt:on_add()
             self.current_damage = self.damage
             hero:event_notify('触发天赋技能', self)
             -- hero.range_attack_start = range_attack_start
-            
             range_attack_start(hero,damage)
+            --激活cd
+            skill:active_cd()
         end 
-
+        
         return false
     end)
 
