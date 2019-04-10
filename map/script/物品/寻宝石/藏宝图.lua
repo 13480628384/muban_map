@@ -24,7 +24,7 @@ mt{
     --售价
     gold = 250,
     --cd
-    cool = 5,
+    cool = 2.5,
     --物品详细介绍的title
     content_tip = '使用说明：'
     
