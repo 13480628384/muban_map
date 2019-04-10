@@ -118,14 +118,24 @@ ac.game:event '游戏-最终boss' (function(trg,index, creep)
         if ac.save_jifen then 
             ac.save_jifen()
         end    
+        
 
         --难1， 游戏胜利  
         --难2、3 ， 20秒后进入无尽 
         if ac.g_game_degree ==1 then 
             ac.game:event_notify('游戏-结束',true)
         else   
-            ac.creep['刷怪-无尽']:start()
-            ac.game:event_dispatch('游戏-无尽开始',creep) 
+            --文字提示
+            ac.player.self:sendMsg('【系统消息】恭喜你打败最终boss,30秒后进入无尽',10)
+            local timer_ex1 = ac.timer_ex 
+            {
+                time = 30,
+                title = "进入无尽倒计时",
+                func = function ()
+                    ac.creep['刷怪-无尽']:start()
+                    ac.game:event_dispatch('游戏-无尽开始',creep) 
+                end,
+            }
         end    
     end) ; 
     

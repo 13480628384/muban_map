@@ -21,7 +21,7 @@ ranking = extends( panel_class,{
         panel.two_title = two_title
 
         --积分
-        local integral = top_panel:add_text('本局累计获得积分：0',40,top_panel.h-35,200,25,8,3)
+        local integral = top_panel:add_text('本局累计获得积分(需击败最终boss)：0',40,top_panel.h-35,200,25,8,3)
         integral:set_color(120,120,120,1)
         panel.integral = integral
         -- --时间

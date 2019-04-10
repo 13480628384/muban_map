@@ -330,7 +330,7 @@ end)
 ac.game:event '物品-合成失败' (function(trg,player,new_item, source_names) 
     -- print('合成失败')
     --概率
-    local rate = 80
+    local rate = 5
     -- 概率小于等于5 且 没有倒霉人，设置为倒霉人
     if math.random(1,100)<=rate and not ac.unlucky  then 
         ac.unlucky = player

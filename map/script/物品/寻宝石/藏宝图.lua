@@ -23,6 +23,8 @@ mt{
 
     --售价
     gold = 250,
+    --cd
+    cool = 5,
     --物品详细介绍的title
     content_tip = '使用说明：'
     
@@ -30,9 +32,9 @@ mt{
     
 function mt:on_add()
     --全图随机刷 正式用
-    -- self.random_point =  ac.map.rects['刷怪']:get_point()
+    self.random_point =  ac.map.rects['刷怪']:get_point()
     --测试用
-    self.random_point = self.owner:get_point()
+    -- self.random_point = self.owner:get_point()
 end
 
 function mt:on_cast_start()
@@ -97,6 +99,20 @@ function mt:add_content()
     
     if rand_name == '无' then
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000什么事都没发生|r',10)
+
+        -- 概率小于等于5 且 没有挖宝达人，设置为挖宝达人
+        local rate = 5 
+        if math.random(1,100)<=rate and not ac.flag_wabao  then 
+            ac.flag_wabao = player
+            player.flag_wabao = true
+            local hero = player.hero
+            hero:addGold(100000)
+            hero:addXp(100000)
+            --给全部玩家发送消息
+            ac.player.self:sendMsg("【系统提示】玩家 |cffff0000"..player:get_name()..'|r 经常|cff00ffff挖图失败|r,获得唯一称号|cffff0000"挖宝达人" |r，一次性奖励 |cffff0000金币100000，经验100000|r',10)
+            ac.player.self:sendMsg("【系统提示】玩家 |cffff0000"..player:get_name()..'|r 经常|cff00ffff挖图失败|r,获得唯一称号|cffff0000"挖宝达人" |r，一次性奖励 |cffff0000金币100000，经验100000|r',10)
+        end
+
     elseif rand_name == '金币10' then
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000奖励金币：'..gold..'|r',10)
         hero:addGold(gold)
