@@ -29,7 +29,7 @@ function mt:on_upgrade()
 	local hero = self.owner
 	-- print(self.life_rate_now)
 	hero:add('攻击距离%', -self.attack_range_now)
-	self.attack_range_now = self.pattack_range
+	self.attack_range_now = self.attack_range
 	hero:add('攻击距离%', self.attack_range)
 end	
 

@@ -130,7 +130,7 @@ function mt:on_change_creep(unit,lni_data)
     unit.fall_rate = 0
     --掉落金币和经验
     unit.gold = 0
-    unit.exp = 0
+    unit.exp = 467
 
     --设置搜敌路径
     -- unit:set_search_range(99999)
