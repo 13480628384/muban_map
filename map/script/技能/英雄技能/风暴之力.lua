@@ -93,6 +93,7 @@ end
 
 function mt:on_add()
     local hero = self.owner
+    local skill = self
     --记录默认攻击方式
     if not hero.oldfunc then
         hero.oldfunc = hero.range_attack_start
