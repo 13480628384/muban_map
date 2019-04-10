@@ -18,7 +18,7 @@ mt{
 	distance = 1500,
 	hit_area = 125,
 	--概率%
-	chance = {15},
+	chance = 15,
 
 	damage = function(self,hero)
 		if self and self.owner then 

@@ -23,7 +23,7 @@ mt{
 	--攻击速度
 	attack_speed = {100,125,150,175,200},
 	--移动速度
-	move_speed = {25},
+	move_speed = 25,
 	--持续时间
 	time = 15,
 }

@@ -21,7 +21,7 @@ mt{
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNBash.blp]],
 
 	--概率
-	chance = {15},
+	chance = 15,
 
 	--晕眩时间
 	time = 1,

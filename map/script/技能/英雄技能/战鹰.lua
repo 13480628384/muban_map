@@ -10,7 +10,7 @@ mt{
 	--耗蓝
 	cost = {70,170,270,370,5000},
 	--冷却时间
-	cool = {25},
+	cool = 25,
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍

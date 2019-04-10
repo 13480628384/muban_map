@@ -17,7 +17,7 @@ mt{
 伤害类型：|cff04be12法术伤害|r
 	]],
 	--概率%
-	chance = {15},
+	chance = 15,
 	int = {5,6,7,8,10},
 	--伤害
 	damage = function(self,hero)

@@ -20,7 +20,7 @@ mt{
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNSmash.blp]],
 
 	--概率
-	chance = {15},
+	chance = 15,
 
 	--范围
 	area = 300,

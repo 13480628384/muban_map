@@ -5,7 +5,7 @@ mt{
 	level = 1,
 
 	max_level = 5,
-	
+
 	--技能类型
 	skill_type = "被动 敏捷",
 	--技能图标
@@ -17,7 +17,7 @@ mt{
 伤害计算：|cffd10c44敏捷 * %agi_mul%|r
 伤害类型：|cff04be12物理伤害|r]],
 	--概率%
-	chance = {15},
+	chance = 15,
     --伤害参数1
 	agi_mul = {3,3.5,4,4.5,5},
 

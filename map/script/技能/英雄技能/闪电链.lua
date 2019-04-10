@@ -18,7 +18,7 @@ mt{
 	--弹射范围(直径)
 	area = 1000,
 	--概率%
-	chance = {15},
+	chance = 15,
 	int= {5,6,7,8,10},
 	damage = function(self,hero)
 		if self and self.owner then 

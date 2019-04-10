@@ -12,7 +12,7 @@ mt{
 		return hero:get('魔法')
 	end	,
 	--冷却时间
-	cool = {20},
+	cool = 20,
 	--伤害
 	int_mul = {5,7.5,10,12.5,15},
 	--技能目标

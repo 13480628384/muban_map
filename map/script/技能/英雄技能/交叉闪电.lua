@@ -24,7 +24,7 @@ mt{
     art = [[weisuoshandianjian.blp]],
 
     --释放几率
-    chance = {15},
+    chance = 15,
 
     --交叉闪电数量
     lig_count = {2,3,4,5,6},

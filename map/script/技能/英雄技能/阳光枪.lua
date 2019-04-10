@@ -18,7 +18,7 @@ mt{
 	hit_area = 150,
 	distance = 900,
 	--概率%
-	chance = {15},
+	chance = 15,
 
 	int = {5,6,7,8,10},
 	damage = function(self,hero)

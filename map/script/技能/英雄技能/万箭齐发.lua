@@ -23,7 +23,7 @@ mt{
     agi = {5,6,7,8,10},
 
     --释放几率
-    chance = {15},
+    chance = 15,
 
     --图标
     art = 'wanjianqifa.blp',
