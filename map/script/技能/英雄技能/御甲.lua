@@ -42,7 +42,7 @@ mt{
     end,
 
     --几率
-    my_chance =  {5,7.5,10,12.5,15},
+    my_chance =  15,
 
     --模型
     model = [[AZ_[Sepll]LinaSun _T2_Blast.MDX]],

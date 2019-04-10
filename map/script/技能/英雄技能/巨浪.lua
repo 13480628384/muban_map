@@ -31,8 +31,6 @@ mt{
 	passive = true,
 	--弹道数量
 	num = 1,
-	--冷却
-	cool = 1,
 	
 	--必填
 	is_skill = true,

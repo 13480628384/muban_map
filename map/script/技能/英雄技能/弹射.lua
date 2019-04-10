@@ -21,7 +21,7 @@ mt{
 	--特效1
 	effect1 = [[Hero_EmberSpirit_N2S_C_Effect.mdx]],
 	--弹射目标
-	cnt = {4,5,6,7,8},
+	cnt = 5,
 	--每次递减
 	reduce = {35,30,25,20,15},
 	--攻击减少

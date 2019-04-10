@@ -19,7 +19,7 @@ mt{
 	--受光环影响的特效
 	effect = [[Abilities\Spells\Other\FrostDamage\FrostDamage.mdl]],
 	--持有光环技能的特效
-	source_effect = [[binglenghexin.mdx]],
+	source_effect = [[]],
     --光环影响范围
     area = 99999,
     --值

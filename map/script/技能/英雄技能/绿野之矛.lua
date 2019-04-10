@@ -34,7 +34,7 @@ mt{
         return 4 + ac.player.self.hero:get '额外投射物数量'
     end,
     --几率
-    my_chance = {5,7.5,10,12.5,15},
+    my_chance = 15,
     --投射物模型
     model = [[lvyezhimao.MDX]],
     title = '绿野之矛',
