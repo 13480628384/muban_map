@@ -240,18 +240,18 @@ local unit_reward = {
     ['钥匙怪'] =  {
         {    rand = 30, name = '金币30' },
         {    rand = 30, name = '经验30',},
-        {    rand = 8, name = '召唤boss',},
+        {    rand = 5, name = '召唤boss',},
         {    rand = 1, name = '吞噬丹',},
         {    rand = 5, name = '杀怪全属性5',},
         {    rand = 5, name = '全属性1000',},
         {    rand = 1, name = '全属性10000',},
-        {    rand = 5, name = '护甲加50',},
+        {    rand = 8, name = '护甲加50',},
         {    rand = 5, name = '杀怪力量10',},
         {    rand = 5, name = '杀怪敏捷10',},
         {    rand = 5, name = '杀怪智力10',},
     },
     ['挑战怪'] =  {
-        { rand = 35,      name = '吞噬丹'}
+        { rand = 30,      name = '吞噬丹'}
     },
     ['商店随机技能'] =  {
         { rand = 100,      name = '随机技能'}
@@ -266,17 +266,17 @@ local unit_reward = {
         }
     },
     ['命运花'] =  {
-        {    rand = 4, name = '无' },
-        {    rand = 12.5, name = '中毒',},
-        {    rand = 12.5, name = '沉默',},
-        {    rand = 12.5, name = '减速',},
-        {    rand = 12.5, name = '暴击率翻倍',},
-        {    rand = 12.5, name = '生命全满',},
-        {    rand = 12.5, name = '攻击力翻倍',},
-        {    rand = 4, name = '护甲加50',},
-        {    rand = 12.5, name = '全属性加100',},
-        {    rand = 4, name = '全属性加1000',},
-        {    rand = 0.5, name = '全属性加10000',},
+        {    rand = 10, name = '无' },
+        {    rand = 9, name = '中毒',},
+        {    rand = 9, name = '沉默',},
+        {    rand = 9, name = '减速',},
+        {    rand = 9, name = '暴击率翻倍',},
+        {    rand = 9, name = '生命全满',},
+        {    rand = 9, name = '攻击力翻倍',},
+        {    rand = 9, name = '护甲加50',},
+        {    rand = 9, name = '全属性加100',},
+        {    rand = 9, name = '全属性加1000',},
+        {    rand = 9, name = '全属性加10000',},
     },
     ['藏宝图'] =  {
         {    rand = 16.5, name = '无' },
@@ -294,7 +294,7 @@ local unit_reward = {
         {    rand = 1, name = '杀怪力量5',},
         {    rand = 1, name = '杀怪敏捷5',},
         {    rand = 1, name = '杀怪智力5',},
-        {    rand = 2, name = '通关积分25',},
+        {    rand = 2, name = '通关积分100',},
     },
     ['均分随机物品'] =  {
         { rand = 100,      name = {
