@@ -29,6 +29,7 @@ local skill_list = ac.skill_list
 
 local all_creep = {}
 local all_food = 40 --总人口
+ac.all_food = all_food
 for k,v in pairs(ac.table.UnitData) do
     if v.type then 
         if finds(v.type,'喽喽','小怪','头目','boss') then
@@ -243,7 +244,7 @@ function mt:on_next()
     --进攻提示
     ac.ui.kzt.up_jingong_title(' 第 '..self.index..' 层 ')
     --每一波开始时，进行初始化数据
-    self.all_food = all_food * get_player_count()   --每多一个玩家， 多1倍的怪物总人口,每回合开始都去检测人口数量
+    self.all_food = all_food +(20 * get_player_count())   --每多一个玩家， 多20怪物总人口,每回合开始都去检测人口数量
     self.used_food = 0 
     self.current_creep ={}
     -- self.player_damage = {}
@@ -640,13 +641,13 @@ ac.game:event '单位-死亡' (function(_,unit,killer)
         exp = unit.exp * ( 1 + killer:get('经验加成')/100)
     end  
     --100级最高级  未测试
-    local total_killer_xp = killer.xp + exp
-    if total_killer_xp - killer:get_upgrade_xp(99) > 0  then 
-        exp = killer:get_upgrade_xp(99) - killer.xp
-    end    
-    if killer.level >= 100 then 
-        exp = 0
-    end    
+    -- local total_killer_xp = killer.xp + exp
+    -- if total_killer_xp - killer:get_upgrade_xp(99) > 0  then 
+    --     exp = killer:get_upgrade_xp(99) - killer.xp
+    -- end    
+    -- if killer.level >= 100 then 
+    --     exp = 0
+    -- end    
 
     local source = killer
     local target = unit

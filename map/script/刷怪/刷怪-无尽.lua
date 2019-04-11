@@ -28,7 +28,7 @@ function mt:on_next()
     --进攻提示
     ac.ui.kzt.up_jingong_title('无尽 - 第 '..self.index..' 层 ')
     --每一波开始时，进行初始化数据
-    self.all_food = ac.creep['刷怪'].all_food
+    self.all_food = all_food +(20 * get_player_count())   --每多一个玩家， 多20怪物总人口,每回合开始都去检测人口数量
     self.used_food = 0 
     self.current_creep ={}
 
