@@ -103,14 +103,14 @@ function mt:add_content()
         -- 概率小于等于5 且 没有挖宝达人，设置为挖宝达人
         local rate = 5 
         if math.random(1,100)<=rate and not ac.flag_wabao  then 
-            ac.flag_wabao = player
-            player.flag_wabao = true
+            -- ac.flag_wabao = player
+            -- player.flag_wabao = true
             local hero = player.hero
-            hero:addGold(100000)
-            hero:addXp(100000)
+            hero:addGold(88888)
+            hero:addXp(88888)
             --给全部玩家发送消息
-            ac.player.self:sendMsg("【系统提示】玩家 |cffff0000"..player:get_name()..'|r 经常|cff00ffff挖图失败|r,获得唯一称号|cffff0000"挖宝达人" |r，一次性奖励 |cffff0000金币100000，经验100000|r',10)
-            ac.player.self:sendMsg("【系统提示】玩家 |cffff0000"..player:get_name()..'|r 经常|cff00ffff挖图失败|r,获得唯一称号|cffff0000"挖宝达人" |r，一次性奖励 |cffff0000金币100000，经验100000|r',10)
+            ac.player.self:sendMsg("【系统提示】玩家 |cffff0000"..player:get_name()..'|r 经常|cff00ffff挖图失败|r,获得称号|cffff0000"挖宝达人" |r，一次性奖励 |cffff0000金币88888，经验88888|r',10)
+            ac.player.self:sendMsg("【系统提示】玩家 |cffff0000"..player:get_name()..'|r 经常|cff00ffff挖图失败|r,获得称号|cffff0000"挖宝达人" |r，一次性奖励 |cffff0000金币88888，经验88888|r',10)
         end
 
     elseif rand_name == '金币10' then
@@ -173,10 +173,10 @@ function mt:add_content()
     elseif  rand_name == '杀怪智力5' then
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000杀怪 智力+5 |r',10)
         hero:add('杀怪智力',5)
-    elseif  rand_name == '通关积分25' then
-        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000 通关积分+25 |r',10)
+    elseif  rand_name == '通关积分100' then
+        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000 通关积分+100 |r',10)
         if ac.jiami then 
-            ac.jiami(player,'jifen',25)
+            ac.jiami(player,'jifen',100)
         end    
     end
    

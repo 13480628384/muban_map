@@ -51,12 +51,12 @@ function mt:on_cast_start()
 
     if rand_name == '无' then
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 拾取了命运花, |cff00ffff什么事都没发生|r',10)
-        local rate = 10 
+        local rate = 15 
         if math.random(1,100)<=rate and not ac.flag_mingyunhua  then 
             ac.flag_mingyunhua = player
             player.flag_mingyunhua = true
             local hero = player.hero
-            hero:add('闪避',40)
+            hero:add('闪避',30)
             hero:add('攻击间隔',-0.2)
             --给全部玩家发送消息
             ac.player.self:sendMsg("【系统提示】玩家 |cffff0000"..player:get_name()..'|r 经常|cff00ffff拾取命运花|r,获得唯一称号|cffff0000"采花大盗" |r，奖励: |cffff0000闪避+40，攻击间隔-0.2|r',10)
