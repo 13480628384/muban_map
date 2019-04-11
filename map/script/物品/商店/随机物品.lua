@@ -27,7 +27,7 @@ target_type = ac.skill.TARGET_TYPE_NONE,
 cool = 0,
 
 --购买价格
-gold = 1250,
+gold = 250,
 --每次增加
 cre_gold = 250,
 

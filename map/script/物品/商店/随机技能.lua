@@ -8,8 +8,10 @@ level = 1,
 --图标
 art = [[other\suijijineng.blp]],
 
+--价格随购买次数增加而增加，|cff00ff00且买且珍惜|r
+
 --说明
-tip = [[获得一本随机技能书，价格随购买次数增加而增加，|cff00ff00且买且珍惜|r]],
+tip = [[获得一本随机技能书]],
 
 content_tip = '物品说明:',
 
