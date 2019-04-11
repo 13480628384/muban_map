@@ -206,9 +206,29 @@ ac.game:event '游戏-开始' (function()
             p.death = p.death + 1
         end)
 
-        hero:event '造成伤害结束'(function(_,self)
-            -- print(p.damage_count)
+        ac.game:event '造成伤害结束'(function(_,self)
+            local hero = self.source
+            local p = hero:get_owner()
+            local hero = p.hero
+            if not p:is_player() then return end
+            --总伤害
             p.damage_count = p.damage_count + self.current_damage
+
+            --记录每波伤害
+            if not p.each_index_damage then 
+                p.each_index_damage={}
+            end  
+            local index = 1
+            if ac.creep['刷怪'].index>=1 then
+                index = ac.creep['刷怪'].index 
+            end	
+            if ac.creep['刷怪-无尽'].index>=1 then
+                index = ac.creep['刷怪-无尽'].index 
+            end	
+            if not p.each_index_damage[index] then 
+                p.each_index_damage[index] =0
+            end    
+            p.each_index_damage[index] = p.each_index_damage[index] + self.current_damage
 
         end)
 

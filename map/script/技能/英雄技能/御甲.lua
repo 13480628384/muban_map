@@ -30,26 +30,17 @@ mt{
     art = 'yujia.blp',
 	--爆炸半径
     hit_area = function(self,hero)
-        return 100 + hero:get '额外范围'
+        if hero then 
+            return 100 + hero:get '额外范围'
+        else 
+            return 100
+        end        
     end,
-
-    --异步下数据 只作为文本提示
-    areaa = function(self)
-        return 100 + ac.player.self.hero:get '额外范围'
-    end,
-
-    --连锁次数
-    client_count = function(self)
-        return ac.player.self.hero:get '额外连锁数量' + 5
-    end,
-
-    --几率
-    my_chance =  15,
 
     --模型
     model = [[AZ_[Sepll]LinaSun _T2_Blast.MDX]],
     title = '御甲',
-    tip = [[|cff11ccff%skill_type%:|r %my_chance% % 几率发动御甲对单位造成伤害并向周围连锁 %client_count% 次,并对周围 %areaa% 内单位造成 30% 伤害 
+    tip = [[|cff11ccff%skill_type%:|r %chance% % 几率发动御甲对单位造成伤害并向周围连锁 %count% 次,并对周围 %hit_area% 内单位造成 30% 伤害 
 伤害计算：|cffd10c44 力量 * %int% |r
 伤害类型：|cff04be12物理伤害|r
 ]]

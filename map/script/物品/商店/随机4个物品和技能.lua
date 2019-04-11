@@ -7,7 +7,7 @@ local function fresh_shop_item(shop)
         if not rand_name then 
             return
         end    
-        
+        -- print('商店随机4物品：',rand_name,#ac.quality_item)
         local list = ac.quality_item[rand_name]   
         --添加 
         local name = list[math.random(#list)]

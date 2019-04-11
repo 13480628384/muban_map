@@ -103,7 +103,10 @@
             --有同类物品 物品数量加1 返回不继续加物品
             --地上的物品需要删除
             if item then
+                --加数量
                 item:add_item_count(it._count)
+                --刷新tip
+                item:set_tip(item:get_tip())
                 --回收句柄
                 it.recycle = true
                 --表示购买成功
@@ -378,11 +381,11 @@
             -- print('调用物品施法：',slot_id,item.name)
             if item.item_type == '消耗品'  then
                 -- print('使用消耗品',item.name,item.type_id)
+                -- 数量-1
+                item._count = item._count - 1
                 --消耗品使用 增加对应的属性值
                 item:on_use_state()
 
-                --删除消耗品
-                item._count = item._count - 1
                 if item._count < 1 then 
                     item:item_remove()
                 end

@@ -225,7 +225,7 @@ end
 function mt:sell_price()
 	local count = self:get_item_count()
 	local gold = self.gold
-	if count > 1 then
+	if count > 1 and self.item_type =='消耗品' then
 		gold = gold * count
 	end
 	gold = math.floor(gold * self.discount)
@@ -551,7 +551,6 @@ function mt:on_add_state()
 			hero:add_tran(value.name,value.value)
 		end	
 	end 
-
 	self.state = state
 end
 --单位 使用物品 添加属性
@@ -624,6 +623,7 @@ function mt:on_use_state()
 			hero:add_tran(value.name,value.value)
 		end	
 	end 
+	self:set_tip(self:get_tip())
 
 end
 
@@ -826,7 +826,17 @@ function unit.__index:add_item(it,is_fall)
 	ac.wait(10,function()
 		it:hide()
 	end)
-
+	--刷新 当前选择的单位的tip
+	if it.auto_fresh_tip then
+		ac.loop(1000, function(t)
+			if not it.owner then
+				t:remove()
+				return
+			end
+			--设置tip
+			it:set_tip(it:get_tip())
+		end)
+	end
 	self:event_notify('单位-获得物品后',self, it)
 
 	-- self:print_item(true)

@@ -456,7 +456,7 @@ function helper:wtf()
 	end
 end
 
---增加物品
+--打印hero键值对应的key值
 function helper:print(str)
 	local obj = self[str]
 	if obj then 
@@ -464,6 +464,21 @@ function helper:print(str)
 			print(obj())
 		elseif 	type(obj) == 'table' then 
 			print(tostring(obj))
+		else
+			print(tostring(obj))
+		end	
+	end	
+end
+
+--打印hero键值对应的key值
+function helper:print_p(str,index)
+	local player = self:get_owner()
+	local obj = player[str]
+	if obj then 
+		if type(obj) == 'function' then 
+			print(obj())
+		elseif 	type(obj) == 'table' then 
+			print(tostring(obj[index or 1]))
 		else
 			print(tostring(obj))
 		end	

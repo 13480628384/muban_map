@@ -8,10 +8,37 @@ level = 1,
 --冷却
 cool = 0,
 
+--描述
+tip = [[
+能吞噬一个装备，永久加成对应的属性
+已吞噬 %cnt%|cffffff00/8|r 个： %content%]],
+cnt = function(self) 
+    local cnt = 0
+    if self and self.owner then 
+        local hero = self.owner
+        local player = hero:get_owner()
+        cnt = player.tunshi_cnt or 0 
+    end    
+    return cnt
+end,
+content = function(self) 
+    local content = '' 
+    if self and self.owner then 
+        local hero = self.owner
+        local player = hero:get_owner()
+        if player.tunshi then 
+            for i,item in ipairs(player.tunshi) do
+                content = content ..'\n'.. item.store_name
+            end
+        end    
+    end    
+    return content
+end,
 --物品技能
 is_skill = true,
 --物品详细介绍的title
-content_tip = '使用说明：'
+content_tip = '使用说明：',
+auto_fresh_tip = true
 
 }
 
@@ -23,6 +50,13 @@ function mt:on_cast_start()
     local name = self:get_name()
     hero = player.hero
     local list = {}
+    --只能吞噬 10 个 物品类的，没法更新数据
+    local cnt = 8
+    if (player.tunshi_cnt or 0) >= cnt then 
+        self:add_item_count(1)
+        player:sendMsg('吞噬丹吞噬个数已满，不可吞噬')
+        return 
+    end    
 
     for i=1,6 do 
         local item = hero:get_slot_item(i)
@@ -62,6 +96,18 @@ function mt:on_cast_start()
                 item:on_add_state()
                 --移除装备，移除一次属性
                 item:item_remove()
+                --吞噬个数 +1
+                if not player.tunshi_cnt then 
+                    player.tunshi_cnt =0
+                end    
+                player.tunshi_cnt = player.tunshi_cnt + 1
+
+                --吞噬名
+                if not player.tunshi then 
+                    player.tunshi = {}
+                end    
+                table.insert(player.tunshi,item)
+
             else
                 -- print('取消更换技能')
                 if self._count > 1 then 

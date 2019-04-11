@@ -39,24 +39,11 @@ mt{
     --回旋伤害比
     cycle_round_damage = 25,
 
-    --异步下数据 只作为文本提示
-    client_area = function(self)
-        return 150 + ac.player.self.hero:get '额外范围'
-    end,
-
-    --投射物数量
-    client_count = function(self)
-        return 2 + ac.player.self.hero:get '额外投射物数量'
-    end,
-    --几率
-    my_chance = function (self)
-        return 15 + ac.player.self.hero:get '天赋触发几率'
-    end,
     --投射物模型
     model = [[SentinelMissile.mdx]],
     title = '回旋刃',
     tip = [[
-|cff11ccff%skill_type%:|r 攻击时 %chance% % 几率发射 %client_count% 个回旋刃，以目标为起始点向前移动 %distance% 距离对碰到单位造成伤害，停留 %stay_time% s后以最快的速度返回到英雄位置，回旋时造成 %cycle_round_damage% % 伤害
+|cff11ccff%skill_type%:|r 攻击时 %chance% % 几率发射 %count% 个回旋刃，以目标为起始点向前移动 %distance% 距离对碰到单位造成伤害，停留 %stay_time% s后以最快的速度返回到英雄位置，回旋时造成 %cycle_round_damage% % 伤害
 伤害计算：|cffd10c44力量 * %int%|r
 伤害类型：|cff04be12物理伤害|r]],
 
