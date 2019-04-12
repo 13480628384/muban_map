@@ -57,10 +57,10 @@ function mt:on_cast_start()
             player.flag_mingyunhua = true
             local hero = player.hero
             hero:add('闪避',30)
-            hero:add('攻击间隔',-0.2)
+            hero:add('攻击间隔',-0.15)
             --给全部玩家发送消息
-            ac.player.self:sendMsg("【系统提示】玩家 |cffff0000"..player:get_name()..'|r 经常|cff00ffff拾取命运花|r,获得唯一称号|cffff0000"采花大盗" |r，奖励: |cffff0000闪避+40，攻击间隔-0.2|r',10)
-            ac.player.self:sendMsg("【系统提示】玩家 |cffff0000"..player:get_name()..'|r 经常|cff00ffff拾取命运花|r,获得唯一称号|cffff0000"采花大盗" |r，奖励: |cffff0000闪避+40，攻击间隔-0.2|r',10)
+            ac.player.self:sendMsg("【系统提示】玩家 |cffff0000"..player:get_name()..'|r 经常|cff00ffff拾取命运花|r,获得唯一称号|cffff0000"采花大盗" |r，奖励: |cffff0000闪避+30，攻击间隔-0.15|r',10)
+            ac.player.self:sendMsg("【系统提示】玩家 |cffff0000"..player:get_name()..'|r 经常|cff00ffff拾取命运花|r,获得唯一称号|cffff0000"采花大盗" |r，奖励: |cffff0000闪避+30，攻击间隔-0.15|r',10)
         end
     elseif  rand_name == '中毒' then
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 拾取了命运花, |cff00ffff中毒，当前生命-50% |r',10)
