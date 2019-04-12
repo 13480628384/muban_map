@@ -136,8 +136,8 @@ function mt:get_point()
 		)
 		local x,y = point:get_point():get()
 		-- print('不规则区域内的随机一点',x,y)
-
-		if  self < point  then
+		--modify by jeff 20190412 添加判断，点必须为可通行的点
+		if  self < point and not point:is_block()  then
 			self.point = point
 			return self.point
 		end	
