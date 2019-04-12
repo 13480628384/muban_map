@@ -289,17 +289,17 @@ local main_attribute_value = 3
 --力量 
 local str_hp = 6
 local str_hp_recover = 0.06
-local str_phy_split_damage = 0.025
+local str_phy_split_damage = 0.01
 
 --敏捷
-local agi_speed = 0.035
-local agi_heart = 0.025
+local agi_speed = 0.01
+local agi_heart = 0.01
 local agi_defense = 0
 
 --智力
 local int_mp = 8
 local int_mp_recover = 0.08
-local int_explosion = 0.025
+local int_explosion = 0.01
 local int_skill_base_damage = 3
 
 
