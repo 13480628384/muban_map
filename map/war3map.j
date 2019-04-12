@@ -71,17 +71,18 @@ string array Player_name
 
 trigger l__library_init
 
+
 rect gg_rct_sg001= null
-rect gg_rct_sg002= null
-rect gg_rct_sg003= null
-rect gg_rct_sg004= null
+trigger gg_trg_______u= null
+rect gg_rct_xr= null
+rect gg_rct_tjsr= null
 rect gg_rct_wpsd= null
 rect gg_rct_jnsd= null
 rect gg_rct_jfsd= null
 rect gg_rct_xxsd= null
-rect gg_rct_xr= null
 rect gg_rct_csd= null
-trigger gg_trg_______u= null
+rect gg_rct_sg002= null
+rect gg_rct_sg003= null
 
 endglobals
 
@@ -1576,16 +1577,16 @@ endfunction
 //***************************************************************************
 function CreateRegions takes nothing returns nothing
     local weathereffect we
-    set gg_rct_sg001=Rect(- 544.0, - 864.0, 256.0, 2624.0)
-    set gg_rct_sg002=Rect(- 960.0, - 416.0, 704.0, 2176.0)
-    set gg_rct_sg003=Rect(- 1440.0, 32.0, 1152.0, 1696.0)
-    set gg_rct_sg004=Rect(- 1888.0, 480.0, 1600.0, 1280.0)
-    set gg_rct_wpsd=Rect(- 2048.0, - 544.0, - 1792.0, - 320.0)
-    set gg_rct_jnsd=Rect(- 1536.0, - 1024.0, - 1344.0, - 768.0)
-    set gg_rct_jfsd=Rect(- 2080.0, - 1472.0, - 1792.0, - 1248.0)
-    set gg_rct_xxsd=Rect(- 2496.0, - 1056.0, - 2272.0, - 768.0)
-    set gg_rct_xr=Rect(- 5088.0, 544.0, - 3392.0, 2240.0)
-    set gg_rct_csd=Rect(- 2048.0, - 1024.0, - 1792.0, - 800.0)
+	set gg_rct_sg001=Rect(- 1376.0, - 1856.0, 1504.0, 672.0)
+    set gg_rct_xr=Rect(- 5120.0, 3104.0, - 3456.0, 4512.0)
+    set gg_rct_tjsr=Rect(- 128.0, 832.0, 256.0, 1152.0)
+    set gg_rct_wpsd=Rect(- 480.0, 832.0, - 128.0, 1152.0)
+    set gg_rct_jnsd=Rect(224.0, 832.0, 608.0, 1152.0)
+    set gg_rct_jfsd=Rect(608.0, 832.0, 960.0, 1152.0)
+    set gg_rct_xxsd=Rect(- 864.0, 832.0, - 480.0, 1152.0)
+    set gg_rct_csd=Rect(- 128.0, 352.0, 256.0, 672.0)
+    set gg_rct_sg002=Rect(- 1920.0, - 1344.0, 2016.0, 192.0)
+    set gg_rct_sg003=Rect(- 1024.0, - 2144.0, 1120.0, - 1856.0)
 endfunction
 
 //===========================================================================

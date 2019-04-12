@@ -26,12 +26,12 @@ local function on_texttag(string,hero)
 	{
 		string = string,
 		size = 16,
-		position = ac.point(x-100 , y, z + 200),
+		position = ac.point(x-100 , y, z+200),
+		-- position = ac.point(x , y, z),
 		red = 238,
 		green = 31,
 		blue = 39,
 		permanent = true,
-		time = ac.clock(),
 	}
 	return tag
 end

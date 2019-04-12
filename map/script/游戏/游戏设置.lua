@@ -7,15 +7,16 @@ local region = require("types.region")
 ac.map = {}
 ac.map_area =  ac.rect.map
 ac.map.rects={
-    ['刷怪'] = region.create(rect.j_rect('sg001'),rect.j_rect('sg002'),rect.j_rect('sg003'),rect.j_rect('sg004')),
+    ['刷怪'] = region.create(rect.j_rect('sg001'),rect.j_rect('sg002'),rect.j_rect('sg003')),
     ['选人区域'] =rect.j_rect('xr') ,
     ['物品商店'] =rect.j_rect('wpsd') ,
     ['技能商店'] =rect.j_rect('jnsd') ,
     ['积分商店'] =rect.j_rect('jfsd') ,
     ['图书馆'] =rect.j_rect('xxsd') ,
+    ['天结散人'] =rect.j_rect('tjsr') ,
     ['出生点'] =rect.j_rect('csd') ,
 }
-ac.map['刷怪中心点'] = rect.j_rect('sg002'):get_point()
+ac.map['刷怪中心点'] = rect.j_rect('sg001'):get_point()
 
 -- local minx, miny, maxx, maxy = ac.map.rects['刷怪']:get()
 -- local point = rect.j_rect('sg002'):get_point()
