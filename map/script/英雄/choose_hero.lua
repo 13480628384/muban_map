@@ -163,7 +163,10 @@ local function start()
 		-- p:setCameraField('CAMERA_FIELD_ZOFFSET', 3200)
 		-- p:setCameraField('CAMERA_FIELD_TARGET_DISTANCE', 500)
 		-- map.rects['选人区域']
-		-- p:setCameraBounds(-1000,-1000,-1500,-1500)  --创建镜头区域大小，在地图上为固定区域大小，无法超出。
+
+		local minx, miny, maxx, maxy = ac.map.rects['选人区域']:get()
+		p:setCameraBounds(minx+900, miny+900, maxx-900, maxy-900)  --创建镜头区域大小，在地图上为固定区域大小，无法超出。
+		-- p:setCameraBounds('xr')  --创建镜头区域大小，在地图上为固定区域大小，无法超出。
 		p:setCamera(map.rects['选人区域'])
 		--禁止框选
 		p:disableDragSelect()
@@ -242,23 +245,25 @@ local function start()
 			player_hero_count = player_hero_count + 1
 			p:event_notify('玩家-注册英雄', p, p.hero)
 			p:event_notify('玩家-注册英雄后', p, p.hero)
-	
-			p:setCameraBounds(-7200, -7200, 7200, 7200)
+
+			local minx, miny, maxx, maxy = ac.rect.j_rect('sg001'):get()
+			p:setCameraBounds(minx-400, miny-400, maxx+400, maxy+400)  --创建镜头区域大小，在地图上为固定区域大小，无法超出。
+			-- p:setCameraBounds('sg001')
 			--把镜头移动过去
 	
 			--敌我识别特效
 			p.hero:add_enemy_tag()
 			
-			ac.wait(1000, function()
+			-- ac.wait(1000, function()
+				p:setCamera(p.hero)
 				p:setCameraField('CAMERA_FIELD_TARGET_DISTANCE', 1000)
 				p:setCameraField('CAMERA_FIELD_ANGLE_OF_ATTACK', 304)
 				p:setCameraField('CAMERA_FIELD_ZOFFSET', 0)
 				p:setCameraField('CAMERA_FIELD_ROTATION', 90)
-				p:setCamera(p.hero)
 				p:showInterface(1)
 				--镜头动画
 				p:setCameraField('CAMERA_FIELD_TARGET_DISTANCE', 2000, 1)
-				p:setCameraBounds(-7200, -7200, 7200, 7200)
+				p:setCameraBounds(minx-400, miny-400, maxx+400, maxy+400)  --创建镜头区域大小，在地图上为固定区域大小，无法超出。
 	
 				--允许框选
 				p:enableDragSelect()
@@ -270,7 +275,7 @@ local function start()
 				ac.wait(1000, function()
 					p.camera_high = 2000
 				end)
-			end)
+			-- end)
 		end
 	
 		--检查是否还有人没选英雄

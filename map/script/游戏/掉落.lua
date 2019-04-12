@@ -85,15 +85,15 @@ local reward = {
     
         local list = {'力量符文','敏捷符文','智力符文','血质符文','魔力符文','生命符文','魔法符文'}
         
-        if level == nil then 
-            if g_game_min < 10 then 
-                level = 1 
-            elseif g_game_min < 20 then 
-                level = 2 
-            else 
-                level = 3
-            end 
-        end 
+        -- if level == nil then 
+        --     if g_game_min < 10 then 
+        --         level = 1 
+        --     elseif g_game_min < 20 then 
+        --         level = 2 
+        --     else 
+        --         level = 3
+        --     end 
+        -- end 
 
         local name = list[math.random(#list)] .. level 
         local x,y = unit:get_point():get() 

@@ -485,6 +485,14 @@ function helper:print_p(str,index)
 	end	
 end
 
+--添加漂浮文字称号
+function helper:add_ch(str,zoffset)
+	if self.ch then 
+		self.ch:remove()
+	end	
+	self.ch = ac.nick_name(str,self,zoffset)
+end
+
 function helper:never_dead(flag)
 	if flag == nil then
 		flag = true

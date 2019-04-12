@@ -37,9 +37,26 @@ print(13)
 --设置天空模型
 -- jass.SetSkyModel([[sky.mdx]])
 -- jass.CreateDestructable(base.string2id('B04E'), 0, 0, 0, 1, 0)
+
+
 ac.wait(100,function ()
+    local function light(type)
+        local light = {
+            'Ashenvale',
+            'Dalaran',
+            'Dungeon',
+            'Felwood',
+            'Lordaeron',
+            'Underground',
+        }
+        if not tonumber(type) or tonumber(type) > #light or tonumber(type) < 1 then
+            return
+        end
+        local name = light[tonumber(type)]
+        jass.SetDayNightModels(([[Environment\DNC\DNC%s\DNC%sTerrain\DNC%sTerrain.mdx]]):format(name, name, name), ([[Environment\DNC\DNC%s\DNC%sUnit\DNC%sUnit.mdx]]):format(name, name, name))
+    end
+    light(3)
    
-    
     -- local item = ac.item.create_item('新手剑')
     
     ac.game:event '游戏-开始' (function()

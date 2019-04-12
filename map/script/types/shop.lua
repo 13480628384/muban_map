@@ -18,7 +18,7 @@ mt.unit_type = 'shop'
 mt.page_stack = nil
 
 --文字显示
-local function on_texttag(string,hero)
+local function on_texttag(string,hero,zoffset,xoffset,yoffset)
 	local target = hero
 	local x, y = target:get_point():get()
 	local z = target:get_point():getZ()
@@ -26,15 +26,19 @@ local function on_texttag(string,hero)
 	{
 		string = string,
 		size = 16,
-		position = ac.point(x-100 , y, z+200),
-		-- position = ac.point(x , y, z),
+		position = target:get_point(),
+		xoffset = tonumber(xoffset) or -100,
+		yoffset = tonumber(yoffset) or 0,
+		zoffset = tonumber(zoffset) or 200,
 		red = 238,
 		green = 31,
 		blue = 39,
 		permanent = true,
+		target = target 
 	}
 	return tag
 end
+ac.nick_name = on_texttag
 --创建一个商店
 function shop.create(name,x,y,face,is_selling)
 	local unit = ac.player[11]:create_unit(name,ac.point(x,y),face)

@@ -37,6 +37,8 @@ mt.position = ac.point(0, 0)
 
 --Z轴偏移（仅在绑定目标时有效）
 mt.zoffset = 0
+mt.xoffset = 0
+mt.yoffset = 0
 
 --速度
 mt.speed = 0
@@ -213,7 +215,10 @@ function mt:move()
 			end
 		end
 		local p = target:get_point() 
-		p.z = self.zoffset
+		local x,y = p:get()
+		p[1] = x + self.xoffset
+		p[2] = y + self.yoffset
+		p[3] = self.zoffset
 		self:set_position(p)
 
 		self:setShow()

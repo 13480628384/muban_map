@@ -16,19 +16,19 @@ ac.game:event '玩家-双击按键' (function(trg,code,state,message)
     local hero =ac.player.self.hero
     local p = ac.player.self
     --双击x 移动练功房
-    if code == keyboard['X'] then
+    -- if code == keyboard['X'] then
 
-        local x,y = rect.j_rect('practice'..p.id):get_point():get()
-        local point = ac.point(x,y+200)
+    --     local x,y = rect.j_rect('practice'..p.id):get_point():get()
+    --     local point = ac.point(x,y+200)
         
-        hero:blink(point,true,false,true)
+    --     hero:blink(point,true,false,true)
         
-    end    
-    --双击c 回城
-    if code == keyboard['C'] then
-        hero:blink(rect.j_rect('wq'),true,false,true)
+    -- end    
+    -- --双击c 回城
+    -- if code == keyboard['C'] then
+    --     hero:blink(rect.j_rect('wq'),true,false,true)
         
-    end    
+    -- end    
 
 end)
 
@@ -41,44 +41,24 @@ ac.game:event '玩家-聊天' (function(self, player, str)
         hero:blink(rect.j_rect('wq'),true,false,true)
     end
     -- '++' 调整镜头大小
-    if str == '+' then
+    if str == '++' then
         --最大3000
-        local distance = p:getCameraField 'CAMERA_FIELD_TARGET_DISTANCE'  +  500
-        
+        local distance = tonumber(p:getCameraField 'CAMERA_FIELD_TARGET_DISTANCE')  
+        print(distance)
         if type(distance) =='number' then  
             p:setCameraField('CAMERA_FIELD_TARGET_DISTANCE', distance)
         end    
     end    
     -- '++' 调整镜头大小
-    if str == '-' then
+    if str == '--' then
         --最大3000
-        local distance = p:getCameraField('CAMERA_FIELD_TARGET_DISTANCE')  -  500
+        local distance = tonumber(p:getCameraField('CAMERA_FIELD_TARGET_DISTANCE'))  -  500
+        print(distance)
         if type(distance) =='number' then  
             p:setCameraField('CAMERA_FIELD_TARGET_DISTANCE', distance)
         end    
     end   
 
-    -- '++' 调整镜头大小
-    if str == '11' then
-        local cast_item ={}
-        for name,data in pairs(ac.table.ItemData) do 
-            local item_type = data.item_type 
-            local color = data.color 
-            if item_type == '消耗品' and color == '白' then 
-                table.insert(cast_item,name)
-            end 
-        end 
-
-        for i = 1,50 do
-
-            --hero:timer(0.1*1000,self.cnt,function()
-                local item_name = cast_item[math.random(#cast_item)]
-                ac.item.create_item(item_name,hero:get_point())
-                -- item:set_item_count(self.cnt)
-            --end)    
-                
-        end     
-    end   
 
     if str:sub(1, 1) == '-' then
 

@@ -56,7 +56,6 @@ local function numerical(value)
     else
         return ('%.1f'):format(value/100000000)..'亿'
     end
-
 end
 ac.numerical = numerical
 
@@ -262,9 +261,9 @@ ac.game:event '游戏-开始' (function()
         p.kill_count = p.kill_count + 1
         --统计用，使用杀敌数后，不减少
         p.total_kill_count = p.total_kill_count + 1
-        local jf_mul = 1
+        local jf_mul = 0.5
         if ac.creep['刷怪-无尽'].index and ac.creep['刷怪-无尽'].index >=1 then
-            jf_mul = 2
+            jf_mul = 1
         end    
         p.putong_jifen = (p.putong_jifen or 0) + jf_mul
         ac.total_putong_jifen = (ac.total_putong_jifen or 0) + jf_mul

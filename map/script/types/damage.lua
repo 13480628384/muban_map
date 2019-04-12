@@ -474,7 +474,9 @@ local function on_texttag(self)
 		size = 12
 		str = '会心'
 	end		
-	if self.current_damage > 10000 then
+	if self.current_damage > 100000000 then
+		str = str..(' %.1f'):format(self.current_damage/100000000)..'亿'
+	elseif	self.current_damage > 10000 then
 		str = str..(' %.1f'):format(self.current_damage/10000)..'万'
 	else	
 		str = str..(' %.0f'):format(self.current_damage)

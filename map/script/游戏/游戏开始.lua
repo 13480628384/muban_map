@@ -3,9 +3,9 @@ g_game_min = 1
 
 ac.game:event '游戏-开始' (function()
 
-    ac.loop(60*1000,function()
-        g_game_min = g_game_min +1
-    end)
+    -- ac.loop(60*1000,function()
+    --     g_game_min = g_game_min +1
+    -- end)
     print('游戏开始1')
     --游戏开始，不允许控制中立被动（钥匙怪）
     for x = 0, 10 do
