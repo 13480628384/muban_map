@@ -43,7 +43,6 @@ function load_heroes()
 				japi.EXSetUnitInteger(base.string2id(hero_data.id), 10, 1)
 				japi.EXSetUnitArrayString(base.string2id(hero_data.id), 61, 0, hero_data.name)
 				japi.EXSetUnitInteger(base.string2id(hero_data.id), 61, 1)
-			else
 			end
 		end
 	end

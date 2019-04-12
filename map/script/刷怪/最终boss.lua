@@ -10,7 +10,7 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
 
     if not creep.boss then 
         local unit = ac.player.com[2]:create_unit('最终boss',ac.map['刷怪中心点'],270)
-        unit:set_size(1)
+        unit:set_size(2)
         unit:add_restriction '定身'
         unit:add_restriction '缴械'
         unit:add_restriction '无敌'
@@ -33,6 +33,7 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
         time = time,
         skill = '游戏模块',
         source = unit,
+        zoffset = 220,
         show = true
     }
     function buff:on_finish()

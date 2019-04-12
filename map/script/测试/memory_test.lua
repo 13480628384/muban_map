@@ -13,16 +13,16 @@ local function rawpairs(t)
 end
 
 ac.game:event '游戏-开始' (function()
-	print((('游戏开始: %.f'):format(ac.clock() / 1000)))
+	log.debug((('游戏开始: %.f'):format(ac.clock() / 1000)))
 end)
 
 ac.loop(30 * 1000, function()
 	local lua_memory = collectgarbage 'count'
-	print(('------------------------定期体检报告------------------------'))
-	print((('时间: %.f'):format(ac.clock() / 1000)))
-	print((('内存[%.3fk]'):format(lua_memory)))
-	print((('jass句柄数[%d],历史最大句柄[%d]'):format(dbg.handlecount(), dbg.handlemax())))
-	print((('计时器 正常[%d]'):format(ac.timer_size())))
+	log.debug(('------------------------定期体检报告------------------------'))
+	log.debug((('时间: %.f'):format(ac.clock() / 1000)))
+	log.debug((('内存[%.3fk]'):format(lua_memory)))
+	log.debug((('jass句柄数[%d],历史最大句柄[%d]'):format(dbg.handlecount(), dbg.handlemax())))
+	log.debug((('计时器 正常[%d]'):format(ac.timer_size())))
 	local unit_normal_count = 0
 	local creature_normal_count = 0
 	local unit_dead_count = 0
@@ -51,8 +51,8 @@ ac.loop(30 * 1000, function()
 			creature_removed_count = creature_removed_count + 1
 		end
 	end
-	print((('单位 正常[%d],死亡[%d],等待释放[%d]'):format(creature_normal_count, creature_dead_count, creature_removed_count)))
-	print((('马甲 正常[%d],死亡[%d],等待释放[%d]'):format(unit_normal_count, unit_dead_count, unit_removed_count)))
+	log.debug((('单位 正常[%d],死亡[%d],等待释放[%d]'):format(creature_normal_count, creature_dead_count, creature_removed_count)))
+	log.debug((('马甲 正常[%d],死亡[%d],等待释放[%d]'):format(unit_normal_count, unit_dead_count, unit_removed_count)))
 
 	local count1 = 0
 	for _ in pairs(mover.mover_group) do
@@ -62,8 +62,8 @@ ac.loop(30 * 1000, function()
 	for _ in pairs(mover.removed_mover) do
 		count2 = count2 + 1
 	end
-	print((('运动器 正常[%d],等待释放[%d]'):format(count1, count2)))
-	print(('-----------------------------------------------------------'))
+	log.debug((('运动器 正常[%d],等待释放[%d]'):format(count1, count2)))
+	log.debug(('-----------------------------------------------------------'))
 end)
 
 function unit:__gc()
@@ -105,39 +105,39 @@ end
 
 ac.game:event '游戏-结束' (function()
 	collectgarbage()
-	--print( '=========================='
-	--print( '统计已经被移除但是依然被引用的触发器'
+	--log.debug( '=========================='
+	--log.debug( '统计已经被移除但是依然被引用的触发器'
 	--for self in pairs(trigger.removed_triggers) do
-	--	print((('++++触发器[%s]'):format(self))
+	--	log.debug((('++++触发器[%s]'):format(self))
 	--	local u = self.unit_event_unit
 	--	if u then
-	--		print((('单位[%s]'):format(u:get_name()))
+	--		log.debug((('单位[%s]'):format(u:get_name()))
 	--	else
-	--		print(('全局')
+	--		log.debug(('全局')
 	--	end
-	--	print(('曾使用的事件:' .. table.concat(self.event_names, ' '))
+	--	log.debug(('曾使用的事件:' .. table.concat(self.event_names, ' '))
 	--end
 	if not base.release then
-		print( '==========================')
-		print( '统计已经被移除但是依然被引用的单位')
+		log.debug( '==========================')
+		log.debug( '统计已经被移除但是依然被引用的单位')
 		for self in pairs(unit.removed_units) do
-			print((('++++单位[%s][%s]'):format(self:get_name(), self.id)))
-			print(('所有者:' .. self:get_owner():get_name()))
+			log.debug((('++++单位[%s][%s]'):format(self:get_name(), self.id)))
+			log.debug(('所有者:' .. self:get_owner():get_name()))
 			if self.model then
-				print(('模型:' .. self.model))
+				log.debug(('模型:' .. self.model))
 			end
 		end
-		print( '==========================')
-		print( '统计已经被移除但是依然被引用的运动器')
+		log.debug( '==========================')
+		log.debug( '统计已经被移除但是依然被引用的运动器')
 		local callback_list = {'on_move', 'on_hit', 'on_remove', 'on_block', 'on_finish'}
 		for self in pairs(mover.removed_mover) do
-			print((('++++运动器 name[%s] id[%s] model[%s]'):format(self.mover:get_name(), self.id, self.model)))
+			log.debug((('++++运动器 name[%s] id[%s] model[%s]'):format(self.mover:get_name(), self.id, self.model)))
 			for i = 1, #callback_list do
 				local name = callback_list[i]
 				local f = self[name]
 				if f then
 					local info = debug.getinfo(f, 'S')
-					print((('[%s] - %s : %d'):format(name, info.source, info.linedefined)))
+					log.debug((('[%s] - %s : %d'):format(name, info.source, info.linedefined)))
 				end
 			end
 		end

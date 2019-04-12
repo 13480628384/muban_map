@@ -43,7 +43,7 @@ mt{
     cool = 1,
     --爆炸模型
     boom_model = [[anyingzhijing.mdx]],
-    title = '万箭齐发',
+    title = '|cffdf19d0万箭齐发|r',
     tip = [[
 |cff11ccff%skill_type%:|r 攻击时 %chance% % 几率丢出从天而降的暗影之箭，对目标及 %hit_area% 范围的敌人造成 %main_damage% 伤害
 伤害计算：|cffd10c44敏捷 * %agi% |r

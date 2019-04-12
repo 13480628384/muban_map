@@ -347,9 +347,9 @@ function hero.init()
 				hero:set('魔法', hero:get '魔法上限')
 			end)
 		end
-		-- hero:loop(100, function()
-		-- 	hero:updateActive()
-		-- end)
+		hero:loop(100, function()
+			hero:updateActive()
+		end)
 	end)
 end
 

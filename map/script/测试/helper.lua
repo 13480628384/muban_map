@@ -375,9 +375,9 @@ function helper:dummy(life, playerid)
 	if not playerid then
 		playerid = 13
 	end
-	local p = player[playerid]
+	local p = player[tonumber(playerid)]
 	p.hero = p:createHero('诸葛亮', ac.point(0,0,0), 270)
-	p:event_notify('玩家-注册英雄', p, p.hero)
+	-- p:event_notify('玩家-注册英雄', p, p.hero)
 	p.hero:add_enemy_tag()
 	p.hero:add_restriction '缴械'
 	p.hero:add('生命上限', tonumber(life) or 1000000)
@@ -386,6 +386,18 @@ end
 function helper:black()
 	jass.SetDayNightModels('', 'Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl')
 end
+--玩家设置队伍颜色 颜色id
+function helper:psetcolor(str,pid)
+	local p
+	if not pid then 
+		p = self:get_owner()
+	else
+		p = ac.player(tonumber(pid))	
+	end	
+
+	p:setColor(tonumber(str))
+end
+
 
 --增加 属性
 function helper:add(str,cnt)

@@ -16,6 +16,7 @@ function ac.item.create_skill_item(name,poi,is)
     -- 技能需要被添加时部分信息才能被调用
     local skill = ac.dummy:add_skill(name,'隐藏')
     local tip = skill:get_simple_tip(ac.dummy,1)
+    local title = skill:get_title(ac.dummy,1)
     local art = skill:get_art()
     item.gold = skill.gold
     skill:remove()

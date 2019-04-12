@@ -15,7 +15,8 @@ else
         for index = 1 , #args do 
             s = s..tostring(args[index])..'   '
         end
-        BJDebugMsg(s)
+        -- 关闭控制台后，print值不在游戏内显示。
+        -- BJDebugMsg(s)
     end
 end
 --阿七为2 ，英萌为0

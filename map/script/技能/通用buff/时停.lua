@@ -7,7 +7,7 @@ mt.cover_type = 0
 mt.debuff = true
 mt.model = [[]]
 
-local function on_texttag(time,hero)
+local function on_texttag(time,hero,zoffset)
 	local target = hero
 	local x, y = target:get_point():get()
 	local z = target:get_point():getZ()
@@ -15,7 +15,7 @@ local function on_texttag(time,hero)
 	{
 		string = tostring(time),
 		size = 10,
-		position = ac.point(x , y, z + 100),
+		position = ac.point(x , y, z + (zoffset or 100)),
 		speed = 250,
 		angle = 90,
 		red = 238,
@@ -63,10 +63,10 @@ function mt:on_add()
 	-- end)
 	-- 是否文字显示计时
 	if self.show then
-		on_texttag(time,self.target)
+		on_texttag(time,self.target,self.zoffset)
 		self.timer1 = ac.timer(1*1000, math.ceil(time),function()
 			time = time - 1
-			on_texttag(time,self.target)
+			on_texttag(time,self.target,self.zoffset)
 			if time <=0 then 
 				if self.on_finish then 
 					self:on_finish()

@@ -1,4 +1,14 @@
+[Categories]
+UndeadClass=有机生物
 [CustomSkin]
+AllyTownUnderAttackSound=Flare4
+AllyUnderAttackSound=Flare4
+CommandButtonCooldown=war3mapImported\cooldown ui.mdx
+IdlePeon=ReplaceableTextures\CommandButtons\BTNStop.blp
+MinimapHeroTexture=minimap\minimap-hero.blp
+MinimapNeutral=UI\Minimap\MiniMap-Hero.mdl
+MinimapNeutralTexture=minimap\minimap-hero.blp
+
 MessageFont=resource\fonts\FZHTJW.TTF
 MasterFont=resource\fonts\FZHTJW.TTF
 InfoPanelTextFont=resource\fonts\FZHTJW.TTF
