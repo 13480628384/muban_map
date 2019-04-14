@@ -146,6 +146,9 @@ local function start()
 		jass.DestroyImage(shadow01)
 		table.insert(flygroup, hero)
 
+		-- str = [[modeldekan\ui\DEKAN_Tag_Ally.mdl]]
+		-- str = [[modeldekan\ui\DEKAN_Tag_Enmy.mdl]]
+		hero:add_effect('origin',[[modeldekan\ui\DEKAN_Tag_Ally.mdl]])
 		hero_types[name] = hero
 	end
 	player[16].hero_lists = flygroup
