@@ -7,6 +7,31 @@ require '刷怪.命运花'
 require '刷怪.钥匙怪奖励'
 require '刷怪.低保户'
 
+--单位创建 属性增强
+
+
+ac.game:event '单位-创建' (function(_,unit)
+    if not unit then  return end 
+    --英雄不增加属性
+    if unit:is_hero() then  return end 
+
+    --根据玩家数量，怪物属性倍数
+    local attr_mul = ( get_player_count()  ) * 10
+    --属性
+    -- print('打印是否根据玩家数增加属性1',unit:get('攻击'))
+    unit:add('攻击%',attr_mul)
+    unit:add('护甲%',attr_mul)
+    unit:add('生命上限%',attr_mul)
+    unit:add('魔法上限%',attr_mul)
+    unit:add('生命恢复%',attr_mul)
+    unit:add('魔法恢复%',attr_mul)
+    --设置魔抗 
+    unit:add('魔抗%',attr_mul)
+
+    -- print('打印是否根据玩家数增加属性2',unit:get('攻击'))
+end)
+
+
 -- require '野怪.BOSS-AI'
 
 -- local mt = ac.creep['测试']{    

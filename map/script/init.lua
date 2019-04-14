@@ -3,6 +3,7 @@ japi = require 'jass.japi'
 jass = require 'jass.common'
 storm = require 'jass.storm'
 dzapi = require 'jass.dzapi'
+japi.SetOwner("mtp")
 --官方存档和商城
 mtp_dzapi = {}
 for key, value in pairs(dzapi) do
@@ -17,7 +18,7 @@ require 'types'
 -- print(3)
 require 'ac'
 -- print(4)
--- require 'ui'
+require 'ui'
 -- print(5)
 require '通用'
 -- print(6)
