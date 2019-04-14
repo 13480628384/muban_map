@@ -1619,19 +1619,19 @@ function InitCustomPlayerSlots takes nothing returns nothing
     // Player 0
     call SetPlayerStartLocation(Player(0), 0)
     call SetPlayerColor(Player(0), ConvertPlayerColor(0))
-    call SetPlayerRacePreference(Player(0), RACE_PREF_HUMAN)
+    call SetPlayerRacePreference(Player(0), RACE_PREF_NIGHTELF)
     call SetPlayerRaceSelectable(Player(0), false)
     call SetPlayerController(Player(0), MAP_CONTROL_USER)
     // Player 1
     call SetPlayerStartLocation(Player(1), 1)
     call SetPlayerColor(Player(1), ConvertPlayerColor(1))
-    call SetPlayerRacePreference(Player(1), RACE_PREF_ORC)
+    call SetPlayerRacePreference(Player(1), RACE_PREF_NIGHTELF)
     call SetPlayerRaceSelectable(Player(1), false)
     call SetPlayerController(Player(1), MAP_CONTROL_USER)
     // Player 2
     call SetPlayerStartLocation(Player(2), 2)
     call SetPlayerColor(Player(2), ConvertPlayerColor(2))
-    call SetPlayerRacePreference(Player(2), RACE_PREF_UNDEAD)
+    call SetPlayerRacePreference(Player(2), RACE_PREF_NIGHTELF)
     call SetPlayerRaceSelectable(Player(2), false)
     call SetPlayerController(Player(2), MAP_CONTROL_USER)
     // Player 3
@@ -1643,19 +1643,19 @@ function InitCustomPlayerSlots takes nothing returns nothing
     // Player 4
     call SetPlayerStartLocation(Player(4), 4)
     call SetPlayerColor(Player(4), ConvertPlayerColor(4))
-    call SetPlayerRacePreference(Player(4), RACE_PREF_HUMAN)
+    call SetPlayerRacePreference(Player(4), RACE_PREF_NIGHTELF)
     call SetPlayerRaceSelectable(Player(4), false)
     call SetPlayerController(Player(4), MAP_CONTROL_USER)
     // Player 5
     call SetPlayerStartLocation(Player(5), 5)
     call SetPlayerColor(Player(5), ConvertPlayerColor(5))
-    call SetPlayerRacePreference(Player(5), RACE_PREF_ORC)
+    call SetPlayerRacePreference(Player(5), RACE_PREF_NIGHTELF)
     call SetPlayerRaceSelectable(Player(5), false)
     call SetPlayerController(Player(5), MAP_CONTROL_USER)
     // Player 10
     call SetPlayerStartLocation(Player(10), 6)
     call SetPlayerColor(Player(10), ConvertPlayerColor(10))
-    call SetPlayerRacePreference(Player(10), RACE_PREF_UNDEAD)
+    call SetPlayerRacePreference(Player(10), RACE_PREF_NIGHTELF)
     call SetPlayerRaceSelectable(Player(10), false)
     call SetPlayerController(Player(10), MAP_CONTROL_COMPUTER)
     // Player 11
