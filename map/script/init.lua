@@ -6,6 +6,7 @@ dzapi = require 'jass.dzapi'
 --官方存档和商城
 mtp_dzapi = {}
 for key, value in pairs(dzapi) do
+    -- print(key, value)
     mtp_dzapi[key] = value
 end
 require 'util'
@@ -16,7 +17,7 @@ require 'types'
 -- print(3)
 require 'ac'
 -- print(4)
-require 'ui'
+-- require 'ui'
 -- print(5)
 require '通用'
 -- print(6)
@@ -57,9 +58,12 @@ ac.wait(100,function ()
     end
     -- light(3)
    
-    -- local item = ac.item.create_item('新手剑')
-    --设置联盟模式
-    -- jass.SetAllyColorFilterState(1)
+    --设置联盟模式0,1,2
+    jass.SetAllyColorFilterState(0)
+    --设置玩家16（中立被动颜色 绿） 1-16
+    ac.player(16):setColor(7)
+
+
     ac.game:event '游戏-开始' (function()
         -- local item = ac.item.create_item('生锈剑')
         -- local item = ac.item.create_skill_item('万箭齐发')

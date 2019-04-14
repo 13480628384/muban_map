@@ -117,9 +117,15 @@ function mt:is_self()
 end
 
 --设置颜色
---	参数为颜色的id
-function mt:setColor(this, c)
-	jass.SetPlayerColor(this.handle, c - 1)
+--	参数为颜色的id , false旗下英雄也改变颜色 
+function mt:setColor(c,changeExisting)
+	-- print(self:getColorWord(c))
+	local color = tonumber(c) - 1
+	jass.SetPlayerColor(self.handle, color) 
+
+	if not changeExisting and self.hero then
+        jass.SetUnitColor(self.hero.handle,color)
+    end
 end
 
 --结盟
@@ -434,8 +440,8 @@ end
 
 local color_word = {}
 --获得颜色
-function mt:getColorWord()
-	local i = self:get()
+function mt:getColorWord(id)
+	local i = id or self:get()
 	return color_word[i]
 end
 
