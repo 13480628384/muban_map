@@ -9,9 +9,9 @@ require 'ui.base.input'
 require 'ui.base.game'
 require 'ui.base.keyboard'
 require 'ui.base.timer'
-dzapi.DzLoadToc("resource\\ui\\custom.toc")
--- dzapi.DzFrameHideInterface()
--- dzapi.DzFrameEditBlackBorders(0,0)
+japi.LoadToc("resource\\ui\\custom.toc")
+-- japi.FrameHideInterface()
+-- japi.FrameEditBlackBorders(0,0)
 
 FogEnable( false )
 FogMaskEnableOff(  )

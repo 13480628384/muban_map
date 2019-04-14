@@ -62,7 +62,7 @@ ui.send_message = function (info)
         print("字符串太长了",msg,debug.traceback())
         return
     end 
-    dzapi.DzSendCustomMessage(msg)
+    japi.SendCustomMessage(msg)
 end
 
 ui.on_custom_ui_event = function (message)
@@ -91,8 +91,8 @@ ui.on_custom_ui_event = function (message)
 end
 
 ui.get_mouse_pos = function ()
-    local x = dzapi.DzGetMouseVectorX() / 1024
-    local y = (-(dzapi.DzGetMouseVectorY() - 768)) / 768 
+    local x = japi.GetMouseVectorX() / 1024
+    local y = (-(japi.GetMouseVectorY() - 768)) / 768 
     x = x * 1920
     y = y * 1080
     return x,y
@@ -101,7 +101,7 @@ end
 ui.set_mouse_pos = function (x,y)
     x = x / 1920 * 1024
     y = 768 - y / 1080 * 768
-    dzapi.DzSetMousePos(x,y)
+    japi.SetMousePos(x,y)
 end 
 
 --将lua表编码成字符串

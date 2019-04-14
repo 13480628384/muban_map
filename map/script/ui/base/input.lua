@@ -57,7 +57,7 @@ input_class = extends( panel_class,{
         ui._panel = panel
         load_edit(edit_fpf,font_size)
         ui._type = string.format('%s%d',ui._type,font_size)
-        ui.id = dzapi.DzCreateFrameByTagName( ui._base, ui._name, panel.id, ui._type,0)
+        ui.id = japi.CreateFrameByTagName( ui._base, ui._name, panel.id, ui._type,0)
         if ui.id == nil or ui.id == 0 then 
             panel:destroy()
             ui_base_class.destroy(ui._index)
@@ -100,25 +100,25 @@ input_class = extends( panel_class,{
 
     set_text = function (self,text)
         self.text = text
-        dzapi.DzFrameSetText(self.id,text)
+        japi.FrameSetText(self.id,text)
     end,
 
     get_text = function (self)
-        return dzapi.DzFrameGetText(self.id)
+        return japi.FrameGetText(self.id)
     end,
 
     set_focus = function (self,is_enable)
         if is_enable then 
-            dzapi.DzSetEditFocus(self.id)
-            dzapi.DzSendMessage(0x207,0,0)
-            dzapi.DzSendMessage(0x208,0,0)
-            dzapi.DzFrameSetFocus(self.id,is_enable)
+            japi.SetEditFocus(self.id)
+            japi.SendMessage(0x207,0,0)
+            japi.SendMessage(0x208,0,0)
+            japi.FrameSetFocus(self.id,is_enable)
             for i=1,self:get_text():len() do
-                dzapi.DzSendMessage(0x100,KEY.RIGHT,0)
-                dzapi.DzSendMessage(0x101,KEY.RIGHT,1,0)
+                japi.SendMessage(0x100,KEY.RIGHT,0)
+                japi.SendMessage(0x101,KEY.RIGHT,1,0)
             end
         else
-            dzapi.DzFrameSetFocus(self.id,is_enable)
+            japi.FrameSetFocus(self.id,is_enable)
         end
     end,
 

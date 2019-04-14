@@ -888,8 +888,8 @@ bag_class = extends( panel_class , {
             return
         end
         
-        local x = dzapi.DzGetMouseVectorX() / 1024 * 1920
-        local y = (-(dzapi.DzGetMouseVectorY() - 768)) / 768 * 1080
+        local x = japi.GetMouseVectorX() / 1024 * 1920
+        local y = (-(japi.GetMouseVectorY() - 768)) / 768 * 1080
         --判断目标按钮是空 且 鼠标位置 在界面位置之外
         if target_button == nil  then 
             if self:point_in_rect(x,y) == false then 
@@ -1109,7 +1109,7 @@ bag_class = extends( panel_class , {
                 button:item_tooltip(item2,item)
             end
         elseif item:get_type() == '消耗品' then 
-            dzapi.DzLocalPointOrder(852270,item.page_id + 0.5,item.slot_id + 0.5,34)
+            japi.LocalPointOrder(852270,item.page_id + 0.5,item.slot_id + 0.5,34)
         end
 
 

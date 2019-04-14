@@ -26,7 +26,7 @@ function mt:on_add()
     local skill = self
     local hero = self.owner
     --改变模型
-    dzapi.DzSetUnitModel(hero.handle,self.effect)
+    japi.SetUnitModel(hero.handle,self.effect)
 
     self.buff = hero:add_buff '影歌'
     {

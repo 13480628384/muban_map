@@ -56,7 +56,7 @@ sprite_class = extends( panel_class,{
         local hash = load_model(model_path)
         ui._type = string.format('%s%d',ui._type,hash)
      
-        ui.id = dzapi.DzCreateFrameByTagName( ui._base, ui._name, panel.id, ui._type,0)
+        ui.id = japi.CreateFrameByTagName( ui._base, ui._name, panel.id, ui._type,0)
  
         if ui.id == nil or ui.id == 0 then 
             panel:destroy()
@@ -108,13 +108,13 @@ sprite_class = extends( panel_class,{
 
     --设置动画
     set_animation = function (self,index,bool)
-        dzapi.DzFrameSetAnimate(self.id,index,bool == true)
+        japi.FrameSetAnimate(self.id,index,bool == true)
     end,
 
     --设置动画进度 百分比
     set_progress = function (self,rote)
         self.progress_value = rote
-        dzapi.DzFrameSetAnimateOffset(self.id,rote)
+        japi.FrameSetAnimateOffset(self.id,rote)
     end,
 
     set_control_size = function (self,width,height)
