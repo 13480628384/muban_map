@@ -83,17 +83,16 @@ function mt:on_cast_start()
         for k,v in pairs(data.attribute) do 
             unit:set(k,v)
         end
-        --设置魔抗
-        unit:set('魔抗',data.attribute['护甲'])
+    
         --属性 （难度系数）
         unit:set('攻击',data.attribute['攻击'] * data.attr_mul * ac.g_game_degree)
-        unit:set('护甲',data.attribute['护甲'] * data.attr_mul * ac.g_game_degree)
+        unit:set('护甲',data.attribute['护甲'] * data.attr_mul * (1+(ac.g_game_degree-1)*0.8))
         unit:set('生命上限',data.attribute['生命上限'] * data.attr_mul * ac.g_game_degree)
         unit:set('魔法上限',data.attribute['魔法上限'] * data.attr_mul * ac.g_game_degree)
         unit:set('生命恢复',data.attribute['生命恢复'] * data.attr_mul * ac.g_game_degree)
         unit:set('魔法恢复',data.attribute['魔法恢复'] * data.attr_mul * ac.g_game_degree)
         --设置魔抗 
-        unit:set('魔抗',data.attribute['护甲']* data.attr_mul * ac.g_game_degree)
+        unit:set('魔抗',data.attribute['护甲']* data.attr_mul * (1+(ac.g_game_degree-1)*0.8))
         --掉落概率
         unit.fall_rate = 100
         --掉落金币和经验
