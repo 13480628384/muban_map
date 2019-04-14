@@ -20,7 +20,7 @@ function mt:on_add()
 	end	
 	--改变模型
 	if self.model then
-		japi.SetUnitModel(self.target.handle,self.model)
+		dzapi.DzSetUnitModel(self.target.handle,self.model)
 	end
 	--设置模型大小
 	if self.size then
@@ -88,7 +88,7 @@ function mt:on_remove()
 	else 
 		--还回模型
 		if self.model then
-			japi.SetUnitModel(self.target.handle,self.old_model)
+			dzapi.DzSetUnitModel(self.target.handle,self.old_model)
 		end	
 		self.target:set_size(self.old_size)
 		--还原属性

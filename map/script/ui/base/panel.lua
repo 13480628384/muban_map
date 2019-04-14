@@ -25,9 +25,9 @@ panel_class = extends( ui_base_class,{
         end 
 
         if parent then 
-            ui.id = japi.CreateFrameByTagName( ui._base, ui._name, parent.id, ui._type,0)
+            ui.id = dzapi.DzCreateFrameByTagName( ui._base, ui._name, parent.id, ui._type,0)
         else 
-            ui.id = japi.CreateFrameByTagName( ui._base, ui._name, game_ui, ui._type,0)
+            ui.id = dzapi.DzCreateFrameByTagName( ui._base, ui._name, game_ui, ui._type,0)
         end 
      
         if ui.id == nil or ui.id == 0 then 

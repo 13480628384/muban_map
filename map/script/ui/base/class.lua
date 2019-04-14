@@ -5,9 +5,10 @@
 ]]
 --类的继承 子类继承父类
 storm = require 'jass.storm'
-japi  = require 'jass.japi'
+dzapi = require 'jass.dzapi'
+dzapi  = require 'jass.dzapi'
 
-game_ui     = japi.GetGameUI()
+game_ui     = dzapi.DzGetGameUI()
 
 global_blp_map = {}
 
@@ -68,7 +69,7 @@ function blp_rect(path,left,top,right,bottom)
     local key = string.format("%i_%i_%i_%i.blp",left,top,right,bottom)
     local newPath = path:gsub('%.blp',key .. '.blp')
     if global_blp_map[newPath] == nil then 
-        japi.EXBlpRect(path,newPath,left,top,right,bottom)
+        dzapi.EXBlpRect(path,newPath,left,top,right,bottom)
         global_blp_map[newPath] = true 
     end 
     return newPath
@@ -83,7 +84,7 @@ function blp_sector(path,x,y,r,angle,section)
     local key = string.format("%i_%i_%i_%i_%i.blp",x,y,r,angle,section)
     local newPath = path:gsub('%.blp',key .. '.blp')
     if global_blp_map[newPath] == nil then 
-        japi.EXBlpSector(path,newPath,x,y,r,angle,section)
+        dzapi.EXBlpSector(path,newPath,x,y,r,angle,section)
         global_blp_map[newPath] = true 
     end 
     return newPath
@@ -95,7 +96,7 @@ function load_fdf(data)
     storm.save('ui\\loaded.fdf',storm.load('ui\\loaded.fdf') .. data)
     storm.save('ui\\Load.fdf',data)
     storm.save('ui\\Load.toc','ui\\Load.fdf\r\n')
-    japi.LoadToc('ui\\Load.toc')
+    dzapi.DzLoadToc('ui\\Load.toc')
 end
 
 function converScreenPosition(x,y)
@@ -282,7 +283,7 @@ ui_base_class = {
         end 
 
 
-        japi.DestroyFrame(self.id)
+        dzapi.DzDestroyFrame(self.id)
         ui_base_class.handle_manager:free(self._index)
         
         self.id = nil
@@ -302,7 +303,7 @@ ui_base_class = {
             return 
         end 
         self.is_show = true 
-        japi.FrameShow(self.id,true)
+        dzapi.DzFrameShow(self.id,true)
     end,
     
     hide = function (self)
@@ -310,7 +311,7 @@ ui_base_class = {
             return 
         end 
         self.is_show = false
-        japi.FrameShow(self.id,false)
+        dzapi.DzFrameShow(self.id,false)
     end,
     
 
@@ -318,12 +319,12 @@ ui_base_class = {
         if value <= 1 then 
             value = value * 0xff
         end
-        japi.FrameSetAlpha(self.id,value)
+        dzapi.DzFrameSetAlpha(self.id,value)
     end,
 
 
     get_alpha = function (self)
-        return japi.FrameGetAlpha(self.id)
+        return dzapi.DzFrameGetAlpha(self.id)
     end,
 
     get_position = function (self)
@@ -345,7 +346,7 @@ ui_base_class = {
         if self.parent == nil then 
             x,y = converScreenPosition(x,y)
             
-            japi.FrameSetAbsolutePoint(self.id,0,x,y)
+            dzapi.DzFrameSetAbsolutePoint(self.id,0,x,y)
         else
             x =  x / 1920 * 0.8
             y = -y / 1080 * 0.6
@@ -354,10 +355,10 @@ ui_base_class = {
                 if type(self.align) == 'string' then
                     align = self.align_map[self.align]
                 end
-                japi.FrameSetPoint(self.id,align,self._panel.id,align,0,0)--x,y)
+                dzapi.DzFrameSetPoint(self.id,align,self._panel.id,align,0,0)--x,y)
                 return
             end 
-            japi.FrameSetPoint(self.id,0,self.parent.id,0,x,y)--x,y)
+            dzapi.DzFrameSetPoint(self.id,0,self.parent.id,0,x,y)--x,y)
         end
     end,
 
@@ -372,7 +373,7 @@ ui_base_class = {
         end 
         width,height = converScreenSize(width,height)
        
-        japi.FrameSetSize(self.id,width,height)
+        dzapi.DzFrameSetSize(self.id,width,height)
         
     end,
 
@@ -394,7 +395,7 @@ ui_base_class = {
         end 
         
         self.normal_image = image_path
-        japi.FrameSetTexture(self.id,image_path,flag or 0)
+        dzapi.DzFrameSetTexture(self.id,image_path,flag or 0)
     end,
 
     set_tooltip = function(self,tip,x,y,width,height,font_size,offset)
@@ -407,8 +408,8 @@ ui_base_class = {
             ox,oy = self:get_real_position()
             ox = ox + self.w / 2
         else
-            ox = japi.GetMouseVectorX() / 1024
-            oy = (-(japi.GetMouseVectorY() - 768)) / 768 
+            ox = dzapi.DzGetMouseVectorX() / 1024
+            oy = (-(dzapi.DzGetMouseVectorY() - 768)) / 768 
             ox = ox * 1920
             oy = oy * 1080
         end
@@ -517,7 +518,7 @@ ui_base_class = {
             if (self.x < 0 or y < 0 
             or y + self.h > parent.h) and self ~= parent.scroll_button then 
                 --隐藏超过面板的控件
-                japi.FrameShow(self.id,false)
+                dzapi.DzFrameShow(self.id,false)
                 parent.scroll_button:show()
 
                 return true
@@ -532,7 +533,7 @@ ui_base_class = {
             
             if self.is_show then 
                 --显示滚动到面板中的控件
-                japi.FrameShow(self.id,true)
+                dzapi.DzFrameShow(self.id,true)
             end 
         end 
 

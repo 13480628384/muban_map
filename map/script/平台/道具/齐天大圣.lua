@@ -25,7 +25,7 @@ function mt:on_add()
     hero:add('物爆几率',self.physical_rate)
     hero:add('物爆伤害',self.physical_damage)
     --改变模型
-    japi.SetUnitModel(hero.handle,self.effect)
+    dzapi.DzSetUnitModel(hero.handle,self.effect)
 end
 function mt:on_remove()
     local hero = self.owner

@@ -41,7 +41,7 @@ console.get = function (name,...)
                 self.y = y
                 x =  (x + self.w / 2) / 1920 * 0.8
                 y = (1080 - y) / 1080 * 0.6
-                japi.FrameSetPoint(self.id,1,game_ui,6,x,y)
+                dzapi.DzFrameSetPoint(self.id,1,game_ui,6,x,y)
             end
         elseif name == '头像模型' then 
             instance.set_position = function (self,x,y)
@@ -49,7 +49,7 @@ console.get = function (name,...)
                 self.y = y
                 x =  x / 1920 * 0.8
                 y = (1080 - y - self.h) / 1080 * 0.6
-                japi.FrameSetPoint(self.id,6,game_ui,6,x,y)
+                dzapi.DzFrameSetPoint(self.id,6,game_ui,6,x,y)
             end
         elseif name == '小地图' then 
             instance.set_position = function (self,x,y)
@@ -59,8 +59,8 @@ console.get = function (name,...)
                 local ay = (1080 - y - self.h) / 1080 * 0.6
                 local bx = (x + self.w) / 1920 * 0.8
                 local by = (1080 - y) / 1080 * 0.6
-                japi.FrameSetPoint(self.id,6,game_ui,6,ax,ay)
-                japi.FrameSetPoint(self.id,2,game_ui,6,bx,by)
+                dzapi.DzFrameSetPoint(self.id,6,game_ui,6,ax,ay)
+                dzapi.DzFrameSetPoint(self.id,2,game_ui,6,bx,by)
             end
         elseif name == '技能按钮' then 
             instance.w = 91
@@ -73,7 +73,7 @@ console.get = function (name,...)
                 self.y = y
                 x =  (x - self.w * 1.5) / 1920 * 0.8
                 y =  -y / 1080 * 0.6
-                japi.FrameSetPoint(self.id,8,game_ui,1,x,y)
+                dzapi.DzFrameSetPoint(self.id,8,game_ui,1,x,y)
             end
         end 
         controls[key] = instance

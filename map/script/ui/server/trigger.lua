@@ -5,13 +5,12 @@ local item_event = require 'ui.server.event.item'
 local trg = CreateTrigger()
 
 
+
 --注册同步事件
-japi.RegisterMessageEvent(trg)
+dzapi.DzTriggerRegisterSyncData(trg,"ui",false)
 TriggerAddAction(trg,function ()
-    local message = japi.GetTriggerMessage()
-    local player = japi.GetMessagePlayer()
-    print(message:len(),message,player)
-  
+    local message = dzapi.DzGetTriggerSyncData()
+    local player = dzapi.DzGetTriggerSyncPlayer()
     ui.on_custom_ui_event(player,message)
 end)
 

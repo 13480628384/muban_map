@@ -55,7 +55,7 @@ function mt:on_add()
     if hero.name == '亚瑟王' then 
         hero:add('物品获取率',self.item_mul)
         --没有皮肤时，更换模型
-        hero.skin = japi.SetUnitModel(hero.handle,self.effect)
+        hero.skin = dzapi.DzSetUnitModel(hero.handle,self.effect)
         --增强剑刃风暴
         local skill = hero:find_skill('剑刃风暴')
         if skill then 
@@ -88,7 +88,7 @@ function mt:buy_failed()
         hero:add('物品获取率',-self.item_mul)
         --已拥有时，再点一次为穿上
         if hero.skin then 
-            japi.SetUnitModel(hero.handle,self.old_model)
+            dzapi.DzSetUnitModel(hero.handle,self.old_model)
             hero.skin = false
         end    
     end    

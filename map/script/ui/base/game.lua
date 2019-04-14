@@ -39,8 +39,8 @@ game.register_event = function(module)
     table.insert(game_event, module)
 end
 game.get_mouse_pos = function ()
-    local x = japi.GetMouseVectorX() / 1024
-    local y = (-(japi.GetMouseVectorY() - 768)) / 768 
+    local x = dzapi.DzGetMouseVectorX() / 1024
+    local y = (-(dzapi.DzGetMouseVectorY() - 768)) / 768 
     x = x * 1920
     y = y * 1080
     return x,y
@@ -49,7 +49,7 @@ end
 game.set_mouse_pos = function (x,y)
     x = x / 1920 * 1024
     y = 768 - y / 1080 * 768
-    japi.SetMousePos(x,y)
+    dzapi.DzSetMousePos(x,y)
 end 
 
 
@@ -124,7 +124,7 @@ TimerStart(CreateTimer(),0.03,true,function ()
         end
     end
     
-    if japi.IsWindowActive() == false and is_active == true then 
+    if dzapi.DzIsWindowActive() == false and is_active == true then 
         is_active = false
         if left_is_down or right_is_down then 
             base.on_mouse_up()
@@ -155,7 +155,7 @@ local texture = nil
 base = {
     
     on_mouse_down = function ()
-        local id = japi.GetMouseFocus()
+        local id = dzapi.DzGetMouseFocus()
         local button = button_class.button_map[id]
 
         left_is_down = true
@@ -173,8 +173,8 @@ base = {
                             base.on_mouse_up()
                         end
 
-                        local x = japi.GetMouseVectorX() / 1024 * 1920
-                        local y = (-(japi.GetMouseVectorY() - 768)) / 768 * 1080
+                        local x = dzapi.DzGetMouseVectorX() / 1024 * 1920
+                        local y = (-(dzapi.DzGetMouseVectorY() - 768)) / 768 * 1080
                         x = x - button.w / 2
                         y = y - button.h / 2
                         texture = texture_class.create(button.normal_image,x,y,width,height)
@@ -190,7 +190,7 @@ base = {
     end,
 
     on_mouse_up = function ()
-        local id = japi.GetMouseFocus()
+        local id = dzapi.DzGetMouseFocus()
         local button = button_class.button_map[id]
 
         left_is_down = false
@@ -226,7 +226,7 @@ base = {
     end,
 
     on_mouse_right_down = function ()
-        local id = japi.GetMouseFocus()
+        local id = dzapi.DzGetMouseFocus()
         local button = button_class.button_map[id]
 
         right_is_down = true
@@ -239,7 +239,7 @@ base = {
     end,
 
     on_mouse_right_up = function ()
-        local id = japi.GetMouseFocus()
+        local id = dzapi.DzGetMouseFocus()
         local button = button_class.button_map[id]
 
         right_is_down = false 
@@ -266,8 +266,8 @@ base = {
 
     on_mouse_move = function ()
         
-        local x = japi.GetMouseVectorX() / 1024
-        local y = (-(japi.GetMouseVectorY() - 768)) / 768 
+        local x = dzapi.DzGetMouseVectorX() / 1024
+        local y = (-(dzapi.DzGetMouseVectorY() - 768)) / 768 
         x = x * 1920
         y = y * 1080
         if texture ~= nil then 
@@ -294,10 +294,10 @@ base = {
     end,
 
     on_mouse_wheeldelta = function ()
-        game_event_callback('on_mouse_wheeldelta',japi.GetWheelDelta() > 0)
+        game_event_callback('on_mouse_wheeldelta',dzapi.DzGetWheelDelta() > 0)
 
-        local x = japi.GetMouseVectorX() / 1024
-        local y = (-(japi.GetMouseVectorY() - 768)) / 768 
+        local x = dzapi.DzGetMouseVectorX() / 1024
+        local y = (-(dzapi.DzGetMouseVectorY() - 768)) / 768 
         x = x * 1920
         y = y * 1080
 
@@ -308,7 +308,7 @@ base = {
             and x >= ox and  y >= oy 
             and x <= ox + panel.w and y <= oy + panel.h 
             then
-                local bool = japi.GetWheelDelta() > 0
+                local bool = dzapi.DzGetWheelDelta() > 0
                 local y = panel.scroll_y or 0
                 if bool then 
                     if y > 0 then 
@@ -328,12 +328,12 @@ base = {
     end,
 
     on_key_down = function ()
-        game_event_callback('on_key_down',japi.GetTriggerKey()) 
+        game_event_callback('on_key_down',dzapi.DzGetTriggerKey()) 
         check_edit_control()
     end,
 
     on_key_up = function ()
-        game_event_callback('on_key_up',japi.GetTriggerKey())
+        game_event_callback('on_key_up',dzapi.DzGetTriggerKey())
         check_edit_control()
     end,
 

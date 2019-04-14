@@ -76,7 +76,7 @@ text_class = extends( panel_class,{
         end
         --ui._type = string.format('%s%d',ui._type,font_size)
 
-        ui.id = japi.CreateFrameByTagName( ui._base, ui._name, panel.id, ui._type,align or 0)
+        ui.id = dzapi.DzCreateFrameByTagName( ui._base, ui._name, panel.id, ui._type,align or 0)
         if ui.id == nil or ui.id == 0 then 
             panel:destroy()
             ui_base_class.destroy(ui._index)
@@ -115,11 +115,11 @@ text_class = extends( panel_class,{
     end,
 
     set_text = function (self,text)
-        japi.FrameSetText(self.id,text)
+        dzapi.DzFrameSetText(self.id,text)
     end,
 
     get_text = function (self)
-        return japi.FrameGetText(self.id)
+        return dzapi.DzFrameGetText(self.id)
     end,
 
 
@@ -139,7 +139,7 @@ text_class = extends( panel_class,{
             self.color = {r = r,g = g,b = b,a = a}            
             color = 255 * 0x1000000 + r * 0x10000 + g * 0x100 + b
         end
-        japi.FrameSetTextColor(self.id,color)
+        dzapi.DzFrameSetTextColor(self.id,color)
     end,
 
     set_alpha = function (self,alpha)

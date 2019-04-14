@@ -146,7 +146,9 @@ ranking = extends( panel_class,{
 local panel = ranking.create()
 
 ranking.on_key_down = function(code)
-    -- print(code)
+    -- print(code,KEY.TAB,japi.GetChatState())
+    -- print(KEY.TAB)
+    -- print(japi.GetChatState())
     if japi.GetChatState() then
         return
     end

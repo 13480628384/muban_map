@@ -25,7 +25,7 @@ function mt:on_add()
     hero:add('移动速度',self.move_speed)
     hero:add('攻击间隔',-self.attack_gap)
     --改变模型
-    japi.SetUnitModel(hero.handle,self.effect)
+    dzapi.DzSetUnitModel(hero.handle,self.effect)
 end
 function mt:on_remove()
     local hero = self.owner

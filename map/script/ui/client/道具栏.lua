@@ -79,8 +79,8 @@ propbar_class = extends( panel_class,{
 
 
         --如果目标按钮为空，且鼠标在界面之外 丢弃
-        local x = japi.GetMouseVectorX() / 1024 * 1920
-        local y = (-(japi.GetMouseVectorY() - 768)) / 768 * 1080
+        local x = dzapi.DzGetMouseVectorX() / 1024 * 1920
+        local y = (-(dzapi.DzGetMouseVectorY() - 768)) / 768 * 1080
         if target_button == nil  then 
             if self:point_in_rect(x,y) == false then 
                 local page_id = source_item.page_id

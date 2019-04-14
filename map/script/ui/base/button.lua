@@ -23,9 +23,9 @@ button_class = extends( panel_class,{
             return 
         end 
         if parent then 
-            ui.id = japi.CreateFrameByTagName( ui._base, ui._name, parent.id, ui._type,0)
+            ui.id = dzapi.DzCreateFrameByTagName( ui._base, ui._name, parent.id, ui._type,0)
         else 
-            ui.id = japi.CreateFrameByTagName( ui._base, ui._name, game_ui, ui._type,0)
+            ui.id = dzapi.DzCreateFrameByTagName( ui._base, ui._name, game_ui, ui._type,0)
         end 
 
         if ui.id == nil or ui.id == 0 then 
@@ -48,7 +48,7 @@ button_class = extends( panel_class,{
         
         ui:set_position(x,y)
         ui:set_control_size(width,height)
-        japi.FrameSetEnable(ui.id,false)
+        dzapi.DzFrameSetEnable(ui.id,false)
         return ui
     end,
 
