@@ -27,7 +27,7 @@ mt{
 	cost_life = 50,
 	--伤害
 	damage = function(self,hero)
-		if self and self.owner then 
+		if self and self.owner and self.owner:is_hero() then 
 		return self.owner:get('敏捷')*self.int
 		end
 	end	,

@@ -31,9 +31,7 @@ mt{
     art ='fengbaozhili.blp',
 
     --异步下数据 只作为文本提示
-    areaa = function(self)
-        return 100 + ac.player.self.hero:get '额外范围'
-    end,
+    areaa = 100,
 
     --几率
     my_chance = {5,7.5,10,12.5,15},

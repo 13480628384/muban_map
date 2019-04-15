@@ -14,7 +14,7 @@ tip = [[
 已吞噬 %cnt%|cffffff00/8|r 个： %content%]],
 cnt = function(self) 
     local cnt = 0
-    if self and self.owner then 
+    if self and self.owner and self.owner:is_hero() then 
         local hero = self.owner
         local player = hero:get_owner()
         cnt = player.tunshi_cnt or 0 
@@ -23,7 +23,7 @@ cnt = function(self)
 end,
 content = function(self) 
     local content = '' 
-    if self and self.owner then 
+    if self and self.owner and self.owner:is_hero() then 
         local hero = self.owner
         local player = hero:get_owner()
         if player.tunshi then 

@@ -795,7 +795,7 @@ function unit.__index:add_item(it,is_fall)
 			-- @应用在 购买商店物品 、 代码直接添加物品给英雄
 			it:item_remove()
 		end		
-		return
+		return it
 	end
 	--单位真正获得物品时的处理
 	it.recycle = false
@@ -883,7 +883,9 @@ function unit.__index:remove_item(it)
 
 	--删除单位身上的table值
 	if slot then 
-		self.item_list[slot] = nil
+		if self.item_list then 
+			self.item_list[slot] = nil
+		end	
 	end	
 	it.slot_id = nil
 	it.owner = nil

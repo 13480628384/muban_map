@@ -10,9 +10,12 @@ mt{
 	skill_type = "被动 智力",
 
     --原始伤害
-    damage = function(self,hero)
-        return hero:get '智力' * self.int
-    end,
+	--伤害
+	damage = function(self,hero)
+		if self and self.owner and self.owner:is_hero() then 
+		return self.owner:get('智力')*self.int
+		end
+	end	,
 
     int = {5,7.5,10,12.5,15},
 

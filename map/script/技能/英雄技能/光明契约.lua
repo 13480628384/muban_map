@@ -29,7 +29,7 @@ mt{
 	addint = {0.5,1,1.5,2,2.5},
 	--伤害
 	damage = function(self,hero)
-		if self and self.owner then 
+		if self and self.owner and self.owner:is_hero() then 
 			return self.owner:get('智力')*self.int_mul 
 		end	
 	end	,

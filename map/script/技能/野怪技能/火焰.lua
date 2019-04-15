@@ -62,7 +62,7 @@ function mt:on_add()
     end)
     --单位死亡时立马删除这个技能，不等播放死亡动画完再删
     hero:event '单位-死亡' (function()
-        if self and self.owner then 
+        if self and self.owner and self.owner:is_hero() then 
             self:remove()
         end    
     end)

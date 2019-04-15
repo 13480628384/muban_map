@@ -26,5 +26,16 @@
                 "isDefault": true
             }
         },
+        {
+            "label": "4开测试",
+            "command": "D:\\fengchao\\w3x2lni_v2.4.1\\host_test.bat",
+            "args": [
+                "${workspaceRoot}"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
     ]
 }
