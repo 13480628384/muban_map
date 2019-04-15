@@ -135,9 +135,6 @@ local function start()
 	
 		local hero = player[16]:createHero(name, cent - {r * i + 90, radius}, r * i - 90)
 		hero.name = name
-		-- print(hero_id,hero.name,hero.unit_type)
-		-- player[16]:create_unit('h002',cent - {r * i + 90, radius-50}, r * i - 90)
-		-- hero:set_high(3000)
 		hero:remove_ability 'Amov'
 		hero:add_restriction '缴械'
 		hero:add_restriction '无敌'
@@ -146,8 +143,6 @@ local function start()
 		jass.DestroyImage(shadow01)
 		table.insert(flygroup, hero)
 
-		-- str = [[modeldekan\ui\DEKAN_Tag_Ally.mdl]]
-		-- str = [[modeldekan\ui\DEKAN_Tag_Enmy.mdl]]
 		hero:add_effect('origin',[[modeldekan\ui\DEKAN_Tag_Ally.mdl]])
 		hero_types[name] = hero
 	end
@@ -320,7 +315,7 @@ local function start()
 	
 	ac.game:event '玩家-注册英雄后' (f)
 	ac.game:event '玩家-离开' (f)
-	ac.wait(60000, f)
+	-- ac.wait(60000, f)
 end
 
 start()

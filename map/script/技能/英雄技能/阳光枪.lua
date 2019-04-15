@@ -22,7 +22,7 @@ mt{
 	cool = 1,
 	int = {5,6,7,8,10},
 	damage = function(self,hero)
-		if self and self.owner then 
+		if self and self.owner and self.owner:is_hero() then 
 		return self.owner:get('敏捷')*self.int+1500
 		end
 	end	,

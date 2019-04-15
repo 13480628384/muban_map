@@ -30,13 +30,13 @@ mt{
 
 	--治疗
 	heal = function(self,hero)
-		if self and self.owner then 
+		if self and self.owner and self.owner:is_hero() then 
 			return self.owner:get('智力')*self.int
 		end	
 	end	,
 	--伤害
 	damage = function(self,hero)
-		if self and self.owner then 
+		if self and self.owner and self.owner:is_hero() then 
 			return self.owner:get('智力')*self.int
 		end
 	end	,

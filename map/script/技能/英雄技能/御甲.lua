@@ -11,7 +11,7 @@ mt{
 
     --伤害
     damage = function(self,hero)
-		if self and self.owner then 
+		if self and self.owner and self.owner:is_hero() then 
 			return self.owner:get('力量')*self.int
 		end	
 	end,

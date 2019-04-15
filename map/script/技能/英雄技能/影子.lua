@@ -22,7 +22,7 @@ mt{
 	art = [[ReplaceableTextures\CommandButtons\BTNMirrorImage.blp]],
 	--召唤物
     unit_name = function(self,hero)
-		if self and self.owner then 
+		if self and self.owner and self.owner:is_hero() then 
          return self.owner:get_name()
         end 
     end,

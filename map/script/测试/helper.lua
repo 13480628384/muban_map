@@ -497,6 +497,17 @@ function helper:print_p(str,index)
 	end	
 end
 
+--打印hero键值对应的key值
+function helper:print_hero()
+	for i = 1,10 do 
+        local player = ac.player(i)
+        local hero = player.hero
+        if hero and hero:is_alive() then 
+           print(player,hero,hero:is_alive())
+        end 
+    end 
+
+end
 --添加漂浮文字称号
 function helper:add_ch(str,zoffset)
 	if self.ch then 

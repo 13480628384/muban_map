@@ -590,9 +590,9 @@ end
 set['攻击距离'] = function(self, attack_range)
 	japi.SetUnitState(self.handle, jass.ConvertUnitState(0x16), attack_range)
 	--修改攻击距离后同时修改主动攻击范围
-	-- if self.owner:is_player() then
-	-- 	self:set_search_range(self:get '攻击距离')
-	-- end
+	if self.owner:is_player() and self:get('攻击距离')>1000 then
+		self:set_search_range(self:get '攻击距离')
+	end
 end
 
 get['移动速度'] = function(self)

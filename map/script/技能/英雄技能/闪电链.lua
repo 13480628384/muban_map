@@ -21,7 +21,7 @@ mt{
 	chance = 15,
 	int= {5,6,7,8,10},
 	damage = function(self,hero)
-		if self and self.owner then 
+		if self and self.owner and self.owner:is_hero() then 
 		return self.owner:get('智力')*self.int
 		end
 	end	,

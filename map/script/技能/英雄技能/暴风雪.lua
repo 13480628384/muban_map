@@ -28,7 +28,7 @@ mt{
 	int ={6,7,8,10,12},
 	--伤害
 	damage = function(self,hero)
-		if self and self.owner then 
+		if self and self.owner and self.owner:is_hero() then 
 			return self.owner:get('智力')*self.int+2000
 		end	
 	end	,

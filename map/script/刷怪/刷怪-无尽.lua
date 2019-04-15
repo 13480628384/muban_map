@@ -79,6 +79,7 @@ function mt:on_next()
                 end    
                 if self.current_count >= max_cnt then 
                     t:remove()
+                    self:on_finish()
                     ac.game:event_notify('游戏-结束')
                 end    
             end)
@@ -141,6 +142,9 @@ end
 
 --刷怪结束
 function mt:on_finish()  
+    if self.timer_ex1 then 
+        self.timer_ex1:remove()
+    end
     if self.key_unit_trg then 
         self.key_unit_trg:remove()
     end    

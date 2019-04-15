@@ -22,7 +22,7 @@ mt{
 	cool = 1,
 
 	damage = function(self,hero)
-		if self and self.owner then 
+		if self and self.owner and self.owner:is_hero() then 
 			return self.owner:get('力量')*self.damage_int
 		end	
 	end	,

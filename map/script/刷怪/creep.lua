@@ -225,30 +225,30 @@ function mt:start(player)
         end    
     end    
     --可能会引起掉线
-    local p = player or ac.player.self
+    -- local p = player or ac.player.self
     local tip = self.tip or ''
-    p:sendMsg('怪物开始刷新:' .. tip, 5)
-    self.trg_player = p
+    ac.player.self:sendMsg('怪物开始刷新:' .. tip, 5)
+    -- self.trg_player = p
 
     --如果 英雄离开时，区域内怪物死亡。
     -- 英雄在一秒内切换时，可能不会死亡
-    self.timer  = ac.loop( 1 * 1000 ,function ()
-        -- print('触发英雄',self.trg_player.hero)
-        if self.is_hero_leave_death then 
-            for _, uu in ipairs(self.group) do
+    -- self.timer  = ac.loop( 1 * 1000 ,function ()
+    --     -- print('触发英雄',self.trg_player.hero)
+    --     if self.is_hero_leave_death then 
+    --         for _, uu in ipairs(self.group) do
 
-                if uu:is_alive() and (uu:get_point() * self.trg_player.hero:get_point() >=2000) then 
-                    self.is_finish =true
-                end
-            end        
-            -- print(self.is_finish)
-            if self.is_finish then 
-                self:finish(true) 
-            end    
-        end 
+    --             if uu:is_alive() and (uu:get_point() * self.trg_player.hero:get_point() >=2000) then 
+    --                 self.is_finish =true
+    --             end
+    --         end        
+    --         -- print(self.is_finish)
+    --         if self.is_finish then 
+    --             self:finish(true) 
+    --         end    
+    --     end 
     
-    end)
-    self.timer:on_timer()
+    -- end)
+    -- self.timer:on_timer()
     
 
     if self.on_start then 

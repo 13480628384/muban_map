@@ -30,7 +30,7 @@ mt{
 	effect1 = [[Abilities\Spells\Human\ThunderClap\ThunderclapTarget.mdx]],
 	--伤害
 	damage = function(self,hero)
-		if self and self.owner then 
+		if self and self.owner and self.owner:is_hero() then 
 			return self.owner:get('攻击') * self.attack_mul
 		end
 	end,

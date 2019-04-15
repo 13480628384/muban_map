@@ -75,10 +75,7 @@ end)
 ac.game:event '玩家-离开' (function(trg, tp)
 	local h = tp.hero
 	if h then
-		h:add_restriction '隐藏'
-		h:add_restriction '缴械'
-		h:add_restriction '无敌'
-		h:set_high(10000)
+		h:remove()
 		hero.getAllHeros()[h] = nil
 	end
 end)

@@ -31,9 +31,9 @@ require '技能'
 require '英雄'
 -- print(10)
 require '刷怪'
--- print(11)
+-- -- print(11)
 require '平台'
--- print(12)
+-- -- print(12)
 require '测试'
 -- print(13)
 --设置天空模型

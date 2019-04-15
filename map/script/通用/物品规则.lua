@@ -76,14 +76,14 @@
 
         --判断物品类型数量
         if u:get_type_count(it) then
-            ac.player.self:sendMsg('该类型的物品只能携带一个')
+            u:get_owner():sendMsg('该类型的物品只能携带一个')
             return true
         end
 
         --判断物品是否唯一
         if it.unique then
             if u:get_unique_name(it) then
-                ac.player.self:sendMsg('该物品唯一,只能携带一个')
+                u:get_owner():sendMsg('该物品唯一,只能携带一个')
                 return true
             end
         end
@@ -155,19 +155,19 @@
             golds = it.player_gold[player] or golds
         end    
         if gold < golds  then
-            ac.player.self:sendMsg('钱不够')
+            u:get_owner():sendMsg('钱不够')
             return
         end 
         if mutou < mutous then
-            ac.player.self:sendMsg('木头不够')
+            u:get_owner():sendMsg('木头不够')
             return
         end
         if kill_count < kill_counts then
-            ac.player.self:sendMsg('杀敌数不够')
+            u:get_owner():sendMsg('杀敌数不够')
             return
         end
         if jifen < jifens then
-            ac.player.self:sendMsg('积分不够')
+            u:get_owner():sendMsg('积分不够')
             return
         end
 
