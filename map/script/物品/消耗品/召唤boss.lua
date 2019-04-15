@@ -74,7 +74,8 @@ function mt:on_cast_start()
     for k,v in pairs(data) do 
         unit.data[k] = v
     end    
-  
+    --怪物类型为boss
+    unit.data.type = 'boss'
     if unit and data  then 
         unit.gold = data.gold
         unit.exp = data.exp

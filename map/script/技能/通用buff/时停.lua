@@ -64,24 +64,24 @@ function mt:on_add()
 	-- 是否文字显示计时
 	if self.show then
 		on_texttag(time,self.target,self.zoffset)
-		self.timer1 = ac.timer(1*1000, math.ceil(time),function()
-			time = time - 1
-			on_texttag(time,self.target,self.zoffset)
-			if time <=0 then 
-				if self.on_finish then 
-					self:on_finish()
-				end	
-						
-				if self.eff then
-					self.eff:remove()
-					self.eff = nil
-				end
-				self.target:remove_restriction '时停'
-				self:remove()
-
-			end	
-		end);
 	end	
+	self.timer1 = ac.timer(1*1000, math.ceil(time),function()
+		time = time - 1
+		on_texttag(time,self.target,self.zoffset)
+		if time <=0 then 
+			if self.on_finish then 
+				self:on_finish()
+			end	
+					
+			if self.eff then
+				self.eff:remove()
+				self.eff = nil
+			end
+			self.target:remove_restriction '时停'
+			self:remove()
+
+		end	
+	end);
 	-- function timer:on_timeout()
 	-- 	self.target:remove_restriction '时停'
 	-- end

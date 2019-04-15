@@ -8,7 +8,7 @@ level = 1,
 art = [[other\suiji101.blp]],
 
 --说明
-tip = [[消耗 |cff00ff00500通关积分|r 兑换 一个随机物品]],
+tip = [[消耗 |cff00ff00500通关积分|r 兑换 一个随机物品,最多购买20次]],
 
 content_tip = '物品说明:',
 
@@ -23,6 +23,8 @@ cool = 0,
 
 --购买价格
 jifen = 500,
+--最大购买次数
+max_buy_cnt = 20,
 
 --物品技能
 is_skill = true,
@@ -36,7 +38,17 @@ function mt:on_cast_start()
     local player = hero.owner
 
     local shop_item = ac.item.shop_item_map[self.name]
-  
+
+    if not player.buy_item_cnt2 then 
+        player.buy_item_cnt2 = 1
+    end 
+    if not shop_item.player_buy_cnt then 
+        shop_item.player_buy_cnt = {}
+    end
+
+    player.buy_item_cnt2 = player.buy_item_cnt2 + 1  
+    shop_item.player_buy_cnt[hero:get_owner()] = player.buy_item_cnt2
+
     --给英雄随机添加物品
     local rand_list = ac.unit_reward['商店随机物品']
     local rand_name = ac.get_reward_name(rand_list)

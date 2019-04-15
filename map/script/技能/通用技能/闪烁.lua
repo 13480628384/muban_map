@@ -56,10 +56,13 @@ function mt:on_can_cast()
 	end	
 	-- print(new_point,target) 
 	self.new_point =  self.new_point:findMoveablePoint(300,angle) or self.new_point --附近寻找一个可通行的点。
-	if self.new_point:is_block()  then
+	-- print(self.new_point,self.new_point:is_block())
+	if ac.map.rects['刷怪']  < self.new_point  then
+		return true
+	else
 		return false
-	end	
-	return true
+	end
+	
 end
 
 function mt:on_cast_start()

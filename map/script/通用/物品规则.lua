@@ -170,6 +170,12 @@
             u:get_owner():sendMsg('积分不够')
             return
         end
+        if it.max_buy_cnt and it.player_buy_cnt then
+            if it.player_buy_cnt[player] > (it.max_buy_cnt or 9999999) then
+                u:get_owner():sendMsg('超出购买上限')
+                return
+            end
+        end    
 
         --购买成功才扣钱
         u.buy_suc = false 

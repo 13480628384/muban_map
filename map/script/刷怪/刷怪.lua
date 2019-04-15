@@ -244,7 +244,8 @@ function mt:on_next()
     --进攻提示
     if ac.ui then ac.ui.kzt.up_jingong_title(' 第 '..self.index..' 层 ') end
     --每一波开始时，进行初始化数据
-    self.all_food = all_food +(20 * (get_player_count() - 1))    --每多一个玩家， 多20怪物总人口,每回合开始都去检测人口数量
+    -- self.all_food = all_food +(20 * (get_player_count() - 1))    --每多一个玩家， 多20怪物总人口,每回合开始都去检测人口数量
+    self.all_food = all_food   
     self.used_food = 0 
     self.current_creep ={}
     -- self.player_damage = {}
@@ -259,8 +260,12 @@ function mt:on_next()
         --获得随机 1-2 个种类的进攻怪
         local temp_type = self:get_temp_type()
         self:random_creeps_datas(temp_type)
-    end   
+    end 
 
+    --每多一个玩家， 多20怪物总人口d，都是喽喽
+    local small_unit_name = self.all_creep['喽喽'][math.random(1,#self.all_creep['喽喽'])]
+    local more_food = 20 * (get_player_count() - 1)
+    self.creeps_datas = self.creeps_datas .. ' '..small_unit_name..'*'..tostring(more_food) 
     print(self.creeps_datas) 
 
     --转化字符串 为真正的区域
@@ -602,7 +607,7 @@ function mt:attack_hero()
                     else 
                         unit.target_point = hero:get_point()
                         if unit:get_point() * hero:get_point() < 1000 then 
-                            unit:issue_order('attack',hero)
+                            unit:issue_order('attack',hero:get_point())
                         else  
                             unit:issue_order('attack',hero:get_point())
                         end 

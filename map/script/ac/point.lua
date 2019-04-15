@@ -182,7 +182,7 @@ point.path_region = nil
 function mt:is_block(path, super)
 	local x, y = self:get()
 	if not path then
-		if jass.IsTerrainPathable(x, y, jass.ConvertUnitState(1)) then
+		if jass.IsTerrainPathable(x, y, 1) then
 			return true
 		end
 		if point.path_region and point.path_region < self then
@@ -190,7 +190,7 @@ function mt:is_block(path, super)
 		end
 	end
 	if not super then
-		if jass.IsTerrainPathable(x, y, jass.ConvertUnitState(2)) then
+		if jass.IsTerrainPathable(x, y, 2) then
 			return true
 		end
 		local block = get_block(path)

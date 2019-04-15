@@ -33,6 +33,7 @@ function mt:on_cast_shot()
     local skill = self
 	local hero = self.owner
 	local target = self.target
+	local player = hero:get_owner()
 	
 	if ac.creep['刷怪-无尽'].index >= 1 then 
 		player:sendMsg(self.name..'无尽时无效',10)

@@ -22,6 +22,8 @@ target_type = ac.skill.TARGET_TYPE_NONE,
 
 --冷却
 cool = 0,
+--最大购买次数
+max_buy_cnt = 20,
 
 --购买价格
 jifen = 750,
@@ -35,6 +37,17 @@ function mt:on_cast_start()
     local hero = self.owner
     local player = hero.owner
     local shop_item = ac.item.shop_item_map[self.name]
+
+    if not player.buy_skill_cnt then 
+        player.buy_skill_cnt = 1
+    end 
+    if not shop_item.player_buy_cnt then 
+        shop_item.player_buy_cnt = {}
+    end
+
+    player.buy_skill_cnt = player.buy_skill_cnt + 1  
+    shop_item.player_buy_cnt[hero:get_owner()] = player.buy_skill_cnt
+
     --给英雄随机添加物品
     local rand_list = ac.unit_reward['商店随机技能']
     local rand_name = ac.get_reward_name(rand_list)
