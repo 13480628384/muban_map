@@ -147,7 +147,7 @@ function mt:on_add()
 
 		local main_attr = self.source_unit.main_attribute..'%'
 		self.source_unit:add(main_attr,-self.source_main_attr)
-		print(self.source_unit,main_attr)
+		-- print(self.source_unit,main_attr)
 	end	
 
 	self.target_unit:event '单位-死亡'(function(trg,unit,killer)

@@ -39,4 +39,15 @@ ac.game:event '玩家-聊天' (function(self, player, str)
 			end	
 		end
 	end  
+    if str == 'next' then
+		--强制下一波
+		local self 
+		if ac.creep['刷怪'].index >= 1 then
+			self = ac.creep['刷怪']
+		end		
+		if ac.creep['刷怪-无尽'].index >= 1 then
+			self = ac.creep['刷怪-无尽']
+		end		
+		self:next()
+	end  
 end)	

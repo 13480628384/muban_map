@@ -35,7 +35,7 @@ is_skill = true,
 }
 
 function mt:on_cast_start()
-    print('施法-随机技能',self.name)
+    -- print('施法-随机技能',self.name)
     local hero = self.owner
     local shop_item = ac.item.shop_item_map[self.name]
     if not hero.buy_skill_cnt then 

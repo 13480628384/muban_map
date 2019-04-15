@@ -4,7 +4,6 @@ local mt = ac.buff['变身']
 mt.keep = true
 
 function mt:on_add()
-    print(self.unit_id)
     if not self.unit_id then
         return
     end 

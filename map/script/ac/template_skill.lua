@@ -92,7 +92,6 @@ ac.book_skill = create_template(function(mt)
 	end
 
 	function mt:on_cast_shot(skill)
-		print(skill,skill.ability_id)
 		if self.__on_cast_shot then
 			self:__on_cast_shot(skill)
 		end

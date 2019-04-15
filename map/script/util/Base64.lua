@@ -144,7 +144,7 @@ end
 function ZZBase64.test()
     local data = "a\193\207="
     local abc = ZZBase64.encode(data)
-    print(abc)
+    -- print(abc)
 
     def = ZZBase64.decode(abc)
     if def == data then

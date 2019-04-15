@@ -16,7 +16,7 @@ ac.game:event '单位-创建' (function(_,unit)
     if unit:is_hero() then  return end 
 
     --根据玩家数量，怪物属性倍数
-    local attr_mul = ( get_player_count()  ) * 10
+    local attr_mul = ( get_player_count() -1 ) * 5
     --属性
     -- print('打印是否根据玩家数增加属性1',unit:get('攻击'))
     unit:add('攻击%',attr_mul)

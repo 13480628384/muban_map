@@ -26,9 +26,6 @@ ac.game:event '游戏-开始' (function()
     end    
     
     print('游戏开始12')
-    --进行数据统计
-    require '游戏.数据统计2'
-    print('游戏开始13')
 
 
 end)    

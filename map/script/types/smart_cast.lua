@@ -490,7 +490,7 @@ function message.hook(msg)
 		local order = msg.order
 		local ability = msg.ability
 		local name = base.id2string(ability or 0)
-		print('技能id',ability)
+		-- print('技能id',ability)
 		local store = ac.unit.j_unit(message.selection())
 		local hero = ac.player.self.hero 
 		--商店购买
@@ -501,7 +501,7 @@ function message.hook(msg)
 				if skill.ability_id == name then 
 					ClearSelection()
 					SelectUnit(hero.handle,true)
-					print('本地命令发布：',GetUnitAbilityLevel(hero.handle,base.string2id('AHta')))
+					-- print('本地命令发布：',GetUnitAbilityLevel(hero.handle,base.string2id('AHta')))
 					message.order_target(852270, 0.7788,index + 0.5 , 0, FLAG_INSTANT)
 					ClearSelection()
 					SelectUnit(store.handle,true)

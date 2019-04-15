@@ -34,7 +34,12 @@ function mt:on_cast_shot()
 	local hero = self.owner
 	local target = self.target
 	-- print(target,target.data.type)
-
+	if ac.creep['刷怪-无尽'].index >= 1 then 
+		player:sendMsg(self.name..'无尽时无效',10)
+		player:sendMsg(self.name..'无尽时无效',10)
+		return 
+	end
+	
 	local ln = ac.lightning('LN00',hero,target,50,50)
 	ln:fade(-5)
 	if target.data.type =='boss' then

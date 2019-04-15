@@ -162,7 +162,6 @@ function mt:on_remove()
 	hero:transform(self.origin_id)
 	--设置为近战
 	hero:setMelee(true)
-	print(hero:isMelee())
 	-- print(hero.weapon['弹道模型'])
 	-- hero.weapon = self.old_weapon
 	-- print(hero.weapon['弹道模型'],self.old_weapon)

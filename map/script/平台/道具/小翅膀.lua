@@ -65,7 +65,7 @@ function mt:on_cast_start()
     hero = player.hero
 
     if player.mall and player.mall[self.name] then 
-        print(2)
+        -- print(2)
         self:buy_failed()
         ac.player.self:sendMsg('|cff00ffff已拥有|r')
         return true 

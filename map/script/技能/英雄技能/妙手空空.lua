@@ -33,6 +33,13 @@ function mt:on_cast_shot()
     local skill = self
 	local hero = self.owner
 	local target = self.target
+	
+	if ac.creep['刷怪-无尽'].index >= 1 then 
+		player:sendMsg(self.name..'无尽时无效',10)
+		player:sendMsg(self.name..'无尽时无效',10)
+		return 
+	end
+	
 
 	if target.data.type =='boss' then
 		hero:add('魔法',self.cost)

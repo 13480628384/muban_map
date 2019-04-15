@@ -31,7 +31,7 @@ auto_fresh_tip = true,
 }
 
 function mt:on_cast_start()
-    print('施法-随机物品',self.name)
+    -- print('施法-随机物品',self.name)
     local hero = self.owner
     local player = hero.owner
 

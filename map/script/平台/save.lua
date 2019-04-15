@@ -37,7 +37,7 @@ for i=1,8 do
 
         --读取积分
         local jifen  = tonumber(ac.GetServerValue(player,'jifen'))
-        print('服务器积分：',player,jifen)
+        -- print('服务器积分：',player,jifen)
 
         --保存服务端积分
         player.jifen = ZZBase64.encode(jifen)

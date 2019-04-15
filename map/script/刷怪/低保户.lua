@@ -15,8 +15,8 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
         local player = ac.player[i]
         local hero = player.hero
         local damage = 0
-        if player:is_player() then
-            damage= player.each_index_damage[index] or 0
+        if player:is_player() and player.each_index_damage then
+            damage = player.each_index_damage[index] or 0
             table.insert(t,{id = player:get(),damage = damage})
         end    
     end

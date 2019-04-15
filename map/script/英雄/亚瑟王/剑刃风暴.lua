@@ -150,7 +150,6 @@ function mt:on_add()
 end
 
 function mt:on_remove()
-	print(self.eff)
     if self.eff then 
         self.eff:remove()
         self.eff = nil

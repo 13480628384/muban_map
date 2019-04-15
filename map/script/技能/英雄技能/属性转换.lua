@@ -139,7 +139,7 @@ end
 
 function mt:on_pulse()
     local hero = self.target
-    print(self.conver_target,self.main_attr_value)
+    -- print(self.conver_target,self.main_attr_value)
 
     if self.conver_target =='力量' then
         if hero:get('敏捷') > self.main_attr_value  then 

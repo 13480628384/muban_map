@@ -200,7 +200,7 @@
                 -- print(it.name)
                 local key = ac.get_mallkey_byname(it.name)
                 if key then 
-                    print(it.name,key,1)
+                    -- print(it.name,key,1)
                     player:Map_SaveServerValue(key,1)
                     if not player.mall then 
                         player.mall ={}

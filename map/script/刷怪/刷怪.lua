@@ -242,7 +242,7 @@ function mt:send_skill_message(cnt,time)
 end  
 function mt:on_next()
     --进攻提示
-    ac.ui.kzt.up_jingong_title(' 第 '..self.index..' 层 ')
+    if ac.ui then ac.ui.kzt.up_jingong_title(' 第 '..self.index..' 层 ') end
     --每一波开始时，进行初始化数据
     self.all_food = all_food +(20 * (get_player_count() - 1))    --每多一个玩家， 多20怪物总人口,每回合开始都去检测人口数量
     self.used_food = 0 
@@ -338,9 +338,10 @@ function mt:on_next()
             end     
             self:next()
         end)  
+        --嘉年华 出怪时间 20秒
         self.timer_ex1 = ac.timer_ex 
         {
-            time = 15,
+            time = 20,
             title = "距离下一波怪开始",
             func = function ()
                 key_unit:remove()

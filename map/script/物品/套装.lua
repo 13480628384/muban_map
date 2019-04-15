@@ -93,7 +93,7 @@ local function unit_add_suit(unit,item)
                             for k,v in attr_tip:gmatch '(%S+)%+(%d+%s-)' do
                                 --额外增加人物属性
                                 --多个物品会额外增加套装属性
-                                print(attr_tip,k,v)
+                                -- print(attr_tip,k,v)
                                 unit:add(k,v)
                             end   
                         end   
