@@ -8,7 +8,9 @@ mt{
     art = [[other\cangbaotu.blp]],
     
     --说明
-    tip = [[到指定地点，挖开即可得 |cffdf19d0 各种物品哦 |r]],
+    tip = [[到指定地点，挖开即可得 |cffdf19d0 各种物品哦 |r
+
+    PS：获得的金币、经验，受英雄的|cffdf19d0金币获取率、经验获取率|r影响！]],
     
     --物品类型
     item_type = '消耗品',

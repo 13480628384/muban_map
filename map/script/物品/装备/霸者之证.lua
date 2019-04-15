@@ -18,11 +18,11 @@ mt{
     --技能图标
     art = [[other\zheng_401.blp]],
     --攻击
-    attack = 25000,
+    attack = 250000,
     --生命
-    life = 5000,
+    life = 500000,
     --护甲
-    defence = 250,
+    defence = 650,
 
     --物爆几率
 	physical_rate = {0,5,10,15,15},
