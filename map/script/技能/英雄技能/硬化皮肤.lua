@@ -22,7 +22,7 @@ mt{
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNResistantSkin.blp]],
 
 	--护甲
-	defence = {30,40,50,75,100},
+	defence = {35,50,75,100,150},
 
 }
 
