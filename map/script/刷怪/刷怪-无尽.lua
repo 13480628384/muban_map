@@ -10,7 +10,7 @@ function mt:on_start()
     --继承刷怪的信息 函数 
     self.region = ac.creep['刷怪'].region
     self.all_creep = ac.creep['刷怪'].all_creep
-    self.game_degree_attr_mul = ac.creep['刷怪'].game_degree_attr_mul
+    ac.g_game_degree = ac.creep['刷怪'].game_degree_attr_mul
 
     self.has_unit = ac.creep['刷怪'].has_unit
     self.get_temp_type = ac.creep['刷怪'].get_temp_type
@@ -124,13 +124,13 @@ function mt:on_change_creep(unit,lni_data)
     unit:set('攻击速度',(base_attack_speed + upgrade_attr['攻击速度'] * self.index))
     --设置 boss 属性倍数 及 每波成长
     if lni_data.attr_mul  then
-        unit:set('攻击',(base_attack + upgrade_attr['攻击'] * self.index) * lni_data.attr_mul * (self.game_degree_attr_mul ))
-        unit:set('护甲',(base_defence + upgrade_attr['护甲'] * self.index) * lni_data.attr_mul* (1+(self.game_degree_attr_mul-1)*0.8))
-        unit:set('生命上限',(base_life + upgrade_attr['生命上限'] * self.index) * lni_data.attr_mul* (self.game_degree_attr_mul ))
-        unit:set('魔法上限',(base_mana + upgrade_attr['魔法上限'] * self.index) * lni_data.attr_mul* (self.game_degree_attr_mul  ))
-        unit:set('生命恢复',(base_life_recover + upgrade_attr['生命恢复'] * self.index) * lni_data.attr_mul* (self.game_degree_attr_mul ))
-        unit:set('魔法恢复',(base_mana_recover + upgrade_attr['魔法恢复'] * self.index) * lni_data.attr_mul* (self.game_degree_attr_mul  ))
-        unit:set('魔抗',(base_defence + upgrade_attr['魔抗'] * self.index) * lni_data.attr_mul* (1+(self.game_degree_attr_mul-1)*0.8))
+        unit:set('攻击',(base_attack + upgrade_attr['攻击'] * self.index) * lni_data.attr_mul * (ac.g_game_degree ))
+        unit:set('护甲',(base_defence + upgrade_attr['护甲'] * self.index) * lni_data.attr_mul* (1+(ac.g_game_degree-1)*0.8))
+        unit:set('生命上限',(base_life + upgrade_attr['生命上限'] * self.index) * lni_data.attr_mul* (ac.g_game_degree ))
+        unit:set('魔法上限',(base_mana + upgrade_attr['魔法上限'] * self.index) * lni_data.attr_mul* (ac.g_game_degree  ))
+        unit:set('生命恢复',(base_life_recover + upgrade_attr['生命恢复'] * self.index) * lni_data.attr_mul* (ac.g_game_degree ))
+        unit:set('魔法恢复',(base_mana_recover + upgrade_attr['魔法恢复'] * self.index) * lni_data.attr_mul* (ac.g_game_degree  ))
+        unit:set('魔抗',(base_defence + upgrade_attr['魔抗'] * self.index) * lni_data.attr_mul* (1+(ac.g_game_degree-1)*0.8))
     end  
 
     --掉落概率

@@ -268,7 +268,6 @@ ac.game:event '游戏-开始' (function()
         p.putong_jifen = (p.putong_jifen or 0) + jf_mul
         ac.total_putong_jifen = (ac.total_putong_jifen or 0) + jf_mul
         --魔兽自带的多面板统计
-        -- ac.game.multiboard.creep_count(-1)
         ac.game.multiboard.player_kill_count(p,p.kill_count) 
     end)
 

@@ -63,13 +63,13 @@ function mt:on_start()
     self.all_creep = all_creep
     -- 刷怪初始化 难度、玩家影响
     if ac.g_game_degree == 1 then 
-        self.game_degree_attr_mul = 1  --难度一 属性倍数1倍
+        ac.g_game_degree = 1  --难度一 属性倍数1倍
     end    
     if ac.g_game_degree == 2 then 
-        self.game_degree_attr_mul = 2  --难度二 属性倍数2倍
+        ac.g_game_degree = 2  --难度二 属性倍数2倍
     end  
     if ac.g_game_degree == 3 then 
-        self.game_degree_attr_mul = 3  --难度三 属性倍数3倍
+        ac.g_game_degree = 3  --难度三 属性倍数3倍
     end  
     --特殊回合处理。
     self.gold_index = 5
@@ -482,14 +482,14 @@ function mt:on_change_creep(unit,lni_data)
         --设置 boss 等 属性倍数
         if lni_data.attr_mul  then
             --属性
-            unit:set('攻击',data.attribute['攻击'] * lni_data.attr_mul * self.game_degree_attr_mul)
-            unit:set('护甲',data.attribute['护甲'] * lni_data.attr_mul * (1+(self.game_degree_attr_mul-1)*0.8))
-            unit:set('生命上限',data.attribute['生命上限'] * lni_data.attr_mul * self.game_degree_attr_mul)
-            unit:set('魔法上限',data.attribute['魔法上限'] * lni_data.attr_mul * self.game_degree_attr_mul)
-            unit:set('生命恢复',data.attribute['生命恢复'] * lni_data.attr_mul * self.game_degree_attr_mul)
-            unit:set('魔法恢复',data.attribute['魔法恢复'] * lni_data.attr_mul * self.game_degree_attr_mul)
+            unit:set('攻击',data.attribute['攻击'] * lni_data.attr_mul * ac.g_game_degree)
+            unit:set('护甲',data.attribute['护甲'] * lni_data.attr_mul * (1+(ac.g_game_degree-1)*0.8))
+            unit:set('生命上限',data.attribute['生命上限'] * lni_data.attr_mul * ac.g_game_degree)
+            unit:set('魔法上限',data.attribute['魔法上限'] * lni_data.attr_mul * ac.g_game_degree)
+            unit:set('生命恢复',data.attribute['生命恢复'] * lni_data.attr_mul * ac.g_game_degree)
+            unit:set('魔法恢复',data.attribute['魔法恢复'] * lni_data.attr_mul * ac.g_game_degree)
             --设置魔抗 
-            unit:set('魔抗',data.attribute['护甲']* lni_data.attr_mul * (1+(self.game_degree_attr_mul-1)*0.8))
+            unit:set('魔抗',data.attribute['护甲']* lni_data.attr_mul * (1+(ac.g_game_degree-1)*0.8))
         end
         --掉落概率
         unit.fall_rate = data.fall_rate * lni_data.food

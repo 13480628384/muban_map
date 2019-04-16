@@ -22,49 +22,50 @@ local function multiboard_init()
 			end
 
 			if x == 1 then
-				if y >= 2 and y <= (all_lines - 2) then
-					mtb:setText(x,y,'玩家' .. y - 1)
-				end
+				-- if y >= 2 and y <= (all_lines - 2) then
+				-- 	mtb:setText(x,y,'玩家' .. y - 1)
+				-- end
 				mtb:setWidth(x,y,0.06)
 			elseif x == 2 then
-				if y >= 2 and y <= (all_lines - 2) then
-					mtb:setStyle(x,y,true,true)
-				end
+				-- if y >= 2 and y <= (all_lines - 2) then
+				-- 	mtb:setStyle(x,y,true,true)
+				-- end
 				mtb:setWidth(x,y,0.05)
-				mtb:setIcon(x,y,base_icon)
+				-- mtb:setIcon(x,y,base_icon)
 			elseif x == 3 then
-				if y >= 2 and y <= (all_lines - 2) then
-					mtb:setText(x,y,0)
-				end
+				-- if y >= 2 and y <= (all_lines - 2) then
+				-- 	mtb:setText(x,y,0)
+				-- end
 				mtb:setWidth(x,y,0.04)
 			elseif x == 4 then
-				if y >= 2 and y <= (all_lines - 2) then
-					mtb:setText(x,y,0)
-				end
+				-- if y >= 2 and y <= (all_lines - 2) then
+				-- 	mtb:setText(x,y,0)
+				-- end
 				mtb:setWidth(x,y,0.04)
 			end
 			
 		end
 	end
 	mtb:setText(1,all_lines,'按住|cffff0000tab|r查看详细数据')
-
-	--玩家信息初始化，设置英雄头像，玩家信息
+	-- mtb:setWidth(1,all_lines,20)
+	
+	-- --玩家信息初始化，设置英雄头像，玩家信息
 	ac.game.multiboard.player_init = function(player,hero)
-		mtb:setText( 1, player.id + 1, player:get_name()..(player.unlucky and '(衰人)' or '' ))
-		mtb:setText( 2, player.id + 1, hero:get_name())
-		mtb:setIcon( 2, player.id + 1, hero:get_slk('Art',base_icon))
+		-- mtb:setText( 1, player.id + 1, player:get_name()..(player.unlucky and '(衰人)' or '' ))
+		-- mtb:setText( 2, player.id + 1, hero:get_name())
+		-- mtb:setIcon( 2, player.id + 1, hero:get_slk('Art',base_icon))
 	end
 	
 
-	--杀害野怪刷新
+	-- --杀害野怪刷新
 	ac.game.multiboard.player_kill_count = function( player, num)
-		mtb:setText( 3, player.id + 1, num)
+		-- mtb:setText( 3, player.id + 1, num)
 	end
 
-	--玩家伤害数据刷新
+	-- --玩家伤害数据刷新
 	local damage_list = {}
 	ac.game.multiboard.damage_init = function(player, num)
-		mtb:setText( 4, player.id + 1, num )
+		-- mtb:setText( 4, player.id + 1, num )
 	end
 
 	ac.game.multiboard.set_time = function(time)
@@ -79,11 +80,7 @@ local function multiboard_init()
 
 	mtb:setText(3,all_lines,'怪物总数')
 	--怪物总数
-	-- local creep_num = 0
-	-- ac.game.multiboard.creep_count = function(num)
-	-- 	creep_num = creep_num + num
-	-- 	mtb:setText(4,all_lines,creep_num)
-	-- end
+	
 	ac.loop(1*1000,function()
 		local current_count = 0
 		if ac.creep['刷怪'].index>=1 then

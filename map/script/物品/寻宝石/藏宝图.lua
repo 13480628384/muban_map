@@ -95,8 +95,8 @@ function mt:add_content()
         index = (index - 1) > 0 and (index - 1) or 1
 
         data = ac.table.UnitData['进攻怪-'..index]
-        gold = math.ceil( (data.gold or 0) * 10 * hero:get('金币加成'))
-        exp = math.ceil((data.exp or 0)  * 10 * hero:get('经验加成'))
+        gold = math.ceil( (data.gold or 0) * 10 * (1 + hero:get('金币加成')/100))
+        exp = math.ceil((data.exp or 0)  * 10 * (1 + hero:get('经验加成')/100))
     end
     
     if rand_name == '无' then
