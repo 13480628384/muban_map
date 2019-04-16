@@ -30,7 +30,7 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
     end    
     local life = 1000 * index * reward_mul
     local defence = 1 * index * reward_mul
-    local gold = 200 * index * reward_mul
+    local gold = 50 * index * reward_mul
 
     --随机取英雄奖励
     local id = t[math.random(1,reward_mul)].id
