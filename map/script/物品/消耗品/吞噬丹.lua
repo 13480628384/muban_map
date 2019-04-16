@@ -23,7 +23,8 @@ cnt = function(self)
 end,
 content = function(self) 
     local content = '' 
-    if self and self.owner and self.owner:is_hero() then 
+    --吞噬丹在宠物也可以展示
+    if self and self.owner  then 
         local hero = self.owner
         local player = hero:get_owner()
         if player.tunshi then 

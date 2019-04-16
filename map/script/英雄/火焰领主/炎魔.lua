@@ -35,8 +35,9 @@ mt{
 
 	--持续时间
 	time = 25,
-
-
+	
+	--攻击次数分裂
+	attack_cnt = {20,18,16,14,12},
 	--特效模型
 	effect = [[Units\Creeps\LavaSpawn\LavaSpawn.mdl]],
 	
@@ -89,10 +90,10 @@ local function create_summon_unit(skill,where)
 		follow = true
 	}
 
-	unit:event '单位-杀死单位' (function(trg, killer, target)
-		local where = target:get_point() - { math.random(1,360) ,100 }
-		create_summon_unit(skill,where)
-	end)
+	-- unit:event '单位-杀死单位' (function(trg, killer, target)
+	-- 	local where = target:get_point() - { math.random(1,360) ,100 }
+	-- 	create_summon_unit(skill,where)
+	-- end)
 
 	unit:event '造成伤害效果' (function(trg, damage)
 		if not damage:is_common_attack() then 
@@ -108,6 +109,18 @@ local function create_summon_unit(skill,where)
 				real_damage = true
 			}
 		end)
+		if damage.source:is_ally(damage.target) then 
+			return
+		end	
+		if not unit.attack_cnt then 
+			unit.attack_cnt = 0
+		end	
+		unit.attack_cnt = unit.attack_cnt + 1	
+		if unit.attack_cnt >= skill.attack_cnt then
+			unit.attack_cnt = 0 
+			local where = target:get_point() - { math.random(1,360) ,100 }
+			create_summon_unit(skill,where)
+		end	
 	end)
 
 	return unit

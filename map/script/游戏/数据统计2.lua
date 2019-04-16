@@ -196,8 +196,8 @@ ac.game:event '游戏-开始' (function()
 
     --注册事件
     for hero,_ in pairs(ac.hero.all_heros) do
-        -- print(hero)
         local p = hero:get_owner()
+        print(hero,p)
         if not p:is_player() then 
             return
         end    
@@ -243,8 +243,7 @@ ac.game:event '游戏-开始' (function()
                 }
             end
         end)
-
-        hero.owner:event '玩家-即将获得金钱'(function(_,data)
+        p:event '玩家-即将获得金钱'(function(_,data)
             local p = data.player
             local gold = data.gold
             p.gold_count = p.gold_count + gold

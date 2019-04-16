@@ -252,9 +252,11 @@ function mt:on_next()
     --金币怪
     if self.index == self.gold_index then 
         self.creeps_datas = "金币怪*1"
+        self.flag_specail = true
     --挑战怪    
     elseif self.index == self.challenge_index then
         self.creeps_datas = "挑战怪"..self.challenge_index.."*1"
+        self.flag_specail = true
     --普通怪    
     else 
         --获得随机 1-2 个种类的进攻怪
@@ -262,10 +264,14 @@ function mt:on_next()
         self:random_creeps_datas(temp_type)
     end 
 
-    --每多一个玩家， 多20怪物总人口d，都是喽喽
-    local small_unit_name = self.all_creep['喽喽'][math.random(1,#self.all_creep['喽喽'])]
-    local more_food = 20 * (get_player_count() - 1)
-    self.creeps_datas = self.creeps_datas .. ' '..small_unit_name..'*'..tostring(more_food) 
+    --每多一个玩家， 多20怪物总人口d，都是喽喽，金币或是挑战都不出来
+    if not self.flag_specail then 
+        local small_unit_name = self.all_creep['喽喽'][math.random(1,#self.all_creep['喽喽'])]
+        local more_food = 20 * (get_player_count() - 1) 
+        if more_food > 0 then 
+            self.creeps_datas = self.creeps_datas .. ' '..small_unit_name..'*'..tostring(more_food) 
+        end     
+    end    
     print(self.creeps_datas) 
 
     --转化字符串 为真正的区域
@@ -460,7 +466,7 @@ function mt:on_change_creep(unit,lni_data)
     else 
         name = '进攻怪-'..self.index
     end   
-    -- print('打印：',name)
+    -- print('打印：',name,self.index)
     local data = ac.table.UnitData[name]
     data.attr_mul = lni_data.attr_mul
     data.food = lni_data.food
@@ -677,7 +683,7 @@ ac.game:event '单位-死亡' (function(_,unit,killer)
             source:addXp(exp)
         end	
         --加钱
-        player:addGold(gold,unit,true)
+        player:addGold(gold,unit)
         return
     end
 
@@ -686,7 +692,7 @@ ac.game:event '单位-死亡' (function(_,unit,killer)
         source:addXp( exp*(1-other_exp_per) )
     end	
     --加钱
-    player:addGold(gold*(1-other_gold_per),unit,true)
+    player:addGold(gold*(1-other_gold_per),unit)
     
     local len = #group
     --附近其他英雄平分经验
@@ -696,7 +702,7 @@ ac.game:event '单位-死亡' (function(_,unit,killer)
             hero:addXp( exp * other_exp_per / len)
         end
         if gold then
-            hero:get_owner():addGold(gold * other_gold_per / len,unit,true)
+            hero:get_owner():addGold(gold * other_gold_per / len,unit)
         end
     end
 end);
@@ -772,6 +778,9 @@ ac.wait(20,function()
         print('游戏开始6')
         --游戏开始后 刷怪时间
         local time = 30
+        if global_test then 
+            time = 1
+        end    
         BJDebugMsg(time .. "秒后开始扫荡第一层怪物")
         ac.timer_ex 
         {

@@ -49,7 +49,8 @@ function mt:on_cast_start()
     --循环40次
     hero:timer(0.01*1000,40,function()
         --进攻怪区域随机点
-        local point = ac.map.rects['刷怪']:get_point()
+        -- local point = ac.map.rects['刷怪']:get_point()
+        local point = hero:get_point()-{hero:get_facing(),300}--在英雄附近 100 到 400 码 随机点
     
         local data = ac.table.UnitData[unit_name]
         local unit = player:create_unit(unit_name,point,270)

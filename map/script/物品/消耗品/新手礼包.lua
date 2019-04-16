@@ -16,6 +16,9 @@ tip = [[1000元
 --物品类型
 item_type = '消耗品',
 
+--图标边框
+blend1 = [[stack_4.blp]],
+
 --目标类型
 target_type = ac.skill.TARGET_TYPE_NONE,
 
@@ -29,7 +32,13 @@ content_tip = '使用说明：'
 
 }
 
+function mt:on_add()
+    -- self:add_blend(self.blend1, 'frame', 2)
+    -- local art = self:get_art()
+    -- print(art)
+    -- self:set_art([[blend\blend_framestack_4b_xin101.blp]])
 
+end
 function mt:on_cast_start()
     local hero = self.owner
     local target = self.target

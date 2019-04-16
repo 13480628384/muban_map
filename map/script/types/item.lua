@@ -198,6 +198,7 @@ end
 --设置贴图
 function mt:set_art(art)
 	self.art = art or self.art
+	-- print('设置贴图1',self.name,self.art)
 	local id = self.type_id
 	japi.EXSetItemDataString(base.string2id(id),1,self.art)
 end
@@ -734,7 +735,6 @@ end
 function unit.__index:add_item(it,is_fall)
 
 	--如果没有初始化则创建
-	-- print('添加物品',items)
 	if type(it) =='string'  then 	
 		--不创建特效
 		it = ac.item.create_item(it,nil,true)
