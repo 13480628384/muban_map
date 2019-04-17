@@ -6,12 +6,15 @@ tip = [[
     闪烁,cd%cool%s.
 ]],
 
---技能图标
-art = [[ReplaceableTextures\CommandButtons\BTNBlink.blp]],
 cool = 10,
 
 target_type = ac.skill.TARGET_TYPE_POINT,
 
+art =  [[sxzh1.blp]],
+--技能图标
+blend = [[hong]],
+--技能图标
+art2 = [[hong]],
 
 --施法距离
 range = 99999,
@@ -25,6 +28,7 @@ new_point =nil,
 
 
 function mt:on_add()
+
     -- print('施法-添加技能',self.name)
     print('攻击：',self['攻击'])
     -- print(self.lni_tip)
@@ -41,6 +45,11 @@ function mt:on_cast_start()
     print(hero,target)
     -- print(self.tip)
     
+    self:add_blend(self.blend, 'frame', 2)
+    -- local art = self:get_art()
+    -- print(art)
+    -- self:set_art([[blend\blend_framestack_4b_xin101.blp]])
+
     print(self.cool)
     print('新手剑技能使用')
 end

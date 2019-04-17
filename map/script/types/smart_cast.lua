@@ -496,7 +496,7 @@ function message.hook(msg)
 		--商店购买
 		if hero and hero:is_alive() and store and store.sell_list then 
 			for index,skill in ipairs(store.sell_list) do 
-				print(skill.ability_id,name,skill.ability_id == name )
+				-- print(skill.ability_id,name,skill.ability_id == name )
 				--利用命令 将商品槽位传递过去
 				if skill.ability_id == name then 
 					ClearSelection()

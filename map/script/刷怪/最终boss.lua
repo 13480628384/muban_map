@@ -127,7 +127,9 @@ ac.game:event '游戏-最终boss' (function(trg,index, creep)
             ac.game:event_notify('游戏-结束',true)
         else   
             --文字提示
-            ac.player.self:sendMsg('【系统消息】恭喜你打败最终boss,30秒后进入无尽',10)
+            ac.player.self:sendMsg('【系统消息】恭喜你打败最终boss,30秒后进入无尽',30)
+            ac.player.self:sendMsg('【系统消息】恭喜你打败最终boss,30秒后进入无尽',30)
+            ac.player.self:sendMsg('【系统消息】恭喜你打败最终boss,30秒后进入无尽',30)
             local timer_ex1 = ac.timer_ex 
             {
                 time = 30,

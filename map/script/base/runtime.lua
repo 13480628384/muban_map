@@ -4,7 +4,7 @@ local console = require 'jass.console'
 local tostring = tostring
 local debug    = debug
 
-console.enable = true
+console.enable = false
 global_test = console.enable
 
 if console.enable then 

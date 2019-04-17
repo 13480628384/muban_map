@@ -359,6 +359,23 @@ function helper:power()
 	self:addGold(999999)
 end
 
+--强制游戏结束
+function helper:over()
+	ac.game:event_notify('游戏-结束')
+end
+
+--强制下一波
+function helper:next()
+	--强制下一波
+	local self 
+	if ac.creep['刷怪'].index >= 1 then
+		self = ac.creep['刷怪']
+	end		
+	if ac.creep['刷怪-无尽'].index >= 1 then
+		self = ac.creep['刷怪-无尽']
+	end		
+	self:next()
+end
 --创建一个敌方英雄在地图中间，如果playerid有参数，则是为playerid玩家创建
 function helper:create(str,cnt, playerid)
 	if not playerid then
@@ -367,7 +384,12 @@ function helper:create(str,cnt, playerid)
 	local p = player[playerid]
 	for i = 1 ,(cnt or 1) do
 		local unit = p:create_unit(str,ac.point(0,0))
+		local data = ac.table.UnitData[str]
+		print(unit:get('护甲'),unit:get('护甲%'),data.attribute['护甲'])
 		unit:set('移动速度',455)
+		ac.wait(0.5*1000,function()
+			print(unit:get('护甲'),unit:get('护甲%'),data.attribute['护甲'])
+		end)
 	end	
 end
 --创建一个敌方英雄在地图中间，如果playerid有参数，则是为playerid玩家创建
