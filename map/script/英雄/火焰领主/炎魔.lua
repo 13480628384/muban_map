@@ -37,7 +37,7 @@ mt{
 	time = 25,
 	
 	--攻击次数分裂
-	attack_cnt = {20,18,16,14,12},
+	attack_cnt = {10,9,8,7,5},
 	--特效模型
 	effect = [[Units\Creeps\LavaSpawn\LavaSpawn.mdl]],
 	
