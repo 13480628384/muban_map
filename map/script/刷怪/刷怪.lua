@@ -270,8 +270,10 @@ function mt:on_next()
         local more_food = 20 * (get_player_count() - 1) 
         if more_food > 0 then 
             self.creeps_datas = self.creeps_datas .. ' '..small_unit_name..'*'..tostring(more_food) 
-        end     
-    end    
+        end   
+    end  
+    self.flag_specail = false  
+
     print(self.creeps_datas) 
 
     --转化字符串 为真正的区域
@@ -390,7 +392,7 @@ function mt:sendMsg_unit()
     for i=1,10 do 
         if self.player_damage and self.player_damage[i] and self.player_damage[i].player:is_player() then
             tip = tip ..'|cffffff00No.'..i..'、 |r|cffff0000'..self.player_damage[i].player:get_name()..'|r|cffffff00: 伤害[|cffff0000'..ac.numerical(self.player_damage[i].damage)..'|r|cffffff00]金币奖励 '..self.player_damage[i].gold..' |r'..'\n'
-            ac.player(i):addGold(self.player_damage[i].gold)
+            self.player_damage[i].player:addGold(self.player_damage[i].gold)
         end   
     end
     ac.player.self:sendMsg(tip,10)   
@@ -410,9 +412,10 @@ function mt:on_change_creep(unit,lni_data)
         --钥匙怪逃跑路线
         self.key_unit_trg = self:move_random_way(unit)
         --倒计时30秒结束
+        local time =25
         self.gold_unit_timer_ex1 = ac.timer_ex 
         {
-            time = 25,
+            time = time,
             title = "金币怪消失倒计时",
             func = function ()
                 --发送金币奖励
@@ -420,8 +423,8 @@ function mt:on_change_creep(unit,lni_data)
                 unit:kill() 
             end,
         }  
-        ac.timer(1*1000,15,function(t)
-            local cnt = 15 - t.cnt
+        ac.timer(1*1000,time,function(t)
+            local cnt = time - t.cnt
             ac.on_texttag_time(cnt,unit)
         end)
         --统计伤害 

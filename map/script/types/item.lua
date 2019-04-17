@@ -1131,16 +1131,16 @@ function item.create(name,pos)
 	items:set_art(items.art)
 
 	--技能处理
-	local flag 
-	for i,v in ipairs(ac.skill_list2) do
-		if v == items.name then 
-			flag = true
-			break
-		end    
-	end 
-	if flag then 
-		items.color = '紫'
-	end	
+	-- local flag 
+	-- for i,v in ipairs(ac.skill_list2) do
+	-- 	if v == items.name then 
+	-- 		flag = true
+	-- 		break
+	-- 	end    
+	-- end 
+	-- if flag then 
+	-- 	items.color = '紫'
+	-- end	
 	--混合图标处理
 	local blend = items.blend or blend_file[items.color or 'nil'] 
 	if blend then 

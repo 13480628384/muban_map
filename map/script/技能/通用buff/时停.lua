@@ -68,6 +68,10 @@ function mt:on_add()
 	self.timer1 = ac.timer(1*1000, math.ceil(time),function()
 		time = time - 1
 		on_texttag(time,self.target,self.zoffset)
+		self:set_time(time)
+		if self.on_timer then 
+			self:on_timer(time)
+		end	
 		if time <=0 then 
 			if self.on_finish then 
 				self:on_finish()
@@ -79,7 +83,6 @@ function mt:on_add()
 			end
 			self.target:remove_restriction '时停'
 			self:remove()
-
 		end	
 	end);
 	-- function timer:on_timeout()

@@ -8,6 +8,7 @@ local list1 = {'玩家ID','所选英雄','杀敌','伤害'}
 local function multiboard_init()
 	local online_player_cnt = get_player_count()
 	local all_lines = online_player_cnt +3
+	all_lines = 2
 	mtb = multiboard.create(4,all_lines)
 	ac.game.multiboard = mtb
 
@@ -15,17 +16,17 @@ local function multiboard_init()
 	mtb:setAllStyle(true,false)
 	for y = 1,all_lines do
 		for x = 1,4 do 
-			if y == 1 then
-				mtb:setText(x,y,list1[x])
-			elseif y == (all_lines - 1) then
-				mtb:setStyle(x,y,false,false)
-			end
+			-- if y == 1 then
+			-- 	mtb:setText(x,y,list1[x])
+			-- elseif y == (all_lines - 1) then
+			-- 	mtb:setStyle(x,y,false,false)
+			-- end
 
 			if x == 1 then
 				-- if y >= 2 and y <= (all_lines - 2) then
 				-- 	mtb:setText(x,y,'玩家' .. y - 1)
 				-- end
-				mtb:setWidth(x,y,0.06)
+				mtb:setWidth(x,y,0.07)
 			elseif x == 2 then
 				-- if y >= 2 and y <= (all_lines - 2) then
 				-- 	mtb:setStyle(x,y,true,true)
@@ -36,17 +37,17 @@ local function multiboard_init()
 				-- if y >= 2 and y <= (all_lines - 2) then
 				-- 	mtb:setText(x,y,0)
 				-- end
-				mtb:setWidth(x,y,0.04)
+				mtb:setWidth(x,y,0.01)
 			elseif x == 4 then
 				-- if y >= 2 and y <= (all_lines - 2) then
 				-- 	mtb:setText(x,y,0)
 				-- end
-				mtb:setWidth(x,y,0.04)
+				mtb:setWidth(x,y,0.1)
 			end
 			
 		end
 	end
-	mtb:setText(1,all_lines,'按住|cffff0000tab|r查看详细数据')
+	mtb:setText(1,2,'按住|cffff0000tab|r查看|cffff0000kda|r')
 	-- mtb:setWidth(1,all_lines,20)
 	
 	-- --玩家信息初始化，设置英雄头像，玩家信息
@@ -69,16 +70,26 @@ local function multiboard_init()
 	end
 
 	ac.game.multiboard.set_time = function(time)
-		local title = ""
+		local tip =''  
+		local degree 
+		if ac.g_game_degree == 1 then 
+			degree = '普通'
+		elseif ac.g_game_degree == 2 then 
+			degree = '噩梦'
+		else 
+			degree = '地狱'
+		end    
+		local name 
 		if ac.g_game_mode == 1 then 
-			title = '标准模式'
-		else
-			title = '嘉年华模式'
-		end	
-		mtb:setTitle(title .. '          游戏剩余时间 ' .. time)
+			name = '标准模式'..tip
+		else 
+			name = '嘉年华模式'..tip
+		end  
+		name = name ..'（'.. degree..'）'
+		mtb:setTitle(name .. '           游戏剩余时间   ' .. time)
 	end
 
-	mtb:setText(3,all_lines,'怪物总数')
+	-- mtb:setText(2,2,'怪物总数')
 	--怪物总数
 	
 	ac.loop(1*1000,function()
@@ -89,8 +100,19 @@ local function multiboard_init()
 		if ac.creep['刷怪-无尽'].index>=1 then
 			current_count = ac.creep['刷怪-无尽'].current_count 
 		end	
-		mtb:setText(4,all_lines,current_count)
+		mtb:setText(2,2,'怪物总数：'..current_count)
+
+		--设置倒计时
+		if ac.creep['刷怪'] and ac.creep['刷怪'].boss then  
+			local buff = ac.creep['刷怪'].boss:find_buff '时停'
+			if buff then 
+				--最终boss死亡之指倒计时 
+				mtb:setText(4,2,'|cffff0000死亡之指|r倒计时：|cffff0000'..(buff.time-1)..'|r')
+			end	
+		end	 
 	end)
+
+	
 end
 
 
