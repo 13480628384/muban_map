@@ -39,7 +39,6 @@ mt.level = 1
 
 --所属单位
 mt.owner = nil
-
 --价格
 mt.gold = 0
 
@@ -84,6 +83,24 @@ mt.art = [[ReplaceableTextures\CommandButtons\BTNSnazzyScrollPurple.blp]]
 
 --商品库存恢复时间
 
+--颜色代码
+local blend_file = {
+    ['红'] = 'hong',
+    ['绿'] = 'lv', 
+    ['蓝'] = 'lan',--浅蓝
+    ['黄'] = 'huang',
+    ['青'] = nil,
+    ['紫'] = 'zi',
+    ['橙'] = nil,
+    ['棕'] = nil,
+    ['粉'] = nil,
+    ['白'] = 'bai',
+    ['黑'] = nil,
+    ['金'] = 'huang',
+	['灰'] = nil,
+	['淡黄'] = nil,	
+}
+ac.blend_file = blend_file
 
 --颜色代码
 local color_code = {
@@ -197,10 +214,10 @@ end
 
 --设置贴图
 function mt:set_art(art)
-	self.art = art or self.art
-	-- print('设置贴图1',self.name,self.art)
+	local art = art or self.art or ''
+	-- print('设置贴图1',self.name,self.art,art)
 	local id = self.type_id
-	japi.EXSetItemDataString(base.string2id(id),1,self.art)
+	japi.EXSetItemDataString(base.string2id(id),1,art)
 end
 
 --设置位置
@@ -838,7 +855,6 @@ function unit.__index:add_item(it,is_fall)
 		end)
 	end
 	self:event_notify('单位-获得物品后',self, it)
-
 	-- self:print_item(true)
 	--刷新tip
 	-- it:fresh_tip()
@@ -1046,14 +1062,18 @@ function ac.item.create_item(name,poi,is)
 	-- print(items.name,items.item_type,items._count)
 	--设置物品名
 	items:set_name(name)
-
 	-- print(items.tip)
 	--设置tip
 	items:set_tip(items:get_tip())
-
 	--设置贴图
 	items:set_art(items.art)
-
+	--混合图标处理
+	local blend = items.blend or blend_file[items.color or 'nil'] 
+	if blend then 
+		items.owner = ac.dummy
+		items:add_blend(blend, 'frame', 2)
+		items.owner = nil
+	end	
 	--是否可以丢弃
 	items:disable_drop(items.drop)
 
@@ -1109,6 +1129,26 @@ function item.create(name,pos)
 	items:set_name(name)
 	--设置贴图
 	items:set_art(items.art)
+
+	--技能处理
+	local flag 
+	for i,v in ipairs(ac.skill_list2) do
+		if v == items.name then 
+			flag = true
+			break
+		end    
+	end 
+	if flag then 
+		items.color = '紫'
+	end	
+	--混合图标处理
+	local blend = items.blend or blend_file[items.color or 'nil'] 
+	if blend then 
+		items.owner = ac.dummy
+		items:add_blend(blend, 'frame', 2)
+		items.owner = nil
+	end	
+
 	--设置tip
 	items:set_tip(items:get_tip())
 	if ac.skill[name].is_skill then
@@ -1129,8 +1169,15 @@ end
 function mt:set_sell_state()
 	--设置物品名
 	self:set_name(self.name)
-	--设置贴图
+	--设置贴图self:get_art()
 	self:set_art(self.art)
+	--混合图标处理
+	local blend = self.blend or blend_file[self.color or 'nil'] 
+	if blend then 
+		self.owner = ac.dummy
+		self:add_blend(blend, 'frame', 2)
+		self.owner = nil
+	end	
 	--设置tip
 	self:set_tip(self:get_tip())
 	--设置商店出售名 颜色没法呈现

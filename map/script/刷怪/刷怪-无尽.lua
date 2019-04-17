@@ -123,7 +123,7 @@ function mt:on_change_creep(unit,lni_data)
     unit:set('攻击间隔',base_attack_gap)
     unit:set('攻击距离',base_attack_distance)
     unit:set('攻击速度',(base_attack_speed + upgrade_attr['攻击速度'] * self.index))
-    --设置 boss 属性倍数 及 每波成长
+    --设置 属性倍数 及 每波成长
     if lni_data.attr_mul  then
         unit:set('攻击',(base_attack + upgrade_attr['攻击'] * self.index) * lni_data.attr_mul * (ac.g_game_degree ))
         unit:set('护甲',(base_defence + upgrade_attr['护甲'] * self.index) * lni_data.attr_mul* (1+(ac.g_game_degree-1)*0.8))

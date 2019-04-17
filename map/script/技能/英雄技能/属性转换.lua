@@ -65,7 +65,7 @@ function mt:on_cast_shot()
         if buf.conver_target == '力量' then
             -- print('设置转化目标为敏捷')
             self.mark['敏捷'] = skill:add_blend(self.art1, 'frame', 3)
-            print(self:get_art())
+            -- print(self:get_art())
             -- print(skill:get_art())
             -- self:set_art(self.art2)
             hero.tran_tip = '当前：力量转敏捷 '

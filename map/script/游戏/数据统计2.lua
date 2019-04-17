@@ -197,7 +197,6 @@ ac.game:event '游戏-开始' (function()
     --注册事件
     for hero,_ in pairs(ac.hero.all_heros) do
         local p = hero:get_owner()
-        print(hero,p)
         if not p:is_player() then 
             return
         end    

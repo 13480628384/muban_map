@@ -25,6 +25,15 @@ function ac.item.create_skill_item(name,poi,is)
     item.skill_name = name
     item.tip =  tip .. '|n|cff808080点击 学习或升级 技能  |r' 
     item:set_art(art)
+    item.art = art
+	--混合图标处理
+	local blend = item.blend or ac.blend_file[item.color or 'nil'] 
+	if blend then 
+		item.owner = ac.dummy
+		item:add_blend(blend, 'frame', 2)
+		item.owner = nil
+    end
+    
     item:set_tip(item.tip)
     
     -- print(skill.name,item.tip,art,item.art)
