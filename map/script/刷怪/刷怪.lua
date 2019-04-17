@@ -412,7 +412,7 @@ function mt:on_change_creep(unit,lni_data)
         --倒计时30秒结束
         self.gold_unit_timer_ex1 = ac.timer_ex 
         {
-            time = 15,
+            time = 25,
             title = "金币怪消失倒计时",
             func = function ()
                 --发送金币奖励
