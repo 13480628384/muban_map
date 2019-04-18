@@ -9,11 +9,15 @@ mt{
 
     skill_type = "被动 智力",
     --伤害
-    damage = function (self,hero)
-        return hero:get '智力'  * self.int
-    end,
+    damage = function(self,hero)
+		if self and self.owner and self.owner:is_hero() then 
+		return self.owner:get('智力')*self.int+self.shanghai
+		end
+	end	,
     
     int = {5,6,7,8,10},
+    shanghai ={5000,50000,500000,125000,2000000},
+
 
     --释放几率
     chance = 15,
@@ -40,7 +44,7 @@ mt{
     model = [[AZ_Kaer_X1.mdx]],
     title = '风暴之力',
     tip = [[|cff11ccff%skill_type%:|r  %my_chance% % 几率发动一个龙卷风向前方移动 %dis% 码，对经过的范围 %areaa% 区域造成伤害,龙卷风到达终点时分裂出四个，造成 40% 伤害
-伤害计算：|cffd10c44智力 * %int% |r
+伤害计算：|cffd10c44智力 * %int% |r+ |cffd10c44 %shanghai% |r
 伤害类型：|cff04be12法术伤害|r
 ]],
 }

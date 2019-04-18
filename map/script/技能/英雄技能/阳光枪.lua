@@ -11,7 +11,7 @@ mt{
 	title = '阳光枪',
 	tip = [[
 |cff11ccff%skill_type%:|r 攻击有 %chance% % 的概率对 %hit_area% 范围造成伤害 (%damage%)
-伤害计算：|cffd10c44敏捷 * %int% +1500 |r
+伤害计算：|cffd10c44敏捷 * %int% |r+ |cffd10c44 %shanghai% |r
 伤害类型：|cff04be12物理伤害|r
 ]],
 	--范围
@@ -21,9 +21,11 @@ mt{
 	chance = 15,
 	cool = 1,
 	int = {5,6,7,8,10},
+	shanghai ={5000,50000,500000,125000,2000000},
+
 	damage = function(self,hero)
 		if self and self.owner and self.owner:is_hero() then 
-		return self.owner:get('敏捷')*self.int+1500
+		return self.owner:get('敏捷')*self.int+self.shanghai
 		end
 	end	,
 	--是否被动

@@ -11,8 +11,8 @@ mt{
 	tip = [[
 		主动：变身大帝，强化自身，持续 %time% S
 			攻击力 +%attack% %
+			溅射 +%jianshe% %
 			攻击间隔 %attack_gap%
-			移动速度 +%move_speed% %
 			伤害减免 %reduce_damage% %
 			攻击距离 +%attack_range%
 		被动：凯撒周围%area%码的单位每增加1个，凯撒的攻击力增加 %attack_increase% %
@@ -34,12 +34,13 @@ mt{
 	--攻击间隔
 	attack_gap = -0.2,
 
+	jianshe = 30,
+
 	--伤害减免
 	reduce_damage = 30,
 
 	--攻击距离
 	attack_range = 800,
-
 
 	--持续时间
 	time = {20,22.5,25,27.5,30},
@@ -94,8 +95,8 @@ function mt:on_cast_shot()
 		source = hero,
 		skill = self,
 		attack = self.attack,
+		jianshe = self.jianshe,
 		attack_gap = self.attack_gap,
-		move_speed = self.move_speed,
 		attack_range = self.attack_range,
 		reduce_damage = self.reduce_damage,
 		unit_type_id = self.unit_type_id,
@@ -144,7 +145,7 @@ function mt:on_add()
 
 	--增加攻击力与生命恢复速度
 	hero:add('攻击%', self.attack)
-	hero:add('移动速度%', self.move_speed)
+	hero:add('溅射', self.jianshe)
 	hero:add('攻击距离', self.attack_range)
 	hero:add('减免', self.reduce_damage)
 	hero:add('攻击间隔', self.attack_gap)
@@ -168,7 +169,7 @@ function mt:on_remove()
 
 	--增加攻击力与生命恢复速度
 	hero:add('攻击%', -self.attack)
-	hero:add('移动速度%', -self.move_speed)
+	hero:add('溅射', -self.jianshe)
 	hero:add('攻击距离', -self.attack_range)
 	hero:add('减免', -self.reduce_damage)
 	hero:add('攻击间隔', -self.attack_gap)

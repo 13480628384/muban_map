@@ -26,7 +26,7 @@ mt{
 	time = 2,
 
 	--伤害参数
-	attack_mul={4,6,8,10,12},
+	attack_mul={12.5,15,17.5,20,25},
 
 	--伤害
 	damage = function(self,hero)

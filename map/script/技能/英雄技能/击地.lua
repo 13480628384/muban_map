@@ -13,14 +13,17 @@ mt{
 	--冷却时间 20 
 	cool = 10,
 	--伤害
-	attack_mul = {1,1.5,2,2.5,3},
+	attack_mul = {2,2.5,3,3.5,4},
+
+	shanghai ={25000,250000,2500000,6250000,10000000},
+
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--施法范围
 	area = 600,
 	--介绍
 	tip = [[|cff11ccff%skill_type%:|r 对范围600码的敌人造成移动力减少 50% 和攻击速度减少 25% ，持续3秒，并造成伤害
-伤害计算：|cffd10c44攻击力 * %attack_mul%|r
+伤害计算：|cffd10c44攻击力 * %attack_mul%|r+ |cffd10c44 %shanghai% |r
 伤害类型：|cff04be12物理伤害|r]],
 	--技能图标
 	art = [[jineng\jineng008.blp]],
@@ -31,7 +34,7 @@ mt{
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner and self.owner:is_hero() then 
-			return self.owner:get('攻击') * self.attack_mul
+			return self.owner:get('攻击') * self.attack_mul+self.shanghai
 		end
 	end,
 

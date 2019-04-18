@@ -12,11 +12,13 @@ mt{
     --原始伤害
     damage = function(self,hero)
 		if self and self.owner and self.owner:is_hero() then 
-			return self.owner:get('力量')*self.int
+			return self.owner:get('力量')*self.int+self.shanghai
 		end	
 	end,
 
     int = {5,6,7,8,10},
+
+    shanghai ={5000,50000,500000,125000,2000000},
 
     --释放几率
     chance = 15,
@@ -44,7 +46,7 @@ mt{
     title = '回旋刃',
     tip = [[
 |cff11ccff%skill_type%:|r 攻击时 %chance% % 几率发射 %count% 个回旋刃，以目标为起始点向前移动 %distance% 距离对碰到单位造成伤害，停留 %stay_time% s后以最快的速度返回到英雄位置，回旋时造成 %cycle_round_damage% % 伤害
-伤害计算：|cffd10c44力量 * %int%|r
+伤害计算：|cffd10c44力量 * %int%|r+ |cffd10c44 %shanghai% |r
 伤害类型：|cff04be12物理伤害|r]],
 
 }

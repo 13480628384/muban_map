@@ -10,18 +10,18 @@ mt{
 	--耗蓝
 	cost = 1,
 	--冷却时间90
-	cool = {60,55,50,45,40},
+	cool = {35,30,25,20,15},
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_UNIT,
 	--施法距离
 	range = 500,
 	--介绍
-	tip = [[|cff11ccff%skill_type%:|r 直接杀死一名敌人（对BOSS无效），50% 获得一个物品，并永久降低自身 15% 的智力
+	tip = [[|cff11ccff%skill_type%:|r 直接杀死一名敌人（对BOSS无效），50% 获得一个物品，并永久降低自身 10% 的智力
 	]],
 	--技能图标
 	art = [[jineng\jineng027.blp]],
 	--扣智力
-	addint = 15,
+	addint = 10,
 	--几率
 	rate = 50,
 }

@@ -14,7 +14,9 @@ mt{
 	max_level = 5,
 	
 	tip = [[
-|cff11ccff%skill_type%:|r 攻击时 %chance% % 触发， 造成 攻击力*%int% 的物理伤害 (%damage%) ，并击晕敌人 %time% 秒，近战有效
+|cff11ccff%skill_type%:|r 攻击时 %chance% % 触发， 对敌人造成物理伤害 (%damage%) ，并击晕敌人 %time% 秒，近战有效
+伤害计算：|cffd10c44力量 * %int% |r+ |cffd10c44 %shanghai% |r
+伤害类型：|cff04be12物理伤害|r
 		]],
 	
 	--技能图标
@@ -28,10 +30,12 @@ mt{
 
 	int = {5,6,7,8,10},
 
+	shanghai ={5000,50000,500000,125000,2000000},
+
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner and self.owner:is_hero() then 
-		return self.owner:get('攻击')*self.int
+		return self.owner:get('攻击')*self.int+self.shanghai
 		end
 	end,	
 

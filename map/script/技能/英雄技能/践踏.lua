@@ -17,7 +17,9 @@ mt{
 	--施法范围
 	area = 500,
 	--介绍
-	tip = [[|cff11ccff%skill_type%:|r 对范围500码敌人晕眩2S，并造成力量*%int%的物理伤害 （%damage%）
+	tip = [[|cff11ccff%skill_type%:|r 对范围500码敌人晕眩2S，并造成物理伤害 （%damage%）
+	伤害计算：|cffd10c44力量 * %int% |r+ |cffd10c44 %shanghai% |r
+	伤害类型：|cff04be12物理伤害|r
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNWarStomp.blp]],
@@ -25,11 +27,15 @@ mt{
 	effect = [[Abilities\Spells\Human\ThunderClap\ThunderclapCaster.mdx]],
 	--特效1
 	effect1 = [[Abilities\Spells\Human\ThunderClap\ThunderclapTarget.mdx]],
-	int = {10,20,30,40,50},
+
+	int = {25,30,35,40,50},
+
+	shanghai ={25000,250000,2500000,6250000,10000000},
+
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner and self.owner:is_hero() then 
-		return self.owner:get('力量') * self.int
+		return self.owner:get('力量') * self.int+self.shanghai
 		end
 	end,
 	--持续时间

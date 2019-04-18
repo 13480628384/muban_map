@@ -14,10 +14,12 @@ mt{
     --原始伤害
     damage = function(self,hero)
 		if self and self.owner and self.owner:is_hero() then 
-			return self.owner:get('敏捷')*self.agi
+			return self.owner:get('敏捷')*self.agi+self.shanghai
 		end	
     end,
     
+    shanghai ={5000,50000,500000,125000,2000000},
+
     agi = {5,6,7,8,10},
 
     --释放几率
@@ -26,7 +28,7 @@ mt{
     --图标
     art = 'wanjianqifa.blp',
     --暗影之箭范围
-    area =  600,
+    area =  700,
     
     --数量
     count = {6,7,8,9,10},
@@ -45,8 +47,8 @@ mt{
     boom_model = [[anyingzhijing.mdx]],
     title = '|cffdf19d0万箭齐发|r',
     tip = [[
-|cff11ccff%skill_type%:|r 攻击时 %chance% % 几率丢出从天而降的暗影之箭，对目标及 %hit_area% 范围的敌人造成 %main_damage% 伤害
-伤害计算：|cffd10c44敏捷 * %agi% |r
+|cff11ccff%skill_type%:|r 攻击时 %chance% % 几率丢出从天而降的暗影之箭，对目标及 %hit_area% 范围的敌人造成伤害
+伤害计算：|cffd10c44敏捷 * %agi% |r + |cffd10c44 %shanghai% |r
 伤害类型：|cff04be12物理伤害|r]],
 }
 

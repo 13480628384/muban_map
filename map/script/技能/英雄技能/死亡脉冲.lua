@@ -18,15 +18,19 @@ mt{
 	area = 800,
 
 	--介绍
-	tip = [[|cff11ccff%skill_type%:|r 对范围800码的敌方单位造成 智力*%int% 法术伤害（%damage%）
+	tip = [[|cff11ccff%skill_type%:|r 对范围800码的敌方单位造成法术伤害（%damage%）
 	对范围400码的友方单位有智力*%int%医疗效果 （%heal%）
+	伤害计算：|cffd10c44 智力 * %int% + |cffd10c44 %shanghai% |r
+	伤害类型：|cff04be12法术伤害|r
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNDeathCoil.blp]],
 	--特效
 	effect = [[Abilities\Spells\Undead\DeathCoil\DeathCoilMissile.mdl]],
 
-	int = {10,12,14,16,20},
+	int = {25,30,35,40,50},
+
+	shanghai ={25000,250000,2500000,6250000,10000000},
 
 	--治疗
 	heal = function(self,hero)
@@ -37,7 +41,7 @@ mt{
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner and self.owner:is_hero() then 
-			return self.owner:get('智力')*self.int
+			return self.owner:get('智力')*self.int+self.shanghai
 		end
 	end	,
 	damage_type = '法术'

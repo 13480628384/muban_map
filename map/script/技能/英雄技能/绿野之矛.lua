@@ -13,11 +13,13 @@ mt{
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner and self.owner:is_hero() then 
-		return self.owner:get('智力')*self.int
+		return self.owner:get('智力')*self.int+self.shanghai
 		end
 	end	,
 
     int = {5,7.5,10,12.5,15},
+
+    shanghai ={5000,50000,500000,125000,2000000},
 
     --释放几率
     chance = 15,
@@ -38,7 +40,7 @@ mt{
     title = '绿野之矛',
     tip = [[
 |cff11ccff%skill_type%:|r %chance% % 几率对敌人发射 %count% 只绿野之矛造成伤害
-伤害计算：|cffd10c44智力 * %int% +2000 |r
+伤害计算：|cffd10c44智力 * %int% |r + |cffd10c44 %shanghai% |r
 伤害类型：|cff04be12法术伤害|r
 ]],
 }

@@ -16,17 +16,21 @@ mt{
 	--施法距离
 	range = 800,
 	--介绍
-	tip = [[|cff11ccff%skill_type%:|r 对指定敌人造成智力*%int%的法术伤害，该技能如果杀死敌人，将刷新冷却
+	tip = [[|cff11ccff%skill_type%:|r 对指定敌人造成法术伤害，该技能如果杀死敌人，将刷新冷却
+	伤害计算：|cffd10c44 智力 * %int% + |cffd10c44 %shanghai% |r
+	伤害类型：|cff04be12法术伤害|r
 	]],
 	--技能图标
 	art = [[jineng\jineng003.blp]],
 
-	int = {12,24,36,48,60},
+	int = {25,30,35,40,50},
+
+	shanghai ={25000,250000,2500000,6250000,10000000},
 
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner and self.owner:is_hero() then 
-			return self.owner:get('智力')*self.int
+			return self.owner:get('智力')*self.int+self.shanghai
 		end	
 	end,
 	--伤害类型

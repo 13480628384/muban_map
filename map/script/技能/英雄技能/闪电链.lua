@@ -12,7 +12,7 @@ mt{
 	title = '闪电链',
 	tip = [[
 		|cff11ccff%skill_type%:|r 攻击有 %chance% % 的概率对 %area% 范围造成伤害(%damage%)
-伤害计算：|cffd10c44智力 * %int%|r
+伤害计算：|cffd10c44智力 * %int%|r+ |cffd10c44 %shanghai% |r
 伤害类型：|cff04be12法术伤害|r
 	]],
 	--弹射范围(直径)
@@ -20,9 +20,10 @@ mt{
 	--概率%
 	chance = 15,
 	int= {5,6,7,8,10},
+	shanghai ={5000,50000,500000,125000,2000000},
 	damage = function(self,hero)
 		if self and self.owner and self.owner:is_hero() then 
-		return self.owner:get('智力')*self.int
+		return self.owner:get('智力')*self.int+self.shanghai
 		end
 	end	,
 	--是否被动

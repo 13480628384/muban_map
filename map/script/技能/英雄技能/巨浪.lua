@@ -12,7 +12,7 @@ mt{
 	title = '巨浪 力量',
 	tip = [[
 |cff11ccff%skill_type%:|r 攻击有 %chance% % 的概率对 %distance% 范围造成物理伤害
-		伤害计算：|cffd10c44力量 * %damage_int%|r
+		伤害计算：|cffd10c44力量 * %damage_int%|r+ |cffd10c44 %shanghai% |r
 		伤害类型：|cff04be12物理伤害|r]],
 	--范围
 	distance = 1500,
@@ -23,11 +23,14 @@ mt{
 
 	damage = function(self,hero)
 		if self and self.owner and self.owner:is_hero() then 
-			return self.owner:get('力量')*self.damage_int
+			return self.owner:get('力量')*self.damage_int+self.shanghai
 		end	
 	end	,
 	--参数智力
 	damage_int = {5,6,7,8,10},
+
+	shanghai ={5000,50000,500000,125000,2000000},
+
 	--是否被动
 	passive = true,
 	--弹道数量

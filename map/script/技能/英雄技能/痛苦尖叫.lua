@@ -17,18 +17,23 @@ mt{
 	--施法范围
 	area = 600,
 	--介绍
-	tip = [[|cff11ccff%skill_type%:|r 发出锐利的尖叫，对范围300码的敌方单位造成智力%int% 法术伤害 （%damage%）
+	tip = [[|cff11ccff%skill_type%:|r 发出锐利的尖叫，对范围300码的敌方单位造成法术伤害 （%damage%）
+	伤害计算：|cffd10c44 智力 * %int% |r+ |cffd10c44 %shanghai% |r
+	伤害类型：|cff04be12法术伤害|r
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNPossession.blp]],
 	--特效
 	effect = [[Abilities\Spells\Undead\Possession\PossessionMissile.mdl]],
 	--伤害参数1
-	int = {10,20,30,40,50},
+	int = {25,30,35,40,50},
+
+	shanghai ={25000,250000,2500000,6250000,10000000},
+
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner and self.owner:is_hero() then 
-		return self.owner:get('智力')*self.int
+		return self.owner:get('智力')*self.int+self.shanghai
 		end
 	end	,
 	damage_type = '法术'

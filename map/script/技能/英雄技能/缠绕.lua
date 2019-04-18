@@ -18,7 +18,9 @@ mt{
 	--施法范围
 	area = 300,
 	--介绍
-	tip = [[|cff11ccff%skill_type%:|r 用树藤缠住目标区域敌人的脚，造成敌人不能行动1S，并造成攻击力*1.5的法术伤害
+	tip = [[|cff11ccff%skill_type%:|r 用树藤缠住目标区域敌人的脚，造成敌人不能行动1S，并造成的法术伤害
+	伤害计算：|cffd10c44攻击力 * %int% |r + |cffd10c44 %shanghai% |r
+	伤害类型：|cff04be12法术伤害|r
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNEntanglingRoots.blp]],
@@ -26,11 +28,12 @@ mt{
 	effect = [[Abilities\Spells\NightElf\EntanglingRoots\EntanglingRootsTarget.mdl]],
 	--持续时间
 	time = 1 ,
-	int = {10,20,30,40,50},
+	int = {12.5,15,17.5,20,25},
+	shanghai ={25000,250000,2500000,6250000,10000000},
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner and self.owner:is_hero() then 
-		return self.owner:get('攻击') * self.int
+		return self.owner:get('攻击') * self.int+self.shanghai
 		end
 	end
 }

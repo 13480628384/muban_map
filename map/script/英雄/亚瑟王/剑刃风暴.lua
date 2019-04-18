@@ -34,24 +34,26 @@ mt{
 
 	--伤害参数1：攻击力
 	attack = function(self,hero)
-		return 2*self.pulse
+		return 3*self.pulse
 	end,
 
 	--伤害参数2：力量
 	power =  function(self,hero)
-		return 2*self.pulse
+		return 3*self.pulse
 	end,
 	
 	--伤害
 	damage = function(self,hero)
-		return hero:get('攻击')*self.attack + hero:get('力量')*self.power
-	end,	
+		if self and self.owner and self.owner:is_hero() then 
+			return hero:get('攻击')*self.attack + hero:get('力量')*self.power
+		end
+	end	,	
 
 	--生命上限
 	life_rate = {10,20,30,40,50},
 
 	--cd
-	cool = {20,17,15,13,10},
+	cool = 10,
 
 	--耗蓝
 	cost = {50,200,350,500,750},

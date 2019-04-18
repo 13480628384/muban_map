@@ -14,17 +14,19 @@ mt{
 	title = '光子灵枪',
 	tip = [[
 |cff11ccff%skill_type%:|r 攻击时有 %chance% % 几率召 %num% 个 %title%飞向敌人造成伤害
-伤害计算：|cffd10c44敏捷 * %agi_mul%|r
+伤害计算：|cffd10c44敏捷 * %agi_mul%|r+ |cffd10c44 %shanghai% |r
 伤害类型：|cff04be12物理伤害|r]],
 	--概率%
 	chance = 15,
     --伤害参数1
-	agi_mul = {3,3.5,4,4.5,5},
+	agi_mul = {2.5,3,3.5,4,5},
+
+	shanghai ={2500,25000,250000,625000,1000000},
 
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner and self.owner:is_hero() then 
-			return self.owner:get('敏捷')*self.agi_mul
+			return self.owner:get('敏捷')*self.agi_mul+self.shanghai
 		end	
 	end	,
 	--是否被动

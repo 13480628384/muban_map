@@ -15,7 +15,7 @@ mt{
 	title = '炎爆术',
 	tip = [[
 |cff11ccff%skill_type%:|r 攻击有 %chance% % 的概率对 %area% 范围造成伤害  (%damage%)
-伤害计算：|cffd10c44力量 * %int% +2000 |r
+伤害计算：|cffd10c44力量 * %int% |r+ |cffd10c44 %shanghai% |r
 伤害类型：|cff04be12物理伤害|r
 ]],
 	--范围
@@ -27,10 +27,12 @@ mt{
 
 	int = {5,6,7,8,10},
 
+	shanghai ={5000,50000,500000,125000,2000000},
+
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner and self.owner:is_hero() then 
-		return self.owner:get('力量')*self.int+1200
+		return self.owner:get('力量')*self.int+self.shanghai
 		end
 	end	,
 	--是否被动

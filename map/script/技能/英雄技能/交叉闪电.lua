@@ -12,11 +12,13 @@ mt{
     --原始伤害
     damage = function(self,hero)
 		if self and self.owner and  self.owner:is_hero() then 
-			return self.owner:get('敏捷')*self.agi
+			return self.owner:get('敏捷')*self.agi+self.shanghai
 		end	
 	end,
 
     agi = {5,6,7,8,10},
+
+    shanghai ={5000,50000,500000,125000,2000000},
 
     --投射物数量
     count = 2,
@@ -38,8 +40,8 @@ mt{
     model = [[FirecrackerArrow.mdx]],
     title = '交叉闪电',
     tip = [[
-|cff11ccff%skill_type%:|r 攻击时有 %chance% % 几率释放金钱镖飞向敌人，命中时会对周围 %lig_count% 个敌人释放交叉闪电，造成 %ejection_damage% % 的伤害
-伤害计算：|cffd10c44敏捷 * %agi%|r
+|cff11ccff%skill_type%:|r 攻击时有 %chance% % 几率释放金钱镖飞向敌人，命中时会对周围 %lig_count% 个敌人释放交叉闪电
+伤害计算：|cffd10c44敏捷 * %agi%|r + |cffd10c44 %shanghai% |r
 伤害类型：|cff04be12物理伤害|r]],
 }
 

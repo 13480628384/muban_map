@@ -15,20 +15,24 @@ mt{
 	--施法距离
 	range = 500,
 	--介绍
-	tip = [[|cff11ccff%skill_type%:|r 损失50%当前生命值， 对指定敌人造成敏捷*%int%的物理伤害，如果杀死敌人，英雄将永久提高 0.5% 的敏捷
-	]],
+	tip = [[|cff11ccff%skill_type%:|r 损失50%当前生命值， 对指定敌人造成物理伤害，如果杀死敌人，英雄将永久提高 %addagi% 的敏捷
+	伤害计算：|cffd10c44敏捷 * %int%|r+ |cffd10c44 %shanghai% |r
+	伤害类型：|cff04be12物理伤害|r
+]],	
 
-	int = {5,7.5,10,12.5,15},
+	int = {25,30,35,40,50},
+
+	shanghai ={25000,250000,2500000,6250000,10000000},
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNDeathPact.blp]],
 	--永久智力
-	addagi = {0.5,1,1.5,2,2.5},
+	addagi = {1,2,3,4,5},
 	--消耗生命
 	cost_life = 50,
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner and self.owner:is_hero() then 
-		return self.owner:get('敏捷')*self.int
+		return self.owner:get('敏捷')*self.int+self.shanghai
 		end
 	end	,
 	damage_type = '物理'

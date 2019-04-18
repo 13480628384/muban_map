@@ -7,37 +7,44 @@ mt{
 	--初始等级
 	level = 1,
 	max_level = 5,
-	
+
+	-- 被动1：周围 %passive_area% 码有敌人死亡，刷新所有技能的冷却时间
+
 	tip = [[
-		主动：召唤刀刃对范围800码的敌方单位攻击，造成敏捷*%int%的物理伤害
-		被动1：周围 %passive_area% 码有敌人死亡，刷新所有技能的冷却时间
-		被动2：攻击对敌人造成护甲 -%reduce_defence% %
-	]],
+		主动：召唤刀刃对范围800码的敌方单位攻击，造成的物理伤害
+		被动：攻击对敌人造成护甲 -%reduce_defence% %
+		伤害计算：|cffd10c44敏捷 * %int% |r + |cffd10c44 %shanghai% |r
+		伤害类型：|cff04be12物理伤害|r
+		]],
+
 	
 	--技能图标
 	art = [[jineng\jineng005.blp]],
 
 	--伤害参数1
-	int = {4,6,8,10,12},
+	int = {25,30,35,40,50},
+
+	shanghai ={25000,250000,2500000,6250000,10000000},
+
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner and self.owner:is_hero() then 
-			return self.owner:get('敏捷')*self.int
+			return self.owner:get('敏捷')*self.int+self.shanghai
 		end
 	end	,
 	damage_type = '物理',
 
 	--施法引导时间 （闪烁过去）
-	cast_channel_time = 0.2,
+	-- cast_channel_time = 0.2,
 
 	--技能目标类型 单位目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 
 	--攻击
-	attack_mul = {3,4,5,6,7},
+	-- attack_mul = {3,4,5,6,7},
 
 	--cd 25
-	cool = {25,22.5,20,17.5,15},
+	cool = 10,
 
 	--耗蓝
 	cost = {10,25,50,100,200},
@@ -57,7 +64,7 @@ mt{
 	-- 攻击减护甲
 	reduce_defence = {20,25,30,35,40},
 	--施法距离
-	range = 1200,
+	-- range = 1200,
 }
 
 function mt:on_upgrade()
@@ -234,14 +241,14 @@ function mt:on_pulse()
 	end	
 	if self.cnt > 0  then 
 		--刷新技能
-		for skl in hero:each_skill() do
-			local skl_name = skl:get_name()
-			if skl:get_type() == '英雄' and skl_name ~= '妙手空空' and skl_name ~= '摔破罐子' then
-				-- print('即将刷新技能',skl:get_name())
-				skl:set_cd(0)
-				-- skl:fresh()
-			end	
-		end	
+		-- for skl in hero:each_skill() do
+		-- 	local skl_name = skl:get_name()
+		-- 	if skl:get_type() == '英雄' and skl_name ~= '妙手空空' and skl_name ~= '摔破罐子' then
+		-- 		-- print('即将刷新技能',skl:get_name())
+		-- 		skl:set_cd(0)
+		-- 		-- skl:fresh()
+		-- 	end	
+		-- end	
 
 	end
 	-- print('周围单位个数：'..self.skill.cnt,hero:get('攻击%'))

@@ -16,9 +16,15 @@ mt{
 	target_type = ac.skill.TARGET_TYPE_UNIT,
 	--施法距离
 	range = 900,
-	int = {5,10,15,20,25},
+
+	int = {25,30,35,40,50},
+
+	shanghai ={30000,300000,3000000,8000000,12500000},
+
 	--介绍
-	tip = [[|cff11ccff%skill_type%:|r 对单一敌人造成晕眩3S，并造成攻击力*%int%的物理伤害
+	tip = [[|cff11ccff%skill_type%:|r 对单一敌人造成晕眩3S，并造成物理伤害
+伤害计算：|cffd10c44攻击力 * %int% |r+ |cffd10c44 %shanghai% |r
+伤害类型：|cff04be12物理伤害|r
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNStormBolt.blp]],
@@ -30,7 +36,9 @@ mt{
 	time = 3,
 	--伤害
 	damage = function(self,hero)
-		return self.owner:get('攻击')*self.int
+		if self and self.owner and self.owner:is_hero() then 
+		return self.owner:get('攻击力')*self.int+self.shanghai
+		end
 	end	,
 	--投射物移动速度
 	speed = 1000,
