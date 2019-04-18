@@ -183,10 +183,17 @@ function mt:find_sell_item(it)
 			return 
 		end
 	end	
-	-- it_name = clean_color(it_name)
-	local item = ac.item.shop_item_map[it_name]
-
+	local item 
+	for i=1,12 do
+		local items = self.sell_item_list[i]
+		if items and (items.name == it_name or items.color == it_name)then
+			item = items
+			break
+		end
+	end
 	return item
+	-- it_name = clean_color(it_name)
+	-- local item = ac.item.shop_item_map[it_name]
 end
 
 --移除商品

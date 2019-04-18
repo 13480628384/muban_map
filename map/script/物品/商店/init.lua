@@ -17,8 +17,9 @@ ac.game:event '玩家-注册英雄后' (function()
     ac.flag_shop = true
     ac.wait(2*1000,function()
         local fresh_time = 2*60 --刷新时间
-        -- local fresh_time = 10 --刷新时间
-
+        if global_test then 
+            fresh_time = 10 --测试刷新时间
+        end
         local off_set = 0
         --创建物品商店
         local x,y = ac.map.rects['物品商店']:get_point():get()

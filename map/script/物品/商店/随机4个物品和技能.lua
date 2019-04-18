@@ -9,8 +9,20 @@ local function fresh_shop_item(shop)
         end    
         -- print('商店随机4物品：',rand_name,#ac.quality_item)
         local list = ac.quality_item[rand_name]   
+        -- local list = {'敏捷丹','敏捷丹','敏捷仙丹','巫术丹','召唤丹'} 物品少于4种会死循环
         --添加 
-        local name = list[math.random(#list)]
+        local name 
+        local flag =true
+        while flag do
+            name = list[math.random(#list)] 
+            flag = false 
+            for i=9,12 do 
+                if shop.sell[i] == name then 
+                    flag = true
+                    break
+                end
+            end     
+        end    
         shop.sell[i] = name
         shop.sell_new_gold[i] = true
         -- shop:add_sell_item(name,i)
@@ -44,7 +56,18 @@ local function fresh_shop_skill(shop)
         
         local list = ac.skill_list2
         --添加 
-        local name = list[math.random(#list)]
+        local name
+        local flag =true
+        while flag do
+            name = list[math.random(#list)] 
+            flag = false 
+            for i=9,12 do 
+                if shop.sell[i] == name then 
+                    flag = true
+                    break
+                end
+            end     
+        end    
         -- print('即将添加商店物品：',name,i)
         -- shop:add_sell_item(name,i)
         shop.sell[i] = name
