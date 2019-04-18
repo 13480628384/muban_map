@@ -75,16 +75,21 @@ function mt:on_cast_shot()
                 if skl then 
                     local id = skl.slotid
                     skl:remove()
-                    -- self:remove()
                     hero:add_skill(name,'英雄',id)
                 else
                     -- print('取消更换技能')
                     if self._count > 1 then 
-                        -- print('数量')
                         self:set_item_count(self._count+1)
                     else
-                        --重新添加给英雄
-                        ac.item.add_skill_item(name,hero)
+                        if hero:is_alive() then 
+                            ac.item.add_skill_item(name,hero)
+                        else    
+                            if hero.xuexijineng_trg then hero.suijijineng_trg:remove() end
+                            hero.xuexijineng_trg = hero:event '单位-复活' (function ()
+                                ac.item.add_skill_item(name,hero)
+                                hero.xuexijineng_trg:remove()
+                            end)    
+                        end    
                     end        
                 end
                 

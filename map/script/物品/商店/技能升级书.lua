@@ -84,8 +84,16 @@ function mt:on_cast_start()
                 if self._count > 1 then 
                    self:add_item_count(1) 
                 else
-                    --重新添加给英雄
-                    hero:add_item(name,true)
+                    if hero:is_alive() then 
+                        --重新添加给英雄
+                        hero:add_item(name,true)
+                    else    
+                        if hero.shengjishu_trg then hero.shengjishu_trg:remove() end
+                        hero.shengjishu_trg = hero:event '单位-复活' (function ()
+                            hero:add_item(name,true)
+                            hero.shengjishu_trg:remove()
+                        end) 
+                    end    
                 end      
             end 
         end)

@@ -52,6 +52,7 @@ end
 
 --给英雄添加技能物品
 --默认是 满格掉落地上，从商店购买时才阻止返回
+--英雄死亡时，添加物品没法添加
 function ac.item.add_skill_item(it,hero,is_drop)
 	if type(it) =='string'  then 	
 		it = ac.item.create_skill_item(it,nil,true)

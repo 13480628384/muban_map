@@ -89,14 +89,22 @@ function mt:on_cast_start()
             self.dialog = nil
             local skill = list[index].skill
             if skill then 
-                ac.item.add_skill_item(skill:get_name(),hero)
-                if self._count > 0 then  
-                    self:on_cast_start()
-                    self:add_item_count(-1)
-                end   
+                if hero:is_alive() then 
+                    ac.item.add_skill_item(skill:get_name(),hero)
+                    if self._count > 0 then  
+                        self:on_cast_start()
+                        self:add_item_count(-1)
+                    end  
+                else
+                    if hero.suijijineng_trg then hero.suijijineng_trg:remove() end
+                    hero.suijijineng_trg = hero:event '单位-复活' (function ()
+                        ac.item.add_skill_item(skill:get_name(),hero)
+                        hero.suijijineng_trg:remove()
+                    end)    
+                end     
 
             else
-                --取消
+                --取消(没有取消)
                 if self._count > 1 then 
                    self:add_item_count(1) 
                 else
