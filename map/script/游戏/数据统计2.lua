@@ -24,23 +24,23 @@ for i=1,10 do
     player.ctl = 0
     --kda
     player.kda = 0
-    player.boshu = 0
+    player.boshu = player.boshu or 0
     --段位为1-7 青铜 白银 黄金 白金 钻石 大师 王者
-    if player.boshu <= 20 then
+    if player.boshu <= 10 then
         player.rank = 1
-    elseif player.boshu <=40 then
+    elseif player.boshu <=20 then
         player.rank = 2
-    elseif player.boshu <=70 then
+    elseif player.boshu <=30 then
         player.rank = 3
-    elseif player.boshu <=100 then
+    elseif player.boshu <=40 then
         player.rank = 4
-    elseif player.boshu <=150 then
+    elseif player.boshu <=50 then
         player.rank = 5
-    elseif player.boshu <=180 then
+    elseif player.boshu <=60 then
         player.rank = 6
-    elseif player.boshu <= 200 then
+    elseif player.boshu <= 70 then
         player.rank = 7
-    elseif player.boshu >= 201 then
+    elseif player.boshu >= 100 then
         player.rank = 8
     end
 
@@ -70,7 +70,7 @@ local rank_art = {
     'image\\排行榜\\wz.tga',
 }
 
-local rank_art = {'黑铁','英勇黄铜','不屈白银','荣耀黄金','华贵铂金','璀璨钻石','超凡大师','最强王者'}
+local rank_art = {'黑铁','黄铜','白银','黄金','铂金','钻石','大师','王者'}
 --计算KDA
 local function get_kda()
     --杀敌数
