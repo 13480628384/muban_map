@@ -4,6 +4,7 @@ local mt = ac.buff['召唤物']
 mt.cover_type = 1
 mt.cover_max = 1
 mt.remove_target = true
+mt.dead_event = false
 mt.search_area = 600
 mt.ref = 'origin'
 
@@ -84,8 +85,12 @@ function mt:on_remove()
 	-- self.target:remove_ability 'BHwe'
 	-- 召唤物 buff 移除时 ，移除召唤物 ， 不受单位死亡事件
 	if self.remove_target then 
-		self.target:remove()
-	else 
+		if self.dead_event then 
+			self.target:kill()
+		else	
+			self.target:remove()
+		end	
+	else
 		--还回模型
 		if self.model then
 			japi.SetUnitModel(self.target.handle,self.old_model)

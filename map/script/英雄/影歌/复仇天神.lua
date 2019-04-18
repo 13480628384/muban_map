@@ -22,7 +22,7 @@ mt{
 	target_type = ac.skill.TARGET_TYPE_NONE,
 
 	--几率
-	chance = 20,
+	chance = 15,
 
 	--复仇天神几率
 	fuchou_chance = 20,

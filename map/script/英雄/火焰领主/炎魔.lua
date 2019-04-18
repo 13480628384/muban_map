@@ -9,7 +9,7 @@ mt{
 	max_level = 5,
 	
 	tip = [[
-		主动：召唤一个炎魔(属性与智力相关)，攻击敌人 %attack_cnt% 次将分裂为两个（状态和母体一致）
+		主动：召唤一个炎魔(属性与智力相关)，攻击敌人 %attack_cnt% 次将分裂为两个（状态和母体一致）,最多分裂 %split_cnt%
 		被动： 本体 和 召唤物攻击，都附加 智力*1.5的真实伤害 
 	]],
 	
@@ -25,7 +25,7 @@ mt{
 	end	,
 
 	--cd 45
-	cool = {45,40,35,30,25},
+	cool = {30,30,30,30,25},
 
 	--耗蓝
 	cost = {45,140,235,330,425},
@@ -35,9 +35,12 @@ mt{
 
 	--持续时间
 	time = 25,
+
+	--最大分裂个数
+	split_cnt = 40,
 	
 	--攻击次数分裂
-	attack_cnt = {10,9,8,7,5},
+	attack_cnt = 5,
 	--特效模型
 	effect = [[Units\Creeps\LavaSpawn\LavaSpawn.mdl]],
 	
@@ -66,13 +69,25 @@ end
 local function create_summon_unit(skill,where)
 	local hero = skill.owner
 	local point = where
+	local current_split_cnt = (skill:get('current_split_cnt') or 0)
+	--最大分裂40只
+	if not skill.flag_hero_create then 
+		current_split_cnt = current_split_cnt + 1
+		if current_split_cnt > skill.split_cnt then 
+			return
+		end	
+	end	
+	skill:set('current_split_cnt',current_split_cnt)
+
 	local unit = hero:get_owner():create_unit('炎魔',point)	
-
-
+	if skill.flag_hero_create then
+		unit.flag_hero_create =true
+	end	
 	local life_mul, defence_mul, attack_mul = ac.get_summon_mul(hero.level)
 	local data = {}
 	data.attribute={
 		['生命上限'] = hero:get('智力') * life_mul,
+		-- ['生命上限'] = 1000000,
 		['护甲'] = hero:get('智力') * defence_mul,
 		['攻击'] = hero:get('智力') * attack_mul * 1.5,
 		['魔法上限'] = 60,
@@ -87,9 +102,10 @@ local function create_summon_unit(skill,where)
 		time = skill.time,
 		attribute = data.attribute,
 		skill = skill,
+		dead_event = true,
 		follow = true
 	}
-
+	-- print(unit:get('生命上限'))
 	-- unit:event '单位-杀死单位' (function(trg, killer, target)
 	-- 	local where = target:get_point() - { math.random(1,360) ,100 }
 	-- 	create_summon_unit(skill,where)
@@ -119,16 +135,25 @@ local function create_summon_unit(skill,where)
 		if unit.attack_cnt >= skill.attack_cnt then
 			unit.attack_cnt = 0 
 			local where = target:get_point() - { math.random(1,360) ,100 }
+			skill.flag_hero_create = false
 			create_summon_unit(skill,where)
 		end	
 	end)
+	unit:event '单位-死亡' (function(_,unit,killer) 
+		-- print('单位死亡',(skill:get('current_split_cnt') or 0) - 1)
+		if not unit.flag_hero_create then
+			local current_split_cnt = (skill:get('current_split_cnt') or 0) - 1
+			skill:set('current_split_cnt',current_split_cnt)
+		end	
+	end)	
+
 
 	return unit
 end	
 function mt:on_cast_shot()
     local skill = self
 	local hero = self.owner
-	
+	skill.flag_hero_create =true 
 	local cnt = (self.cnt + hero:get('召唤物')) or 1
 	--多个召唤物
 	for i=1,cnt do 
