@@ -37,7 +37,7 @@ mt{
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner and self.owner:is_hero() then 
-		return self.owner:get('攻击力')*self.int+self.shanghai
+		return self.owner:get('攻击')*self.int+self.shanghai
 		end
 	end	,
 	--投射物移动速度

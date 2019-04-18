@@ -15,7 +15,7 @@ mt{
 	--施法距离
 	range = 500,
 	--介绍
-	tip = [[|cff11ccff%skill_type%:|r 损失50%当前生命值， 对指定敌人造成物理伤害，如果杀死敌人，英雄将永久提高 %addagi% 的敏捷
+	tip = [[|cff11ccff%skill_type%:|r 损失50%当前生命值， 对指定敌人造成物理伤害，如果杀死敌人，英雄将永久提高 %addagi% %的敏捷
 	伤害计算：|cffd10c44敏捷 * %int%|r+ |cffd10c44 %shanghai% |r
 	伤害类型：|cff04be12物理伤害|r
 ]],	
@@ -56,7 +56,7 @@ function mt:on_cast_shot()
 	}
 
 	if not target:is_alive() then 
-		hero:add('敏捷',math.ceil(hero:get('敏捷')*self.addagi/100))
+		hero:add('敏捷%',self.addagi)
 	end	
 end	
 function mt:on_remove()
