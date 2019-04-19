@@ -1,5 +1,5 @@
 local japi = require("jass.japi")
-local mt = ac.skill['后羿']
+local mt = ac.skill['大天使加百列']
 mt{
     --必填
     is_skill = true,
@@ -8,24 +8,27 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[移速+50，攻击间隔减少0.2]],
+	tip = [[攻击+50%， 会心几率+10% ， 通关积分+50%]],
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNFlakCannons.blp]],
 	--特效
-	effect = [[Hero_WindRunner_N2.mdx]],
-	--移动速度
-	move_speed = 50,
-	--攻击间隔
-    attack_gap = 0.2,
+    effect = [[ArchAngelngelGabriel.mdx]],
     --模型大小
-    model_size = 1.4
+	model_size = 1.3,
+	--攻击
+	attack_rate = 50,
+	--会心几率
+	heart_rate = 10,
+    --获得积分额外倍数
+    jifen_mul = 0.5
 	
 }
 function mt:on_add()
     local skill = self
     local hero = self.owner
-    hero:add('移动速度',self.move_speed)
-    hero:add('攻击间隔',-self.attack_gap)
+    hero:add('攻击%',self.attack_rate)
+    hero:add('会心几率',self.heart_rate)
+    hero:add('积分加成',self.jifen_mul)
     --改变模型
     japi.SetUnitModel(hero.handle,self.effect)
     hero:set_size(self.model_size)
@@ -36,6 +39,8 @@ function mt:on_remove()
         self.trg:remove()
         self.trg = nil
     end
-    hero:add('移动速度',-self.move_speed)
-    hero:add('攻击间隔',self.attack_gap)
+    
+    hero:add('攻击%',-self.attack_rate)
+    hero:add('会心几率',-self.heart_rate)
+    hero:add('积分加成',-self.jifen_mul)
 end

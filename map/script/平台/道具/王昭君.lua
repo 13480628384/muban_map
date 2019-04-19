@@ -17,6 +17,8 @@ mt{
 	move_speed = 50,
 	--冷却缩减
 	cool_reduce = 15,
+    --模型大小
+    model_size = 1.2
 	
 }
 function mt:on_add()
@@ -26,6 +28,7 @@ function mt:on_add()
     hero:add('冷却缩减',-self.cool_reduce)
     --改变模型
     japi.SetUnitModel(hero.handle,self.effect)
+    hero:set_size(self.model_size)
 end
 function mt:on_remove()
     local hero = self.owner

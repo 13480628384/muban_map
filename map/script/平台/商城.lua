@@ -25,6 +25,7 @@ local item = {
 
     {'XCB','小翅膀'}, --积分 
     {'JK','杰克','亚瑟王'}, --积分
+    {'JBL','大天使加百列','鲁大师'},
 
 }
 local function get_mallkey_byname(name)
@@ -40,6 +41,21 @@ end
 ac.mall =   item 
 --根据商城物品名取得对应的key
 ac.get_mallkey_byname = get_mallkey_byname
+
+local function save(player,name,value)  
+    local key = ac.get_mallkey_byname(name)
+    if key then 
+        -- print(it.name,key,1)
+        player:Map_SaveServerValue(key,tonumber(value))
+        if not player.mall then 
+            player.mall ={}
+        end
+        player.mall[name] = true    
+    end 
+end    
+ac.save = save
+
+
 ac.wait(10,function()
     for i=1,10 do
         local p = ac.player[i]

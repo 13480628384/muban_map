@@ -119,8 +119,22 @@ ac.game:event '游戏-最终boss' (function(trg,index, creep)
         if ac.save_jifen then 
             ac.save_jifen()
         end    
-        
-
+        --通关难3，送男枪皮肤
+        if ac.g_game_degree ==3 then 
+            local t = {}
+            for i = 1 ,10 do 
+                local player = ac.player(i)
+                if player:is_player() and player.kda then 
+                    table.insert(t,{id = player:get(),kda = p.kda})
+                end    
+            end 
+            table.sort(t,function(a,b) return a.kda>b.kda end)           
+            local p = ac.player(t[1].id) 
+            ac.save(p,'大天使加百列',1)
+            --发送消息
+            local tip = '|cffffff00【系统消息】|r恭喜玩家 |cffff0000'..p:get_name()..'|r获得皮肤：|cffff0000男枪（鲁大师皮肤）|r'..'，可能是因为kda最高才能获得。\n'
+            ac.player.self:sendMsg(tip,30)
+        end    
         --难1， 游戏胜利  
         --难2、3 ， 20秒后进入无尽 
         if ac.g_game_degree ==1 then 
