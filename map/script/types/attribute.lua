@@ -535,6 +535,10 @@ set['攻击'] = function(self, attack)
 	if attack <= 1 then 
 		attack = 2
 	end	
+	--攻击上限 21亿
+	if attack >= 2100000000 then 
+		attack = 2100000000
+	end	
 	japi.SetUnitState(self.handle, jass.ConvertUnitState(0x12), attack - 1)
 	if self.freshDamageInfo then
 		self:freshDamageInfo()
