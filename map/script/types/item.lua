@@ -924,6 +924,9 @@ end
 --获取一个空槽位
 function unit.__index:get_nil_slot()
 	local a,b = self:get_bar_page()
+	if not self.item_list then 
+		self.item_list = {}
+	end	
 	for i=a,b do
 		local slot = self.item_list[i]
 		if not slot then
@@ -937,7 +940,9 @@ end
 function unit.__index:get_slot_item(slot)
 	local page = self.currentpage or 1
 	slot = (page - 1) * 6 + slot
-
+	if not self.item_list then 
+		self.item_list = {}
+	end	
 	local item = self.item_list[slot]
 	if item then
 		return item

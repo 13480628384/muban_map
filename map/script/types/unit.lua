@@ -261,13 +261,21 @@ end
 		end
 
 		--移除单位身上的物品
-		for i = 1, 6 do
-			local it = self:find_skill(i, '物品')
-			if it then
-				it:remove()
+		-- for i = 1, 6 do
+		-- 	local it = self:find_skill(i, '物品')
+		-- 	if it then
+		-- 		it:remove()
+		-- 	end
+		-- end
+		--只有英雄才删除物品
+		if self:is_hero() then 
+			for i = 1, 6 do
+				local it = self:get_slot_item(i)
+				if it then
+					it:item_remove()
+				end
 			end
-		end
-
+		end	
 		--移除单位身上的计时器
 		if self._timers then
 			for i, t in ipairs(self._timers) do
