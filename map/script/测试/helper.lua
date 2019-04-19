@@ -381,7 +381,7 @@ function helper:create(str,cnt, playerid)
 	if not playerid then
 		playerid = 12
 	end
-	local p = player[playerid]
+	local p = ac.player[tonumber(playerid)]
 	for i = 1 ,(cnt or 1) do
 		local unit = p:create_unit(str,ac.point(0,0))
 		local data = ac.table.UnitData[str]

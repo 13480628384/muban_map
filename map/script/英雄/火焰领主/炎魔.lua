@@ -83,7 +83,15 @@ local function create_summon_unit(skill,where)
 	if skill.flag_hero_create then
 		unit.flag_hero_create =true
 	end	
-	local life_mul, defence_mul, attack_mul = ac.get_summon_mul(hero.level)
+	
+	local index = ac.creep['刷怪'].index 
+	if not index or index == 0 then 
+		index = 1
+	end	
+	index = index + ac.creep['刷怪-无尽'].index 
+
+	local life_mul, defence_mul, attack_mul = ac.get_summon_mul(index)
+
 	local data = {}
 	data.attribute={
 		['生命上限'] = hero:get('智力') * life_mul,

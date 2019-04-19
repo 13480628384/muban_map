@@ -46,7 +46,13 @@ function mt:on_add()
 			local unit = hero:get_owner():create_unit('幻象马甲-蝗虫',point)	
 			local p_hero = hero:get_owner().hero
 			
-			local life_mul, defence_mul, attack_mul = ac.get_summon_mul(p_hero.level)
+			local index = ac.creep['刷怪'].index 
+			if not index or index == 0 then 
+				index = 1
+			end	
+			index = index + ac.creep['刷怪-无尽'].index 
+
+			local life_mul, defence_mul, attack_mul = ac.get_summon_mul(index)
 			local data = {}
 			data.attribute={
 				['生命上限'] = p_hero:get('智力') * life_mul*1.5,

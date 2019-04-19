@@ -69,7 +69,13 @@ function mt:on_cast_shot()
 		local point = hero:get_point()-{hero:get_facing(),100}--在英雄附近 100 到 400 码 随机点
 		local unit = hero:get_owner():create_unit('复仇天神',point)	
 		
-		local life_mul, defence_mul, attack_mul = ac.get_summon_mul(hero.level)
+		local index = ac.creep['刷怪'].index 
+		if not index or index == 0 then 
+			index = 1
+		end	
+		index = index + ac.creep['刷怪-无尽'].index 
+
+		local life_mul, defence_mul, attack_mul = ac.get_summon_mul(index)
 		local data = {}
 		data.attribute={
 			['生命上限'] = hero:get('智力') * life_mul*1.5,

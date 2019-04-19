@@ -168,8 +168,9 @@ local function hero_register_main()
 
 		-- hero:add_skill('魔法书', '英雄')
 		-- hero:add_skill('魔法书', '英雄')
+		--武器
 		-- hero:add_effect('hand',[[Abilities\Weapons\PhoenixMissile\Phoenix_Missile.mdl]])
-		-- hero:add_effect('hand',[[sword_2h_armyoflight_c_01.mdx]])
+		-- hero:add_effect('hand',[[wuqi123.mdx]])
 		
 		--添加英雄属性面板
 		hero:add_skill('英雄属性面板', '隐藏')

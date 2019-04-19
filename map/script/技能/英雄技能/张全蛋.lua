@@ -58,14 +58,13 @@ function mt:on_cast_shot()
 		local point = hero:get_point()-{hero:get_facing(),100}--在英雄附近 100 到 400 码 随机点
 		local unit = hero:get_owner():create_unit(self.unit_name,point)	
 
-		-- local index = ac.creep['刷怪'].index
-		-- if not index or index == 0 then 
-		-- 	index = 1
-		-- end	
-		-- print('技能使用时 当前波数',index)
-		-- local data = ac.table.UnitData['进攻怪-'..index]
+		local index = ac.creep['刷怪'].index 
+		if not index or index == 0 then 
+			index = 1
+		end	
+		index = index + ac.creep['刷怪-无尽'].index 
 
-		local life_mul, defence_mul, attack_mul = ac.get_summon_mul(hero.level)
+		local life_mul, defence_mul, attack_mul = ac.get_summon_mul(index)
 		local data = {}
 		data.attribute={
 			['生命上限'] = hero:get('智力') * life_mul,

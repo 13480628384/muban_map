@@ -293,9 +293,10 @@ local function on_defence(self)
 end
 
 local function on_life_steal(self)
-	if not self:is_attack() then
-		return
-	end
+	--是攻击就吸血
+	-- if not self:is_attack() then
+	-- 	return
+	-- end
 	local life_steal = self['吸血']
 	if life_steal == 0 then
 		return
