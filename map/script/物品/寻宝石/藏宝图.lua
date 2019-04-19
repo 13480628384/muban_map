@@ -26,7 +26,7 @@ mt{
     --售价
     gold = 250,
     --cd
-    cool = 2.5,
+    cool = 0,
     --物品详细介绍的title
     content_tip = '使用说明：'
     
@@ -34,9 +34,9 @@ mt{
     
 function mt:on_add()
     --全图随机刷 正式用
-    self.random_point =  ac.map.rects['刷怪']:get_point()
+    -- self.random_point =  ac.map.rects['刷怪']:get_point()
     --测试用
-    -- self.random_point = self.owner:get_point()
+    self.random_point = self.owner:get_point()
 end
 
 function mt:on_cast_start()
@@ -176,9 +176,10 @@ function mt:add_content()
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000杀怪 智力+5 |r',10)
         hero:add('杀怪智力',5)
     elseif  rand_name == '通关积分100' then
-        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000 通关积分+100 |r',10)
+        local value =   100 * ((hero:get '积分加成' or 0) + 1)
+        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000 通关积分+'..value..' |r',10)
         if ac.jiami then 
-            ac.jiami(player,'jifen',100)
+            ac.jiami(player,'jifen',(value or 0))
         end    
     end
    

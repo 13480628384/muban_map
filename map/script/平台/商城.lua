@@ -15,7 +15,7 @@ local japi = require 'jass.japi'
 local item = {
     {'JBLB','金币礼包'},
     {'MCLB','木材礼包'},
-    {'HY','生存会员'},
+    {'SCHY','生存会员'},
     {'TSZG','天使之光'},
     {'SBJFK','双倍积分卡'},
     {'QTDS','齐天大圣','悟空'}, --表示皮肤

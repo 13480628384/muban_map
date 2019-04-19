@@ -557,10 +557,18 @@ function player.create(id, jPlayer)
 	p.id = id
 
 	p.base_name = p:get_name()
-	
+
+	local str = jass.Player_name[id]
+	if str then
+		local name = string.sub(str,11,-3)
+		p.name = name
+	end
+
 	player[id] = p
+
 	return p
 end
+
 
 --一些常用事件
 function player.regist_jass_triggers()

@@ -13,7 +13,7 @@ mt{
 	--特效
 	effect = [[]],
 	--物品获取率
-	fall_rate = 20,
+	fall_rate = 25,
 	
 }
 function mt:on_add()

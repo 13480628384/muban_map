@@ -15,13 +15,13 @@ mt{
 	--移动速度
 	move_speed = 50,
 	--攻击速度
-	attack_speed = 50,
+	attack_speed = 100,
 	--金币加成
-	gold_mul = 10,
+	gold_mul = 20,
 	--经验加成
-    exp_mul = 10,
+    exp_mul = 20,
 
-    item_mul = 10,
+    item_mul = 20,
 	
 }
 function mt:on_add()

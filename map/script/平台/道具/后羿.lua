@@ -8,7 +8,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[移速+50，攻击间隔减少0.05]],
+	tip = [[移速+50，攻击间隔减少0.2]],
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNFlakCannons.blp]],
 	--特效
@@ -16,7 +16,7 @@ mt{
 	--移动速度
 	move_speed = 50,
 	--攻击间隔
-	attack_gap = 0.05,
+	attack_gap = 0.2,
 	
 }
 function mt:on_add()

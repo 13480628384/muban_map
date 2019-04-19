@@ -14,7 +14,7 @@ mt{
 	--特效
 	effect = [[qtds.mdx]],
 	--物爆几率
-	physical_rate = 5,
+	physical_rate = 10,
 	--物爆伤害
 	physical_damage = 50,
 	
