@@ -9,5 +9,6 @@ require '平台.道具.杰克'
 require '平台.道具.后羿'
 require '平台.道具.影歌'
 require '平台.道具.王昭君'
+require '平台.道具.大天使加百列'
 
 
