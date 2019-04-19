@@ -19,7 +19,7 @@ mt{
 
 	--介绍
 	tip = [[|cff11ccff%skill_type%:|r 对范围800码的敌方单位造成法术伤害（%damage%）
-	对范围400码的友方单位有智力*%int%医疗效果 （%heal%）
+	增加范围400码的队友%heal%生命
 	伤害计算：|cffd10c44 智力 * %int% + |cffd10c44 %shanghai% |r
 	伤害类型：|cff04be12法术伤害|r
 	]],
@@ -33,11 +33,8 @@ mt{
 	shanghai ={25000,250000,2500000,6250000,10000000},
 
 	--治疗
-	heal = function(self,hero)
-		if self and self.owner and self.owner:is_hero() then 
-			return self.owner:get('智力')*self.int
-		end	
-	end	,
+	heal = 10,
+
 	--伤害
 	damage = function(self,hero)
 		if self and self.owner and self.owner:is_hero() then 
@@ -87,7 +84,7 @@ function mt:on_cast_shot()
 					source = hero,
 					skill = skill,
 					size = 10,
-					heal = skill.heal,
+					heal = u:get('生命上限') * skill.heal/100,
 				}	
 			end	
 		end

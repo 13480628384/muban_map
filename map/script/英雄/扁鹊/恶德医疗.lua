@@ -35,7 +35,7 @@ mt{
 	end,	
 
 	--生命上限
-	life_rate = {15,20,25,30,35},
+	life_rate = 10,
 
 	--cd 5
 	cool = 5,

@@ -10,7 +10,7 @@ mt{
 	--耗蓝
 	cost = {40,150,260,370,500},
 	--冷却时间
-	cool = 10,
+	cool = 15,
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
@@ -21,7 +21,7 @@ mt{
 	--特效
 	effect = [[Abilities\Spells\Human\HolyBolt\HolyBoltSpecialArt.mdl]],
 	--生命上限比
-	life_rate = {20,25,30,35,40},
+	life_rate = {15,20,25,30,35},
 }
 function mt:on_add()
     local skill = self
