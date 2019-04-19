@@ -8,7 +8,10 @@ level = 1,
 art = [[ReplaceableTextures\CommandButtons\BTNPotionGreen.blp]],
 
 --说明
-tip = [[使用恢复全部生命值]],
+tip = [[使用恢复全部生命值
+
+|cffdf19d0 PS：可以给宠物，让宠物帮忙吃药|r
+]],
 
 --物品类型
 item_type = '消耗品',
