@@ -66,8 +66,22 @@ mt{
 function mt:on_add()
     local skill = self
     local hero = self.owner
-    local p = hero:get_owner()    
+    local player = hero:get_owner()    
+    hero = player.hero
 
+    -- local effect 
+    -- if player.mall and player.mall['小翅膀'] then 
+    --     effect = self.effect1
+    -- end    
+    -- if player.mall and player.mall['天使之光'] then 
+    --     effect = self.effect2
+    -- end    
+    -- if effect then 
+    --     if hero.chibang then 
+    --         hero.chibang:remove()
+    --     end    
+    --     hero.chibang = hero:add_effect('chest',effect) 
+    -- end    
 end
 function mt:on_cast_start()
     local skill = self 

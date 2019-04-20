@@ -278,6 +278,7 @@ end)
 
 --游戏时间 2个小时
 local shijian = 1*60*60
+-- local shijian = 1*60 --测试
 ac.g_game_time = shijian 
 local total_time = shijian 
 

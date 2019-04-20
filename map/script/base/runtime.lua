@@ -10,15 +10,15 @@ global_test = console.enable
 if console.enable then 
     print = console.write
 else
-    print = function  (...)
-        local args={...}
-        local s = ''
-        for index = 1 , #args do 
-            s = s..tostring(args[index])..'   '
-        end
-        -- 关闭控制台后，print值不在游戏内显示。
-        -- BJDebugMsg(s)
-    end
+    -- print = function  (...)
+    --     local args={...}
+    --     local s = ''
+    --     for index = 1 , #args do 
+    --         s = s..tostring(args[index])..'   '
+    --     end
+    --     -- 关闭控制台后，print值不在游戏内显示。
+    --     BJDebugMsg(s)
+    -- end
 end
 --阿七为2 ，英萌为0
 runtime.handle_level = 0
@@ -31,3 +31,25 @@ runtime.error_handle = function(msg)
     print(debug.traceback())
     print("---------------------------------------")
 end
+
+function sortpairs(t)
+    local mt
+    local func 
+    local sort = {}
+    for k, v in pairs(t) do
+        sort[#sort+1] = {k, v}
+    end
+    table.sort(sort, function (a, b)
+        return a[1] < b[1]
+    end)
+    local n = 1
+    return function()
+        local v = sort[n]
+        if not v then
+            return
+        end
+        n = n + 1
+        return v[1], v[2]
+    end
+end
+

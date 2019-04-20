@@ -81,7 +81,7 @@ end
 function mt:has_unit(str)
     -- print('打印当前野怪',self.current_creep)
     local u
-    for k,v in pairs(self.current_creep) do
+    for k,v in sortpairs(self.current_creep) do
         if v.type == str or v.name == str then 
             u = v
             break
@@ -130,7 +130,7 @@ function mt:random_creeps_datas(temp_type)
             self.current_creep[rand_name]['cnt'] = self.current_creep[rand_name]['cnt'] +1
         else 
             --保存当前生成的数据
-            for k,v in pairs(ac.table.UnitData[rand_name]) do
+            for k,v in sortpairs(ac.table.UnitData[rand_name]) do
                 if not self.current_creep[rand_name]  then 
                     self.current_creep[rand_name] = {}
                 end 
@@ -142,7 +142,7 @@ function mt:random_creeps_datas(temp_type)
 
         if self.used_food == self.all_food then 
             local result = ''
-            for k,v in pairs(self.current_creep) do
+            for k,v in sortpairs(self.current_creep) do
                 result = result ..v.name..'*'..tostring(v.cnt)..' '
             end   
             -- print('函数内的返回结果',result)
@@ -474,7 +474,7 @@ function mt:on_change_creep(unit,lni_data)
     data.attr_mul = lni_data.attr_mul
     data.food = lni_data.food
     --继承进攻怪lni 值
-    for k,v in pairs(data) do 
+    for k,v in sortpairs(data) do 
         unit.data[k] = v
     end    
   
@@ -483,7 +483,7 @@ function mt:on_change_creep(unit,lni_data)
         unit.exp = data.exp
         -- print(unit.category,data.category)
         unit.category = data.category
-        for k,v in pairs(data.attribute) do 
+        for k,v in sortpairs(data.attribute) do 
             unit:set(k,v)
         end
         --设置魔抗

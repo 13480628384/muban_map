@@ -45,7 +45,7 @@ function mt:on_add()
 
 	--调整属性
 	if self.attribute then
-		for k, v in pairs(self.attribute) do
+		for k, v in sortpairs(self.attribute) do
 			hero:add(k, v)
 		end
     end
@@ -66,7 +66,7 @@ function mt:on_remove()
 	
 	--调整属性
 	if self.attribute then
-		for k, v in pairs(self.attribute) do
+		for k, v in sortpairs(self.attribute) do
 			hero:add(k, -v)
 		end
     end

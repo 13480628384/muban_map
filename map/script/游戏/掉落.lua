@@ -4,7 +4,7 @@
 --quality_item={'白' = {'新手剑','新手戒指'},'蓝' = {..}}
 local quality_item ={}
 local all_item = {}
-for name,data in pairs(ac.table.ItemData) do 
+for name,data in sortpairs(ac.table.ItemData) do 
     local color = data.color 
     if color then 
         if data.item_type == '装备' or data.item_type == '消耗品'   then

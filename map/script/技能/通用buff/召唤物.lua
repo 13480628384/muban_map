@@ -29,7 +29,7 @@ function mt:on_add()
     end
     --设置属性
 	if self.attribute then
-		for k, v in pairs(self.attribute) do
+		for k, v in sortpairs(self.attribute) do
 			-- print('召唤物属性',k,v)
 			self.target:set(k, v)
 		end

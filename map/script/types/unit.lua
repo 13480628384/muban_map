@@ -1073,13 +1073,13 @@ function mt:create_illusion(p, no_item)
 	end
 
 	if self:is_hero() then 
-		for k, v in pairs(self.hero_data.attribute) do
+		for k, v in sortpairs(self.hero_data.attribute) do
 			if not finds(k,'力量','敏捷','智力')then
 				dummy:set(k, v)
 			end	
 		end
 
-		for k, v in pairs(self.hero_data.attribute) do
+		for k, v in sortpairs(self.hero_data.attribute) do
 			if finds(k,'力量','敏捷','智力')then
 				dummy:add(k, v)
 			end	
@@ -1088,7 +1088,7 @@ function mt:create_illusion(p, no_item)
 		--复制属性 1 复制与当前匹配的属性，如果是受光环影响 则最新属性将又受到光环、技能影响
 		--复制属性 2 一个一个属性复制，boss为喽喽的5倍，需要在这里不断加，代码直接加的都需要在这边添加
 		--先用属性 2 
-		for k, v in pairs(self.data.attribute) do
+		for k, v in sortpairs(self.data.attribute) do
 			dummy:set(k, v)
 		end
 		 --设置  属性倍数
@@ -1293,7 +1293,7 @@ function unit.init_unit(handle, p)
 	if data then
 		u.unit_type = data.unit_type
 		if data.attribute then
-			for k, v in pairs(data.attribute) do
+			for k, v in sortpairs(data.attribute) do
 				if not finds(k,'力量','敏捷','智力')then
 					u:set(k, v)
 				end	

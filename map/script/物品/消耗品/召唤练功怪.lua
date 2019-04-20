@@ -72,7 +72,7 @@ function mt:on_cast_start()
             unit.data = {}
         end    
         --继承进攻怪lni 值
-        for k,v in pairs(data) do 
+        for k,v in sortpairs(data) do 
             unit.data[k] = v
         end    
       
@@ -81,7 +81,7 @@ function mt:on_cast_start()
             unit.exp = data.exp
             -- print(unit.category,data.category)
             unit.category = data.category
-            for k,v in pairs(data.attribute) do 
+            for k,v in sortpairs(data.attribute) do 
                 unit:set(k,v)
             end
             --属性 （难度系数）

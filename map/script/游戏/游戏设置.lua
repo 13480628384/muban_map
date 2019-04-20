@@ -67,7 +67,7 @@ local function get_summon_mul(lv)
 	local life_mul = 1
 	local defence_mul = 1
 	local attack_mul = 1
-	for index,info in pairs(level_mul) do 
+	for index,info in sortpairs(level_mul) do 
 		if lv <= index and lv > info['最小范围']  then 
 			life_mul = info['生命']
 			defence_mul = info['护甲']

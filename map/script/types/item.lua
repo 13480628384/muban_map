@@ -526,7 +526,7 @@ function mt:on_add_state()
 	local data = ac.unit.attribute
 
 	local state = {}
-	for key in pairs(data) do 
+	for key in sortpairs(data) do 
 		local value 
 		if self.random then 
 			value = self.randm_data[key]
@@ -598,7 +598,7 @@ function mt:on_use_state()
 	local data = ac.unit.attribute
 
 	local state = {}
-	for key in pairs(data) do 
+	for key in sortpairs(data) do 
 		local value 
 		if self.random then 
 			value = self.randm_data[key]
@@ -1002,7 +1002,7 @@ function ac.item.create_item(name,poi,is)
 	
 	--在继承skill的属性(如果带技能的话,不存在技能时遍历一下也无所谓)
 	local data = ac.skill[name]
-	for k, v in pairs(data) do
+	for k, v in sortpairs(data) do
 		items[k] = v
 	end	
 
@@ -1010,7 +1010,7 @@ function ac.item.create_item(name,poi,is)
 	local data = ac.table.ItemData[name]
 	items.lni_data = data
 	if data then
-		for k, v in pairs(data) do
+		for k, v in sortpairs(data) do
 			items[k] = v
 		end
 	end
@@ -1106,14 +1106,14 @@ function item.create(name,pos)
 
 	--在继承skill的属性(如果带技能的话,不存在技能时遍历一下也无所谓)
 	local data = ac.skill[name]
-	for k, v in pairs(data) do
+	for k, v in sortpairs(data) do
 		items[k] = v
 	end	
 
 	--如果存在lni则继承lni的属性
 	local data = ac.table.ItemData[name]
 	if data then
-		for k, v in pairs(data) do
+		for k, v in sortpairs(data) do
 			items[k] = v
 		end
 	end

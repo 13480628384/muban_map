@@ -98,7 +98,5 @@ function mt:on_cast_shot()
         else
             self:add_item_count(1)    
         end    
-    end 
-
-
+    end
 end 

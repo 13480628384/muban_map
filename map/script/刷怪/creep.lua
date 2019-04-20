@@ -438,7 +438,7 @@ function mt:finish(is_unit_kill)
         self.timer:remove()
     end
     
-    for k,v in pairs(self.creep_timer) do
+    for k,v in sortpairs(self.creep_timer) do
          --print('移除计时器',k,v)
         if v then 
             v:remove()

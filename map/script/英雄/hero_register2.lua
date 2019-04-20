@@ -37,7 +37,7 @@ ac.game:event '玩家-注册英雄' (function(_, player, hero)
 		end 
 
 		--添加属性
-		for k, v in pairs(data.upgrade) do
+		for k, v in sortpairs(data.upgrade) do
 
 			if finds(k,'力量','敏捷','智力')then
 

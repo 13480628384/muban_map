@@ -193,5 +193,4 @@ ac.game:event '玩家-选择单位' (function(self, player, hero)
 	for skill in hero:each_skill '英雄' do 
 		skill:fresh()
 	end 
-
 end)
