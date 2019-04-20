@@ -26,7 +26,7 @@ mt{
     --售价
     gold = 250,
     --cd
-    cool = 0,
+    cool = 2.5,
     --物品详细介绍的title
     content_tip = '使用说明：'
     
@@ -34,9 +34,9 @@ mt{
     
 function mt:on_add()
     --全图随机刷 正式用
-    -- self.random_point =  ac.map.rects['刷怪']:get_point()
+    self.random_point =  ac.map.rects['刷怪']:get_point()
     --测试用
-    self.random_point = self.owner:get_point()
+    -- self.random_point = self.owner:get_point()
 end
 
 function mt:on_cast_start()

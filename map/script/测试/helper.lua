@@ -230,9 +230,9 @@ function helper:dtdj(lv)
 	local peon = p.peon
 	if peon then
 		local skill = peon:find_skill('荣耀称号', '英雄', true)
-		print(skill,10)
 		if skill then 
-			skill:set_level(lv)
+			skill.map_level = tonumber(lv)
+			skill:on_add()
 		end	
 	end
 end

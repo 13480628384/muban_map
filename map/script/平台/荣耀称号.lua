@@ -24,7 +24,7 @@ mt{
 ]],
     map_level = function(self,hero)
 		if self and self.owner and self.owner:get_owner() then 
-			return self.owner:get_owner():Map_GetMapLevel() or self.level or 0
+			return self.owner:get_owner():Map_GetMapLevel() 
 		end	
     end,    
 	--技能图标
@@ -58,6 +58,9 @@ function mt:on_add()
     local skill = self
     local hero = self.owner
     local p = hero:get_owner()
+    if self.map_level <=0 then 
+        self.map_level = 1
+    end     
     self:set_level(self.map_level)
     self.list = {}
     --加成到英雄身上
@@ -77,6 +80,13 @@ function mt:on_add()
         self:set('eff', hero:add_effect('overhead',self.effect3) )
 
     elseif self.map_level <10 then
+
+        self.active3 = '|cff00ff00' 
+        hero:add('智力',100)
+        hero:add('敏捷',100)
+        hero:add('力量',100)
+        hero:add('金币加成',5)
+
         self.active5 = '|cff00ff00' 
         hero:add('物品获取率',5)
         hero:add('经验加成',5)
@@ -87,6 +97,18 @@ function mt:on_add()
         end    
         self:set('eff', hero:add_effect('overhead',self.effect5) )
     elseif self.map_level <15 then
+
+        self.active3 = '|cff00ff00' 
+        hero:add('智力',100)
+        hero:add('敏捷',100)
+        hero:add('力量',100)
+        hero:add('金币加成',5)
+
+        self.active5 = '|cff00ff00' 
+        hero:add('物品获取率',5)
+        hero:add('经验加成',5)
+        hero:add('金币加成',5)
+
         self.active10 = '|cff00ff00' 
         hero:add('攻击%',25)
         hero:add('对BOSS额外伤害',50)
@@ -96,6 +118,22 @@ function mt:on_add()
         end    
         self:set('eff', hero:add_effect('overhead',self.effect10) )
     elseif self.map_level <25 then
+
+        self.active3 = '|cff00ff00' 
+        hero:add('智力',100)
+        hero:add('敏捷',100)
+        hero:add('力量',100)
+        hero:add('金币加成',5)
+
+        self.active5 = '|cff00ff00' 
+        hero:add('物品获取率',5)
+        hero:add('经验加成',5)
+        hero:add('金币加成',5)
+
+        self.active10 = '|cff00ff00' 
+        hero:add('攻击%',25)
+        hero:add('对BOSS额外伤害',50)
+
         self.active15 = '|cff00ff00' 
         hero:add('智力',1000)
         hero:add('敏捷',1000)
@@ -106,6 +144,28 @@ function mt:on_add()
         end    
         self:set('eff', hero:add_effect('overhead',self.effect15) )
     else
+        
+        self.active3 = '|cff00ff00' 
+        hero:add('智力',100)
+        hero:add('敏捷',100)
+        hero:add('力量',100)
+        hero:add('金币加成',5)
+
+        self.active5 = '|cff00ff00' 
+        hero:add('物品获取率',5)
+        hero:add('经验加成',5)
+        hero:add('金币加成',5)
+
+        self.active10 = '|cff00ff00' 
+        hero:add('攻击%',25)
+        hero:add('对BOSS额外伤害',50)
+
+        self.active15 = '|cff00ff00' 
+        hero:add('智力',1000)
+        hero:add('敏捷',1000)
+        hero:add('力量',1000)
+        hero:add('金币加成',50)
+
         self.active25 = '|cff00ff00' 
         hero:add('智力%',15)
         hero:add('敏捷%',15)
@@ -118,7 +178,6 @@ function mt:on_add()
     end    
 
 end
-mt.on_upgrade = mt.on_add
 function mt:on_cast_start()
     -- if self.is_choosed then 
     --     player:sendMsg("已经选择称号，不可修改")
