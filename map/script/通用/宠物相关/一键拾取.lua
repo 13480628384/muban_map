@@ -20,7 +20,7 @@ mt{
 	target_type = ac.skill.TARGET_TYPE_NONE,
 
 	--施法范围
-	area = 400,
+	area = 500,
 
 	--cd
 	cool = 1,
