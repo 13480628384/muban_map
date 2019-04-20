@@ -28,7 +28,7 @@ local function get_summon_mul(lv)
 	local level_mul = {
 		[10] ={ 
 			['最小范围'] = 0,
-			['生命'] = 25, 
+			['生命'] = 20, 
 			['护甲'] = 0.001, 
 			['攻击'] = 0.5, 
 		},

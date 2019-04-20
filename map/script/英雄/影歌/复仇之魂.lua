@@ -24,7 +24,8 @@ mt{
 	chance = 5,
 
 	--持续时间
-	time = 30,
+	time = 25,
+
 	attr_mul = 1,
 
 	--特效模型
