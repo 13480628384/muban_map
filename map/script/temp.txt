@@ -152,6 +152,7 @@ D:\one-map\muban_map\map\script\平台\荣耀称号.lua
 D:\one-map\muban_map\map\script\平台\道具\init.lua
 D:\one-map\muban_map\map\script\平台\道具\双倍积分卡.lua
 D:\one-map\muban_map\map\script\平台\道具\后羿.lua
+D:\one-map\muban_map\map\script\平台\道具\大天使加百列.lua
 D:\one-map\muban_map\map\script\平台\道具\天使之光.lua
 D:\one-map\muban_map\map\script\平台\道具\小翅膀.lua
 D:\one-map\muban_map\map\script\平台\道具\影歌.lua

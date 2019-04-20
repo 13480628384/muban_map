@@ -48,7 +48,8 @@ function mt:on_cast_shot()
 
 		local point = hero:get_point()-{hero:get_facing(),100}--在英雄附近 100 到 400 码 随机点
 		local unit = hero:get_owner():create_unit(self.unit_name,point)	
-        unit.unit_type = 'unit'
+		unit.unit_type = 'unit'
+		unit:remove_ability 'AInv'
         local data = {}
         data.attribute ={
             ['攻击'] = hero:get('攻击'),

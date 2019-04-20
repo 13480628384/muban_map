@@ -180,6 +180,16 @@ function mt:add_content()
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000 通关积分+'..value..' |r',10)
         if ac.jiami then 
             ac.jiami(player,'jifen',(value or 0))
+        end  
+    elseif rand_name == '十连挖' then
+        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000 十连挖 |r',10)
+        if not player.flag_shilianwan then 
+            player.flag_shilianwan = true
+            --添加东西给英雄
+            for i=1,10 do 
+                self:add_content()
+            end   
+            player.flag_shilianwan = false 
         end    
     end
    

@@ -182,7 +182,7 @@ function mt:showSysWarning(msg)
     local sys_sound = jass.CreateSoundFromLabel("InterfaceError", false, false, false, 10, 10);
     if(jass.GetLocalPlayer() == self.handle) then
         if (msg ~= '') and (msg ~= nil) then
-            jass.ClearTextMessages();
+            -- jass.ClearTextMessages();
             jass.DisplayTimedTextToPlayer(self.handle, 0.5, -1, 2, '|cffffcc00' .. msg .. '|r');
         end
         jass.StartSound(sys_sound);
