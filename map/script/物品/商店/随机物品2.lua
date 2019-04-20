@@ -22,7 +22,8 @@ target_type = ac.skill.TARGET_TYPE_NONE,
 cool = 0,
 
 --购买价格
-jifen = 500,
+jifen = 1000,
+
 --最大购买次数
 max_buy_cnt = 20,
 

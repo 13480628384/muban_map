@@ -26,7 +26,8 @@ cool = 0,
 max_buy_cnt = 20,
 
 --购买价格
-jifen = 750,
+jifen = 1500,
+
 auto_fresh_tip = true,
 --物品技能
 is_skill = true,
