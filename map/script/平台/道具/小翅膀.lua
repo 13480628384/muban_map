@@ -34,11 +34,11 @@ auto_fresh_tip = true,
 --物品技能
 is_skill = true,
 --金币加成
-gold_mul = 5,
+gold_mul = 10,
 --物品获取率
-item_mul = 5,
+item_mul = 10,
 --经验加成
-exp_mul = 5,
+exp_mul = 10,
 
 --特效翅膀
 effect = [[QX_chibang_d.mdx]],
