@@ -9,11 +9,11 @@ level = 1,
 art = [[icon\jieke.blp]],
 
 --说明
-tip = [[消耗 |cff00ff00100000通关积分|r 兑换 |cffdf19d0亚瑟王的皮肤-杰克|r
+tip = [[消耗 |cff00ff00 %jifen% 通关积分|r 兑换 |cffdf19d0亚瑟王的皮肤-杰克|r
 |cffff0000兑换后可立即激活，且永久拥有|r  
 
 |cffFFE799增加属性：|r 
-|cffffff00+10%|r 物品获取率
+|cffffff00+ %item_mul% %|r 物品获取率
 |cffffff00强化|r 剑刃风暴]],
 
 --物品类型

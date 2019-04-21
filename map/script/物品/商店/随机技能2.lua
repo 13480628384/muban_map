@@ -9,7 +9,7 @@ level = 1,
 art = [[other\suijijineng.blp]],
 
 --说明
-tip = [[消耗 |cff00ff00750通关积分|r 兑换 一本随机技能书]],
+tip = [[消耗 |cff00ff00 %jifen% 通关积分|r 兑换 一本随机技能书]],
 
 content_tip = '物品说明:',
 

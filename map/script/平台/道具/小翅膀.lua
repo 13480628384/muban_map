@@ -8,13 +8,13 @@ level = 1,
 art = [[icon\xiaochibang.blp]],
 
 --说明
-tip = [[消耗 |cff00ff007500通关积分|r 兑换 小翅膀
+tip = [[消耗 |cff00ff00 %jifen% 通关积分|r 兑换 小翅膀
 |cffff0000兑换后可立即激活，且可在宠物处切换翅膀|r  
 
 |cffFFE799增加属性：|r 
-|cffffff00+5%|r 金币加成
-|cffffff00+5%|r 经验加成
-|cffffff00+5%|r 物品获取率]],
+|cffffff00+ %gold_mul% %|r 金币加成
+|cffffff00+ %exp_mul% %|r 经验加成
+|cffffff00+ %item_mul% %|r 物品获取率]],
 
 --物品类型
 item_type = '神符',

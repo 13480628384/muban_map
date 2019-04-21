@@ -8,7 +8,7 @@ level = 1,
 art = [[other\suiji101.blp]],
 
 --说明
-tip = [[消耗 |cff00ff00500通关积分|r 兑换 一个随机物品,最多购买20次]],
+tip = [[消耗 |cff00ff00 %jifen% 通关积分|r 兑换 一个随机物品,最多购买20次]],
 
 content_tip = '物品说明:',
 
