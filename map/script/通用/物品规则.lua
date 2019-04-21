@@ -166,12 +166,15 @@
             u:get_owner():sendMsg('杀敌数不够')
             return
         end
-        if jifen < jifens then
-            u:get_owner():sendMsg('积分不够')
-            return
-        end
+        --以免积分负数购买不了其他物品。
+        if jifens > 0 then 
+            if jifen < jifens then
+                u:get_owner():sendMsg('积分不够')
+                return
+            end
+        end    
         if it.max_buy_cnt and it.player_buy_cnt then
-            if it.player_buy_cnt[player] > (it.max_buy_cnt or 9999999) then
+            if it.player_buy_cnt[player] and (it.player_buy_cnt[player] > (it.max_buy_cnt or 9999999)) then
                 u:get_owner():sendMsg('超出购买上限')
                 return
             end
@@ -201,7 +204,8 @@
 
             if jifens > 0 then 
                 --扣除积分
-                player:event_notify('积分变化',player,-jifens)
+                ac.jiami(player,'jifen',-jifens)
+                -- player:event_notify('积分变化',player,-jifens)
                 --保存服务器存档 永久性的物品
                 -- print(it.name)
                 local key = ac.get_mallkey_byname(it.name)
