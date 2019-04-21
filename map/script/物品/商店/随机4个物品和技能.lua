@@ -7,8 +7,14 @@ local function fresh_shop_item(shop)
         if not rand_name then 
             return
         end    
-        -- print('商店随机4物品：',rand_name,#ac.quality_item)
+        -- for k,v in sortpairs(ac.quality_item) do
+        --     print('商店随机4物品：',k,#v)
+        --     -- for _,v1 in ipairs(v) do
+        --     --     print(k,v1)
+        --     -- end    
+        -- end    
         local list = ac.quality_item[rand_name]   
+        -- print('商店随机4物品：',rand_name,#list)
         -- local list = {'敏捷丹','敏捷丹','敏捷仙丹','巫术丹','召唤丹'} 物品少于4种会死循环
         --添加 
         local name 

@@ -84,7 +84,10 @@ function mt:on_add()
     local hero = self.owner
     local player = hero:get_owner()
     local item = self 
- 
+    
+    hero:add('攻击',self.attack)
+    hero:add('生命上限',self.life)
+    hero:add('护甲',self.defence)
 
     if not self.trg then 
         self.trg = ac.game:event '单位-杀死单位' (function(trg, killer, target)

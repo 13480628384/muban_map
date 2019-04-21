@@ -250,6 +250,11 @@ function helper:jifen(jf)
 	local jifen  = tonumber(ac.GetServerValue(p,'jifen'))
 	print('服务器积分：',jifen)
 end	
+--ac.save_jifen
+function helper:save_jifen()
+	ac.save_jifen()
+end	
+
 
 --服务器存档 保存 
 function helper:save(key,value)

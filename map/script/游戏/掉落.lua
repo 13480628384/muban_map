@@ -4,21 +4,42 @@
 --quality_item={'白' = {'新手剑','新手戒指'},'蓝' = {..}}
 local quality_item ={}
 local all_item = {}
-for name,data in sortpairs(ac.table.ItemData) do 
+for name,data in pairs(ac.table.ItemData) do 
     local color = data.color 
     if color then 
         if data.item_type == '装备' or data.item_type == '消耗品'   then
-            local list = quality_item[color] or {}
-            table.insert(list,name)
-            quality_item[color] = list 
+            if not quality_item[color] then 
+                quality_item[color] = {}
+            end    
+            table.insert(quality_item[color],name)
             --打印 可合成或是掉落的物品 
             -- print(name,color)
             table.insert(all_item,name)
         end    
     end 
-end 
+end
+
 ac.quality_item = quality_item
 ac.all_item = all_item
+for k,v in sortpairs(ac.quality_item) do 
+    table.sort(v,function (strA,strB)
+        return strA<strB
+    end)
+end    
+table.sort(ac.all_item,function (strA,strB)
+    return strA<strB
+end)
+
+
+for k,v in sortpairs(ac.quality_item) do
+    print('物品个数：',k,#v)
+    for _,v1 in ipairs(v) do
+        print(k,v1)
+    end    
+end    
+
+
+
 --英雄技能，钥匙怪掉落表
 ac.skill_list2 = ac.skill_list2
 

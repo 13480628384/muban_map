@@ -63,23 +63,24 @@ ac.game:event '积分变化'(function(_,p,value)
 end)
 
 local function save_jifen()
+    --只保存一次
+    local value
+    value = (ac.total_putong_jifen - (ac.old_total_putong_jifen or 0)) * (ac.g_game_degree or 1) / get_player_count() 
+    ac.old_total_putong_jifen = ac.total_putong_jifen
+
     for i=1,10 do
         local p = ac.player[i]
         if p:is_player() then
-            --只保存一次
-            local value
-          
-            value = (ac.total_putong_jifen - (ac.old_total_putong_jifen or 0)) * (ac.g_game_degree or 1) / get_player_count() 
             -- (p.putong_jifen - (p.old_putong_jifen or 0)) * (p.hero:get '积分加成' + (ac.g_game_degree or 1) )
-            value = value * (p.hero:get '积分加成' + 1)
+            local p_value = value * (p.hero:get '积分加成' + 1)
             -- print('当前回合最终加的积分',value,'总积分',ac.total_putong_jifen,'难度倍数',ac.g_game_degree,'在线玩家数',get_player_count(),'积分加成',p.hero:get '积分加成')
 
             local total_value = (ac.total_putong_jifen* (ac.g_game_degree or 1)) / get_player_count() * (p.hero:get '积分加成' + 1)
             -- print('累计获得的积分',total_value)
             -- end 
-            ac.old_total_putong_jifen = ac.total_putong_jifen
+            -- print('本回合保存积分：',p,p_value)
             --保存积分
-            ac.jiami(p,'jifen',value)
+            ac.jiami(p,'jifen',p_value)
 
             --修改排行榜的积分
             if p:is_self() then
