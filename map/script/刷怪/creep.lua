@@ -128,7 +128,7 @@ function creep:find_creep_by_region(region_str)
     local name 
     local ceps = {}
     
-    for k,v in pairs(creep.all_creep) do
+    for k,v in sortpairs(creep.all_creep) do
         -- print(k,v.region_str ,region_str)
         if v.region_str == region_str then 
             name = k
@@ -296,7 +296,7 @@ function mt:next()
         return 
     end    
     -- creeps_datas[u] = count ，单位，数量
-    for k,v in pairs(creeps_datas) do 
+    for k,v in sortpairs(creeps_datas) do 
         -- print('检测单位名称',k,v)
         cnt = cnt +1 
         local name = k

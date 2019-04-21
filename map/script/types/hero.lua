@@ -205,13 +205,13 @@ function player.__index.createHero(p, name, where, face)
 	u.hero_data = hero_data
 	-- print(u.name,u:get('力量'),u:get('敏捷'),u:get('智力'))
 	-- 属性已经在创建单位时初始化所以不用再重复
-	for k, v in pairs(hero_data.attribute) do
+	for k, v in sortpairs(hero_data.attribute) do
 		if not finds(k,'力量','敏捷','智力')then
 			u:set(k, v)
 		end	
 	end
 
-	for k, v in pairs(hero_data.attribute) do
+	for k, v in sortpairs(hero_data.attribute) do
 		if  finds(k,'力量','敏捷','智力')then
 			u:add(k, v)
 		end	
@@ -224,6 +224,9 @@ end
 function hero.create(name)
 	return function(data)
 		hero.hero_datas[name] = data
+		if data == nil then 
+			print(name,'的单位数据是空的',debug.traceback())
+		end 
 		--继承英雄属性
 		setmetatable(data, hero)
 		data.__index = data

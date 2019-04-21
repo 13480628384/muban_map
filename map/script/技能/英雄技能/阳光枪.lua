@@ -58,7 +58,7 @@ function mt:atk_pas_shot(damage)
 		size = 1,
 	}
 	if mvr then
-		for key,value in pairs(skill.effect_data) do 
+		for key,value in sortpairs(skill.effect_data) do 
 			mvr.mover:add_effect(key,value)
 		end	
 		function mvr:on_hit(u)
@@ -84,7 +84,7 @@ function mt:on_add()
 			return 
 		end 
 		--添加效果
-		for key,value in pairs(skill.effect_data) do 
+		for key,value in sortpairs(skill.effect_data) do 
 			hero:add_effect(key,value):remove()
 		end	
 	

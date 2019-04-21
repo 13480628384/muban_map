@@ -3,8 +3,8 @@ local console = require 'jass.console'
 
 local tostring = tostring
 local debug    = debug
---开启控制台 全局测试 true 开启 打包地图前需要先调为 false 
-console.enable = true
+--开启控制台 全局测试 true 开启 上传地图前需要先调为 false 
+console.enable = false
 global_test = console.enable
 
 if console.enable then 

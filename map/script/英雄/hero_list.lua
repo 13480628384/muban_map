@@ -27,6 +27,9 @@ function load_heroes()
 		-- print(name)
 		local data = ac.table.UnitData[name]
 		-- print(data)
+		if data == nil then 
+			prnit('缺少单位数据',name,debug.traceback())
+		end 
 		local hero_data = ac.hero.create(name)(data)
 		-- print(hero_data)
 		if hero_data ~= nil then 

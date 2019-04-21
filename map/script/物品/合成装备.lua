@@ -9,6 +9,16 @@ for name,data in pairs(ac.table.ItemData) do
         table.insert(list,name)
     end 
 end 
+
+for color,list in pairs(quality_item) do 
+    table.sort(list,function (a,b)
+        return a < b
+    end)
+end 
+
+
+
+
 -- for k,v in pairs(quality_item) do
 --     print(k,v[1])
 -- end
@@ -141,7 +151,7 @@ local function streng_item(alltable,unit,it)
 
         for ti=1,max_cnt do 
             -- print(source_names[ti])   
-            for k,v in pairs(source_names[ti]) do
+            for k,v in sortpairs(source_names[ti]) do
                 local stack = find_item(unit_item_list,k,false)
                 if not stack then
                     is_streng_suc =false 
@@ -171,7 +181,7 @@ local function streng_item(alltable,unit,it)
             -- print_item(unit_item_list)
             local del_item ={} 
             for ti=1,max_cnt do 
-                for k,v in pairs(source_names[ti]) do
+                for k,v in sortpairs(source_names[ti]) do
                     local u_it = u:has_item(k) 
                     
                     --不是即将获得的物品，就删掉单位身上的

@@ -216,7 +216,7 @@ local function start()
 			return
 		end
 		local list = {}
-		for name, _ in pairs(hero_types) do
+		for name, _ in sortpairs(hero_types) do
 			if name ~= '金木研' and name ~= '更木剑八' then
 				table.insert(list, name)
 			end

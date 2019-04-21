@@ -81,7 +81,7 @@ function mt:on_cast_shot()
 
         else 
             --清空混合图标
-            for key,value in pairs(self.mark) do 
+            for key,value in sortpairs(self.mark) do 
                 value:remove()
             end
             -- self:set_art(self.art)

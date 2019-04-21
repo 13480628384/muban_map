@@ -33,6 +33,10 @@ for name,data in pairs(ac.table.ItemData) do
     end 
 end 
 
+table.sort(cast_item,function (a,b)
+    return a < b
+end)
+
 function mt:on_add()
     local skill = self
     local hero = self.owner 

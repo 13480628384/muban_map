@@ -193,9 +193,16 @@ ac.game:event '单位-创建' (function(_,unit)
 end)
 
 ac.game:event '游戏-开始' (function()
-
-    --注册事件
+    
+    local list = {}
     for hero,_ in pairs(ac.hero.all_heros) do
+        table.insert(list,hero)
+    end 
+    table.sort(list,function (a,b)
+        return a:get_name() < b:get_name()
+    end)
+    --注册事件
+    for _,hero in ipairs(list) do
         local p = hero:get_owner()
         if not p:is_player() then 
             return

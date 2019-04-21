@@ -1,5 +1,6 @@
 
 log = require 'jass.log'
+local jass = require 'jass.common'
 local log = log
 
 local function split(str, p)
@@ -8,7 +9,7 @@ local function split(str, p)
 	return rt
 end
 
-log.path = '日志\\' .. split(log.path, '\\')[2]
+log.path = '日志\\' .. '玩家' .. tostring(jass.GetPlayerId(jass.GetLocalPlayer()) + 1).. '_' .. split(log.path, '\\')[2]
 log.debug '日志系统装载完毕'
 
 local std_print = print

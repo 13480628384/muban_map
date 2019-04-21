@@ -147,6 +147,7 @@ D:\one-map\muban_map\map\script\平台\init.lua
 D:\one-map\muban_map\map\script\平台\save.lua
 D:\one-map\muban_map\map\script\平台\商城.lua
 D:\one-map\muban_map\map\script\平台\存档.lua
+D:\one-map\muban_map\map\script\平台\宠物天赋.lua
 D:\one-map\muban_map\map\script\平台\翅膀管理.lua
 D:\one-map\muban_map\map\script\平台\荣耀称号.lua
 D:\one-map\muban_map\map\script\平台\道具\init.lua

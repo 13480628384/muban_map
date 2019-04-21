@@ -21,9 +21,9 @@ end
 
 ac.quality_item = quality_item
 ac.all_item = all_item
-for k,v in sortpairs(ac.quality_item) do 
+for k,v in pairs(quality_item) do 
     table.sort(v,function (strA,strB)
-        return strA<strB
+        return strA < strB
     end)
 end    
 table.sort(ac.all_item,function (strA,strB)
@@ -31,12 +31,12 @@ table.sort(ac.all_item,function (strA,strB)
 end)
 
 
-for k,v in sortpairs(ac.quality_item) do
-    print('物品个数：',k,#v)
-    for _,v1 in ipairs(v) do
-        print(k,v1)
-    end    
-end    
+-- for k,v in sortpairs(ac.quality_item) do
+--     print('物品个数：',k,#v)
+--     for _,v1 in ipairs(v) do
+--         print(k,v1)
+--     end    
+-- end    
 
 
 

@@ -80,7 +80,7 @@ function mt:atk_pas_shot(damage)
 					damage_type = skill.damage_type,
 				}
 				--添加效果
-				for key,value in pairs(skill.effect_data) do 
+				for key,value in sortpairs(skill.effect_data) do 
 					u:add_effect(key,value):remove()
 				end	
 			end

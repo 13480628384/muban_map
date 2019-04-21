@@ -27,12 +27,21 @@ ac.game:event '玩家-聊天' (function(self, player, str)
 	
     if str == 'qlwp' then
 		--开始清理物品
-		for _,v in pairs(ac.item.item_map) do 
-			--没有所有者 ，视为在地图上
-			-- print(v.name,v.owner)
+		local tbl = {}
+		for _,v in pairs(ac.item.item_map) do
+
 			if not v.owner  then 
-				v:item_remove()
+				table.insert(tbl,v)
 			end	
 		end
+
+		table.sort(tbl,function (a,b)
+			local p = ac.point(0,0)
+			return a:get_point() * p <  b:get_point() * p
+		end)
+
+		for index,item in ipairs(tbl) do 
+			item:item_remove()
+		end 
 	end  
 end)	

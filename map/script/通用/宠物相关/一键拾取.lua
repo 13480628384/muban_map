@@ -48,7 +48,7 @@ function mt:on_cast_shot()
     -- self.eff = ac.effect(point, self.effect, 270, 1,'origin')
 
     --开始选择物品
-    for _,v in pairs(ac.item.item_map) do 
+    for _,v in sortpairs(ac.item.item_map) do 
         -- 没有所有者 ，视为在地图上
         -- 在地图上 被隐藏的，一般为默认切换背包时的装备 或者 为添加物品给英雄，没有添加成功
         if not v.owner  then 

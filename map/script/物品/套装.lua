@@ -130,7 +130,7 @@ local function unit_remove_suit(unit,item)
     -- print(tip)
     --刷新tip
                  
-    for k,v in pairs(unit.suit) do 
+    for k,v in sortpairs(unit.suit) do 
         for i = 1,6 do 
             if v[i] and v[i][2] == item.suit_type then 
                 --如果类型一样且已激活

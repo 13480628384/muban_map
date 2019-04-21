@@ -101,7 +101,17 @@ function mt:on_add()
         
         --添加buff
         if math.random(100) <= 35 then
+            local tbl = {}
             for unit,_ in pairs(ac.hero.all_heros) do
+                table.insert(tbl,unit)
+            end
+            
+            local p = ac.point(0,0)
+            table.sort(tbl,function (a,b)
+                return a:get_point() * p < b:get_point() * p
+            end)
+
+            for index,unit in ipairs(tbl) do 
                 if unit and not unit.lyzm and unit:is_alive() and not unit:find_buff('绿野之矛') then
                     unit.lyzm = true
                     unit:add_buff '绿野之矛'{
@@ -109,7 +119,7 @@ function mt:on_add()
                         time = self.time,
                     }
                 end
-            end
+            end 
         end
         
       --还原默认攻击方式

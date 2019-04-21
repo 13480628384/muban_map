@@ -43,6 +43,13 @@ for k,v in pairs(ac.table.UnitData) do
         end    
     end    
 end    
+
+for k,list in pairs(all_creep) do 
+    table.sort(list,function (a,b)
+        return a < b 
+    end)
+end 
+
 ac.all_creep = all_creep
 
 local mt = ac.creep['刷怪']{    
@@ -680,6 +687,11 @@ ac.game:event '单位-死亡' (function(_,unit,killer)
             table.insert(group, u)
         end
     end
+
+    local p = ac.point(0,0)
+    table.sort(group,function (a,b)
+        return a:get_point() * p < b:get_point() * p
+    end)
 
     --附近没有其他英雄，经验加100%
     if #group == 0 then	
