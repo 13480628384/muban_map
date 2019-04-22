@@ -45,7 +45,11 @@ function mt:on_cast_start()
 	-- print()
 	-- print(it.owner)
 	-- local item = ac.item.create_item('新手剑',ac.point(0,0))
-	hero:add_item(it,true)
+	if hero:is_alive() then 
+		hero:add_item(it,true)
+	else
+		it:setPoint(hero:get_point())
+	end	
    
 end
 

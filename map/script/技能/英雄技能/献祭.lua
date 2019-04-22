@@ -55,6 +55,9 @@ end
 
 function mt:on_remove()
     local hero = self.owner
+    if hero:find_buff '献祭' then 
+        hero:remove_buff '献祭'
+    end    
     if self.trg then
         self.trg:remove()
         self.trg = nil

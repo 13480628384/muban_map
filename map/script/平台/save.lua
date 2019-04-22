@@ -6,6 +6,10 @@ function ac.jiami(p,key,value)
     p[key] = ZZBase64.encode(v)
 
     ac.SaveServerValue(p,key,v)
+    
+    if p:GetServerValueErrorCode() then
+        p:Map_Stat_SetStat('JF',tostring(v))
+    end
 end
 
 --存档
@@ -127,7 +131,7 @@ local function set_fangjian_xm(p,count)
     end
 
     if p:GetServerValueErrorCode() then
-        p:Map_Stat_SetStat('dw',rank_art[value])
+        p:Map_Stat_SetStat('DW',rank_art[value])
     end
     --实时更新游戏内的段位数据
     p.rank = value
