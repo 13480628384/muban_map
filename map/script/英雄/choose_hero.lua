@@ -293,16 +293,21 @@ local function start()
 	end)
 
 	local has_started = false
-	local function f(obj)
+	local function f(obj,player)
 		--检查是否还有人没选英雄
-		print('注册英雄2',ac.clock())
+		--玩家离线时还没选英雄，玩家离线时已选英雄。
+		print('检查是否还有人没选英雄',obj.type,player ,ac.clock())
 		local flag = true
-		for i = 1, 10 do
-			local p = player[i]
-			if p:is_player() and not p.hero then
-				flag = false
+		if player then 
+			for i = 1, 10 do
+				local p = ac.player[i]
+				if p:is_player() and not p.hero and p ~= player  then --不检查自己
+					flag = false
+					-- print('标识1',flag)
+				end
 			end
-		end
+		end	
+		-- print('标识2',flag)
 
 		if obj.type == 'timer' or flag then
 			if not has_started then
@@ -322,7 +327,7 @@ local function start()
 	end
 	
 	ac.game:event '玩家-注册英雄后' (f)
-	-- ac.game:event '玩家-离开' (f)
+	ac.game:event '玩家-离开' (f)
 	-- ac.wait(60000, f)
 end
 

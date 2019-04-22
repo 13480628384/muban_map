@@ -346,6 +346,7 @@ ac.game:event '物品-合成失败' (function(trg,player,new_item, source_names)
     if math.random(1,100)<=rate and not ac.unlucky  then 
         ac.unlucky = player
         player.unlucky = true
+        player.is_show_nickname = '(衰人)'
         local hero = player.hero
         hero:add('力量',10000)
         hero:add('敏捷',10000)

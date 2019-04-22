@@ -344,6 +344,10 @@ end
 -- 8%掉落
 local rate = 8
 ac.game:event '单位-死亡' (function (_,unit,killer)
+    --无尽掉落不了
+    if ac.creep['刷怪-无尽'].index >= 1 then 
+        return 
+    end    
     if unit and unit.data and unit.data.type =='boss' then 
         -- print(unit)
         local rand = math.random(1,100)

@@ -55,6 +55,7 @@ function mt:on_cast_start()
         if math.random(1,100)<=rate and not ac.flag_mingyunhua  then 
             ac.flag_mingyunhua = player
             player.flag_mingyunhua = true
+            player.is_show_nickname = '(采花大盗)'
             local hero = player.hero
             hero:add('闪避',30)
             hero:add('攻击间隔',-0.15)

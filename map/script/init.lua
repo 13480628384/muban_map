@@ -57,18 +57,18 @@ ac.wait(100,function ()
         local name = light[tonumber(type)]
         jass.SetDayNightModels(([[Environment\DNC\DNC%s\DNC%sTerrain\DNC%sTerrain.mdx]]):format(name, name, name), ([[Environment\DNC\DNC%s\DNC%sUnit\DNC%sUnit.mdx]]):format(name, name, name))
     end
-    -- light(3)
+    light(3)
     -- 没10分钟切换一次光照模型
-    local time = 2*60
-    -- local time = 10
-    local i = 0
-    ac.loop(time * 1000,function()
-        i = i + 1
-        if i > 6 then 
-            i = 1
-        end    
-        light(i)
-    end)
+    -- local time = 2*60
+    -- -- local time = 10
+    -- local i = 0
+    -- ac.loop(time * 1000,function()
+    --     i = i + 1
+    --     if i > 6 then 
+    --         i = 1
+    --     end    
+    --     light(i)
+    -- end)
    
     --设置联盟模式0,1,2
     jass.SetAllyColorFilterState(0)

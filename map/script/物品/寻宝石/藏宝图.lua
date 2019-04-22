@@ -107,6 +107,7 @@ function mt:add_content()
         if math.random(1,100)<=rate and not ac.flag_wabao  then 
             -- ac.flag_wabao = player
             -- player.flag_wabao = true
+            player.is_show_nickname = '(挖宝达人)'
             local hero = player.hero
             hero:addGold(88888)
             hero:addXp(88888)

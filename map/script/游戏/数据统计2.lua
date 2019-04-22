@@ -71,6 +71,7 @@ local rank_art = {
 }
 
 local rank_art = {'黑铁','黄铜','白银','黄金','铂金','钻石','大师','王者'}
+ac.player_list = get_player_list()
 --计算KDA
 local function get_kda()
     --杀敌数
@@ -95,7 +96,7 @@ local function get_kda()
     end
 
     local t = {}
-    local list = get_player_list()
+    local list = ac.player_list
     for i,p in ipairs(list) do
         local a = 0
         local b = 0
@@ -138,7 +139,7 @@ local function get_kda()
         local id = t[i].id
         local p = ac.player[id]
         --玩家名
-        local p_name = p:get_name()..(p.unlucky and '(衰人)' or '' )..' '
+        local p_name = p:get_name()..(p.is_show_nickname  or '' )..' '
         ranking.ui.player[i]:set_text(p_name)
         --段位
         ranking.ui.rank[i]:set_text(rank_art[p.rank])

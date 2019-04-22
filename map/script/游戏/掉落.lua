@@ -128,7 +128,8 @@ local reward = {
             return 
         end 
         local name = list[math.random(#list)]
-        if not is_on_hero then 
+        --英雄死亡时 掉落在地上
+        if not is_on_hero or (not hero:is_alive()) then 
             local item = ac.item.create_item(name,unit:get_point())
             item_self_skill(item,hero)
         else
@@ -144,7 +145,8 @@ local reward = {
             return 
         end 
         local name = list[math.random(#list)]
-        if not is_on_hero then 
+        --英雄死亡时 掉落在地上
+        if not is_on_hero or (not hero:is_alive()) then 
             local item = ac.item.create_item(name,unit:get_point())
             item_self_skill(item,hero)
         else
@@ -161,7 +163,8 @@ local reward = {
             return 
         end 
         local name = list[math.random(#list)]
-        if not is_on_hero then 
+        --英雄死亡时 掉落在地上
+        if not is_on_hero or (not hero:is_alive()) then 
             local item = ac.item.create_item(name,unit:get_point())
             item_self_skill(item,hero)
         else
@@ -177,7 +180,8 @@ local reward = {
             return 
         end 
         local name = list[math.random(#list)]
-        if not is_on_hero then 
+        --英雄死亡时 掉落在地上
+        if not is_on_hero or (not hero:is_alive()) then 
             local item = ac.item.create_item(name,unit:get_point())
             item_self_skill(item,hero)
         else
@@ -192,7 +196,8 @@ local reward = {
             return 
         end 
         local name = list[math.random(#list)]
-        if not is_on_hero then 
+        --英雄死亡时 掉落在地上
+        if not is_on_hero or (not hero:is_alive()) then 
             local item = ac.item.create_skill_item(name,unit:get_point())
             item_self_skill(item,hero)
         else
@@ -202,7 +207,8 @@ local reward = {
     end,
     ['吞噬丹'] = function (player,hero,unit,is_on_hero)
         local name = '吞噬丹'
-        if not is_on_hero then 
+        --英雄死亡时 掉落在地上
+        if not is_on_hero or (not hero:is_alive()) then 
             local item = ac.item.create_item(name,unit:get_point())
             item_self_skill(item,hero)
         else
@@ -212,7 +218,8 @@ local reward = {
     end,
     ['召唤boss'] = function (player,hero,unit,is_on_hero)
         local name = '召唤boss'
-        if not is_on_hero then 
+        --英雄死亡时 掉落在地上
+        if not is_on_hero or (not hero:is_alive()) then 
             local item = ac.item.create_item(name,unit:get_point())
             item_self_skill(item,hero)
         else
@@ -222,7 +229,8 @@ local reward = {
     end,
     ['召唤练功怪'] = function (player,hero,unit,is_on_hero)
         local name = '召唤练功怪'
-        if not is_on_hero then 
+        --英雄死亡时 掉落在地上
+        if not is_on_hero or (not hero:is_alive()) then 
             local item = ac.item.create_item(name,unit:get_point())
             item_self_skill(item,hero)
         else
