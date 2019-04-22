@@ -12,4 +12,12 @@ for i = 1, 4 do
 		--不自动刷新文本
 		auto_fresh_tip = false,
 	}
+	-- function mt:on_add()
+	-- 	print('添加预览技能')
+
+	-- end	
+	function mt:on_cast_start()
+		print('点击技能预览')
+
+	end	
 end

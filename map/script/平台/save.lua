@@ -39,6 +39,7 @@ for i=1,8 do
         local jifen  = tonumber(ac.GetServerValue(player,'jifen'))
         -- print('服务器积分：',player,jifen)
 
+
         --读取波数
         local value = player:Map_GetServerValue('boshu')
         if not value or value == '' or value == "" then
@@ -50,6 +51,14 @@ for i=1,8 do
 
         --保存服务端积分
         player.jifen = ZZBase64.encode(jifen)
+
+        --修复积分为负数的，并奖励10000积分
+        if jifen < 0 then 
+            local value = -jifen + 10000
+            print(jifen,value)
+            ac.jiami(player,'jifen',value)
+            ac.player.self:sendMsg('【系统消息】 已修复积分为0，并发放 积分10000 作为补偿',tonumber(ac.GetServerValue(player,'jifen')))
+        end    
 
     else
         player.jifen = 0

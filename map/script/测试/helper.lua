@@ -242,7 +242,7 @@ function helper:jifen(jf)
 	local p = self:get_owner()
 	p.putong_jifen = jf
 	
-	local value = p.putong_jifen * (p.hero:get '积分加成' + 1)
+	local value = p.putong_jifen --* (p.hero:get '积分加成' + 1)
 	print('积分',value)
 	--保存积分
 	ac.jiami(p,'jifen',value)
@@ -451,8 +451,11 @@ function helper:remove_skill(str)
 end
 --升级技能
 function helper:upgrade(str,lv)
-	local skill = self:find_skill(str) or self:has_item(str)
+	local peon = self:get_owner().peon
+	-- print(peon,peon:find_skill(str))
+	local skill = self:find_skill(str) or self:has_item(str) or peon:find_skill(str)
 	if skill then 
+		-- print(peon,peon:find_skill(str))
 		skill:upgrade(tonumber(lv) or 1)
 	end	
 end

@@ -107,11 +107,15 @@ local function showHeroState(p, u)
 	if p == ac.player.self then
 		for i = 1, 4 do
 			local skl = hero:find_skill('预览技能' .. i, '预览', true)
-			local dest = hero_data.skill_datas[i]
-			if dest then
-				skl:set_tip(dest:get_tip(hero, 0, true))
-				skl:set_title(dest:get_title(hero, 0, true))
-				skl:set_art(dest.art)
+			if i == 4 then 
+				
+			else
+				local dest = hero_data.skill_datas[i]
+				if dest then
+					skl:set_tip(dest:get_tip(hero, 0, true))
+					skl:set_title(dest:get_title(hero, 0, true))
+					skl:set_art(dest.art)
+				end	
 			end	
 		end
 	end
