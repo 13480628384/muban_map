@@ -22,7 +22,7 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
             unit.data = {}
         end    
         unit.data.type ='boss'
-        
+
         creep.boss = unit
     end 
     local c_boss_buff = creep.boss:find_buff '时停' 
@@ -129,11 +129,17 @@ ac.game:event '游戏-最终boss' (function(trg,index, creep)
             for i = 1 ,10 do 
                 local player = ac.player(i)
                 if player:is_player() and player.kda then 
-                    table.insert(t,{id = player:get(),kda = p.kda})
+                    table.insert(t,{id = player:get(),kda = player.kda})
                 end    
             end 
             table.sort(t,function(a,b) return a.kda>b.kda end)           
             local p = ac.player(t[1].id) 
+            -- for i =1,10 do 
+            --     if t[i] then 
+            --        print(ac.player(t[i].id) ,t[i].kda) 
+            --     end
+            -- end    
+
             ac.save(p,'大天使加百列',1)
             --发送消息
             local tip = '|cffffff00【系统消息】|r恭喜玩家 |cffff0000'..p:get_name()..'|r获得皮肤：|cffff0000大天使加百列（鲁大师皮肤）|r'..'，可能是因为kda最高才能获得。\n'

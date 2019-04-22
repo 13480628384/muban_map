@@ -74,7 +74,10 @@ ac.wait(10,function()
                         if hero.name == item[n][3] then 
                             --可能会掉线
                             if ac.player.self == p then
-                                hero:add_skill(item[n][2],'隐藏')
+                                local skill_name = item[n][2]
+                                local skill = ac.skill[skill_name]
+                                japi.SetUnitModel(hero.handle,skill.effect)
+                                -- hero:add_skill(item[n][2],'隐藏')
                             end
                         end
                     end 

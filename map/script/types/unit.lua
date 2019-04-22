@@ -285,6 +285,7 @@ end
 
 		ignore_flag = true
 		jass.RemoveUnit(self.handle)
+		unit.remove_handle_map[self.handle] = true
 		ignore_flag = false
 		
 		--从表中删除单位
@@ -1247,6 +1248,11 @@ local function init_unit(handle, p)
 	if handle == 0 then
 		return nil
 	end
+	-- 已经执行过remove 的 handle不会再生成
+	if unit.remove_handle_map[handle] then 
+		return nil
+	end	
+
 	local u = setmetatable({}, unit)
 	dbg.gchash(u, handle)
 	u.gchash = handle
@@ -1358,6 +1364,7 @@ function player.__index:create_unit(id, where, face)
 
 	ignore_flag = true
 	local handle = jass.CreateUnit(self.handle, j_id, x, y, face or 0)
+	unit.remove_handle_map[handle] = nil 
 	dbg.handle_ref(handle)
 	ignore_flag = false
 	local u = unit.init_unit(handle, self)
@@ -1386,6 +1393,7 @@ function player.__index:create_dummy(id, where, face)
 	end
 	ignore_flag = true
 	local handle = jass.CreateUnit(owner.handle, j_id, x, y, face or 0)
+	unit.remove_handle_map[handle] = nil 
 	dbg.handle_ref(handle)
 	ignore_flag = false
 	local u = unit.init_unit(handle, self)
@@ -1978,6 +1986,8 @@ end
 function unit.init()
 	--全局单位索引
 	unit.all_units = {}
+	unit.remove_handle_map = {}
+	
 	unit.removed_units = setmetatable({}, { __mode = 'kv' })
 
 	--注册单位的jass事件
