@@ -52,7 +52,7 @@ function mt:on_add()
 			ac.effect(target:get_point(),self.effect,0,2,'chest'):remove()
 	 	    for i, u in ac.selector()
 				: in_range(target,self.area)
-				: is_enemy(target)
+				: is_enemy(hero)
 				: of_not_building()
 				: ipairs()
 			do

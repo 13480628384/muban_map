@@ -18,7 +18,11 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
         -- unit:setColor(68,68,68)
         -- unit:set_animation 'Stand Ready'
         unit:add_skill('死亡之环','英雄')
-
+        if not unit.data  then 
+            unit.data = {}
+        end    
+        unit.data.type ='boss'
+        
         creep.boss = unit
     end 
     local c_boss_buff = creep.boss:find_buff '时停' 

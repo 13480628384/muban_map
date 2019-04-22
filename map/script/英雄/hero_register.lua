@@ -44,7 +44,7 @@ if i == 16 then
 	p.ability_list = {}
 	p.ability_list['预览'] = {size = 4}
 	for x = 1, p.ability_list['预览'].size do
-		p.ability_list['预览'][x] = ('Q20%d'):format(x - 1)
+		p.ability_list['预览'][x] = ('Q20%d'):format(x)
 	end
 	
 end

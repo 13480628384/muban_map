@@ -11,11 +11,10 @@ mt{
     color =  '青',
     -- auto_fresh_tip = true,
 	--介绍
-    tip = [[点击可学习宠物天赋，当前宠物天赋点：%remain_point%
+    tip = [[可用天赋点：%remain_point%
 %strong_attr_tip%
-获得途径：
-吃掉宠物经验书，宠物升级获得
-PS：宠物等级可存档
+|cff00ffff点击可学习宠物天赋，可存档，食用宠物经验书|r
+%need_xp_tip%
 ]],
     -- level = function(self,hero)
     --     if self and self.owner and self.owner:get_owner() then 
@@ -40,7 +39,7 @@ PS：宠物等级可存档
         -- print(self.strong_attr)
         -- print(self.used_point)
         if self.strong_attr then 
-            for k,v in pairs(self.strong_attr) do 
+            for k,v in sortpairs(self.strong_attr) do 
                 -- print(k,v[1],v[2])
                 local sigle_value = v[1]
                 local total_value = v[1] * v[2]
@@ -68,6 +67,11 @@ PS：宠物等级可存档
         end    
         return tip 
     end,  
+    need_xp_tip =  function(self,hero )
+        return '升级还需经验：'..'|cff'..ac.color_code['红']..self.need_xp..'|r'
+    end,
+    need_xp = 1000,
+    effect =  [[Hero_CrystalMaiden_N2_V_boom.mdx]],   
     --测试
     -- test21 =0
 	
@@ -103,6 +107,9 @@ function mt:on_upgrade()
     local hero = self.owner
     local p = hero:get_owner()
     hero:set_size(self.model_size)
+    -- print(self.effect)
+    --升级特效
+    local eff = ac.effect(hero:get_point(),self.effect,0,1,'chest'):remove()
 end    
 function mt:on_add()
     local skill = self
@@ -110,10 +117,13 @@ function mt:on_add()
     local p = hero:get_owner()
     hero:set_size(self.model_size) 
 
-    local value = ac.GetServerValue(self.owner:get_owner(),'CWTF') or 0
-    -- local value = 23 --测试
-    value = math.max(value,1)
-    self:set_level(value)
+    local value = tonumber(p:Map_GetServerValue('CWTF'))
+    if not value or value == '' or value == "" then
+        value = 0 
+    end
+    if value > 0 then
+        hero:peon_add_xp(value)
+    end    
 
 end
 function mt:on_cast_start()
@@ -230,32 +240,56 @@ end
 --获得经验对应的等级
 function unit.__index:peon_get_lv_by_xp(xp)
     local xp = xp or 0
-	return math.floor(xp/1000) + 1	 
+    local lv = 1
+  
+    local flag = true 
+    while flag do
+        flag = false  
+        local total_xp = self:peon_get_upgrade_xp(lv)
+        if xp < total_xp then 
+            lv = lv + 1
+            flag = true
+        end    
+    end    
+	return lv 
 end   
 
 --增加经验
 function unit.__index:peon_add_xp(xp)
     local player = self:get_owner()
     self.peon_xp = (self.peon_xp or 0) + xp 
-    self.peon_old_lv = self.peon_lv or 0
-    self.peon_lv = self:peon_get_lv_by_xp(self.peon_xp)
-    local need_xp = self:peon_get_upgrade_xp(self.peon_lv) - self.peon_xp
-    --改变宠物的名字
-    local name = self:get_name()
-    name = name ..'-Lv'..self.peon_lv ..'(升级所需经验：'..need_xp..')'
-    print(name)
-    japi.EXSetUnitArrayString(base.string2id(self.id), 61, 0, name)
-
     --保存经验到服务器存档
     player:Map_SaveServerValue('CWTF',tonumber(self.peon_xp))
 
-    if self.peon_lv > self.peon_old_lv then 
-        ac.game:event_notify('宠物升级',self)
+        --升级
+    self.peon_lv = self.peon_lv or 1
+    local flag = true 
+    while flag do
+        flag = false  
+        local need_xp = self:peon_get_upgrade_xp(self.peon_lv) - self.peon_xp
+        local name = self:get_name()
+        -- name = name ..'-Lv'..self.peon_lv ..'(升级所需经验：'..need_xp..')'
+        -- name = '升级所需经验：'..'|cff'..ac.color_code['红']..need_xp..'|r'
+        -- print(name)
         local skill = self:find_skill('宠物天赋')
         if skill then
-            skill:upgrade(self.peon_lv - self.peon_old_lv)
-        end    
-    end    
+            --更改宠物天赋的tip显示
+            skill:set('need_xp',need_xp)
+            skill:fresh_tip()
+        end 
+
+        if self.peon_xp >= self:peon_get_upgrade_xp(self.peon_lv) then
+            flag = true
+            self.peon_lv = self.peon_lv + 1
+            skill:upgrade(1)
+            ac.game:event_notify('宠物升级',self)
+        end 
+    end
+   
+
+    --改变宠物的名字 不是英雄单位无法修改
+    -- japi.EXSetUnitArrayString(base.string2id(self.id), 61, 0, name)
+
 	return unit	 
 end  
 
@@ -269,10 +303,10 @@ mt{
 level = 1,
 
 --图标
-art = [[icon\zhaohuan.blp]],
+art = [[ReplaceableTextures\CommandButtons\BTNScroll.blp]],
 
 --说明
-tip = [[+%xp% 宠物经验]],
+tip = [[+%xp% 宠物天赋经验]],
 
 --品质
 color = '红',
@@ -284,7 +318,7 @@ item_type = '消耗品',
 target_type = ac.skill.TARGET_TYPE_NONE,
 
 --冷却
-cool = 1,
+cool = 0.5,
 --经验
 xp = 200,
 --购买价格
@@ -292,6 +326,8 @@ gold = 0,
 
 --物品数量
 _count = 1,
+--物品模型
+specail_model = [[ScrollHealing.mdx]],
 --物品详细介绍的title
 content_tip = '使用说明：'
 }
@@ -303,3 +339,16 @@ function mt:on_cast_start()
     hero:peon_add_xp(self.xp)
 end
 
+
+--宠物经验书掉落
+-- 8%掉落
+local rate = 8
+ac.game:event '单位-死亡' (function (_,unit,killer)
+    if unit and unit.data and unit.data.type =='boss' then 
+        -- print(unit)
+        local rand = math.random(1,100)
+        if rand < rate then 
+           ac.item.create_item('宠物经验书',unit:get_point())
+        end
+    end    
+end)

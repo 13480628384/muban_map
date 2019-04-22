@@ -18,6 +18,7 @@ function player.__index:create_pets()
     u:add_skill('装备合成','英雄')
     u:add_skill('荣耀称号','英雄',8)
     u:add_skill('翅膀管理','英雄',7)
+    u:add_skill('宠物天赋','英雄',6)
     
     
 end

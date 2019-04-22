@@ -1048,7 +1048,9 @@ function ac.item.create_item(name,poi,is)
 	if items.color and items.suit_type  then 
 		items._model = zb_color_model['绿']
 	end
-
+	if items.specail_model then 
+		items._model = items.specail_model
+	end	
 	if not is then 
 		items._eff = ac.effect(ac.point(x,y),items._model,270,1,'origin')
 	end
