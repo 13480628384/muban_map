@@ -150,6 +150,7 @@ D:\one-map\muban_map\map\script\平台\存档.lua
 D:\one-map\muban_map\map\script\平台\宠物天赋.lua
 D:\one-map\muban_map\map\script\平台\翅膀管理.lua
 D:\one-map\muban_map\map\script\平台\荣耀称号.lua
+D:\one-map\muban_map\map\script\平台\重置版奖励.lua
 D:\one-map\muban_map\map\script\平台\道具\init.lua
 D:\one-map\muban_map\map\script\平台\道具\双倍积分卡.lua
 D:\one-map\muban_map\map\script\平台\道具\后羿.lua
@@ -166,6 +167,7 @@ D:\one-map\muban_map\map\script\平台\道具\生存会员.lua
 D:\one-map\muban_map\map\script\平台\道具\穆拉丁.lua
 D:\one-map\muban_map\map\script\平台\道具\资源礼包.lua
 D:\one-map\muban_map\map\script\平台\道具\金币礼包.lua
+D:\one-map\muban_map\map\script\平台\道具\黑魔导.lua
 D:\one-map\muban_map\map\script\平台\道具\齐天大圣.lua
 D:\one-map\muban_map\map\script\技能\init.lua
 D:\one-map\muban_map\map\script\技能\技能事件.lua

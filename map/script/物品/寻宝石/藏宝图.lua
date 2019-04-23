@@ -28,7 +28,9 @@ mt{
     --cd
     cool = 2.5,
     --物品详细介绍的title
-    content_tip = '使用说明：'
+    content_tip = '使用说明：',
+    --自动挖宝
+    wabao_auto_use = false,
     
 }
     
@@ -47,28 +49,67 @@ function mt:on_cast_start()
     --需要先增加一个，否则消耗品点击则无条件先消耗
     self:add_item_count(1) 
 
+    if hero.wabao_auto then 
+        self.wabao_auto_use = true
+    else
+        self.wabao_auto_use = false
+    end    
+
     local tx,ty = self.random_point:get()
     local rect = ac.rect.create( tx - self.area/2, ty-self.area/2, tx + self.area/2, ty + self.area/2)
     local region = ac.region.create(rect)
     local point = hero:get_point()
 
-    
-    --点在区域内
-    if region < point  then 
-
-        if hero.unit_type == '宠物' or hero.unit_type == '召唤物' then 
-            player:sendMsg('|cff00ffff宠物不能挖图|r',10)
-            player:sendMsg('|cff00ffff宠物不能挖图|r',10)
-            return true
+    --自动寻宝
+    if self.wabao_auto_use then 
+        --区域修改
+        rect = ac.rect.create( tx - 32, ty-32, tx + 32, ty + 32)
+        region = ac.region.create(rect)
+        if not self.trg then 
+            self.trg = region:event '区域-进入' (function(trg, unit)
+                if  unit == hero then
+                    if hero.unit_type == '宠物' or hero.unit_type == '召唤物' then 
+                        player:sendMsg('|cff00ffff宠物不能挖图|r',10)
+                        player:sendMsg('|cff00ffff宠物不能挖图|r',10)
+                        return true
+                    end 
+                    -- print('单位进入')
+                    self:on_add() 
+                    --添加东西给英雄
+                    self:add_content()  
+                    self:add_item_count(-1) 
+                    self.trg:remove()
+                    self.trg = nil
+                    
+                    if self:get_item_count()>= 1 then 
+                        --模拟消耗品使用
+                        self:on_cast_start()
+                        self:add_item_count(-1) 
+                    end  
+                end
+            end)
         end    
-
-        self:add_item_count(-1) 
-        self:on_add() 
-        --添加东西给英雄
-        self:add_content()
-    else
+        ac.wait(500,function()
+            hero:issue_order('move',self.random_point)
+        end)
         player:pingMinimap(self.random_point, 3)
-    end    
+    else      
+        --点在区域内
+        if region < point  then
+            if hero.unit_type == '宠物' or hero.unit_type == '召唤物' then 
+                player:sendMsg('|cff00ffff宠物不能挖图|r',10)
+                player:sendMsg('|cff00ffff宠物不能挖图|r',10)
+                return true
+            end    
+
+            self:add_item_count(-1) 
+            self:on_add() 
+            --添加东西给英雄
+            self:add_content()
+        else
+            player:pingMinimap(self.random_point, 3)
+        end 
+    end       
 end    
 
 function mt:add_content()
@@ -198,5 +239,9 @@ function mt:add_content()
 end
 
 function mt:on_remove()
-
+    local hero = self.owner
+    if self.trg then 
+        self.trg:remove()
+        self.trg = nil
+    end    
 end
