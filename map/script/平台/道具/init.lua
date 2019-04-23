@@ -15,4 +15,5 @@ require '平台.道具.寻宝小达人'
 require '平台.道具.战斗礼包'
 require '平台.道具.资源礼包'
 require '平台.道具.穆拉丁'
+require '平台.道具.黑魔导'
 

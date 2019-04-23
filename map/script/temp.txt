@@ -155,12 +155,16 @@ D:\one-map\muban_map\map\script\平台\道具\双倍积分卡.lua
 D:\one-map\muban_map\map\script\平台\道具\后羿.lua
 D:\one-map\muban_map\map\script\平台\道具\大天使加百列.lua
 D:\one-map\muban_map\map\script\平台\道具\天使之光.lua
+D:\one-map\muban_map\map\script\平台\道具\寻宝小达人.lua
 D:\one-map\muban_map\map\script\平台\道具\小翅膀.lua
 D:\one-map\muban_map\map\script\平台\道具\影歌.lua
+D:\one-map\muban_map\map\script\平台\道具\战斗礼包.lua
 D:\one-map\muban_map\map\script\平台\道具\木材礼包.lua
 D:\one-map\muban_map\map\script\平台\道具\杰克.lua
 D:\one-map\muban_map\map\script\平台\道具\王昭君.lua
 D:\one-map\muban_map\map\script\平台\道具\生存会员.lua
+D:\one-map\muban_map\map\script\平台\道具\穆拉丁.lua
+D:\one-map\muban_map\map\script\平台\道具\资源礼包.lua
 D:\one-map\muban_map\map\script\平台\道具\金币礼包.lua
 D:\one-map\muban_map\map\script\平台\道具\齐天大圣.lua
 D:\one-map\muban_map\map\script\技能\init.lua
