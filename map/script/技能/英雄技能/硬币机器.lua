@@ -34,7 +34,7 @@ mt{
 	cnt = 1,
 
 	--几率
-	chance = {20,25,30,40,50},
+	chance = 15,
 }
 	
 function mt:on_add()
