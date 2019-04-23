@@ -41,13 +41,23 @@ local mt = ac.skill['英雄属性面板']
 经验加成：   %moreexp% %
 物品获取率： %item_rate% %
 
-杀怪加力量： %kill_str%
-杀怪加敏捷： %kill_agi%
+杀怪加力量： %kill_str%     每秒金币:   %per_gold%  
+杀怪加敏捷： %kill_agi%     每秒全属性: %per_allattr% 
 杀怪加智力： %kill_int%
 杀怪加全属性： %kill_all_attr%
+杀怪加护甲： %kill_defence%
 ]],
 }
 
+function mt:per_allattr()
+	return ('|cffF9C801%.f|r'):format(self.owner:get '每秒全属性')
+end
+function mt:per_gold()
+	return ('|cffF9C801%.f|r'):format(self.owner:get '每秒金币')
+end
+function mt:kill_defence()
+	return ('|cffF9C801%.f|r'):format(self.owner:get '杀怪护甲')
+end
 function mt:kill_str()
 	return ('|cffF9C801%.f|r'):format(self.owner:get '杀怪力量')
 end

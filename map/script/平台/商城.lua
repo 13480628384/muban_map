@@ -25,7 +25,12 @@ local item = {
     {'HY','后羿','小黑'},
     {'YG','影歌','影歌'},
     {'WZJ','王昭君','小昭君'},
-    {'TSZG','天使之光'}, --翅膀必须在改变模型之后  
+    
+    {'MLD','穆拉丁','山丘王'},
+    {'TSZG','天使之光'}, --翅膀必须在改变模型之后 
+    {'XBXDR','寻宝小达人'}, 
+    {'ZYLB','资源礼包'}, 
+    {'ZDLB','战斗礼包'}, 
 
     --其他服务器存档字段, CWTF 宠物天赋   房间相关: DW 段位  JF 积分 
 
@@ -76,7 +81,11 @@ ac.wait(10,function()
                             if ac.player.self == p then
                                 local skill_name = item[n][2]
                                 local skill = ac.skill[skill_name]
+                                local model_size = skill.model_size
                                 japi.SetUnitModel(hero.handle,skill.effect)
+                                if model_size then 
+                                    hero:set_size(model_size)
+                                end    
                                 -- hero:add_skill(item[n][2],'隐藏')
                             end
                         end

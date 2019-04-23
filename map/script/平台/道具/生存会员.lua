@@ -19,6 +19,7 @@ mt{
 function mt:on_add()
     local skill = self
     local hero = self.owner
+    local player = hero:get_owner()
     hero:add('物品获取率',self.fall_rate)
 
     
@@ -27,17 +28,15 @@ function mt:on_add()
 
     local function give_rand_item()
         --给英雄随机添加物品
-        local rand_list = ac.unit_reward['商店随机物品']
-        local rand_name = ac.get_reward_name(rand_list)
-        if not rand_name then 
-            return
-        end    
-
-        local list = ac.quality_item[rand_name] 
-        --添加 
-        local name = list[math.random(#list)]
+        local name = ac.all_item[math.random( 1,#ac.all_item)]
         --满时，掉在地上
-        hero:add_item(name,true)
+        hero:add_item(name,true) 
+
+        local lni_color ='白'
+        if  ac.table.ItemData[name] and ac.table.ItemData[name].color then 
+            lni_color = ac.table.ItemData[name].color
+        end    
+        player:sendMsg('【系统消息】生存会员特权触发： 随机获得 |cff'..ac.color_code[lni_color]..name..'|r',10)
     end
     --第0波时先给一个随机物品
     if ac.creep['刷怪'].index == 0 then 

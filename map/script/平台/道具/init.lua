@@ -11,4 +11,8 @@ require '平台.道具.影歌'
 require '平台.道具.王昭君'
 require '平台.道具.大天使加百列'
 
+require '平台.道具.寻宝小达人'
+require '平台.道具.战斗礼包'
+require '平台.道具.资源礼包'
+require '平台.道具.穆拉丁'
 
