@@ -9,13 +9,12 @@ mt{
 	max_level = 5,
 	
 	tip = [[
-		主动：同时只能连接一个目标；
-		以法器连接一名队友，减少自己主属性 %source_main_attr% %，增加队友主属性 %target_main_attr% %
-		以法器连接一名敌人，每0.5秒造成 攻击力*2+智力*5 的法术伤害 (%damage%) ；超过 %target_range% 距离断开
+		主动：以法器连接一名队友，减少自己主属性 %source_main_attr% %，增加队友主属性 %target_main_attr% %
+		或者 连接一名敌人，每0.5秒造成 攻击力*2+智力*5 的法术伤害 (%damage%) ；超过 %target_range% 距离断开
 		被动：物品获取率+ %item_rate% %金钱获得+ %gold_rate% %
 		
 		进阶后的技能效果： (%upgrade_tip%)
-		法器可同时链接 多个队友或敌人 ，不减少自己的主属性。
+		法器可同时链接 多个目标 ，并且不减少自己的主属性
 	]],
 	
 	--技能图标
@@ -45,7 +44,7 @@ mt{
 	pulse = 0.5,
 
 	--cd
-	cool = 0,
+	cool = 2,
 
 	--耗蓝
 	cost = {25,130,235,340,450},
@@ -69,8 +68,8 @@ function mt:on_add()
 	-- 增强 卜算子 技能 1个变为多个
 	if player.mall and player.mall['黑魔导'] then 
 		self:set('target_type',ac.skill.TARGET_TYPE_POINT)
-		self:set('area',500)
-		self:set('target_range',1500)
+		self:set('area',400)
+		self:set('target_range',1300)
 		self:set('upgrade_tip','已进阶')
 		local source_main_attr = {0,0,0,0,0}
 		self:set('source_main_attr',source_main_attr)
