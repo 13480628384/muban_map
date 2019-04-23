@@ -314,7 +314,8 @@ local function on_life_steal(self)
 end
 
 local function on_splash(self)
-	if not self:is_attack() or self:is_aoe() then
+	--普攻、近战有效
+	if not self:is_attack() or self:is_aoe() or (not self.source:isMelee()) then
 		return
 	end
 	local source, target = self.source, self.target

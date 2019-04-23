@@ -314,6 +314,8 @@ color = '红',
 --物品类型
 item_type = '消耗品',
 
+--不能被当做合成的材料，也不能被合出来 后续处理。
+-- is_not_hecheng = true,
 --目标类型
 target_type = ac.skill.TARGET_TYPE_NONE,
 
@@ -328,9 +330,11 @@ gold = 0,
 _count = 1,
 --物品模型
 specail_model = [[ScrollHealing.mdx]],
+titile = '|cffff0000宠物经验书|r',
 --物品详细介绍的title
 content_tip = '使用说明：'
 }
+
 
 function mt:on_cast_start()
     local hero = self.owner
@@ -344,10 +348,10 @@ end
 -- 8%掉落
 local rate = 8
 ac.game:event '单位-死亡' (function (_,unit,killer)
-    --无尽掉落不了
-    if ac.creep['刷怪-无尽'].index >= 1 then 
-        return 
-    end    
+    -- 无尽可掉落
+    -- if ac.creep['刷怪-无尽'].index >= 1 then 
+    --     return 
+    -- end    
     if unit and unit.data and unit.data.type =='boss' then 
         -- print(unit)
         local rand = math.random(1,100)

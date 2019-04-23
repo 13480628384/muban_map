@@ -23,9 +23,8 @@ local mt = ac.skill['英雄属性面板']
 攻击:    %attack% （已加成 %attack_per% %）
 攻击间隔:    %attack_gip% 
 攻速:    %attack_speed% (每秒攻击%attack_rate%次)
-溅射:    %splash% %
+溅射:    %splash% % （近战有效）
 破甲:    %pene% (%pene_rate% %)
-吸血:    %life_steal%
 减免:    %defence_rate% %
 
 物爆几率: %physical_rate% %  物爆伤害:  %physical_damage% %
