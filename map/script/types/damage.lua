@@ -457,7 +457,7 @@ local function on_texttag(self)
 		color['r'] = 255
 		color['g'] = 152
 		color['b'] = 0
-		size = 12
+		size = 10
 		str = '物爆'
 	end		
 	--法术暴击 颜色 蓝色
@@ -465,7 +465,7 @@ local function on_texttag(self)
 		color['r'] = 31
 		color['g'] = 165
 		color['b'] = 238
-		size = 12
+		size = 10
 		str = '法爆'
 	end		
 	--会心一击 颜色 红色
@@ -473,7 +473,7 @@ local function on_texttag(self)
 		color['r'] = 238
 		color['g'] = 31
 		color['b'] = 39
-		size = 12
+		size = 10
 		str = '会心'
 	end		
 	if self.current_damage > 100000000 then

@@ -65,8 +65,10 @@ mt{
     kill_add_attr = 20,
     --概率收集
     chance = function(self,hero)
-        if self and hero then 
-            return 20 * ( 1 + hero:get('物品获取率')/100 )
+        if self and self.owner then 
+            return 20 * ( 1 + self.owner:get('物品获取率')/100 )
+        else
+            return 20    
         end
     end,       
     --唯一

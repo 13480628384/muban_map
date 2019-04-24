@@ -442,7 +442,7 @@ function mt:get_tip()
 			for i=1,10 do
 				if ac.player(i) == ac.player.self then
 					if ac.GetServerValue then 
-						gold = '|cffebd43d(积分：'..self:buy_jifen()..')|r  |cff00ffff拥有'..(ac.GetServerValue(ac.player.self,'jifen') or '0')..'|r|n'..'\n'
+						gold = '|cffebd43d(积分：'..self:buy_jifen()..')|r  |cff00ffff拥有'..(ZZBase64.decode(ac.player.self.jifen) or '0')..'|r|n'..'\n'
 					end	
 				end	
 			end

@@ -355,6 +355,7 @@ D:\one-map\muban_map\map\script\物品\神符\传送点\init.lua
 D:\one-map\muban_map\map\script\物品\神符\传送点\练功房.lua
 D:\one-map\muban_map\map\script\物品\装备\init.lua
 D:\one-map\muban_map\map\script\物品\装备\勇气之证.lua
+D:\one-map\muban_map\map\script\物品\装备\懒人的智慧鞋.lua
 D:\one-map\muban_map\map\script\物品\装备\新手剑.lua
 D:\one-map\muban_map\map\script\物品\装备\霸者之证.lua
 D:\one-map\muban_map\map\script\英雄\choose_hero.lua

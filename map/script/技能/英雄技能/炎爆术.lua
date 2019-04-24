@@ -68,7 +68,7 @@ function mt:atk_pas_shot(damage)
 				model = skill.model,
 				size = skill.area/512,
 				speed = 2,
-			}
+			}:remove()
 			for _,u in ac.selector()
 				: in_range(mvr.mover:get_point(),skill.area)
 				: is_enemy(hero)

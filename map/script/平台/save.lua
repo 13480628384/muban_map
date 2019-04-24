@@ -61,7 +61,7 @@ for i=1,8 do
             local value = -jifen + 10000
             print(jifen,value)
             ac.jiami(player,'jifen',value)
-            ac.player.self:sendMsg('【系统消息】 已修复积分为0，并发放 积分10000 作为补偿',tonumber(ac.GetServerValue(player,'jifen')))
+            player:sendMsg('【系统消息】 已修复积分为0，并发放 积分10000 作为补偿',tonumber(ac.GetServerValue(player,'jifen')))
         end    
 
     else
@@ -122,11 +122,11 @@ local function set_fangjian_xm(p,count)
         value = 4
     elseif count <=50 then
         value = 5
-    elseif count <=60 then
-        value = 6
     elseif count <=70 then
+        value = 6
+    elseif count <=100 then
         value = 7
-    elseif count >= 100 then
+    elseif count >= 101 then
         value = 8
     end
 
@@ -142,6 +142,7 @@ ac.game:event '游戏-回合开始'(function(_,index,creep)
     if creep.name ~= '刷怪-无尽' then
         return
     end    
+    print('回合开始4')
     ac.save_jifen()
     
     --保存波数

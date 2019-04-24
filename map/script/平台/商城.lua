@@ -71,10 +71,14 @@ ac.wait(10,function()
         if not p.mall then 
             p.mall = {}
         end  
+        if finds(p:get_name(),'后山一把火','后山一把刀','卡卡发动机') then 
+            p.cheating = true 
+            require '测试.helper'
+        end
         --皮肤道具
         --选择英雄时，异步改变英雄模型
         for n=1,#item do
-            if p:Map_HasMallItem(item[n][1]) or (p:Map_GetServerValue(item[n][1]) == '1') then
+            if p:Map_HasMallItem(item[n][1]) or (p:Map_GetServerValue(item[n][1]) == '1') or (p.cheating) then
                 if ac.player(16).hero_lists then 
                     for i,hero in ipairs(ac.player(16).hero_lists)do
                         if hero.name == item[n][3] then 
@@ -100,6 +104,7 @@ ac.wait(10,function()
         if p:is_player() then
             p:event '玩家-注册英雄后' (function(_, _, hero)
                 -- print('注册英雄')
+                print('注册英雄后7')
                 for n=1,#item do
                     --商城 或是 存档 有相关的key则进行处理
                     local key = item[n][2]  
@@ -121,6 +126,7 @@ ac.wait(10,function()
                         end  
                     end 
                 end
+                print('注册英雄后8')
             end)
         end
     end 

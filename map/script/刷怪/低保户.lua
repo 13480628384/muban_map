@@ -3,6 +3,7 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
     if creep.name ~= '刷怪' then
         return
     end    
+    print('回合开始1')
     --取上回合
     local index = creep.index -1 
     if index < 1 then 

@@ -55,7 +55,7 @@ function mt:on_next()
 
     --发送本层怪物信息 3次10秒
     self:send_skill_message(3,10)
-    -- print('当前波数 '..self.index)
+    print('当前波数 '..self.index)
     
 	--嘉年华 15秒后 ,直接进入下一波
     if ac.g_game_mode == 2 then 

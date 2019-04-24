@@ -36,11 +36,10 @@ mt{
     end,
     strong_attr_tip = function(self,hero)
         local tip = ''
-        -- print(self.strong_attr)
-        -- print(self.used_point)
-        if self.strong_attr then 
-            for k,v in sortpairs(self.strong_attr) do 
-                -- print(k,v[1],v[2])
+        local hero = self.owner:get_owner().hero 
+        if hero.strong_attr then 
+            for k,v in sortpairs(hero.strong_attr) do 
+                -- print(hero,k,v[1],v[2])
                 local sigle_value = v[1]
                 local total_value = v[1] * v[2]
                 local affict = '+'
@@ -72,22 +71,13 @@ mt{
     end,
     need_xp = 1000,
     effect =  [[Hero_CrystalMaiden_N2_V_boom.mdx]],   
+    
     --测试
     -- test21 =0
 	
 }
-mt.strong_attr = {
-    ['力量%'] = {3,0,5},
-    ['敏捷%'] = {3,0,5},
-    ['智力%'] = {3,0,5},
-    ['攻击%'] = {3,0,5},
-    ['减免%'] = {3,0,5},
-    ['攻击间隔'] = {-0.02,0,5},
-    ['物品获取率%'] = {3,0,5},
-    ['金币加成%'] = {3,0,5},
-    ['经验加成%'] = {3,0,5},
-    ['积分加成'] = {0.02,0,5},
-}
+-- local strong_attr = {
+-- }
 
 -- local strong_attr = {
 --     {'力量 3% 5'},
@@ -116,6 +106,18 @@ function mt:on_add()
     local hero = self.owner
     local p = hero:get_owner()
     hero:set_size(self.model_size) 
+    p.hero.strong_attr = {
+        ['力量%'] = {3,0,5},
+        ['敏捷%'] = {3,0,5},
+        ['智力%'] = {3,0,5},
+        ['攻击%'] = {3,0,5},
+        ['减免%'] = {3,0,5},
+        ['攻击间隔'] = {-0.02,0,5},
+        ['物品获取率%'] = {3,0,5},
+        ['金币加成%'] = {3,0,5},
+        ['经验加成%'] = {3,0,5},
+        ['积分加成'] = {0.02,0,5},
+    }
 
     local value = tonumber(p:Map_GetServerValue('CWTF'))
     if not value or value == '' or value == "" then
@@ -140,21 +142,17 @@ function mt:on_cast_start()
         player:sendMsg('天赋技能点数不足')
         return 
     end    
-
+    -- print(self.auto_fresh_tip)
     -- local tab = self.strong_attr
     -- -- tab['力量%'][2] = 10
     -- self:set('strong_attr',tab) 
     -- print(tab['力量%'][4])
-    local strong_attr = self:get('strong_attr')
-    self:get('strong_attr_tip')
+    local strong_attr = hero.strong_attr
     local list = {}
-
-    -- local gchash = 0
-    -- gchash = gchash + 1
-    -- dbg.gchash(strong_attr, gchash)
-    -- strong_attr.gchash = gchash
+    
         
     for k,v in sortpairs(strong_attr) do 
+        -- print(hero,k,v[1],v[2])
         if v[2] < v[3] then
             local info = {
                 name = v[4],
@@ -184,10 +182,8 @@ function mt:on_cast_start()
             local attr = list[index].attr
             local value = list[index].value
             if attr then 
-                local tab = self.strong_attr
-                tab[attr][2] = tab[attr][2] + 1 
-                self:set('strong_attr',tab) 
-
+                hero.strong_attr[attr][2] =  hero.strong_attr[attr][2] + 1
+                -- self:set('strong_attr',tab) 
                 self.used_point = self.used_point + 1
                 self:set('used_point',self.used_point) 
                 self:fresh_tip()

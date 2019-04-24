@@ -145,6 +145,7 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
     if creep.name ~= '刷怪' then
         return
     end    
+    print('回合开始2')
     --回合开始时，创建命运花
     mt:on_create()
 end)

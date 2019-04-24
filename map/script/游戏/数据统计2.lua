@@ -36,14 +36,13 @@ for i=1,10 do
         player.rank = 4
     elseif player.boshu <=50 then
         player.rank = 5
-    elseif player.boshu <=60 then
+    elseif player.boshu <=70 then
         player.rank = 6
-    elseif player.boshu <= 70 then
+    elseif player.boshu <= 100 then
         player.rank = 7
-    elseif player.boshu >= 100 then
+    elseif player.boshu >= 101 then
         player.rank = 8
     end
-
 end
 
 
@@ -323,7 +322,8 @@ ac.game:event '游戏-回合开始'(function(_,index,creep)
         name = '标准'..tip
     else 
         name = '嘉年华'..tip
-    end               
+    end 
+    print('回合开始6')              
     ranking.ui.two_title:set_text(name..'-第'..index..'波('..degree..')')
 end)
 

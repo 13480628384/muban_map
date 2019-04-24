@@ -5,6 +5,7 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
     if creep.name ~= '刷怪' then
         return
     end  
+    print('回合开始3')
     -- 回合开始，倒计时释放死亡之环
     local time = 60
 

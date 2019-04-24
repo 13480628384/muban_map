@@ -53,13 +53,16 @@ local function hero_register_main()
 	--注册英雄
 	ac.game:event '玩家-注册英雄' (function(_, player, hero)
 		print('注册英雄3')
-		SelectUnitForPlayerSingle(hero.handle,player.handle)
+		-- SelectUnitForPlayerSingle(hero.handle,player.handle)
 
+		print('注册英雄31')
 		-- 统一设置搜敌范围
 		hero:set_search_range(1000)
 		--添加技能
+		print('注册英雄4')
 		hero:add_all_hero_skills()
 
+		print('注册英雄5')
 		hero:add_skill('拾取','拾取',1)
 		-- hero:add_skill('切换背包','英雄',5)
 		-- hero:add_skill('测试','英雄')
@@ -155,6 +158,7 @@ local function hero_register_main()
 		-- hero:add('多重射',3)
 		-- hero:add_item('新人寻宝石') 
 		-- hero:add_item('生命药水') 
+		print('注册英雄6')
 		hero:add_item('新手礼包') 
 		
 		-- hero:add_item('勇气之证')
@@ -172,9 +176,11 @@ local function hero_register_main()
 		-- hero:add_effect('hand',[[Abilities\Weapons\PhoenixMissile\Phoenix_Missile.mdl]])
 		-- hero:add_effect('hand',[[wuqi123.mdx]])
 		
+		print('注册英雄7')
 		--添加英雄属性面板
 		hero:add_skill('英雄属性面板', '隐藏')
 
+		print('注册英雄8')
 		--创建一个宠物
 		player:create_pets()
 	end)
