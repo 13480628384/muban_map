@@ -62,11 +62,12 @@ mt{
 
 mt.item_rate_now = 0
 mt.gold_rate_now = 0
-function mt:on_add()
+
+function mt:strong_skill_func()
 	local hero = self.owner 
 	local player = hero:get_owner()
-	-- 增强 卜算子 技能 1个变为多个
-	if player.mall and player.mall['黑魔导'] then 
+	-- 增强 卜算子 技能 1个变为多个 --商城 或是 技能进阶可得。
+	if (player.mall and player.mall['黑魔导']) or (hero.strong_skill and hero.strong_skill[self.name]) then 
 		self:set('target_type',ac.skill.TARGET_TYPE_POINT)
 		self:set('area',400)
 		self:set('target_range',1300)
@@ -75,7 +76,9 @@ function mt:on_add()
 		self:set('source_main_attr',source_main_attr)
 		-- print(2222222222222222222)
 	end	
-
+end	
+function mt:on_add()
+	self:strong_skill_func()
 	--判断是否买了商城道具
 	-- local player = 
 

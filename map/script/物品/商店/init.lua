@@ -8,6 +8,7 @@ require '物品.商店.技能升级书'
 require '物品.商店.技能升级书1'
 require '物品.商店.霸者之证进阶'
 require '物品.商店.挑战伏地魔'
+require '物品.商店.迷路的坦克'
 
 
 --一开始就创建商店 需要有玩家在视野内 漂浮文字的高度才能显示出来
@@ -71,7 +72,17 @@ ac.game:event '玩家-注册英雄后' (function()
                 ac.player.self:sendMsg('【系统消息】新增|cffff0000藏宝图|r玩法，前往|cffff0000天结散人|r处购买',10)
                 ac.player.self:sendMsg('【系统消息】新增|cffff0000藏宝图|r玩法，前往|cffff0000天结散人|r处购买',10)
                 ac.player.self:sendMsg('【系统消息】新增|cffff0000藏宝图|r玩法，前往|cffff0000天结散人|r处购买',10)
-            end    
+            end   
+
+            --迷路的宝藏 第20波 出现
+            local index = 20 
+            if creep.name == '刷怪' and  creep.index == index then
+                shop4:add_sell_item('迷路的坦克',2)
+                --发送消息
+                ac.player.self:sendMsg('【系统消息】新增|cffff0000迷路的坦克|r玩法，前往|cffff0000天结散人|r处购买',10)
+                ac.player.self:sendMsg('【系统消息】新增|cffff0000迷路的坦克|r玩法，前往|cffff0000天结散人|r处购买',10)
+                ac.player.self:sendMsg('【系统消息】新增|cffff0000迷路的坦克|r玩法，前往|cffff0000天结散人|r处购买',10)
+            end   
         end)
     end)    
 

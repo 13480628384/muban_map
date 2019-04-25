@@ -11,7 +11,7 @@ mt{
 	-- 被动1：周围 %passive_area% 码有敌人死亡，刷新所有技能的冷却时间
 
 	tip = [[
-		主动：召唤刀刃对范围800码的敌方单位攻击，造成的物理伤害
+		主动：召唤%casting_cnt%次刀刃对范围800码的敌方单位攻击，造成的物理伤害
 		被动：攻击对敌人造成护甲 -%reduce_defence% %
 		伤害计算：|cffd10c44敏捷 * %int% |r + |cffd10c44 %shanghai% |r
 		伤害类型：|cff04be12物理伤害|r
@@ -63,19 +63,31 @@ mt{
 	passive_area = 600,
 	-- 攻击减护甲
 	reduce_defence = {20,25,30,35,40},
+	-- 主动技能施法次数
+	casting_cnt = 1,
 	--施法距离
 	-- range = 1200,
 }
 
+function mt:strong_skill_func()
+	local hero = self.owner 
+	local player = hero:get_owner()
+	-- 增强 卜算子 技能 1个变为多个 --商城 或是 技能进阶可得。
+	if (hero.strong_skill and hero.strong_skill[self.name]) then 
+		self:set('casting_cnt',5)
+		-- print(2222222222222222222)
+	end	
+end	
+
 function mt:on_upgrade()
     local skill = self
 	local hero = self.owner 
-	
-
 end	
 function mt:on_add()
     local skill = self
 	local hero = self.owner 
+
+	self:strong_skill_func()
 
 	self.trg1 = hero:add_buff '死吻-被动1' 
 	{
@@ -111,40 +123,56 @@ function mt:on_cast_shot()
 	local skill = self
 	local hero = self.owner
 	local target = self.target
-	local angle_base = 0
-	local num = 3
-	for i = 1, num do
-		local mvr = ac.mover.line
-		{
-			source = hero,
-			skill = skill,
-			start = hero:get_point(),
-			model =  skill.effect1,
-			speed = 800,
-			angle = angle_base + 360/num * i,
-			distance = skill.area  ,
-			size = 2,
-			height = 120
-		}
-		if not mvr then
-			return
-		end
+	local function start_damage()
+		local angle_base = 0
+		local num = 3
+		for i = 1, num do
+			local mvr = ac.mover.line
+			{
+				source = hero,
+				skill = skill,
+				start = hero:get_point(),
+				model =  skill.effect1,
+				speed = 800,
+				angle = angle_base + 360/num * i,
+				distance = skill.area  ,
+				size = 2,
+				height = 120
+			}
+			if not mvr then
+				return
+			end
+		end	
+
+		for i, u in ac.selector()
+		: in_range(hero,self.area)
+		: is_enemy(hero)
+		: of_not_building()
+		: ipairs()
+		do
+			u:damage
+			{
+				source = hero,
+				damage = skill.damage ,
+				skill = skill,
+				damage_type =skill.damage_type
+			}	
+		end 
+	end	 
+	--先释放一次，再释放4次
+	start_damage()
+	if self.casting_cnt >1 then 
+		hero:timer(0.3*1000,self.casting_cnt-1,function(t)
+			start_damage()
+		end)
 	end	
 
-	for i, u in ac.selector()
-	: in_range(hero,self.area)
-	: is_enemy(hero)
-	: of_not_building()
-	: ipairs()
-	do
-		u:damage
-		{
-			source = hero,
-			damage = skill.damage ,
-			skill = skill,
-			damage_type =skill.damage_type
-		}	
-	end    
+
+	-- for i=1,self.casting_cnt do
+	-- 	--每0.3秒释放一次
+	-- end	
+
+
 	-- hero:add_effect('origin',self.effect)
 	-- self.eff = self.target:add_effect('chest',self.effect)
 

@@ -6,3 +6,4 @@ require '物品.消耗品.新手礼包'
 require '物品.消耗品.召唤boss'
 require '物品.消耗品.召唤练功怪'
 
+require '物品.消耗品.恶魔果实'

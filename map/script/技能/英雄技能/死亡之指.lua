@@ -19,6 +19,7 @@ mt{
 	tip = [[|cff11ccff%skill_type%:|r 对指定敌人造成法术伤害，该技能如果杀死敌人，将刷新冷却
 	伤害计算：|cffd10c44 智力 * %int% + |cffd10c44 %shanghai% |r
 	伤害类型：|cff04be12法术伤害|r
+	%strong_skill_tip%
 	]],
 	--技能图标
 	art = [[jineng\jineng003.blp]],
@@ -34,31 +35,60 @@ mt{
 		end	
 	end,
 	--伤害类型
-	damage_type = '法术'
+	damage_type = '法术',
+	strong_skill_tip ='',
 
 }
+function mt:strong_skill_func()
+	local hero = self.owner 
+	local player = hero:get_owner()
+	-- 增强  技能 1个变为多个 
+	if (hero.strong_skill and hero.strong_skill[self.name]) then 
+		self:set('target_type',ac.skill.TARGET_TYPE_POINT)
+		self:set('area',400)
+		self:set('range',1100)
+		self:set('strong_skill_tip','|cff00ff00强化效果：400范围全体伤害,提升300施法距离|r')
+		
+	end	
+end	
 function mt:on_add()
     local skill = self
     local hero = self.owner
+	self:strong_skill_func()
 end
 function mt:on_cast_shot()
     local skill = self
 	local hero = self.owner
 	local target = self.target
 
-	local ln = ac.lightning('TWLN',hero,target,50,50)
-	ln:fade(-5)
-	
-	target:damage
-	{
-		source = hero,
-		damage = self.damage,
-		skill = self,
-		damage_type =self.damage_type
-	}
-	if not target:is_alive() then 
-		self:set_cd(0)
-		-- self:fresh()
+	local function start_damage(target)
+		local ln = ac.lightning('TWLN',hero,target,50,50)
+		ln:fade(-5)
+		
+		target:damage
+		{
+			source = hero,
+			damage = self.damage,
+			skill = self,
+			damage_type =self.damage_type
+		}
+		if not target:is_alive() then 
+			self:set_cd(0)
+			-- self:fresh()
+		end	
+	end	
+
+	if target.type == 'point' then 
+		for _, u in ac.selector()
+		: in_range(target, self.area)
+		: is_enemy(hero)
+		: ipairs()
+		do
+			start_damage(u)
+		end
+		
+	else	
+		start_damage(target)
 	end	
 end	
 function mt:on_remove()

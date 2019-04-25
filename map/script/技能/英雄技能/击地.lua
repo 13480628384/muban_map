@@ -24,7 +24,8 @@ mt{
 	--介绍
 	tip = [[|cff11ccff%skill_type%:|r 对范围600码的敌人造成移动力减少 50% 和攻击速度减少 25% ，持续3秒，并造成伤害
 伤害计算：|cffd10c44攻击力 * %attack_mul%|r+ |cffd10c44 %shanghai% |r
-伤害类型：|cff04be12物理伤害|r]],
+伤害类型：|cff04be12物理伤害|r
+%strong_skill_tip%]],
 	--技能图标
 	art = [[jineng\jineng008.blp]],
 	--特效
@@ -44,11 +45,24 @@ mt{
 	attack_speed = 25 ,
 	--持续时间
 	time = 3 ,
+	strong_skill_tip ='',
+	casting_cnt = 1
 
 }
+function mt:strong_skill_func()
+	local hero = self.owner 
+	local player = hero:get_owner()
+	-- 增强 卜算子 技能 1个变为多个 --商城 或是 技能进阶可得。
+	if (hero.strong_skill and hero.strong_skill[self.name]) then 
+		self:set('casting_cnt',5)
+		self:set('strong_skill_tip','|cff00ff00强化效果：额外触发4次击地，造成等值伤害|r')
+		-- print(2222222222222222222)
+	end	
+end	
 function mt:on_add()
     local skill = self
     local hero = self.owner
+	self:strong_skill_func()
 end
 
 
@@ -56,33 +70,41 @@ function mt:on_cast_shot()
     local skill = self
     local hero = self.owner
 
-    local point = hero:get_point()
-	-- hero:add_effect('origin',self.effect):remove()
-	local effect = ac.effect(point,self.effect,0,2,'origin'):remove()
-
-	for i, u in ac.selector()
-		: in_range(hero,self.area)
-		: is_enemy(hero)
-		: of_not_building()
-		: ipairs()
-	do
-		u:add_buff '击地'
-		{
-			time = self.time,
-			skill = self,
-			source = hero,
-			model = self.effect1,
-			attack_speed = self.attack_speed,
-			move_speed = self.move_speed,
-		}
-		u:damage
-		{
-			skill = self,
-			source = hero,
-			damage = self.damage,
-			damage_type = '物理'
-		}
+	local function start_damage()
+		local point = hero:get_point()
+		local effect = ac.effect(point,self.effect,0,2,'origin'):remove()
+		for i, u in ac.selector()
+			: in_range(hero,self.area)
+			: is_enemy(hero)
+			: of_not_building()
+			: ipairs()
+		do
+			u:add_buff '击地'
+			{
+				time = self.time,
+				skill = self,
+				source = hero,
+				model = self.effect1,
+				attack_speed = self.attack_speed,
+				move_speed = self.move_speed,
+			}
+			u:damage
+			{
+				skill = self,
+				source = hero,
+				damage = self.damage,
+				damage_type = '物理'
+			}
+		end	
+	end
+	--先释放一次，再释放4次
+	start_damage()
+	if self.casting_cnt >1 then 
+		hero:timer(0.3*1000,self.casting_cnt-1,function(t)
+			start_damage()
+		end)
 	end	
+	
 end	
 
 function mt:on_remove()

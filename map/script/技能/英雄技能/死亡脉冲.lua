@@ -22,6 +22,7 @@ mt{
 	增加范围400码的队友%heal%生命
 	伤害计算：|cffd10c44 智力 * %int% + |cffd10c44 %shanghai% |r
 	伤害类型：|cff04be12法术伤害|r
+	%strong_skill_tip%
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNDeathCoil.blp]],
@@ -41,55 +42,78 @@ mt{
 			return self.owner:get('智力')*self.int+self.shanghai
 		end
 	end	,
-	damage_type = '法术'
+	damage_type = '法术',
+	strong_skill_tip ='',
+	casting_cnt = 1
 }
+function mt:strong_skill_func()
+	local hero = self.owner 
+	local player = hero:get_owner()
+	-- 增强 卜算子 技能 1个变为多个 --商城 或是 技能进阶可得。
+	if (hero.strong_skill and hero.strong_skill[self.name]) then 
+		self:set('casting_cnt',5)
+		self:set('strong_skill_tip','|cff00ff00强化效果：额外触发4次死亡脉冲，造成等值伤害|r')
+		-- print(2222222222222222222)
+	end	
+end	
 function mt:on_add()
     local skill = self
     local hero = self.owner
+	self:strong_skill_func()
 end
 
 function mt:on_cast_shot()
     local skill = self
 	local hero = self.owner
 	local target = self.target
-	for i, u in ac.selector()
-		: in_range(hero,self.area)
-		: of_not_building()
-		: ipairs()
-	do
-		local mvr = ac.mover.target
-		{
-			source = hero,
-			target = u,
-			model = skill.effect,
-			speed = 600,
-			height = 110,
-			skill = skill,
-		}
-		if not mvr then
-			return
+	local function start_damage()
+		for i, u in ac.selector()
+			: in_range(hero,self.area)
+			: of_not_building()
+			: ipairs()
+		do
+			local mvr = ac.mover.target
+			{
+				source = hero,
+				target = u,
+				model = skill.effect,
+				speed = 600,
+				height = 110,
+				skill = skill,
+			}
+			if not mvr then
+				return
+			end
+			function mvr:on_finish()
+				if u:is_enemy(hero) then 
+					u:damage
+					{
+						source = hero,
+						damage = skill.damage ,
+						skill = skill,
+						damage_type =skill.damage_type
+					}	
+				else
+					u:heal
+					{
+						source = hero,
+						skill = skill,
+						size = 10,
+						heal = u:get('生命上限') * skill.heal/100,
+					}	
+				end	
+			end
 		end
-		function mvr:on_finish()
-			if u:is_enemy(hero) then 
-				u:damage
-				{
-					source = hero,
-					damage = skill.damage ,
-					skill = skill,
-					damage_type =skill.damage_type
-				}	
-			else
-				u:heal
-				{
-					source = hero,
-					skill = skill,
-					size = 10,
-					heal = u:get('生命上限') * skill.heal/100,
-				}	
-			end	
-		end
-
 	end
+
+	--先释放一次，再释放4次
+	start_damage()
+	if self.casting_cnt >1 then 
+		hero:timer(0.3*1000,self.casting_cnt-1,function(t)
+			start_damage()
+		end)
+	end	
+	
 	
 end	
 

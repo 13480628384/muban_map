@@ -20,6 +20,7 @@ mt{
 	tip = [[|cff11ccff%skill_type%:|r 对一条直线上的敌人晕眩1S，并造成力量*%int%的物理伤害 （%damage%）
 	伤害计算：|cffd10c44力量 * %int% |r+ |cffd10c44 %shanghai% |r
 	伤害类型：|cff04be12物理伤害|r
+	%strong_skill_tip%
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNImpale.blp]],
@@ -44,10 +45,24 @@ mt{
 	hit_area = 200,
 	--特效移动速度
 	speed = 5000,
+
+	strong_skill_tip ='',
+	casting_cnt = 1
 }
+function mt:strong_skill_func()
+	local hero = self.owner 
+	local player = hero:get_owner()
+	-- 增强 卜算子 技能 1个变为多个 --商城 或是 技能进阶可得。
+	if (hero.strong_skill and hero.strong_skill[self.name]) then 
+		self:set('casting_cnt',5)
+		self:set('strong_skill_tip','|cff00ff00强化效果：额外触发4次穿刺，造成等值伤害|r')
+		-- print(2222222222222222222)
+	end	
+end	
 function mt:on_add()
     local skill = self
     local hero = self.owner
+	self:strong_skill_func()
 end
 
 
@@ -55,63 +70,70 @@ function mt:on_cast_shot()
     local skill = self
     local hero = self.owner
 
-	local source = hero:get_point()
-	local target = self.target:get_point()
-	local angle = source / target
-	-- print('打印 施法出手',angle)
-	-- hero:add_effect('origin',self.effect):remove()
-	local mvr = ac.mover.line
-	{
-		source = hero,
-		start = hero,
-		angle = angle,
-		speed = skill.speed,
-		distance = skill.range,
-		skill = skill,
-		high = 110,
-		model = '', 
-		hit_area = skill.hit_area,
-		size = 1
-	}
-	if not mvr then 
-		return
-	end
+	local function start_damage()
+		local source = hero:get_point()
+		local target = self.target:get_point()
+		local angle = source / target
+		local mvr = ac.mover.line
+		{
+			source = hero,
+			start = hero,
+			angle = angle,
+			speed = skill.speed,
+			distance = skill.range,
+			skill = skill,
+			high = 110,
+			model = '', 
+			hit_area = skill.hit_area,
+			size = 1
+		}
+		if not mvr then 
+			return
+		end
 
-	function mvr:on_move()
-		-- print('移动中创建特效',skill.effect1)
-		ac.effect(self.mover:get_point(),skill.effect1,0,1,'origin'):remove()  
-	end	
-	function mvr:on_hit(dest)
-		for i, u in ac.selector()
-			: in_range(dest,skill.hit_area)
-			: is_enemy(hero)
-			: of_not_building()
-			: ipairs()
-		do
-			
-			u:add_effect('origin',skill.effect):remove()
-			u:add_buff '晕眩'
-			{
-				time = skill.time,
-				skill = skill,
-				source = hero,
-			}
-			
-			u:add_buff '高度'
-			{
-				time = 0.3,
-				speed = 1200,
-				skill = skill,
-				reduction_when_remove = true
-			}
-			u:damage
-			{
-				skill = skill,
-				source = hero,
-				damage = skill.damage,
-				damage_type = '物理'
-			}
+		function mvr:on_move()
+			-- print('移动中创建特效',skill.effect1)
+			ac.effect(self.mover:get_point(),skill.effect1,0,1,'origin'):remove()  
 		end	
+		function mvr:on_hit(dest)
+			for i, u in ac.selector()
+				: in_range(dest,skill.hit_area)
+				: is_enemy(hero)
+				: of_not_building()
+				: ipairs()
+			do
+				
+				u:add_effect('origin',skill.effect):remove()
+				u:add_buff '晕眩'
+				{
+					time = skill.time,
+					skill = skill,
+					source = hero,
+				}
+				
+				u:add_buff '高度'
+				{
+					time = 0.3,
+					speed = 1200,
+					skill = skill,
+					reduction_when_remove = true
+				}
+				u:damage
+				{
+					skill = skill,
+					source = hero,
+					damage = skill.damage,
+					damage_type = '物理'
+				}
+			end	
+		end	
+	end	
+	--先释放一次，再释放4次
+	start_damage()
+	if self.casting_cnt >1 then 
+		hero:timer(0.5*1000,self.casting_cnt-1,function(t)
+			start_damage()
+		end)
 	end	
 
 	

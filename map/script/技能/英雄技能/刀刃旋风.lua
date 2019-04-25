@@ -19,6 +19,7 @@ mt{
 	tip = [[|cff11ccff%skill_type%:|r 召唤刀刃对范围800码的敌方单位造成物理伤害
 	伤害计算：|cffd10c44敏捷 * %int%|r+ |cffd10c44 %shanghai% |r
 	伤害类型：|cff04be12物理伤害|r
+	%strong_skill_tip%
 	]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNFanOfKnives.blp]],
@@ -35,53 +36,73 @@ mt{
 			return self.owner:get('敏捷')*self.int+self.shanghai
 		end
 	end	,
-	damage_type = '物理'
+	damage_type = '物理',
+	strong_skill_tip ='',
+	casting_cnt = 1
 }
+function mt:strong_skill_func()
+	local hero = self.owner 
+	local player = hero:get_owner()
+	-- 增强 卜算子 技能 1个变为多个 --商城 或是 技能进阶可得。
+	if (hero.strong_skill and hero.strong_skill[self.name]) then 
+		self:set('casting_cnt',5)
+		self:set('strong_skill_tip','|cff00ff00强化效果：额外触发4次刀刃旋风，造成等值伤害|r')
+		-- print(2222222222222222222)
+	end	
+end	
 function mt:on_add()
     local skill = self
     local hero = self.owner
+	self:strong_skill_func()
 end
 
 function mt:on_cast_shot()
     local skill = self
 	local hero = self.owner
 	local target = self.target
-	local angle_base = 0
-	local num = 3
-	for i = 1, num do
-		local mvr = ac.mover.line
-		{
-			source = hero,
-			skill = skill,
-			start = hero:get_point(),
-			model =  skill.effect,
-			speed = 800,
-			angle = angle_base + 360/num * i,
-			distance = skill.area  ,
-			size = 2,
-			height = 120
-		}
-		if not mvr then
-			return
-		end
+	local function start_damage()
+		local angle_base = 0
+		local num = 3
+		for i = 1, num do
+			local mvr = ac.mover.line
+			{
+				source = hero,
+				skill = skill,
+				start = hero:get_point(),
+				model =  skill.effect,
+				speed = 800,
+				angle = angle_base + 360/num * i,
+				distance = skill.area  ,
+				size = 2,
+				height = 120
+			}
+			if not mvr then
+				return
+			end
+		end	
+
+		for i, u in ac.selector()
+		: in_range(hero,self.area)
+		: is_enemy(hero)
+		: of_not_building()
+		: ipairs()
+		do
+			u:damage
+			{
+				source = hero,
+				damage = skill.damage ,
+				skill = skill,
+				damage_type =skill.damage_type
+			}	
+		end 
+	end	 
+	--先释放一次，再释放4次
+	start_damage()
+	if self.casting_cnt >1 then 
+		hero:timer(0.3*1000,self.casting_cnt-1,function(t)
+			start_damage()
+		end)
 	end	
-
-	for i, u in ac.selector()
-	: in_range(hero,self.area)
-	: is_enemy(hero)
-	: of_not_building()
-	: ipairs()
-	do
-		u:damage
-		{
-			source = hero,
-			damage = skill.damage ,
-			skill = skill,
-			damage_type =skill.damage_type
-		}	
-	end
-
-	
 end	
 
 

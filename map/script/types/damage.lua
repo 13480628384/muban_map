@@ -991,8 +991,11 @@ function damage:__call()
 	if self.current_damage < 0 then
 		self.current_damage = 0
 	end
-
-	target:event_notify('伤害计算完毕', self)
+	--return true 终止伤害
+	if target:event_dispatch('伤害计算完毕', self) then
+		self.current_damage = 0
+		return
+	end
 
 	--消耗护盾
 	local effect_damage = cost_shield(self)

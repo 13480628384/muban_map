@@ -20,8 +20,9 @@ mt{
 	range = 800,
 	--介绍
 	tip = [[|cff11ccff%skill_type%:|r 对指定敌人造成敏捷*%agi%的物理伤害，该技能如果杀死敌人，将刷新冷却
-	伤害计算：|cffd10c44 敏捷 * %int% + |cffd10c44 %shanghai% |r
+	伤害计算：|cffd10c44 敏捷 * %agi% + |cffd10c44 %shanghai% |r
 	伤害类型：|cff04be12物理伤害|r
+	%strong_skill_tip%
 	]],
 	--技能图标
 	art = [[jineng\jineng028.blp]],
@@ -34,44 +35,74 @@ mt{
 		end	
 	end,
 	--伤害类型
-	damage_type = '物理'
+	damage_type = '物理',
+	strong_skill_tip ='',
 
 }
+function mt:strong_skill_func()
+	local hero = self.owner 
+	local player = hero:get_owner()
+	-- 增强  技能 1个变为多个 
+	if (hero.strong_skill and hero.strong_skill[self.name]) then 
+		self:set('target_type',ac.skill.TARGET_TYPE_POINT)
+		self:set('area',400)
+		self:set('range',1100)
+		self:set('strong_skill_tip','|cff00ff00强化效果：400范围全体伤害,提升300施法距离|r')
+		
+	end	
+end	
 function mt:on_add()
     local skill = self
     local hero = self.owner
+	self:strong_skill_func()
 end
 function mt:on_cast_shot()
     local skill = self
 	local hero = self.owner
 	local target = self.target
-	local mvr = ac.mover.target
-	{
-		source = hero,
-		target = target,
-		model = skill.effect,
-		speed = 1200,
-		height = 110,
-		skill = skill,
-	}
-	if not mvr then
-		return
-	end
-	function mvr:on_finish()
-		if target:is_enemy(hero) then 
-			target:damage
-			{
-				source = hero,
-				damage = skill.damage ,
-				skill = skill,
-				damage_type =skill.damage_type
-			}	
-			if not target:is_alive() then 
-				skill:set_cd(0)
-				-- skill:fresh()
+
+	local function start_damage(target)
+		local mvr = ac.mover.target
+		{
+			source = hero,
+			target = target,
+			model = skill.effect,
+			speed = 1200,
+			height = 110,
+			skill = skill,
+		}
+		if not mvr then
+			return
+		end
+		function mvr:on_finish()
+			if target:is_enemy(hero) then 
+				target:damage
+				{
+					source = hero,
+					damage = skill.damage ,
+					skill = skill,
+					damage_type =skill.damage_type
+				}	
+				if not target:is_alive() then 
+					skill:set_cd(0)
+					-- skill:fresh()
+				end	
 			end	
-		end	
-	end
+		end
+	end	
+
+	if target.type == 'point' then 
+		for _, u in ac.selector()
+		: in_range(target, self.area)
+		: is_enemy(hero)
+		: ipairs()
+		do
+			start_damage(u)
+		end
+		
+	else	
+		start_damage(target)
+	end	
 
 
 end	

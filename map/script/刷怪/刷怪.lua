@@ -556,7 +556,38 @@ function mt:move_random_way(unit)
 
     end);
     return trg
+end 
+local function ai_move_random_way(unit)
+    --逃跑路线
+    local hero = ac.find_hero(unit)
+    local angle
+    if hero then  
+        angle= hero:get_point()/unit:get_point()
+    else 
+        angle =math.random(0,360)
+    end    
+    --优化钥匙怪跑路角度
+    angle = angle - math.random(0,360)
+    local target_point = unit:get_point() - {angle,800}
+    unit:issue_order('move',target_point)
+
+    local trg = unit:loop(2*1000,function()
+        local hero = ac.find_hero(unit)
+        local angle
+        if hero then  
+            angle= hero:get_point()/unit:get_point()
+        else 
+            angle =math.random(0,360)
+        end    
+        --优化钥匙怪跑路角度
+        angle = angle - math.random(0,360)
+        local target_point = unit:get_point() - {angle,800}
+        unit:issue_order('move',target_point)
+
+    end);
+    return trg
 end    
+ac.ai_move_random_way = ai_move_random_way
 
 --创建钥匙怪
 function mt:creat_key_unit()
