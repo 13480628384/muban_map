@@ -62,6 +62,11 @@ for i=1,8 do
             print(jifen,value)
             ac.jiami(player,'jifen',value)
             player:sendMsg('【系统消息】 已修复积分为0，并发放 积分10000 作为补偿',tonumber(ac.GetServerValue(player,'jifen')))
+        end   
+        if jifen >= 500000 then  
+            local value = -jifen 
+            ac.jiami(player,'jifen',value)
+            player:sendMsg('【系统消息】 检测到积分过高，积分清零',tonumber(ac.GetServerValue(player,'jifen')))
         end    
 
     else

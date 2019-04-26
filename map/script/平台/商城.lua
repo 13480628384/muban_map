@@ -78,6 +78,7 @@ ac.wait(10,function()
         --皮肤道具
         --选择英雄时，异步改变英雄模型
         for n=1,#item do
+            -- print("01",p:Map_HasMallItem(item[n][1]))
             if p:Map_HasMallItem(item[n][1]) or (p:Map_GetServerValue(item[n][1]) == '1') or (p.cheating) then
                 if ac.player(16).hero_lists then 
                     for i,hero in ipairs(ac.player(16).hero_lists)do

@@ -115,6 +115,7 @@ ac.aura_buff = create_template(function(mt)
 			self.aura_timer = hero:loop(aura_pulse, function ()
 				if not hero:is_alive() then
 					for u in pairs(self.aura_node) do
+						-- print(self.name,'光环里的单位1',u,u.handle)
 						self.aura_node[u]:remove()
 						self.aura_node[u] = nil
 					end
@@ -131,6 +132,7 @@ ac.aura_buff = create_template(function(mt)
 					end
 				end
 				for _, u in ipairs(delete) do
+					-- print(self.name,'光环里的单位2',u,u.handle)
 					self.aura_node[u]:remove()
 					self.aura_node[u] = nil
 				end

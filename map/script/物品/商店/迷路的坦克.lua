@@ -58,7 +58,8 @@ function mt:on_cast_start()
     if data.model_size then 
         unit:set_size(data.model_size)
     end   
-    unit:set('生命上限',20)
+    --设置生命上限
+    unit:set('生命上限',1500)
     --设置移动路径
     -- print(unit)
     ac.ai_move_random_way(unit)

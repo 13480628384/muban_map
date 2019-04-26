@@ -96,27 +96,27 @@ function mt:on_next()
 end
 --改变怪物
 function mt:on_change_creep(unit,lni_data)
-    local base_attack = 300000 --每波 + 100000
-    local base_defence = 1000
-    local base_life = 5000000
+    local base_attack = 600000 --每波 + 100000
+    local base_defence = 2000
+    local base_life = 10000000
     local base_mana = 2500000
     local base_move_speed = 325
-    local base_attack_gap = 2
+    local base_attack_gap = 1.5
     local base_life_recover = 25000
     local base_mana_recover = 25000
-    local base_attack_distance = 100
-    local base_attack_speed = 50
+    local base_attack_distance = 125
+    local base_attack_speed = 35
 
 
     local upgrade_attr = {
-        ['攻击'] = 250000,
-        ['护甲'] = 150,
-        ['魔抗'] = 150,
-        ['生命上限'] = 2000000,
+        ['攻击'] = 375000,
+        ['护甲'] = 225,
+        ['魔抗'] = 225,
+        ['生命上限'] = 3000000,
         ['魔法上限'] = 1000000,
         ['生命恢复'] = 10000,
         ['魔法恢复'] = 10000,
-        ['攻击速度'] = 4,
+        ['攻击速度'] = 5,
     }
     --设置属性
     unit:set('移动速度',base_move_speed)

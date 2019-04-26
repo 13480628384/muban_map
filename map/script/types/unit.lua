@@ -1237,7 +1237,7 @@ function mt:create_unit(id, where, face)
 	end
 	return self:get_owner():create_unit(id, where, face or self:get_facing())
 end
-
+local num = 0
 local function init_unit(handle, p)
 	if handle == nil then 
 		return 
@@ -1254,8 +1254,12 @@ local function init_unit(handle, p)
 	end	
 
 	local u = setmetatable({}, unit)
-	dbg.gchash(u, handle)
-	u.gchash = handle
+	num = num + 1
+	
+	dbg.gchash(u, num)
+	u.gchash = num
+
+	-- print('create_unit',num,jass.GetUnitName(handle),u.gchash)
 	--保存到全局单位表中
 	u.handle = handle
 	u.id = base.id2string(jass.GetUnitTypeId(handle))

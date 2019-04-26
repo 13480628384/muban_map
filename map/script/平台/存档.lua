@@ -85,6 +85,7 @@ end
 --判断玩家是否有商城道具
 function player.__index:Map_HasMallItem(key)
     local handle = self.handle
+    -- print(handle,key)
     return japi.DzAPI_Map_HasMallItem(handle,key)
     --测试时，默认都为空
     -- return false

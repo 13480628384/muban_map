@@ -44,7 +44,7 @@ mt{
 	pulse = 0.5,
 
 	--cd
-	cool = 2,
+	cool = 2.5,
 
 	--耗蓝
 	cost = {25,130,235,340,450},
@@ -69,7 +69,7 @@ function mt:strong_skill_func()
 	-- 增强 卜算子 技能 1个变为多个 --商城 或是 技能进阶可得。
 	if (player.mall and player.mall['黑魔导']) or (hero.strong_skill and hero.strong_skill[self.name]) then 
 		self:set('target_type',ac.skill.TARGET_TYPE_POINT)
-		self:set('area',400)
+		self:set('area',350)
 		self:set('target_range',1300)
 		self:set('upgrade_tip','已进阶')
 		local source_main_attr = {0,0,0,0,0}
@@ -123,6 +123,7 @@ function mt:on_cast_shot()
 		for i,u in ac.selector()
 			: in_range(target:get_point(),self.area)
 			: of_not_building()
+			: is_not(hero)
 			: ipairs()
 		do
 			if  u:find_buff('大吉大利') then  

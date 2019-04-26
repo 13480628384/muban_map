@@ -326,6 +326,7 @@ gold = 0,
 _count = 1,
 --物品模型
 specail_model = [[ScrollHealing.mdx]],
+model_size = 2,
 titile = '|cffff0000宠物经验书|r',
 --物品详细介绍的title
 content_tip = '使用说明：'

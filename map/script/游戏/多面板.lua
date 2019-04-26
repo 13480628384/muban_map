@@ -31,7 +31,7 @@ local function multiboard_init()
 				-- if y >= 2 and y <= (all_lines - 2) then
 				-- 	mtb:setStyle(x,y,true,true)
 				-- end
-				mtb:setWidth(x,y,0.05)
+				mtb:setWidth(x,y,0.06)
 				-- mtb:setIcon(x,y,base_icon)
 			elseif x == 3 then
 				-- if y >= 2 and y <= (all_lines - 2) then

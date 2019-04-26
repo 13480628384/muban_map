@@ -327,6 +327,7 @@ D:\one-map\muban_map\map\script\物品\商店\init.lua
 D:\one-map\muban_map\map\script\物品\商店\技能升级书.lua
 D:\one-map\muban_map\map\script\物品\商店\技能升级书1.lua
 D:\one-map\muban_map\map\script\物品\商店\挑战伏地魔.lua
+D:\one-map\muban_map\map\script\物品\商店\迷路的坦克.lua
 D:\one-map\muban_map\map\script\物品\商店\随机4个物品和技能.lua
 D:\one-map\muban_map\map\script\物品\商店\随机技能.lua
 D:\one-map\muban_map\map\script\物品\商店\随机技能1.lua
@@ -346,6 +347,7 @@ D:\one-map\muban_map\map\script\物品\消耗品\init.lua
 D:\one-map\muban_map\map\script\物品\消耗品\召唤boss.lua
 D:\one-map\muban_map\map\script\物品\消耗品\召唤练功怪.lua
 D:\one-map\muban_map\map\script\物品\消耗品\吞噬丹.lua
+D:\one-map\muban_map\map\script\物品\消耗品\恶魔果实.lua
 D:\one-map\muban_map\map\script\物品\消耗品\新手礼包.lua
 D:\one-map\muban_map\map\script\物品\消耗品\生命药水.lua
 D:\one-map\muban_map\map\script\物品\消耗品\随机技能书.lua

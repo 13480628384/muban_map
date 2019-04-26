@@ -21,7 +21,7 @@ require 'ac'
 require 'ui'
 -- print(5)
 require '通用'
-require '平台'
+-- require '平台'
 -- print(6)
 require '游戏'
 -- print(7)
@@ -29,7 +29,7 @@ require '物品'
 -- print(8)
 require '技能'
 -- print(9)
-require '英雄'
+-- require '英雄'
 -- print(10)
 require '刷怪'
 -- print(11)

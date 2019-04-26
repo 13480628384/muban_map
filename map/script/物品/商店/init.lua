@@ -26,6 +26,7 @@ ac.game:event '玩家-注册英雄后' (function()
         --创建物品商店
         local x,y = ac.map.rects['物品商店']:get_point():get()
         local shop = ac.shop.create('物品商店',x,y-off_set,270)
+        shop:set_size(1.2)
         ac.map.fresh_shop_item(shop)
         ac.loop(fresh_time*1000,function()
             ac.map.fresh_shop_item(shop)
@@ -38,7 +39,7 @@ ac.game:event '玩家-注册英雄后' (function()
         --创建技能商店
         local x,y = ac.map.rects['技能商店']:get_point():get()
         local shop1 = ac.shop.create('技能商店',x,y-off_set,270)
-        shop1:set_size(0.7)
+        shop1:set_size(0.7*1.2)
         ac.map.fresh_shop_skill(shop1)
         ac.loop(fresh_time*1000 + 100,function()
             ac.map.fresh_shop_skill(shop1)
@@ -51,16 +52,18 @@ ac.game:event '玩家-注册英雄后' (function()
         --创建积分商店
         local x,y = ac.map.rects['积分商店']:get_point():get()
         local shop2 = ac.shop.create('积分商店',x,y-off_set,270)
-        shop2:set_size(2)
+        shop2:set_size(2*1.2)
         print('注册英雄后4')
         --创建xx商店
         local x,y = ac.map.rects['图书馆']:get_point():get()
         local shop3 = ac.shop.create('图书馆',x,y-off_set,270)
+        shop3:set_size(1.2)
 
         print('注册英雄后5')
         --创建天结散人
         local x,y = ac.map.rects['天结散人']:get_point():get()
         local shop4 = ac.shop.create('天结散人',x,y-off_set,270)
+        shop4:set_size(1.2)
 
         print('注册英雄后6')
         ac.game:event '游戏-回合开始'(function(trg,index, creep) 

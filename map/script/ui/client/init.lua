@@ -1,11 +1,4 @@
-require 'ui.client.tooltip'
+
 require 'ui.client.util'
--- require 'ui.client.taskbar'
--- require 'ui.client.bag'
-require 'ui.client.ui_print'
--- require 'ui.client.item'
--- require 'ui.client.控制台'
--- require 'ui.client.道具栏'
--- require 'ui.client.技能栏'
 require 'ui.client.ranking'
 require 'ui.client.kzt'

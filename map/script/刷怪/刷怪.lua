@@ -37,7 +37,7 @@ for k,v in pairs(ac.table.UnitData) do
                 all_creep[v.type] = {}
             end
             --排除，以免刷到最终boss怪
-            if not finds(k,'最终boss','挑战','金币','伏地魔') then
+            if not finds(k,'最终boss','挑战','金币','伏地魔','迷路的坦克') then
                 table.insert(all_creep[v.type],k)    
             end    
         end    
@@ -127,7 +127,7 @@ function mt:random_creeps_datas(temp_type)
     end    
     -- print(rand_name)
     -- print(rand_name,ac.table.UnitData[rand_name].food)
-    self.used_food = self.used_food  + ac.table.UnitData[rand_name].food or 20 --避免忘了排除特殊boss导致刷怪失败
+    self.used_food = self.used_food  + (ac.table.UnitData[rand_name].food or 20) --避免忘了排除特殊boss导致刷怪失败
 
     if self.used_food <= self.all_food then 
         local u = self:has_unit(rand_type)
@@ -761,17 +761,23 @@ ac.game:event '游戏-选择难度' (function (_,index)
     if index == 1 then 
         ac.g_game_degree = index 
         ac.player.self:sendMsg("选择了 |cffffff00【普通难度】|r ")
+        require '英雄'
+        require '平台'
     end
     
     --难度2
     if index == 2 then 
         ac.g_game_degree = index
         ac.player.self:sendMsg("选择了 |cffffff00【噩梦难度】（可进入无尽）|r")
+        require '英雄'
+        require '平台'
     end 
     --难度3
     if index == 3 then 
         ac.g_game_degree = index
         ac.player.self:sendMsg("选择了 |cffffff00【地狱难度】（可进入无尽 新手慎入）|r")
+        require '英雄'
+        require '平台'
     end 
 
     --每3秒提醒玩家主机在选择难度

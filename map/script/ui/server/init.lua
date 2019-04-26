@@ -1,7 +1,3 @@
--- require 'ui.server.bag'
--- require 'ui.server.taskbar'
+
 require 'ui.server.trigger'
 require 'ui.server.kzt'
--- require 'ui.server.item'
--- require 'ui.server.unit'
--- require 'ui.server.技能栏'
