@@ -9,17 +9,15 @@ mt{
 	max_level = 5,
 	
 	tip = [[
-		主动：以法器连接一名队友，减少自己主属性 %source_main_attr% %，增加队友主属性 %target_main_attr% %
+		主动：以法器连接一名队友，增加队友主属性 %target_main_attr% %
 		或者 连接一名敌人，每0.5秒造成 攻击力*2+智力*5 的法术伤害 (%damage%) ；超过 %target_range% 距离断开
 		被动：物品获取率+ %item_rate% %金钱获得+ %gold_rate% %
 		
-		进阶后的技能效果： (%upgrade_tip%)
-		法器可同时链接 多个目标 ，并且不减少自己的主属性
+		%strong_skill_tip%
 	]],
 	
 	--技能图标
 	art = [[jineng\jineng010.blp]],
-	upgrade_tip = '未进阶',
 
 	--技能目标类型 单位目标
 	target_type = ac.skill.TARGET_TYPE_UNIT,
@@ -28,7 +26,7 @@ mt{
 	target_main_attr = {35,40,45,50,55},
 
 	--减少主属性 
-	source_main_attr = {35,25,15,5,0},
+	source_main_attr = {0,0,0,0,0},
 
 	--伤害
 	damage = function(self,hero)
@@ -56,6 +54,8 @@ mt{
 
 	--牵引保持距离
 	target_range = 1200,
+
+	strong_skill_tip = '（可食用|cffffff00恶魔果实|r进行强化）',
 	--强制施法
 	-- range = 1200,
 }
@@ -67,22 +67,24 @@ function mt:strong_skill_func()
 	local hero = self.owner 
 	local player = hero:get_owner()
 	-- 增强 卜算子 技能 1个变为多个 --商城 或是 技能进阶可得。
-	if (player.mall and player.mall['黑魔导']) or (hero.strong_skill and hero.strong_skill[self.name]) then 
+	if hero.strong_skill and hero.strong_skill[self.name] then 
 		self:set('target_type',ac.skill.TARGET_TYPE_POINT)
 		self:set('area',350)
 		self:set('target_range',1300)
-		self:set('upgrade_tip','已进阶')
-		local source_main_attr = {0,0,0,0,0}
-		self:set('source_main_attr',source_main_attr)
+		self:set('strong_skill_tip','|cffffff00已强化：|r|cff00ff00可同时链接指定区域内的所有单位|r')
 		-- print(2222222222222222222)
 	end	
 end	
 function mt:on_add()
+	local hero = self.owner 
+	local player = hero:get_owner()
+	if player.mall and player.mall['黑魔导'] then 
+		if not hero.strong_skill then 
+            hero.strong_skill = {}
+		end  
+		hero.strong_skill[self.name] = true
+	end	
 	self:strong_skill_func()
-	--判断是否买了商城道具
-	-- local player = 
-
-
 end	
 function mt:on_upgrade()
 	local hero = self.owner

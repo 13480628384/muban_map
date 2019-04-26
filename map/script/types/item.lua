@@ -129,6 +129,7 @@ local color_model = {
     ['金'] = [[faguanghuang.mdx]],
     ['红'] = [[faguanghong.mdx]],
     ['绿'] = [[faguanglv.mdx]],
+    ['紫'] = [[faguangzi.mdx]],
 }
 
 --颜色模型 目前应用于装备

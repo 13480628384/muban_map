@@ -52,4 +52,5 @@ function sortpairs(t)
         return v[1], v[2]
     end
 end
-
+-- local dbg = require("jass.debug")
+-- rawset(dbg,'gchash',function () end)

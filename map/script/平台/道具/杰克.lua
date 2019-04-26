@@ -49,6 +49,9 @@ function mt:on_add()
     if not hero then 
         hero = self.owner 
     end
+    if not hero.strong_skill then 
+        hero.strong_skill = {}
+    end  
     self.old_model = hero:get_slk 'file'
 	if not getextension(self.old_model) then 
 		self.old_model = self.old_model..'.mdl'
@@ -60,8 +63,10 @@ function mt:on_add()
         --增强剑刃风暴
         local skill = hero:find_skill('剑刃风暴')
         if skill then 
-            skill.is_stronged = true
+            hero.strong_skill['剑刃风暴'] = true
+            skill:strong_skill_func()
         end    
+       
     end    
 end    
 

@@ -79,7 +79,8 @@ mt{
     show_level = true,
     --升级特效
     effect =[[Hero_CrystalMaiden_N2_V_boom.mdx]],
-    content_tip = '基本属性：'
+    content_tip = '基本属性：',
+    specail_model = [[Objects\InventoryItems\TreasureChest\treasurechest.mdl]]
 }
 
 

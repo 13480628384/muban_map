@@ -13,6 +13,7 @@ mt{
 		主动：对周围%area%码的敌人每 %pulse% 秒造成物理伤害，持续时间 %time% 秒
 		被动：提升溅射%life_rate% %
 		|cff00bdec伤害计算：攻击力*%attack% |cff00bdec+力量*%power% |cff00bdec(%damage%|cff00bdec)|r
+		
 		%strong_skill_tip%
 	]],
 	
@@ -79,7 +80,7 @@ mt{
 	follow_move_skip = 10,
 	
 	--强化技能文本
-	strong_skill_tip = ''
+	strong_skill_tip = '（可食用|cffffff00恶魔果实|r进行强化）'
 }
 mt.life_rate_now = 0
 
@@ -90,7 +91,7 @@ function mt:strong_skill_func()
 	-- 增强 卜算子 技能 1个变为多个 --商城 或是 技能进阶可得。
 	if (hero.strong_skill and hero.strong_skill[self.name]) then 
 		self.is_stronged = true
-		self:set('strong_skill_tip','|cff00ff00强化效果：额外触发多重冲击波，造成等值伤害|r')
+		self:set('strong_skill_tip','|cffffff00已强化：|r|cff00ff00额外触发多重冲击波，造成等值伤害|r')
 		-- print(2222222222222222222)
 	end	
 end	

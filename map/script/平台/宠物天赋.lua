@@ -305,7 +305,7 @@ art = [[ReplaceableTextures\CommandButtons\BTNScroll.blp]],
 tip = [[+%xp% 宠物天赋经验]],
 
 --品质
-color = '红',
+color = '紫',
 
 --物品类型
 item_type = '消耗品',

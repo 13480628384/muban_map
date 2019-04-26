@@ -6,6 +6,8 @@ local hero = require 'types.hero'
 local item = require 'types.item'
 local affix = require 'types.affix'
 local japi = require 'jass.japi'
+local dbg = require 'jass.debug' 
+-- dbg.gchash = function () end 
 
 local error_handle = require 'jass.runtime'.error_handle
 
@@ -269,7 +271,7 @@ function helper:clear_server()
 		for n = 1,#ac.mall do 
 			p:Map_SaveServerValue(ac.mall[n][1],0)
 		end	
-		ac.set_jiami(p,'jifen',0)
+		-- ac.set_jiami(p,'jifen',0)
 	end
 end
 --服务器存档 读取 
@@ -466,6 +468,31 @@ function helper:add_item(str,cnt)
 		self:add_item(str,true)
 	end	
 end
+--进入地狱，7个光环
+function helper:tt()
+	ac.creep['刷怪'].index = 59
+	ac.item.add_skill_item('战鼓光环',self)
+	ac.item.add_skill_item('攻速光环',self)
+	ac.item.add_skill_item('辉煌光环',self)
+	ac.item.add_skill_item('强击光环',self)
+	ac.item.add_skill_item('冰冷核心',self)
+	ac.item.add_skill_item('吸血光环',self)
+	ac.item.add_skill_item('寻宝光环',self)
+
+	self:add('杀怪全属性',3000)
+	self:add('攻击距离',2000)
+	self:add('物爆几率',90)
+	self:add('会心几率',90)
+	self:add('多重射',10)
+	self:add('溅射',100)
+	self:add('攻击',1000000000)
+	
+	if not ac.wtf then
+		helper.wtf(self)
+	end
+	self:add_restriction '免死'
+	self:addGold(999999)
+end
 --设置物品数量
 function helper:set_item(str,cnt)
 	local item = self:has_item(str)
@@ -556,6 +583,45 @@ function helper:never_dead(flag)
 		self:remove_restriction '免死'
 	end
 end
+
+ac.test_unit ={}
+function helper:cr1()
+	-- if str =='1' then 
+		for i=1,500 do
+			local u = ac.player(16):create_unit('金币怪',ac.point(100,200))
+			u:set('生命上限',20000000)
+			u:set('移动速度',300)
+			ac.test_unit[u] = true
+		end
+	-- end	
+	-- print(1111111111111111111111111111111111111)
+end
+function helper:cr2()
+	for u in pairs(ac.test_unit) do
+		print(u.handle,u,math.random(100000))
+		-- u:remove()
+		-- ac.test_unit[u] = false
+	end	
+end
+
+function helper:cr3()
+	-- if str =='1' then 
+		for i=1,500 do
+			local k = {id = i }
+			dbg.gchash(k,i)
+			k.gchash = i
+			ac.test_unit[k] = i 
+		end	
+	-- end	
+	-- print(1111111111111111111111111111111111111)
+end
+function helper:cr4()
+	for k,v in pairs(ac.test_unit) do
+		print(k.id)
+	end	
+end
+
+
 --设置昼夜模型
 function helper:light(type)
 	local light = {
