@@ -25,6 +25,7 @@ mt{
 	tip = [[|cff11ccff%skill_type%:|r 对范围600码的敌人造成移动力减少 50% 和攻击速度减少 25% ，持续3秒，并造成伤害
 伤害计算：|cffd10c44攻击力 * %attack_mul%|r+ |cffd10c44 %shanghai% |r
 伤害类型：|cff04be12物理伤害|r
+
 %strong_skill_tip%]],
 	--技能图标
 	art = [[jineng\jineng008.blp]],
@@ -45,7 +46,7 @@ mt{
 	attack_speed = 25 ,
 	--持续时间
 	time = 3 ,
-	strong_skill_tip ='',
+	strong_skill_tip ='（可食用|cffffff00恶魔果实|r进行强化）',
 	casting_cnt = 1
 
 }
@@ -55,7 +56,7 @@ function mt:strong_skill_func()
 	-- 增强 卜算子 技能 1个变为多个 --商城 或是 技能进阶可得。
 	if (hero.strong_skill and hero.strong_skill[self.name]) then 
 		self:set('casting_cnt',5)
-		self:set('strong_skill_tip','|cff00ff00强化效果：额外触发4次击地，造成等值伤害|r')
+		self:set('strong_skill_tip','|cffffff00已强化：|r|cff00ff00额外触发4次击地，造成等值伤害|r')
 		-- print(2222222222222222222)
 	end	
 end	

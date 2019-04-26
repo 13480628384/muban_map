@@ -10,7 +10,7 @@ cool = 0,
 
 --描述
 tip = [[
-能吞噬一个装备，永久加成对应的属性
+能吞噬一个装备，永久增加对应的属性（套装效果无法加成）
 已吞噬 %cnt%|cffffff00/8|r 个： %content%]],
 cnt = function(self) 
     local cnt = 0

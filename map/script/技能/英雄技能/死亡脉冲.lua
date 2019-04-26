@@ -22,6 +22,7 @@ mt{
 	增加范围400码的队友%heal%生命
 	伤害计算：|cffd10c44 智力 * %int% + |cffd10c44 %shanghai% |r
 	伤害类型：|cff04be12法术伤害|r
+
 	%strong_skill_tip%
 	]],
 	--技能图标
@@ -43,7 +44,7 @@ mt{
 		end
 	end	,
 	damage_type = '法术',
-	strong_skill_tip ='',
+	strong_skill_tip ='（可食用|cffffff00恶魔果实|r进行强化）',
 	casting_cnt = 1
 }
 function mt:strong_skill_func()
@@ -52,7 +53,7 @@ function mt:strong_skill_func()
 	-- 增强 卜算子 技能 1个变为多个 --商城 或是 技能进阶可得。
 	if (hero.strong_skill and hero.strong_skill[self.name]) then 
 		self:set('casting_cnt',5)
-		self:set('strong_skill_tip','|cff00ff00强化效果：额外触发4次死亡脉冲，造成等值伤害|r')
+		self:set('strong_skill_tip','|cffffff00已强化：|r|cff00ff00额外触发4次死亡脉冲，造成等值伤害|r')
 		-- print(2222222222222222222)
 	end	
 end	

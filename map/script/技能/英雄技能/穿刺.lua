@@ -20,6 +20,7 @@ mt{
 	tip = [[|cff11ccff%skill_type%:|r 对一条直线上的敌人晕眩1S，并造成力量*%int%的物理伤害 （%damage%）
 	伤害计算：|cffd10c44力量 * %int% |r+ |cffd10c44 %shanghai% |r
 	伤害类型：|cff04be12物理伤害|r
+	
 	%strong_skill_tip%
 	]],
 	--技能图标
@@ -46,7 +47,7 @@ mt{
 	--特效移动速度
 	speed = 5000,
 
-	strong_skill_tip ='',
+	strong_skill_tip ='（可食用|cffffff00恶魔果实|r进行强化）',
 	casting_cnt = 1
 }
 function mt:strong_skill_func()
@@ -55,7 +56,7 @@ function mt:strong_skill_func()
 	-- 增强 卜算子 技能 1个变为多个 --商城 或是 技能进阶可得。
 	if (hero.strong_skill and hero.strong_skill[self.name]) then 
 		self:set('casting_cnt',5)
-		self:set('strong_skill_tip','|cff00ff00强化效果：额外触发4次穿刺，造成等值伤害|r')
+		self:set('strong_skill_tip','|cffffff00已强化：|r|cff00ff00额外触发4次穿刺，造成等值伤害|r')
 		-- print(2222222222222222222)
 	end	
 end	
