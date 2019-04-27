@@ -19,7 +19,7 @@ mt{
 	--特效
 	effect = [[Abilities\Spells\Human\DevotionAura\DevotionAura.mdl]],
     --光环影响范围
-    area = 99999,
+    area = 9999,
     --值
     value = {20,30,40,65,100},
 }
@@ -70,7 +70,7 @@ mt.pulse = 1
 mt.cover_type = 1
 mt.cover_max = 1
 mt.effect = [[]]
-mt.keep = true
+-- mt.keep = true
 -- mt.cover_global = 1
 
 function mt:on_add()

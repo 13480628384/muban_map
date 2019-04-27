@@ -19,7 +19,7 @@ mt{
 	--特效
 	effect = [[Abilities\Spells\Orc\WarDrums\DrumsCasterHeal.mdl]],
     --光环影响范围
-    area = 99999,
+    area = 9999,
     --值
     value = {15,25,35,50,75},
 }
@@ -39,7 +39,7 @@ function mt:on_upgrade()
                 : is_ally(hero)
                 : ipairs()
             do 
-                print('加buff啦',name)
+                -- print('加buff啦',name)
                 unit:add_buff(name)
                 {
                     value = self.value,
@@ -71,7 +71,7 @@ mt.pulse = 1
 mt.cover_type = 1
 mt.cover_max = 1
 mt.effect = [[]]
-mt.keep = true
+-- mt.keep = true
 
 function mt:on_add()
     local target = self.target

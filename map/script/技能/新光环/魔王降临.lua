@@ -19,7 +19,7 @@ mt{
 	--特效
 	source_effect = [[Abilities\Spells\Undead\RegenerationAura\ObsidianRegenAura.mdl]],
     --光环影响范围
-    area = 99999,
+    area = 9999,
     --值
     value = {15,20,25,30,35},
 }
@@ -69,7 +69,7 @@ mt.pulse = 1
 mt.cover_type = 1
 mt.cover_max = 1
 mt.effect = [[]]
-mt.keep = true
+-- mt.keep = true
 
 function mt:on_add()
     local target = self.target

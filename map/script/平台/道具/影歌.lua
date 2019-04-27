@@ -18,7 +18,7 @@ mt{
 	--物爆伤害
     physical_damage = 50,
     --影响范围
-    area = 99999,
+    area = 9999,
 	--特效
 	source_effect = [[Abilities\Spells\Undead\RegenerationAura\ObsidianRegenAura.mdl]],
 }
@@ -71,7 +71,7 @@ mt.pulse = 1
 mt.cover_type = 1
 mt.cover_max = 1
 mt.effect = [[]]
-mt.keep = true
+-- mt.keep = true
 
 function mt:on_add()
     local target = self.target

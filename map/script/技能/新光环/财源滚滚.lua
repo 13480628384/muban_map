@@ -19,7 +19,7 @@ mt{
 	--特效
 	effect = [[Effect_BlinkYE.mdx]],
     --光环影响范围
-    area = 99999,
+    area = 9999,
     --值
     value = {20,40,60,80,100},
 }
@@ -69,7 +69,7 @@ mt.pulse = 1
 mt.cover_type = 1
 mt.cover_max = 1
 mt.effect = [[]]
-mt.keep = true
+-- mt.keep = true
 
 function mt:on_add()
     local target = self.target

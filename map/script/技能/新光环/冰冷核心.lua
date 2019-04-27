@@ -21,7 +21,7 @@ mt{
 	--持有光环技能的特效
 	source_effect = [[]],
     --光环影响范围
-    area = 99999,
+    area = 9999,
     --值
     value = {25,35,45,55,65},
 }
@@ -72,7 +72,7 @@ mt.cover_type = 1
 mt.cover_type = 1
 mt.cover_max = 1
 mt.effect = [[]]
-mt.keep = true
+-- mt.keep = true
 
 function mt:on_add()
     local target = self.target

@@ -19,7 +19,7 @@ mt{
 	--特效
 	effect = [[Abilities\Spells\Undead\VampiricAura\VampiricAura.mdl]],
     --光环影响范围
-    area = 99999,
+    area = 9999,
     --值
     value = {0.2,0.4,0.6,0.8,1},
 }
@@ -71,7 +71,7 @@ mt.pulse = 1
 mt.cover_type = 1
 mt.cover_max = 1
 mt.effect = [[]]
-mt.keep = true
+-- mt.keep = true
 
 
 function mt:on_add()
