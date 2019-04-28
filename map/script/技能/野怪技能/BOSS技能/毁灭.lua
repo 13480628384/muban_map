@@ -4,7 +4,7 @@ mt{
 level = 1,
 --施法信息
 cast_start_time = 0,
-cast_channel_time = 0.8,
+cast_channel_time = 1.5,
 cast_shot_time = 0,
 cast_finish_time = 1,
 --技能图标
