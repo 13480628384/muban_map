@@ -6,6 +6,7 @@ require '刷怪.游戏结束'
 require '刷怪.命运花'
 require '刷怪.钥匙怪奖励'
 require '刷怪.低保户'
+require '刷怪.BOSS-AI'
 
 --单位创建 属性增强
 

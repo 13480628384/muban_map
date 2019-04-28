@@ -18,7 +18,7 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
         -- unit:setColor(100,100,100)
         -- unit:setColor(68,68,68)
         -- unit:set_animation 'Stand Ready'
-        unit:add_skill('死亡之环','英雄')
+        unit:add_skill('死亡之环','隐藏')
         if not unit.data  then 
             unit.data = {}
         end    
@@ -99,6 +99,14 @@ ac.game:event '游戏-最终boss' (function(trg,index, creep)
         target_size = 2.5,
         time = 3.5
     }
+    --添加4个boss技能
+    creep.boss:add_skill('毁灭','英雄') 
+    for i=1,3 do 
+        local skl_name = ac.skill_list3[math.random(#ac.skill_list3)]
+        if not creep.boss:find_skill(skl_name) then 
+            creep.boss:add_skill(skl_name,'英雄') 
+        end
+    end        
 	--镜头动画
 	local p = ac.player.self
 	p:setCamera(creep.boss:get_point() + {0, 300}, 0.5)

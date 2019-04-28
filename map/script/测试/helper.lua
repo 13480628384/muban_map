@@ -288,6 +288,7 @@ function helper:boshu(str,index)
 	local creep = ac.creep[str]
 	ac.creep[str].index = math.ceil(index)
 end
+
 --动画
 function helper:ani(name)
 	self:set_animation(name)
@@ -691,6 +692,14 @@ end
 function helper:player(cmd)
     table.remove(cmd, 1)
     call_method(self:get_owner(), cmd)
+end
+
+
+--测试boss技能
+function helper:boss()
+	ac.creep['刷怪'].index = 9
+	self:add_restriction '免死'
+	ac.creep['刷怪']:next()
 end
 
 local function main()

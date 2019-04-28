@@ -34,6 +34,72 @@ local function point_effect_simple(self, point)
 	self.point = point
 	self.handle = jass.AddSpecialEffect(self.model, point:get())
 	dbg.handle_ref(self.handle)
+
+	function self:set_rotate(x,y,z)
+	    japi.EXEffectMatRotateX(self.handle, x)
+    	japi.EXEffectMatRotateY(self.handle, y)
+    	japi.EXEffectMatRotateZ(self.handle, z)
+	end
+	function self:add_rotate(x,y,z)
+		self.rotate[1] = self.rotate[1] + x
+		self.rotate[2] = self.rotate[2] + y
+		self.rotate[3] = self.rotate[3] + z
+	    japi.EXEffectMatRotateX(self.handle, self.rotate[1])
+    	japi.EXEffectMatRotateY(self.handle, self.rotate[2])
+    	japi.EXEffectMatRotateZ(self.handle, self.rotate[3])
+	end
+
+	function self:set_size(size)
+    	japi.EXSetEffectSize(self.handle, size)
+	end
+
+	function self:set_height(h)
+    	japi.EXSetEffectZ(self.handle, h + self.point:getZ() + self.high or 0)
+	end
+	function self:set_point(loc)
+    	japi.EXSetEffectXY(self.handle, loc[1],loc[2])
+    	if loc[3] then
+	    	self:set_height(loc[3])
+    	end
+	end
+
+	function self:set_speed(spd)
+    	japi.EXSetEffectSpeed(self.handle, spd)
+	end
+	function self:add_scale(scale)
+		self.scale = scale
+    	japi.EXEffectMatScale(self.handle, self.scale[1], self.scale[2], self.scale[3])
+	end
+	
+	--point
+	--model
+	--rotate
+	if self.scale then
+		self:add_scale(self.scale)
+	end
+	if self.rotate then
+		self:set_rotate(self.rotate[1],self.rotate[2],self.rotate[3])
+	else
+		self.rotate = {0,0,0}
+	end
+	--size
+	if self.size and self.size ~= 1 then
+		self:set_size(self.size)
+	else
+		self.size = 1
+	end
+	--high
+	if self.high then
+		self:set_height(self.high)
+	else
+		self.high = 0
+	end
+	--speed
+	if self.speed and self.speed~=0 then
+		self:set_speed(self.speed)
+	else
+		self.speed = 1
+	end
 	return setmetatable(self, effect)
 end
 

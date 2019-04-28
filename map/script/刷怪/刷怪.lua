@@ -187,6 +187,38 @@ function mt:get_creep_skill()
     return rand_skill_list
 
 end
+
+--每回合开始 从 ac.skill_list3 随机取1-2个野怪技能
+function mt:get_boss_skill()
+
+    local rand_skill_cnt = math.random(1,3)
+    local rand_skill_list = {}
+    if rand_skill_cnt == 0 then 
+        return 
+    end  
+    for i = 1,rand_skill_cnt do  
+        local rand_skill_name = ac.skill_list3[math.random(#ac.skill_list3)]
+        
+        table.insert(rand_skill_list,rand_skill_name)
+    end    
+    return rand_skill_list
+
+end
+
+function mt:add_boss_skill(tab,unit)
+    if not tab or #tab == 0 then 
+        return 
+    end    
+    local prtin_str =''
+    for i = 1,#tab do  
+        local skill_name = tab[i]
+        local skill = ac.skill[skill_name]
+
+        if not unit:find_skill(skill_name) then 
+            unit:add_skill(skill_name,'英雄')    
+        end    
+    end
+end
 --给野怪添加技能 
 --技能列表
 --野怪单位
@@ -224,7 +256,7 @@ function mt:add_creep_skill(tab,unit)
         
         prtin_str = prtin_str .. i .. skill_name ..','
     end 
-    -- unit:add_skill('火焰','隐藏')    
+    -- unit:add_skill('龙破斩','英雄')    
     -- print('1111111111本回合野怪技能：',prtin_str)
 end 
 
@@ -289,7 +321,7 @@ function mt:on_next()
     self:set_creeps_datas()
 
     self.rand_skill_list = self:get_creep_skill()
-
+    self.rand_boss_skill_list = self:get_boss_skill()
     --发送本层怪物信息 3次10秒
     self:send_skill_message(3,10)
     print('当前波数 '..self.index)
@@ -407,6 +439,7 @@ end
 --改变怪物
 function mt:on_change_creep(unit,lni_data)
     local name
+    local flag_tianzhan 
      --金币怪
     if self.index == self.gold_index then 
         self.gold_index = self.gold_index + 10
@@ -472,6 +505,7 @@ function mt:on_change_creep(unit,lni_data)
     elseif self.index == self.challenge_index then
         self.challenge_index = self.challenge_index + 10
         name = "挑战怪-"..self.index
+        flag_tianzhan = true 
     --普通怪    
     else 
         name = '进攻怪-'..self.index
@@ -518,6 +552,10 @@ function mt:on_change_creep(unit,lni_data)
     -- unit:set_search_range(99999)
     --随机添加怪物技能
     self:add_creep_skill(self.rand_skill_list,unit)
+
+    if flag_tianzhan then 
+        self:add_boss_skill(self.rand_boss_skill_list,unit)
+    end    
     -- unit:add_skill('火焰','隐藏')
     -- unit:add_skill('神盾','隐藏')
     -- unit:add_skill('减速光环','隐藏')

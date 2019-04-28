@@ -1,7 +1,5 @@
 
 
-
-
 ac.game:event '造成伤害开始' (function (_,damage)
     if damage:is_common_attack() == false then 
         return 
@@ -9,17 +7,11 @@ ac.game:event '造成伤害开始' (function (_,damage)
 
     local hero = damage.source 
     local target = damage.target 
-    if hero.is_boss == nil  then 
-        if target.is_boss == nil then 
-            return 
-        else 
-            hero = damage.target
-            target = damage.source
-        end 
-    end 
-
+    -- print(hero,hero.data.type)
+    if hero.data and hero.data.type ~= 'boss' then 
+        return 
+    end    
    
-
     local list = {}
     for skill in hero:each_skill '英雄' do 
         table.insert(list,skill)
@@ -29,13 +21,14 @@ ac.game:event '造成伤害开始' (function (_,damage)
         return 
     end 
     local skill  = list[math.random(#list)]
-
+    -- print(skill.name)
     if skill == nil then 
         return 
     end 
    
+    -- print(rand)
     local rand = math.random(100)
-    if rand <= 30 then 
+    if rand <= 15 then 
         if skill.target_type == 0 then 
             skill:cast()
         elseif skill.target_type == 1 then  

@@ -349,7 +349,7 @@ C;X13;K2
 C;X14;K0
 C;Y3;X1;K"CLPB"
 C;X2;K"Chain Lightning - Primary Bolt"
-C;X3;K"ReplaceableTextures\Weather"
+C;X3;K"lightnings"
 C;X4;K"Lightning.blp"
 C;X5;K100
 C;X6;K50
@@ -585,20 +585,21 @@ C;X11;K0
 C;X12;K0.5
 C;X13;K2
 C;X14;K1
-C;Y20;X1;K"LN02"
-C;X2;K"激光 100粗细"
-C;X3;K"lightnings"
-C;X4;K"LN00.blp"
-C;X5;K30
-C;X6;K100
+C;Y20;X1;K"FFAA"
+C;X2;K"Lazer"
+C;X3;K"F2texture"
+C;X4;K"F2_lt_1.blp"
+C;X5;K100
+C;X6;K20
 C;X7;K255
 C;X8;K255
 C;X9;K255
 C;X10;K255
 C;X11;K0
-C;X12;K0
+C;X12;K1
 C;X13;K2
 C;X14;K1
+F;SM176;Y18;X1
 C;Y21;X1;K"LN03"
 C;X2;K"紫色闪电"
 C;X3;K"lightnings"
