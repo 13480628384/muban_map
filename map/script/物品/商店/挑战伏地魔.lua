@@ -47,6 +47,13 @@ function mt:on_cast_start()
         if data.model_size then 
             unit:set_size(data.model_size)
         end   
+        --添加4个boss技能
+        for i=1,2 do 
+            local skl_name = ac.skill_list3[math.random(#ac.skill_list3)]
+            if not unit:find_skill(skl_name) then 
+                unit:add_skill(skl_name,'英雄') 
+            end
+        end   
         --设置搜敌路径
         unit:set_search_range(99999)
         --注册事件
