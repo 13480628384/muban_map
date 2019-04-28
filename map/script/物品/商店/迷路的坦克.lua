@@ -45,21 +45,44 @@ function mt:on_cast_start()
     local hero = self.owner
     local player = hero.owner
     local shop_item = ac.item.shop_item_map[self.name]
-
-    ac.player.self:sendMsg('|cffff0000迷路的坦克|r |cff00ffff已出现，请大侠击杀，获取|r|cffff0000恶魔果实，强化技能|r') 
+      
     --同一时间只能有一只伏地魔
     if ac.flag_tank then 
+        ac.player.self:sendMsg('|cffff0000场上已有坦克|r |cff00ffff，请大侠击杀，获取|r|cffff0000恶魔果实，强化技能|r')  
         return   
     end
     ac.flag_tank = true 
     --创建伏地魔
     local unit = ac.player(12):create_unit('迷路的坦克',ac.map.rects['刷怪']:get_point()) 
-    local data = ac.table.UnitData['迷路的坦克']
-    if data.model_size then 
-        unit:set_size(data.model_size)
-    end   
-    --设置生命上限
-    unit:set('生命上限',1500)
+    local data = ac.table.UnitData['迷路的坦克'] 
+
+
+    local rand = math.random(100)
+    if rand < 30 then 
+        ac.player.self:sendMsg('|cffff0000破烂不堪的坦克|r |cff00ffff已出现，请大侠击杀，获取|r|cffff0000恶魔果实，强化技能|r') 
+        if data.model_size then 
+            unit:set_size(data.model_size*0.6)
+        end  
+        --设置生命上限
+        unit:set('生命上限',500)
+
+    elseif rand < 60 then 
+        ac.player.self:sendMsg('|cffff0000偷工减料的坦克|r |cff00ffff已出现，请大侠击杀，获取|r|cffff0000恶魔果实，强化技能|r')   
+        if data.model_size then 
+            unit:set_size(data.model_size*0.8)
+        end   
+        --设置生命上限
+        unit:set('生命上限',1000) 
+    else
+        ac.player.self:sendMsg('|cffff0000迷路的坦克|r |cff00ffff已出现，请大侠击杀，获取|r|cffff0000恶魔果实，强化技能|r')     
+        if data.model_size then 
+            unit:set_size(data.model_size)
+        end    
+        --设置生命上限
+        unit:set('生命上限',1500)      
+    end
+
+        
     --设置移动路径
     -- print(unit)
     ac.ai_move_random_way(unit)
