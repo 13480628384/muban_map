@@ -126,12 +126,12 @@ function mt:on_change_creep(unit,lni_data)
     --设置 属性倍数 及 每波成长
     if lni_data.attr_mul  then
         unit:set('攻击',(base_attack + upgrade_attr['攻击'] * self.index) * lni_data.attr_mul * (ac.g_game_degree ))
-        unit:set('护甲',(base_defence + upgrade_attr['护甲'] * self.index) * lni_data.attr_mul* (1+(ac.g_game_degree-1)*0.8))
+        unit:set('护甲',(base_defence + upgrade_attr['护甲'] * self.index) * lni_data.attr_mul* (ac.g_game_degree ))
         unit:set('生命上限',(base_life + upgrade_attr['生命上限'] * self.index) * lni_data.attr_mul* (ac.g_game_degree ))
         unit:set('魔法上限',(base_mana + upgrade_attr['魔法上限'] * self.index) * lni_data.attr_mul* (ac.g_game_degree  ))
         unit:set('生命恢复',(base_life_recover + upgrade_attr['生命恢复'] * self.index) * lni_data.attr_mul* (ac.g_game_degree ))
         unit:set('魔法恢复',(base_mana_recover + upgrade_attr['魔法恢复'] * self.index) * lni_data.attr_mul* (ac.g_game_degree  ))
-        unit:set('魔抗',(base_defence + upgrade_attr['魔抗'] * self.index) * lni_data.attr_mul* (1+(ac.g_game_degree-1)*0.8))
+        unit:set('魔抗',(base_defence + upgrade_attr['魔抗'] * self.index) * lni_data.attr_mul* (ac.g_game_degree ))
     end  
 
     --掉落概率

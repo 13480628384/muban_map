@@ -533,13 +533,13 @@ function mt:on_change_creep(unit,lni_data)
         if lni_data.attr_mul  then
             --属性
             unit:set('攻击',data.attribute['攻击'] * lni_data.attr_mul * ac.g_game_degree)
-            unit:set('护甲',data.attribute['护甲'] * lni_data.attr_mul * (1+(ac.g_game_degree-1)*0.8))
+            unit:set('护甲',data.attribute['护甲'] * lni_data.attr_mul * ac.g_game_degree)
             unit:set('生命上限',data.attribute['生命上限'] * lni_data.attr_mul * ac.g_game_degree)
             unit:set('魔法上限',data.attribute['魔法上限'] * lni_data.attr_mul * ac.g_game_degree)
             unit:set('生命恢复',data.attribute['生命恢复'] * lni_data.attr_mul * ac.g_game_degree)
             unit:set('魔法恢复',data.attribute['魔法恢复'] * lni_data.attr_mul * ac.g_game_degree)
             --设置魔抗 
-            unit:set('魔抗',data.attribute['护甲']* lni_data.attr_mul * (1+(ac.g_game_degree-1)*0.8))
+            unit:set('魔抗',data.attribute['护甲']* lni_data.attr_mul * ac.g_game_degree)
         end
         --掉落概率
         unit.fall_rate = data.fall_rate * lni_data.food
