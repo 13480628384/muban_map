@@ -58,6 +58,22 @@ ac.wait(100,function ()
         jass.SetDayNightModels(([[Environment\DNC\DNC%s\DNC%sTerrain\DNC%sTerrain.mdx]]):format(name, name, name), ([[Environment\DNC\DNC%s\DNC%sUnit\DNC%sUnit.mdx]]):format(name, name, name))
     end
     light(3)
+
+    --开局锁定镜头
+    local fogmodifier = require 'types.fogmodifier'
+    for i = 1, 10 do
+		local p = ac.player[i]
+		--在选人区域创建可见度修整器(对每个玩家,永久)
+		fogmodifier.create(p, ac.map.rects['选人区域'])
+		local minx, miny, maxx, maxy = ac.map.rects['选人区域']:get()
+		p:setCameraBounds(minx+900, miny+900, maxx-900, maxy-900)  --创建镜头区域大小，在地图上为固定区域大小，无法超出。
+		p:setCamera(ac.map.rects['选人区域'])
+		--禁止框选
+		p:disableDragSelect()
+
+	end
+
+
     -- 没10分钟切换一次光照模型
     -- local time = 2*60
     -- -- local time = 10

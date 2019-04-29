@@ -85,7 +85,7 @@ function mt:on_cast_shot()
 		skill.physical_rate = self.physical_rate
 		skill.physical_damage = self.physical_damage
 		
-		unit:add_skill('致命一击','英雄')
+		unit:add_skill('致命一击','隐藏')
 		
 		
 	end	

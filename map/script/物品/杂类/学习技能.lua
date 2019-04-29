@@ -99,4 +99,12 @@ function mt:on_cast_shot()
             self:add_item_count(1)    
         end    
     end
+
+    --学习技能后，刷新技能
+    local unit = self.owner
+    if not unit:is_hero() then 
+        for skill in unit:each_skill '英雄' do 
+            skill:fresh()
+        end 
+    end
 end 
