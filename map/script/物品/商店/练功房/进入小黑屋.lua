@@ -8,10 +8,10 @@ mt{
 level = 1,
 
 --图标
-art = [[tanke.blp]],
+art = [[xiaoheiwu.blp]],
 
 --说明
-tip = [[进入小黑屋|r]],
+tip = [[点击传送到安静的小黑屋，冷静地思考下，你是谁？你从哪里来？你要去哪里？]],
 
 --物品类型
 item_type = '神符',
@@ -26,7 +26,9 @@ content_tip = '',
 --物品技能
 is_skill = true,
 --增加值
-value = 0.02
+value = 0.02,
+--商店名词缀
+store_affix = ''
 
 }
 

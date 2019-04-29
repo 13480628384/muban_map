@@ -24,7 +24,9 @@ cool = 0,
 content_tip = '',
 --物品技能
 is_skill = true,
-effect = [[Bloodelf_Vanguard_Tank.mdx]]
+effect = [[Bloodelf_Vanguard_Tank.mdx]],
+--商店名词缀
+store_affix = ''
 
 }
 

@@ -8,7 +8,7 @@ mt{
 level = 1,
 
 --图标
-art = [[tanke.blp]],
+art = [[xiaoheiwu.blp]],
 
 --说明
 tip = [[退出小黑屋|r]],
@@ -26,7 +26,9 @@ content_tip = '',
 --物品技能
 is_skill = true,
 --增加值
-value = 0.02
+value = 0.02,
+--商店名词缀
+store_affix = ''
 
 }
 
