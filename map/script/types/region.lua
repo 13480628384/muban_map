@@ -122,26 +122,31 @@ function mt:compare_set(other)
 	end
 end	
 -- 获得不规则区域内的随机一点
-function mt:get_point()
+-- true 获取中心点
+function mt:get_point(flag)
 	local minx, miny, maxx, maxy = self:get()
 	local x1 = math.modf(minx/32)
 	local x2 = math.modf(maxx/32)
 	local y1 = math.modf(miny/32)
 	local y2 = math.modf(maxy/32)
-	
-	while true do
-		local point = ac.point(
-			math.random(x1,x2)*32,
-			math.random(y1,y2)*32
-		)
-		local x,y = point:get_point():get()
-		-- print('不规则区域内的随机一点',x,y)
-		--modify by jeff 20190412 添加判断，点必须为可通行的点
-		if  self < point and not point:is_block()  then
-			self.point = point
-			return self.point
-		end	
-	end
+	if not flag then 
+		while true do
+			local point = ac.point(
+				math.random(x1,x2)*32,
+				math.random(y1,y2)*32
+			)
+			local x,y = point:get_point():get()
+			-- print('不规则区域内的随机一点',x,y)
+			--modify by jeff 20190412 添加判断，点必须为可通行的点
+			if  self < point and not point:is_block()  then
+				self.point = point
+				return self.point
+			end	
+		end
+	else
+		local point = ac.point((maxx + minx)/2,(maxy + miny)/2)
+		return point
+	end	
 end
 
 --在不规则区域中添加/移除区域

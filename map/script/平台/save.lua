@@ -154,7 +154,7 @@ ac.game:event '游戏-回合开始'(function(_,index,creep)
     for i=1,10 do
         local p = ac.player[i]
         if p:is_player() then
-            if creep.index > p.boshu then
+            if creep.index > (p.boshu or 0) then
                 if ac.g_game_degree == 2 then 
                     if creep.index <= 40 then 
                         p:Map_SaveServerValue('boshu',creep.index)

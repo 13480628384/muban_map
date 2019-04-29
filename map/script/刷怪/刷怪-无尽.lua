@@ -9,7 +9,7 @@ local mt = ac.creep['刷怪-无尽']{
 function mt:on_start()
     --继承刷怪的信息 函数 
     self.region = ac.creep['刷怪'].region
-    self.all_creep = ac.creep['刷怪'].all_creep
+    self.all_units = ac.creep['刷怪'].all_units
 
     self.has_unit = ac.creep['刷怪'].has_unit
     self.get_temp_type = ac.creep['刷怪'].get_temp_type
@@ -37,7 +37,7 @@ function mt:on_next()
     self:random_creeps_datas(temp_type)
     
     --每多一个玩家， 多20怪物总人口d，都是喽喽
-    local small_unit_name = self.all_creep['喽喽'][math.random(1,#self.all_creep['喽喽'])]
+    local small_unit_name = self.all_units['喽喽'][math.random(1,#self.all_units['喽喽'])]
     local more_food = 20 * (get_player_count() - 1)
     if more_food > 0 then 
         self.creeps_datas = self.creeps_datas .. ' '..small_unit_name..'*'..tostring(more_food) 

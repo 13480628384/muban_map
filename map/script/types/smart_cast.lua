@@ -108,6 +108,7 @@ local clean_last_skill
 local function cast_spell(msg, hero, name, force)
 	--找到英雄的技能
 	local skl = hero:find_skill(name)
+	-- print(skl.name)
 	if not skl then
 		return false
 	end
@@ -123,7 +124,7 @@ local function cast_spell(msg, hero, name, force)
 	if skl.break_order == 0 then
 		flag = flag + FLAG_RESUME
 	end
-	--print(order, ('%X'):format(order_id))
+	-- print(order, ('%X'):format(order_id))
 	if skl.target_type == ac.skill.TARGET_TYPE_POINT then
 		if (x == 0 and y == 0) or (not force and get_smart_cast_type(name) ~= 1) then
 			save_last_skill(msg, hero, name)
@@ -297,8 +298,11 @@ function message.hook(msg)
 		--'Z','X','C','V','Q', 'W', 'E', 'R','D', 'F', 'G', 
 		local list = {}
 
-		-- ,按键代码，按键类型,message
-		ac.game:event_notify('玩家-按下按键',  code,state,message)
+		-- ,按键代码，按键类型,message 需要同步
+		--cast_spell(msg, get_select(), name) 
+		-- ac.game:event_notify('玩家-按下按键',  code,state,message)
+		
+		
 
 		-- print(ac.player.self._last_code,code,'====',ac.player.self._last_code_time,ac.clock())
 		if  ac.player.self._last_code == code  and (ac.clock() - ac.player.self._last_code_time) < 1000 then
@@ -404,6 +408,37 @@ function message.hook(msg)
 			
 			return true
 		end
+
+		--F2 练功房
+		if code == keyboard['F2'] then
+			local hero = is_select_off_line_hero() or select_hero()
+			if not hero then
+				return true
+			end
+
+			--本地发布技能指令
+			if cast_spell(msg, hero, 'F2回城',true) then
+				return false
+			end
+			
+			return true
+		end
+
+		--F3 回城
+		if code == keyboard['F3'] then
+			local hero = is_select_off_line_hero() or select_hero()
+			if not hero then
+				return true
+			end
+
+			--本地发布技能指令
+			if cast_spell(msg, hero, 'F3小黑屋',true) then
+				return false
+			end
+			
+			return true
+		end
+
 
 		--空格
 		if code == 32 then

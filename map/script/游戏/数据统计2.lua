@@ -305,6 +305,9 @@ end)
 
 local kzt = require 'ui.client.kzt'
 ac.game:event '游戏-回合开始'(function(_,index,creep)
+    if not finds(creep.name,'刷怪','刷怪-无尽') then
+        return 
+    end
     local tip =''
     if creep.name == '刷怪-无尽' then 
         tip = '(无尽)'

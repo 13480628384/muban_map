@@ -24,8 +24,8 @@ local mt = ac.skill['英雄属性面板']
 攻击间隔:    %attack_gip% 
 攻速:    %attack_speed% (每秒攻击%attack_rate%次)
 溅射:    %splash% % （近战有效）
-破甲:    %pene% (%pene_rate% %)
-减免:    %defence_rate% %
+多重射:    %duochongshe%
+减甲:    %pene%    减免:   %defence_rate% %
 
 物爆几率: %physical_rate% %  物爆伤害:  %physical_damage% %
 法爆几率: %magic_rate% %  法爆伤害:  %magic_damage% %
@@ -47,6 +47,10 @@ local mt = ac.skill['英雄属性面板']
 杀怪加护甲： %kill_defence%
 ]],
 }
+
+function mt:duochongshe()
+	return ('|cffF9C801%.2f|r'):format(self.owner:get '多重射')
+end
 
 function mt:per_allattr()
 	return ('|cffF9C801%.f|r'):format(self.owner:get '每秒全属性')
@@ -249,7 +253,7 @@ function mt:splash()
 end
 
 function mt:pene()
-	return ('|cffF9C801%.2f|r'):format(self.owner:get '破甲')
+	return ('|cffF9C801%.2f|r'):format(self.owner:get '减甲')
 end
 
 function mt:pene_rate()

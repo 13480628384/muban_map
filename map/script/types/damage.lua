@@ -842,6 +842,21 @@ end
 --// add by jeff 
 --// end
 
+--减甲 双抗
+function mt:on_reduce_defence()
+	if not self:is_common_attack() then
+		return
+	end	
+	local source = self.source
+	local target = self.target
+	local val = source:get '减甲'
+    
+	if val > 0 then
+		target:add('护甲',-val)
+		target:add('魔抗',-val)
+	end
+end
+
 
 
 --创建伤害
@@ -1022,6 +1037,8 @@ function damage:__call()
 			on_life_steal(self)
 			--溅射
 			on_splash(self)
+			--减甲
+			self:on_reduce_defence()
 
 			--击杀回血
 			--self:count_kill_hp()

@@ -101,6 +101,7 @@ ac.game:event '游戏-最终boss' (function(trg,index, creep)
     }
     --添加4个boss技能
     creep.boss:add_skill('毁灭','英雄') 
+    -- creep.boss:add_skill('地狱火雨','英雄') 
     for i=1,3 do 
         local skl_name = ac.skill_list3[math.random(#ac.skill_list3)]
         if not creep.boss:find_skill(skl_name) then 

@@ -45,7 +45,45 @@ jingong = extends(panel_class,{
     end
 })
 
+local F2_home = {}
+F2_home = extends(panel_class,{
+    create = function ()
+        local panel = panel_class.create('image\\控制台\\F2_home.blp',10,140,84,84)
+        local title = panel:add_text('',(panel.w-260)/2,(panel.h-40)/2-30,260,40,15,4)
+        panel.title = title
+        return panel
+    end
+})
 
+local F3_xiaoheiwu = {}
+F3_xiaoheiwu = extends(panel_class,{
+    create = function ()
+        local panel = panel_class.create('image\\控制台\\F3_xiaoheiwu.blp',10,234,84,84)
+        local title = panel:add_text('',(panel.w-260)/2,(panel.h-40)/2-30,260,40,15,4)
+        panel.title = title
+        return panel
+    end
+})
+
+-- kzt.on_key_down = function(code)
+--     -- print(code)
+--     if japi.GetChatState() then
+--         return
+--     end
+
+--     if code == KEY.F2 then
+--         print('F2')
+
+--         -- ranking.ui:show()
+--         return
+--     end
+
+--     if code == KEY.F3 then
+--         print('F3')
+--         -- ranking.ui:show()
+--         return
+--     end
+-- end
 
 local function initialize()
 
@@ -53,6 +91,12 @@ local function initialize()
     kzt.jingong = jingong.create()
     kzt.jingong:hide()
 
+    --练功房
+    kzt.F2_home = F2_home.create()
+    kzt.F2_home:hide()
+    kzt.F3_xiaoheiwu = F3_xiaoheiwu.create()
+    kzt.F3_xiaoheiwu:hide()
+    
 
     ui.register_event('kzt',kzt.event)
     game.register_event(kzt)

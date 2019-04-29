@@ -41,7 +41,7 @@ mt.is_hero_leave_death =false
 mt.tip =nil
 mt.creeps_datas = nil
 -- 野怪所有者
-mt.creep_player = ac.player[13]
+mt.creep_player = ac.player[12]
 -- 单位组
 mt.group = {}
 -- 触发玩家
@@ -145,9 +145,7 @@ function creep:find_creep_by_region(region_str)
 end    
 
 function mt:set_region(rgn)
-	--刷怪区域的名字要连续性，不能有空格
     local rect_name = rgn or self.region
-    
 	--已经转化过了
     if type(rect_name) ~= 'string' then 
         self.region = rect_name 
@@ -230,26 +228,30 @@ function mt:start(player)
     ac.player.self:sendMsg('怪物开始刷新:' .. tip, 5)
     -- self.trg_player = p
 
-    --如果 英雄离开时，区域内怪物死亡。
-    -- 英雄在一秒内切换时，可能不会死亡
-    -- self.timer  = ac.loop( 1 * 1000 ,function ()
-    --     -- print('触发英雄',self.trg_player.hero)
-    --     if self.is_hero_leave_death then 
-    --         for _, uu in ipairs(self.group) do
-
-    --             if uu:is_alive() and (uu:get_point() * self.trg_player.hero:get_point() >=2000) then 
-    --                 self.is_finish =true
-    --             end
-    --         end        
-    --         -- print(self.is_finish)
-    --         if self.is_finish then 
-    --             self:finish(true) 
-    --         end    
-    --     end 
-    
-    -- end)
-    -- self.timer:on_timer()
-    
+    if self.is_leave_region_replace then 
+        local reg = self.region
+        if self.region.type ~='region' then 
+            reg = region.create(reg)
+        end
+        self.event_region = reg:event '区域-离开' (function(trg, hero)
+            -- local loc_hero = ac.player.self.hero
+            if hero == self.owner.hero then 
+                -- self:print_group()
+                -- self:finish(true)
+                local ceps = creep:find_creep_by_region(self.region_str)
+                if ceps then 
+                    for i =1, #ceps do
+                        -- 移除该区域内每个刷怪 动作,包含自己
+                        -- if ceps[i].name ~= self.name then 
+                            -- print('2 移除:',ceps[i].name)
+                            ceps[i]:finish(true)
+                        -- end    
+                    end    
+                end 
+            end    
+        end)    
+    end    
+        
 
     if self.on_start then 
         self:on_start()
@@ -425,9 +427,15 @@ function mt:next()
 
 
 end    
+function mt:print_group()
+    for _, uu in ipairs(self.group) do
+        print(_,uu)
+        -- uu:remove()
+        -- table.remove(self.group,_)
+    end     
 
+end    
 function mt:finish(is_unit_kill)
-    
     self.is_finish = true
     self.has_started = false
 
@@ -437,7 +445,10 @@ function mt:finish(is_unit_kill)
     if  self.timer then 
         self.timer:remove()
     end
-    
+    if self.event_region then 
+        self.event_region:remove()
+    end
+
     for k,v in sortpairs(self.creep_timer) do
          --print('移除计时器',k,v)
         if v then 
@@ -453,10 +464,11 @@ function mt:finish(is_unit_kill)
  
     if is_unit_kill then 
         for _, uu in ipairs(self.group) do
-            uu:kill()
+            -- print('开始删除',_,uu)
+            uu:remove()
+            -- table.remove(self.group,_)
         end     
     end
- 
     --creep.all_creep[self.name] = nil
     
     

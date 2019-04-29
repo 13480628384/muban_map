@@ -269,8 +269,13 @@ function helper:clear_server()
 	for i = 1, 10 do
 		local p = ac.player(i)
 		for n = 1,#ac.mall do 
-			p:Map_SaveServerValue(ac.mall[n][1],0)
+			-- p:Map_SaveServerValue(ac.mall[n][1],0)
+			p:Map_FlushStoredMission(ac.mall[n][1],'S')
 		end	
+		--jifen \ boshu  都要清空
+
+		p:Map_FlushStoredMission('boshu','S')
+
 		-- ac.set_jiami(p,'jifen',0)
 	end
 end
@@ -695,9 +700,9 @@ function helper:player(cmd)
 end
 
 
---测试boss技能
-function helper:boss()
-	ac.creep['刷怪'].index = 9
+--测试副本
+function helper:fb(str)
+	ac.creep['刷怪'].index = tonumber(str) - 1
 	self:add_restriction '免死'
 	ac.creep['刷怪']:next()
 end

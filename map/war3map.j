@@ -73,7 +73,6 @@ trigger l__library_init
 
 
 rect gg_rct_sg001= null
-trigger gg_trg_______u= null
 rect gg_rct_xr= null
 rect gg_rct_tjsr= null
 rect gg_rct_wpsd= null
@@ -83,6 +82,19 @@ rect gg_rct_xxsd= null
 rect gg_rct_csd= null
 rect gg_rct_sg002= null
 rect gg_rct_sg003= null
+rect gg_rct_lgfsd1= null
+rect gg_rct_lgfsd2= null
+rect gg_rct_lgfsd3= null
+rect gg_rct_lgfsd4= null
+rect gg_rct_lgfsd5= null
+rect gg_rct_lgfsd6= null
+rect gg_rct_lgfsg1= null
+rect gg_rct_lgfsg2= null
+rect gg_rct_lgfsg3= null
+rect gg_rct_lgfsg4= null
+rect gg_rct_lgfsg5= null
+rect gg_rct_lgfsg6= null
+rect gg_rct_jtsd= null
 
 endglobals
 
@@ -1577,8 +1589,8 @@ endfunction
 //***************************************************************************
 function CreateRegions takes nothing returns nothing
     local weathereffect we
-	set gg_rct_sg001=Rect(- 1376.0, - 1856.0, 1504.0, 672.0)
-    set gg_rct_xr=Rect(- 5120.0, 3104.0, - 3456.0, 4512.0)
+    set gg_rct_sg001=Rect(- 1376.0, - 1856.0, 1504.0, 672.0)
+    set gg_rct_xr=Rect(- 4928.0, 3264.0, - 3648.0, 4352.0)
     set gg_rct_tjsr=Rect(- 128.0, 832.0, 256.0, 1152.0)
     set gg_rct_wpsd=Rect(- 480.0, 832.0, - 128.0, 1152.0)
     set gg_rct_jnsd=Rect(224.0, 832.0, 608.0, 1152.0)
@@ -1587,6 +1599,19 @@ function CreateRegions takes nothing returns nothing
     set gg_rct_csd=Rect(- 128.0, 352.0, 256.0, 672.0)
     set gg_rct_sg002=Rect(- 1920.0, - 1344.0, 2016.0, 192.0)
     set gg_rct_sg003=Rect(- 1024.0, - 2144.0, 1120.0, - 1856.0)
+    set gg_rct_lgfsd1=Rect(- 2688.0, - 4096.0, - 2336.0, - 3808.0)
+    set gg_rct_lgfsd2=Rect(- 640.0, - 4096.0, - 288.0, - 3808.0)
+    set gg_rct_lgfsd3=Rect(1408.0, - 4128.0, 1760.0, - 3840.0)
+    set gg_rct_lgfsd4=Rect(- 2688.0, - 6144.0, - 2336.0, - 5856.0)
+    set gg_rct_lgfsd5=Rect(- 640.0, - 6176.0, - 288.0, - 5888.0)
+    set gg_rct_lgfsd6=Rect(1408.0, - 6144.0, 1760.0, - 5856.0)
+    set gg_rct_lgfsg1=Rect(- 2688.0, - 4996.0, - 1408.0, - 3808.0)
+    set gg_rct_lgfsg2=Rect(- 640.0, - 4996.0, 640.0, - 3808.0)
+    set gg_rct_lgfsg3=Rect(1408.0, - 5028.0, 2688.0, - 3840.0)
+    set gg_rct_lgfsg4=Rect(- 2688.0, - 7044.0, - 1408.0, - 5856.0)
+    set gg_rct_lgfsg5=Rect(- 640.0, - 7076.0, 640.0, - 5888.0)
+    set gg_rct_lgfsg6=Rect(1408.0, - 7076.0, 2688.0, - 5888.0)
+    set gg_rct_jtsd=Rect(- 2176.0, - 7296.0, 2048.0, 736.0)
 endfunction
 
 //===========================================================================

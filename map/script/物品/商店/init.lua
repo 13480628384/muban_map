@@ -9,6 +9,7 @@ require '物品.商店.技能升级书1'
 require '物品.商店.霸者之证进阶'
 require '物品.商店.挑战伏地魔'
 require '物品.商店.迷路的坦克'
+require '物品.商店.练功房'
 
 
 --一开始就创建商店 需要有玩家在视野内 漂浮文字的高度才能显示出来
@@ -65,8 +66,16 @@ ac.game:event '玩家-注册英雄后' (function()
         local shop4 = ac.shop.create('天结散人',x,y-off_set,270)
         shop4:set_size(1.2)
 
+
+
+
+
+
         print('注册英雄后6')
         ac.game:event '游戏-回合开始'(function(trg,index, creep) 
+            if creep.name ~= '刷怪' then 
+                return 
+            end    
             --藏宝图 第10波 出现
             local index = 10 
             if creep.name == '刷怪' and  creep.index == index then
@@ -86,6 +95,41 @@ ac.game:event '玩家-注册英雄后' (function()
                 ac.player.self:sendMsg('【系统消息】新增|cffff0000迷路的坦克|r玩法，前往|cffff0000天结散人|r处购买',10)
                 ac.player.self:sendMsg('【系统消息】新增|cffff0000迷路的坦克|r玩法，前往|cffff0000天结散人|r处购买',10)
             end   
+
+            --小黑屋 第30波 出现
+            local index = 30 
+            if creep.name == '刷怪' and  creep.index == index then
+                shop4:add_sell_item('小黑屋',3)
+                --发送消息
+                ac.player.self:sendMsg('【系统消息】新增|cffff0000小黑屋|r玩法，前往|cffff0000天结散人|r处进入',10)
+                ac.player.self:sendMsg('【系统消息】新增|cffff0000小黑屋|r玩法，前往|cffff0000天结散人|r处进入',10)
+                ac.player.self:sendMsg('【系统消息】新增|cffff0000小黑屋|r玩法，前往|cffff0000天结散人|r处进入',10)
+                --开启按钮
+                c_ui.kzt.F2_home:show()
+                c_ui.kzt.F3_xiaoheiwu:show()
+
+                --调整镜头锁定区域
+                local fogmodifier = require 'types.fogmodifier'
+                for i = 1, 10 do
+                    local p = ac.player[i]
+                    --在选人区域创建可见度修整器(对每个玩家,永久)
+                    if p:is_player() then 
+                        local minx, miny, maxx, maxy = ac.map.rects['镜头锁定']:get()
+                        p:setCameraBounds(minx, miny, maxx, maxy)  --创建镜头区域大小，在地图上为固定区域大小，无法超出。
+
+                        p.hero:add_skill('F2回城', '隐藏')
+                        p.hero:add_skill('F3小黑屋', '隐藏') 
+                    
+                        --给每位玩家创建小黑屋 修炼商店
+                        local x,y = ac.rect.j_rect('lgfsd'..p.id):get_point():get()
+                        local shop5 = ac.shop.create('修炼商店',x,y,270)
+                        shop5:set_size(1.2) 
+                    end  
+                end
+
+            end   
+
+
         end)
     end)    
 

@@ -27,30 +27,30 @@ ac.special_boss = {
 
 local skill_list = ac.skill_list
 
-local all_creep = {}
+local all_units = {}
 local all_food = 40 --总人口
 ac.all_food = all_food
 for k,v in pairs(ac.table.UnitData) do
     if v.type then 
         if finds(v.type,'喽喽','小怪','头目','boss') then
-            if not all_creep[v.type] then 
-                all_creep[v.type] = {}
+            if not all_units[v.type] then 
+                all_units[v.type] = {}
             end
             --排除，以免刷到最终boss怪
             if not finds(k,'最终boss','挑战','金币','伏地魔','迷路的坦克') then
-                table.insert(all_creep[v.type],k)    
+                table.insert(all_units[v.type],k)    
             end    
         end    
     end    
 end    
 
-for k,list in pairs(all_creep) do 
+for k,list in pairs(all_units) do 
     table.sort(list,function (a,b)
         return a < b 
     end)
 end 
 
-ac.all_creep = all_creep
+ac.all_units = all_units
 
 local mt = ac.creep['刷怪']{    
     region = '',
@@ -67,7 +67,7 @@ function mt:on_start()
     local rect = require 'types.rect'
     local region = ac.map.rects['刷怪']
     self.region = region
-    self.all_creep = all_creep
+    self.all_units = all_units
     -- 刷怪初始化 难度、玩家影响
     if ac.g_game_degree == 1 then 
         ac.g_game_degree = 1  --难度一 属性倍数1倍
@@ -123,7 +123,7 @@ function mt:random_creeps_datas(temp_type)
     if u then 
         rand_name = u.name
     else    
-        rand_name = self.all_creep[rand_type][math.random(1,#self.all_creep[rand_type])]
+        rand_name = self.all_units[rand_type][math.random(1,#self.all_units[rand_type])]
     end    
     -- print(rand_name)
     -- print(rand_name,ac.table.UnitData[rand_name].food)
@@ -305,7 +305,7 @@ function mt:on_next()
 
     --每多一个玩家， 多20怪物总人口d，都是喽喽，金币或是挑战都不出来
     if not self.flag_specail then 
-        local small_unit_name = self.all_creep['喽喽'][math.random(1,#self.all_creep['喽喽'])]
+        local small_unit_name = self.all_units['喽喽'][math.random(1,#self.all_units['喽喽'])]
         local more_food = 20 * (get_player_count() - 1) 
         if more_food > 0 then 
             self.creeps_datas = self.creeps_datas .. ' '..small_unit_name..'*'..tostring(more_food) 

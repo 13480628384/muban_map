@@ -1,36 +1,66 @@
 local rect = require "types.rect"
---键盘事件
---code,state,message
-ac.game:event '玩家-按下按键' (function(trg,code,state,message)
-    local keyboard = message.keyboard
-    local hero =ac.player.self.hero
-	--单击x 移动练功房
-    -- if code == keyboard['X'] then
-    -- end    
+local mt = ac.skill['F2回城']
+mt{
+	--技能id
+	ability_id = 'A01H',
+    --必填
+    is_skill = true,
+    --等级
+    level = 1,
+    --目标类型
+    target_type = ac.skill.TARGET_TYPE_NONE,
+    --拾取cd，太快会触发2次。
+    cool = 0,
+    --目标数据
+    cus_target_data = '按键',
+    --图标是否可见 0可见 1隐藏
+    -- hide_count = 1,
+}
+function mt:on_add()
+    self:hide()
+end    
+function mt:on_cast_start()
+    local hero = self.owner
+    hero:blink(ac.point(0,0),true,false,true)
+end
 
+local mt = ac.skill['F3小黑屋']
+mt{
+	--技能id
+	ability_id = 'AX11',
+    --必填
+    is_skill = true,
+    --等级
+    level = 1,
+    --目标类型
+    target_type = ac.skill.TARGET_TYPE_NONE,
+    --拾取cd，太快会触发2次。
+    cool = 0,
+    --目标数据
+    cus_target_data = '按键',
+    --图标是否可见 0可见 1隐藏
+    -- hide_count = 1,
+}
+function mt:on_add()
+    self:hide()
+end    
 
+function mt:on_cast_start()
+    local hero = self.owner
+    local it = self.target
+    local p = hero:get_owner()
+    local rect = ac.rect.j_rect('lgfsg'..p.id)
+    -- print(rect)
+    hero:blink(rect,true,false,true)
+
+end
+--30回合开始
+ac.game:event '玩家-注册英雄' (function(trg, player, hero)
+	-- hero:add_skill('F2回城', '隐藏')
+	-- hero:add_skill('F3小黑屋', '隐藏')
 end)
 
-ac.game:event '玩家-双击按键' (function(trg,code,state,message)
-    local keyboard = message.keyboard
-    local hero =ac.player.self.hero
-    local p = ac.player.self
-    --双击x 移动练功房
-    -- if code == keyboard['X'] then
 
-    --     local x,y = rect.j_rect('practice'..p.id):get_point():get()
-    --     local point = ac.point(x,y+200)
-        
-    --     hero:blink(point,true,false,true)
-        
-    -- end    
-    -- --双击c 回城
-    -- if code == keyboard['C'] then
-    --     hero:blink(rect.j_rect('wq'),true,false,true)
-        
-    -- end    
-
-end)
 
 ac.game:event '玩家-聊天' (function(self, player, str)
     local hero = player.hero

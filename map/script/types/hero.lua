@@ -67,6 +67,9 @@ function mt:addXp(xp)
 		xp = 0
 		return 
 	end    
+	if xp <= 0 then 
+		return
+	end	
 	
 	jass.SetHeroXP(self.handle, jass.GetHeroXP(self.handle) + xp, true);
 	self.xp = jass.GetHeroXP(self.handle);

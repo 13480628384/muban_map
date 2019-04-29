@@ -92,6 +92,10 @@ local attribute = {
 	['召唤物'] = true, --默认表示为基础值,召唤物数量
 	['召唤物属性'] = true, --默认表示为%, 召唤物属性加成
 	['主动释放的增益效果'] = true,  --默认表示为%
+
+	['减甲'] = true,  --默认表示为基础值 永久性减甲
+	
+
 	['杀怪力量'] = true,  --默认表示为基础值
 	['杀怪敏捷'] = true,  --默认表示为基础值
 	['杀怪智力'] = true,  --默认表示为基础值
@@ -121,6 +125,7 @@ local base_attr =[[
 额外伤害 召唤物 
 杀怪力量 杀怪敏捷 杀怪智力 杀怪全属性 杀怪护甲
 每秒金币 每秒力量 每秒敏捷 每秒智力 每秒全属性 每秒护甲
+减甲
 ]]
 
 
@@ -738,6 +743,12 @@ on_get['闪避'] = function(self, value)
 	end
 	return value
 end
+--破甲和破魔一样
+on_get['破魔'] = function(self, value)
+	return on_get['破甲']
+end
+
+
 
 --杀怪加全属性通用规则
 ac.game:event '单位-杀死单位' (function(trg, killer, target)

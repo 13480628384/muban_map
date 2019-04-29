@@ -2147,9 +2147,13 @@ end
 -- 客户端使用技能
 function mt:cast_by_client(target, data)
 	local hero = self.owner
-	if not self:is_visible() then
-		return false
-	end
+	-- 自定义按键事件，如果指定类型为按键，不判断目标是否隐藏。 
+	-- 默认隐藏图标的技能无法进入施法流程
+	if not self.cus_target_data =='按键' then
+		if not self:is_visible() then
+			return false
+		end
+	end	
 	
 	-- print('打印 客户端使用技能1',target.type)
 	if not target then

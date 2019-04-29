@@ -381,13 +381,19 @@ end
 		return true
 	end
 
+	
 	--传送到指定位置
 	--	[无视地形]
-	function mt:blink(target, path, not_stop)
+	--	[不停止]
+	--	[镜头跟随]
+	function mt:blink(target, path, not_stop,follow_camera)
 		local source = self:get_point()
 		if self:set_position(target, path) then
 			self:event_notify('单位-传送完成', self, source, target)
 		end
+		if follow_camera then 
+			self:get_owner():setCamera(target)
+		end	
 		if not not_stop then self:issue_order 'stop' end
 	end
 

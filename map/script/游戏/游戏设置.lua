@@ -15,6 +15,7 @@ ac.map.rects={
     ['图书馆'] =rect.j_rect('xxsd') ,
     ['天结散人'] =rect.j_rect('tjsr') ,
     ['出生点'] =rect.j_rect('csd') ,
+    ['镜头锁定'] =rect.j_rect('jtsd') ,
 }
 ac.map['刷怪中心点'] = rect.j_rect('sg001'):get_point()
 

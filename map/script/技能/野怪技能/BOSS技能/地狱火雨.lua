@@ -62,6 +62,9 @@ function mt:boss_skill_shot()
             if not index or index == 0 then 
                 index = 1
             end	
+            if index > 60 then 
+                index = 60
+            end   
             -- print('技能使用时 当前波数',index)
             local data = ac.table.UnitData['进攻怪-'..index] 
             
@@ -69,7 +72,7 @@ function mt:boss_skill_shot()
                 summon:add_buff '召唤物' {
                     time = self.time,
                     attribute = data.attribute,
-                    attr_mul = 1,
+                    attr_mul = 4,
                     skill = self,
                 }
                 summon:set_search_range(99999)
