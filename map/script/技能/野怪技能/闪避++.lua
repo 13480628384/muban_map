@@ -2,15 +2,15 @@ local mt = ac.skill['闪避++']
 
 mt.title = "闪避++"
 mt.tip = [[
-    被动1：提升自己的闪避率80%
-    被动2：降低自己的三维40%
+    被动1：提升自己的闪避率70%
+    被动2：降低自己的三维45%
 ]]
 
 --影响三维值 (怪物为：生命上限，护甲，攻击力)
-mt.value = 40
+mt.value = 45
 
 --闪避
-mt.dodge = 80
+mt.dodge = 70
 
 
 function mt:on_add()

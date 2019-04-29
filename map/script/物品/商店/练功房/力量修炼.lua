@@ -8,7 +8,7 @@ mt{
 level = 1,
 
 --图标
-art = [[tanke.blp]],
+art = [[liliang.blp]],
 
 --说明
 tip = [[力量修炼，杀一只怪+25力量 |r]],

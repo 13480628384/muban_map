@@ -8,7 +8,7 @@ mt{
 level = 1,
 
 --图标
-art = [[tanke.blp]],
+art = [[zhili.blp]],
 
 --说明
 tip = [[智力修炼，杀一只怪+25智力 |r]],

@@ -8,7 +8,7 @@ mt{
 level = 1,
 
 --图标
-art = [[tanke.blp]],
+art = [[hujia.blp]],
 
 --说明
 tip = [[护甲修炼，杀一只怪+1护甲 |r]],

@@ -8,7 +8,7 @@ mt{
 level = 1,
 
 --图标
-art = [[tanke.blp]],
+art = [[duochongshe.blp]],
 
 --说明
 tip = [[多重射修炼，杀一只怪+0.002多重射|r]],
@@ -26,7 +26,7 @@ content_tip = '',
 --物品技能
 is_skill = true,
 --增加值
-value = 0.002
+value = 0.004
 
 }
 

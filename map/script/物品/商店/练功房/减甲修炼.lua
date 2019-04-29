@@ -8,7 +8,7 @@ mt{
 level = 1,
 
 --图标
-art = [[tanke.blp]],
+art = [[shaguaijianjia.blp]],
 
 --说明
 tip = [[减甲修炼，杀一只怪+0.01攻击减甲|r]],
@@ -26,7 +26,7 @@ content_tip = '',
 --物品技能
 is_skill = true,
 --增加值
-value = 0.01
+value = 0.02
 
 }
 
