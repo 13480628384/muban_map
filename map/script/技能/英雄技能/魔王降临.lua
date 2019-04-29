@@ -21,7 +21,7 @@ mt{
     --光环影响范围
     area = 99999,
     --值
-    value = {15,20,25,30,35},
+    value = {10,12.5,15,17.5,20},
 }
 function mt:on_upgrade()
     local skill = self

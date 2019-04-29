@@ -62,7 +62,7 @@ mt{
 	-- 周围范围
 	passive_area = 600,
 	-- 攻击减护甲
-	reduce_defence = {20,25,30,35,40},
+	reduce_defence = 20,
 	-- 主动技能施法次数
 	casting_cnt = 1,
 	--施法距离
