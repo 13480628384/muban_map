@@ -24,6 +24,7 @@ function mt:on_add()
     --改变模型
     japi.SetUnitModel(hero.handle,self.effect)
     hero:set_size(self.model_size)
+    hero.wabao_auto = true
 end
 function mt:on_remove()
     local hero = self.owner
@@ -31,5 +32,6 @@ function mt:on_remove()
         self.trg:remove()
         self.trg = nil
     end
+    hero.wabao_auto = false
     
 end
