@@ -67,6 +67,7 @@ function mt:boss_skill_shot()
     	for _,u in ac.selector()
 	    	: in_range( point, speed * tm * 0.1 )
 	    	: is_enemy(hero)
+            : is_not(ac.key_unit)
 	    	: ipairs()
     	do
 	    	if not group[u] then

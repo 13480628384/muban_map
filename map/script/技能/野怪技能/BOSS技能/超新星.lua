@@ -58,6 +58,7 @@ function mt:on_add()
         for _,u in ac.selector()
             : in_range(hero,skill.range3)
             : is_enemy(hero)
+			: is_not(ac.key_unit)
             : ipairs()
         do 
             if u ~= damage.target then 
@@ -96,6 +97,7 @@ function mt:on_pulse()
 	for _,u in ac.selector()
 		: in_range(hero,skill.area)
 		: is_enemy(hero)
+		: is_not(ac.key_unit)
 		: ipairs()
 	do
 		u:damage

@@ -44,7 +44,7 @@ function mt:on_cast_start()
         return
     end
     --处理模型
-    local unit_name = ac.all_creep['喽喽'][math.random(1,#ac.all_creep['喽喽'])]
+    local unit_name = ac.all_units['喽喽'][math.random(1,#ac.all_units['喽喽'])]
     local player = ac.creep['刷怪'].creep_player
     --循环40次
     hero:timer(0.01*1000,40,function()

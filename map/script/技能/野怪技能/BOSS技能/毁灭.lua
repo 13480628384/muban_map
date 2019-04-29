@@ -59,6 +59,7 @@ function mt:boss_skill_shot()
 		    for _,u in ac.selector()
 		        : in_range(loc,120)
 		        : is_enemy(hero)
+                : is_not(ac.key_unit)
 		        : ipairs()
 		    do
 		        u:damage
@@ -96,6 +97,7 @@ function mt:boss_skill_shot()
     for _,u in ac.selector()
         : in_range(loc,120)
         : is_enemy(hero)
+        : is_not(ac.key_unit)
         : ipairs()
     do
         u:damage

@@ -99,7 +99,7 @@ ac.game:event '玩家-注册英雄后' (function()
             --小黑屋 第30波 出现
             local index = 30 
             if creep.name == '刷怪' and  creep.index == index then
-                shop4:add_sell_item('小黑屋',3)
+                shop4:add_sell_item('进入小黑屋',3)
                 --发送消息
                 ac.player.self:sendMsg('【系统消息】新增|cffff0000小黑屋|r玩法，前往|cffff0000天结散人|r处进入',10)
                 ac.player.self:sendMsg('【系统消息】新增|cffff0000小黑屋|r玩法，前往|cffff0000天结散人|r处进入',10)
