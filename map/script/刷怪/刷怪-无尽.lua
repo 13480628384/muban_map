@@ -78,10 +78,9 @@ function mt:on_next()
         
         --@游戏失败 场上怪物超过50只
         if not self.mode_timer then 
-			self.mode_timer = ac.loop(1*1000,function(t)
+			self.mode_timer = ac.loop(2*1000,function(t)
 				local max_cnt = 50 * get_player_count()
                 if self.current_count >= max_cnt * 0.5 then 
-                    ac.player.self:sendMsg("【系统提示】当前怪物存活过多，还剩 |cffE51C23 "..(max_cnt - self.current_count).." 只|r 游戏结束，请及时清怪")
                     ac.player.self:sendMsg("【系统提示】当前怪物存活过多，还剩 |cffE51C23 "..(max_cnt - self.current_count).." 只|r 游戏结束，请及时清怪")
                 end    
                 if self.current_count >= max_cnt then 
