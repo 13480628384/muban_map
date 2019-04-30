@@ -33,7 +33,7 @@ end
 function finds(str,...)
 	local flag = false
 	
-	for key , value in pairs{...} do
+	for key , value in sortpairs{...} do
 		local _, q=string.find(str, value)
 		if _ then 
 			flag= true

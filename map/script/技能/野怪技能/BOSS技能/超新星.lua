@@ -148,7 +148,8 @@ function mt:on_remove()
 	hero:remove_restriction '缴械'
 	hero:remove_restriction '硬直'
 
-	for k,v in pairs(self.eft) do
+	for k,v in ipairs(self.eft) do
+		-- print(k,v)
 		v:remove()
 	end
 end

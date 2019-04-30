@@ -134,3 +134,19 @@ end
 function mt:on_remove()
    
 end
+
+
+ac.game:event '单位-死亡' (function (_,unit,killer)
+    if unit:get_owner() ~= ac.player(12) then 
+        return
+    end    
+    --玩家12（敌对死亡才掉落）
+    local rate = 2 
+    local rand = math.random(100)
+    if rand <= rate then 
+        --掉落
+        ac.item.create_item('抽奖券',unit:get_point())
+    end    
+end)
+
+
