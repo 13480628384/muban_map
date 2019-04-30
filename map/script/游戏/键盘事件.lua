@@ -52,7 +52,17 @@ function mt:on_cast_start()
     local rect = ac.rect.j_rect('lgfsg'..p.id)
     -- print(rect)
     hero:blink(rect,true,false,true)
-
+    if not p.flag_create_room then 
+        p.flag_create_room = true
+        ac.wait(1000,function()
+            --给每位玩家创建小黑屋 修炼商店
+            local x,y = ac.rect.j_rect('lgfsd'..p.id):get_point():get()
+            local shop5 = ac.shop.create('修炼商店',x,y,270)
+            shop5:set_size(1.2) 
+            local shop6 = ac.shop.create('杀敌兑换',x+300,y,270)
+            shop6:set_size(1.2) 
+        end)
+    end    
 end
 --30回合开始
 ac.game:event '玩家-注册英雄' (function(trg, player, hero)

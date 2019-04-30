@@ -25,7 +25,7 @@ local function on_texttag(string,hero,zoffset,xoffset,yoffset)
 	local tag = ac.texttag
 	{
 		string = string,
-		size = 16,
+		size = 14,
 		position = target:get_point(),
 		xoffset = tonumber(xoffset) or -100,
 		yoffset = tonumber(yoffset) or 0,

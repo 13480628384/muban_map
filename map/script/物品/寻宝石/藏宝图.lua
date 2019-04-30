@@ -186,6 +186,9 @@ function mt:add_content()
         local name = list[math.random(#list)]
         ac.item.add_skill_item(name,hero)
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000奖励 技能书：'..name..'|r',10)
+    elseif  rand_name == '召唤练功怪' then
+        hero:add_item('召唤练功怪',true)
+        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000奖励：召唤练功怪|r',10)
     elseif  rand_name == '召唤boss' then
         hero:add_item('召唤boss',true)
         ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 挖了|cff00ffff藏宝图|r, |cffff0000奖励：召唤boss|r',10)

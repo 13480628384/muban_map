@@ -190,7 +190,7 @@ end
 
 --每回合开始 从 ac.skill_list3 随机取1-2个野怪技能
 function mt:get_boss_skill()
-
+    local boss_skill_list = ''
     local rand_skill_cnt = math.random(1,3)
     local rand_skill_list = {}
     if rand_skill_cnt == 0 then 
@@ -198,9 +198,10 @@ function mt:get_boss_skill()
     end  
     for i = 1,rand_skill_cnt do  
         local rand_skill_name = ac.skill_list3[math.random(#ac.skill_list3)]
-        
+        boss_skill_list = boss_skill_list ..rand_skill_name ..' '
         table.insert(rand_skill_list,rand_skill_name)
     end    
+    print('boss 技能：',boss_skill_list)
     return rand_skill_list
 
 end

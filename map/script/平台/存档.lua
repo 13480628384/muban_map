@@ -30,7 +30,11 @@ register_japi[[
 -- for key, value in pairs(japi) do
 --     print(key, value)
 -- end
-
+--获取游戏开始时间
+function player.__index:Map_GetGameStartTime()
+    local handle = self.handle
+    return japi.DzAPI_Map_GetGameStartTime()
+end
 --获取玩家是否购买重置版
 function player.__index:Map_IsMapReset()
     local handle = self.handle
