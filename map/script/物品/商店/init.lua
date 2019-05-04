@@ -17,12 +17,13 @@ require '物品.商店.练功房'
 ac.game:event '玩家-注册英雄后' (function()
     if ac.flag_shop  then return end
     ac.flag_shop = true
+
     ac.wait(2*1000,function()
         print('注册英雄后1')
         local fresh_time = 2*60 --刷新时间
-        if global_test then 
-            fresh_time = 10 --测试刷新时间
-        end
+        -- if global_test then 
+        --     fresh_time = 10 --测试刷新时间
+        -- end
         local off_set = 0
         --创建物品商店
         local x,y = ac.map.rects['物品商店']:get_point():get()
@@ -66,11 +67,6 @@ ac.game:event '玩家-注册英雄后' (function()
         local shop4 = ac.shop.create('天结散人',x,y-off_set,270)
         shop4:set_size(1.2)
 
-
-
-
-
-
         print('注册英雄后6')
         ac.game:event '游戏-回合开始'(function(trg,index, creep) 
             if creep.name ~= '刷怪' then 
@@ -109,7 +105,6 @@ ac.game:event '玩家-注册英雄后' (function()
                 c_ui.kzt.F3_xiaoheiwu:show()
 
                 --调整镜头锁定区域
-                local fogmodifier = require 'types.fogmodifier'
                 for i = 1, 10 do
                     local p = ac.player[i]
                     --在选人区域创建可见度修整器(对每个玩家,永久)
@@ -120,12 +115,17 @@ ac.game:event '玩家-注册英雄后' (function()
                         p.hero:add_skill('F2回城', '隐藏')
                         p.hero:add_skill('F3小黑屋', '隐藏') 
                     
-                        --给每位玩家创建小黑屋 修炼商店
+                        --创建天结散人
+                        -- local unit = p:create_unit('修炼商店',ac.point(0,0))
                         -- local x,y = ac.rect.j_rect('lgfsd'..p.id):get_point():get()
-                        -- local shop5 = ac.shop.create('修炼商店',x,y,270)
-                        -- shop5:set_size(1.2) 
-                        -- local shop6 = ac.shop.create('杀敌兑换',x+300,y,270)
-                        -- shop6:set_size(1.2) 
+                        -- local shop5 = ac.shop.create('强盗',x,y,270)
+
+                        --给每位玩家创建小黑屋 修炼商店
+                        local x,y = ac.rect.j_rect('lgfsd'..p.id):get_point():get()
+                        local shop5 = ac.shop.create('修炼商店',x,y,270)
+                        shop5:set_size(1.2) 
+                        local shop6 = ac.shop.create('杀敌兑换',x+300,y,270)
+                        shop6:set_size(1.2) 
                     end  
                 end
 

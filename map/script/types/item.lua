@@ -1131,6 +1131,7 @@ function item.create(name,pos)
 	--创建一个实例物品
 	local item_handle = jass.CreateItem(base.string2id(type_id),0,0)
 	ac.item.shop_item_map[name] = items
+	-- ac.item.shop_item_map[item_handle] = items
 
 	items.handle = item_handle
 	--设置物品名

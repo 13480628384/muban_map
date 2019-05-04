@@ -453,6 +453,7 @@ function mt:finish(is_unit_kill)
          --print('移除计时器',k,v)
         if v then 
             v:remove()
+            self.creep_timer[k] = nil
         end    
     end	
     
@@ -466,6 +467,7 @@ function mt:finish(is_unit_kill)
         for _, uu in ipairs(self.group) do
             -- print('开始删除',_,uu)
             uu:remove()
+            self.group[_] = nil
             -- table.remove(self.group,_)
         end     
     end

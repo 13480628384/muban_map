@@ -68,35 +68,6 @@ function shop.create(name,x,y,face,is_selling)
 
 	shop.unit_list[unit.handle] = unit
 
-	local j_trg = war3.CreateTrigger(function()
-		--贩卖者
-		local seller = shop.unit_list[jass.GetSellingUnit()]
-		--购买者
-		local u = ac.unit.j_unit(jass.GetBuyingUnit())
-		-- 被购买的物品名，没办法保存物品handle，因为物品添加给商店时就被删除了
-		-- 添加颜色代码会导致物品没有在商店里面创建。
-		local it_name = jass.GetItemName(jass.GetSoldItem())
-		-- 如果英雄在两个商店的中间，购买一次物品会触发两次购买事件。
-		if not it_name then 
-			return
-		end	
-		it_name = clean_color(it_name)
-		local it = ac.item.shop_item_map[it_name]
-
-		--删掉物品排泄(神符类物品需要删除)
-		jass.RemoveItem(jass.GetSoldItem())
-
-		if not u or not seller or not it then
-			return
-		end
-
-		u:event_notify('单位-点击商店物品',seller,u,it)
-	end)
-
-	for i = 1, 13 do
-		jass.TriggerRegisterPlayerUnitEvent(j_trg, ac.player[i].handle, jass.EVENT_PLAYER_UNIT_SELL_ITEM, nil)
-	end
-
 	return unit
 end
 
@@ -162,6 +133,7 @@ function mt:add_sell_item(name,i)
 		self.sell[i] = item.name
 	end	
 	--添加到商店
+	-- print(item.name,item.type_id)
 	jass.AddItemToStock(self.handle,base.string2id(item.type_id),1,1)
 	item:hide()
 	--删掉物品
@@ -278,6 +250,39 @@ function mt:fresh()
 		end	
 	end	
 end	
+--注册魔兽事件
+
+local j_trg = war3.CreateTrigger(function()
+	--贩卖者
+	local seller = shop.unit_list[jass.GetSellingUnit()]
+	--购买者
+	local u = ac.unit.j_unit(jass.GetBuyingUnit())
+	-- 被购买的物品名，没办法保存物品handle，因为物品添加给商店时就被删除了
+	-- 添加颜色代码会导致物品没有在商店里面创建。
+	local it_name = jass.GetItemName(jass.GetSoldItem())
+	-- 如果英雄在两个商店的中间，购买一次物品会触发两次购买事件。
+	if not it_name then 
+		return
+	end	
+	it_name = clean_color(it_name)
+	local it = ac.item.shop_item_map[it_name]
+
+	--删掉物品排泄(神符类物品需要删除)
+	jass.RemoveItem(jass.GetSoldItem())
+
+	if not u or not seller or not it then
+		return
+	end
+
+	u:event_notify('单位-点击商店物品',seller,u,it)
+end)
+
+for i = 1, 13 do
+	jass.TriggerRegisterPlayerUnitEvent(j_trg, ac.player[i].handle, jass.EVENT_PLAYER_UNIT_SELL_ITEM, nil)
+end
+
+
+
 
 --native RemoveItemFromStock takes unit whichUnit, integer itemId returns nothing
 

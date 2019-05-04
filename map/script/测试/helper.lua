@@ -7,6 +7,7 @@ local item = require 'types.item'
 local affix = require 'types.affix'
 local japi = require 'jass.japi'
 local dbg = require 'jass.debug' 
+local runtime = require 'jass.runtime'
 -- dbg.gchash = function () end 
 
 local error_handle = require 'jass.runtime'.error_handle
@@ -398,11 +399,11 @@ function helper:create(str,cnt, playerid)
 	for i = 1 ,(cnt or 1) do
 		local unit = p:create_unit(str,ac.point(0,0))
 		local data = ac.table.UnitData[str]
-		print(unit:get('护甲'),unit:get('护甲%'),data.attribute['护甲'])
+		-- print(unit:get('护甲'),unit:get('护甲%'),data.attribute['护甲'])
 		unit:set('移动速度',455)
-		ac.wait(0.5*1000,function()
-			print(unit:get('护甲'),unit:get('护甲%'),data.attribute['护甲'])
-		end)
+		-- ac.wait(0.5*1000,function()
+		-- 	print(unit:get('护甲'),unit:get('护甲%'),data.attribute['护甲'])
+		-- end)
 	end	
 end
 --创建一个敌方英雄在地图中间，如果playerid有参数，则是为playerid玩家创建
@@ -705,6 +706,15 @@ function helper:fb(str)
 	ac.creep['刷怪'].index = tonumber(str) - 1
 	self:add_restriction '免死'
 	ac.creep['刷怪']:next()
+end
+--测试商店
+function helper:cs()
+ --调整镜头锁定区域
+	for i = 1,60 do
+		xpcall(function ()
+			local shop5 = ac.shop.create('图书馆',0,0,270)
+		end,runtime.error_handle)
+	end
 end
 
 local function main()

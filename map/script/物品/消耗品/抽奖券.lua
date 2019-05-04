@@ -141,7 +141,7 @@ ac.game:event '单位-死亡' (function (_,unit,killer)
         return
     end    
     --玩家12（敌对死亡才掉落）
-    local rate = 2 
+    local rate = 1 
     local rand = math.random(100)
     if rand <= rate then 
         --掉落
