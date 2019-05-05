@@ -469,6 +469,9 @@ function mt:on_change_creep(unit,lni_data)
         end)
         --统计伤害 
         unit:event '伤害计算完毕'(function (_,damage)
+            if damage.real_damage then 
+                damage.current_damage = 1 
+            end    
             if not self.player_damage then 
                 self.player_damage = {}
             end    

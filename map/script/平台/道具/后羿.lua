@@ -17,6 +17,8 @@ mt{
 	move_speed = 50,
 	--攻击间隔
     attack_gap = 0.2,
+	--会心几率
+    heart_rate = 5,
     --模型大小
     model_size = 1.4
 	
@@ -26,6 +28,7 @@ function mt:on_add()
     local hero = self.owner
     hero:add('移动速度',self.move_speed)
     hero:add('攻击间隔',-self.attack_gap)
+    hero:add('会心几率',self.heart_rate)
     --改变模型
     japi.SetUnitModel(hero.handle,self.effect)
     hero:set_size(self.model_size)
@@ -38,4 +41,5 @@ function mt:on_remove()
     end
     hero:add('移动速度',-self.move_speed)
     hero:add('攻击间隔',self.attack_gap)
+    hero:add('会心几率',-self.heart_rate)
 end

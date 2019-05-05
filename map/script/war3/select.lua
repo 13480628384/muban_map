@@ -36,6 +36,7 @@ local j_trg = war3.CreateTrigger(function()
 	local player = ac.player(jass.GetTriggerPlayer())
 	if jass.GetTriggerEventId() == jass.EVENT_PLAYER_UNIT_SELECTED then
 		player:event_notify('玩家-选择单位', player, u)
+		player:event_notify('玩家-选择单位后', player, u)
 	else
 		player:event_notify('玩家-取消选择单位', player, u)
 	end

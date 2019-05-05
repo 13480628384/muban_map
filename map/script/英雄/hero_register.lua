@@ -23,6 +23,7 @@ for i = 1, 12 do
 	p.ability_list['英雄'] = {}
 	p.ability_list['隐藏'] = {}
 	p.ability_list['拾取'] = {}
+	p.ability_list['魔法书'] = {size = 12}
 
 	local n = 0
 
@@ -36,6 +37,10 @@ for i = 1, 12 do
 		p.ability_list['英雄'][t] = id
 	end
 	p.ability_list['拾取'][1] = 'A'..id_name[i]..'13'
+
+	for x = 1, p.ability_list['魔法书'].size do
+		p.ability_list['魔法书'][x] = ('AM%X%X'):format(i - 1, x - 1)
+	end
 end
 --玩家16 技能预览图
 local i =16
@@ -64,6 +69,10 @@ local function hero_register_main()
 
 		print('注册英雄5')
 		hero:add_skill('拾取','拾取',1)
+		hero:add_skill('攻击','英雄',9)
+		hero:add_skill('停止','英雄',10)
+		hero:add_skill('保持原位','英雄',11)
+		
 		
 		-- hero:add_skill('死亡飞镖','英雄')
 		-- hero:add_skill('妙手空空','英雄')
@@ -98,7 +107,9 @@ local function hero_register_main()
 		
 		print('注册英雄7')
 		--添加英雄属性面板
-		hero:add_skill('英雄属性面板', '隐藏')
+		hero:add_skill('英雄属性面板', '英雄',12)
+		-- 测试魔法书
+		-- hero:add_skill('魔法书demo','英雄')
 		
 		print('注册英雄8')
 		--创建一个宠物
@@ -111,7 +122,8 @@ hero_register_main()
 
 
 
-ac.game:event '玩家-选择单位' (function(self, player, hero)
+ac.game:event '玩家-选择单位后' (function(self, player, hero)
+	-- print(hero,2)
 	if hero:get_owner() ~= player then 
 		return 
 	end 

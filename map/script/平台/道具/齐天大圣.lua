@@ -16,7 +16,7 @@ mt{
 	--物爆几率
 	physical_rate = 10,
 	--物爆伤害
-	physical_damage = 50,
+	physical_damage = 500,
 	
 }
 function mt:on_add()

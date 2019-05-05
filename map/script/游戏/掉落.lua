@@ -327,7 +327,11 @@ local unit_reward = {
         {    rand = 2, name = '通关积分100',},
     },
     ['抽奖券'] =  {
-        {    rand = 68, name = '无' },
+        {    rand = 70,  name ={
+                { rand = 50, name = '欧皇达人'},
+                { rand = 50, name = '无'}, 
+            }
+        },
         {    rand = 5, name = '金币' },
         {    rand = 5, name = '经验',},
         {    rand = 10, name = '随机物品',},
@@ -337,7 +341,6 @@ local unit_reward = {
         {    rand = 1, name = '吞噬丹',},
         {    rand = 1, name = '宠物经验书',},
         {    rand = 2, name = '随机恶魔果实',},
-        {    rand = 2, name = '十连抽',},
     },
     ['均分随机物品'] =  {
         { rand = 100,      name = {

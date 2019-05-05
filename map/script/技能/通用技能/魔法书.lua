@@ -50,7 +50,7 @@ ac.game:event '技能-施法完成' (function (_,hero,self)
     hero.skill_page = page_type
 
     self.parent_skill.hide_book = true 
-    for skill in hero:each_skill(self:get_type()) do 
+    for skill in hero:each_skill(self:get_type(),true) do 
         skill:hide()
         skill:fresh()
     end 
@@ -132,7 +132,7 @@ function mt:on_cast_start()
         end
     end 
 
-    for skill in hero:each_skill(book:get_type()) do 
+    for skill in hero:each_skill(book:get_type(),true) do 
         if skill:is_hide() then 
             skill:add_ability(skill.ability_id)
             skill:show()
@@ -145,6 +145,7 @@ function mt:close()
     local hero = self.owner
     local player = hero:get_owner()
     local book = self.book
+    -- hero = player.selected
     if book.hide_book == nil then 
         return 
     end 
@@ -157,7 +158,7 @@ function mt:close()
         end
     end
 
-    for skill in hero:each_skill('英雄') do 
+    for skill in hero:each_skill('英雄',true) do 
         if skill:is_hide() then 
             skill:show()
             skill:fresh()
@@ -174,15 +175,41 @@ ac.game:event'单位-获得技能' (function (_,hero,skill)
     end
 end)
 
+-- ac.game:event '玩家-选择单位' (function (_,player,unit)
+--     local hero = player:get_hero()
+--     -- print(unit,hero)
+--     if hero == unit or hero == nil then 
+--         return 
+--     end 
+--     local skl = unit:find_skill('关闭',unit.skill_page or '英雄')
+--     if skl and not skl:is_hide() then 
+--         skl:close()
+--     end 
+-- end)
+
+
 ac.game:event '玩家-选择单位' (function (_,player,unit)
     local hero = player:get_hero()
+    local pet = player.peon
+    
+    if pet and pet ~= unit then
+        local skl = pet:find_skill('关闭',pet.skill_page or '英雄')
+        -- print(skl.name,pet.skill_page)
+        if skl and not skl:is_hide() then
+            skl:close()
+        end 
+    end
+
+    
     if hero == unit or hero == nil then 
         return 
     end 
+
     local skl = hero:find_skill('关闭',hero.skill_page or '英雄')
     if skl and not skl:is_hide() then 
         skl:close()
     end 
+    
 end)
 
 

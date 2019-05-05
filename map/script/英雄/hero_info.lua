@@ -17,7 +17,7 @@ local mt = ac.skill['英雄属性面板']
 
 	passive = true,
 	
-	ability_id = 'B889',
+	-- ability_id = 'B889',
 
 	tip = [[
 攻击:    %attack% （已加成 %attack_per% %）

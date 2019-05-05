@@ -638,6 +638,9 @@ function mt:get_simple_tip(hero, level, need_level)
 end
 
 function mt:get_tip(hero, level, need_level)
+	if self.is_order then
+		return self:get_simple_tip(hero, level, need_level)
+	end
 	if not level then
 		level = self.level
 	end
@@ -668,6 +671,9 @@ end
 
 function mt:get_title(hero)
 	local title = self:get_simple_title(hero)
+	if self.is_order then
+		return  (title or '') .. self:get_hotkey_tip(hero)
+	end
 	title = (title or '') .. self:get_hotkey_tip(hero) .. self:get_level_tip(hero)
 	return title
 end
@@ -772,6 +778,8 @@ end
 
 --获取技能命令
 function mt:get_order()
+	local type = self:get_type()
+
 	local ability_id = self.ability_id
 	if not ability_id then
 		return nil
@@ -785,13 +793,13 @@ function mt:get_order()
 		if order == '' then
 			return nil
 		end
-		return order
+		return type .. order
 	end
 	local order = ability_data['DataF1']
 	if order == '' then
 		return nil
 	end
-	return order
+	return type .. order
 end
 
 --获取冷却说明
@@ -1305,7 +1313,8 @@ function mt:get_ability_id()
 	local slotid = self.slotid
 	if slotid then
 		local p = self.owner:get_owner()
-		return p:get_ability_id(slotid)
+		-- return p:get_ability_id(self.type,slotid) --,self.owner
+		return p:get_ability_id(slotid) 
 	end
 end
 
@@ -1737,7 +1746,8 @@ function unit.__index:add_skill(name, type, slotid, data)
 		skill:upgrade(lv)
 		skill:fresh()
 	end
-
+	
+	self:event_notify('单位-获得技能',self,skill)
 
 	return skill
 end
@@ -1769,6 +1779,8 @@ function mt:remove()
 	else
 		hero.skills[self:get_type()][self.slotid] = nil
 	end
+
+	hero:event_notify('单位-失去技能',hero,self)
 
 	if self.opened then
 		self:_call_event('on_close', true)
@@ -2479,9 +2491,17 @@ local function init()
 		if not hero._order_skills then
 			return
 		end
+		
+		local page = hero.skill_page or '英雄'
+		local yincang_order = '隐藏'.. order
+		order = page .. order
 
 		local skill = hero._order_skills[order]
-		-- print('打印 进入发布命令3 ',order,skill,target)
+
+		if not skill then 
+			skill = hero._order_skills[yincang_order]
+		end
+
 		if skill then
 			-- print('打印 进入发布命令4 ',order,skill.target_type,target)
 			if not hero._ignore_order_list then

@@ -101,6 +101,10 @@ end
 function mt:get_hero()
 	return self.hero 
 end
+
+function mt:set_hero(hero)
+	self.hero = hero
+end
 --是否是玩家
 function mt:is_player()
 	return jass.GetPlayerController(self.handle) == jass.MAP_CONTROL_USER and jass.GetPlayerSlotState(self.handle) == jass.PLAYER_SLOT_STATE_PLAYING
@@ -518,6 +522,9 @@ function mt:get_ability_id(type, slotid)
 	local list = self.ability_list
 	if not list then
 		return nil
+	end
+	if type ~= '英雄' and type ~= '隐藏' and type ~= '预览' and type ~= '拾取' then
+		type = '魔法书'
 	end
 	if not list[type] then
 		return nil
