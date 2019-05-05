@@ -1,5 +1,5 @@
 local jass = require 'jass.common'
-local mt = ac.book_skill['魔法书2']
+local mt = ac.book_skill['魔法书']
 mt{
 	level = 1,
 	instant = 1,
@@ -9,13 +9,13 @@ mt{
 	art = [[ReplaceableTextures\CommandButtons\BTNSkillz.blp]],
 	cool = 0,
 	cost = 0,
-	ability_id = 'AB32',
+	ability_id = 'AB31',
 }
 
 table.insert(mt.sub_skills, {
-	art = [[sxzh1.blp]],
-	title = '测试1',
-	tip = '测试tip1',
+	art = [[model\megumin\BTNMeguminR1.blp]],
+	title = '惠惠的爆裂之道',
+	tip = '练习|cffff3333爆裂魔法|r会对建筑造成25%的伤害。|n|cffffaaaa爆裂魔法熟练度|r获取量+20%。',
 })
 
 table.insert(mt.sub_skills, {
@@ -28,13 +28,36 @@ table.insert(mt.sub_skills, {
 })
 
 table.insert(mt.sub_skills, {
-	art = [[sxzh2.blp]],
-	title = '测试2',
-	tip = '测试tip2',
+	art = [[model\megumin\BTNMeguminR3.blp]],
+	title = '维兹的爆裂魔法',
+	tip = '|cffff3333爆裂魔法|r施法后不再会硬直。|n魔力上限+20%。',
 })
 
 table.insert(mt.sub_skills, false)
 
+table.insert(mt.sub_skills, {
+	art = [[model\megumin\BTNMeguminR4.blp]],
+	title = '超电磁炮！压缩爆裂魔法',
+	tip = '|cffff3333爆裂魔法|r伤害+30%，护甲穿透+30%。',
+})
+
+table.insert(mt.sub_skills, {
+	art = [[model\megumin\BTNMeguminR5.blp]],
+	title = '超级！爆裂魔法',
+	tip = '|cffff3333爆裂魔法|r的施法距离、伤害范围、吟唱时间提高50%。',
+})
+
+table.insert(mt.sub_skills, {
+	art = [[model\megumin\BTNMeguminR6.blp]],
+	title = '高速吟唱！爆裂魔法',
+	tip = '|cffff3333爆裂魔法|r的吟唱时间减少1秒。',
+})
+
+table.insert(mt.sub_skills, {
+	art = [[model\megumin\BTNMeguminR7.blp]],
+	title = '爆裂魔法的虚实之道',
+	tip = '练习|cffff3333爆裂魔法|r时，你可以使用|cffff3333爆裂魔法|r，把它变为|cffff3333爆裂魔法|r。也可以在吟唱|cffff3333爆裂魔法|r时把它变为练习。',
+})
 
 for _, skill in ipairs(mt.sub_skills) do
 	if skill then

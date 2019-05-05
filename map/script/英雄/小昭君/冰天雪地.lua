@@ -7,7 +7,7 @@ mt{
 	level = 1,
 	max_level = 5,
 
-    title = '暴风雪',
+    title = '冰天雪地',
     tip = [[
 		主动：在周围 %hit_area% 码降下暴风雪，每1秒造成 攻击力*2+智力*4点 法术伤害( %damage% )，并晕眩 %yun_time% 秒，同时刷新寒冰护盾。
 		

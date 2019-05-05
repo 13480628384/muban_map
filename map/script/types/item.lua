@@ -768,7 +768,12 @@ function unit.__index:add_item(it,is_fall)
 		it.is_discard_event = false 
 		return 
 	end
-	
+	-- 统一修复，如果英雄死亡时给与，统一掉地上。
+	if not self:is_alive() then 
+		it:setPoint(self:get_point())
+		it.recycle = false
+		return it
+	end	
 	
 	--为了合成装备
 	-- print('装备2',it)

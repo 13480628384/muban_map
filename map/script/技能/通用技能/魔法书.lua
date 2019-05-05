@@ -1,106 +1,188 @@
-local jass = require 'jass.common'
-local mt = ac.book_skill['魔法书']
+
+local slots = {9,10,11,12,5,6,7,8,1,2,3,4}
+
+ac.game:event '技能-获得' (function (_,hero,self)
+    if self.is_spellbook == nil or self.skills == nil then 
+        return 
+    end 
+    local player = hero:get_owner()
+    local skill_list = {}
+    local skill_map = {}
+    local page_type = self:get_type() .. '_' .. string.format("%01x",self.slotid)
+    
+    local skill_book = {}
+
+    for index,name in ipairs(self.skills) do 
+        local skill = hero:add_skill(name,page_type,slots[index],{
+            book = self,
+        })
+        skill_map[name] = skill
+        table.insert(skill_list,skill)
+        table.insert(skill_book,skill)
+    end 
+    local skill = hero:add_skill('关闭',page_type,slots[12],{
+        book = self,
+    })
+    table.insert(skill_list,skill)
+
+    --包含关闭技能的列表
+    self.skill_list = skill_list
+    self.skill_map = skill_map
+    
+    --不包含关闭技能的列表
+    self.skill_book = skill_book
+
+    for index,skill in ipairs(self.skill_list) do 
+        if not skill:is_hide() then 
+            skill:hide()
+            skill:remove_ability(skill.ability_id)
+        end
+    end 
+end)
+
+ac.game:event '技能-施法完成' (function (_,hero,self)
+    if self.is_spellbook == nil or self.skills == nil then 
+        return 
+    end 
+    local player = hero:get_owner()
+    local page_type = self:get_type() .. '_' .. string.format("%01x",self.slotid)
+
+    hero.skill_page = page_type
+
+    self.parent_skill.hide_book = true 
+    for skill in hero:each_skill(self:get_type()) do 
+        skill:hide()
+        skill:fresh()
+    end 
+
+    for index,skill in ipairs(self.skill_list) do 
+        if skill:is_hide() then 
+            skill:add_ability(skill.ability_id)
+            skill:show()
+        end
+
+        skill:fresh()
+    end 
+
+    if player:is_self() then 
+        ClearSelection()
+        SelectUnit(hero.handle,true)
+    end 
+
+end)
+
+ac.game:event '单位-失去技能'(function (_,hero,self)
+    if self.is_spellbook == nil or self.skills == nil then 
+        return 
+    end 
+    local skl = hero:find_skill('关闭',hero.skill_page or '英雄')
+    if skl and not skl:is_hide() then 
+        skl:close()
+    end 
+    if self.skill_list then 
+        for index,skill in ipairs(self.skill_list) do 
+            skill:remove()
+        end 
+        self.skill_list = nil
+    end 
+    self.skill_book = nil
+end)
+
+
+local mt = ac.skill['关闭']
 mt{
-	level = 1,
-	instant = 1,
-	force_cast = 1,
-	never_reload = true,
-	never_copy = true,
-	art = [[ReplaceableTextures\CommandButtons\BTNSkillz.blp]],
-	cool = 0,
-	cost = 0,
-	ability_id = 'AB31',
+    art = [[ReplaceableTextures\CommandButtons\BTNCancel.blp]],
+    title = '关闭',
+    tip = [[
+关闭，回到上一级。
+    ]],
+    instant = 1,
+    is_order = 1,
+    key = 'Esc',
 }
+-- ['魔法书']
+-- is_order = 2
+-- art = [[ReplaceableTextures\CommandButtons\BTNSpellBookBLS.blp]]
+-- title = '打开魔法书'
+-- tip = [[
+-- 打开魔法书
+-- ]]
+-- instant = 1
 
-table.insert(mt.sub_skills, {
-	art = [[model\megumin\BTNMeguminR1.blp]],
-	title = '惠惠的爆裂之道',
-	tip = '练习|cffff3333爆裂魔法|r会对建筑造成25%的伤害。|n|cffffaaaa爆裂魔法熟练度|r获取量+20%。',
-})
+-- is_spellbook = 1
 
-table.insert(mt.sub_skills, {
-	art = [[model\megumin\BTNMeguminR2.blp]],
-	title = '和真的支援！生命吸收',
-	tip = '每%explosion_cool%秒，你的下一个|cffff3333爆裂魔法|r不需要消耗魔力。',
-	explosion_cool = function (self)
-		return ('%.2f'):format(100 / self.owner:get_resource '魔力恢复')
-	end,
-})
+-- skills = {
 
-table.insert(mt.sub_skills, {
-	art = [[model\megumin\BTNMeguminR3.blp]],
-	title = '维兹的爆裂魔法',
-	tip = '|cffff3333爆裂魔法|r施法后不再会硬直。|n魔力上限+20%。',
-})
+-- }
 
-table.insert(mt.sub_skills, false)
+function mt:on_cast_start()
+    local hero = self.owner
+    local player = hero:get_owner()
+    local book = self.book
+    if book.hide_book == nil then 
+        return 
+    end 
+    hero.skill_page = book:get_type()
 
-table.insert(mt.sub_skills, {
-	art = [[model\megumin\BTNMeguminR4.blp]],
-	title = '超电磁炮！压缩爆裂魔法',
-	tip = '|cffff3333爆裂魔法|r伤害+30%，护甲穿透+30%。',
-})
+    book.hide_book = nil 
+    for index,skill in ipairs(book.skill_list) do 
+        if not skill:is_hide() then 
+            skill:hide()
+            skill:remove_ability(skill.ability_id)
+        end
+    end 
 
-table.insert(mt.sub_skills, {
-	art = [[model\megumin\BTNMeguminR5.blp]],
-	title = '超级！爆裂魔法',
-	tip = '|cffff3333爆裂魔法|r的施法距离、伤害范围、吟唱时间提高50%。',
-})
+    for skill in hero:each_skill(book:get_type()) do 
+        if skill:is_hide() then 
+            skill:add_ability(skill.ability_id)
+            skill:show()
+            skill:fresh()
+        end
+    end 
+end 
 
-table.insert(mt.sub_skills, {
-	art = [[model\megumin\BTNMeguminR6.blp]],
-	title = '高速吟唱！爆裂魔法',
-	tip = '|cffff3333爆裂魔法|r的吟唱时间减少1秒。',
-})
+function mt:close()
+    local hero = self.owner
+    local player = hero:get_owner()
+    local book = self.book
+    if book.hide_book == nil then 
+        return 
+    end 
+    hero.skill_page = nil
+    book.hide_book = nil 
+    for index,skill in ipairs(book.skill_list) do 
+        if not skill:is_hide() then 
+            skill:hide()
+            skill:remove_ability(skill.ability_id)
+        end
+    end
 
-table.insert(mt.sub_skills, {
-	art = [[model\megumin\BTNMeguminR7.blp]],
-	title = '爆裂魔法的虚实之道',
-	tip = '练习|cffff3333爆裂魔法|r时，你可以使用|cffff3333爆裂魔法|r，把它变为|cffff3333爆裂魔法|r。也可以在吟唱|cffff3333爆裂魔法|r时把它变为练习。',
-})
+    for skill in hero:each_skill('英雄') do 
+        if skill:is_hide() then 
+            skill:show()
+            skill:fresh()
+        end
+    end 
+end 
 
-for _, skill in ipairs(mt.sub_skills) do
-	if skill then
-		skill.simple_tip = true
-		skill.max_level = 1
-	end
-end
+ac.game:event'单位-获得技能' (function (_,hero,skill)
+    if skill and skill.slot_type == '英雄' then 
+        local skl = hero:find_skill('关闭',hero.skill_page or '英雄')
+        if skl and not skl:is_hide() then 
+            skl:close()
+        end 
+    end
+end)
+
+ac.game:event '玩家-选择单位' (function (_,player,unit)
+    local hero = player:get_hero()
+    if hero == unit or hero == nil then 
+        return 
+    end 
+    local skl = hero:find_skill('关闭',hero.skill_page or '英雄')
+    if skl and not skl:is_hide() then 
+        skl:close()
+    end 
+end)
 
 
-function mt:on_cast_shot(skill)
-	local hero = self.owner
-	skill:set_art(skill:get_art(nil, true))
-	skill:remove()
-	-- table.insert(self.sub_skill.upgraded, skill)
-	print(skill.title)
-	-- self.sub_skill.upgraded[skill.title] = true
-	-- self.sub_skill:fresh_tip()
-	-- hero:get_owner():play_sound([[response\惠惠\skill\]] .. skill.sub_id .. '.mp3', '等待')
-	-- self.upgraded = self.sub_skill.upgraded
-
-	-- if skill.title == '超级！爆裂魔法' then
-	-- 	self.sub_skill.explosion:explosion_update_data('range', nil, 1.5)
-	-- 	self.sub_skill.explosion:explosion_update_data('area', nil, 1.5)
-	-- 	self.sub_skill.explosion:explosion_update_data('cast_channel_time', nil, 1.5)
-	-- elseif skill.title == '高速吟唱！爆裂魔法' then
-	-- 	self.sub_skill.explosion:explosion_update_data('cast_channel_time', -1)
-	-- 	self.sub_skill.explosion.explosion_fast_channel = true
-	-- elseif skill.title == '维兹的爆裂魔法' then
-	-- 	self.sub_skill.explosion.explosion_nohard = true
-	-- 	hero:add_resource('魔力上限%', 20)
-	-- elseif skill.title == '和真的支援！生命吸收' then
-	-- 	hero:add_buff '爆裂魔法-生命吸收'
-	-- 	{
-	-- 		skill = self.sub_skill.explosion,
-	-- 	}
-	-- elseif skill.title == '爆裂魔法的虚实之道' then
-	-- 	self.sub_skill.explosion.explosion_can_convert = true
-	-- elseif skill.title == '超电磁炮！压缩爆裂魔法' then
-	-- 	self.sub_skill.explosion:explosion_update_data('damage_rate', 0.3)
-	-- 	self.sub_skill.explosion:explosion_update_data('damage_pene_rate', 30)
-	-- elseif skill.title == '惠惠的爆裂之道' then
-	-- 	self.sub_skill.explosion.explosion_training_building = true
-	-- end
-	-- self.sub_skill.explosion:explosion_update_data('damage_ratio', self.sub_skill:get_level() * 1)
-	-- self.sub_skill.explosion:explosion_fresh()
-end

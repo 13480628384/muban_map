@@ -27,7 +27,7 @@ function mt:on_add()
     local skill = self
     local hero = self.owner
     hero:add('移动速度',self.move_speed)
-    hero:add('冷却缩减',-self.cool_reduce)
+    hero:add('冷却缩减',self.cool_reduce)
     hero:add('法爆几率',self.magic_rate)
     --改变模型
     japi.SetUnitModel(hero.handle,self.effect)
@@ -41,6 +41,6 @@ function mt:on_remove()
     end
     
     hero:add('移动速度',-self.move_speed)
-    hero:add('冷却缩减',self.cool_reduce)
+    hero:add('冷却缩减',-self.cool_reduce)
     hero:add('法爆几率',-self.magic_rate)
 end
