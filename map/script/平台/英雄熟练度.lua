@@ -209,16 +209,17 @@ mt{
     color =  '青',
 	--介绍
     tip = [[
-熟练度：%p_sld% （%hero_xp%）
-+%all_attr% 全属性
-+%sld_value% %sld_key%
+|cffffff00熟练度：|r%p_sld% （%hero_xp%）
+|cffffff00+%all_attr%|r 全属性
+|cffffff00+%sld_value%|r %sld_key%
 
-熟练度获得途径：
-1.每次通关游戏可存档
+|cffffff00获得途径：|r
+1.每次通关游戏可获得，并存档
 2.挑战镜像成功
+3.其它
 
-本局熟练度：%current_hero_xp% (击败最终boss后才生效)
-达下阶段还需：%next_hero_xp% 
+|cffffff00本局熟练度：|r%current_hero_xp% 
+|cffffff00升阶还需：|r%next_hero_xp% 
 ]],
 -- 团队增益：
 -- +%格挡% % 格挡几率
