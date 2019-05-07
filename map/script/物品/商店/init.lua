@@ -121,13 +121,28 @@ ac.game:event '玩家-注册英雄后' (function()
                         shop5:set_size(1.2) 
                         local shop6 = ac.shop.create('杀敌兑换',x+300,y,270)
                         shop6:set_size(1.2) 
-                        local shop7 = ac.shop.create('镜像挑战',x+600,y,270)
-                        shop6:set_size(1.2) 
                     end  
                 end
 
             end   
+            --挑战自我 第40波 出现
+            local index = 40 
+            if creep.name == '刷怪' and  creep.index == index then
+                --发送消息
+                ac.player.self:sendMsg('【系统消息】新增|cffff0000挑战自我|r玩法，前往|cffff0000小黑屋|r处购买',10)
+                ac.player.self:sendMsg('【系统消息】新增|cffff0000挑战自我|r玩法，前往|cffff0000小黑屋|r处购买',10)
+                ac.player.self:sendMsg('【系统消息】新增|cffff0000挑战自我|r玩法，前往|cffff0000小黑屋|r处购买',10)
 
+                for i = 1, 10 do
+                    local p = ac.player[i]
+                    --在选人区域创建可见度修整器(对每个玩家,永久)
+                    if p:is_player() then 
+                        local x,y = ac.rect.j_rect('lgfsd'..p.id):get_point():get()
+                        local shop7 = ac.shop.create('镜像挑战',x+600,y,270)
+                        shop7:set_size(1.2) 
+                    end  
+                end
+            end   
 
         end)
     end)    
