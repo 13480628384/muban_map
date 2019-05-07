@@ -215,6 +215,7 @@ mt{
 +%冷却缩减% % 冷却缩减
 +%额外伤害% % 额外伤害
 +%对BOSS额外伤害% % 对BOSS额外伤害
+
 个人增益：
 +%all_attr% 全属性
 
@@ -223,7 +224,7 @@ mt{
 达下阶段还需：%next_hero_xp% 
 ]],
 	--技能图标
-    art = [[chongwugou.blp]],
+    art = [[shuliandu.blp]],
 
     -- --格挡几率
     ['格挡'] = 0,

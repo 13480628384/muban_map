@@ -8,10 +8,13 @@ mt{
 level = 1,
 
 --图标
-art = [[shaguaijianjia.blp]],
+art = [[ReplaceableTextures\CommandButtons\BTNMirrorImage.blp]],
 
 --说明
-tip = [[挑战2倍镜像,cd 5分钟]],
+tip = [[挑战10倍全属性的镜像，成功奖励：
+|cffffff00+20000|r 全属性
+|cffffff00+3|r 英雄熟练度
+]],
 
 --特殊id 带cd
 type_id = 'EX02',
@@ -92,6 +95,7 @@ ac.wait(10,function()
                     ['物爆伤害'] = hero:get('物爆伤害'),
                     ['会心几率'] = hero:get('会心几率'),
                     ['会心伤害'] = hero:get('会心伤害'),
+                    ['魔抗'] = hero:get('护甲') ,
                 }
         
                 unit:add_buff '召唤物' {
