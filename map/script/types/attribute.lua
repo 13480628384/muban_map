@@ -674,11 +674,11 @@ set['格挡'] = function(self)
 	end
 end
 
-get['格挡伤害'] = function()
+get['格挡伤害'] = function(self)
 	return 60
 end
 
-set['格挡伤害'] = function()
+set['格挡伤害'] = function(self)
 	if self.freshDefenceInfo then
 		self:freshDefenceInfo()
 	end

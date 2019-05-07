@@ -22,6 +22,8 @@ for i=1,10 do
     player.damage_count = 0
     --参团率
     player.ctl = 0
+    --熟练度
+    player.sld = ''
     --kda
     player.kda = 0
     player.boshu = player.boshu or 0
@@ -143,6 +145,8 @@ local function get_kda()
         --段位
         ranking.ui.rank[i]:set_text(rank_art[p.rank])
         --ranking.ui.rank[i]:set_normal_image(rank_art[p.rank])
+        --熟练度
+        ranking.ui.sld[i]:set_text(p.sld)
         --杀敌数
         ranking.ui.kill_count[i]:set_text(p.total_kill_count)
         --死亡数
@@ -155,8 +159,6 @@ local function get_kda()
         ac.game.multiboard.damage_init(p,numerical(p.damage_count))
         --受到伤害
         ranking.ui.take_damage[i]:set_text(numerical(p.take_damage_count))
-        --参团率
-        ranking.ui.ctl[i]:set_text(numerical(p.ctl))
         --kda
         ranking.ui.kda[i]:set_text(numerical(p.kda))
         if p:is_self() then

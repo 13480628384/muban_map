@@ -25,6 +25,7 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
         unit.data.type ='boss'
 
         creep.boss = unit
+        ac.final_boss = unit
     end 
     local c_boss_buff = creep.boss:find_buff '时停' 
 
@@ -129,6 +130,18 @@ ac.game:event '游戏-最终boss' (function(trg,index, creep)
     creep.boss:set_search_range(99999)
     --注册事件
     creep.boss:event '单位-死亡'(function(_,unit,killer) 
+        --保存英雄熟练度
+        local value 
+        if ac.g_game_degree ==1 then 
+            value = 2
+        elseif ac.g_game_degree ==2 then    
+            value = 4  
+        else
+            value = 6
+        end     
+        ac.final_boss = false   
+        killer:add_hero_xp(value)
+
         --保存积分
         if ac.save_jifen then 
             ac.save_jifen()

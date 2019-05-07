@@ -136,7 +136,9 @@ local function set_fangjian_xm(p,count)
     end
 
     if p:GetServerValueErrorCode() then
-        p:Map_Stat_SetStat('DW',rank_art[value])
+        if rank_art[value] then 
+            p:Map_Stat_SetStat('DW',rank_art[value])
+        end 
     end
     --实时更新游戏内的段位数据
     p.rank = value

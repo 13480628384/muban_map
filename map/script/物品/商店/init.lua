@@ -115,16 +115,13 @@ ac.game:event '玩家-注册英雄后' (function()
                         p.hero:add_skill('F2回城', '隐藏')
                         p.hero:add_skill('F3小黑屋', '隐藏') 
                     
-                        --创建天结散人
-                        -- local unit = p:create_unit('修炼商店',ac.point(0,0))
-                        -- local x,y = ac.rect.j_rect('lgfsd'..p.id):get_point():get()
-                        -- local shop5 = ac.shop.create('强盗',x,y,270)
-
                         --给每位玩家创建小黑屋 修炼商店
                         local x,y = ac.rect.j_rect('lgfsd'..p.id):get_point():get()
                         local shop5 = ac.shop.create('修炼商店',x,y,270)
                         shop5:set_size(1.2) 
                         local shop6 = ac.shop.create('杀敌兑换',x+300,y,270)
+                        shop6:set_size(1.2) 
+                        local shop7 = ac.shop.create('镜像挑战',x+600,y,270)
                         shop6:set_size(1.2) 
                     end  
                 end

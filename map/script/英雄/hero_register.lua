@@ -59,8 +59,6 @@ local function hero_register_main()
 	ac.game:event '玩家-注册英雄' (function(_, player, hero)
 		print('注册英雄3')
 		-- SelectUnitForPlayerSingle(hero.handle,player.handle)
-
-		print('注册英雄31')
 		-- 统一设置搜敌范围
 		hero:set_search_range(1000)
 		--添加技能
@@ -71,7 +69,7 @@ local function hero_register_main()
 		hero:add_skill('拾取','拾取',1)
 		hero:add_skill('攻击','英雄',9)
 		hero:add_skill('停止','英雄',10)
-		hero:add_skill('保持原位','英雄',11)
+		-- hero:add_skill('保持原位','英雄',11)
 		
 		
 		-- hero:add_skill('死亡飞镖','英雄')

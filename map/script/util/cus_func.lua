@@ -116,4 +116,18 @@ function getextension(filename)
 end
 
 
+--根据table sortkey 排序，取key对应的最大值
+function get_maxtable(tab,sortkey,key)
+	table.sort(tab,function (a,b)
+		return a[sortkey] > b[sortkey]
+	end) 
+	return tab[1][key]
+end
+--根据table sortkey 排序，取key对应的最大值
+function get_mintable(tab,sortkey,key)
+	table.sort(tab,function (a,b)
+		return a[sortkey] < b[sortkey]
+	end) 
+	return tab[1][key]
+end
 

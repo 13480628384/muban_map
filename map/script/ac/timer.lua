@@ -22,7 +22,7 @@ local function alloc_queue()
 	end
 end
 
-local function m_timeout(self, timeout)
+local function execute(self,timeout)
 	local ti = cur_frame + timeout
 	local q = timer[ti]
 	if q == nil then
@@ -31,6 +31,11 @@ local function m_timeout(self, timeout)
 	end
 	self.timeout_frame = ti
 	q[#q + 1] = self
+end
+
+local function m_timeout(self, timeout)
+	execute(self,timeout)
+	--pcall(execute,self,timeout)
 end
 
 local function m_wakeup(self)
@@ -139,6 +144,10 @@ function api:resume()
 end
 
 function ac.wait(timeout, on_timer)
+	if type(timeout) ~= 'number'  or type(on_timer) ~= 'function' then 
+		print("计时器参数错误2",timeout,on_timer)
+		return 
+	end 
 	local timeout = math_max(math_floor(timeout) or 1, 1)
 	local t = setmetatable({
 		['on_timer'] = on_timer,
@@ -148,6 +157,10 @@ function ac.wait(timeout, on_timer)
 end
 
 function ac.loop(timeout, on_timer)
+	if type(timeout) ~= 'number' or type(on_timer) ~= 'function' then 
+		print("计时器参数错误1",timeout,on_timer)
+		return 
+	end 
 	local t = setmetatable({
 		['timeout'] = math_max(math_floor(timeout) or 1, 1),
 		['on_timer'] = on_timer,
@@ -157,6 +170,11 @@ function ac.loop(timeout, on_timer)
 end
 
 function ac.timer(timeout, count, on_timer)
+	if type(timeout) ~= 'number' or type(count) ~= 'number' or type(on_timer) ~= 'function' then 
+		print("计时器参数错误1",timeout,count,on_timer)
+		return 
+	end 
+
 	if count == 0 then
 		return ac.loop(timeout, on_timer)
 	end

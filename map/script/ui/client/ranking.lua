@@ -51,25 +51,27 @@ ranking = extends( panel_class,{
         local rank = data_panel:add_text('段位',130,0,80,20,10,1)
         rank:set_color(120,120,120,1)
 
+        --熟练度
+        local sld = data_panel:add_text('熟练度',220,0,80,20,10,1)
+        sld:set_color(120,120,120,1)
+
         --杀敌数
-        local sds = data_panel:add_text('杀敌数',220,0,80,20,10,1)
+        local sds = data_panel:add_text('杀敌数',300,0,80,20,10,1)
         sds:set_color(120,120,120,1)
 
         --死亡次数
-        local death = data_panel:add_text('死亡次数',300,0,80,20,10,1)
+        local death = data_panel:add_text('死亡次数',400,0,80,20,10,1)
         death:set_color(120,120,120,1)
         --金币数
-        local gold = data_panel:add_text('获得金币数',400,0,80,20,10,1)
+        local gold = data_panel:add_text('获得金币数',490,0,80,20,10,1)
         gold:set_color(120,120,120,1)
         --伤害量
-        local damage = data_panel:add_text('累计伤害',490,0,100,20,10,1)
+        local damage = data_panel:add_text('累计伤害',590,0,100,20,10,1)
         damage:set_color(120,120,120,1)
+
         --承受伤害
-        local take_damage = data_panel:add_text('承受伤害',590,0,100,20,10,1)
+        local take_damage = data_panel:add_text('承受伤害',680,0,100,20,10,1)
         take_damage:set_color(120,120,120,1)
-        --参团率
-        local ctl = data_panel:add_text('参团率',680,0,80,20,10,1)
-        ctl:set_color(120,120,120,1)
         --kda
         local kda = data_panel:add_text('KDA',750,0,80,20,10,1)
         kda:set_color(120,120,120,1)
@@ -81,7 +83,7 @@ ranking = extends( panel_class,{
         panel.gold_count = {}
         panel.damage_count = {}
         panel.take_damage = {}
-        panel.ctl = {}
+        panel.sld = {}
         panel.kda = {}
         local color = {}
         --玩家
@@ -107,30 +109,31 @@ ranking = extends( panel_class,{
             rank:set_color(color[1],color[2],color[3],color[4])
             --local rank = data_panel:add_texture('image\\排行榜\\toumingtietu.tga',150,y,37,37)
             --table.insert(panel.rank,rank)
+            
+            local sld = data_panel:add_text('',220,y,80,35,9,4)
+            table.insert(panel.sld,sld)
+            sld:set_color(color[1],color[2],color[3],color[4])
 
-            local kill_count = data_panel:add_text('',220,y,80,35,9,4)
+            local kill_count = data_panel:add_text('',300,y,80,35,9,4)
             table.insert(panel.kill_count,kill_count)
             kill_count:set_color(color[1],color[2],color[3],color[4])
 
-            local death_count = data_panel:add_text('',300,y,80,35,9,4)
+            local death_count = data_panel:add_text('',400,y,80,35,9,4)
             table.insert(panel.death_count,death_count)
             death_count:set_color(color[1],color[2],color[3],color[4])
             
-            local gold_count = data_panel:add_text('',400,y,80,35,9,4)
+            local gold_count = data_panel:add_text('',490,y,80,35,9,4)
             table.insert(panel.gold_count,gold_count)
             gold_count:set_color(color[1],color[2],color[3],color[4])
 
-            local damage_count = data_panel:add_text('',490,y,100,35,9,4)
+            local damage_count = data_panel:add_text('',590,y,100,35,9,4)
             table.insert(panel.damage_count,damage_count)
             damage_count:set_color(color[1],color[2],color[3],color[4])
 
-            local take_damage = data_panel:add_text('',590,y,100,35,9,4)
+            local take_damage = data_panel:add_text('',680,y,100,35,9,4)
             table.insert(panel.take_damage,take_damage)
             take_damage:set_color(color[1],color[2],color[3],color[4])
 
-            local ctl = data_panel:add_text('',680,y,80,35,9,4)
-            table.insert(panel.ctl,ctl)
-            ctl:set_color(color[1],color[2],color[3],color[4])
 
             local kda = data_panel:add_text('',750,y,80,35,9,4)
             table.insert(panel.kda,kda)          

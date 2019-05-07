@@ -82,6 +82,9 @@ local function showHeroState(p, u)
 	local tip = [[
 |cff00bdec定位   |cffffcc00%production%
 ]]
+
+	local tip2 ='|cff00bdec熟练度|r   |cffff0000'..ac.player.self.hero_xp[hero_name]..'|r  |cffffcc00(熟练度越高，团队和个人增益越大)|r'
+	
 	local difficulty_level = {
 		'|cffffaaaa★|r|cffeeeeee☆☆☆☆☆|r',
 		'|cffff8888★★|r|cffeeeeee☆☆☆☆|r',
@@ -102,7 +105,7 @@ local function showHeroState(p, u)
 			data = data[path]
 		end
 		return data
-	end), 60)
+	end)..tip2, 60)
 	--刷新技能说明
 	if p == ac.player.self then
 		for i = 1, 4 do

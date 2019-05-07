@@ -508,12 +508,10 @@ local function on_texttag(self)
 			i = i + 1
 			if i < 10 then
 				tag.crit_size = tag.crit_size + 1
-
-			else if i < 20 then
-					tag.crit_size = tag.crit_size	
-				else 
-					tag.crit_size = tag.crit_size - 1
-				end
+			elseif i < 20 then
+				tag.crit_size = tag.crit_size	
+			else 
+				tag.crit_size = tag.crit_size - 1
 			end	
 			tag:setText(nil, tag.size + tag.crit_size)
 		end)
@@ -987,9 +985,8 @@ function damage:__call()
 		--计算减伤
 		self:Injury()
 
-		-- --判断伤害类型
-		-- if not self:is_common_attack()  then
-		-- end
+		--计算格挡
+		on_block(self)
 
 		local ewsh = source:get '额外伤害'
 		--计算额外伤害

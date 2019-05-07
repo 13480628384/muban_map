@@ -52,7 +52,7 @@ mt.unique = false
 mt.type_count = 0
 
 --物品类型ID
-mt.type_id = 0
+mt.type_id = nil
 
 --物品句柄
 mt.handle = nil
@@ -1125,16 +1125,18 @@ function item.create(name,pos)
 			items[k] = v
 		end
 	end
-
-	local type_id = ac.get_shop_item_handle(pos)
-	if not type_id then 
-		print('商店模板id超出限制')
-		return 
+	-- print(items.type_id)
+	if not items.type_id then 
+		local type_id = ac.get_shop_item_handle(pos)
+		if not type_id then 
+			print('商店模板id超出限制')
+			return 
+		end	
+		items.type_id = type_id
 	end	
-	items.type_id = type_id
 
 	--创建一个实例物品
-	local item_handle = jass.CreateItem(base.string2id(type_id),0,0)
+	local item_handle = jass.CreateItem(base.string2id(items.type_id),0,0)
 	ac.item.shop_item_map[name] = items
 	-- ac.item.shop_item_map[item_handle] = items
 
