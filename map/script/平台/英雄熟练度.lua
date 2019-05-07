@@ -187,6 +187,8 @@ function unit.__index:add_hero_xp(xp)
     local production = self.data['production']
     local max_tab = get_strong_attr_byxp(production,p.hero_xp[name])
     p.sld = max_tab[5] 
+    p.sld_value = max_tab[4]
+    p.sld_key = max_tab[3]
 
     --下一级所需
     local next_tab = get_next_strong_attr_byxp(production,p.hero_xp[name])
@@ -207,22 +209,32 @@ mt{
     color =  '青',
 	--介绍
     tip = [[
-团队增益：
-+%格挡% % 格挡几率
-+%生命恢复%% % 生命恢复
-+%减甲% 减甲
-+%攻击距离% 攻击距离
-+%冷却缩减% % 冷却缩减
-+%额外伤害% % 额外伤害
-+%对BOSS额外伤害% % 对BOSS额外伤害
-
-个人增益：
+熟练度：%p_sld% （%hero_xp%）
 +%all_attr% 全属性
++%sld_value% %sld_key%
 
-总熟练度：%hero_xp%
+熟练度获得途径：
+1.每次通关游戏可存档
+2.挑战镜像成功
+
 本局熟练度：%current_hero_xp% (击败最终boss后才生效)
 达下阶段还需：%next_hero_xp% 
 ]],
+-- 团队增益：
+-- +%格挡% % 格挡几率
+-- +%生命恢复%% % 生命恢复
+-- +%减甲% 减甲
+-- +%攻击距离% 攻击距离
+-- +%冷却缩减% % 冷却缩减
+-- +%额外伤害% % 额外伤害
+-- +%对BOSS额外伤害% % 对BOSS额外伤害
+
+-- 个人增益：
+-- +%all_attr% 全属性
+
+-- 总熟练度：%hero_xp%
+-- 本局熟练度：%current_hero_xp% (击败最终boss后才生效)
+-- 达下阶段还需：%next_hero_xp% 
 	--技能图标
     art = [[shuliandu.blp]],
 
@@ -259,7 +271,25 @@ mt{
         local p = hero:get_owner()
         hero = p.hero 
         return string.format( "%.f",(hero.next_hero_xp or 100))
-    end
+    end,
+    p_sld = function(self)
+        local hero = self.owner
+        local p = hero:get_owner()
+        hero = p.hero 
+        return p.sld
+    end,
+    sld_key = function(self)
+        local hero = self.owner
+        local p = hero:get_owner()
+        hero = p.hero 
+        return p.sld_key
+    end,
+    sld_value = function(self)
+        local hero = self.owner
+        local p = hero:get_owner()
+        hero = p.hero 
+        return p.sld_value
+    end,
 
     
 }
