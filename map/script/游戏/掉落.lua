@@ -328,8 +328,8 @@ local unit_reward = {
     },
     ['抽奖券'] =  {
         {    rand = 70,  name ={
-                { rand = 50, name = '欧皇达人'},
-                { rand = 50, name = '无'}, 
+                { rand = 0.5, name = '欧皇达人'},
+                { rand = 99.5, name = '无'}, 
             }
         },
         {    rand = 5, name = '金币' },

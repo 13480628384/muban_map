@@ -1352,7 +1352,7 @@ function mt:is_silent()
 	if not self.owner:has_restriction '禁魔' then
 		return false
 	end
-	if self:get_type() == '英雄' or self:get_type() == '通用' then
+	if (self:get_type() == '英雄' and not self.is_order) or self:get_type() == '通用' then
 		return true
 	end
 	return false

@@ -241,6 +241,14 @@ ac.timer_ex = function(data)
 			func()
 		end 
 	end)
+	
+	function timer:PauseTimer()
+		jass.PauseTimer(timer.handle)
+	end
+
+	function timer:ResumeTimer()
+		jass.ResumeTimer(timer.handle)
+	end
 
 	function timer:create_timer_dialog(title)
 		local time_dialog = jass.CreateTimerDialog(jtm)

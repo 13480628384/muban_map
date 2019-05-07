@@ -31,12 +31,11 @@ mt.region  = nil
 mt.is_random  = nil
 -- 刷新时间 (怪物符合刷新条件后，还需要等待的时间)
 mt.cool= nil
+-- 强制刷新时间 (不需要等待怪物全死亡，直接刷新下一波)
+mt.force_cool= nil
 --怪物数量 - 刷新条件 达到后进入刷新时间计时 
 mt.cool_count = nil
 
--- true 英雄离开，怪物死亡。false 离开不死亡
--- 格子图 偷懒设计，当怪物与英雄距离超出2000米 （超一屏幕），视为离开挑战区域，怪物死亡。
-mt.is_hero_leave_death =false 
 -- 说明
 mt.tip =nil
 mt.creeps_datas = nil
@@ -251,15 +250,31 @@ function mt:start(player)
             end    
         end)    
     end    
-        
-
+    
     if self.on_start then 
         self:on_start()
     end 
     self:next()   
     
 end
-  
+--暂停计时
+function mt:PauseTimer()
+    if not self.force_timer then 
+        return 
+    end
+    self.force_timer:PauseTimer()   
+    return self.force_timer
+end    
+
+--恢复计时
+function mt:ResumeTimer()
+    if not self.force_timer then 
+        return 
+    end
+    self.force_timer:ResumeTimer()   
+    return self.force_timer
+end  
+
 function mt:next()
     --已经结束
     if is_finish then
@@ -273,6 +288,18 @@ function mt:next()
         self:finish() 
         return
     end    
+    
+    if not self.force_timer and self.force_cool then 
+        --创建计时器窗口
+        self.force_timer = ac.timer_ex 
+        {
+            time = self.force_cool,
+            title = "距离怪物进攻",
+            func = function ()
+                self:next()   
+            end,
+        }
+    end    
 
     if ac.game:event_dispatch('游戏-回合开始',self.index,self)  then 
         return 
@@ -280,6 +307,7 @@ function mt:next()
     if self.on_next then 
         self:on_next()
     end 
+    
     local creeps_datas = self.creeps_datas
     local region = self.region
     local creep_player = self.creep_player
@@ -385,6 +413,10 @@ function mt:next()
                 if ac.game:event_dispatch('游戏-回合结束',self.index,self)  then 
                     return 
                 end    
+                --防守时刷怪倒计时，如果怪物全杀死也不进入下一波
+                if self.force_timer then 
+                    return 
+                end    
                 --如果有刷新时间配置 则 按照时间等待后刷新，没有的话立即刷新
                 if self.cool then 
                     ac.wait(self.cool  * 1000, function()
@@ -444,6 +476,9 @@ function mt:finish(is_unit_kill)
     end
     if  self.timer then 
         self.timer:remove()
+    end
+    if  self.force_timer then 
+        self.force_timer:remove()
     end
     if self.event_region then 
         self.event_region:remove()

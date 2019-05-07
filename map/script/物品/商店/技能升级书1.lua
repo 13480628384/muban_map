@@ -18,7 +18,8 @@ mt{
     --物品技能
     is_skill = true,
     --物品详细介绍的title
-    content_tip = '使用说明：'
+    content_tip = '使用说明：',
+    skill_cnt = 8,
     
 }
     
@@ -32,18 +33,20 @@ function mt:on_cast_start()
     hero = player.hero
     local item = self 
     local list = {}
-    for skill in hero:each_skill '英雄' do 
-
-        local upgrade_count = skill.upgrade_count or 1
-        if upgrade_count < 5  then 
-            local price = upgrade_count * 500
-            local info = {
-                name = skill:get_name() .. ' ' .. (skill:get_level() + 1) .. ' 级 (' .. skill:get_hotkey() ..')' ,
-                key = skill:get_hotkey():byte(),
-                skill = skill,
-            }
-            table.insert(list,info)
-        end 
+    for i=1,self.skill_cnt do 
+        local skill = hero:find_skill(i,'英雄')
+        if skill then 
+            local upgrade_count = skill.upgrade_count or 1
+            if upgrade_count < 5  then 
+                local price = upgrade_count * 500
+                local info = {
+                    name = skill:get_name() .. ' ' .. (skill:get_level() + 1) .. ' 级 (' .. skill:get_hotkey() ..')' ,
+                    key = skill:get_hotkey():byte(),
+                    skill = skill,
+                }
+                table.insert(list,info)
+            end 
+        end  
     end 
 
     local name = self.name
