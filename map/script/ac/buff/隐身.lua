@@ -11,6 +11,8 @@ mt.trg_spell = nil
 
 function mt:on_add()
 	self.target:add_restriction '隐身'
+	--变透明
+	self.target:setAlpha(30)
 	if self.remove_when_attack then
 		self.trg_attack = self.target:event '单位-攻击出手' (function()
 			self:remove()
@@ -21,6 +23,10 @@ function mt:on_add()
 			self:remove()
 		end)
 	end
+	--增加移动速度
+	if self.move_speed then 
+		self.target:add('移动速度',self.move_speed)
+	end	
 end
 
 function mt:on_remove()
@@ -31,6 +37,12 @@ function mt:on_remove()
 	if self.trg_spell then
 		self.trg_spell:remove()
 	end
+	--增加移动速度
+	if self.move_speed then 
+		self.target:add('移动速度',-self.move_speed)
+	end	
+	--变透明
+	self.target:setAlpha(100)
 end
 
 function mt:on_cover(dest)
