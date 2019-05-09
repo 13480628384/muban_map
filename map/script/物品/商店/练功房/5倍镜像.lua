@@ -12,7 +12,7 @@ art = [[ReplaceableTextures\CommandButtons\BTNMirrorImage.blp]],
 
 --说明
 tip = [[挑战5倍全属性的镜像，成功奖励：
-|cffffff00+20000|r 全属性
+|cffffff00+25000|r 全属性
 |cffffff00+2|r 英雄熟练度]],
 
 --特殊id 带cd
@@ -67,7 +67,7 @@ ac.wait(10,function()
                 is_region_replace = true,
                 ctime = 5*60 , --镜像持续时间
                 cattr_mul = 4 , --镜像额外倍数
-                call_attr = 20000 , --奖励全属性
+                call_attr = 25000 , --奖励全属性
                 cmodel_size = 2 , --模型倍数
                 chero_xp = 2 , --奖励英雄熟练度
 
