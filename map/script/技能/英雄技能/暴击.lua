@@ -24,13 +24,13 @@ mt{
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNCriticalStrike.blp]],
 
 	--物爆
-	physical_rate = {5,7.5,10,12.5,15},
+	physical_rate = {2,4,6,8,10},
 	physical_damage = {100,200,300,400,500},
 	--会爆
-	heart_rate = {5,7.5,10,12.5,15},
+	heart_rate = {2,4,6,8,10},
 	heart_damage = {100,200,300,400,500},
 	--法爆
-	magic_rate = {5,7.5,10,12.5,15},
+	magic_rate = {2,4,6,8,10},
 	magic_damage = {100,200,300,400,500},
 
 
