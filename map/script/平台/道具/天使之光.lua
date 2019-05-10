@@ -10,14 +10,12 @@ mt{
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
     tip = [[%active%
-    激活方式：选择英雄后自动激活
-    翅膀属性1：拥有酷炫的翅膀效果
-    翅膀属性2：金币获取率+20%； 经验获取率+20%； 物品获取率+20%
-    翅膀属性3：移速+50， 攻击速度+100%
-    ]],
+|cffffff00特权1：|r拥有酷炫的翅膀效果
+|cffffff00特权2：|r金币获取率+20%； 经验获取率+20%； 物品获取率+20%
+|cffffff00特权3：|r移速+50， 攻击速度+100%]],
     --是否激活状态
     active = function(self)
-        local res = [[|cffFFE799需要：
+        local res = [[|cff00bdec需要：
  - 通过【官方商城】获得|r]]
         if self.level >=1 then 
             res = ''

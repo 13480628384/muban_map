@@ -10,12 +10,10 @@ mt{
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
 	tip = [[%active%
-激活方式：开局自动激活
-特权：开局金币+1000， 每秒金币+6， 金币获取率+20%
-    ]],
+|cffffff00特权：|r开局金币+1000， 每秒金币+6， 金币获取率+20%]],
     --是否激活状态
     active = function(self)
-        local res = [[|cffFFE799需要：
+        local res = [[|cff00bdec需要：
  - 通过【官方商城】获得|r]]
         if self.level >=1 then 
             res = ''

@@ -10,13 +10,11 @@ mt{
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
 	tip = [[%active%
-|cffFFE799激活方式：进游戏自动激活
-|cffFFE799特权1：|r每10波赠送一个随机物品（共7个，纯随机，人品好可能出金装红装）
-|cffFFE799特权2：|r物品获取率+25%
-    ]],
+|cffffff00特权1：|r每10波赠送一个随机物品（共7个，纯随机，人品好可能出金装红装）
+|cffffff00特权2：|r物品获取率+25%]],
     --是否激活状态
     active = function(self)
-        local res = [[|cffFFE799需要：
+        local res = [[|cff00bdec需要：
  - 通过【官方商城】获得|r]]
         if self.level >=1 then 
             res = ''
