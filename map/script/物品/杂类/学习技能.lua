@@ -41,6 +41,13 @@ function mt:on_cast_shot()
 
         skill:set_level(skill:get_level() + 1)
         -- self:remove()
+        --升级技能后
+        local unit = self.owner
+        if not unit:is_hero() then 
+            for skill in unit:each_skill '英雄' do 
+                skill:fresh()
+            end 
+        end
         return 
     end 
 

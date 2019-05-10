@@ -26,6 +26,7 @@ mt{
 function mt:on_add()
     local skill = self
     local hero = self.owner
+    if not hero:is_hero() then return end
     hero:add('力量',self.str)
     hero:add('杀怪力量',self.kill_str)
     hero:add('杀怪护甲',self.kill_defence)

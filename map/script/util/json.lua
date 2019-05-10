@@ -26,7 +26,7 @@ local escape_char_map = {
 }
 
 local escape_char_map_inv = { [ "\\/" ] = "/" }
-for k, v in pairs(escape_char_map) do
+for k, v in sortpairs(escape_char_map) do
   escape_char_map_inv[v] = k
 end
 
@@ -53,7 +53,7 @@ local function encode_table(val, stack)
   if val[1] ~= nil or next(val) == nil then
     -- Treat as array -- check keys are valid and it is not sparse
     local n = 0
-    for k,v in pairs(val) do
+    for k,v in sortpairs(val) do
       if type(k) ~= "number" then
         error("invalid table: mixed or invalid key types")
       end
@@ -68,7 +68,7 @@ local function encode_table(val, stack)
 
   else
     -- Treat as an object
-    for k, v in pairs(val) do
+    for k, v in sortpairs(val) do
       if type(k) ~= "string" then
         error("invalid table: mixed or invalid key types")
       end

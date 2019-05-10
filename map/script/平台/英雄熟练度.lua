@@ -18,6 +18,7 @@ local hero_key = {
     ['诸葛亮'] = 'SLZGL', 
     ['鲁大师'] = 'SLLDS', 
 }
+ac.hero_key = hero_key
 local strong_attr = {
     ['肉盾'] = {
         {0,100,'格挡',0,'新手肉盾'},
@@ -169,6 +170,7 @@ function unit.__index:add_hero_xp(xp)
     if not self:is_hero() then 
         return 
     end    
+    local xp = (xp or 0) * (1 + self:get('熟练度加成'))
     local p = self:get_owner()
     local name = self.name 
     -- print(self.name,p)
@@ -192,7 +194,9 @@ function unit.__index:add_hero_xp(xp)
 
     --下一级所需
     local next_tab = get_next_strong_attr_byxp(production,p.hero_xp[name])
-    self.next_hero_xp = next_tab[1] - p.hero_xp[name]
+    if next_tab then 
+        self.next_hero_xp = next_tab[1] - p.hero_xp[name]
+    end
 
 
 end
@@ -211,7 +215,7 @@ mt{
     tip = [[
 |cffffff00熟练度：|r%p_sld% （%hero_xp%）
 |cffffff00+%all_attr%|r 全属性
-|cffffff00+%sld_value%|r %sld_key%
+|cffffff00+%sld_value%|r 团队%sld_key%(不可叠加)
 
 |cffffff00获得途径：|r
 1.每次通关游戏可获得，并存档

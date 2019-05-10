@@ -34,6 +34,22 @@ function ac.GetServerValue(p,KEY)
     return ZZBase64.decode(value)
 end
 
+--服务器存档 读取 (整合加密key、商城数据)
+function ac.get_server(p,key)
+    local value,key_name,is_mall
+    key_name,is_mall = ac.get_keyname_by_key(key)
+    
+    if tonumber(is_mall) == 1 and p:Map_HasMallItem(key) then 
+        value = 1
+    elseif key == 'jifen' then 
+		value = ac.GetServerValue(p,'jifen')
+	else	
+		value = p:Map_GetServerValue(key)
+    end	
+    return value,key_name,is_mall
+end	
+
+
 --读取积分
 for i=1,8 do
     local player = ac.player[i]

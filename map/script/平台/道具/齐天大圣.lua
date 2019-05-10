@@ -22,6 +22,7 @@ mt{
 function mt:on_add()
     local skill = self
     local hero = self.owner
+    if not hero:is_hero() then return end
     hero:add('物爆几率',self.physical_rate)
     hero:add('物爆伤害',self.physical_damage)
     --改变模型

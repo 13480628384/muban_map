@@ -19,7 +19,7 @@ local item = {
 
     {'JBLB','金币礼包'},
     {'MCLB','木材礼包'},
-    {'SCHY','生存会员'},
+    {'SCHY','天空的宝藏会员'},
     {'SBJFK','双倍积分卡'},
     {'QTDS','齐天大圣','悟空'}, --表示皮肤
     {'HY','后羿','小黑'},
@@ -30,13 +30,53 @@ local item = {
     {'MLD','穆拉丁','山丘王'},
     {'TSZG','天使之光'}, --翅膀必须在改变模型之后 
     {'XBXDR','寻宝小达人'}, 
-    {'ZYLB','资源礼包'}, 
-    {'ZDLB','战斗礼包'}, 
+    {'ZYLB','金币多多'}, 
+    {'ZDLB','战斗机器'}, 
+    {'MLZX','魔龙之心'}, 
+    {'YJCJZZ','永久超级赞助'}, 
+    
     -- HeroElfDarkEnchanter.mdx
     --其他服务器存档字段, CWTF 宠物天赋   房间相关: DW 段位  JF 积分 
-
-
 }
+local other_key = {
+    {'CWTF','宠物天赋'}, 
+    {'boshu','无尽层数'}, 
+    {'jifen','积分'},
+}
+ac.server_key = {}
+ac.wait(100,function()
+    for i,v in ipairs(item) do
+        v[4] = 1 --表示商城道具
+        table.insert(ac.server_key,v)
+    end
+    for i,v in ipairs(other_key) do
+        table.insert(ac.server_key,v)
+    end
+    for k,v in sortpairs(ac.hero_key) do
+        local temp = {v,k..'熟练度'}
+        table.insert(ac.server_key,temp)
+    end
+    -- for i,v in ipairs(ac.server_key) do
+    --     print(i,v[1],v[2])
+    -- end    
+    function ac.get_keyname_by_key(key)
+        local res
+        local is_mall
+        for i,v in ipairs(ac.server_key) do
+            if v[1] == key then 
+                res = v[2]
+                is_mall = v[4]
+                break
+            end    
+        end 
+        is_mall = is_mall or 0   
+        return  res,is_mall
+    end  
+    --copy 对战平台数据到自己的服务器去 
+    -- ac.server_init() 
+end);
+
+
 local function get_mallkey_byname(name)
     local res
     for i=1,#item do
@@ -79,7 +119,7 @@ ac.wait(10,function()
         --选择英雄时，异步改变英雄模型
         for n=1,#item do
             -- print("01",p:Map_HasMallItem(item[n][1]))
-            if p:Map_HasMallItem(item[n][1]) or (p:Map_GetServerValue(item[n][1]) == '1') or (p.cheating) then
+            if (p:Map_HasMallItem(item[n][1]) or (p:Map_GetServerValue(item[n][1]) == '1') or (p.cheating)) then
                 if ac.player(16).hero_lists then 
                     for i,hero in ipairs(ac.player(16).hero_lists)do
                         if hero.name == item[n][3] then 
@@ -120,10 +160,12 @@ ac.wait(10,function()
                         if item[n][3]  then 
                             --设置英雄模型(皮肤)
                             if hero.name == item[n][3] then 
-                                hero:add_skill(item[n][2],'隐藏')
+                                local skill = hero:add_skill(item[n][2],'隐藏')
+                                skill:set_level(1)
                             end    
                         else
-                            hero:add_skill(item[n][2],'隐藏') 
+                            local skill = hero:add_skill(item[n][2],'隐藏') 
+                            skill:set_level(1)
                         end  
                     end 
                 end

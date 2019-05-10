@@ -748,8 +748,8 @@ ac.game:event '单位-死亡' (function(_,unit,killer)
     local source = killer
     local target = unit
     --自己得50%，其他人平分剩余经验和钱
-    local other_exp_per = 0.5
-    local other_gold_per = 0.5
+    local other_exp_per = 0.75
+    local other_gold_per = 0.75
     --找到附近的其他英雄
     local from_p = source and source:get_owner()
     local heros = ac.hero.all_heros
@@ -765,7 +765,7 @@ ac.game:event '单位-死亡' (function(_,unit,killer)
         return a:get_point() * p < b:get_point() * p
     end)
 
-    --附近没有其他英雄，经验加100%
+    --附近没有其他英雄，金钱和经验加100%，返回。
     if #group == 0 then	
         --自己加经验
         if source:is_alive() and source:is_hero() then 
@@ -776,24 +776,27 @@ ac.game:event '单位-死亡' (function(_,unit,killer)
         return
     end
 
-    --自己加经验
+    local len = #group
+    --自己先得 25%，再得剩余人平分得75%。
+    local tran_xp = exp*(1-other_exp_per)  + exp * other_exp_per / (len+1)
+    local tran_gold = gold*(1-other_gold_per)  + gold * other_gold_per / (len+1)
     if source:is_alive() and source:is_hero() then 
-        source:addXp( exp*(1-other_exp_per) )
+        source:addXp( tran_xp )
     end	
     --加钱
-    player:addGold(gold*(1-other_gold_per),unit)
+    player:addGold(tran_gold,unit)
     
-    local len = #group
-    --附近其他英雄平分经验
+    --其他英雄平分经验
     for _, hero in ipairs(group) do
         -- print(hero)
         if exp then
-            hero:addXp( exp * other_exp_per / len)
+            hero:addXp( exp * other_exp_per / (len+1))
         end
         if gold then
-            hero:get_owner():addGold(gold * other_gold_per / len,unit)
+            hero:get_owner():addGold(gold * other_gold_per / (len+1),unit)
         end
     end
+
 end);
 
 

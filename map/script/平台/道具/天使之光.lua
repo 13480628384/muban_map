@@ -3,13 +3,29 @@ mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+    level = 0,
+    --魔法书
+    is_order = 1,
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[]],
+    tip = [[%active%
+    激活方式：选择英雄后自动激活
+    翅膀属性1：拥有酷炫的翅膀效果
+    翅膀属性2：金币获取率+20%； 经验获取率+20%； 物品获取率+20%
+    翅膀属性3：移速+50， 攻击速度+100%
+    ]],
+    --是否激活状态
+    active = function(self)
+        local res = [[|cffFFE799需要：
+ - 通过【官方商城】获得|r]]
+        if self.level >=1 then 
+            res = ''
+        end    
+        return res
+    end, 
 	--技能图标
-	art = [[icon\chibang.blp]],
+	art = [[tszg.blp]],
 	--特效
 	effect = [[Hero_Slayer_N5S_F_Chest.mdx]],
 	--移动速度
@@ -27,6 +43,7 @@ mt{
 function mt:on_add()
     local skill = self
     local hero = self.owner
+    if not hero:is_hero() then return end
     hero:add('金币加成',self.gold_mul)
     hero:add('经验加成',self.exp_mul)
     hero:add('移动速度',self.move_speed)

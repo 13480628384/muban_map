@@ -43,13 +43,13 @@ function mt:on_cast_shot()
 	
 	local ln = ac.lightning('LN00',hero,target,50,50)
 	ln:fade(-5)
-	if target.data.type =='boss' then
+	if not target.data or target.data.type =='boss' then
 		hero:add('魔法',self.cost)
 		self:set_cd(0)
 		-- self:fresh()
 		ac.on_texttag('【对boss无效】','橙',hero)
 	else
-		target:kill()
+		target:kill(hero)
 		hero:add('智力',- math.ceil(hero:get('智力')*self.addint/100))
 		local rand = math.random(1,100)
 		if rand <= self.rate then 

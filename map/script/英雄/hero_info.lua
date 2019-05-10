@@ -23,9 +23,10 @@ local mt = ac.skill['英雄属性面板']
 攻击:    %attack% （已加成 %attack_per% %）
 攻击间隔:    %attack_gip% 
 攻速:    %attack_speed% (每秒攻击%attack_rate%次)
-溅射:    %splash% % （近战有效）
-多重射:    %duochongshe%
-减甲:    %pene%    减免:   %defence_rate% %
+溅射:  %splash% % （近战有效）
+多重射:  %duochongshe%     
+减甲:    %pene%    减免:  %defence_rate% %
+吸血:    %life_steal% %
 
 物爆几率: %physical_rate% %  物爆伤害:  %physical_damage% %
 法爆几率: %magic_rate% %  法爆伤害:  %magic_damage% %
@@ -34,7 +35,6 @@ local mt = ac.skill['英雄属性面板']
 召 唤 物加成： %dummy%   
 召唤物属性加成： %dummy_attr% %
 法术攻击加成： %magic_attack% % 
-主动释放的增益效果： %moregood% % 
 
 金币加成：   %moregold% %
 经验加成：   %moreexp% %

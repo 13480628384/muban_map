@@ -2471,6 +2471,9 @@ local function init()
 		if order == '' then
 			return
 		end
+		if not order  then
+			return
+		end
 
 		if order == 'stop' or order == 'smart' or order == 'attack' then
 			if player_order then

@@ -44,7 +44,14 @@ end
 --返回通用型 返回的是字符串型
 function player.__index:Map_GetServerValue(key)
     local handle = self.handle
-    return japi.DzAPI_Map_GetServerValue(handle,key)
+    local value = japi.DzAPI_Map_GetServerValue(handle,key)
+    
+    if not value or value == '' or value == "" then
+        value = 0
+    else
+        value = tonumber(value)
+    end
+    return value
 end
 
 --存档通用型 只能存入字符串型

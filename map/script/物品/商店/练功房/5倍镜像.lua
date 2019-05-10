@@ -36,7 +36,7 @@ is_skill = true,
 function mt:on_cast_start()
     local hero = self.owner
     local p = hero:get_owner()
-    hero = p.hero
+    hero = p.hero  
     local ret = 'lgfsg'..p.id
     local name = '5倍镜像'..p.id
 

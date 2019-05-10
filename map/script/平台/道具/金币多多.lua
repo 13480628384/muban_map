@@ -1,15 +1,29 @@
-local mt = ac.skill['资源礼包']
+local mt = ac.skill['金币多多']
 mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+    level = 0,
+    --魔法书
+    is_order = 1,
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[]],
+	tip = [[%active%
+激活方式：开局自动激活
+特权：开局金币+1000， 每秒金币+6， 金币获取率+20%
+    ]],
+    --是否激活状态
+    active = function(self)
+        local res = [[|cffFFE799需要：
+ - 通过【官方商城】获得|r]]
+        if self.level >=1 then 
+            res = ''
+        end    
+        return res
+    end,  
 	--技能图标
-	art = [[ReplaceableTextures\PassiveButtons\PASBTNFlakCannons.blp]],
+	art = [[jbdd.blp]],
 	--特效
 	effect = [[]],
     --开局金币
@@ -24,6 +38,7 @@ mt{
 function mt:on_add()
     local skill = self
     local hero = self.owner
+    if not hero:is_hero() then return end
     hero:addGold(self.add_gold)
     hero:add('每秒金币',self.per_gold)
     hero:add('金币加成',self.gold_rate)

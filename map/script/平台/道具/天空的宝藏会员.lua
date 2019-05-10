@@ -1,15 +1,30 @@
-local mt = ac.skill['生存会员']
+local mt = ac.skill['天空的宝藏会员']
 mt{
     --必填
     is_skill = true,
     --初始等级
-    level = 1,
+    level = 0,
+    --魔法书
+    is_order = 1,
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[]],
+	tip = [[%active%
+|cffFFE799激活方式：进游戏自动激活
+|cffFFE799特权1：|r每10波赠送一个随机物品（共7个，纯随机，人品好可能出金装红装）
+|cffFFE799特权2：|r物品获取率+25%
+    ]],
+    --是否激活状态
+    active = function(self)
+        local res = [[|cffFFE799需要：
+ - 通过【官方商城】获得|r]]
+        if self.level >=1 then 
+            res = ''
+        end    
+        return res
+    end,   
 	--技能图标
-	art = [[ReplaceableTextures\PassiveButtons\PASBTNFlakCannons.blp]],
+	art = [[hy.blp]],
 	--特效
 	effect = [[]],
 	--物品获取率
@@ -19,6 +34,7 @@ mt{
 function mt:on_add()
     local skill = self
     local hero = self.owner
+    if not hero:is_hero() then return end
     local player = hero:get_owner()
     hero:add('物品获取率',self.fall_rate)
 

@@ -294,7 +294,7 @@ function mt:next()
         self.force_timer = ac.timer_ex 
         {
             time = self.force_cool,
-            title = "距离怪物进攻",
+            title = self.timer_ex_title or "距离怪物进攻",
             func = function ()
                 self:next()   
             end,
@@ -418,16 +418,21 @@ function mt:next()
                     return 
                 end    
                 --如果有刷新时间配置 则 按照时间等待后刷新，没有的话立即刷新
-                if self.cool then 
-                    ac.wait(self.cool  * 1000, function()
-                        self:next()
-                    end)
+                if self.cool  then 
+                    if not self.wait_trg then 
+                        self.wait_trg = ac.wait(self.cool  * 1000, function()
+                            self.wait_trg = nil
+                            self:next()
+                        end)
+                    end    
                 else
                     --最小刷新时间
-                    --print('等待0.1秒刷新')
-                    ac.wait(0.3 * 1000, function()
-                        self:next()
-                    end)
+                    if not self.wait_trg then 
+                        self.wait_trg = ac.wait(0.3 * 1000, function()
+                            self.wait_trg = nil
+                            self:next()
+                        end)
+                    end    
                 end	
                    
             end)
@@ -473,16 +478,25 @@ function mt:finish(is_unit_kill)
 
     if  self.trg then 
         self.trg:remove()
+        self.trg = nil
     end
     if  self.timer then 
         self.timer:remove()
+        self.timer = nil
     end
     if  self.force_timer then 
         self.force_timer:remove()
+        self.force_timer = nil
     end
     if self.event_region then 
         self.event_region:remove()
+        self.event_region = nil
     end
+    if self.wait_trg then 
+        self.wait_trg:remove()
+        self.wait_trg = nil
+    end
+
 
     for k,v in sortpairs(self.creep_timer) do
          --print('移除计时器',k,v)

@@ -25,6 +25,8 @@ function player.__index:create_pets()
     u:add_skill('翅膀管理','英雄',9)
     u:add_skill('宠物天赋','英雄',6)
     u:add_skill('一键出售','英雄',7)
+    u:add_skill('商城管理','英雄')
+    
     -- 测试魔法书
     -- u:add_skill('魔法书demo','英雄')
     print('注册英雄18')
