@@ -178,6 +178,10 @@ function unit.__index:add_hero_xp(xp)
         p.hero_xp[name] = 0
     end     
     p.hero_xp[name] =  p.hero_xp[name] + (xp or 0)
+    -- 最高5W
+    if p.hero_xp[name] >= 50000 then 
+        p.hero_xp[name] = 50000
+    end    
     self.current_hero_xp = (self.current_hero_xp or 0) + xp
     
     

@@ -139,7 +139,7 @@ ac.game:event '玩家-注册英雄后' (function()
                     if p:is_player() then 
                         local x,y = ac.rect.j_rect('lgfsd'..p.id):get_point():get()
                         local shop7 = ac.shop.create('镜像挑战',x+600,y,270)
-                        shop7:set_owner(p)
+                        -- shop7:set_owner(p)
                         shop7:set_size(1.2) 
                     end  
                 end

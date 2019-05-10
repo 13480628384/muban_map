@@ -38,6 +38,7 @@ mt{
 function mt:on_add()
     local skill = self
     local hero = self.owner
+    if not hero:is_hero() then return end
     local p = hero:get_owner()
     local peon = p.peon
     hero:add('经验加成',self.xp_rate)
