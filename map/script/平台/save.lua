@@ -172,13 +172,19 @@ ac.game:event '游戏-回合开始'(function(_,index,creep)
     for i=1,10 do
         local p = ac.player[i]
         if p:is_player() then
+            --保存最大波数和段位
             if creep.index > (p.boshu or 0) then
                 if ac.g_game_degree == 2 then 
-                    if creep.index <= 40 then 
+                    if creep.index <= 30 then 
                         p:Map_SaveServerValue('boshu',creep.index)
                         set_fangjian_xm(p,creep.index)
                     end    
-                else
+                elseif ac.g_game_degree == 3 then 
+                    if creep.index <= 70 then 
+                        p:Map_SaveServerValue('boshu',creep.index)
+                        set_fangjian_xm(p,creep.index)
+                    end  
+                else    
                     p:Map_SaveServerValue('boshu',creep.index)
                     set_fangjian_xm(p,creep.index)
                 end    
@@ -187,6 +193,52 @@ ac.game:event '游戏-回合开始'(function(_,index,creep)
     end      
 end)
 
+--游戏结束
+
+-- ac.game:event '游戏-回合开始'(function(_)
+ac.game:event '游戏-结束'(function(_)
+    local value = ac.creep['刷怪-无尽'].index or 0
+    if value == 0 then 
+        return 
+    end    
+    --不是圣人模式返回
+    if ac.g_game_degree ~= 4 then 
+        return 
+    end    
+
+    --保存自定义服务器的排名(每日)
+    --每一把保存一次,提早退出 无排名
+    for i=1,10 do
+        local p = ac.player[i]
+        if p.hero  then 
+            --保存波束
+            p:sp_set_rank('boshu_rank',value)
+            p:GetServerValue('boshu_rank',function(data)
+                if type(data) ~= 'table' then  
+                    return
+                end    
+                if value >= (tonumber(data.value) or 0) then 
+                    p:SetServerValue('boshu_rank',value)
+                end   
+            end)
+
+            --保存金钱
+            local gold = tonumber(p.gold_count)
+            p:sp_set_rank('gold',gold)
+            --如果当前游戏获得金钱>历史总金钱,保存到服务器里面去. 层数
+            p:GetServerValue('gold',function(data)
+                if type(data) ~= 'table' then  
+                    return
+                end    
+                -- print_r(data)
+                if gold >= (tonumber(data.value) or 0) then 
+                    p:SetServerValue('gold',gold)
+                end   
+            end)
+        end      
+    end    
+
+end);    
 
 
 

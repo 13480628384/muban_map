@@ -70,13 +70,16 @@ function mt:on_start()
     self.all_units = all_units
     -- 刷怪初始化 难度、玩家影响
     if ac.g_game_degree == 1 then 
-        ac.g_game_degree = 1  --难度一 属性倍数1倍
+        ac.g_game_degree_attr = 1  --难度一 属性倍数1倍
     end    
     if ac.g_game_degree == 2 then 
-        ac.g_game_degree = 2  --难度二 属性倍数2倍
+        ac.g_game_degree_attr = 2  --难度二 属性倍数2倍
     end  
     if ac.g_game_degree == 3 then 
-        ac.g_game_degree = 3  --难度三 属性倍数3倍
+        ac.g_game_degree_attr = 3  --难度三 属性倍数3倍
+    end  
+    if ac.g_game_degree == 4 then 
+        ac.g_game_degree_attr = 5  --难度三 属性倍数3倍
     end  
     --特殊回合处理。
     self.gold_index = 5
@@ -535,14 +538,14 @@ function mt:on_change_creep(unit,lni_data)
         --设置 boss 等 属性倍数
         if lni_data.attr_mul  then
             --属性
-            unit:set('攻击',data.attribute['攻击'] * lni_data.attr_mul * ac.g_game_degree)
-            unit:set('护甲',data.attribute['护甲'] * lni_data.attr_mul * ac.g_game_degree)
-            unit:set('生命上限',data.attribute['生命上限'] * lni_data.attr_mul * ac.g_game_degree)
-            unit:set('魔法上限',data.attribute['魔法上限'] * lni_data.attr_mul * ac.g_game_degree)
-            unit:set('生命恢复',data.attribute['生命恢复'] * lni_data.attr_mul * ac.g_game_degree)
-            unit:set('魔法恢复',data.attribute['魔法恢复'] * lni_data.attr_mul * ac.g_game_degree)
+            unit:set('攻击',data.attribute['攻击'] * lni_data.attr_mul * ac.g_game_degree_attr)
+            unit:set('护甲',data.attribute['护甲'] * lni_data.attr_mul * ac.g_game_degree_attr)
+            unit:set('生命上限',data.attribute['生命上限'] * lni_data.attr_mul * ac.g_game_degree_attr)
+            unit:set('魔法上限',data.attribute['魔法上限'] * lni_data.attr_mul * ac.g_game_degree_attr)
+            unit:set('生命恢复',data.attribute['生命恢复'] * lni_data.attr_mul * ac.g_game_degree_attr)
+            unit:set('魔法恢复',data.attribute['魔法恢复'] * lni_data.attr_mul * ac.g_game_degree_attr)
             --设置魔抗 
-            unit:set('魔抗',data.attribute['护甲']* lni_data.attr_mul * ac.g_game_degree)
+            unit:set('魔抗',data.attribute['护甲']* lni_data.attr_mul * ac.g_game_degree_attr)
         end
         --掉落概率
         unit.fall_rate = data.fall_rate * lni_data.food
@@ -823,6 +826,13 @@ ac.game:event '游戏-选择难度' (function (_,index)
         require '英雄'
         require '平台'
     end 
+    --难度4
+    if index == 4 then 
+        ac.g_game_degree = index
+        ac.player.self:sendMsg("选择了 |cffffff00【圣人难度】（喜欢挑战的来）|r")
+        require '英雄'
+        require '平台'
+    end 
 
     --每3秒提醒玩家主机在选择难度
     ac.loop(3*1000,function(t)
@@ -850,6 +860,7 @@ ac.wait(20,function()
         { name = "普通" },
         { name = "噩梦（可进入无尽）" },
         { name = "地狱（可进入无尽 新手慎入）" },
+        { name = "圣人（新欢挑战的来）" },
     }
     ac.player.self:sendMsg("正在选择 |cffffff00模式、难度|r")
     if player then 

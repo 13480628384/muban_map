@@ -136,8 +136,10 @@ ac.game:event '游戏-最终boss' (function(trg,index, creep)
             value = 2
         elseif ac.g_game_degree ==2 then    
             value = 4  
+        elseif ac.g_game_degree ==3 then    
+            value = 6  
         else
-            value = 6
+            value = 8
         end     
         ac.final_boss = false   
         killer:add_hero_xp(value)
@@ -146,8 +148,8 @@ ac.game:event '游戏-最终boss' (function(trg,index, creep)
         if ac.save_jifen then 
             ac.save_jifen()
         end    
-        --通关难3，送大天使皮肤
-        if ac.g_game_degree ==3 then 
+        --通关难4，送大天使皮肤
+        if ac.g_game_degree ==4 then 
             local t = {}
             for i = 1 ,10 do 
                 local player = ac.player(i)
@@ -165,7 +167,7 @@ ac.game:event '游戏-最终boss' (function(trg,index, creep)
 
             ac.save(p,'大天使加百列',1)
             --发送消息
-            local tip = '|cffffff00【系统消息】|r恭喜玩家 |cffff0000'..p:get_name()..'|r获得皮肤：|cffff0000大天使加百列（鲁大师皮肤）|r'..'，可能是因为kda最高才能获得。\n'
+            local tip = '|cffffff00【系统消息】通关圣人难度|r,恭喜玩家 |cffff0000'..p:get_name()..'|r获得皮肤：|cffff0000大天使加百列（鲁大师皮肤）|r'..'，可能是因为kda最高才能获得。\n'
             ac.player.self:sendMsg(tip,30)
         end    
         --难1， 游戏胜利  

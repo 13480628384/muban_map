@@ -319,8 +319,10 @@ ac.game:event '游戏-回合开始'(function(_,index,creep)
         degree = '普通'
     elseif ac.g_game_degree == 2 then 
         degree = '噩梦'
-    else 
+    elseif ac.g_game_degree == 3 then  
         degree = '地狱'
+    else 
+        degree = '圣人'
     end    
     local name 
     if ac.g_game_mode == 1 then 

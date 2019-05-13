@@ -43,6 +43,14 @@ local other_key = {
     {'boshu','无尽层数'}, 
     {'jifen','积分'},
 }
+local cus_key = {
+    --以下自定义服务器 key value
+    {'gold','福布斯排行榜'},
+    {'boshu_rank','无尽层数(圣人模式)'},
+    
+}
+ac.cus_server_key = cus_key
+
 ac.server_key = {}
 ac.wait(100,function()
     for i,v in ipairs(item) do
@@ -62,6 +70,7 @@ ac.wait(100,function()
     function ac.get_keyname_by_key(key)
         local res
         local is_mall
+        --取网易key,value
         for i,v in ipairs(ac.server_key) do
             if v[1] == key then 
                 res = v[2]
@@ -69,11 +78,21 @@ ac.wait(100,function()
                 break
             end    
         end 
+        --取自定义key,value
+        for i,v in ipairs(ac.cus_server_key) do 
+            if v[1] == key then 
+                res = v[2]
+                is_mall = v[4]
+                break
+            end
+        end  
+
         is_mall = is_mall or 0   
         return  res,is_mall
     end  
     --copy 对战平台数据到自己的服务器去 
-    -- ac.server_init() 
+    --并初始化自定义服务器存档
+    ac.server_init() 
 end);
 
 
