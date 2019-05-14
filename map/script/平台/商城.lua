@@ -134,6 +134,11 @@ ac.wait(10,function()
             p.cheating = true 
             require '测试.helper'
         end
+        --补偿
+        if finds(p:get_name(),'半夏','后山一把刀','卡卡发动机') then 
+            p:Map_SaveServerValue('XCB',1) --小翅膀补偿
+            p:Map_SaveServerValue('JK',1)--杰克补偿
+        end    
         --皮肤道具
         --选择英雄时，异步改变英雄模型
         for n=1,#item do

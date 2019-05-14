@@ -1,5 +1,31 @@
+local player = require 'ac.player'
 
+function player.__index:clear_server()
+    local player = self
+    for i,v in ipairs(ac.server_key) do 
+        local key = v[1]
+        local is_mall= v[4]
+        if key =='jifen' then 
+            ac.SaveServerValue(player,'jifen',0)
+        else
+            if not is_mall then 
+                player:Map_SaveServerValue(key,0)
+            end    
+        end    
+    end    
 
+end    
+
+--网易服务器清空档案
+function ac:clear_all_server()
+	for i = 1, 10 do
+        local player = ac.player(i)
+        if player:is_player() then 
+            player:clear_server()
+        end   
+	end
+end
+--执行加积分函数
 function ac.jiami(p,key,value)
     local v = ZZBase64.decode(p[key])
     v = v  + value
@@ -79,11 +105,11 @@ for i=1,8 do
             ac.jiami(player,'jifen',value)
             player:sendMsg('【系统消息】 已修复积分为0，并发放 积分10000 作为补偿',tonumber(ac.GetServerValue(player,'jifen')))
         end   
-        if jifen >= 500000 then  
-            local value = -jifen 
-            ac.jiami(player,'jifen',value)
-            player:sendMsg('【系统消息】 检测到积分过高，积分清零',tonumber(ac.GetServerValue(player,'jifen')))
-        end    
+        -- if jifen >= 500000 then  
+        --     local value = -jifen 
+        --     ac.jiami(player,'jifen',value)
+        --     player:sendMsg('【系统消息】 检测到积分过高，积分清零',tonumber(ac.GetServerValue(player,'jifen')))
+        -- end    
 
     else
         player.jifen = 0
@@ -240,6 +266,15 @@ ac.game:event '游戏-结束'(function(_)
 
 end);    
 
+--处理黑名单数据 每5分钟执行一次判断
+local time = 5*60
+if global_test == true then 
+    time = 10
+end    
+ac.loop(time*1000,function()
+    --执行黑名单惩罚
+    ac.punish_black();
+end);
 
 
 
