@@ -19,3 +19,5 @@ require '平台.道具.黑魔导'
 
 require '平台.道具.永久超级赞助'
 require '平台.道具.魔龙之心'
+
+require '平台.道具.Pa'

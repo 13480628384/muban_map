@@ -71,6 +71,8 @@
     ESC   = 0x1b,
     SPACE = 0x20, --空格键
 
+    CAPS = 0x75, --大写键 Caps Lock
+
     SLASH = 0xbf, -- 正斜杠 \\ 
     BACKSLASH         = 0xdc, --反斜杠 //
 

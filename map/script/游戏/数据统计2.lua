@@ -2,6 +2,26 @@ local player = require 'ac.player'
 local hero = require 'types.hero'
 local ranking = require 'ui.client.ranking'
 
+local function get_real_dw(player)
+    --段位为1-7 青铜 白银 黄金 白金 钻石 大师 王者
+    if player.boshu <= 10 then
+        player.rank = 1
+    elseif player.boshu <=20 then
+        player.rank = 2
+    elseif player.boshu <=30 then
+        player.rank = 3
+    elseif player.boshu <=40 then
+        player.rank = 4
+    elseif player.boshu <=50 then
+        player.rank = 5
+    elseif player.boshu <=70 then
+        player.rank = 6
+    elseif player.boshu <= 100 then
+        player.rank = 7
+    elseif player.boshu >= 101 then
+        player.rank = 8
+    end
+end   
 
 --已刷新的BOSS数量
 ac.boss_count = 0
@@ -27,26 +47,8 @@ for i=1,10 do
     --kda
     player.kda = 0
     player.boshu = player.boshu or 0
-    --段位为1-7 青铜 白银 黄金 白金 钻石 大师 王者
-    if player.boshu <= 10 then
-        player.rank = 1
-    elseif player.boshu <=20 then
-        player.rank = 2
-    elseif player.boshu <=30 then
-        player.rank = 3
-    elseif player.boshu <=40 then
-        player.rank = 4
-    elseif player.boshu <=50 then
-        player.rank = 5
-    elseif player.boshu <=70 then
-        player.rank = 6
-    elseif player.boshu <= 100 then
-        player.rank = 7
-    elseif player.boshu >= 101 then
-        player.rank = 8
-    end
-end
-
+    get_real_dw(player)
+end 
 
 --数值转换
 local function numerical(value)
@@ -94,6 +96,8 @@ local function get_kda()
         take_damage_count = take_damage_count + p.take_damage_count
         damage_count = damage_count + p.damage_count
         death = death + p.death
+        --刷新段位
+        get_real_dw(p)
     end
 
     local t = {}

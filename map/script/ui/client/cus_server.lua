@@ -87,16 +87,19 @@ end
 function player.__index:CopyAllServerValue()
     for i,v in ipairs(ac.server_key) do 
         local key = v[1]
-        self:CopyServerValue(key,function (retval)  
-            local tbl = json.decode(retval)
-            -- print(tbl.code)
-            if tbl.code == 0 then 
-                -- print(self:get_name(),'上传成功')
-            else
-                print(self:get_name(),key,'上传失败')
-            end        
-            -- end    
-        end);
+        ac.wait(1000*i,function()
+            self:CopyServerValue(key,function (retval)  
+                -- print(retval)
+                local tbl = json.decode(retval)
+                -- print(tbl.code)
+                if tbl.code == 0 then 
+                    -- print(self:get_name(),'上传成功')
+                else
+                    print(self:get_name(),key,'上传失败')
+                end        
+                -- end    
+            end);
+        end)  
     end    
 end   
 --初始化自定义服务器的数据
@@ -143,6 +146,33 @@ local function init()
     print('上传数据')
 end  
 ac.server_init = init   
+--模糊读
+--保存排名数据
+function player.__index:sp_get_like(key,f)
+    local player_name = self:get_name()
+    local map_name = config.map_name
+    local url = config.url2
+    local value = value or 0
+    -- print(map_name,player_name,key,key_name,is_mall,value)
+    local post = 'exec=' .. json.encode({
+        sp_name = 'sp_get_like',
+        para1 = map_name,
+        para2 = player_name,
+        para3 = key,
+    })
+    -- print(url,post)
+    local f = f or function (retval)  end
+    post_message(url,post,function (retval) 
+        local tbl = json.decode(retval)
+        if tbl.code == 0 then 
+            f(tbl.data[1])
+        else
+            print(key,'模糊读失败')
+        end        
+    end)
+end
+
+
 
 --===========业务函数==============================
 --保存排名数据
@@ -239,6 +269,10 @@ local function punish_black()
 end    
 
 ac.punish_black = punish_black
+
+
+
+
 
 
 --[[

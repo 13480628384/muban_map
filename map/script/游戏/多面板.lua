@@ -8,7 +8,7 @@ local list1 = {'玩家ID','所选英雄','杀敌','伤害'}
 local function multiboard_init()
 	local online_player_cnt = get_player_count()
 	local all_lines = online_player_cnt +3
-	all_lines = 3
+	all_lines = 4
 	mtb = multiboard.create(4,all_lines)
 	ac.game.multiboard = mtb
 
@@ -49,6 +49,7 @@ local function multiboard_init()
 	end
 	mtb:setText(2,3,'按住|cffff0000tab|r查看|cffff0000kda|r')
 	mtb:setText(1,3,'按住|cffff0000~|r查看|cffff0000排行榜|r')
+	mtb:setText(1,4,'按住|cffff0000空格|r查看|cffff0000今日榜|r')
 	-- mtb:setWidth(1,all_lines,20)
 	
 	-- --玩家信息初始化，设置英雄头像，玩家信息

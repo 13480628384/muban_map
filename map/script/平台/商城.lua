@@ -44,9 +44,11 @@ local other_key = {
     {'jifen','积分'},
 }
 local cus_key = {
-    --以下自定义服务器 key value
+    --以下自定义服务器 key 
     {'gold','福布斯排行榜'},
     {'boshu_rank','无尽层数(圣人模式)'},
+    {'today_boshu','今日排行（巅峰）'},
+    {'today_gold','今日排行（福布斯）'},
     
 }
 ac.cus_server_key = cus_key
@@ -135,7 +137,7 @@ ac.wait(10,function()
             require '测试.helper'
         end
         --补偿
-        if finds(p:get_name(),'半夏','后山一把刀','卡卡发动机') then 
+        if finds(p:get_name(),'半夏℡') then 
             p:Map_SaveServerValue('XCB',1) --小翅膀补偿
             p:Map_SaveServerValue('JK',1)--杰克补偿
         end    
@@ -198,4 +200,63 @@ ac.wait(10,function()
         end
     end 
 end)
+
+
+--处理 皮肤碎片相关
+local ui = require 'ui.client.util'
+for i =1,6 do 
+    local p = ac.player(i);
+    if not p.skin then 
+        p.skin = {}
+    end
+    if p:is_player() then     
+        p:sp_get_like('skin',function(data)
+            ac.wait(10,function()
+                for i = 1, #data do  
+                    -- print(data[i].key_name) 
+                    if data[i].key_name then 
+                        local skill_name = string.gsub(data[i].key_name, "皮肤_", "")
+                        -- p.skin[skill_name] = data[i].value
+                        -- print('客户端',skill_name,data[i].value)
+
+                        ac.wait(100,function()
+                            --发起同步请求
+                            local info = {
+                                type = 'cus_server',
+                                func_name = 'on_get',
+                                params = {
+                                    [1] = skill_name,
+                                    [2] = data[i].value,
+                                }
+                            }
+                            ui.send_message(info)
+                        end)   
+                    end
+                end    
+            end)
+        end);
+    end    
+end    
+
+local ui = require 'ui.server.util'
+--处理同步请求
+local event = {
+    on_get = function (skill_name,value)
+        local player = ui.player 
+        -- print('服务端',skill_name,value)
+        -- print(player)
+        player.skin[skill_name] = value
+
+        if tonumber(value) >= 100 and not player.mall[skill_name] then 
+            player.mall[skill_name] = true
+            player:event '玩家-注册英雄后' (function(_, _, hero)
+                hero:add_skill(skill_name,'隐藏');
+            end)    
+
+        end    
+    end,
+}
+ui.register_event('cus_server',event)
+
+
 

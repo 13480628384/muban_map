@@ -183,6 +183,7 @@ local function set_fangjian_xm(p,count)
         end 
     end
     --实时更新游戏内的段位数据
+    p.boshu = count
     p.rank = value
 end
 
@@ -239,6 +240,7 @@ ac.game:event '游戏-结束'(function(_)
         if p.hero  then 
             --保存波束
             p:sp_set_rank('boshu_rank',value)
+            p:sp_set_rank('today_boshu',value)
             p:GetServerValue('boshu_rank',function(data)
                 if type(data) ~= 'table' then  
                     return
@@ -251,6 +253,7 @@ ac.game:event '游戏-结束'(function(_)
             --保存金钱
             local gold = tonumber(p.gold_count)
             p:sp_set_rank('gold',gold)
+            p:sp_set_rank('today_gold',gold)
             --如果当前游戏获得金钱>历史总金钱,保存到服务器里面去. 层数
             p:GetServerValue('gold',function(data)
                 if type(data) ~= 'table' then  
@@ -261,6 +264,8 @@ ac.game:event '游戏-结束'(function(_)
                     p:SetServerValue('gold',gold)
                 end   
             end)
+
+            
         end      
     end    
 
