@@ -95,6 +95,8 @@ ac.wait(100,function()
     --copy 对战平台数据到自己的服务器去 
     --并初始化自定义服务器存档
     ac.server_init() 
+    --初始化完后进行补偿
+    ac.compensation()
 end);
 
 

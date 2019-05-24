@@ -85,7 +85,6 @@ ac.wait(100,function ()
     --     end    
     --     light(i)
     -- end)
-   
     --设置联盟模式0,1,2
     jass.SetAllyColorFilterState(0)
     --设置玩家16（中立被动颜色 绿） 1-16

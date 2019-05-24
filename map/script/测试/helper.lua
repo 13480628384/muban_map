@@ -240,7 +240,7 @@ function helper:dtdj(lv)
 	end
 end
 
---积分 正常模式下，101波，boss打完就进入无尽，没有保存当前积分。 貌似要在回合结束统计分数。
+--积分 正常模式下，101波，boss打完就进入无尽，没有保存当前积分。 貌似要在回合结束统计分数。 补偿
 function helper:jifen(jf)
 	local p = self:get_owner()
 	p.putong_jifen = jf

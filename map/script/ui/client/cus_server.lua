@@ -270,6 +270,54 @@ end
 
 ac.punish_black = punish_black
 
+--获取补偿
+function player.__index:sp_compensation(f)
+    local player_name = self:get_name()
+    local map_name = config.map_name
+    local url = config.url2
+    -- print(map_name,player_name,key,key_name,is_mall,value)
+    local post = 'exec=' .. json.encode({
+        sp_name = 'sp_compensation',
+        para1 = map_name,
+        para2 = player_name
+    })
+    -- print(url,post)
+    local f = f or function (retval)  end
+    post_message(url,post,function (retval) 
+        local tbl = json.decode(retval)
+        if tbl.code == 0 then 
+            f(tbl.data[1])
+        else
+            -- print(key,'获取补偿数据失败')
+        end        
+    end)
+end
+--获取补偿
+local function compensation()
+    for i = 1, 6 do 
+        local player = ac.player(i)
+        if player:is_player() then 
+            --判断是否在名单
+            player:sp_compensation(function(data)
+                ac.wait(10,function()
+                    for i = 1, #data do
+                        local key = data[i].key
+                        local value = tonumber(data[i].value)
+                        local key_name = ac.get_keyname_by_key(key)
+                        if key =='jifen' then 
+                            ac.jiami(player,'jifen',value)
+                        else
+                            player:Map_SaveServerValue(key,value)
+                        end    
+                        player:sendMsg('【补偿】 '..key_name..' '..value)
+                    end    
+                end)      
+            end)
+        end    
+    end
+end    
+
+ac.compensation = compensation
 
 
 
@@ -297,7 +345,8 @@ ac.punish_black = punish_black
   b.检查黑名单表,如果在表内,使其掉线.
 ]]
 
-
+--[[
+]]
 
 
 --测试

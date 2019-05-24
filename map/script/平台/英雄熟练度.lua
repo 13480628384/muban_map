@@ -197,9 +197,9 @@ function unit.__index:add_hero_xp(xp)
     p.sld_key = max_tab[3]
 
     --下一级所需
-    local next_tab = get_next_strong_attr_byxp(production,p.hero_xp[name])
+    local next_tab = get_strong_attr_byxp(production,p.hero_xp[name])
     if next_tab then 
-        self.next_hero_xp = next_tab[1] - p.hero_xp[name]
+        self.next_hero_xp = next_tab[2] - p.hero_xp[name]
     end
 
 
