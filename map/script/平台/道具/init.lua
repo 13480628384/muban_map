@@ -21,3 +21,4 @@ require '平台.道具.永久超级赞助'
 require '平台.道具.魔龙之心'
 
 require '平台.道具.Pa'
+require '平台.道具.火焰领主'

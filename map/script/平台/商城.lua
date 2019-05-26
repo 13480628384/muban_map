@@ -219,7 +219,7 @@ for i =1,6 do
                     if data[i].key_name then 
                         local skill_name = string.gsub(data[i].key_name, "皮肤_", "")
                         -- p.skin[skill_name] = data[i].value
-                        -- print('客户端',skill_name,data[i].value)
+                        print('客户端',skill_name,data[i].value)
 
                         ac.wait(100,function()
                             --发起同步请求
