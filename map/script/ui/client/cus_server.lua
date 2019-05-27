@@ -292,6 +292,8 @@ function player.__index:sp_compensation(f)
         end        
     end)
 end
+
+local ui = require 'ui.client.util'
 --获取补偿
 local function compensation()
     for i = 1, 6 do 
@@ -305,11 +307,16 @@ local function compensation()
                         local value = tonumber(data[i].value)
                         local key_name = ac.get_keyname_by_key(key)
                         if key =='jifen' then 
+                            -- print('服务端补偿数据',key,value)
                             ac.jiami(player,'jifen',value)
                         else
-                            player:Map_SaveServerValue(key,value)
+                            -- print('服务端补偿数据',player,key,value)
+                            player:Map_AddServerValue(key,tonumber(value))
                         end    
+                        --同步数据回自定义服务器
+                        player:CopyServerValue(key)
                         player:sendMsg('【补偿】 '..key_name..' '..value)
+
                     end    
                 end)      
             end)
@@ -319,6 +326,25 @@ end
 
 ac.compensation = compensation
 
+-- local ui = require 'ui.server.util'
+-- --处理同步请求
+-- local event = {
+--     on_get = function (key,value)
+--         local player = ui.player 
+--         local key_name = ac.get_keyname_by_key(key)
+--         if key =='jifen' then 
+--             print('服务端补偿数据',key,value)
+--             ac.jiami(player,'jifen',value)
+--         else
+--             print('服务端补偿数据',player,key,value)
+--             player:Map_AddServerValue(key,tonumber(value))
+--         end    
+--         --同步数据回自定义服务器
+--         player:CopyServerValue(key)
+--         player:sendMsg('【补偿】 '..key_name..' '..value)
+--     end,
+-- }
+-- ui.register_event('cus_server2',event)
 
 
 

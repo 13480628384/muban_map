@@ -55,8 +55,16 @@ function player.__index:Map_GetServerValue(key)
 end
 
 --存档通用型 只能存入字符串型
+function player.__index:Map_AddServerValue(key,value)
+    local old_value = tonumber(self:Map_GetServerValue(key))
+    local new_value = old_value + value
+    self:Map_SaveServerValue(key,new_value)
+end
+
+--存档通用型 只能存入字符串型
 function player.__index:Map_SaveServerValue(key,value)
     local handle = self.handle
+    -- print(self,key,value)
     japi.DzAPI_Map_SaveServerValue(handle,tostring(key),tostring(value))
     
 end
