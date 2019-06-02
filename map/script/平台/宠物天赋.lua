@@ -223,6 +223,7 @@ end
 -- 1 1000
 -- 2 3000
 -- 3 6000
+-- 4 10000
 --获得升级所需要的经验
 function unit.__index:peon_get_upgrade_xp(lv)
     local lv = lv or 0
