@@ -213,49 +213,56 @@ for i =1,6 do
     end
     if p:is_player() then     
         p:sp_get_like('skin',function(data)
-            ac.wait(10,function()
-                for i = 1, #data do  
-                    -- print(data[i].key_name) 
-                    if data[i].key_name then 
-                        local skill_name = string.gsub(data[i].key_name, "皮肤_", "")
-                        -- p.skin[skill_name] = data[i].value
-                        -- print('客户端',skill_name,data[i].value)
-
-                        ac.wait(500*i,function()
-                            --发起同步请求
-                            local info = {
-                                type = 'cus_server',
-                                func_name = 'on_get',
-                                params = {
-                                    [1] = skill_name,
-                                    [2] = data[i].value,
-                                }
-                            }
-                            ui.send_message(info)
-                        end)   
-                    end
-                end    
-            end)
-        end);
+            local temp_tab = {}
+            -- print_r(tbl)
+            for i,tab in ipairs(data) do  
+                local skill_name = string.gsub(tab.key_name, "皮肤_", "")
+                temp_tab[skill_name] = tab.value
+            end    
+            local tab_str = ui.encode(temp_tab)
+            -- print('数据长度',#tab_str)
+            if #tab_str >1000 then 
+                print('字符串太长，同步失败')
+            else  
+                ac.wait(10,function()
+                    --发起同步请求
+                    -- print('发起同步请求')
+                    local info = {
+                        type = 'cus_server',
+                        func_name = 'on_get',
+                        params = {
+                            [1] = tab_str,
+                        }
+                    }
+                    ui.send_message(info)
+                end) 
+            end 
+        end)   
     end    
 end    
 
 local ui = require 'ui.server.util'
 --处理同步请求
 local event = {
-    on_get = function (skill_name,value)
+    on_get = function (tab_str) 
         local player = ui.player 
-        -- print('服务端',skill_name,value)
-        -- print(player)
-        player.skin[skill_name] = value
-
-        if tonumber(value) >= 100 and not player.mall[skill_name] then 
-            player.mall[skill_name] = true
-            player:event '玩家-注册英雄后' (function(_, _, hero)
-                hero:add_skill(skill_name,'隐藏');
-            end)    
-
+        if not player.cus_server then 
+            player.cus_server = {}
         end    
+        local data = ui.decode(tab_str) 
+        for key,val in sortpairs(data) do 
+            -- print('同步后的数据：',key,val)
+            player.skin[key] = tonumber(val)
+            if tonumber(val) >= 100 and not player.mall[key] then 
+                player.mall[key] = true
+                -- print('111111添加皮肤')
+                player:event '玩家-注册英雄后' (function(_, _, hero)
+                    -- print('添加皮肤',key)
+                    hero:add_skill(key,'隐藏');
+                end)    
+    
+            end    
+        end  
     end,
 }
 ui.register_event('cus_server',event)
