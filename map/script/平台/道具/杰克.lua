@@ -49,6 +49,7 @@ function mt:on_add()
     if not hero then 
         hero = self.owner 
     end
+    if hero.name ~='亚瑟王' then return end 
     if not hero.strong_skill then 
         hero.strong_skill = {}
     end  

@@ -8,7 +8,7 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[移速+50，攻击间隔减少0.2]],
+	tip = [[移速+50，攻击间隔减少0.2,会心几率+5]],
 	--技能图标
 	art = [[ReplaceableTextures\PassiveButtons\PASBTNFlakCannons.blp]],
 	--特效
@@ -27,6 +27,7 @@ function mt:on_add()
     local skill = self
     local hero = self.owner
     if not hero:is_hero() then return end
+    if hero.name ~='小黑' then return end 
     hero:add('移动速度',self.move_speed)
     hero:add('攻击间隔',-self.attack_gap)
     hero:add('会心几率',self.heart_rate)

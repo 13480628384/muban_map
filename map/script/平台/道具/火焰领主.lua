@@ -31,7 +31,6 @@ function mt:on_add()
     -- local unit = hero:get_owner():create_unit('强盗',ac.point(0,0))
     -- unit:set('生命上限',10000000)
 
-
     hero:add('智力%',self.attack_rate)
     hero:add('会心几率',self.heart_rate)
     --改变模型

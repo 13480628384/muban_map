@@ -27,6 +27,7 @@ function mt:on_add()
     local skill = self
     local hero = self.owner
     if not hero:is_hero() then return end
+    if hero.name ~='小昭君' then return end 
     hero:add('移动速度',self.move_speed)
     hero:add('冷却缩减',self.cool_reduce)
     hero:add('法爆几率',self.magic_rate)

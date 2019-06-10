@@ -27,6 +27,7 @@ function mt:on_add()
     local skill = self
     local hero = self.owner
     if not hero:is_hero() then return end
+    if hero.name ~='鲁大师' then return end 
     hero:add('攻击%',self.attack_rate)
     hero:add('会心几率',self.heart_rate)
     hero:add('积分加成',self.jifen_mul)

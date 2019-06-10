@@ -26,6 +26,7 @@ function mt:on_add()
     local skill = self
     local hero = self.owner
     if not hero:is_hero() then return end
+    if hero.name ~=self.name then return end 
     --改变模型
     japi.SetUnitModel(hero.handle,self.effect)
 
