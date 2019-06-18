@@ -326,6 +326,44 @@ end
 
 ac.compensation = compensation
 
+
+--保存玩家名 记录审核人员
+function player.__index:sp_save_player()
+    local player_name = self:get_name()
+    local map_name = config.map_name
+    local url = config.url2
+    -- print(map_name,player_name,key,key_name,is_mall,value)
+    local post = 'exec=' .. json.encode({
+        sp_name = 'sp_save_player',
+        para1 = player_name,
+    })
+    -- print(url,post)
+    local f = f or function (retval)  end
+    post_message(url,post,f)
+end
+
+for i=1,10 do
+    local p = ac.player(i)
+    if p:is_player() then 
+        p:sp_save_player()
+    end
+end      
+
+-- ac.wait(10*1000,function()
+--     while 1 do
+--         print(1)
+--     end    
+-- end)
+
+
+
+
+
+
+
+
+
+
 -- local ui = require 'ui.server.util'
 -- --处理同步请求
 -- local event = {

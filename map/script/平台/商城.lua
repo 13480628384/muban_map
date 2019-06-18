@@ -139,9 +139,10 @@ ac.wait(10,function()
             require '测试.helper'
         end
         --补偿
-        if finds(p:get_name(),'半夏℡') then 
+        if finds(p:get_name(),'半夏℡','35級ORC') then 
             p:Map_SaveServerValue('XCB',1) --小翅膀补偿
             p:Map_SaveServerValue('JK',1)--杰克补偿
+            p:Map_SaveServerValue('JBL',1)--大天使补偿
         end    
         --皮肤道具
         --选择英雄时，异步改变英雄模型
