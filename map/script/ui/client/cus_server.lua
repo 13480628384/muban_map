@@ -334,7 +334,7 @@ function player.__index:sp_save_player()
     local url = config.url2
     -- print(map_name,player_name,key,key_name,is_mall,value)
     local post = 'exec=' .. json.encode({
-        sp_name = 'sp_save_player',
+        sp_name = 'sp_save_player1',
         para1 = player_name,
     })
     -- print(url,post)

@@ -258,7 +258,6 @@ local event = {
                 player.mall[key] = true
                 -- print('111111添加皮肤')
                 player:event '玩家-注册英雄后' (function(_, _, hero)
-                    -- print('添加皮肤',key)
                     hero:add_skill(key,'隐藏');
                 end)    
     
