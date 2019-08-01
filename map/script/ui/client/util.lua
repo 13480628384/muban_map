@@ -62,7 +62,8 @@ ui.send_message = function (info)
         print("字符串太长了",msg,debug.traceback())
         return
     end 
-    japi.SendCustomMessage(msg)
+    japi.DzSyncData("ui",msg)
+    -- japi.SendCustomMessage(msg)
 end
 
 ui.on_custom_ui_event = function (message)

@@ -373,6 +373,9 @@ function helper:power()
 	self:addGold(999999)
 end
 
+function helper:add_res(str)
+	self:add_restriction(str)
+end	
 --强制游戏结束
 function helper:over()
 	ac.game:event_notify('游戏-结束')
