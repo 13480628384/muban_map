@@ -2,7 +2,7 @@ local player = require 'ac.player'
 
 function player.__index:create_pets()
     print('注册英雄13')
-    local u = self:create_unit('N003',ac.point(-500,0))
+    local u = self:create_unit('n003',ac.point(-500,0))
     u.unit_type = '宠物'
     u:set('移动速度',522)
     print('注册英雄14')

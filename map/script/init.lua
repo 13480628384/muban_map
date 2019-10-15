@@ -78,7 +78,7 @@ ac.wait(100,function ()
     -- hero:add_skill('全图闪烁','英雄')
     -- p.hero = hero
 
-    -- local u = p:create_unit('N003',ac.point(-500,0))
+    -- local u = p:create_unit('n003',ac.point(-500,0))
     -- u.unit_type = '宠物'
     -- -- u:set('移动速度',522)
     -- u:add_skill('全图闪烁','英雄')

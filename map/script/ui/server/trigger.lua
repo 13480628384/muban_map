@@ -24,7 +24,7 @@ end)
 --     local message = japi.DzGetTriggerSyncData()
 --     local player = japi.DzGetTriggerSyncPlayer()
 --     print(message:len(),message,player)
-    ui.on_custom_ui_event(player,message)
+    -- ui.on_custom_ui_event(player,message)
     -- ui.on_custom_ui_event(ac.player(GetPlayerId(player) + 1),message)
 -- end)
 
