@@ -34,10 +34,22 @@ local item = {
     {'ZDLB','战斗机器'}, 
     {'MLZX','魔龙之心'}, 
     {'YJCJZZ','永久超级赞助'}, 
-    
-    -- HeroElfDarkEnchanter.mdx
-    --其他服务器存档字段, CWTF 宠物天赋   房间相关: DW 段位  JF 积分 
+
 }
+if record_11 then 
+    item = {
+        {'XCB','小翅膀'},  
+        {'JK','杰克','亚瑟王'}, --积分
+        {'JBL','大天使加百列','鲁大师'},
+
+        {'20000835','寻宝小达人'}, 
+        {'20000836','齐天大圣','悟空'}, --表示皮肤
+    }
+    -- print(item[1][1],item[1][2],ac.player(1):Map_HasMallItem(item[1][1]))
+    -- print(item[1][1],item[1][2],ac.player(1):Map_HasMallItem('20000835'))
+    -- print(item[1][1],item[1][2],ac.player(1):Map_HasMallItem(20000835))
+end    
+
 local other_key = {
     {'CWTF','宠物天赋'}, 
     {'boshu','无尽层数'}, 

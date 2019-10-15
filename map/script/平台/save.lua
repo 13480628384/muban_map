@@ -94,6 +94,7 @@ for i=1,8 do
         if jifen < 0 then 
             local value = -jifen + 10000
             print(jifen,value)
+            player.jifen = jifen
             player:Map_AddServerValue('jifen',value)
             player:sendMsg('|cffffe799【系统消息】|r 已修复积分为0，并发放 积分10000 作为补偿')
         end   

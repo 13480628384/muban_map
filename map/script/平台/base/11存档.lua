@@ -2,6 +2,7 @@ local player = require 'ac.player'
 local japi = require 'jass.japi'
 local jass = require 'jass.common'
 local dzapi = require 'jass.dzapi'
+record_11 = true
 register_japi([[
 native  InitGameCache    takes string campaignFile returns gamecache
 native  SaveGameCache    takes gamecache whichCache returns boolean
@@ -80,7 +81,8 @@ end
 function ac.player.__index:Map_HasMallItem(key)
     if has_record then
 		return japi.HaveStoredInteger(self:record(), "状态", key) 
-    end
+	end
+	print('warning: has_record为空')
     --测试时，默认都为空
 	return false
 end
@@ -187,8 +189,9 @@ ac.loop(60 * 1000,function()
     for i = 1,8 do
         local p = ac.player[i]
         if p:is_player() then
-            p:Map_AddServerValue('exp',60)
-            p:Map_SaveServerValue('level',math.floor(tonumber(p:Map_GetServerValue 'exp') / 5000))
+            p:Map_AddServerValue('exp',60) math.sqrt(16)
+            -- p:Map_SaveServerValue('level',math.floor(tonumber(p:Map_GetServerValue 'exp') / 5000))
+            p:Map_SaveServerValue('level',math.floor(math.sqrt(p:Map_GetServerValue('exp')/3600)+1)) --当前地图等级=开方（经验值/3600）+1
         end
     end
 end)
