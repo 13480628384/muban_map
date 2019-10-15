@@ -4,7 +4,7 @@ local json = require 'util.json'
 local player = require 'ac.player'
 
 local config = {
-    map_name = '天空的宝藏',
+    map_name = '宇宙的宝藏',
     url = 'www.91mtp.com/api/maptest' , --类似官方对战平台的服务器存档
     url2 = 'www.91mtp.com/api/mapdb' --统一存储过程入口
 }

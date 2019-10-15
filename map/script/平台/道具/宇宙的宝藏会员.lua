@@ -1,4 +1,4 @@
-local mt = ac.skill['天空的宝藏会员']
+local mt = ac.skill['宇宙的宝藏会员']
 mt{
     --必填
     is_skill = true,
