@@ -83,7 +83,7 @@ local function showHeroState(p, u)
 |cff00bdec定位   |cffffcc00%production%
 ]]
 
-	local tip2 ='|cff00bdec熟练度|r   |cffff0000'..ac.player.self.hero_xp[hero_name]..'|r  |cffffcc00(熟练度越高，团队和个人增益越大)|r'
+	local tip2 ='|cff00bdec熟练度|r   |cffff0000'..(ac.player.self.hero_xp and ac.player.self.hero_xp[hero_name] or '')..'|r  |cffffcc00(熟练度越高，团队和个人增益越大)|r'
 	
 	local difficulty_level = {
 		'|cffffaaaa★|r|cffeeeeee☆☆☆☆☆|r',

@@ -49,7 +49,10 @@ end)
 
 --基地爆炸的时候结算胜负
 ac.game:event '游戏-结束' (function(trg,flag)
-
+	--11平台的游戏结束
+	if ac.game.score_game_end then 
+		ac.game:score_game_end()
+	end	
 	local name 
 	if flag then 
 		name = '【游戏胜利】'

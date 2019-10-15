@@ -248,9 +248,9 @@ function helper:jifen(jf)
 	local value = p.putong_jifen --* (p.hero:get '积分加成' + 1)
 	print('积分',value)
 	--保存积分
-	ac.jiami(p,'jifen',value)
+	p:Map_AddServerValue('jifen', value)
 
-	local jifen  = tonumber(ac.GetServerValue(p,'jifen'))
+	local jifen  = p:Map_GetServerValue('jifen')
 	print('服务器积分：',jifen)
 end	
 --ac.save_jifen
@@ -283,11 +283,7 @@ end
 --服务器存档 读取 
 function helper:get_server(key)
 	local p = self:get_owner()
-	if key == 'jifen' then 
-		print('服务器存档:'..key,ac.GetServerValue(p,'jifen'))
-	else	
-		print('服务器存档:'..key,p:Map_GetServerValue(key))
-	end	
+	print('服务器存档:'..key,p:Map_GetServerValue(key))
 end	
 --波数
 function helper:boshu(str,index)
@@ -404,6 +400,7 @@ function helper:create(str,cnt, playerid)
 		local data = ac.table.UnitData[str]
 		-- print(unit:get('护甲'),unit:get('护甲%'),data.attribute['护甲'])
 		unit:set('移动速度',455)
+		unit:add_skill('全图闪烁','英雄')
 		-- ac.wait(0.5*1000,function()
 		-- 	print(unit:get('护甲'),unit:get('护甲%'),data.attribute['护甲'])
 		-- end)

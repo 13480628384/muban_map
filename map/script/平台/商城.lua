@@ -146,32 +146,32 @@ ac.wait(10,function()
         end    
         --皮肤道具
         --选择英雄时，异步改变英雄模型
-        for n=1,#item do
-            -- print("01",p:Map_HasMallItem(item[n][1]))
-            if (p:Map_HasMallItem(item[n][1]) or (p:Map_GetServerValue(item[n][1]) == '1') or (p.cheating)) then
-                if ac.player(16).hero_lists then 
-                    for i,hero in ipairs(ac.player(16).hero_lists)do
-                        if hero.name == item[n][3] then 
-                            --可能会掉线
-                            if ac.player.self == p then
-                                local skill_name = item[n][2]
-                                local skill = ac.skill[skill_name]
-                                local model_size = skill.model_size
-                                japi.SetUnitModel(hero.handle,skill.effect)
-                                if model_size then 
-                                    hero:set_size(model_size)
-                                end    
-                                -- hero:add_skill(item[n][2],'隐藏')
-                            end
-                        end
-                    end 
-                end 
-                local key = item[n][2]  
-                p.mall[key] = true  
-            end  
-        end    
-        -- print('测试服务器存档是否读取成功',p:GetServerValueErrorCode())
         if p:is_player() then
+            for n=1,#item do
+                -- print("01",p:Map_HasMallItem(item[n][1]))
+                if (p:Map_HasMallItem(item[n][1]) or (p:Map_GetServerValue(item[n][1]) == 1) or (p.cheating)) then
+                    if ac.player(16).hero_lists then 
+                        for i,hero in ipairs(ac.player(16).hero_lists)do
+                            if hero.name == item[n][3] then 
+                                --可能会掉线
+                                if ac.player.self == p then
+                                    local skill_name = item[n][2]
+                                    local skill = ac.skill[skill_name]
+                                    local model_size = skill.model_size
+                                    japi.SetUnitModel(hero.handle,skill.effect)
+                                    if model_size then 
+                                        hero:set_size(model_size)
+                                    end    
+                                    -- hero:add_skill(item[n][2],'隐藏')
+                                end
+                            end
+                        end 
+                    end 
+                    local key = item[n][2]  
+                    p.mall[key] = true  
+                end  
+            end    
+        -- print('测试服务器存档是否读取成功',p:GetServerValueErrorCode())
             p:event '玩家-注册英雄后' (function(_, _, hero)
                 -- print('注册英雄')
                 print('注册英雄后7')

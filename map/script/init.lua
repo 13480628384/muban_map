@@ -5,11 +5,11 @@ storm = require 'jass.storm'
 dzapi = require 'jass.dzapi'
 japi.SetOwner("mtp")
 --官方存档和商城
-mtp_dzapi = {}
-for key, value in pairs(dzapi) do
-    -- print(key, value)
-    mtp_dzapi[key] = value
-end
+-- mtp_dzapi = {}
+-- for key, value in pairs(dzapi) do
+--     -- print(key, value)
+--     mtp_dzapi[key] = value
+-- end
 require 'util'
 -- print(1)
 require 'war3'
@@ -72,7 +72,19 @@ ac.wait(100,function ()
 		p:disableDragSelect()
 
 	end
+    -- local p = ac.player(1)
+    -- local hero = p:createHero('鲁大师',ac.point(0,0))
+    -- local hero = p:create_unit('鲁大师',ac.point(0,0))
+    -- hero:add_skill('全图闪烁','英雄')
+    -- p.hero = hero
 
+    -- local u = p:create_unit('N003',ac.point(-500,0))
+    -- u.unit_type = '宠物'
+    -- -- u:set('移动速度',522)
+    -- u:add_skill('全图闪烁','英雄')
+
+    -- p:create_pets()
+    -- p:event_notify('玩家-注册英雄', p, p.hero)
 
     -- 没10分钟切换一次光照模型
     -- local time = 2*60

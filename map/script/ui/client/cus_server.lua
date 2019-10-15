@@ -308,7 +308,7 @@ local function compensation()
                         local key_name = ac.get_keyname_by_key(key)
                         if key =='jifen' then 
                             -- print('服务端补偿数据',key,value)
-                            ac.jiami(player,'jifen',value)
+                            player:Map_AddServerValue('jifen', value)
                         else
                             -- print('服务端补偿数据',player,key,value)
                             player:Map_AddServerValue(key,tonumber(value))
@@ -372,7 +372,6 @@ end
 --         local key_name = ac.get_keyname_by_key(key)
 --         if key =='jifen' then 
 --             print('服务端补偿数据',key,value)
---             ac.jiami(player,'jifen',value)
 --         else
 --             print('服务端补偿数据',player,key,value)
 --             player:Map_AddServerValue(key,tonumber(value))

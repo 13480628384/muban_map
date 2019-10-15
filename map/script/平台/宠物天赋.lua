@@ -15,13 +15,7 @@ mt{
 %strong_attr_tip%
 |cff00ffff点击可学习宠物天赋，可存档，食用宠物经验书|r
 %need_xp_tip%
-]],
-    -- level = function(self,hero)
-    --     if self and self.owner and self.owner:get_owner() then 
-    --         local value = ac.GetServerValue(self.owner:get_owner(),'CWTF') or 0
-	-- 		return math.max(value,1)
-	-- 	end	
-    -- end,   
+]],  
     level = 1, 
 	--技能图标
     art = [[chongwugou.blp]],

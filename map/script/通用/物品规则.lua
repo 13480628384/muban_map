@@ -141,10 +141,7 @@
         local gold = u.owner.gold
         local mutou = player:getlumber()
         local kill_count = player.kill_count or 0
-        local jifen = 0
-        -- if ac.GetServerValue then  
-        jifen= tonumber(ZZBase64.decode(player.jifen)) or 0
-        -- end
+        local jifen = player.jifen or 0
 
         local golds = it:buy_price()
         local mutous = it:buy_mutou()
@@ -204,8 +201,8 @@
 
             if jifens > 0 then 
                 --扣除积分
-                ac.jiami(player,'jifen',-jifens)
-                -- player:event_notify('积分变化',player,-jifens)
+                player.jifen = player.jifen - jifens
+                player:Map_AddServerValue('jifen', -jifens)
                 --保存服务器存档 永久性的物品
                 -- print(it.name)
                 local key = ac.get_mallkey_byname(it.name)

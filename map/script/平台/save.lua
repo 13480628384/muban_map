@@ -5,12 +5,8 @@ function player.__index:clear_server()
     for i,v in ipairs(ac.server_key) do 
         local key = v[1]
         local is_mall= v[4]
-        if key =='jifen' then 
-            ac.SaveServerValue(player,'jifen',0)
-        else
-            if not is_mall then 
-                player:Map_SaveServerValue(key,0)
-            end    
+        if not is_mall then 
+            player:Map_SaveServerValue(key,0)
         end    
     end    
 
@@ -25,38 +21,38 @@ function ac:clear_all_server()
         end   
 	end
 end
---执行加积分函数
-function ac.jiami(p,key,value)
-    local v = ZZBase64.decode(p[key])
-    v = v  + value
-    ac.SaveServerValue(p,key,v)
-    if p:GetServerValueErrorCode() then
-        p:Map_Stat_SetStat('JF',tostring(v))
-    end
-end
+----执行加积分函数
+-- function ac.jiami(p,key,value)
+--     local v = ZZBase64.decode(p[key])
+--     v = v  + value
+--     ac.SaveServerValue(p,key,v)
+--     -- if p:GetServerValueErrorCode() then
+--         -- p:Map_Stat_SetStat('JF',tostring(v))
+--     -- end
+-- end
 
---存档
-function ac.SaveServerValue(p,key,value)
-    value = tostring(value)
-    local s = ZZBase64.encode(value)
-    p[key] = s
-    p:Map_SaveServerValue(key,s)
-end
+----存档
+-- function ac.SaveServerValue(p,key,value)
+--     value = tostring(value)
+--     local s = ZZBase64.encode(value)
+--     p[key] = s
+--     p:Map_SaveServerValue(key,s)
+-- end
 
---读取
-function ac.GetServerValue(p,KEY)
-    local value = p:Map_GetServerValue(KEY)
-    if not value or value == '' or value == "" then
-        return 0
-    end
+----读取
+-- function ac.GetServerValue(p,KEY)
+--     local value = p:Map_GetServerValue(KEY)
+--     if not value or value == '' or value == "" then
+--         return 0
+--     end
 
-    local t = tonumber(value)
-    if t then
-        return 0
-    end
+--     local t = tonumber(value)
+--     if t then
+--         return 0
+--     end
 
-    return ZZBase64.decode(value)
-end
+--     return ZZBase64.decode(value)
+-- end
 
 --服务器存档 读取 (整合加密key、商城数据)
 function ac.get_server(p,key)
@@ -65,8 +61,6 @@ function ac.get_server(p,key)
     
     if tonumber(is_mall) == 1 and p:Map_HasMallItem(key) then 
         value = 1
-    elseif key == 'jifen' then 
-		value = ac.GetServerValue(p,'jifen')
 	else	
 		value = p:Map_GetServerValue(key)
     end	
@@ -80,7 +74,7 @@ for i=1,8 do
     if player:is_player() then
 
         --读取积分
-        local jifen  = tonumber(ac.GetServerValue(player,'jifen'))
+        local jifen  = player:Map_GetServerValue('jifen')
         -- print('服务器积分：',player,jifen)
 
 
@@ -94,14 +88,14 @@ for i=1,8 do
         -- print('服务器波数：',player, player.boshu)
 
         --保存服务端积分
-        player.jifen = ZZBase64.encode(jifen)
+        player.jifen = jifen
 
         --修复积分为负数的，并奖励10000积分
         if jifen < 0 then 
             local value = -jifen + 10000
             print(jifen,value)
-            ac.jiami(player,'jifen',value)
-            player:sendMsg('【系统消息】 已修复积分为0，并发放 积分10000 作为补偿',tonumber(ac.GetServerValue(player,'jifen')))
+            player:Map_AddServerValue('jifen',value)
+            player:sendMsg('【系统消息】 已修复积分为0，并发放 积分10000 作为补偿')
         end   
         -- if jifen >= 500000 then  
         --     local value = -jifen 
@@ -116,9 +110,6 @@ for i=1,8 do
 end
 
 
-ac.game:event '积分变化'(function(_,p,value)
-    ac.jiami(p,'jifen',value)
-end)
 
 local function save_jifen()
     --只保存一次
@@ -132,7 +123,7 @@ local function save_jifen()
             local p_value = value * (p.hero:get '积分加成' + 1)
             local total_value = math.ceil((ac.total_putong_jifen* (ac.g_game_degree or 1)) / get_player_count() * (p.hero:get '积分加成' + 1))
             --保存积分
-            ac.jiami(p,'jifen',p_value)
+            p:Map_AddServerValue('jifen', p_value)
             --修改排行榜的积分
             if p:is_self() then
                 c_ui.ranking.ui.integral:set_text('本局累计获得积分：'..total_value)
@@ -166,11 +157,11 @@ local function set_fangjian_xm(p,count)
         value = 8
     end
 
-    if p:GetServerValueErrorCode() then
-        if rank_art[value] then 
-            p:Map_Stat_SetStat('DW',rank_art[value])
-        end 
-    end
+    -- if p:GetServerValueErrorCode() then
+    --     if rank_art[value] then 
+    --         -- p:Map_Stat_SetStat('DW',rank_art[value])
+    --     end 
+    -- end
     --实时更新游戏内的段位数据
     p.boshu = count
     p.rank = value
