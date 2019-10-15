@@ -15,7 +15,11 @@ mt{
 	--技能说明
 	title = '切换背包',
 
-    tip = [[|cffffff00背包数量：3，点击可切换背包|r]],
+    tip = [[
+
+|cffFFE799【使用说明】：|r
+一共|cff00ff003个背包|r，点击可切换
+]],
     --最大页数
     page = 3,
     currentpage = 1,

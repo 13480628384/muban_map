@@ -9,18 +9,21 @@ mt{
     --标题颜色
     color =  '青',
 	--介绍
-    tip = [[|cffFFE799称号说明：|r|cffff0000多个称号属性可叠加，点击可切换称号效果|r
+    tip = [[
 
-|cffffff00%nick_name3%（地图等级3可激活）:|r 
+|cffFFE799【称号说明】|r|cff00ff00地图等级能解锁可存档称号|r |cffff0000多个称号属性可叠加，点击可切换称号效果|r
+
+|cffffE7993级|r 奖励 |cff00ff00%nick_name3%
 %active3%全属性 +100,金币加成 +5%|r
-|cffffff00%nick_name5%（地图等级5可激活）:|r 
+|cffffE7995级|r 奖励 |cff00ffff%nick_name5%
 %active5%物品获取率 +5%,经验加成 +5%，金币加成 +5%|r
-|cffffff00%nick_name10%（地图等级10可激活）:|r 
+|cffffE79910级|r 奖励 |cffffff00%nick_name10%
 %active10%攻击力 +25%,对boss额外伤害 +50%|r 
-|cffffff00%nick_name15%（地图等级15可激活）:|r 
+|cffffE79915级|r 奖励 |cffffff00%nick_name15%
 %active15%全属性 +1000,金币加成 +50%|r
-|cffffff00%nick_name25%（地图等级25可激活）:|r 
+|cffffE79925级|r 奖励 |cffff0000%nick_name25%
 %active25%全属性 +15%,物品获取率 +50%|r
+
 ]],
     map_level = function(self,hero)
 		if self and self.owner and self.owner:get_owner() then 

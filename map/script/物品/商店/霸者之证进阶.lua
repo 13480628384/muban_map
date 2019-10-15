@@ -8,7 +8,7 @@ level = 1,
 art = [[icon\feisheng.blp]],
 
 --说明
-tip = [[|cffffff00当英雄满级后，如果想在修为上更进一步，只有拥有霸者之证的人，才能步入化境！]],
+tip = [[|cffffff00当英雄到达|cffff0000100级|cffffff00，如果想在修为上更进一步，只有拥有|cffff0000霸者之证|cffffff00的人，才能步入化境！]],
 
 --物品类型
 item_type = '神符',

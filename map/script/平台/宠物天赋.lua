@@ -11,14 +11,18 @@ mt{
     color =  '青',
     -- auto_fresh_tip = true,
 	--介绍
-    tip = [[可用天赋点：%remain_point%
+    tip = [[|cff00ffff(可用天赋点：%spell_stack%|cff00ffff %need_xp_tip%|cff00ffff)|r
+
+|cffFFE799【使用说明】：|r
+|cff00ff00打开天赋菜单，分配宠物的天赋点|r
+
+|cffFFE799【增加属性】：|r
 %strong_attr_tip%
-|cff00ffff点击可学习宠物天赋，可存档，食用宠物经验书|r
-%need_xp_tip%
+|cffcccccc食用宠物经验书可升级宠物，宠物等级可存档|r
 ]],  
     level = 1, 
 	--技能图标
-    art = [[chongwugou.blp]],
+    art = [[ReplaceableTextures\CommandButtons\BTNSkillz.blp]],
     model_size = function(self,hero)
         return 1 + self.level * 0.01
     end,    

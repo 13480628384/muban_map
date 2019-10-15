@@ -224,7 +224,7 @@ function mt:start(player)
     --可能会引起掉线
     -- local p = player or ac.player.self
     local tip = self.tip or ''
-    ac.player.self:sendMsg('怪物开始刷新:' .. tip, 5)
+    ac.player.self:sendMsg('|cffffe799【系统消息】|r怪物开始进攻:' .. tip, 5)
     -- self.trg_player = p
 
     if self.is_leave_region_replace then 

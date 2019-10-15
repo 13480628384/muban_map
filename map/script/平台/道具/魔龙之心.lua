@@ -10,10 +10,13 @@ mt{
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
     tip = [[%active%
-|cffffff00特权：|r杀怪全属性+5，经验获取率+25%，开局赠送一颗吞噬丹（发放至宠物背包）]],
+
+|cffffff00特权：|r杀怪全属性+5，经验获取率+25%，开局赠送一颗吞噬丹（发放至宠物背包）
+
+]],
     --是否激活状态
     active = function(self)
-        local res = [[|cff00bdec需要：
+        local res = [[|cffcccccc需要：
  - 通过【官方商城】获得|r]]
         if self.level >=1 then 
             res = ''

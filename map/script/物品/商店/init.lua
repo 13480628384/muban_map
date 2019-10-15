@@ -55,6 +55,7 @@ ac.game:event '玩家-注册英雄后' (function()
         local x,y = ac.map.rects['积分商店']:get_point():get()
         local shop2 = ac.shop.create('积分商店',x,y-off_set,270)
         shop2:set_size(2*1.2)
+
         print('注册英雄后4')
         --创建xx商店
         local x,y = ac.map.rects['图书馆']:get_point():get()
@@ -77,9 +78,9 @@ ac.game:event '玩家-注册英雄后' (function()
             if creep.name == '刷怪' and  creep.index == index then
                 shop4:add_sell_item('藏宝图',1)
                 --发送消息
-                ac.player.self:sendMsg('【系统消息】新增|cffff0000藏宝图|r玩法，前往|cffff0000天结散人|r处购买',10)
-                ac.player.self:sendMsg('【系统消息】新增|cffff0000藏宝图|r玩法，前往|cffff0000天结散人|r处购买',10)
-                ac.player.self:sendMsg('【系统消息】新增|cffff0000藏宝图|r玩法，前往|cffff0000天结散人|r处购买',10)
+                ac.player.self:sendMsg('|cffffe799【系统消息】|r新增|cffff0000藏宝图|r玩法，前往|cffff0000天结散人|r处购买',10)
+                ac.player.self:sendMsg('|cffffe799【系统消息】|r新增|cffff0000藏宝图|r玩法，前往|cffff0000天结散人|r处购买',10)
+                ac.player.self:sendMsg('|cffffe799【系统消息】|r新增|cffff0000藏宝图|r玩法，前往|cffff0000天结散人|r处购买',10)
             end   
 
             --迷路的宝藏 第20波 出现
@@ -87,9 +88,9 @@ ac.game:event '玩家-注册英雄后' (function()
             if creep.name == '刷怪' and  creep.index == index then
                 shop4:add_sell_item('迷路的坦克',2)
                 --发送消息
-                ac.player.self:sendMsg('【系统消息】新增|cffff0000迷路的坦克|r玩法，前往|cffff0000天结散人|r处购买',10)
-                ac.player.self:sendMsg('【系统消息】新增|cffff0000迷路的坦克|r玩法，前往|cffff0000天结散人|r处购买',10)
-                ac.player.self:sendMsg('【系统消息】新增|cffff0000迷路的坦克|r玩法，前往|cffff0000天结散人|r处购买',10)
+                ac.player.self:sendMsg('|cffffe799【系统消息】|r新增|cffff0000迷路的坦克|r玩法，前往|cffff0000天结散人|r处购买',10)
+                ac.player.self:sendMsg('|cffffe799【系统消息】|r新增|cffff0000迷路的坦克|r玩法，前往|cffff0000天结散人|r处购买',10)
+                ac.player.self:sendMsg('|cffffe799【系统消息】|r新增|cffff0000迷路的坦克|r玩法，前往|cffff0000天结散人|r处购买',10)
             end   
 
             --小黑屋 第30波 出现
@@ -97,9 +98,9 @@ ac.game:event '玩家-注册英雄后' (function()
             if creep.name == '刷怪' and  creep.index == index then
                 shop4:add_sell_item('进入小黑屋',3)
                 --发送消息
-                ac.player.self:sendMsg('【系统消息】新增|cffff0000小黑屋|r玩法，前往|cffff0000天结散人|r处进入',10)
-                ac.player.self:sendMsg('【系统消息】新增|cffff0000小黑屋|r玩法，前往|cffff0000天结散人|r处进入',10)
-                ac.player.self:sendMsg('【系统消息】新增|cffff0000小黑屋|r玩法，前往|cffff0000天结散人|r处进入',10)
+                ac.player.self:sendMsg('|cffffe799【系统消息】|r新增|cffff0000小黑屋|r玩法，前往|cffff0000天结散人|r处进入',10)
+                ac.player.self:sendMsg('|cffffe799【系统消息】|r新增|cffff0000小黑屋|r玩法，前往|cffff0000天结散人|r处进入',10)
+                ac.player.self:sendMsg('|cffffe799【系统消息】|r新增|cffff0000小黑屋|r玩法，前往|cffff0000天结散人|r处进入',10)
                 --开启按钮
                 c_ui.kzt.F2_home:show()
                 c_ui.kzt.F3_xiaoheiwu:show()
@@ -129,9 +130,9 @@ ac.game:event '玩家-注册英雄后' (function()
             local index = 40 
             if creep.name == '刷怪' and  creep.index == index then
                 --发送消息
-                ac.player.self:sendMsg('【系统消息】新增|cffff0000挑战自我|r玩法，前往|cffff0000小黑屋|r处购买',10)
-                ac.player.self:sendMsg('【系统消息】新增|cffff0000挑战自我|r玩法，前往|cffff0000小黑屋|r处购买',10)
-                ac.player.self:sendMsg('【系统消息】新增|cffff0000挑战自我|r玩法，前往|cffff0000小黑屋|r处购买',10)
+                ac.player.self:sendMsg('|cffffe799【系统消息】|r新增|cffff0000挑战自我|r玩法，前往|cffff0000小黑屋|r处购买',10)
+                ac.player.self:sendMsg('|cffffe799【系统消息】|r新增|cffff0000挑战自我|r玩法，前往|cffff0000小黑屋|r处购买',10)
+                ac.player.self:sendMsg('|cffffe799【系统消息】|r新增|cffff0000挑战自我|r玩法，前往|cffff0000小黑屋|r处购买',10)
 
                 for i = 1, 10 do
                     local p = ac.player[i]

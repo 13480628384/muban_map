@@ -80,11 +80,14 @@ local function showHeroState(p, u)
 	local hero = u
 
 	local tip = [[
-|cff00bdec定位   |cffffcc00%production%
+
+		|cffffcc11定  位   |cffff0000%production%
 ]]
 
-	local tip2 ='|cff00bdec熟练度|r   |cffff0000'..(ac.player.self.hero_xp and ac.player.self.hero_xp[hero_name] or '')..'|r  |cffffcc00(熟练度越高，团队和个人增益越大)|r'
+	local tip2 ='|cffffcc11熟练度|r   |cffff0000'..(ac.player.self.hero_xp and ac.player.self.hero_xp[hero_name] or '')..'|r'
+	--|cffffcc00(熟练度越高，团队和个人增益越大)|r
 	
+
 	local difficulty_level = {
 		'|cffffaaaa★|r|cffeeeeee☆☆☆☆☆|r',
 		'|cffff8888★★|r|cffeeeeee☆☆☆☆|r',
@@ -93,19 +96,23 @@ local function showHeroState(p, u)
 		'|cffff2222★★★★★|r|cffeeeeee☆|r',
 		'|cffff0000★★★★★★|r|cffeeeeee|r',
 	}
-	local difficulty_tip = '|cffffcc11生存:  ' .. difficulty_level[hero_data.survival_lv or 1]..'\n'
+	
+	local difficulty_tip = '\n|cffffcc11生存:  ' .. difficulty_level[hero_data.survival_lv or 1]..'\n'
 	difficulty_tip = difficulty_tip ..'|cffffcc11攻击:  ' .. difficulty_level[hero_data.attack_lv or 1]..'\n'
 	difficulty_tip = difficulty_tip ..'|cffffcc11成长:  ' .. difficulty_level[hero_data.grow_lv or 1]..'\n'
 	difficulty_tip = difficulty_tip ..'|cffffcc11操作难度:  ' .. difficulty_level[hero_data.diff_lv or 1]..'\n'
 
 
-	p:sendMsg(difficulty_tip .. '\n' .. tip:gsub('%%(.-)%%', function(name)
+	p:sendMsg(tip:gsub
+	('%%(.-)%%', function(name)
 		local data = hero_data
 		for path in name:gmatch '[^%.]+' do
 			data = data[path]
 		end
 		return data
-	end)..tip2, 60)
+	end)..tip2..'\n'..difficulty_tip, 60)
+
+
 	--刷新技能说明
 	if p == ac.player.self then
 		for i = 1, 4 do
@@ -204,7 +211,7 @@ local function start()
 				p.last_select_hero_time = current_time
 				p.last_select_hero_name = hero_name
 				p.last_select_hero = hero
-				p:sendMsg(('双击选择 |cffffcc00%s|r !'):format(hero_name))
+				p:sendMsg(('双击选择 |cff00ff00%s|r'):format(hero_name))
 				-- lookAtHero(p, hero)
 				showHeroState(p, hero)
 				return
@@ -267,7 +274,7 @@ local function start()
 				p:setCameraField('CAMERA_FIELD_ROTATION', 90)
 				p:showInterface(1)
 				--镜头动画
-				p:setCameraField('CAMERA_FIELD_TARGET_DISTANCE', 2500, 1)
+				p:setCameraField('CAMERA_FIELD_TARGET_DISTANCE', 1600, 1)
 				p:setCameraBounds(minx-400, miny-400, maxx+400, maxy+400)  --创建镜头区域大小，在地图上为固定区域大小，无法超出。
 	
 				--允许框选
@@ -278,7 +285,7 @@ local function start()
 	
 				--强制镜头高度
 				ac.wait(1000, function()
-					p.camera_high = 2500
+					p.camera_high = 1600
 				end)
 			-- end)
 		end

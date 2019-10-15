@@ -153,8 +153,8 @@ function mt:add_content()
             hero:addGold(88888)
             hero:addXp(88888)
             --给全部玩家发送消息
-            ac.player.self:sendMsg("【系统提示】玩家 |cffff0000"..player:get_name()..'|r 经常|cff00ffff挖图失败|r,获得称号|cffff0000"挖宝达人" |r，一次性奖励 |cffff0000金币88888，经验88888|r',10)
-            ac.player.self:sendMsg("【系统提示】玩家 |cffff0000"..player:get_name()..'|r 经常|cff00ffff挖图失败|r,获得称号|cffff0000"挖宝达人" |r，一次性奖励 |cffff0000金币88888，经验88888|r',10)
+            ac.player.self:sendMsg("|cffffe799【系统提示】|r玩家 |cffff0000"..player:get_name()..'|r 经常|cff00ffff挖图失败|r,获得称号|cffff0000"挖宝达人" |r，一次性奖励 |cffff0000金币88888，经验88888|r',10)
+            ac.player.self:sendMsg("|cffffe799【系统提示】|r玩家 |cffff0000"..player:get_name()..'|r 经常|cff00ffff挖图失败|r,获得称号|cffff0000"挖宝达人" |r，一次性奖励 |cffff0000金币88888，经验88888|r',10)
         end
 
     elseif rand_name == '金币10' then

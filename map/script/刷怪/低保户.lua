@@ -43,6 +43,6 @@ ac.game:event '游戏-回合开始'(function(trg,index, creep)
     hero:add('护甲',defence)
 
     --发送消息
-    local tip = '|cffffff00【系统消息】|r玩家 |cffff0000'..player:get_name()..'|r|cffffff00实在弱，获得低保奖励：|cffff0000金币+'..gold..'，护甲+'..defence..'，生命上限+'..life..'\n'
+    local tip = '|cffffe799【系统消息】|r玩家 |cffff0000'..player:get_name()..'|r|cffffff00实在弱，获得低保奖励：|cffff0000金币+'..gold..'，护甲+'..defence..'，生命上限+'..life..'\n'
     ac.player.self:sendMsg(tip,10)
 end)

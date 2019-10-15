@@ -40,7 +40,7 @@ function mt:on_cast_start()
     local player = hero:get_owner()
     
     if ac.creep['刷怪-无尽'].index >= 1 then 
-        player:sendMsg('【系统消息】召唤boss，召唤练功怪，进入无尽后无效')
+        player:sendMsg('|cffffe799【系统消息】|r召唤boss，召唤练功怪，进入无尽后无效')
         return
     end
     --处理模型

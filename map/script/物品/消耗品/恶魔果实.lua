@@ -54,7 +54,7 @@ for i=1,#ac.guoshi_list do
             hero.strong_skill = {}
         end  
         if hero.strong_skill[self.strong_skill_name] then 
-            player:sendMsg('【系统消息】 你的技能：|cff'..ac.color_code['红']..self.strong_skill_name..'|r，已强化成功')
+            player:sendMsg('|cffffe799【系统消息】|r 你的技能：|cff'..ac.color_code['红']..self.strong_skill_name..'|r，已强化成功')
             self:add_item_count(1)
             return 
         end    
@@ -63,7 +63,7 @@ for i=1,#ac.guoshi_list do
             hero.strong_skill[self.strong_skill_name] = true
             skill:strong_skill_func()
         else
-            player:sendMsg('【系统消息】 请先学习技能：|cff'..ac.color_code['红']..self.strong_skill_name..'|r，强化失败')
+            player:sendMsg('|cffffe799【系统消息】|r 请先学习技能：|cff'..ac.color_code['红']..self.strong_skill_name..'|r，强化失败')
             self:add_item_count(1)    
             return 
         end    

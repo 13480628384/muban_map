@@ -45,7 +45,7 @@ function mt:on_cast_start()
     ac.item.add_skill_item(name,hero)
 
     --系统提示
-    ac.player.self:sendMsg('|cff00ffff【系统提示】|r|cffff0000'..player:get_name()..'|r|cff00ffff在技能商店用|r|cffff8000杀敌数|r|cff00ffff兑换了一本|r|cff00ff00'..name..'|r',10)
+    ac.player.self:sendMsg('|cffffe799【系统提示】|r|cffff0000'..player:get_name()..'|r|cff00ffff在技能商店用|r|cffff8000杀敌数|r|cff00ffff兑换了一本|r|cff00ff00'..name..'|r',10)
 
 
 

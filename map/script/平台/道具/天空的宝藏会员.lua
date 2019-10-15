@@ -9,12 +9,15 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[%active%
-|cffffff00特权1：|r每10波赠送一个随机物品（共7个，纯随机，人品好可能出金装红装）
-|cffffff00特权2：|r物品获取率+25%]],
+    tip = [[%active%
+    
+|cffffff00特权1：|r每10波赠送一个随机物品（纯随机，人品好可能出金装红装）
+|cffffff00特权2：|r物品获取率+25%
+
+]],
     --是否激活状态
     active = function(self)
-        local res = [[|cff00bdec需要：
+        local res = [[|cffcccccc需要：
  - 通过【官方商城】获得|r]]
         if self.level >=1 then 
             res = ''
@@ -54,7 +57,7 @@ function mt:on_add()
         if  ac.table.ItemData[name] and ac.table.ItemData[name].color then 
             lni_color = ac.table.ItemData[name].color
         end    
-        player:sendMsg('【系统消息】生存会员特权触发： 随机获得 |cff'..ac.color_code[lni_color]..name..'|r',10)
+        player:sendMsg('|cffffe799【系统消息】|r生存会员特权触发： 随机获得 |cff'..ac.color_code[lni_color]..name..'|r',10)
     end
     --第0波时先给一个随机物品
     if ac.creep['刷怪'].index == 0 then 

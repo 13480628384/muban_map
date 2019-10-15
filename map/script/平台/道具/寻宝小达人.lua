@@ -9,14 +9,17 @@ mt{
 	--技能目标
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
-	tip = [[%active%
+    tip = [[%active%
+    
 |cffffff00特权1：|r开局赠送5张藏宝图，5张抽奖券（发放至宠物背包），物品获取率+20%
-|cffffff00特权2：|r移速+50，无视碰撞体积]],
+|cffffff00特权2：|r移速+50，无视碰撞体积
+
+]],
 	--技能图标
 	art = [[xbxdr.blp]],
     --是否激活状态
     active = function(self)
-        local res = [[|cff00bdec需要：
+        local res = [[|cffcccccc需要：
  - 通过【官方商城】获得|r]]
         if self.level >=1 then 
             res = ''

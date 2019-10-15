@@ -8,7 +8,7 @@ level = 1,
 art = [[other\suiji101.blp]],
 
 --说明
-tip = [[消耗 |cff00ff00 %jifen% 通关积分|r 兑换 一个随机物品,最多购买20次]],
+tip = [[消耗 |cffff0000 %jifen% 通关积分|r 兑换 |cff00ff00一个随机物品|cffcccccc（最多购买20次）]],
 
 content_tip = '物品说明:',
 
@@ -64,7 +64,7 @@ function mt:on_cast_start()
     local item = hero:add_item(name,true)
     local color = ac.color_code[item.color or '白']
     --系统提示
-    ac.player.self:sendMsg('|cff00ffff【系统提示】|r|cffff0000'..player:get_name()..'|r|cff00ffff在物品商店用|r|cffff8000积分|r|cff00ffff兑换了一件 |r|cff'..color..name..'|r',10)
+    ac.player.self:sendMsg('|cffffe799【系统提示】|r|cffff0000'..player:get_name()..'|r|cff00ffff在物品商店用|r|cffff8000积分|r|cff00ffff兑换了一件 |r|cff'..color..name..'|r',10)
 
 
 

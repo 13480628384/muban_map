@@ -101,7 +101,7 @@ total_ranking.on_key_down = function(code)
         return
     end
 
-    if code == KEY.WAVES then
+    if code == KEY.F4 then
         -- print('波浪线')
         total_ranking.ui:show()
         return
@@ -113,7 +113,7 @@ total_ranking.on_key_up = function(code)
         return
     end
 
-    if code == KEY.WAVES then
+    if code == KEY.F4 then
         total_ranking.ui:hide()
         return
     end

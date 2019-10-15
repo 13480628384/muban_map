@@ -9,7 +9,7 @@ level = 1,
 art = [[other\suijijineng.blp]],
 
 --说明
-tip = [[消耗 |cff00ff00 %jifen% 通关积分|r 兑换 一本随机技能书]],
+tip = [[消耗 |cffffff00 %jifen% 通关积分|r 兑换 |cff00ff00一本随机技能书]],
 
 content_tip = '物品说明:',
 
@@ -62,7 +62,7 @@ function mt:on_cast_start()
     ac.item.add_skill_item(name,hero)
 
     --系统提示
-    ac.player.self:sendMsg('|cff00ffff【系统提示】|r|cffff0000'..player:get_name()..'|r|cff00ffff在技能商店用|r|cffff8000积分|r|cff00ffff兑换了一本 |r|cff00ff00'..name..'|r',10)
+    ac.player.self:sendMsg('|cffffe799【系统提示】|r|cffff0000'..player:get_name()..'|r|cff00ffff在技能商店用|r|cffff8000积分|r|cff00ffff兑换了一本 |r|cff00ff00'..name..'|r',10)
 
     
 end

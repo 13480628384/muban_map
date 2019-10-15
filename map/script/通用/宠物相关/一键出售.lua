@@ -10,8 +10,10 @@ mt{
 	max_level = 5,
 	
 	tip = [[
-一键出售身上物品
-	]],
+
+|cffFFE799【使用说明】：|r
+可以将宠物身上的物品|cff00ff00全部出售|r
+]],
 	
 	--技能图标
 	art = [[yijianchushou.blp]],

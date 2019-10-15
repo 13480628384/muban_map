@@ -8,7 +8,7 @@ level = 1,
 art = [[icon\hunqi.blp]],
 
 --说明
-tip = [[|cffffff00召唤伏地魔，挑战成功可以将霸者之证升到顶级|r]],
+tip = [[|cffffff00满足一定条件后，召唤伏地魔并战胜它，可将霸者之证升到|cffff0000顶级|r]],
 
 --物品类型
 item_type = '神符',

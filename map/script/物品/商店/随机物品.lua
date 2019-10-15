@@ -8,12 +8,7 @@ level = 1,
 art = [[other\suiji101.blp]],
 
 --说明
-tip = [[获得一个随机物品，价格随购买次数增加而增加，|cff00ff00且买且珍惜|r
-
-|cffffff00白装概率：|r 67.5%
-|cffffff00蓝装概率：|r 22.5%
-|cffffff00金装概率：|r 7.5%
-|cffffff00红装概率：|r 2.5%]],
+tip = [[|n获得 |cffff0000随机物品|r，价格随购买次数增加而增加，|cff00ff00且买且珍惜|r]],
 
 content_tip = '物品说明:',
 

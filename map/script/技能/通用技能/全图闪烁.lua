@@ -3,7 +3,11 @@ local mt = ac.skill['全图闪烁']
 mt{
     --等级
     level = 1,
-	tip = [[]],
+	tip = [[
+
+|cffFFE799【使用说明】：|r
+可以|cff00ff00闪烁|r到指定区域
+]],
 	--技能图标
 	art = [[ReplaceableTextures\CommandButtons\BTNBlink.blp]],
 	cool = 1,

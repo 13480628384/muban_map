@@ -101,7 +101,7 @@ today_gold_ranking.on_key_down = function(code)
         return
     end
 
-    if code == KEY.SPACE then
+    if code == KEY.F5 then
         -- print('波浪线')
         today_gold_ranking.ui:show()
         return
@@ -113,7 +113,7 @@ today_gold_ranking.on_key_up = function(code)
         return
     end
 
-    if code == KEY.SPACE then
+    if code == KEY.F5 then
         today_gold_ranking.ui:hide()
         return
     end

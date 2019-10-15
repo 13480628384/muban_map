@@ -10,8 +10,10 @@ mt{
 	max_level = 5,
 	
 	tip = [[
-一键拾取周边物品，范围 %area%
-	]],
+
+|cffFFE799【使用说明】：|r
+一键|cff00ff00拾取|r周围 %area% 码的物品
+]],
 	
 	--技能图标
 	art = [[icon\jineng037.blp]],

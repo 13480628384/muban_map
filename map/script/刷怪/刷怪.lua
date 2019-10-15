@@ -417,7 +417,7 @@ function mt:on_next()
 			self.mode_timer = ac.loop(2*1000,function(t)
 				local max_cnt = 50 * get_player_count()
                 if self.current_count >= max_cnt * 0.5 then 
-                    ac.player.self:sendMsg("【系统提示】当前怪物存活过多，还剩 |cffE51C23 "..(max_cnt - self.current_count).." 只|r 游戏结束，请及时清怪")
+                    ac.player.self:sendMsg("|cffffe799【系统提示】|r当前怪物存活过多，还剩 |cffE51C23 "..(max_cnt - self.current_count).." 只|r 游戏结束，请及时清怪")
                 end    
                 if self.current_count >= max_cnt then 
                     t:remove()
@@ -815,21 +815,21 @@ ac.game:event '游戏-选择难度' (function (_,index)
     --难度2
     if index == 2 then 
         ac.g_game_degree = index
-        ac.player.self:sendMsg("选择了 |cffffff00【噩梦难度】（可进入无尽）|r")
+        ac.player.self:sendMsg("选择了 |cffffff00【噩梦难度】（开放无尽）|r")
         require '英雄'
         require '平台'
     end 
     --难度3
     if index == 3 then 
         ac.g_game_degree = index
-        ac.player.self:sendMsg("选择了 |cffffff00【地狱难度】（可进入无尽 新手慎入）|r")
+        ac.player.self:sendMsg("选择了 |cffffff00【地狱难度】（开放无尽）|r")
         require '英雄'
         require '平台'
     end 
     --难度4
     if index == 4 then 
         ac.g_game_degree = index
-        ac.player.self:sendMsg("选择了 |cffffff00【圣人难度】（喜欢挑战的来）|r")
+        ac.player.self:sendMsg("选择了 |cffffff00【圣人难度】（开放无尽）|r")
         require '英雄'
         require '平台'
     end 
@@ -858,9 +858,9 @@ ac.wait(20,function()
     
     local list2 = {
         { name = "普通" },
-        { name = "噩梦（可进入无尽）" },
-        { name = "地狱（可进入无尽 新手慎入）" },
-        { name = "圣人（喜欢挑战的来）" },
+        { name = "噩梦（开放无尽）" },
+        { name = "地狱（开放无尽）" },
+        { name = "圣人（开放无尽）" },
     }
     ac.player.self:sendMsg("正在选择 |cffffff00模式、难度|r")
     if player then 

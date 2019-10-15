@@ -24,9 +24,9 @@ ac.game:event '游戏-开始' (function()
 					if ac.game.challenge_cnt < 0 then 
 						ac.game:event_notify('游戏-结束') --失败
 					else
-						ac.player.self:sendMsg('|cff00ffff【系统消息】全部玩家死亡，剩余额外 |r|cffff0000'..ac.game.challenge_cnt..'|r'..' |cff00ffff挑战次数,务必小心中央boss倒计时结束造成80%伤害|r',10)
-						ac.player.self:sendMsg('|cff00ffff【系统消息】全部玩家死亡，剩余额外 |r|cffff0000'..ac.game.challenge_cnt..'|r'..' |cff00ffff挑战次数,务必小心中央boss倒计时结束造成80%伤害|r',10)
-						ac.player.self:sendMsg('|cff00ffff【系统消息】全部玩家死亡，剩余额外 |r|cffff0000'..ac.game.challenge_cnt..'|r'..' |cff00ffff挑战次数,务必小心中央boss倒计时结束造成80%伤害|r',10)
+						ac.player.self:sendMsg('|cffffe799【系统消息】|r|cff00ff00全部玩家死亡，剩余|cffff0000'..ac.game.challenge_cnt..'点|r'..'|cff00ff00团队生命值，务必小心中间BOSS每60秒一次的大招|r',10)
+						ac.player.self:sendMsg('|cffffe799【系统消息】|r|cff00ff00全部玩家死亡，剩余|cffff0000'..ac.game.challenge_cnt..'点|r'..'|cff00ff00团队生命值，务必小心中间BOSS每60秒一次的大招|r',10)
+						ac.player.self:sendMsg('|cffffe799【系统消息】|r|cff00ff00全部玩家死亡，剩余|cffff0000'..ac.game.challenge_cnt..'点|r'..'|cff00ff00团队生命值，务必小心中间BOSS每60秒一次的大招|r',10)
 					end	
 				end	
 			end);

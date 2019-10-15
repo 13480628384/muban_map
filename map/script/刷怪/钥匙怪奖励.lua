@@ -35,22 +35,22 @@ function mt:on_cast_start()
     local exp = math.ceil((data.exp or 0)  * 30 )
 
     if rand_name == '金币30' then
-        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 杀掉了钥匙怪, |cff00ffff奖励金币：'..gold..'|r',10)
+        ac.player.self:sendMsg('|cffffe799【系统提示】|r玩家 |cff00ffff'..player:get_name()..'|r 杀掉了钥匙怪, |cff00ffff奖励金币：'..gold..'|r',10)
         hero:addGold(gold)
     elseif  rand_name == '经验30' then
-        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 杀掉了钥匙怪, |cff00ffff奖励经验：'..exp..'|r',10)
+        ac.player.self:sendMsg('|cffffe799【系统提示】|r玩家 |cff00ffff'..player:get_name()..'|r 杀掉了钥匙怪, |cff00ffff奖励经验：'..exp..'|r',10)
         hero:addXp(exp)
     elseif  rand_name == '召唤boss' then
-        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 杀掉了钥匙怪, |cff00ffff奖励：召唤boss|r',10)
+        ac.player.self:sendMsg('|cffffe799【系统提示】|r玩家 |cff00ffff'..player:get_name()..'|r 杀掉了钥匙怪, |cff00ffff奖励：召唤boss|r',10)
         hero:add_item('召唤boss',true)
     elseif  rand_name == '吞噬丹' then
-        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 杀掉了钥匙怪, |cff00ffff奖励：吞噬丹|r',10)
+        ac.player.self:sendMsg('|cffffe799【系统提示】|r玩家 |cff00ffff'..player:get_name()..'|r 杀掉了钥匙怪, |cff00ffff奖励：吞噬丹|r',10)
         hero:add_item('吞噬丹',true)
     elseif  rand_name == '杀怪全属性5' then
-        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 杀掉了钥匙怪, |cff00ffff杀怪 全属性+5 |r',10)
+        ac.player.self:sendMsg('|cffffe799【系统提示】|r玩家 |cff00ffff'..player:get_name()..'|r 杀掉了钥匙怪, |cff00ffff杀怪 全属性+5 |r',10)
         hero:add('杀怪全属性',5)
     elseif  rand_name == '全属性加1000' then
-        ac.player.self:sendMsg('玩家 |cff00ffff'..player:get_name()..'|r 杀掉了钥匙怪, |cff00ffff全属性加1000 |r',10)
+        ac.player.self:sendMsg('|cffffe799【系统提示】|r玩家 |cff00ffff'..player:get_name()..'|r 杀掉了钥匙怪, |cff00ffff全属性加1000 |r',10)
         hero:add('力量',1000)
         hero:add('敏捷',1000)
         hero:add('智力',1000)

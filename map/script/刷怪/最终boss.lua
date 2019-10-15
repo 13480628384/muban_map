@@ -167,7 +167,7 @@ ac.game:event '游戏-最终boss' (function(trg,index, creep)
 
             ac.save(p,'大天使加百列',1)
             --发送消息
-            local tip = '|cffffff00【系统消息】通关圣人难度|r,恭喜玩家 |cffff0000'..p:get_name()..'|r获得皮肤：|cffff0000大天使加百列（鲁大师皮肤）|r'..'，可能是因为kda最高才能获得。\n'
+            local tip = '|cffffe799【系统消息】通关圣人难度|r,恭喜玩家 |cffff0000'..p:get_name()..'|r获得皮肤：|cffff0000大天使加百列（鲁大师皮肤）|r'..'，可能是因为kda最高才能获得。\n'
             ac.player.self:sendMsg(tip,30)
         end    
         --难1， 游戏胜利  
@@ -176,9 +176,9 @@ ac.game:event '游戏-最终boss' (function(trg,index, creep)
             ac.game:event_notify('游戏-结束',true)
         else   
             --文字提示
-            ac.player.self:sendMsg('【系统消息】恭喜你打败最终boss,30秒后进入无尽',30)
-            ac.player.self:sendMsg('【系统消息】恭喜你打败最终boss,30秒后进入无尽',30)
-            ac.player.self:sendMsg('【系统消息】恭喜你打败最终boss,30秒后进入无尽',30)
+            ac.player.self:sendMsg('|cffffe799【系统消息】|r恭喜你打败最终boss,30秒后进入无尽',30)
+            ac.player.self:sendMsg('|cffffe799【系统消息】|r恭喜你打败最终boss,30秒后进入无尽',30)
+            ac.player.self:sendMsg('|cffffe799【系统消息】|r恭喜你打败最终boss,30秒后进入无尽',30)
             local timer_ex1 = ac.timer_ex 
             {
                 time = 30,

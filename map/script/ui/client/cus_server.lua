@@ -259,7 +259,7 @@ local function punish_black()
                         -- EndGame(true) 处理掉线,会由寄存器报错问题
                         player:clear_server()
                         -- 清空网易服务器存档数据
-                        player:sendMsg('【系统消息】 检测到可能作弊，清空数据')
+                        player:sendMsg('|cffffe799【系统消息】|r 检测到可能作弊，清空数据')
                     end    
                 end)
 

@@ -10,10 +10,13 @@ mt{
 	target_type = ac.skill.TARGET_TYPE_NONE,
 	--介绍
     tip = [[%active%
-|cffffff00特权：|r基础攻击间隔-0.1，会心几率+10%，每秒全属性+8]],
+
+|cffffff00特权：|r基础攻击间隔-0.1，会心几率+10%，每秒全属性+8
+
+]],
     --是否激活状态
     active = function(self)
-        local res = [[|cff00bdec需要：
+        local res = [[|cffcccccc需要：
  - 通过【官方商城】获得|r]]
         if self.level >=1 then 
             res = ''
